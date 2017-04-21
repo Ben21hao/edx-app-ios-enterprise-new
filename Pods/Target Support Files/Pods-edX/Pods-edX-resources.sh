@@ -18,6 +18,12 @@ case "${TARGETED_DEVICE_FAMILY}" in
   2)
     TARGET_DEVICE_ARGS="--target-device ipad"
     ;;
+  3)
+    TARGET_DEVICE_ARGS="--target-device tv"
+    ;;
+  4)
+    TARGET_DEVICE_ARGS="--target-device watch"
+    ;;
   *)
     TARGET_DEVICE_ARGS="--target-device mac"
     ;;
@@ -77,19 +83,25 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "DateTools/DateTools/DateTools.bundle"
   install_resource "FBSDKCoreKit/FacebookSDKStrings.bundle"
   install_resource "GoogleSignIn/Resources/GoogleSignIn.bundle"
+  install_resource "MJRefresh/MJRefresh/MJRefresh.bundle"
   install_resource "Parse/Parse/Resources/en.lproj"
+  install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "DateTools/DateTools/DateTools.bundle"
   install_resource "FBSDKCoreKit/FacebookSDKStrings.bundle"
   install_resource "GoogleSignIn/Resources/GoogleSignIn.bundle"
+  install_resource "MJRefresh/MJRefresh/MJRefresh.bundle"
   install_resource "Parse/Parse/Resources/en.lproj"
+  install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
 fi
 if [[ "$CONFIGURATION" == "Profile" ]]; then
   install_resource "DateTools/DateTools/DateTools.bundle"
   install_resource "FBSDKCoreKit/FacebookSDKStrings.bundle"
   install_resource "GoogleSignIn/Resources/GoogleSignIn.bundle"
+  install_resource "MJRefresh/MJRefresh/MJRefresh.bundle"
   install_resource "Parse/Parse/Resources/en.lproj"
+  install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

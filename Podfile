@@ -19,6 +19,11 @@ pod 'FBSDKLoginKit', '~> 4.6'
 pod 'Parse', '~> 1.7'
 pod 'Smartling.i18n', '~> 1.0'
 pod 'Firebase/Core', '= 3.11.0'
+pod 'AFNetworking', '~> 3.0'
+pod 'SVProgressHUD', '~> 2.0.3'
+pod 'MJExtension', '~> 3.0.13'
+pod 'MJRefresh', '~> 3.1.12'
+pod 'SDWebImage', '~> 3.8.1'
 end
 
 target 'edXTests' do

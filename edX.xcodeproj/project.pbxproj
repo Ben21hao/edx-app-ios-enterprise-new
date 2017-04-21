@@ -43,7 +43,6 @@
 		19A1339519CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19A1339319CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.xib */; };
 		19A1339719CAE108003ADD24 /* EULA.htm in Resources */ = {isa = PBXBuildFile; fileRef = 19A1339619CAE108003ADD24 /* EULA.htm */; };
 		19BB622A1A9B28F1007DBF47 /* OEXRegistrationFieldWrapperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB62291A9B28F1007DBF47 /* OEXRegistrationFieldWrapperView.m */; };
-		19BB62301A9C656B007DBF47 /* OEXMySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB622E1A9C656B007DBF47 /* OEXMySettingsViewController.m */; };
 		19BB62311A9C656B007DBF47 /* OEXMySettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19BB622F1A9C656B007DBF47 /* OEXMySettingsViewController.xib */; };
 		19E1F02B1A272DDC00C2E1BE /* LastAccessed.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E1F02A1A272DDC00C2E1BE /* LastAccessed.m */; };
 		19EA0F5D1965CB3700B684B0 /* OEXCustomEditingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19EA0F5C1965CB3700B684B0 /* OEXCustomEditingView.m */; };
@@ -634,6 +633,30 @@
 		B4D5C7EB1A6FBAA300427D1D /* OEXAccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5C7E61A6FBAA300427D1D /* OEXAccessToken.m */; };
 		B4D5C7EC1A6FBAA300427D1D /* OEXPersistentCredentialStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5C7E81A6FBAA300427D1D /* OEXPersistentCredentialStorage.m */; };
 		B4D5C7ED1A6FBAA300427D1D /* OEXSession.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5C7EA1A6FBAA300427D1D /* OEXSession.m */; };
+		B50211A21EA852B7001DE1E2 /* TDAboutWeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B502119D1EA852B7001DE1E2 /* TDAboutWeViewController.m */; };
+		B50211A31EA852B7001DE1E2 /* TDSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B502119F1EA852B7001DE1E2 /* TDSettingCell.m */; };
+		B50211A41EA852B7001DE1E2 /* TDSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211A11EA852B7001DE1E2 /* TDSettingViewController.m */; };
+		B50211A71EA8530E001DE1E2 /* OEXMySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211A61EA8530E001DE1E2 /* OEXMySettingsViewController.m */; };
+		B50211E81EA85490001DE1E2 /* TDBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211D11EA85490001DE1E2 /* TDBaseViewController.m */; };
+		B50211E91EA85490001DE1E2 /* TDCutImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211D31EA85490001DE1E2 /* TDCutImageViewController.m */; };
+		B50211EA1EA85490001DE1E2 /* TDSwiftBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50211D41EA85490001DE1E2 /* TDSwiftBaseViewController.swift */; };
+		B50211EC1EA85490001DE1E2 /* TDBaseToolModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211D91EA85490001DE1E2 /* TDBaseToolModel.m */; };
+		B50211ED1EA85490001DE1E2 /* TDAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211DC1EA85490001DE1E2 /* TDAlertView.m */; };
+		B50211EE1EA85490001DE1E2 /* TDBaseScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211DE1EA85490001DE1E2 /* TDBaseScrollView.m */; };
+		B50211EF1EA85490001DE1E2 /* TDBaseTableview.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211E01EA85490001DE1E2 /* TDBaseTableview.m */; };
+		B50211F01EA85490001DE1E2 /* TDBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211E21EA85490001DE1E2 /* TDBaseView.m */; };
+		B50211F11EA85490001DE1E2 /* TDTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211E41EA85490001DE1E2 /* TDTextView.m */; };
+		B50211F21EA85490001DE1E2 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211E71EA85490001DE1E2 /* UIView+Toast.m */; };
+		B50211F41EA8558D001DE1E2 /* swiftPch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50211F31EA8558D001DE1E2 /* swiftPch.swift */; };
+		B50211F81EA856B8001DE1E2 /* UIColor+JHHexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211F71EA856B8001DE1E2 /* UIColor+JHHexColor.m */; };
+		B50211FE1EA85818001DE1E2 /* ClipImg.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211FB1EA85818001DE1E2 /* ClipImg.m */; };
+		B50211FF1EA85818001DE1E2 /* UIImage+Crop.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211FD1EA85818001DE1E2 /* UIImage+Crop.m */; };
+		B50212041EA85ACD001DE1E2 /* OEXFlowErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50212021EA85ACD001DE1E2 /* OEXFlowErrorViewController.m */; };
+		B50212051EA85ACD001DE1E2 /* OEXFlowErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B50212031EA85ACD001DE1E2 /* OEXFlowErrorViewController.xib */; };
+		B53EA90D1EA621BE00CEC936 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53EA90C1EA621BE00CEC936 /* Images.xcassets */; };
+		B54C8AC81EA8BF670002FCED /* WYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8AC71EA8BF670002FCED /* WYAlertView.m */; };
+		B54C8ACB1EA8BF8A0002FCED /* UIColor+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8ACA1EA8BF8A0002FCED /* UIColor+extend.m */; };
+		B54C8ACF1EA8BF950002FCED /* JHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8ACE1EA8BF950002FCED /* JHTextField.m */; };
 		BD3838541DD1CA7E00805697 /* OEXFontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */; };
 		BD7C6C3E1DCA32370004D135 /* OEXFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */; };
 		BD7C6C401DCA329A0004D135 /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = BD7C6C3F1DCA329A0004D135 /* fonts.json */; };
@@ -811,8 +834,6 @@
 		19A1339619CAE108003ADD24 /* EULA.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = EULA.htm; sourceTree = "<group>"; };
 		19BB62281A9B28F1007DBF47 /* OEXRegistrationFieldWrapperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXRegistrationFieldWrapperView.h; sourceTree = "<group>"; };
 		19BB62291A9B28F1007DBF47 /* OEXRegistrationFieldWrapperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXRegistrationFieldWrapperView.m; sourceTree = "<group>"; };
-		19BB622D1A9C656B007DBF47 /* OEXMySettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXMySettingsViewController.h; sourceTree = "<group>"; };
-		19BB622E1A9C656B007DBF47 /* OEXMySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXMySettingsViewController.m; sourceTree = "<group>"; };
 		19BB622F1A9C656B007DBF47 /* OEXMySettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OEXMySettingsViewController.xib; sourceTree = "<group>"; };
 		19DC02011A1E13AA00A874D3 /* OEXAnalyticsData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OEXAnalyticsData.h; sourceTree = "<group>"; };
 		19E1F0291A272DDC00C2E1BE /* LastAccessed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastAccessed.h; sourceTree = "<group>"; };
@@ -1514,6 +1535,50 @@
 		B4D5C7E91A6FBAA300427D1D /* OEXSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXSession.h; sourceTree = "<group>"; };
 		B4D5C7EA1A6FBAA300427D1D /* OEXSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXSession.m; sourceTree = "<group>"; };
 		B4D5C7EE1A6FBAC300427D1D /* OEXAccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXAccessToken.h; sourceTree = "<group>"; };
+		B502119C1EA852B7001DE1E2 /* TDAboutWeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAboutWeViewController.h; sourceTree = "<group>"; };
+		B502119D1EA852B7001DE1E2 /* TDAboutWeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAboutWeViewController.m; sourceTree = "<group>"; };
+		B502119E1EA852B7001DE1E2 /* TDSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSettingCell.h; sourceTree = "<group>"; };
+		B502119F1EA852B7001DE1E2 /* TDSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSettingCell.m; sourceTree = "<group>"; };
+		B50211A01EA852B7001DE1E2 /* TDSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSettingViewController.h; sourceTree = "<group>"; };
+		B50211A11EA852B7001DE1E2 /* TDSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSettingViewController.m; sourceTree = "<group>"; };
+		B50211A51EA8530E001DE1E2 /* OEXMySettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXMySettingsViewController.h; sourceTree = "<group>"; };
+		B50211A61EA8530E001DE1E2 /* OEXMySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXMySettingsViewController.m; sourceTree = "<group>"; };
+		B50211D01EA85490001DE1E2 /* TDBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBaseViewController.h; sourceTree = "<group>"; };
+		B50211D11EA85490001DE1E2 /* TDBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBaseViewController.m; sourceTree = "<group>"; };
+		B50211D21EA85490001DE1E2 /* TDCutImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCutImageViewController.h; sourceTree = "<group>"; };
+		B50211D31EA85490001DE1E2 /* TDCutImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCutImageViewController.m; sourceTree = "<group>"; };
+		B50211D41EA85490001DE1E2 /* TDSwiftBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDSwiftBaseViewController.swift; sourceTree = "<group>"; };
+		B50211D81EA85490001DE1E2 /* TDBaseToolModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBaseToolModel.h; sourceTree = "<group>"; };
+		B50211D91EA85490001DE1E2 /* TDBaseToolModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBaseToolModel.m; sourceTree = "<group>"; };
+		B50211DB1EA85490001DE1E2 /* TDAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAlertView.h; sourceTree = "<group>"; };
+		B50211DC1EA85490001DE1E2 /* TDAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAlertView.m; sourceTree = "<group>"; };
+		B50211DD1EA85490001DE1E2 /* TDBaseScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBaseScrollView.h; sourceTree = "<group>"; };
+		B50211DE1EA85490001DE1E2 /* TDBaseScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBaseScrollView.m; sourceTree = "<group>"; };
+		B50211DF1EA85490001DE1E2 /* TDBaseTableview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBaseTableview.h; sourceTree = "<group>"; };
+		B50211E01EA85490001DE1E2 /* TDBaseTableview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBaseTableview.m; sourceTree = "<group>"; };
+		B50211E11EA85490001DE1E2 /* TDBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBaseView.h; sourceTree = "<group>"; };
+		B50211E21EA85490001DE1E2 /* TDBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBaseView.m; sourceTree = "<group>"; };
+		B50211E31EA85490001DE1E2 /* TDTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDTextView.h; sourceTree = "<group>"; };
+		B50211E41EA85490001DE1E2 /* TDTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTextView.m; sourceTree = "<group>"; };
+		B50211E61EA85490001DE1E2 /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
+		B50211E71EA85490001DE1E2 /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
+		B50211F31EA8558D001DE1E2 /* swiftPch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = swiftPch.swift; sourceTree = "<group>"; };
+		B50211F61EA856B8001DE1E2 /* UIColor+JHHexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+JHHexColor.h"; sourceTree = "<group>"; };
+		B50211F71EA856B8001DE1E2 /* UIColor+JHHexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+JHHexColor.m"; sourceTree = "<group>"; };
+		B50211FA1EA85818001DE1E2 /* ClipImg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImg.h; sourceTree = "<group>"; };
+		B50211FB1EA85818001DE1E2 /* ClipImg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipImg.m; sourceTree = "<group>"; };
+		B50211FC1EA85818001DE1E2 /* UIImage+Crop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Crop.h"; sourceTree = "<group>"; };
+		B50211FD1EA85818001DE1E2 /* UIImage+Crop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Crop.m"; sourceTree = "<group>"; };
+		B50212011EA85ACD001DE1E2 /* OEXFlowErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXFlowErrorViewController.h; sourceTree = "<group>"; };
+		B50212021EA85ACD001DE1E2 /* OEXFlowErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXFlowErrorViewController.m; sourceTree = "<group>"; };
+		B50212031EA85ACD001DE1E2 /* OEXFlowErrorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OEXFlowErrorViewController.xib; sourceTree = "<group>"; };
+		B53EA90C1EA621BE00CEC936 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../edX/Images.xcassets; sourceTree = "<group>"; };
+		B54C8AC61EA8BF670002FCED /* WYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYAlertView.h; sourceTree = "<group>"; };
+		B54C8AC71EA8BF670002FCED /* WYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYAlertView.m; sourceTree = "<group>"; };
+		B54C8AC91EA8BF8A0002FCED /* UIColor+extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+extend.h"; sourceTree = "<group>"; };
+		B54C8ACA1EA8BF8A0002FCED /* UIColor+extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+extend.m"; sourceTree = "<group>"; };
+		B54C8ACD1EA8BF950002FCED /* JHTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHTextField.h; sourceTree = "<group>"; };
+		B54C8ACE1EA8BF950002FCED /* JHTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHTextField.m; sourceTree = "<group>"; };
 		BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFontsTests.swift; sourceTree = "<group>"; };
 		BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFonts.swift; sourceTree = "<group>"; };
 		BD7C6C3F1DCA329A0004D135 /* fonts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
@@ -1818,8 +1883,7 @@
 		19BB622C1A9C6554007DBF47 /* Settings View */ = {
 			isa = PBXGroup;
 			children = (
-				19BB622D1A9C656B007DBF47 /* OEXMySettingsViewController.h */,
-				19BB622E1A9C656B007DBF47 /* OEXMySettingsViewController.m */,
+				B502119B1EA852B7001DE1E2 /* TDSettingViewController */,
 			);
 			name = "Settings View";
 			sourceTree = "<group>";
@@ -2260,6 +2324,7 @@
 		776459831A0968F0008404CC /* Library Additions */ = {
 			isa = PBXGroup;
 			children = (
+				B50211CD1EA85490001DE1E2 /* TDLibraryViewController */,
 				77DCD23C1C2B434200CAEBB5 /* UIViewController+Overlay.swift */,
 				7706AAC01BCFEEBF00728432 /* NSAttributedString+Formatting.swift */,
 				7727EC341BBC73F300C9987F /* RevealViewController.swift */,
@@ -2940,6 +3005,142 @@
 			name = "Registration Field Controllers";
 			sourceTree = "<group>";
 		};
+		B502119B1EA852B7001DE1E2 /* TDSettingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B50211A51EA8530E001DE1E2 /* OEXMySettingsViewController.h */,
+				B50211A61EA8530E001DE1E2 /* OEXMySettingsViewController.m */,
+				B502119C1EA852B7001DE1E2 /* TDAboutWeViewController.h */,
+				B502119D1EA852B7001DE1E2 /* TDAboutWeViewController.m */,
+				B502119E1EA852B7001DE1E2 /* TDSettingCell.h */,
+				B502119F1EA852B7001DE1E2 /* TDSettingCell.m */,
+				B50211A01EA852B7001DE1E2 /* TDSettingViewController.h */,
+				B50211A11EA852B7001DE1E2 /* TDSettingViewController.m */,
+			);
+			path = TDSettingViewController;
+			sourceTree = "<group>";
+		};
+		B50211CD1EA85490001DE1E2 /* TDLibraryViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B54C8ACC1EA8BF950002FCED /* TDTextField */,
+				B54C8AC51EA8BF670002FCED /* TDAlertView */,
+				B50212001EA85ACD001DE1E2 /* TDErrorViewControler */,
+				B50211F91EA85818001DE1E2 /* TDCutImage */,
+				B50211CE1EA85490001DE1E2 /* BaseFile */,
+				B50211F51EA856B8001DE1E2 /* TDHexColor */,
+				B50211E51EA85490001DE1E2 /* toast */,
+			);
+			path = TDLibraryViewController;
+			sourceTree = "<group>";
+		};
+		B50211CE1EA85490001DE1E2 /* BaseFile */ = {
+			isa = PBXGroup;
+			children = (
+				B50211CF1EA85490001DE1E2 /* BaseCotrollers */,
+				B50211D71EA85490001DE1E2 /* BaseModel */,
+				B50211DA1EA85490001DE1E2 /* Baseview */,
+			);
+			path = BaseFile;
+			sourceTree = "<group>";
+		};
+		B50211CF1EA85490001DE1E2 /* BaseCotrollers */ = {
+			isa = PBXGroup;
+			children = (
+				B50211D01EA85490001DE1E2 /* TDBaseViewController.h */,
+				B50211D11EA85490001DE1E2 /* TDBaseViewController.m */,
+				B50211D21EA85490001DE1E2 /* TDCutImageViewController.h */,
+				B50211D31EA85490001DE1E2 /* TDCutImageViewController.m */,
+				B50211D41EA85490001DE1E2 /* TDSwiftBaseViewController.swift */,
+			);
+			path = BaseCotrollers;
+			sourceTree = "<group>";
+		};
+		B50211D71EA85490001DE1E2 /* BaseModel */ = {
+			isa = PBXGroup;
+			children = (
+				B50211D81EA85490001DE1E2 /* TDBaseToolModel.h */,
+				B50211D91EA85490001DE1E2 /* TDBaseToolModel.m */,
+			);
+			path = BaseModel;
+			sourceTree = "<group>";
+		};
+		B50211DA1EA85490001DE1E2 /* Baseview */ = {
+			isa = PBXGroup;
+			children = (
+				B50211DB1EA85490001DE1E2 /* TDAlertView.h */,
+				B50211DC1EA85490001DE1E2 /* TDAlertView.m */,
+				B50211DD1EA85490001DE1E2 /* TDBaseScrollView.h */,
+				B50211DE1EA85490001DE1E2 /* TDBaseScrollView.m */,
+				B50211DF1EA85490001DE1E2 /* TDBaseTableview.h */,
+				B50211E01EA85490001DE1E2 /* TDBaseTableview.m */,
+				B50211E11EA85490001DE1E2 /* TDBaseView.h */,
+				B50211E21EA85490001DE1E2 /* TDBaseView.m */,
+				B50211E31EA85490001DE1E2 /* TDTextView.h */,
+				B50211E41EA85490001DE1E2 /* TDTextView.m */,
+			);
+			path = Baseview;
+			sourceTree = "<group>";
+		};
+		B50211E51EA85490001DE1E2 /* toast */ = {
+			isa = PBXGroup;
+			children = (
+				B50211E61EA85490001DE1E2 /* UIView+Toast.h */,
+				B50211E71EA85490001DE1E2 /* UIView+Toast.m */,
+			);
+			path = toast;
+			sourceTree = "<group>";
+		};
+		B50211F51EA856B8001DE1E2 /* TDHexColor */ = {
+			isa = PBXGroup;
+			children = (
+				B54C8AC91EA8BF8A0002FCED /* UIColor+extend.h */,
+				B54C8ACA1EA8BF8A0002FCED /* UIColor+extend.m */,
+				B50211F61EA856B8001DE1E2 /* UIColor+JHHexColor.h */,
+				B50211F71EA856B8001DE1E2 /* UIColor+JHHexColor.m */,
+			);
+			path = TDHexColor;
+			sourceTree = "<group>";
+		};
+		B50211F91EA85818001DE1E2 /* TDCutImage */ = {
+			isa = PBXGroup;
+			children = (
+				B50211FA1EA85818001DE1E2 /* ClipImg.h */,
+				B50211FB1EA85818001DE1E2 /* ClipImg.m */,
+				B50211FC1EA85818001DE1E2 /* UIImage+Crop.h */,
+				B50211FD1EA85818001DE1E2 /* UIImage+Crop.m */,
+			);
+			path = TDCutImage;
+			sourceTree = "<group>";
+		};
+		B50212001EA85ACD001DE1E2 /* TDErrorViewControler */ = {
+			isa = PBXGroup;
+			children = (
+				B50212011EA85ACD001DE1E2 /* OEXFlowErrorViewController.h */,
+				B50212021EA85ACD001DE1E2 /* OEXFlowErrorViewController.m */,
+				B50212031EA85ACD001DE1E2 /* OEXFlowErrorViewController.xib */,
+			);
+			path = TDErrorViewControler;
+			sourceTree = "<group>";
+		};
+		B54C8AC51EA8BF670002FCED /* TDAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				B54C8AC61EA8BF670002FCED /* WYAlertView.h */,
+				B54C8AC71EA8BF670002FCED /* WYAlertView.m */,
+			);
+			path = TDAlertView;
+			sourceTree = "<group>";
+		};
+		B54C8ACC1EA8BF950002FCED /* TDTextField */ = {
+			isa = PBXGroup;
+			children = (
+				B54C8ACD1EA8BF950002FCED /* JHTextField.h */,
+				B54C8ACE1EA8BF950002FCED /* JHTextField.m */,
+			);
+			path = TDTextField;
+			sourceTree = "<group>";
+		};
 		BE0D454E192DE63900D720D6 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -3112,12 +3313,14 @@
 		BECB7B151924C0C3009C77F1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B53EA90C1EA621BE00CEC936 /* Images.xcassets */,
 				773A04691AF289650076532C /* edX-Bridging-Header.h */,
 				BEEEBF82196AAACF00EF2C35 /* Localizable.strings */,
 				B47780581AADA95400436DB4 /* Terms-and-Services.htm */,
 				BECB7B161924C0C3009C77F1 /* edX-Info.plist */,
 				BECB7B1A1924C0C3009C77F1 /* main.m */,
 				BECB7B1C1924C0C3009C77F1 /* edX-Prefix.pch */,
+				B50211F31EA8558D001DE1E2 /* swiftPch.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -3511,7 +3714,7 @@
 						TestTargetID = BECB7B0A1924C0C3009C77F1;
 					};
 					BECB7B0A1924C0C3009C77F1 = {
-						DevelopmentTeam = 57UCUYGPA2;
+						DevelopmentTeam = 567YW4PL68;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -3527,7 +3730,7 @@
 						};
 					};
 					BECB7B2B1924C0C3009C77F1 = {
-						DevelopmentTeam = 57UCUYGPA2;
+						DevelopmentTeam = 567YW4PL68;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						TestTargetID = BECB7B0A1924C0C3009C77F1;
@@ -3646,6 +3849,7 @@
 				BD7C6C401DCA329A0004D135 /* fonts.json in Resources */,
 				69ECC6021D50D1170030CF87 /* OpenSans-Italic.ttf in Resources */,
 				69ECC6481D50D1170030CF87 /* separator5.png in Resources */,
+				B53EA90D1EA621BE00CEC936 /* Images.xcassets in Resources */,
 				69ECC6141D50D1170030CF87 /* bt_blue2.png in Resources */,
 				69ECC6321D50D1170030CF87 /* ic_download_arrow.png in Resources */,
 				69ECC6091D50D1170030CF87 /* Icon-29@2x.png in Resources */,
@@ -3678,6 +3882,7 @@
 				69ECC60C1D50D1170030CF87 /* Icon-40@3x.png in Resources */,
 				6926CDAB1D59BE3600A16E22 /* ic_next_press.png in Resources */,
 				BEEEBF80196AAACF00EF2C35 /* Localizable.strings in Resources */,
+				B50212051EA85ACD001DE1E2 /* OEXFlowErrorViewController.xib in Resources */,
 				69ECC63A1D50D1170030CF87 /* ic_watched@2x.png in Resources */,
 				69ECC6061D50D1170030CF87 /* OpenSans-Semibold.ttf in Resources */,
 				69ECC63B1D50D1170030CF87 /* ic_watched@3x.png in Resources */,
@@ -3723,7 +3928,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		0243B436864CA2EEDF9B6700 /* [CP] Check Pods Manifest.lock */ = {
@@ -3738,7 +3943,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		7753912C1C9397CE00FA959C /* Copy config */ = {
@@ -3979,6 +4184,7 @@
 				B4B285E21A9A497A00DD603A /* OEXSegmentConfig.m in Sources */,
 				7772BEA31AFA68330081CA7A /* ConstraintAttributes.swift in Sources */,
 				773A04801AF2E6DA0076532C /* CourseOutlineTableSource.swift in Sources */,
+				B50211F01EA85490001DE1E2 /* TDBaseView.m in Sources */,
 				191A002B19405E1B004F7902 /* OEXCourse.m in Sources */,
 				E0A2461F1D5DA12A0066C766 /* AppStoreConfig.swift in Sources */,
 				7778F0981ABB1A6C00B4CDA0 /* NSError+OEXKnownErrors.m in Sources */,
@@ -3997,6 +4203,7 @@
 				7765025F1C7CEBC5007384E7 /* SingleChildContainingViewController.swift in Sources */,
 				7C2DD54F1D4A7901006148E0 /* UserPreference.swift in Sources */,
 				1A3AFFE51BD56370002846F3 /* CropViewController.swift in Sources */,
+				B54C8AC81EA8BF670002FCED /* WYAlertView.m in Sources */,
 				7731813B1B6C1442000CC050 /* SeparatorInsetable.swift in Sources */,
 				B4B285DC1A9A490400DD603A /* OEXFacebookConfig.m in Sources */,
 				9C9B7F6C1A8CC68400A857B2 /* OEXFindCoursesViewController.m in Sources */,
@@ -4011,6 +4218,7 @@
 				1913DD4419502E5D00573977 /* OEXVideoSummary.m in Sources */,
 				9EAB5BE91B564C2F00CA9F3C /* ProgressController.swift in Sources */,
 				771273271BA36B76008BA397 /* LoggingAnalyticsTracker.swift in Sources */,
+				B50211F41EA8558D001DE1E2 /* swiftPch.swift in Sources */,
 				7772BEA91AFA68330081CA7A /* EdgeInsets.swift in Sources */,
 				9E4E6C411B4BDB5C0034F7EB /* MockLastAccessedProvider.swift in Sources */,
 				7772BEAA1AFA68330081CA7A /* LayoutConstraint.swift in Sources */,
@@ -4024,6 +4232,7 @@
 				7727EC351BBC73F300C9987F /* RevealViewController.swift in Sources */,
 				1A8172511C3C1F2E007262AA /* OEXConfig.swift in Sources */,
 				77D6A9A61C28F98A00E67CCF /* EnrolledCoursesViewController.swift in Sources */,
+				B50211E91EA85490001DE1E2 /* TDCutImageViewController.m in Sources */,
 				77691F911B388626003922F2 /* UIGestureRecognizer+BlockActions.swift in Sources */,
 				1AB539F81BFE046C0065501F /* DebugMenuLogger.swift in Sources */,
 				9ED168AE1B29A4ED00AA7B5B /* UserAPI.swift in Sources */,
@@ -4039,7 +4248,9 @@
 				B4B285ED1A9B429200DD603A /* OEXNetworkUtility.m in Sources */,
 				BE0D454A192DD4F800D720D6 /* OEXNetworkInterface.m in Sources */,
 				B419295E1A8A3F1900448AD5 /* OEXNetworkManager.m in Sources */,
+				B50211A21EA852B7001DE1E2 /* TDAboutWeViewController.m in Sources */,
 				890D027F1967343A002CE7EC /* OEXCourseInfoCell.m in Sources */,
+				B50211FE1EA85818001DE1E2 /* ClipImg.m in Sources */,
 				E0A2461D1D5CA6950066C766 /* LogoutApi.swift in Sources */,
 				770A27961A6995DF00DFC6FF /* NSArray+OEXFunctional.m in Sources */,
 				9CADE2F71A91E91A00ACDAF7 /* NSURL+OEXPathExtensions.m in Sources */,
@@ -4075,6 +4286,7 @@
 				1A3671F51BB03C7A00704032 /* OEXRearTableViewController.swift in Sources */,
 				77DCD23D1C2B434200CAEBB5 /* UIViewController+Overlay.swift in Sources */,
 				198826E81952FE39005D4D8A /* OEXOpenInBrowserViewController.m in Sources */,
+				B54C8ACB1EA8BF8A0002FCED /* UIColor+extend.m in Sources */,
 				770848BA1B200C76002FEEEE /* ViewTopMessageController.swift in Sources */,
 				778B82EC1A520F2A0040D9E0 /* OEXEnvironment.m in Sources */,
 				9E30B4021B00BFB0007F673E /* CourseDashboardViewController.swift in Sources */,
@@ -4084,10 +4296,12 @@
 				7772BEA21AFA68330081CA7A /* Constraint.swift in Sources */,
 				77FDF4111AFBF0C300E8C639 /* VideoBlockViewController.swift in Sources */,
 				1918AFB11948359300F40345 /* OEXCourseDetailTableViewCell.m in Sources */,
+				B50211A71EA8530E001DE1E2 /* OEXMySettingsViewController.m in Sources */,
 				77AFD11C1C1B76D0001985FD /* NSObject+SafeKVO.swift in Sources */,
 				9EE684CB1B3D5FAB00C7B157 /* CourseHandoutsViewController.swift in Sources */,
 				7C2DD5511D4A790F006148E0 /* UserPreferenceAPI.swift in Sources */,
 				9E0D4BD31B0C84F800B2417D /* CourseUnknownBlockViewController.swift in Sources */,
+				B50211FF1EA85818001DE1E2 /* UIImage+Crop.m in Sources */,
 				19E1F02B1A272DDC00C2E1BE /* LastAccessed.m in Sources */,
 				7784C68B1B03BA1E00529C7C /* LoadStateViewController.swift in Sources */,
 				778F176C1C0CF57F0099BF93 /* RouterEnvironment.swift in Sources */,
@@ -4120,14 +4334,18 @@
 				1940D8CB1A230E25000318A3 /* OEXAnalytics.m in Sources */,
 				1A8AC0C01BB49EC5009D8F5E /* UserProfile.swift in Sources */,
 				1AC147371BCEB14900E0A230 /* CGRect+OEXHelpers.swift in Sources */,
+				B50211F21EA85490001DE1E2 /* UIView+Toast.m in Sources */,
 				7714A2601AB37CF7004C2254 /* OEXRegistrationFieldError.m in Sources */,
 				77E6486C1C912BD600B6740D /* Logger+OEXObjC.m in Sources */,
+				B54C8ACF1EA8BF950002FCED /* JHTextField.m in Sources */,
 				77000A4A1A7757E0007D306C /* NSDate+OEXComparisons.m in Sources */,
 				77AFD1111C1B4F79001985FD /* NSString+TestExamples.m in Sources */,
 				9E5EDA691AFB603A002ADC64 /* CourseAnnouncementsViewController.swift in Sources */,
 				B498405C19753C6C00019D1F /* CLButton.m in Sources */,
 				770C514B1B1685E3009B9696 /* HTMLBlockViewController.swift in Sources */,
 				46CECC3A1B041CDC0073C63A /* CourseCardView.swift in Sources */,
+				B50211EC1EA85490001DE1E2 /* TDBaseToolModel.m in Sources */,
+				B50212041EA85ACD001DE1E2 /* OEXFlowErrorViewController.m in Sources */,
 				9ED105441B3AAC5B00D244FF /* BlockViewControllerCacheManager.swift in Sources */,
 				199627831945AB5B0022C489 /* OEXCustomTextField.m in Sources */,
 				193B50481945A0520038E11C /* OEXCustomLabel.m in Sources */,
@@ -4145,6 +4363,7 @@
 				1A373E911C45807D00E3AAAA /* NSError+JSON.swift in Sources */,
 				697B5A091D92DB3F002C3ABD /* RegistrationFormAPI.swift in Sources */,
 				77D6A9A41C28F32900E67CCF /* CoursesAPI.swift in Sources */,
+				B50211EF1EA85490001DE1E2 /* TDBaseTableview.m in Sources */,
 				778B40D91C2F62520009F33E /* EnrollmentManager.swift in Sources */,
 				BECB7B5A1924D760009C77F1 /* SWRevealViewController.m in Sources */,
 				B4B6D62B1A949F1B000F44E8 /* OEXRegistrationFieldTextController.m in Sources */,
@@ -4170,6 +4389,8 @@
 				BE54F19C195F080E005D069F /* Reachability.m in Sources */,
 				775434861AD73D1900635A40 /* OEXParseConfig.m in Sources */,
 				1AE0A6C81BF4F68A00E14917 /* CourseCertificateCell.swift in Sources */,
+				B50211EE1EA85490001DE1E2 /* TDBaseScrollView.m in Sources */,
+				B50211ED1EA85490001DE1E2 /* TDAlertView.m in Sources */,
 				770848BC1B209EF4002FEEEE /* BorderStyle.swift in Sources */,
 				19A1339419CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.m in Sources */,
 				B4B6D6051A949EFC000F44E8 /* OEXRegistrationAgreement.m in Sources */,
@@ -4207,10 +4428,12 @@
 				77ADF4AC1AC1F31200AC8955 /* OEXExternalAuthOptionsView.m in Sources */,
 				1A3F456C1BED00FB0077A40C /* IconButton.swift in Sources */,
 				B498405A19753C6C00019D1F /* CLVideoPlayerControls.m in Sources */,
+				B50211EA1EA85490001DE1E2 /* TDSwiftBaseViewController.swift in Sources */,
 				B4B6D6311A949F71000F44E8 /* OEXRegistrationFieldControllerFactory.m in Sources */,
 				7773D1A91B1E557D0037214B /* OEXVideoEncoding.m in Sources */,
 				77092C731B421BD0004AA1A1 /* ContainerNavigationController.swift in Sources */,
 				B4132C10195AAFBE00F50B46 /* OEXAuthentication.m in Sources */,
+				B50211F11EA85490001DE1E2 /* TDTextView.m in Sources */,
 				775EB3AE1B1FF1AD009526A8 /* ButtonStyle.swift in Sources */,
 				7772BE731AF2FECC0081CA7A /* CourseOutlineHeaderCell.swift in Sources */,
 				1A5501A41BBAB8BD00D5F9DD /* JSONFormBuilder.swift in Sources */,
@@ -4225,12 +4448,14 @@
 				9E17EFD31BC65B7600C903CC /* UIAppearance+Swift.m in Sources */,
 				77FFA2BE1AC3031900B4D69B /* OEXUsingExternalAuthHeadingView.m in Sources */,
 				775DF41A1AFAB04300F96B2F /* CourseDataManager.swift in Sources */,
+				B50211A31EA852B7001DE1E2 /* TDSettingCell.m in Sources */,
 				7793764D1BED27D000900A8C /* BasicAuthCredential.swift in Sources */,
 				B4B6D62E1A949F1B000F44E8 /* OEXRegistrationFieldTextAreaController.m in Sources */,
 				B4B285E51A9A49FF00DD603A /* OEXFabricConfig.m in Sources */,
 				1A81971B1C060FA50030254D /* ShareHelper.swift in Sources */,
 				77F76A6E1B0BD32A00ED3E39 /* OEXSession+Authorization.swift in Sources */,
 				9E0CC1031BA9574E00A1CFDB /* SpinnerButton.swift in Sources */,
+				B50211E81EA85490001DE1E2 /* TDBaseViewController.m in Sources */,
 				191A002419405B91004F7902 /* OEXUserDetails.m in Sources */,
 				77BECB0D1B0A8BBD00894276 /* UIEdgeInsets+Geometry.swift in Sources */,
 				77AF07751CB311B200A42704 /* UserProfileView.swift in Sources */,
@@ -4238,6 +4463,7 @@
 				1AFEB1B31BBD52C7004C471D /* JSONFormBuilderTextEditor.swift in Sources */,
 				B4B6D6391A95042B000F44E8 /* OEXCheckBoxView.m in Sources */,
 				1A22CD901B90B31A005B07D0 /* UIImage+OEXIcon.swift in Sources */,
+				B50211A41EA852B7001DE1E2 /* TDSettingViewController.m in Sources */,
 				1ACD163C1BB1BE63006ACC82 /* UserProfileViewController.swift in Sources */,
 				5D836DCA1B2FA12E00411CAB /* DiscussionNewCommentViewController.swift in Sources */,
 				1AFEB1B11BBD51EE004C471D /* JSONFormBuilderChooser.swift in Sources */,
@@ -4279,6 +4505,7 @@
 				9EDB10B61B0C742C00C760C6 /* CourseOutlineItemView.swift in Sources */,
 				B4B2F16A1AA4F4E500A66A71 /* OEXRegistrationFieldValidator.m in Sources */,
 				1A5501A01BBA316900D5F9DD /* UserProfileEditViewController.swift in Sources */,
+				B50211F81EA856B8001DE1E2 /* UIColor+JHHexColor.m in Sources */,
 				B4B6C80D1A9C7AEA004F0FAF /* OEXPlaceholderTextView.m in Sources */,
 				77E648781C91330D00B6740D /* Result+Conveniences.swift in Sources */,
 				9EF21A9E1B4697CA000048F8 /* CourseLastAccessedController.swift in Sources */,
@@ -4294,7 +4521,6 @@
 				1AE0A6CA1BF4FF9000E14917 /* UserCourseEnrollment.swift in Sources */,
 				77503E8E1B287DBF00C47229 /* KeyboardInsetsSource.swift in Sources */,
 				7772BE841AF834EC0081CA7A /* CourseOutlineQuerier.swift in Sources */,
-				19BB62301A9C656B007DBF47 /* OEXMySettingsViewController.m in Sources */,
 				77B463971A30F65E0083453A /* OEXStyles.m in Sources */,
 				7772BEB21AFA6C0F0081CA7A /* FontAwesome.swift in Sources */,
 				7772BEA41AFA68330081CA7A /* ConstraintDescription.swift in Sources */,
@@ -4550,11 +4776,13 @@
 			baseConfigurationReference = 6C5AB6D484316B1D809C5BC7 /* Pods-edX.profile.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = edX.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				DEVELOPMENT_TEAM = 57UCUYGPA2;
+				DEVELOPMENT_TEAM = 567YW4PL68;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4571,7 +4799,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "";
 				PODS_CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = org.edx.mobile;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.eliteu.enterprise.mobile.ios;
 				PRODUCT_NAME = edX;
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
@@ -4586,7 +4814,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 57UCUYGPA2;
+				DEVELOPMENT_TEAM = 567YW4PL68;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -4960,11 +5188,13 @@
 			baseConfigurationReference = B1AF3BB032520841A93A174B /* Pods-edX.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = edX.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				DEVELOPMENT_TEAM = 57UCUYGPA2;
+				DEVELOPMENT_TEAM = 567YW4PL68;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4980,7 +5210,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PODS_CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = org.edx.mobile;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.eliteu.enterprise.mobile.ios;
 				PRODUCT_NAME = edX;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -4996,11 +5226,13 @@
 			baseConfigurationReference = FFF07B872500B8140F91FB08 /* Pods-edX.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = edX.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				DEVELOPMENT_TEAM = 57UCUYGPA2;
+				DEVELOPMENT_TEAM = 567YW4PL68;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5017,7 +5249,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "";
 				PODS_CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = org.edx.mobile;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.eliteu.enterprise.mobile.ios;
 				PRODUCT_NAME = edX;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
@@ -5033,7 +5265,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 57UCUYGPA2;
+				DEVELOPMENT_TEAM = 567YW4PL68;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -5089,7 +5321,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 57UCUYGPA2;
+				DEVELOPMENT_TEAM = 567YW4PL68;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

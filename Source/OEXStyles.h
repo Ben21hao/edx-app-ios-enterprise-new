@@ -60,6 +60,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIColor*)primaryLightColor;
 - (UIColor*)primaryXLightColor;
 
+#pragma mark - baseColor
+- (UIColor *)baseColor1;
+- (UIColor *)baseColor2;
+- (UIColor *)baseColor3;
+- (UIColor *)baseColor4;
+- (UIColor *)baseColor5;
+- (UIColor *)baseColor6;
+- (UIColor *)baseColor7;
+- (UIColor *)baseColor8;
+- (UIColor *)baseColor9;
+- (UIColor *)baseColor10;
+
 #pragma mark Secondary
 
 - (nonnull UIColor*)secondaryXDarkColor;

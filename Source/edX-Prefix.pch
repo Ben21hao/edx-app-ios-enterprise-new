@@ -23,5 +23,48 @@
 
 #import "OEXCast.h"
 #import "OEXConstants.h"
+#import "UIColor+JHHexColor.h"
+#import "ClipImg.h"
+#import <SVProgressHUD/SVProgressHUD.h>
+#import "UIView+Toast.h"
+#import <AFNetworking.h>
+#import <Masonry/Masonry.h>
+#import "OEXConfig.h"
+#import "TDBaseToolModel.h"
+#import "TDBaseView.h"
+//#import "TDCompanyModel.h"
+
+#define TableViewBGColor [UIColor colorWithRed:245/255.0 green:247/255.0 blue:250/255.0 alpha:1.0]
+
+//#define ELITEU_URL @"http://192.168.0.101"
+//#define ELITEU_URL @"http://www.eliteu.cn"
+//#define ELITEU_URL @"http://beta.eliteu.cn"
+
+#define ELITEU_URL [OEXConfig sharedConfig].apiHostURL//统一在配置文件拿域名，不用分配在
+
+#define APPID_Weixin @"wx89dc4dc519a2f935"//旧的wx89dc4dc519a2f935
+#define Wexin_Pay_APPSecret @"fa9e442eccb5b78287b9f36a20d376ea"//旧的e80676f525c334b78c22aec043ed1f97
+#define WEIXIN_PARTNER_ID @"wx890dUIWNKMK3o398923ndaADM72Mae"
+
+#define TDWidth [UIScreen mainScreen].bounds.size.width
+#define TDHeight [UIScreen mainScreen].bounds.size.height
+#define TDKeybordHeight 216 //252 - 216 系统键盘的两个不同高度
+
+#define colorHexStr1 @"#0692E1"//深蓝
+#define colorHexStr2 @"#3bafda"//蓝色
+#define colorHexStr3 @"#f6bb42"//浅黄
+#define colorHexStr4 @"#fa7f2b"//黄色
+#define colorHexStr5 @"#f5f7fa"//一级浅灰 -- 背景
+#define colorHexStr6 @"#e6e9ed"//二级灰色 -- 浅线
+#define colorHexStr7 @"#ccd1d9"//三级中灰
+#define colorHexStr8 @"#aab2bd"//四级灰
+#define colorHexStr9 @"#656d78"//五级灰 -- 字体
+#define colorHexStr10 @"#434a54"//六级深灰
+#define colorHexStr11 @"#4fc1e9"//浅蓝
+#define colorHexStr12 @"#FA7F2B"//橙色
+#define colorHexStr13 @"#ffffff" //白色
+#define colorHexStr14 @"#EEF8FD" //
+
+
 
 #endif

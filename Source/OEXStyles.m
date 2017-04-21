@@ -124,6 +124,38 @@ static OEXStyles* sSharedStyles;
     return [self.oexColors colorForIdentifier:ColorsIdentifiersPrimaryXLightColor];
 }
 
+#pragma mark - baseColor
+- (UIColor *)baseColor1 {
+    return [UIColor colorWithHexString:colorHexStr1];
+}
+- (UIColor *)baseColor2 {
+    return [UIColor colorWithHexString:colorHexStr2];
+}
+- (UIColor *)baseColor3 {
+    return [UIColor colorWithHexString:colorHexStr3];
+}
+- (UIColor *)baseColor4 {
+    return [UIColor colorWithHexString:colorHexStr4];
+}
+- (UIColor *)baseColor5 {
+    return [UIColor colorWithHexString:colorHexStr5];
+}
+- (UIColor *)baseColor6 {
+    return [UIColor colorWithHexString:colorHexStr6];
+}
+- (UIColor *)baseColor7 {
+    return [UIColor colorWithHexString:colorHexStr7];
+}
+- (UIColor *)baseColor8 {
+    return [UIColor colorWithHexString:colorHexStr8];
+}
+- (UIColor *)baseColor9 {
+    return [UIColor colorWithHexString:colorHexStr9];
+}
+- (UIColor *)baseColor10 {
+    return [UIColor colorWithHexString:colorHexStr10];
+}
+
 #pragma mark Secondary
 
 - (UIColor*)secondaryXDarkColor {
