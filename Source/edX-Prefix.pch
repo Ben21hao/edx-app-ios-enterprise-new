@@ -15,6 +15,11 @@
 #define NSLog(...) /* suppress NSLog when in release mode */
 #endif
 
+#if __has_feature(objc_arc)
+#define WS(weakSelf) __weak typeof(&*self)weakSelf = self
+#else
+#define WS(weakSelf) __block typeof(&*self)weakSelf = self
+#endif
 
 #ifdef __OBJC__
 
