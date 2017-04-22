@@ -1,57 +1,86 @@
 {
     "fields":[
-    {
+              {
               "name" : "account_privacy",
-              "label" : "Other learners can see my:",
+              "label" : "其他学习者可查看我的：",
               "type" : "switch",
               "data_type" : "boolean",
               "options" : {
-                "values" : [
-                            { "name" : "Full Profile", "value" : "all_users" },
-                            { "name" : "Limited Profile",  "value" : "private" }
-                 ]
+              "values" : [
+                          { "name" : "完整资料", "value" : "all_users" },
+                          { "name" : "部分资料",  "value" : "private" }
+                          ]
               },
-              "instructions" : "A limited profile only shares your username and profile photo.",
+              "instructions" : "部分资料仅公开您的账号和头像",
               "accessibility_hint" : "Change what information is shared with others."
-    },
-    {
+              },
+              {
               "name" : "year_of_birth",
-              "label" : "Birth year",
+              "label" : "出生年份",
               "type" : "select",
               "options" : {
-                "range_min" : 1896,
-                "range_max" : 2015,
-                "allows_none" : true
+              "range_min" : 1896,
+              "range_max" : 2015,
+              "allows_none" : true
               },
-              "instructions" : "You must specify your birth year before you can share your full profile.",
-              "sub_instructions" : "This will not be displayed publicly"
-    },
-    {
+              "instructions" : "分享完整资料前您必须选择具体出生年份。",
+              "sub_instructions" : "此内容将不会被公开显示。"
+              },
+              {
               "name" : "country",
-              "label" : "Location",
+              "label" : "国家及地区",
               "type" : "select",
               "data_type" : "country",
               "options" : {
-                "reference" : "countries",
-                "allows_none" : true
+              "reference" : "countries",
+              "allows_none" : true
               }
-    },
-    {
+              },
+              {
               "name" : "language_proficiencies",
-              "label" : "Primary language",
+              "label" : "主语言",
               "type" : "select",
               "data_type" : "language",
               "options" : {
-                "reference" : "languages",
-                "allows_none" : true
+              "reference" : "languages",
+              "allows_none" : true
               }
-    },
-    {
+              },
+              {
               "name" : "bio",
-              "label" : "About me",
+              "label" : "关于我",
               "type" : "textarea",
-              "placeholder" : "I would like to learn..."
-    }
-    ]
+              "placeholder" : "我想要通过英荔学习..."
+              },
+              {
+              "name" : "level_of_education",
+              "label" : "最高学历",
+              "type" : "select",
+              "data_type" : "education",
+              "placeholder" : "选择",
+              "options" : {
+              "reference" : "educations",
+              "allows_none" : true
+              }
+              },
+              {
+              "name" : "nickname",
+              "label" : "昵称",
+              "type" : "textarea",
+              "placeholder" : "请输入昵称"
+              },
+              {
+              "name" : "email",
+              "label" : "邮箱",
+              "type" : "textarea",
+              "placeholder" : "可用于登录和找回密码"
+              },
+              {
+              "name" : "mobile",
+              "label" : "手机号码",
+              "type" : "textarea",
+              "placeholder" : "可用于登录和找回密码"
+              }
+              ]
 }
 

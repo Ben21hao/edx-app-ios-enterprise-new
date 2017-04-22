@@ -14,6 +14,7 @@ import Foundation
 public class OfflineSupportViewController: UIViewController {
     typealias Env = protocol<ReachabilityProvider>
     private let environment : Env
+    let titleViewLabel = UILabel.init(frame: CGRectMake(0, 0, TDScreenWidth - 198, 44))
     init(env: Env) {
         self.environment = env
         super.init(nibName: nil, bundle: nil)
@@ -25,12 +26,22 @@ public class OfflineSupportViewController: UIViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        
         setupObservers()
+        setTitleLabelNaviBar()
     }
     
     override public func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         showOfflineSnackBarIfNecessary()
+    }
+    
+    func setTitleLabelNaviBar() {
+        self.titleViewLabel.textAlignment = .Center
+        self.titleViewLabel.font = UIFont.init(name: "OpenSans", size: 18.0)
+        self.titleViewLabel.textColor = UIColor.whiteColor()
+        self.navigationItem.titleView = self.titleViewLabel
     }
     
     private func setupObservers() {

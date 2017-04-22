@@ -715,6 +715,9 @@
 		B54C8AC81EA8BF670002FCED /* WYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8AC71EA8BF670002FCED /* WYAlertView.m */; };
 		B54C8ACB1EA8BF8A0002FCED /* UIColor+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8ACA1EA8BF8A0002FCED /* UIColor+extend.m */; };
 		B54C8ACF1EA8BF950002FCED /* JHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8ACE1EA8BF950002FCED /* JHTextField.m */; };
+		B58C1F0E1EAB5ACB00AB7B7E /* TDBindEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B58C1F091EAB5ACB00AB7B7E /* TDBindEmailViewController.m */; };
+		B58C1F0F1EAB5ACB00AB7B7E /* TDBindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B58C1F0B1EAB5ACB00AB7B7E /* TDBindPhoneViewController.m */; };
+		B58C1F101EAB5ACB00AB7B7E /* TDBindSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B58C1F0D1EAB5ACB00AB7B7E /* TDBindSuccessViewController.m */; };
 		BD3838541DD1CA7E00805697 /* OEXFontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */; };
 		BD7C6C3E1DCA32370004D135 /* OEXFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */; };
 		BD7C6C401DCA329A0004D135 /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = BD7C6C3F1DCA329A0004D135 /* fonts.json */; };
@@ -1741,6 +1744,12 @@
 		B54C8ACA1EA8BF8A0002FCED /* UIColor+extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+extend.m"; sourceTree = "<group>"; };
 		B54C8ACD1EA8BF950002FCED /* JHTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHTextField.h; sourceTree = "<group>"; };
 		B54C8ACE1EA8BF950002FCED /* JHTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHTextField.m; sourceTree = "<group>"; };
+		B58C1F081EAB5ACB00AB7B7E /* TDBindEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBindEmailViewController.h; sourceTree = "<group>"; };
+		B58C1F091EAB5ACB00AB7B7E /* TDBindEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBindEmailViewController.m; sourceTree = "<group>"; };
+		B58C1F0A1EAB5ACB00AB7B7E /* TDBindPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBindPhoneViewController.h; sourceTree = "<group>"; };
+		B58C1F0B1EAB5ACB00AB7B7E /* TDBindPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBindPhoneViewController.m; sourceTree = "<group>"; };
+		B58C1F0C1EAB5ACB00AB7B7E /* TDBindSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBindSuccessViewController.h; sourceTree = "<group>"; };
+		B58C1F0D1EAB5ACB00AB7B7E /* TDBindSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBindSuccessViewController.m; sourceTree = "<group>"; };
 		BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFontsTests.swift; sourceTree = "<group>"; };
 		BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFonts.swift; sourceTree = "<group>"; };
 		BD7C6C3F1DCA329A0004D135 /* fonts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
@@ -2072,6 +2081,7 @@
 		1A6B23CE1BAB4A5100FD7309 /* User Profiles */ = {
 			isa = PBXGroup;
 			children = (
+				B58C1F071EAB5ACB00AB7B7E /* TDBindAcountViewController */,
 				B50DF9471EAAEF1F001F38BD /* TDCouponViewController */,
 				B518BEEB1EA9E9A00027569D /* TDMoneyTool */,
 				B518BE961EA9E6F00027569D /* TDOrderAssistantViewController */,
@@ -3576,6 +3586,19 @@
 			path = TDTextField;
 			sourceTree = "<group>";
 		};
+		B58C1F071EAB5ACB00AB7B7E /* TDBindAcountViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B58C1F081EAB5ACB00AB7B7E /* TDBindEmailViewController.h */,
+				B58C1F091EAB5ACB00AB7B7E /* TDBindEmailViewController.m */,
+				B58C1F0A1EAB5ACB00AB7B7E /* TDBindPhoneViewController.h */,
+				B58C1F0B1EAB5ACB00AB7B7E /* TDBindPhoneViewController.m */,
+				B58C1F0C1EAB5ACB00AB7B7E /* TDBindSuccessViewController.h */,
+				B58C1F0D1EAB5ACB00AB7B7E /* TDBindSuccessViewController.m */,
+			);
+			path = TDBindAcountViewController;
+			sourceTree = "<group>";
+		};
 		BE0D454E192DE63900D720D6 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -4609,6 +4632,7 @@
 				5DEA47D71B62F64300831EC9 /* DiscussionObjectModel.swift in Sources */,
 				BE0D4551192DE65200D720D6 /* OEXInterface.m in Sources */,
 				B518BEC21EA9E6F00027569D /* TDTeacherCommentModel.m in Sources */,
+				B58C1F0F1EAB5ACB00AB7B7E /* TDBindPhoneViewController.m in Sources */,
 				77F9C1741B0D496B004D39E7 /* CourseStructureAPI.swift in Sources */,
 				779376571BF15C1B00900A8C /* FindCoursesWebViewHelper.swift in Sources */,
 				6919F5FF1D65CD27006935C8 /* OEXColors.swift in Sources */,
@@ -4723,6 +4747,7 @@
 				80056C9A1B0CDE1A0004D85C /* DiscussionResponsesViewController.swift in Sources */,
 				775716B91CB804E40091AB10 /* UserProfilePresenter.swift in Sources */,
 				BECB7B691924EE11009C77F1 /* OEXLoginViewController.m in Sources */,
+				B58C1F101EAB5ACB00AB7B7E /* TDBindSuccessViewController.m in Sources */,
 				775434891AD8121200635A40 /* OEXParsePushProvider.m in Sources */,
 				1AAD95F61CEA222500BBF70C /* StartupViewController.swift in Sources */,
 				1A5501A21BBA323700D5F9DD /* ProfileBanner.swift in Sources */,
@@ -4946,6 +4971,7 @@
 				77AF07751CB311B200A42704 /* UserProfileView.swift in Sources */,
 				77236EEB1C21C32E006AC1A4 /* PaginationController.swift in Sources */,
 				1AFEB1B31BBD52C7004C471D /* JSONFormBuilderTextEditor.swift in Sources */,
+				B58C1F0E1EAB5ACB00AB7B7E /* TDBindEmailViewController.m in Sources */,
 				B4B6D6391A95042B000F44E8 /* OEXCheckBoxView.m in Sources */,
 				1A22CD901B90B31A005B07D0 /* UIImage+OEXIcon.swift in Sources */,
 				B50211A41EA852B7001DE1E2 /* TDSettingViewController.m in Sources */,

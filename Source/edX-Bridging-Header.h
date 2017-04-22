@@ -76,9 +76,13 @@
 
 #import "TDBaseToolModel.h"
 #import "UIView+Toast.h"
+#import "UIColor+JHHexColor.h"
 #import "TDAssistantServiceViewController.h"
 #import "UserYouViewController.h"
 #import "UserFirstViewController.h"
+#import "TDBindEmailViewController.h"
+#import "TDBindPhoneViewController.h"
+#import "TDAlertView.h"
 //#import "TDAutenPhotoViewController.h"
 //#import "TDMessageShowViewController.h"
 //#import "TDAuthenSuccessViewController.h"

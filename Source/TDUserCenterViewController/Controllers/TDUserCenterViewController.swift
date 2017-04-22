@@ -45,16 +45,17 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationItem.title = Strings.userCenter
+
         setUpViewConstraint()
-//        setRightNavigationBar()
+//        tsetRightNavigationBar()
         
         addProfileListener()//数据请求
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.titleViewLabel.text = Strings.userCenter
         
         environment.analytics.trackScreenWithName(OEXAnalyticsScreenProfileView)
         presenter.refresh()
@@ -93,7 +94,8 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
         }
     }
     
-    func setRightNavigationBar() {
+    func tsetRightNavigationBar() {
+        
         let rightButton = UIButton.init(frame: CGRectMake(0, 0, 68, 48))
         rightButton.contentEdgeInsets = UIEdgeInsetsMake(0, 16, 0, -16)
         rightButton.titleLabel?.font = UIFont.init(name: "OpenSans", size: 16.0)

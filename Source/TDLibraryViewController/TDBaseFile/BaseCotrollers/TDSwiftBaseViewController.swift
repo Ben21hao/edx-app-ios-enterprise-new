@@ -8,31 +8,35 @@
 
 import UIKit
 
-class TDSwiftBaseViewController: UIViewController {
+public class TDSwiftBaseViewController: UIViewController,UIGestureRecognizerDelegate {
     
     let titleViewLabel = UILabel.init(frame: CGRectMake(0, 0, TDScreenWidth - 198, 44))
     let leftButton = UIButton.init(frame: CGRectMake(0, 0, 48, 48))
     let rightButton = UIButton.init()
-    
+    let loadIngView = UIView.init()
+    let nullView = UIView.init()
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
         setTitleLabelNaviBar()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override public func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         self.view.backgroundColor = OEXStyles.sharedStyles().baseColor5()
+        
+        setTitleLabelNaviBar()
+        setLeftNavigationBar()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override public func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
     }
@@ -45,142 +49,105 @@ class TDSwiftBaseViewController: UIViewController {
     }
     
     func setLeftNavigationBar() {
+        self.leftButton.setImage(UIImage.init(named: "backImagee"), forState: .Normal)
+        self.leftButton.showsTouchWhenHighlighted = true
+        self.leftButton.imageEdgeInsets = UIEdgeInsetsMake(0, -23, 0, 23)
+        
+        self.navigationController?.interactivePopGestureRecognizer?.enabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
+        self.leftButton.addTarget(self, action: #selector(leftButtonAction), forControlEvents: .TouchUpInside)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: self.leftButton)
+    }
+    
+    func leftButtonAction() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func setRightNavigationBar(str : String) {
+        self.rightButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        self.rightButton.contentEdgeInsets = UIEdgeInsetsMake(0, 16, 0, -16)
+        self.rightButton.titleLabel?.font = UIFont.init(name: "OpenSans", size: 16.0)
+        self.rightButton.titleLabel?.textAlignment = .Right
+        self.rightButton.showsTouchWhenHighlighted = true
+        self.rightButton.setTitle(str, forState: .Normal)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: self.rightButton)
+    }
+    
+    func setLoadDataView() {
+        self.loadIngView.backgroundColor = OEXStyles.sharedStyles().baseColor5()
+        self.view.addSubview(self.loadIngView)
+        self.loadIngView.snp_makeConstraints { (make) in
+            make.left.right.top.bottom.equalTo(self.view)
+        }
+        
+        let loadLabel = UILabel.init()
+        loadLabel.textColor = OEXStyles.sharedStyles().baseColor1()
+        loadLabel.font = UIFont.init(name: "FontAwesome", size: 25)
+        loadLabel.text = "\u{f110}"
+        self.loadIngView.addSubview(loadLabel)
+        
+        loadLabel.snp_makeConstraints { (make) in
+            make.centerX.equalTo(self.loadIngView)
+            make.centerY.equalTo(self.loadIngView).offset(-28)
+        }
+        
+        let animate = CAKeyframeAnimation.init()
+        animate.keyPath = "transform.rotation"
+        
+        let timeArr = NSMutableArray()
+        let directArr = NSMutableArray()
+        for i in 0...8 {
+            let time = Double(i) / 8.0
+            let num = NSNumber.init(double: time)
+            timeArr.addObject(num)
+            
+            let direct = time * 2.0 * M_PI
+            let dNum = NSNumber.init(double: direct)
+            directArr.addObject(dNum)
+        }
+        
+        animate.keyTimes = NSArray.init(array: timeArr) as? [NSNumber]
+        animate.values = NSArray.init(array: directArr) as [AnyObject]
+        
+        animate.repeatCount = 88
+        animate.duration = 0.6
+        animate.additive = true
+        animate.calculationMode = kCAAnimationDiscrete
+        animate.beginTime = self.view.layer.convertTime(0, toLayer: self.view.layer)
+        loadLabel.layer.addAnimation(animate, forKey: nil)
+        self.view.bringSubviewToFront(self.loadIngView)
+        
         
     }
+    
+    func setNullDataView(nullStr: String) {
+        self.nullView.backgroundColor = OEXStyles.sharedStyles().baseColor5()
+        self.view.addSubview(self.nullView)
+        
+        let nullLable = UILabel.init()
+        nullLable.font = UIFont.init(name: "OpenSans", size: 16)
+        nullLable.textColor = OEXStyles.sharedStyles().baseColor8()
+        nullLable.textAlignment = .Center
+        nullLable.text = title
+        self.nullView.addSubview(nullLable)
+        
+        self.nullView.snp_makeConstraints { (make) in
+            make.left.right.bottom.top.equalTo(self.view)
+        }
+        
+        nullLable.snp_makeConstraints { (make) in
+            make.centerX.equalTo(self.nullView.snp_centerX)
+            make.centerY.equalTo(self.nullView.snp_centerY)
+        }
+    }
+    
+    override public func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
-
-
-/*
- - (void)viewDidLoad {
- [super viewDidLoad];
- 
- [self setTitleLabel];
- [self setLeftNavigationBar];
- [self setRightNavigationBar];
- }
-
- #pragma mark - 导航栏左边按钮
- - (void)setLeftNavigationBar {
- 
- self.leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 48, 48)];
- [self.leftButton setImage:[UIImage imageNamed:@"backImagee"] forState:UIControlStateNormal];
- self.leftButton.showsTouchWhenHighlighted = YES;
- self.leftButton.imageEdgeInsets = UIEdgeInsetsMake(0, -23, 0, 23);
- 
- if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
- self.navigationController.interactivePopGestureRecognizer.enabled = YES;
- self.navigationController.interactivePopGestureRecognizer.delegate = self;
- }
- 
- [self.leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
- [self.leftButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
- self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftButton];
- 
- }
- 
- - (void)backButtonAction:(UIButton *)sender {
- [self.navigationController popViewControllerAnimated:YES];
- }
- 
- #pragma mark - 导航栏右边按钮
- - (void)setRightNavigationBar {
- 
- self.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 68, 48)];
- [self.rightButton setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
- self.rightButton.contentEdgeInsets = UIEdgeInsetsMake(0, 16, 0, -16);
- self.rightButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:16.0];
- self.rightButton.titleLabel.textAlignment = NSTextAlignmentRight;
- self.rightButton.showsTouchWhenHighlighted = YES;
- [self.rightButton addTarget:self action:@selector(rightButtonAciton:) forControlEvents:UIControlEventTouchUpInside];
- self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightButton];
- 
- }
- 
- - (void)rightButtonAciton:(UIButton *)sender {
- if (self.rightButtonHandle) {
- self.rightButtonHandle();
- }
- }
- 
- #pragma mark - 数据加载
- - (void)setLoadDataView {
- 
- self.loadIngView = [[UIView alloc] init];
- self.loadIngView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
- [self.view addSubview:self.loadIngView];
- [self.loadIngView mas_makeConstraints:^(MASConstraintMaker *make) {
- make.left.right.top.bottom.mas_equalTo(self.view);
- }];
- 
- UILabel *loadLabel = [[UILabel alloc] init];
- loadLabel.textColor = [UIColor colorWithHexString:colorHexStr1];
- loadLabel.font = [UIFont fontWithName:@"FontAwesome" size:25];
- [loadLabel setText: @"\U0000f110"];//\u{f110}
- [self.loadIngView addSubview:loadLabel];
- 
- [loadLabel mas_makeConstraints:^(MASConstraintMaker *make) {
- make.centerX.mas_equalTo(self.loadIngView);
- make.centerY.mas_equalTo(self.loadIngView).offset(-28);
- }];
- 
- CAKeyframeAnimation *animate = [[CAKeyframeAnimation alloc] init];
- animate.keyPath = @"transform.rotation";
- 
- NSMutableArray *timeArr = [[NSMutableArray alloc] init];
- NSMutableArray *directArr = [[NSMutableArray alloc] init];
- for (double i = 0; i < 8; i ++) {
- double time = i / 8.0;
- NSNumber *num = [NSNumber numberWithDouble:time];
- [timeArr addObject:num];
- 
- double direct = time * 2.0 * M_PI;
- NSNumber *dNum = [NSNumber numberWithDouble:direct];
- [directArr addObject:dNum];
- }
- animate.keyTimes = timeArr;
- animate.values = directArr;
- 
- animate.repeatCount = 88;
- animate.duration = 0.6;
- animate.additive = YES;
- animate.calculationMode = kCAAnimationDiscrete;
- animate.beginTime = [self.view.layer convertTime:0 toLayer:self.view.layer];
- [loadLabel.layer addAnimation:animate forKey:nil];
- 
- [self.view bringSubviewToFront:self.loadIngView];
- }
- 
- #pragma mark - 无数据处理
- - (void)setNullDataView:(NSString *)title {
- self.nullView = [[UIView alloc] init];
- self.nullView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
- [self.view addSubview:self.nullView];
- 
- UILabel *nullLabel = [[UILabel alloc] init];
- nullLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
- nullLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
- nullLabel.textAlignment = NSTextAlignmentCenter;
- nullLabel.text = title;
- [self.nullView addSubview:nullLabel];
- 
- [self.nullView mas_makeConstraints:^(MASConstraintMaker *make) {
- make.left.right.top.bottom.mas_equalTo(self.view);
- }];
- 
- [nullLabel mas_makeConstraints:^(MASConstraintMaker *make) {
- make.centerX.mas_equalTo(self.nullView.mas_centerX);
- make.centerY.mas_equalTo(self.nullView.mas_centerY).offset(-8);
- }];
- }
- 
- - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
- [self.view resignFirstResponder];
- }
- */

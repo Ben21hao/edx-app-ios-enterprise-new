@@ -82,7 +82,7 @@ extension UserProfile : FormData {
     }
 }
 
-class UserProfileEditViewController: UITableViewController {
+class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDelegate {
     
     typealias Environment = protocol<OEXAnalyticsProvider, DataManagerProvider, NetworkManagerProvider>
     
@@ -92,6 +92,7 @@ class UserProfileEditViewController: UITableViewController {
     var imagePicker: ProfilePictureTaker?
     var banner: ProfileBanner!
     let footer = UIView()
+    var titleLabel : UILabel?
     
     init(profile: UserProfile, environment: Environment) {
         self.profile = profile
@@ -141,7 +142,7 @@ class UserProfileEditViewController: UITableViewController {
         }
         
         let bottomLine = UIView()
-        bottomLine.backgroundColor = OEXStyles.sharedStyles().neutralLight()
+        bottomLine.backgroundColor = OEXStyles.sharedStyles().baseColor6()
         bannerWrapper.addSubview(bottomLine)
         bottomLine.snp_makeConstraints { (make) -> Void in
             make.left.equalTo(bannerWrapper)
@@ -150,22 +151,18 @@ class UserProfileEditViewController: UITableViewController {
             make.bottom.equalTo(bannerWrapper)
         }
         
-        
         return bannerWrapper
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = Strings.Profile.editTitle
-        navigationItem.backBarButtonItem?.title = " "
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 44
-        
+        setNaviewgatinBar()
         
         tableView.tableHeaderView = makeHeader()
         tableView.tableFooterView = footer //get rid of extra lines when the content is shorter than a screen
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 48
         if #available(iOS 9.0, *) {
             tableView.cellLayoutMarginsFollowReadableWidth = false
         }
@@ -178,14 +175,51 @@ class UserProfileEditViewController: UITableViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        let viewHeight = view.bounds.height
-        var footerFrame = footer.frame
-        let footerViewRect = footer.superview!.convertRect(footerFrame, toView: view)
-        footerFrame.size.height = viewHeight - CGRectGetMinY(footerViewRect)
-        footer.frame = footerFrame
+        
+//        let viewHeight = view.bounds.height
+//        var footerFrame = footer.frame
+//        let footerViewRect = footer.superview!.convertRect(footerFrame, toView: view)
+//        footerFrame.size.height = viewHeight - CGRectGetMinY(footerViewRect)
+//        footer.frame = footerFrame
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        environment.analytics.trackScreenWithName(OEXAnalyticsScreenProfileEdit)
+
+        hideToast()
+        updateProfile()
+        reloadViews()
+    }
+    
+    func setNaviewgatinBar() {
+        
+        let leftButton = UIButton.init(frame: CGRectMake(0, 0, 48, 48))
+        leftButton.setImage(UIImage.init(named: "backImagee"), forState: .Normal)
+        leftButton.imageEdgeInsets = UIEdgeInsetsMake(0, -23, 0, 23)
+        leftButton.addTarget(self, action: #selector(leftBarItemAction), forControlEvents: .TouchUpInside)
+        
+        self.navigationController?.interactivePopGestureRecognizer?.enabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
+        let leftBarItem = UIBarButtonItem.init(customView: leftButton)
+        self.navigationItem.leftBarButtonItem = leftBarItem
+        
+        //添加标题文本
+        self.titleLabel = UILabel(frame:CGRect(x:0, y:0, width:40, height:40))
+        self.titleLabel?.text = Strings.Profile.editTitle
+        self.titleLabel?.font = UIFont(name:"OpenSans",size:18.0)
+        self.titleLabel?.textColor = UIColor.whiteColor()
+        self.navigationItem.titleView = self.titleLabel
+    }
+    
+    func leftBarItemAction() {
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     private func updateProfile() {
+        
         if profile.hasUpdates {
             let fieldName = profile.updateDictionary.first!.0
             let field = fields.filter{$0.name == fieldName}[0]
@@ -209,34 +243,29 @@ class UserProfileEditViewController: UITableViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        environment.analytics.trackScreenWithName(OEXAnalyticsScreenProfileEdit)
-
-        hideToast()
-        updateProfile()
-        reloadViews()
-    }
-    
     func reloadViews() {
         disableLimitedProfileCells(profile.sharingLimitedProfile)
         self.tableView.reloadData()
     }
     
+    //MARK: tableView Delegate
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fields.count
     }
     
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section >= 5 {
+            return 1
+        }
+        return 0
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let field = fields[indexPath.row]
+        let field = fields[indexPath.section]
         let cell = tableView.dequeueReusableCellWithIdentifier(field.cellIdentifier, forIndexPath: indexPath)
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+//        cell.selectionStyle = UITableViewCellSelectionStyle.None
         cell.applyStandardSeparatorInsets()
-
+        
         guard let formCell = cell as? FormCell else { return cell }
         formCell.applyData(field, data: profile)
         
@@ -246,6 +275,7 @@ class UserProfileEditViewController: UITableViewController {
         //remove actions before adding so there's not a ton of actions
         segmentCell.typeControl.oex_removeAllActions()
         segmentCell.typeControl.oex_addAction({ [weak self] sender in
+            
             let control = sender as! UISegmentedControl
             let limitedProfile = control.selectedSegmentIndex == 1
             let newValue = String(limitedProfile)
@@ -255,6 +285,7 @@ class UserProfileEditViewController: UITableViewController {
             self?.disableLimitedProfileCells(limitedProfile)
             self?.tableView.reloadData()
             }, forEvents: .ValueChanged)
+        
         if let under13 = profile.parentalConsent where under13 == true {
             let descriptionStyle = OEXMutableTextStyle(weight: .Light, size: .XSmall, color: OEXStyles.sharedStyles().neutralDark())
             segmentCell.descriptionLabel.attributedText = descriptionStyle.attributedStringWithText(Strings.Profile.ageLimit)
@@ -263,18 +294,98 @@ class UserProfileEditViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 88
+        }
+        return 58
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let field = fields[indexPath.row]
-        field.takeAction(profile, controller: self)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+       
+        if indexPath.section <= 6 {
+            let field = fields[indexPath.section]
+            field.takeAction(profile, controller: self)
+            
+        } else {
+            if indexPath.section == 7 {
+                vertifitePassword(1)
+                
+            } else {
+                vertifitePassword(2)
+            }
+        }
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        let field = fields[indexPath.row]
-        let enabled = !disabledFields.contains(field.name)
-        cell.userInteractionEnabled = enabled
-        cell.backgroundColor = enabled ? UIColor.clearColor() : OEXStyles.sharedStyles().neutralXLight()
+        
+        cell.backgroundColor = UIColor.whiteColor()
+        
+//        let field = fields[indexPath.section]
+//        let enabled = !disabledFields.contains(field.name)
+//        cell.userInteractionEnabled = enabled
+//        cell.backgroundColor = enabled ? UIColor.clearColor() : OEXStyles.sharedStyles().neutralXLight()
     }
     
+    func vertifitePassword(type : NSInteger) {
+        
+        tableView.scrollEnabled = false
+        
+        let alertView = TDAlertView.init()
+        alertView.frame = CGRectMake(0, 0, TDScreenWidth,TDScreenHeight - 60)
+        alertView.sureHandle = { (AnyObject) -> () in
+            
+            alertView.removeFromSuperview()
+            if AnyObject.characters.count == 0 {
+                self.view.makeToast(Strings.loginPassword, duration: 1.08, position: CSToastPositionCenter)
+            } else {
+                let baseTool = TDBaseToolModel.init()
+                baseTool.vertifiteLoginPassword(AnyObject, andName: self.profile.username, onView: self.view)
+                baseTool.vertifitePasswordHandle = { () in
+                    self.jumpToController(type)
+                }
+            }
+        }
+        alertView.cancelHandle = { () -> () in
+            alertView.removeFromSuperview()
+        }
+        self.view.addSubview(alertView)
+        
+    }
+    
+    func jumpToController(type : NSInteger) {
+        
+        if type == 1 {
+            let emailVC = TDBindEmailViewController.init()
+            emailVC.username = self.profile.username
+            emailVC.bindEmailHandle = {(AnyObject) -> () in
+                print("绑定邮箱 --- \(AnyObject)")
+            }
+            self.navigationController?.pushViewController(emailVC, animated: true)
+            
+        } else {
+            let phoneVc = TDBindPhoneViewController.init()
+            phoneVc.username = self.profile.username
+            phoneVc.bindPhoneHandle = {(AnyObject) -> () in
+                self.profile.phone = String(AnyObject)
+                
+                //                let networkRequest = ProfileAPI.profileUpdateRequest(self.profile)
+                //                self.environment.networkManager.taskForRequest(networkRequest) { result in
+                //                    if let _ = result.error {
+                //                        self.showToast("绑定手机失败")
+                //
+                //                    } else {
+                //                        self.showToast("成功绑定")
+                //                    }
+                //
+                //                }
+                print("绑定手机号 --- \(AnyObject) \(self.profile.phone)")
+            }
+            self.navigationController?.pushViewController(phoneVc, animated: true)
+        }
+    }
+
     private func disableLimitedProfileCells(disabled: Bool) {
         banner.changeButton.enabled = true
         if disabled {
@@ -286,9 +397,9 @@ class UserProfileEditViewController: UITableViewController {
                 disabledFields.append(UserProfile.ProfileFields.AccountPrivacy.rawValue)
                 banner.changeButton.enabled = false 
             }
-            footer.backgroundColor = OEXStyles.sharedStyles().neutralXLight()
+//            footer.backgroundColor = OEXStyles.sharedStyles().neutralWhite()
         } else {
-            footer.backgroundColor = UIColor.clearColor()
+//            footer.backgroundColor = UIColor.clearColor()
             disabledFields.removeAll()
         }
     }
