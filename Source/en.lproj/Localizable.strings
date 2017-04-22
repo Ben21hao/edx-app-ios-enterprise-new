@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  edXVideoLocker
-
-  Created by Nirbhay Agarwal on 07/07/14.
-  Copyright (c) 2014-2015 edX. All rights reserved.
-*/
+/*
+ Localizable.strings
+ edXVideoLocker
+ 
+ Created by Nirbhay Agarwal on 07/07/14.
+ Copyright (c) 2014-2015 edX. All rights reserved.
+ */
 
 // Please keep in alphabetical order
 
@@ -18,6 +18,7 @@
 "ACCESSIBILITY_CHECKBOX_HINT_CHECKED" = "Clear the checkbox";
 /* Label for action hint on check box when it's checked. */
 "ACCESSIBILITY_CHECKBOX_HINT_UNCHECKED" = "Tap to select";
+
 /* Appending By before course organization and number on My Find Courses*/
 "ACCESSIBILITY_BY" = "By";
 /* Accessibility hint for close button*/
@@ -36,6 +37,13 @@
 "ACCESSIBILITY.DISCUSSION_FOLLOW_HINT" = "Double tap to follow.";
 /* Accessibility hint for Unfollow button for discussion responses*/
 "ACCESSIBILITY.DISCUSSION_UNFOLLOW_HINT" = "Double tap to unfollow.";
+/* Call to action for Course content on Home Screen */
+"ACCESSIBILITY_SHOWS_COURSE_CONTENT" = "Double tap to view course content.";
+/* Call to action for Opening Dropdown */
+"ACCESSIBILITY_SHOWS_DROPDOWN_HINT" = "Double tap to open dropdown.";
+
+/* Text spoken for Navigation Button on Course List Screen */
+"ACCESSIBILITY_NAVIGATION" = "Navigation";
 /* Acessibility label for the download progress button. {percent_complete} is an already localized numeric percentage like "44%" */
 "ACCESSIBILITY_DOWNLOAD_PROGRESS_BUTTON##{one}" = "Downloads in progress: {percent_complete}";
 /* Acessibility label for the download progress button. {percent_complete} is an already localized numeric percentage like "44%" */
@@ -76,16 +84,13 @@
 "ACCESSIBILITY_SELECT_ALL" = "Select All";
 /* Accessibility label for Settings Button in the Video Player */
 "ACCESSIBILITY_SETTINGS" = "Settings";
-/* Call to action for Course content on Home Screen */
-"ACCESSIBILITY_SHOWS_COURSE_CONTENT" = "Double tap to view course content.";
-/* Call to action for Opening Dropdown */
-"ACCESSIBILITY_SHOWS_DROPDOWN_HINT" = "Double tap to open dropdown.";
 /* Call to action for Selecting Option */
 "ACCESSIBILITY_SELECT_VALUE_HINT" = "Double tap to select.";
 /* Accessibility label for Unknown Icon in the Courseware screens */
 "ACCESSIBILITY_UNKNOWN" = "Unknown";
 /* Accessibility label for Video Icon in the Courseware screens */
 "ACCESSIBILITY_VIDEO" = "Video";
+
 /* Text spoken for Navigation Button on Course List Screen */
 "ACCESSIBILITY_MENU" = "Navigation Menu";
 /* Accessibility label for close button when left drawer is open*/
@@ -119,6 +124,7 @@
 /*Accessibility hint for user profile in left drawer*/
 "ACCESSIBILITY.LEFT_DRAWER.PROFILE_HINT" = "Double tap to open your profile";
 /* Title of user profile section for user accomplishments (like badges) */
+
 "ACCOMPLISHMENTS.TITLE" = "Accomplishments";
 /* Default text template when user shares an accomplishment */
 "ACCOMPLISHMENTS.SHARE_TEXT" = "I earned a badge on {platform_name}! Check it out";
@@ -197,7 +203,7 @@
 /* Error message shown when there is a problem loading a video */
 "CHECK_CONNECTION"="Problem loading video.\nPlease check your Internet connection.";
 /* Generic action button label when the user chooses a thing */
- "CHOOSE" = "Choose";
+"CHOOSE" = "Choose";
 /* Title of dropdown from which the user can select topics on New Post Screen */
 "CHOOSE_A_TOPIC" = "Choose a topic...";
 /* Prompt text shown after user chooses to begin registering with an external service like Facebook or Google. {service} will be replaced with a service name like Google or Facebook. */
@@ -702,3 +708,605 @@
 "WAITING_FOR_RESPONSE"="Please wait...";
 /* Alert dialog button title to confirm an action */
 "YES"="Yes";
+
+
+/*登录到英荔教育*/
+"SIGN_IN_ELITEU" = "Sign in To EliteU";
+/*注册到英荔教育*/
+"SIGN_UP_ELITEU" = "Sign up for EliteU";
+/*忘记密码*/
+"FORGET_PASSWORD" = "Forgot your password?";
+/*还没有账号*/
+"NO_ACCOUNT" = "No account yet?";
+/*登录*/
+"SIGN_IN" = "Sign in";
+/*手机号或邮箱地址*/
+"PHONE_OR_EMAIL" = "Mobile or email";
+/*密码*/
+"PASSWORD" = "Password";
+/*密码重置邮件已发送*/
+"RESET_PASSWORD_SENT" = "Password reset message has been sent.";
+/*输入错误*/
+"INPUT_ERROR" = "Input Error";
+/*不可用的邮箱地址或手机号码*/
+"UNUSED_EMAIL_OR_PHONE_NUMBER" = "Not available email address or phone number.";
+/*已发送*/
+"SENT" = "Already sent";
+/*密码重置验证码已发送*/
+"PASSWORD_RESET_AUTHENTICATION_SENT" = "Password reset authentication code has been sent.";
+/*发送失败*/
+"SEND_FAILED" = "Send failed";
+/*该手机未注册*/
+"PHONE_NUMBER_NOT_REGISTER" = "The phone number is not yet registered.";
+/*取消*/
+"CANCEL" = "Cancel";
+/*确定*/
+"OK" = "OK";
+/*重置失败*/
+"RESET_FAILED" = "Reset failed";
+/*重置密码成功*/
+"RESET_PASSWORD_SUCCESS" = "Reset password successfully.";
+/*手机账号密码重置成功*/
+"MOBILE_PHONE_ACCOUNT_RESET_SUCCESS" = "Mobile phone account password reset successfully.";
+/*重置密码失败*/
+"RESET_THE_PASSWORD_FAILED" = "Reset password failed";
+/*手机账号密码重置失败*/
+"MOBILE_PHONE_ACCOUNT_RESET_FAILED" = "Mobile phone account password reset failed.";
+/*密码长度少于6位数*/
+"PASSWORD_LENGTH_IS_LESS_THAN_SIX" = "Password should be at least 6 characters.";
+/*验证码错误*/
+"VERIFICATION_CODE_ERROR" = "Verification code error.";
+/*跳过*/
+"JUMP_OVER" = "Skip";
+/*注册*/
+"REGISTER" = "Sign Up";
+/*版本*/
+"APPVERSION" = "Version";
+/*我的课程*/
+"MY_COURSE" = "My Courses";
+/*我的下载*/
+"MY_VIDEO" = "My Videos";
+/*发现课程*/
+"FIND_COURSE" = "Find Courses";
+/*个人中心*/
+"USER_CENTER" = "User Center";
+/*设置*/
+"MY_SETTING" = "My Settings";
+/*获取验证码失败*/
+"FAILED_GET_VERIFICATION" = "Failed to get verification code.";
+/*请输入正确的手机号码*/
+"ENTER_CORRECT_NUMBER" = "Please enter correct mobile number.";
+/*注册失败*/
+"REGISTRATION_FAILURE" = "Registration failure";
+/*手机号已经注册过，请重新输入*/
+"PHONE_NUMBER_HAS_BEEN_REGISTERED" = "Mobile number has already been registered, please try again.";
+/*注册成功*/
+"REGISTRATION_SUCCESS" = "Account created successfully.";
+/*请登录*/
+"PLEASE_SIGN_IN" = "Please sign in";
+/*验证码错误，请重新输入*/
+"VERIFICATION_ERROR" = "Verification code error.";
+/*密码长度大于30位数,请重新输入*/
+"PASSWORD_LENGTH_IS_MORE_THAN_30" = "Password should be no more than 30 characters.";
+/*请输入正确的手机号、验证码和密码*/
+"PLEASE_ENTER_THE_CORRECT" = "Please enter the correct phone number, password and a verification code.";
+/*使用手机注册*/
+"USE_PHONE_REGISTER" = "Sign up with mobile";
+/*请输入手机号*/
+"PLEASE_ENTER_PHONE_NUMBER" = "Mobile";
+/*请输入验证码*/
+"PLEASE_ENTER_VERI" = "Verification code";
+/*请输入密码*/
+"PLEASE_ENTER_PASSWORD" = "Please enter the new password";
+/*获取验证码*/
+"GET_VERIFICATION" = "Send";
+/*重新发送*/
+"RESEND" = "Resend";
+/*创建账号*/
+"CREATE_ACCOUNT" = "Create My Account";
+/*注册英荔教育即表示您同意*/
+"SIGN_UP_AGREE" = "By signing up, I agree to Elite Education's.";
+/**/
+"AGREEMENT" = "Terms and Conditions";
+/*重置密码*/
+"RESET_PASSWORD" = "Reset Password";
+/*请输入手机号或邮箱,以重置您的密码*/
+"PLEASE_ENTER_YOUR_PHONE_OR_EMAIL_TO_RESET_PASSWORD" = "Enter your mobile number or email address, we'll send instructions to reset your password.";
+/*请输入手机号或邮箱*/
+"PLEASE_ENTER_YOUR_PHONE_OR_EMAIL" = "Mobile or email";
+/*仅在wifi下载*/
+"DOWNLOAD_IN_WIFI" = "Only download content when Wi-Fi is turned on.";
+/*注册时--输入密码*/
+"PLEASE_SET_PASSWORD" = "Please enter the password";
+/*秒*/
+"SECOND" = "s";
+/*手机号码为空*/
+"PHONE_IS_EMPTY" = "Please enter your mobile number";
+/*验证码为空*/
+"VERIFICATION_CODE_IS_EMPTY" = "Please enter verification code.";
+/*密码为空*/
+"PASSWORD_IS_EMPTY" = "Please enter your password and try again.";
+/*注册密码为空*/
+"REGI_PASSWORD_IS_EMPTY" = "Please enter your password.";
+/*还没获取验证码*/
+"STILL_NO_GET_VERI" = "No acquire verification code yet";
+/*修改了手机号*/
+"MOBILE_CHANGED" = "Mobile number changed, please verify again.";
+/*字幕*/
+"CLOSED_CAPTIONS" = "Captions";
+/*播放速度*/
+"VIDEO_SPEED" = "Video Speed";
+/*请输入您的手机号或邮箱*/
+"ENTER_PHONE_OR_EMAIL" = "Please enter mobile number or email address.";
+/*请输入正确的手机号或邮箱*/
+"ENTER_RIGHT_PHONE_OR_EMAIL" = "Please enter correct mobile number or email address.";
+/*仅Wi-fi下载*/
+"DOWNLOAD_ONLY_WIFI" = "Download Wi-Fi only";
+/*关于*/
+"ABOUT_APP" = "About";
+/*当前版本*/
+"VERSION_APP" = "Version";
+/*公司官网*/
+"WEBSITE_COMPANY" = "Official Website";
+/*广州英荔教育科技有限公司*/
+"COMPANY_NAME" = "Guangzhou Elite Education & Technology Co.,Ltd.";
+/*绑定邮箱*/
+"BIND_EMAIL" = "Email Binding";
+/*提交*/
+"SUBMIT" = "Submit";
+/*邮箱格式错误*/
+"EMAIL_FORMAT_ERROR" = "Format error";
+/*邮箱已存在*/
+"EMAIL_IS_REGISTERED" = "Email had been used";
+/*已发送验证邮件，请前往邮箱查看。*/
+"EMAIL_AREADY_SEND" = "Email send successfully, please check your mailbox.";
+/*未知错误*/
+"UNKNOWN_ERROR" = "unknown error";
+/*确定绑定*/
+"SURE_BIND" = "Confirm";
+/*手机格式错误*/
+"PHONE_FORMAT_ERROR" = "Format error";
+/*手机绑定*/
+"PHONE_DINDING" = "Mobile binding";
+/*手机号码已存在*/
+"PHONE_IS_REGISTERED" = "Mobile has been used";
+/*绑定成功*/
+"PHONE_BIND_SUCCESS" = "Bind success";
+/*绑定失败*/
+"PHONE_BIND_FAIL" = "Bind fail";
+/*密码错误*/
+"PASSWORD_ERROR" = "Password incorrect";
+/*已发送验证短信，请查看。*/
+"MESSAGE_AREADY_SEND" = "A verification message has been sent to you.";
+/*班级*/
+"CLASS_TITLE" = "Class";
+/*温馨提示*/
+"REMINDER" = "Reminder";
+/*保存二维码图片到相册*/
+"SAVE_QR_IMAGE" = "Save QR code image?";
+/*保存成功*/
+"SAVE_QR_IMAGE_SUCCESS" = "Save success";
+/*保存失败*/
+"SAVE_QR_IMAGE_FAIL" = "Save fail";
+/*复制成功*/
+"COPY_SUCCESS" = "Copied";
+/*复制微信号*/
+"COPY_WECHAT_NUMBER" = "Copy Wechat ID";
+/*宝典充值*/
+"RECHARGE_Coins" = "Recharge coins";
+/*微信支付*/
+"WECHAT_PAY" = "Wechat Pay";
+/*支付宝支付*/
+"ALI_PAY" = "Alipay";
+/*确定充值*/
+"SURE_RECHARGE" = "Confirm";
+/*选择支付方式*/
+"SELECT_PAYWAY" = "Select payment";
+/*选择支付方式*/
+"CURRENT_COINS" = "Select amount(available coins : ";
+/*输入其他金额*/
+"ENTER_OTHERPRICE" = "Enter amount";
+/*宝典*/
+"COINS_VALUE" = "Coins";
+/*赠送*/
+"GIVE_COINS" = " + gain {count} complimentary coins.";
+/*请选择或输入充值金额*/
+"ENTER_OR_SELECT_RECHARGE_MONEY" = "Please select or enter amount";
+/*正在充值...*/
+"IS_RECHARGE" = "Recharging";
+/*请输入小于5位数字*/
+"ENTER_LASS_FIVE" = "Please enter less than 5 digits.";
+/*正在充值...请不要离开此界面!*/
+"IS_RECHARGE_NO_LEVE" = "Recharge... Please do not leave this interface!";
+/*充值成功*/
+"RECHARGE_SUCCESS" = "Recharged";
+/*用户不存在*/
+"NO_EXIST_USER" = "User does not exist";
+/*支付结果*/
+"PAY_RESULT" = "Payment result";
+/*支付成功*/
+"PAY_SUCCESS" = "Payment success";
+/*取消支付*/
+"PAY_CANCEL" = "Cancel payment";
+/*支付失败*/
+"PAY_FAIL" = "Payment fail";
+/*授权失败*/
+"PAY_AUTHENRIZATE_FAIL" = "Authorization fail";
+/*微信不支持*/
+"NO_SUPPORT_WECHAT" = "WeChat does not support.";
+/*用户不存在*/
+"NETWORK_CONNET_FAIL" = "Network connection error.";
+/*正在处理中*/
+"IS_HANDLE" = "Being processed";
+/*学习宝典*/
+"STUDY_COINS" = "Coins";
+/*当前共*/
+"NOW_HAVE" = "{count} coins in total.";
+/*优惠券*/
+"COUPON_PAPER" = "Coupon";
+/*正在处理中*/
+"COUPON_NUMBER" = "{count} available coupon(s).";
+/*待支付课单*/
+"COURSE_ORDER" = "Pending Orders";
+/*您有{count}个待支付课单*/
+"ORDER_COUNT" = "{count} pending order(s).";
+/*兑换*/
+"EXCHANGE_TITLE" = "Redeem";
+/*待支付*/
+"PREPARE_PAY" = "Pending Orders";
+/*优惠活动*/
+"COUPON_ACTIVITY" = "Select a special offer";
+/*单号*/
+"ORDER_NUMBER" = "Order No:";
+/*合计*/
+"IN_TOTAL_PRICE" = "Total:";
+/*支付*/
+"PAY_TITLE" = "Pay Now";
+/*未使用*/
+"NO_USE_COUPON" = "Available";
+/*已使用*/
+"IS_USED_COUPON" = "Used";
+/*已过期*/
+"IS_OVERDUE_COUPON" = "Expired";
+/*即将开课*/
+"WILL_BEGIN_COURSE" = "Soon";
+/*查看待支付*/
+"VIEW_PREPARE_ORDER" = "Finish payment";
+/*兑换优惠券*/
+"EXCHANGE_COUPON" = "Redeem Coupons";
+/*请输入兑换码*/
+"ENTER_COUPON_NUM" = "Enter redeem code";
+/*兑换失败*/
+"EXCHANGE_FAIL" = "Fail to redeem.";
+/*兑换成功*/
+"EXCHANGE_SUCCESS" = "Redeemed successfully";
+/*请检查网络*/
+"CHECK_NEWWORK" = "Connection Error";
+/*优惠券兑换成功，请及时使用您的优惠券*/
+"EXCHANGE_AND_USE" = "Your coupon is available now. Please use it in time.";
+/*您已经领用过此优惠券*/
+"HAD_EXCHANGE" = "This code has already been redeemed";
+/*很抱歉，优惠券已经领用完了！*/
+"HAS_NO_COUPON" = "Sorry, coupon quota has been used up";
+/*优惠券兑换时间未到*/
+"COUPON_TIME_EARLY" = "Coupon exchange time is not";
+/*优惠券已过期*/
+"COUPON_TIME_LATER" = "Coupon expired";
+/*优惠券已失效*/
+"COUPON_NO_USERENABLE" = "Invalid coupon";
+/*兑换码无效*/
+"NO_INVALIDE_COUPON" = "Invalid redeem code";
+/*企业优惠券兑换失败*/
+"COMPANY_COUPON_FAIL" = "Redeem error";
+/*暂时没有未使用的优惠券*/
+"NO_AVALIDE_COUPON" = "No available coupons yet";
+/*暂时没有已使用的优惠券*/
+"NO_USED_COUPON" = "No used coupons yet";
+/*暂时没有已过期的优惠券*/
+"NO_EXPIRED_COUPON" = "No expired coupons yet";
+/*暂时没有待支付课单*/
+"NO_COURSE_ORDER" = "No pending orders yet";
+/*主讲教授*/
+"MAIN_PROFESSOR" = "Professors";
+/*课程大纲*/
+"COURSE_OUTLINE" = "Syllabus";
+/*学员评价*/
+"STUDENT_COMMENT" = "Comments";
+/*加入课程班级群*/
+"ENTET_CLASS" = "join class";
+/*全文*/
+"ALL_TEXT" = "More↓";
+/*收起*/
+"STOP_UP" = "Collapse↑";
+/*学习时长*/
+"STUDY_TIME" = "Hours";
+/*报名人数*/
+"APPLICATION_NUMBER" = "Enrollment";
+/*人*/
+"NUMBER_STUDENT" = "members";
+/*小时*/
+"STUDY_HOUR" = "hours";
+/*邮箱*/
+"EMAIL_NUMBER" = "Email: ";
+/*手机号码*/
+"PHONE_NUMBER" = "Mobile: ";
+/*可用于登录和找回密码*/
+"USE_SIGNUP_BACKPASSWOR" = "Used for login or resetting password.";
+/*未命名*/
+"NO_NAME" = "Not named";
+/*选择*/
+"CHOOSE_EDUCATION" = "Select";
+/*请先登录再点赞*/
+"LOGIN_AND_COMMENT" = "Log in before you like this comment.";
+/*您已经点过赞了*/
+"AREADY_COMMENT" = "You've already commented";
+/*安全验证*/
+"SECURITY_VALIDATION" = "Security Validation";
+/*请输入登陆密码*/
+"LOGIN_PASSWORD" = "Enter login password";
+/*教授详情*/
+"PROFESSOR_DETAIL" = "Details";
+/*暂无学员评价*/
+"NO_STUDENT_COMMENT" = "No comments";
+/*选课表*/
+"COURSE_LIST" = "Course list";
+/*提交课表*/
+"HANDIN_COURSE_LIST" = "Submit";
+/*推荐课程*/
+"RECOMMEND_COURSE" = "Recommendation";
+/*选择优惠活动*/
+"CHOOSE_ACTIVITY" = "Select a special offer";
+/*暂无优惠活动*/
+"NO_ACTIVITY" = "No avaliabel offers";
+/*请选择优惠券*/
+"SELECT_COUPON" = "Please select a coupon";
+/*请选择活动项*/
+"SELECT_ACTIVITY_ITEM" = "Select an option";
+/*全选*/
+"SELCT_ALL" = "All";
+/*交学费*/
+"HAND_MONEY" = "Pay tuition";
+/*输入宝典*/
+"ENTER_COINS_AMOUNT" = "Enter coins amount";
+/*剩余{count}宝典，本次可用{number}宝典*/
+"HAD_COINS_NUMBER" = "{count} remained,{number} available.";
+/*请输入宝典数*/
+"COINS_AMOUNT" = "amount";
+/*1元 = 10宝典*/
+"RMB_TO_COINS" = "￥1 = 10 coins";
+/*确定购买*/
+"SURE_TO_BUY" = "Purchase";
+/*当前账号剩余%.2lf宝典\n购买课程需要%.2lf宝典*/
+"NEED_COINS" = "{count} remained,\n need {number} purchase.";
+/*余额不足*/
+"NO_ENOUGH_COINS" = "Coins not enough";
+/*去充值*/
+"GO_TO_RECHARGE" = "Recharge";
+/*购买成功*/
+"BUY_SUCCESS" = "Purchase success";
+/*输入的宝典数大于可用宝典数*/
+"MORE_COINS_REMAIND" = "The number of input is greater than the number of available coins.";
+/*输入的宝典数大于剩余宝典数*/
+"MORE_COINS_AVALIDE" = "The number of input is greater than the remaining number of coins.";
+/*您正在使用企业优惠券，不能使用宝典支付*/
+"COUPON_NO_COINS" = "You are using company coupons,Can not use the coins to pay.";
+/*结算*/
+"BALANCE_BUY" = "Pay";
+/*暂时无可选优惠券*/
+"NO_CHOOSE_COUPON" = "No available coupons";
+/*您的账号尚未激活*/
+"NEED_ACTIVITY" = "Account is not activated";
+/*确定发送激活邮件到登录邮箱？*/
+"SEND_EMAIL_ACTIVITY" = "Confirm and send activation email?";
+/*昵称不能为空*/
+"NICKNAME_NULL" = "Nickname cannot be empty";
+/*昵称最多填写六个字*/
+"NICKNAME_NUMBER" = "Nickname up to six words";
+/*下一步*/
+"NEXT_TEST" = "Next";
+/*手机号码注册*/
+"PHONE_REGISTER" = "Sign up with mobile";
+/*邮箱注册*/
+"EMAIL_REGISTER" = "Sign up with email";
+/*6-30位密码*/
+"PASSWORD_NUM" = "6-30 characters";
+/*密码至少6位字符*/
+"MORE_PASSWORD" = "No more than 6 characters";
+/*请输入小于30位的密码*/
+"LESS_PASSWORD" = "Password should be no more than 30 characters";
+/*使用邮箱或手机号码注册*/
+"PHONE_OR_EMAIL_REGISTER" = "Sign up with email or mobile";
+/*服务条款*/
+"SERVICE_ITEM" = "Stipulation";
+/*邮箱或手机号码*/
+"PHONE_OR_EMAIL" = "Email or mobile";
+/*我们给您发送了一封重置密码邮件，请进入邮箱查收并按提示设置新密码。*/
+"HAD_SEND_EMAIL" = "An activation mail has been sent. Please log in {count} and follow the instruction to activate.";
+/*已经激活？马上登录*/
+"ACTIVITY_LOGIN" = "Already activated? Log in now";
+/*没有收到邮件？*/
+"NO_RECEIVE_EMAIL" = "Not receiving any mails?";
+/*点此重发*/
+"CLICK_RESEND" = "Resend";
+/*您不能使用这个昵称，请重新输入*/
+"CONNOT_USE_NICKNAME" = "Stop words included, please try again.";
+/*我们给您发送了一条验证短信*/
+"HAD_SEND_MESSAGE" = "An activation message has been sent to you";
+/*设置密码*/
+"SET_PASSWORD" = "Set password";
+/*约*/
+"ABOUT_TIME" = "About";
+
+/*加入成功*/
+"ADD_SUCCESS" = "Enrolled";
+/*去学习*/
+"GO_TO_STUDY" = "Study now";
+/*加入课程成功*/
+"ADD_COURSE_SUCCESS" = "Now you've enrolled in this course.";
+/*课程信息*/
+"COURSE_MESSAGE" = "Order details";
+/*课程名称*/
+"COURSE_TITLE" = "Course name";
+/*原价*/
+"ORIGIN_PRICE" = "Original cost";
+/*优惠活动抵扣*/
+"CUT_ACTIVITY" = "Special offer deducted";
+/*优惠券抵扣*/
+"CUT_COUPON" = "Coupon deducted";
+/*宝典抵扣*/
+"CUT_BAODIAN" = "Coins deducted";
+/*实际支付*/
+"PAY_LAST" = "Actual cost";
+/*充值宝典信息*/
+"RECHARGE_MESSAGE" = "Recharge details";
+/*充值金额*/
+"RECHARGE_MONEY" = "Total amount";
+/*充值宝典*/
+"RECHARGE_BAODIAN" = "Recharged coins";
+/*剩余宝典*/
+"AVALIABLE_BAODIAN" = "Remaining coins";
+/*发送激活邮件成功*/
+"SEND_EMAIL_SUCCESS" = "Eaill sent successfully.";
+/*未选择*/
+"UN_SELECTED" = "Unselected";
+/*应付金额不能小于或等于0*/
+"NO_LESSTHAN_ZERO" = "The amount payable shall not be less than or equal to 0.";
+/*已认证 */
+"TD_VERTIFIED" = "Verified";
+/*审核中 */
+"TD_PROCESSING" = "Processing";
+/*未认证 */
+"TD_UNVERTIFIED" = "Unverified";
+/*重拍 */
+"TD_RETAKE" = "Retake";
+/*面部认证  */
+"FACE_AUTHENTICATION" = "Face Authentication";
+/* 注意事项：
+ 确保您的面部在有效区域内。
+ 效果不满意可重拍。*/
+"FACE_NOTES" = "Notes:\nEnsure that your face is fully displayed.\nRetake if not satisfied with the preview.\n\n";
+/* 照片用途：
+ 用于学习过程的身份验证，确保是本人参与课程。*/
+"FACE_USE_FOR" = "Used for:\nAuthentication for learning procedure.\n\n";
+/* 如摄像头无法使用：
+ 请检查您是否禁止了摄像头使用权限。*/
+"IMAGE_USE_CAMERA" = "When unable to use camera:\nPlease check if you have disabled in-app access to camera.";
+
+/*身份认证 */
+"IDENTIFY_AUTHENTICATION" = "Identity Authentication";
+/*注意事项：
+ 确保您的面部在有效区域内。
+ 确保身份证信息清晰被辨别。 */
+"IDENTIFY_AUTHENTICATION" = "Notes:\nEnsure that your face is fully displayed.\nEnsure ID card info can be easily recognized.\n\n";
+/*照片用途：
+ 用于证书颁发的验证，确保个人信息真实有效。 */
+"IDENTIFY_USE_FOR" = "Used for:\nAuthentication for course certificates.";
+/*男 */
+"TD_MAN" = "Male";
+/*女 */
+"TD_WOMEN" = "Female";
+/*姓名  */
+"TRURE_NAME" = "Name";
+/*身份证号  */
+"CARD_ID" = "ID number";
+/*出生日期  */
+"USER_BIRTHDATE" = "Birth date";
+/*性别  */
+"USER_SEX" = "Gender";
+/*请输入真实姓名 */
+"ENTE_REAL_NAME" = "Please enter real name.";
+/*请输入身份证号 */
+"ENTER_CARD_ID" = "Please enter ID number.";
+/*请选择出生日期 */
+"ENTET_BIRTH_DATE" = "Please select birth date.";
+/*请选择性别 */
+"SELECT_SEX" = "Please select gender.";
+/*请输入完整的姓名 */
+"ENTER_ALL_NAME" = "Please enter full name.";
+/*身份证号格式不正确 */
+"CARD_ID_ERROR" = "This format is incorrect.";
+/*姓名为中文 */
+"CHINESE_NAME" = "No letters, numbers or punctuations should be contained.";
+/*认证信息  */
+"AUTHENTICATION_MESSAGE" = "Authentication";
+/*第一步 面部认证  */
+"FIRST_FACE" = "1. Face Authentication";
+/*第二步 身份认证 */
+"SECOND_IDENTIFY" = "2. Identity Authentication";
+/*第三步 填写资料 */
+"THIRD_MESSAGE" = "3. Personal Information";
+/*请对准摄像头 */
+"AIM_CAMERA" = "Please align with the camera.";
+/* 请出示身份证 */
+"SHOW_CARD" = "Please present your ID card.";
+/*点击拍照  */
+"CLICK_PHOTO" = "Click Here";
+/*请输入个人信息（必填） */
+"ENTER_MESSAGE" = "Please fill in personal info(required). ";
+/*您已通过认证 */
+"AUTHENTE_SUCCESS" = "You have completed the authentication.";
+/*资料已提交，48小时内显示审核结果。 */
+"WAIT_FOR_RESULT" = "Your information has been submitted. The result will be released within 48 hours.";
+/*重新认证 */
+"AUTHENT_AGAIN" = "Reauthenticate";
+/*审核未通过 */
+"AUTHEN_NO_PASS" = "You haven't passed the authentication.";
+/*提交成功 */
+"HANDIN_SUCCESS" = "Submitted";
+/*博士*/
+"D_DEGREE" = "Doctorate";
+/*硕士*/
+"M_DEGREE" = "Master";
+/*学士*/
+"B_DEGREE" = "Bachelor";
+/*肆业证书*/
+"A_DEGREE" = "Associate Degree";
+/*高中*/
+"HS_DEGREE" = "High School";
+/*初中*/
+"JHS_DEGREE" = "Junior High School";
+/*小学*/
+"EL_DEGREE" = "Primary school";
+/*未受正规教育*/
+"NONE_DEGREE" = "Informal Education";
+/*其他教育程度*/
+"OTHER_DEGREE" = "Others";
+/*宝典赠送*/
+"COIN_RECEIVE" = "Coins Received";
+/*赠送{count}宝典Get xxx coins*/
+"GIVE_COINS_NUMBER" = "Get {count} coins.";
+/*2017-02-18至2017-02-28加入课程，赠送375.00宝典*/
+"RECEIVE_MIND" = "Enroll on {startDate} to {endDate},get {number} coins.";
+/*2017-02-18至2017-02-28支付，赠送375.00宝典*/
+"PAY_RECEIVE_MIND" = "Pay on {startDate} to {endDate},get {number} coins.";
+/*获取信息失败*/
+"FAILED_QUESTE" = "Failed to acquire data.";
+/*提交失败*/
+"FALILED_SUBMIT" = "Failed to submit.";
+/*完成*/
+"DONE" = "Done";
+/*学习期限*/
+"DATE_LIMIT" = "Expiry Date";
+/*持续有效*/
+"NO_LIMIT" = "No time limit";
+/*本课程可随时加入，不设有效期限，考核通过后仍保留学习权限*/
+"ENROLL_MESSAGE" = "You're free to enroll anytime. There's no expiry date for this course, you can still access the course even after completing it.";
+/*通过手机号码设置密码*/
+"RESET_BY_PHONE" = "Set password by phone number.";
+/*通过邮箱重置密码*/
+"RESET_BY_EMAIL" = "Reset password via mailbox.";
+
+/*教授简介Introduction*/
+"PROFESSOR_INTRODUCE" = "Introduction";
+/*主要成就Main Achievements*/
+"MAIN_ACHIECEMENT" = "Main Achievements";
+/*教育背景Educational Background*/
+"EDUCATIONNAL_BACKGROUND" = "Educational Background";
+/*其他成就Others*/
+"OTHERS_ACHIEVEMENT" = "Others";
+/*研究领域Research Fields*/
+"RESEARCH_FIELD" = "Research Fields";
+/*学术邗物文章Academic Essays*/
+"ACADEMIC_ESSAYS" = "Academic Essays";
+/*管理咨询项目Management Consulting*/
+"MANAGEREMENT_CONSULTING" = "Management Consulting";

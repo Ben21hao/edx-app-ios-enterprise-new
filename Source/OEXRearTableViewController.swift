@@ -196,6 +196,9 @@ class OEXRearTableViewController : UITableViewController {
             let tableviewHeight = tableView.contentSize.height
             return max((screenHeight - tableviewHeight) + LogoutCellDefaultHeight, LogoutCellDefaultHeight)
         }
+        else if indexPath.row == OEXRearViewOptions.SubmitFeedback.rawValue {
+            return 0
+        }
         
         
         return super.tableView(tableView, heightForRowAtIndexPath: indexPath)

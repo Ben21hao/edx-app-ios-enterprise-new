@@ -27,6 +27,19 @@ public class UserProfile {
         case YearOfBirth = "year_of_birth"
         case ParentalConsent = "requires_parental_consent"
         case AccountPrivacy = "account_privacy"
+        
+        case Name = "name" //用户名
+        case Education = "level_of_education"//学历
+        case Nickname = "nickname"//昵称
+        case Remainscore = "remainscore" //宝典
+        case phone = "mobile"//手机号码
+        case email = "email"//邮箱
+        case coupon = "can_use_coupon_num"//优惠券
+        case order = "wait_order_num"//未支付订单
+        case vertify = "verify_status" //认证信息
+        case code = "code"
+        case companyDic = "company"//公司dic
+        case logoUrl = "logo"//公司logo
     }
     
     let hasProfileImage: Bool
@@ -42,6 +55,17 @@ public class UserProfile {
     
     var hasUpdates: Bool { return updateDictionary.count > 0 }
     var updateDictionary = [String: AnyObject]()
+    
+    let statusCode : Int? //状态码 400 未认证，200 提交成功 ，201 已认证，202 认证失败
+    let name : String?
+    var educationCode : String?
+    var nickname: String?//昵称
+    var remainscore: Double?//宝典
+    var phone : String?//手机号
+    var email : String?//邮箱
+    var coupon :  Double? //优惠券
+    var order : Double?//未支付订单
+    let logoUrl: String?//公司logo
     
     public init?(json: JSON) {
         let profileImage = json[ProfileFields.Image]
@@ -59,9 +83,27 @@ public class UserProfile {
         birthYear = json[ProfileFields.YearOfBirth].int
         parentalConsent = json[ProfileFields.ParentalConsent].bool
         accountPrivacy = ProfilePrivacy(rawValue: json[ProfileFields.AccountPrivacy].string ?? "")
+        
+        let companyDic = json[ProfileFields.companyDic]
+        logoUrl = companyDic[ProfileFields.logoUrl].string
+        
+        let profileStatus = json[ProfileFields.vertify]
+        statusCode = profileStatus[ProfileFields.code].int
+        
+        phone = json[ProfileFields.phone].string //手机号
+        email = json[ProfileFields.email].string//邮箱
+        name = json[ProfileFields.Name].string//用户名
+        nickname = json[ProfileFields.Nickname].string//昵称
+        coupon = json[ProfileFields.coupon].double//优惠券
+        order = json[ProfileFields.order].double//未支付订单
+        remainscore = json[ProfileFields.Remainscore].double
+        educationCode = json[ProfileFields.Education].string
+        
+        print("json-----\(json)")
     }
     
-    internal init(username : String, bio : String? = nil, parentalConsent : Bool? = false, countryCode : String? = nil, accountPrivacy : ProfilePrivacy? = nil) {
+    internal init(username : String, bio : String? = nil, parentalConsent : Bool? = false, countryCode : String? = nil, accountPrivacy : ProfilePrivacy? = nil,name : String, education : String? = nil,nickname : String,remainscore : Double,phone : String,email : String,coupon : Double,order : Double) {
+        
         self.accountPrivacy = accountPrivacy
         self.username = username
         self.hasProfileImage = false
@@ -69,6 +111,17 @@ public class UserProfile {
         self.parentalConsent = parentalConsent
         self.bio = bio
         self.countryCode = countryCode
+        
+        self.name = name
+        self.statusCode = nil
+        self.educationCode = education
+        self.nickname = nickname
+        self.remainscore = remainscore
+        self.phone = phone
+        self.email = email
+        self.coupon = coupon
+        self.order = order
+        self.logoUrl = nil
     }
     
     var languageCode: String? {
