@@ -95,21 +95,72 @@ class OEXRearTableViewController : UITableViewController {
     }
     
     private func setupProfileLoader() {
+        
         guard environment.config.profilesEnabled else { return }
         profileFeed = self.environment.userProfileManager.feedForCurrentUser()
+        
         profileFeed?.output.listen(self,  success: { profile in
             self.userProfilePicture.remoteImage = profile.image(self.environment.networkManager)
+            
+//            self.companyImage.contentMode = .ScaleAspectFit
+//            let companyImageStr = ELITEU_URL +  profile.logoUrl!
+//            self.companyImage.sd_setImageWithURL(NSURL.init(string:companyImageStr), placeholderImage: UIImage.init(named: "logobg"))
+            
+            if (profile.nickname != nil) == true {//如果昵称不为空,显示昵称
+                self.userNameLabel.text = profile.nickname
+            }
+            if (profile.nickname == nil) == true {//如果昵称为空,显示用户名
+                if profile.name != profile.username {
+                    self.userNameLabel.text = profile.name
+                } else {
+                    self.userNameLabel.text = Strings.noName
+                }
+            }
+            
+            let baseTool = TDBaseToolModel.init()
+            if profile.phone != nil {//如果手机号不为空,显示手机号
+                self.userEmailLabel.text = baseTool.setPhoneStyle(profile.phone)
+            }
+            
+            if profile.phone == nil{//如果手机为空,显示邮箱
+                self.userEmailLabel.text = baseTool.setEmailStyle(profile.email)
+            }
+
             }, failure : { _ in
                 Logger.logError("Profiles", "Unable to fetch profile")
         })
     }
     
     private func updateUIWithUserInfo() {
-        if let currentUser = environment.session.currentUser {
-            userNameLabel.text = currentUser.name
-            userEmailLabel.text = currentUser.email
-            profileFeed?.refresh()
+//        if let currentUser = environment.session.currentUser {
+//            userNameLabel.text = currentUser.name
+//            userEmailLabel.text = currentUser.email
+//        }
+        
+        let currentUser = environment.session.currentUser
+        if  (currentUser != nil){  //登录状态
+            
+            if (currentUser!.nick_name != nil) == true { //如果昵称不为空,显示昵称
+                userNameLabel.text = currentUser!.nick_name
+            }
+            if (currentUser!.nick_name == nil) == true {//如果昵称为空,显示用户名
+                if currentUser?.name != currentUser?.username {
+                    userNameLabel.text = currentUser!.name
+                } else {
+                    userNameLabel.text = Strings.noName
+                }
+            }
+            
+            let baseTool = TDBaseToolModel.init()
+            if currentUser!.mobile != nil { //如果手机号不为空,显示手机号
+                userEmailLabel.text = baseTool.setPhoneStyle(currentUser!.mobile)
+            }
+            if currentUser!.mobile == nil{ //如果手机为空,显示邮箱
+                userEmailLabel.text = baseTool.setEmailStyle(currentUser!.email)
+            }
         }
+        
+         profileFeed?.refresh()
     }
     
     private func setNaturalTextAlignment() {

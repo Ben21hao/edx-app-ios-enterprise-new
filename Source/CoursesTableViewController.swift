@@ -13,7 +13,7 @@ class CourseCardCell : UITableViewCell {
     
     private static let cellIdentifier = "CourseCardCell"
     private let courseView = CourseCardView(frame: CGRectZero)
-    private var course : OEXCourse?
+//    private var course : OEXCourse?
     private let courseCardBorderStyle = BorderStyle()
     
     override init(style : UITableViewCellStyle, reuseIdentifier : String?) {
@@ -72,6 +72,7 @@ class CoursesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.separatorStyle = .None
@@ -108,11 +109,11 @@ class CoursesTableViewController: UITableViewController {
         
         switch context {
         case .CourseCatalog:
-            CourseCardViewModel.onCourseCatalog(course).apply(cell.courseView, networkManager: self.environment.networkManager)
+            CourseCardViewModel.onCourseCatalog(course).apply(cell.courseView, networkManager: self.environment.networkManager,type: 2)
         case .EnrollmentList:
-            CourseCardViewModel.onHome(course).apply(cell.courseView, networkManager: self.environment.networkManager)
+            CourseCardViewModel.onHome(course).apply(cell.courseView, networkManager: self.environment.networkManager,type: 3)
         }
-        cell.course = course
+//        cell.course = course
 
         return cell
     }

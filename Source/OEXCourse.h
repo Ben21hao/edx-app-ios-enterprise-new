@@ -39,6 +39,7 @@ OEXStartType OEXStartTypeForString(NSString* type);
 @interface OEXCourse : NSObject
 
 - (id)initWithDictionary:(NSDictionary*)info;
+
 // TODO: Rename these to CamelCase (MK - eh just make this swift)
 @property (readonly, nonatomic, strong, nullable) OEXLatestUpdates* latest_updates;
 @property (readonly, nonatomic, strong, nullable) NSDate* end;
@@ -46,13 +47,18 @@ OEXStartType OEXStartTypeForString(NSString* type);
 @property (readonly, nonatomic, copy, nullable) NSString* name;
 @property (readonly, nonatomic, copy, nullable) NSString* org;
 @property (readonly, nonatomic, copy, nullable) NSString* video_outline;
-@property (readonly, nonatomic, copy, nullable) NSString* effort;
+@property (readonly, nonatomic, copy, nullable) NSString* effort;//学习时长（约60小时）
 @property (readonly, nonatomic, copy, nullable) NSString* course_id;
 @property (readonly, nonatomic, copy, nullable) NSString* root_block_usage_key;
 @property (readonly, nonatomic, copy, nullable) NSString* subscription_id;
 @property (readonly, nonatomic, copy, nullable) NSString* number;
 @property (readonly, nonatomic, copy, nullable) NSString* overview_html;
 @property (readonly, nonatomic, copy, nullable) NSString* short_description;
+@property (readonly, nonatomic, copy, nullable) NSString* moreDescription;//更多课程详情
+@property (readonly, nonatomic, copy, nullable) NSString* intro_video_3rd_url;//预告url
+@property (readonly, nonatomic, copy, nullable) NSNumber* listen_count;//报名人数
+@property (readonly, nonatomic, copy, nullable) NSString* professor_username;//教授名字
+@property (readonly, nonatomic, copy, nullable) NSNumber *course_price;//价格
 @property (readonly, nonatomic, copy, nullable) NSString* course_updates;         //  ANNOUNCEMENTS URL
 @property (readonly, nonatomic, copy, nullable) NSString* course_handouts;        //  HANDOUTS URL
 @property (readonly, nonatomic, copy, nullable) NSString* course_about;           // COURSE INFO URL
@@ -67,6 +73,10 @@ OEXStartType OEXStartTypeForString(NSString* type);
 
 @property (readonly, nonatomic, strong, nullable) NSString* courseImageURL;
 
+@property (readonly, nonatomic, copy, nullable) NSNumber *give_coin; //购买课程赠送宝典
+@property (readonly, nonatomic, copy, nullable) NSString *begin_at; //购买课程赠送宝典开始时间
+@property (readonly, nonatomic, copy, nullable) NSString *end_at; //购买课程赠送宝典结束时间
+@property (readonly, nonatomic, copy, nullable) NSNumber *is_eliteu_course;//是否为付费课程
 
 @end
 

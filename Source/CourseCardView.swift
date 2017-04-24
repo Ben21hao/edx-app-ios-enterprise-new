@@ -15,8 +15,8 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
     
     var course: OEXCourse?
     
+    let container = UIView()
     private let coverImageView = UIImageView()
-    private let container = UIView()
     private let titleLabel = UILabel()
     private let detailLabel = UILabel()
     private let bottomLine = UIView()
@@ -242,7 +242,8 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
     func addCenteredOverlay(view : UIView) {
         addSubview(view)
         view.snp_makeConstraints {make in
-            make.center.equalTo(overlayContainer)
+//            make.center.equalTo(overlayContainer)
+            make.center.equalTo(self)
         }
     }
 }

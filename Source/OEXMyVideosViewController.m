@@ -96,33 +96,94 @@ typedef  enum OEXAlertType
 
 @property (strong, nonatomic) OEXCheckBox* btn_SelectAllEditing;
 @property (strong, nonatomic) ProgressController *progressController;
+
+@property (nonatomic,strong) UILabel *titleViewLabel;
+
 @end
 
 @implementation OEXMyVideosViewController
 
 #pragma mark Status Overlay
 
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+    self.videoViewHeight.constant = 0;
+
+    // Do any additional setup after loading the view.
+    //Hide back button
+//    self.navigationController.navigationBarHidden = NO;
+//    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    [self setTitleLabel];
+//    self.title = [Strings myVideos];
+
+    //Set exclusive touch for all buttons
+    self.videoVideo.exclusiveTouch = YES;
+    self.table_RecentVideos.exclusiveTouch = YES;
+    self.table_MyVideos.exclusiveTouch = YES;
+    
+    //Set Navigation Buttons
+    self.btn_SelectAllEditing = [[OEXCheckBox alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [self.btn_SelectAllEditing addTarget:self action:@selector(selectAllChanged:) forControlEvents:UIControlEventTouchUpInside];
+    self.progressController = [[ProgressController alloc] initWithOwner:self router:self.environment.router dataInterface:self.environment.interface];
+    self.navigationItem.rightBarButtonItem = [self.progressController navigationItem];
+    [self.progressController hideProgessView];
+    
+    // Initialize array of data to show on table
+    self.arr_SubsectionData = [[NSMutableArray alloc] init];
+
+    // Initialize the interface for API calling
+    self.dataInterface = [OEXInterface sharedInterface];
+
+    //Add custom button for drawer
+//    UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage MenuIcon] style:UIBarButtonItemStylePlain target:self action:@selector(leftNavigationBtnClicked)];
+//    closeButton.accessibilityLabel = [Strings accessibilityMenu];
+//    self.navigationItem.leftBarButtonItem = closeButton;
+
+    //Fix for 20px issue for the table view
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.table_MyVideos setContentInset:UIEdgeInsetsMake(0, 0, 8, 0)];
+
+    [self.dataInterface setNumberOfRecentDownloads:0];
+
+    // Used for autorotation
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+
+    // Show Custom editing View
+    [self.customEditing.btn_Edit addTarget:self action:@selector(editTableClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.customEditing.btn_Delete addTarget:self action:@selector(deleteTableClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.customEditing.btn_Cancel addTarget:self action:@selector(cancelTableClicked:) forControlEvents:UIControlEventTouchUpInside];
+    self.btn_SelectAllEditing.hidden = YES;
+    self.isTableEditing = NO;           // Check Edit button is clicked
+    self.selectAll = NO;        // Check if all are selected
+
+    // set select all button color to white so it look prominent on blue navigation bar
+    self.btn_SelectAllEditing.tintColor = [[OEXStyles sharedStyles] navigationItemTintColor];
+    [self performSelector:@selector(reloadTable) withObject:self afterDelay:5.0];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     //Analytics Screen record
     [[OEXAnalytics sharedAnalytics] trackScreenWithName: OEXAnalyticsScreenMyVideosAllVideos];
-
-    [self.navigationController setNavigationBarHidden:false animated:animated];
-
+    
+//    [self.navigationController setNavigationBarHidden:false animated:animated];
+    
     // Add Observer
     [self addObservers];
-
+    
     // Only if video is playing.
     if(cellSelectedIndex == 1) {
         [self addPlayerObserver];
     }
-
+    
     // Populate My Videos View data
     self.lbl_NoVideo.hidden = YES;
     self.lbl_NoVideo.text = [Strings noVideosDownloaded];
     [self getMyVideosTableData];
     _isShifted = NO;
-
+    
     //While editing goto downloads then comes back Progressview overlaps checkbox.
     // To avoid this check this.
     if(_isTableEditing) {
@@ -133,15 +194,26 @@ typedef  enum OEXAlertType
             [self.recentEditViewHeight setConstant:0.0f];
         }
     }
-
-    self.navigationController.navigationBarHidden = NO;
-
+    
+//    self.navigationController.navigationBarHidden = NO;
+    
     self.table_RecentVideos.separatorInset = UIEdgeInsetsZero;
 #ifdef __IPHONE_8_0
     if(IS_IOS8) {
         [self.table_RecentVideos setLayoutMargins:UIEdgeInsetsZero];
     }
 #endif
+}
+
+#pragma mark - 导航栏标题
+- (void)setTitleLabel {
+    
+    self.titleViewLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, TDWidth - 198, 44)];
+    self.titleViewLabel.textAlignment = NSTextAlignmentCenter;
+    self.titleViewLabel.font = [UIFont fontWithName:@"OpenSans" size:18.0];
+    self.titleViewLabel.textColor = [UIColor whiteColor];
+    self.titleViewLabel.text = [Strings myVideos];
+    self.navigationItem.titleView = self.titleViewLabel;
 }
 
 - (void)removeAllObserver {
@@ -170,62 +242,6 @@ typedef  enum OEXAlertType
 
 - (void)toggleReveal {
     [self.revealViewController toggleDrawerAnimated:YES];
-}
-
-- (void)viewDidLoad {
-    
-    [super viewDidLoad];
-    self.videoViewHeight.constant = 0;
-
-    // Do any additional setup after loading the view.
-    //Hide back button
-    self.navigationController.navigationBarHidden = NO;
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" " style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.title = [Strings myVideos];
-
-    //Set exclusive touch for all buttons
-    self.videoVideo.exclusiveTouch = YES;
-    self.table_RecentVideos.exclusiveTouch = YES;
-    self.table_MyVideos.exclusiveTouch = YES;
-    
-    //Set Navigation Buttons
-    self.btn_SelectAllEditing = [[OEXCheckBox alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [self.btn_SelectAllEditing addTarget:self action:@selector(selectAllChanged:) forControlEvents:UIControlEventTouchUpInside];
-    self.progressController = [[ProgressController alloc] initWithOwner:self router:self.environment.router dataInterface:self.environment.interface];
-    self.navigationItem.rightBarButtonItem = [self.progressController navigationItem];
-    [self.progressController hideProgessView];
-    
-    // Initialize array of data to show on table
-    self.arr_SubsectionData = [[NSMutableArray alloc] init];
-
-    // Initialize the interface for API calling
-    self.dataInterface = [OEXInterface sharedInterface];
-
-    //Add custom button for drawer
-    UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage MenuIcon] style:UIBarButtonItemStylePlain target:self action:@selector(leftNavigationBtnClicked)];
-    closeButton.accessibilityLabel = [Strings accessibilityMenu];
-    self.navigationItem.leftBarButtonItem = closeButton;
-
-    //Fix for 20px issue for the table view
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.table_MyVideos setContentInset:UIEdgeInsetsMake(0, 0, 8, 0)];
-
-    [self.dataInterface setNumberOfRecentDownloads:0];
-
-    // Used for autorotation
-    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-
-    // Show Custom editing View
-    [self.customEditing.btn_Edit addTarget:self action:@selector(editTableClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.customEditing.btn_Delete addTarget:self action:@selector(deleteTableClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.customEditing.btn_Cancel addTarget:self action:@selector(cancelTableClicked:) forControlEvents:UIControlEventTouchUpInside];
-    self.btn_SelectAllEditing.hidden = YES;
-    self.isTableEditing = NO;           // Check Edit button is clicked
-    self.selectAll = NO;        // Check if all are selected
-
-    // set select all button color to white so it look prominent on blue navigation bar
-    self.btn_SelectAllEditing.tintColor = [[OEXStyles sharedStyles] navigationItemTintColor];
-    [self performSelector:@selector(reloadTable) withObject:self afterDelay:5.0];
 }
 
 - (void)reloadTable {
@@ -427,7 +443,7 @@ typedef  enum OEXAlertType
         }
         NSString* videoDetails = [NSString stringWithFormat:@"%@, %@", Vcount, [dictVideo objectForKey:CAV_KEY_VIDEOS_SIZE]];
         
-        [[CourseCardViewModel onMyVideos:obj_course collectionInfo:videoDetails] apply:infoView networkManager:self.environment.networkManager];
+        [[CourseCardViewModel onMyVideos:obj_course collectionInfo:videoDetails] apply:infoView networkManager:self.environment.networkManager type: 5];
         
         return cell;
     }

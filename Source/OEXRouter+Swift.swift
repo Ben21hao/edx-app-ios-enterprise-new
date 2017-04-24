@@ -256,8 +256,8 @@ extension OEXRouter {
         presentViewController(navController, fromController:nil, completion: nil)
     }
 
-    func showCourseCatalogDetail(courseID: String, fromController: UIViewController) {
-        let detailController = CourseCatalogDetailViewController(environment: environment, courseID: courseID)
+    func showCourseCatalogDetail(courseModel: OEXCourse, fromController: UIViewController) {
+        let detailController = CourseCatalogDetailViewController(environment: environment, courseModel: courseModel)
         fromController.navigationController?.pushViewController(detailController, animated: true)
     }
     

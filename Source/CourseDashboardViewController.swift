@@ -164,7 +164,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     
     private func loadedCourseWithEnrollment(enrollment: UserCourseEnrollment) {
         navigationItem.title = enrollment.course.name
-        CourseCardViewModel.onDashboard(enrollment.course).apply(courseCard, networkManager: self.environment.networkManager)
+        CourseCardViewModel.onDashboard(enrollment.course).apply(courseCard, networkManager: self.environment.networkManager,type: 4)
         verifyAccessForCourse(enrollment.course)
         prepareTableViewData(enrollment)
         self.tableView.reloadData()

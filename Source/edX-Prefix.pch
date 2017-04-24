@@ -37,6 +37,7 @@
 #import "OEXConfig.h"
 #import "TDBaseToolModel.h"
 #import "TDBaseView.h"
+#import "TDBaseViewController.h"
 //#import "TDCompanyModel.h"
 
 #define TableViewBGColor [UIColor colorWithRed:245/255.0 green:247/255.0 blue:250/255.0 alpha:1.0]

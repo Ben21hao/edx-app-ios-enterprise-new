@@ -15,13 +15,15 @@ class CourseCatalogViewController: UIViewController, CoursesTableViewControllerD
     private let tableController : CoursesTableViewController
     private let loadController = LoadStateViewController()
     private let insetsController = ContentInsetsController()
+    let titleViewLabel = UILabel.init(frame: CGRectMake(0, 0, TDScreenWidth - 198, 44))
     
     init(environment : Environment) {
         self.environment = environment
         self.tableController = CoursesTableViewController(environment: environment, context: .CourseCatalog)
         super.init(nibName: nil, bundle: nil)
-        self.navigationItem.title = Strings.findCourses
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .Plain, target: nil, action: nil)
+        
+//        self.navigationItem.title = Strings.findCourses
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .Plain, target: nil, action: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -41,30 +43,13 @@ class CourseCatalogViewController: UIViewController, CoursesTableViewControllerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.view.accessibilityIdentifier = "course-catalog-screen";
-        addChildViewController(tableController)
-        tableController.didMoveToParentViewController(self)
-        self.loadController.setupInController(self, contentView: tableController.view)
-        
-        self.view.addSubview(tableController.view)
-        tableController.view.snp_makeConstraints {make in
-            make.edges.equalTo(self.view)
-        }
-        
         self.view.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
         
-        tableController.delegate = self
-
-        paginationController.stream.listen(self, success:
-            {[weak self] courses in
-                self?.loadController.state = .Loaded
-                self?.tableController.courses = courses
-                self?.tableController.tableView.reloadData()
-            }, failure: {[weak self] error in
-                self?.loadController.state = LoadState.failed(error)
-            }
-        )
-        paginationController.loadMore()
+        setTitleLabelNaviBar()
+        addChildView()
+        loadCourseData()
         
         insetsController.setupInController(self, scrollView: tableController.tableView)
         insetsController.addSource(
@@ -79,11 +64,47 @@ class CourseCatalogViewController: UIViewController, CoursesTableViewControllerD
         environment.analytics.trackScreenWithName(OEXAnalyticsScreenFindCourses)
     }
     
+    func addChildView() {
+        
+        addChildViewController(tableController)
+        tableController.didMoveToParentViewController(self)
+        self.loadController.setupInController(self, contentView: tableController.view)
+        
+        self.view.addSubview(tableController.view)
+        tableController.view.snp_makeConstraints {make in
+            make.edges.equalTo(self.view)
+        }
+        tableController.delegate = self
+    }
+    
+    func loadCourseData() {
+        paginationController.stream.listen(self, success:
+            {[weak self] courses in
+                self?.loadController.state = .Loaded
+                self?.tableController.courses = courses
+                self?.tableController.tableView.reloadData()
+            }, failure: {[weak self] error in
+                self?.loadController.state = LoadState.failed(error)
+            }
+        )
+        paginationController.loadMore()
+    }
+    
+    func setTitleLabelNaviBar() {
+        self.titleViewLabel.textAlignment = .Center
+        self.titleViewLabel.font = UIFont.init(name: "OpenSans", size: 18.0)
+        self.titleViewLabel.textColor = UIColor.whiteColor()
+        self.titleViewLabel.text = Strings.findCourses
+        self.navigationItem.titleView = self.titleViewLabel
+    }
+    
     func coursesTableChoseCourse(course: OEXCourse) {
-        guard let courseID = course.course_id else {
+        if (course.course_id != nil) {
+            self.environment.router?.showCourseCatalogDetail(course, fromController:self)
+        }  else {
             return
         }
-        self.environment.router?.showCourseCatalogDetail(courseID, fromController:self)
+        
     }
 }
 

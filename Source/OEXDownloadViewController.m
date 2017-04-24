@@ -81,8 +81,7 @@
 
     [self reloadDownloadingVideos];
 
-    // set the custom navigation view properties
-    self.title = [Strings downloads];
+    self.titleViewLabel.text = [Strings downloads];
 
     //Listen to notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadProgressNotification:) name:DOWNLOAD_PROGRESS_NOTIFICATION object:nil];

@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,18 +22,23 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iFC-95-ZX8" userLabel="RecentVideoView">
+                                <rect key="frame" x="0.0" y="45" width="375" height="558"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h57-PP-XUC" userLabel="playback view">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rNo-KV-qy8" userLabel="videoview">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="225" id="E5T-iI-bXL"/>
                                                 </constraints>
                                             </view>
                                             <view hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Mz-5c-Ilz" userLabel="titleview">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                                 <subviews>
                                                     <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" tag="701" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="294" translatesAutoresizingMaskIntoConstraints="NO" id="vAF-sO-Tjz" customClass="OEXCustomLabel">
+                                                        <rect key="frame" x="16" y="18" width="349" height="17"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -58,16 +66,18 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="50" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="vF0-7G-Vd6" userLabel="Table View - RECENT">
+                                        <rect key="frame" x="0.0" y="225" width="375" height="283"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellCourseVideo" rowHeight="60" id="yH3-lk-slx" customClass="OEXCourseVideosTableViewCell">
                                                 <rect key="frame" x="0.0" y="50" width="375" height="60"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yH3-lk-slx" id="2nC-WH-FoH">
-                                                    <frame key="frameInset" width="375" height="59"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="501" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Introduction to giving with purpose" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1XH-jH-Bdl" customClass="OEXCustomLabel">
+                                                            <rect key="frame" x="53" y="15" width="219" height="20"/>
                                                             <accessibility key="accessibilityConfiguration" label="lbVideoName"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="219" id="MHs-7P-C5j"/>
@@ -78,6 +88,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J9X-dx-kC7" customClass="OEXCheckBox" customModule="edX" customModuleProvider="target">
+                                                            <rect key="frame" x="325" y="10" width="40" height="40"/>
                                                             <accessibility key="accessibilityConfiguration" label="btnCheckBoxDelete"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="W8L-zz-xp8"/>
@@ -89,6 +100,7 @@
                                                             </state>
                                                         </button>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="502" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3:45" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSZ-cu-2C4" customClass="OEXCustomLabel">
+                                                            <rect key="frame" x="53" y="39" width="47" height="10"/>
                                                             <accessibility key="accessibilityConfiguration" label="lbVideoLength"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="10" id="42k-zQ-8dk"/>
@@ -99,6 +111,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="503" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200MB" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4PX-dG-qM3" customClass="OEXCustomLabel">
+                                                            <rect key="frame" x="101" y="39" width="47" height="10"/>
                                                             <accessibility key="accessibilityConfiguration" label="lbVideoSize"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="47" id="i5N-jd-OQ1"/>
@@ -109,6 +122,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_partiallywatched.png" translatesAutoresizingMaskIntoConstraints="NO" id="REY-30-Fqx">
+                                                            <rect key="frame" x="16" y="22" width="15" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="15" id="7YD-2k-jNC"/>
                                                                 <constraint firstAttribute="height" constant="15" id="nQq-u1-9SN"/>
@@ -154,6 +168,7 @@
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yZm-m7-fVH" customClass="OEXCustomEditingView">
+                                        <rect key="frame" x="0.0" y="508" width="375" height="50"/>
                                         <color key="backgroundColor" red="0.24313725489999999" green="0.25882352939999997" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="y59-fs-o6j"/>
@@ -175,8 +190,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aIT-EB-vrS" userLabel="TabView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                                 <subviews>
                                     <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WFv-LH-THx">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                                         <color key="backgroundColor" red="0.24313725489999999" green="0.25882352939999997" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="10" id="79G-mT-IpH">
                                             <size key="itemSize" width="160" height="44"/>
@@ -186,18 +203,21 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="tabCell" id="a0q-S3-Lpw" customClass="OEXTabBarItemsCell">
-                                                <rect key="frame" x="0.0" y="1" width="165" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.5" width="165" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="165" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bt_scrollbar_tap.png" translatesAutoresizingMaskIntoConstraints="NO" id="b4w-V7-ilH"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bt_scrollbar_tap.png" translatesAutoresizingMaskIntoConstraints="NO" id="b4w-V7-ilH">
+                                                            <rect key="frame" x="16" y="1" width="140" height="43"/>
+                                                        </imageView>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="401" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dxg-h2-Exd" customClass="OEXCustomLabel">
+                                                            <rect key="frame" x="16" y="12.5" width="140" height="19.5"/>
                                                             <accessibility key="accessibilityConfiguration">
                                                                 <accessibilityTraits key="traits" button="YES"/>
                                                             </accessibility>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -241,6 +261,7 @@
                                 </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="188" sectionHeaderHeight="8" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="tEo-nb-KXu" userLabel="Table View - ALL VIDEOS">
+                                <rect key="frame" x="0.0" y="45" width="375" height="558"/>
                                 <color key="backgroundColor" red="0.8862745098" green="0.89019607840000003" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="U7W-1v-F4n"/>
@@ -251,12 +272,14 @@
                                         <rect key="frame" x="0.0" y="8" width="375" height="188"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rid-lC-u6h" id="7KS-O3-qpE">
-                                            <frame key="frameInset" width="375" height="188"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="188"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LO4-dV-iUX">
+                                                    <rect key="frame" x="8" y="0.0" width="359" height="188"/>
                                                     <subviews>
                                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SLQ-Vk-S3s" customClass="CourseCardView" customModule="edX" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="359" height="188"/>
                                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </view>
                                                     </subviews>
@@ -295,6 +318,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are currently no videos downloaded" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="K8K-cn-EfC">
+                                <rect key="frame" x="47.5" y="276.5" width="280" height="50"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="Lo7-Cb-W7H"/>

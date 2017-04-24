@@ -80,6 +80,7 @@ NSString* NSStringForOEXStartType(OEXStartType type) {
 @property (nonatomic, copy) NSString* number;
 @property (nonatomic, copy) NSString* effort;
 @property (nonatomic, copy) NSString* short_description;
+@property (nonatomic, copy) NSString *intro_video_3rd_url;
 @property (nonatomic, copy) NSString* overview_html;
 @property (nonatomic, copy) NSString* course_updates;         //  ANNOUNCEMENTS
 @property (nonatomic, copy) NSString* course_handouts;        //  HANDOUTS
@@ -87,6 +88,14 @@ NSString* NSStringForOEXStartType(OEXStartType type) {
 @property (nonatomic, strong) OEXCoursewareAccess* courseware_access;
 @property (nonatomic, copy) NSString* discussionUrl;
 @property (nonatomic, copy) NSDictionary<NSString*, CourseMediaInfo*>* mediaInfo;
+@property (nonatomic, copy)NSString *moreDescription;//更多课程详情
+@property (nonatomic, copy) NSNumber* listen_count;//报名人数
+@property (nonatomic, copy) NSString* professor_username;//教授名字
+@property (nonatomic, copy) NSNumber *course_price;//价格
+@property (nonatomic,copy) NSNumber *give_coin; //购买课程赠送宝典
+@property (nonatomic,copy) NSString *begin_at; //购买课程赠送宝典开始时间
+@property (nonatomic,copy) NSString *end_at; //购买课程赠送宝典结束时间
+@property (nonatomic,copy) NSNumber *is_eliteu_course;//是否付费的课程
 
 @end
 
@@ -96,13 +105,11 @@ NSString* NSStringForOEXStartType(OEXStartType type) {
     self = [super init];
     if(self != nil) {
         info = [info oex_replaceNullsWithEmptyStrings];
-        self.end = [OEXDateFormatting dateWithServerString:[info objectForKey:@"end"]];
         
+        self.end = [OEXDateFormatting dateWithServerString:[info objectForKey:@"end"]];
         NSDate* start = [OEXDateFormatting dateWithServerString:[info objectForKey:@"start"]];
-        self.start_display_info = [[OEXCourseStartDisplayInfo alloc]
-                                   initWithDate:start
-                                   displayDate:[info objectForKey:@"start_display"]
-                                   type:OEXStartTypeForString([info objectForKey:@"start_type"])];
+        self.start_display_info = [[OEXCourseStartDisplayInfo alloc] initWithDate:start displayDate:[info objectForKey:@"start_display"] type:OEXStartTypeForString([info objectForKey:@"start_type"])];
+        
         self.course_image_url = [info objectForKey:@"course_image"];
         self.name = [info objectForKey:@"name"];
         self.org = [info objectForKey:@"org"];
@@ -111,7 +118,12 @@ NSString* NSStringForOEXStartType(OEXStartType type) {
         self.root_block_usage_key = [info objectForKey:@"root_block_usage_key"];
         self.number = [info objectForKey:@"number"];
         self.effort = [info objectForKey:@"effort"];
+        self.listen_count = [info objectForKey:@"listen_count"]; //报名人数
+        self.course_price = [info objectForKey:@"course_price"];
+        self.professor_username = [info objectForKey:@"professor_username"]; //教授名字
         self.short_description = [info objectForKey:@"short_description"];
+        self.moreDescription = [[info objectForKey:@"description"] stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"]; //添加更多课程详情描述
+        self.intro_video_3rd_url = [info objectForKey:@"intro_video_3rd_url"];
         self.overview_html = [info objectForKey:@"overview"];
         self.course_updates = [info objectForKey:@"course_updates"];
         self.course_handouts = [info objectForKey:@"course_handouts"];
@@ -122,6 +134,12 @@ NSString* NSStringForOEXStartType(OEXStartType type) {
         NSDictionary* updatesInfo = [info objectForKey:@"latest_updates"];
         self.latest_updates = [[OEXLatestUpdates alloc] initWithDictionary:updatesInfo];
         self.discussionUrl = [info objectForKey:@"discussion_url"];
+        
+        self.give_coin = [info objectForKey:@"give_coin"];
+        self.begin_at = [info objectForKey:@"begin_at"];
+        self.end_at = [info objectForKey:@"end_at"];
+        self.is_eliteu_course = [info objectForKey:@"is_eliteu_course"];
+        
         NSDictionary* mediaInfo = OEXSafeCastAsClass(info[@"media"], NSDictionary);
         
         NSMutableDictionary<NSString*, CourseMediaInfo*>* parsedMediaInfo = [[NSMutableDictionary alloc] init];
@@ -132,6 +150,8 @@ NSString* NSStringForOEXStartType(OEXStartType type) {
             [parsedMediaInfo setObjectOrNil:info forKey:type];
         }];
         self.mediaInfo = parsedMediaInfo;
+        
+        NSLog(@"课程详情 ---- %@",info);
 
     }
     return self;

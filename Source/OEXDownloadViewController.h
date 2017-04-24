@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OEXDownloadViewController : UIViewController <UITableViewDelegate>
+@interface OEXDownloadViewController : TDBaseViewController <UITableViewDelegate>
 
 @end
 

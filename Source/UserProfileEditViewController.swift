@@ -544,6 +544,5 @@ extension UserProfileEditViewController : ProfilePictureTakerDelegate {
                 self.showToast(Strings.Profile.unableToGet)
             }
         }
-        
     }
 }

@@ -377,7 +377,6 @@
 		7778F0951ABA2C3600B4CDA0 /* OEXRegistrationFieldEmailViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7778F0941ABA2C3600B4CDA0 /* OEXRegistrationFieldEmailViewTests.m */; };
 		7778F0981ABB1A6C00B4CDA0 /* NSError+OEXKnownErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 7778F0971ABB1A6C00B4CDA0 /* NSError+OEXKnownErrors.m */; };
 		777DE7141C1630110068E280 /* CourseMediaInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777DE7131C1630110068E280 /* CourseMediaInfo.swift */; };
-		777DE7181C1649630068E280 /* CourseCatalogDetailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777DE7171C1649630068E280 /* CourseCatalogDetailViewControllerTests.swift */; };
 		777DE71A1C1656ED0068E280 /* CourseCatalogDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777DE7191C1656ED0068E280 /* CourseCatalogDetailView.swift */; };
 		777EFEFD1A7AFF0E00F8BF06 /* OEXRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 777EFEFC1A7AFF0E00F8BF06 /* OEXRouter.m */; };
 		778345511B45D697009C7853 /* ContentInsetsControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778345501B45D697009C7853 /* ContentInsetsControllerTests.swift */; };
@@ -718,6 +717,29 @@
 		B58C1F0E1EAB5ACB00AB7B7E /* TDBindEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B58C1F091EAB5ACB00AB7B7E /* TDBindEmailViewController.m */; };
 		B58C1F0F1EAB5ACB00AB7B7E /* TDBindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B58C1F0B1EAB5ACB00AB7B7E /* TDBindPhoneViewController.m */; };
 		B58C1F101EAB5ACB00AB7B7E /* TDBindSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B58C1F0D1EAB5ACB00AB7B7E /* TDBindSuccessViewController.m */; };
+		B592389F1EADB59A00C686D8 /* TDProfessorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B592389C1EADB59A00C686D8 /* TDProfessorCell.m */; };
+		B59238A01EADB59A00C686D8 /* TDProfessorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B592389E1EADB59A00C686D8 /* TDProfessorViewController.m */; };
+		B59238B01EADB6D100C686D8 /* OutlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238A41EADB6D100C686D8 /* OutlineViewController.m */; };
+		B59238B11EADB6D100C686D8 /* OutlineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B59238A51EADB6D100C686D8 /* OutlineViewController.xib */; };
+		B59238B21EADB6D100C686D8 /* OutlineFirstItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238A81EADB6D100C686D8 /* OutlineFirstItem.m */; };
+		B59238B31EADB6D100C686D8 /* OutlineSecondItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238AA1EADB6D100C686D8 /* OutlineSecondItem.m */; };
+		B59238B41EADB6D100C686D8 /* OutlineThirdItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238AC1EADB6D100C686D8 /* OutlineThirdItem.m */; };
+		B59238B51EADB6D100C686D8 /* TDOutLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238AF1EADB6D100C686D8 /* TDOutLineCell.m */; };
+		B59238BB1EADB70C00C686D8 /* TDCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238B81EADB70C00C686D8 /* TDCommentCell.m */; };
+		B59238BC1EADB70C00C686D8 /* TDCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238BA1EADB70C00C686D8 /* TDCommentViewController.m */; };
+		B59238C21EADBD4D00C686D8 /* CommentDetailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238BF1EADBD4D00C686D8 /* CommentDetailItem.m */; };
+		B59238C31EADBD4D00C686D8 /* CommentTopItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238C11EADBD4D00C686D8 /* CommentTopItem.m */; };
+		B59238CF1EADCC4200C686D8 /* QRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238CE1EADCC4200C686D8 /* QRViewController.m */; };
+		B59238E81EADD0BE00C686D8 /* TDActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238D31EADD0BE00C686D8 /* TDActivityViewController.m */; };
+		B59238E91EADD0BE00C686D8 /* TDChooseCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238D51EADD0BE00C686D8 /* TDChooseCourseViewController.m */; };
+		B59238EA1EADD0BE00C686D8 /* ActivityListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238D81EADD0BE00C686D8 /* ActivityListItem.m */; };
+		B59238EB1EADD0BE00C686D8 /* ChooseCourseItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238DA1EADD0BE00C686D8 /* ChooseCourseItem.m */; };
+		B59238EC1EADD0BE00C686D8 /* ChooseCourseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238DC1EADD0BE00C686D8 /* ChooseCourseModel.m */; };
+		B59238ED1EADD0BE00C686D8 /* DataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238DE1EADD0BE00C686D8 /* DataItem.m */; };
+		B59238EE1EADD0BE00C686D8 /* TDBottomCouseView.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238E11EADD0BE00C686D8 /* TDBottomCouseView.m */; };
+		B59238EF1EADD0BE00C686D8 /* TDChooseCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238E31EADD0BE00C686D8 /* TDChooseCourseCell.m */; };
+		B59238F01EADD0BE00C686D8 /* TDChooseCourseView.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238E51EADD0BE00C686D8 /* TDChooseCourseView.m */; };
+		B59238F11EADD0BE00C686D8 /* TDRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238E71EADD0BE00C686D8 /* TDRecommendCell.m */; };
 		BD3838541DD1CA7E00805697 /* OEXFontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */; };
 		BD7C6C3E1DCA32370004D135 /* OEXFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */; };
 		BD7C6C401DCA329A0004D135 /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = BD7C6C3F1DCA329A0004D135 /* fonts.json */; };
@@ -1267,7 +1289,6 @@
 		7778F0961ABB1A6C00B4CDA0 /* NSError+OEXKnownErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+OEXKnownErrors.h"; sourceTree = "<group>"; };
 		7778F0971ABB1A6C00B4CDA0 /* NSError+OEXKnownErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+OEXKnownErrors.m"; sourceTree = "<group>"; };
 		777DE7131C1630110068E280 /* CourseMediaInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMediaInfo.swift; sourceTree = "<group>"; };
-		777DE7171C1649630068E280 /* CourseCatalogDetailViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCatalogDetailViewControllerTests.swift; sourceTree = "<group>"; };
 		777DE7191C1656ED0068E280 /* CourseCatalogDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCatalogDetailView.swift; sourceTree = "<group>"; };
 		777EFEFB1A7AFF0E00F8BF06 /* OEXRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXRouter.h; sourceTree = "<group>"; };
 		777EFEFC1A7AFF0E00F8BF06 /* OEXRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXRouter.m; sourceTree = "<group>"; };
@@ -1750,6 +1771,51 @@
 		B58C1F0B1EAB5ACB00AB7B7E /* TDBindPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBindPhoneViewController.m; sourceTree = "<group>"; };
 		B58C1F0C1EAB5ACB00AB7B7E /* TDBindSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBindSuccessViewController.h; sourceTree = "<group>"; };
 		B58C1F0D1EAB5ACB00AB7B7E /* TDBindSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBindSuccessViewController.m; sourceTree = "<group>"; };
+		B592389B1EADB59A00C686D8 /* TDProfessorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDProfessorCell.h; sourceTree = "<group>"; };
+		B592389C1EADB59A00C686D8 /* TDProfessorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDProfessorCell.m; sourceTree = "<group>"; };
+		B592389D1EADB59A00C686D8 /* TDProfessorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDProfessorViewController.h; sourceTree = "<group>"; };
+		B592389E1EADB59A00C686D8 /* TDProfessorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDProfessorViewController.m; sourceTree = "<group>"; };
+		B59238A31EADB6D100C686D8 /* OutlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutlineViewController.h; sourceTree = "<group>"; };
+		B59238A41EADB6D100C686D8 /* OutlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutlineViewController.m; sourceTree = "<group>"; };
+		B59238A51EADB6D100C686D8 /* OutlineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutlineViewController.xib; sourceTree = "<group>"; };
+		B59238A71EADB6D100C686D8 /* OutlineFirstItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutlineFirstItem.h; sourceTree = "<group>"; };
+		B59238A81EADB6D100C686D8 /* OutlineFirstItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutlineFirstItem.m; sourceTree = "<group>"; };
+		B59238A91EADB6D100C686D8 /* OutlineSecondItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutlineSecondItem.h; sourceTree = "<group>"; };
+		B59238AA1EADB6D100C686D8 /* OutlineSecondItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutlineSecondItem.m; sourceTree = "<group>"; };
+		B59238AB1EADB6D100C686D8 /* OutlineThirdItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutlineThirdItem.h; sourceTree = "<group>"; };
+		B59238AC1EADB6D100C686D8 /* OutlineThirdItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutlineThirdItem.m; sourceTree = "<group>"; };
+		B59238AE1EADB6D100C686D8 /* TDOutLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDOutLineCell.h; sourceTree = "<group>"; };
+		B59238AF1EADB6D100C686D8 /* TDOutLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDOutLineCell.m; sourceTree = "<group>"; };
+		B59238B71EADB70C00C686D8 /* TDCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCommentCell.h; sourceTree = "<group>"; };
+		B59238B81EADB70C00C686D8 /* TDCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCommentCell.m; sourceTree = "<group>"; };
+		B59238B91EADB70C00C686D8 /* TDCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCommentViewController.h; sourceTree = "<group>"; };
+		B59238BA1EADB70C00C686D8 /* TDCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCommentViewController.m; sourceTree = "<group>"; };
+		B59238BE1EADBD4D00C686D8 /* CommentDetailItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentDetailItem.h; sourceTree = "<group>"; };
+		B59238BF1EADBD4D00C686D8 /* CommentDetailItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentDetailItem.m; sourceTree = "<group>"; };
+		B59238C01EADBD4D00C686D8 /* CommentTopItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTopItem.h; sourceTree = "<group>"; };
+		B59238C11EADBD4D00C686D8 /* CommentTopItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTopItem.m; sourceTree = "<group>"; };
+		B59238CD1EADCC4200C686D8 /* QRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRViewController.h; sourceTree = "<group>"; };
+		B59238CE1EADCC4200C686D8 /* QRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRViewController.m; sourceTree = "<group>"; };
+		B59238D21EADD0BE00C686D8 /* TDActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDActivityViewController.h; sourceTree = "<group>"; };
+		B59238D31EADD0BE00C686D8 /* TDActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDActivityViewController.m; sourceTree = "<group>"; };
+		B59238D41EADD0BE00C686D8 /* TDChooseCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDChooseCourseViewController.h; sourceTree = "<group>"; };
+		B59238D51EADD0BE00C686D8 /* TDChooseCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDChooseCourseViewController.m; sourceTree = "<group>"; };
+		B59238D71EADD0BE00C686D8 /* ActivityListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityListItem.h; sourceTree = "<group>"; };
+		B59238D81EADD0BE00C686D8 /* ActivityListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityListItem.m; sourceTree = "<group>"; };
+		B59238D91EADD0BE00C686D8 /* ChooseCourseItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseCourseItem.h; sourceTree = "<group>"; };
+		B59238DA1EADD0BE00C686D8 /* ChooseCourseItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseCourseItem.m; sourceTree = "<group>"; };
+		B59238DB1EADD0BE00C686D8 /* ChooseCourseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseCourseModel.h; sourceTree = "<group>"; };
+		B59238DC1EADD0BE00C686D8 /* ChooseCourseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseCourseModel.m; sourceTree = "<group>"; };
+		B59238DD1EADD0BE00C686D8 /* DataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataItem.h; sourceTree = "<group>"; };
+		B59238DE1EADD0BE00C686D8 /* DataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataItem.m; sourceTree = "<group>"; };
+		B59238E01EADD0BE00C686D8 /* TDBottomCouseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBottomCouseView.h; sourceTree = "<group>"; };
+		B59238E11EADD0BE00C686D8 /* TDBottomCouseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBottomCouseView.m; sourceTree = "<group>"; };
+		B59238E21EADD0BE00C686D8 /* TDChooseCourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDChooseCourseCell.h; sourceTree = "<group>"; };
+		B59238E31EADD0BE00C686D8 /* TDChooseCourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDChooseCourseCell.m; sourceTree = "<group>"; };
+		B59238E41EADD0BE00C686D8 /* TDChooseCourseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDChooseCourseView.h; sourceTree = "<group>"; };
+		B59238E51EADD0BE00C686D8 /* TDChooseCourseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDChooseCourseView.m; sourceTree = "<group>"; };
+		B59238E61EADD0BE00C686D8 /* TDRecommendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDRecommendCell.h; sourceTree = "<group>"; };
+		B59238E71EADD0BE00C686D8 /* TDRecommendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRecommendCell.m; sourceTree = "<group>"; };
 		BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFontsTests.swift; sourceTree = "<group>"; };
 		BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFonts.swift; sourceTree = "<group>"; };
 		BD7C6C3F1DCA329A0004D135 /* fonts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
@@ -2990,6 +3056,11 @@
 		9C9B7F701A8CC68D00A857B2 /* Course Enrollment */ = {
 			isa = PBXGroup;
 			children = (
+				B59238D01EADD0BE00C686D8 /* ChooseCourseViewController */,
+				B59238CC1EADCC4200C686D8 /* QRViewController */,
+				B59238B61EADB70C00C686D8 /* TDCommentViewController */,
+				B59238A11EADB6D100C686D8 /* OutLineViewController */,
+				B592389A1EADB59A00C686D8 /* ProFessorViewController */,
 				7758FFDD1C32FD6A0072355B /* EnrollmentShared.swift */,
 				77D6A9A31C28F32900E67CCF /* CoursesAPI.swift */,
 				777DE7191C1656ED0068E280 /* CourseCatalogDetailView.swift */,
@@ -3599,6 +3670,142 @@
 			path = TDBindAcountViewController;
 			sourceTree = "<group>";
 		};
+		B592389A1EADB59A00C686D8 /* ProFessorViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B592389B1EADB59A00C686D8 /* TDProfessorCell.h */,
+				B592389C1EADB59A00C686D8 /* TDProfessorCell.m */,
+				B592389D1EADB59A00C686D8 /* TDProfessorViewController.h */,
+				B592389E1EADB59A00C686D8 /* TDProfessorViewController.m */,
+			);
+			path = ProFessorViewController;
+			sourceTree = "<group>";
+		};
+		B59238A11EADB6D100C686D8 /* OutLineViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B59238A21EADB6D100C686D8 /* controller */,
+				B59238A61EADB6D100C686D8 /* model */,
+				B59238AD1EADB6D100C686D8 /* view */,
+			);
+			path = OutLineViewController;
+			sourceTree = "<group>";
+		};
+		B59238A21EADB6D100C686D8 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				B59238A31EADB6D100C686D8 /* OutlineViewController.h */,
+				B59238A41EADB6D100C686D8 /* OutlineViewController.m */,
+				B59238A51EADB6D100C686D8 /* OutlineViewController.xib */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		B59238A61EADB6D100C686D8 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				B59238A71EADB6D100C686D8 /* OutlineFirstItem.h */,
+				B59238A81EADB6D100C686D8 /* OutlineFirstItem.m */,
+				B59238A91EADB6D100C686D8 /* OutlineSecondItem.h */,
+				B59238AA1EADB6D100C686D8 /* OutlineSecondItem.m */,
+				B59238AB1EADB6D100C686D8 /* OutlineThirdItem.h */,
+				B59238AC1EADB6D100C686D8 /* OutlineThirdItem.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		B59238AD1EADB6D100C686D8 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				B59238AE1EADB6D100C686D8 /* TDOutLineCell.h */,
+				B59238AF1EADB6D100C686D8 /* TDOutLineCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		B59238B61EADB70C00C686D8 /* TDCommentViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B59238B71EADB70C00C686D8 /* TDCommentCell.h */,
+				B59238B81EADB70C00C686D8 /* TDCommentCell.m */,
+				B59238B91EADB70C00C686D8 /* TDCommentViewController.h */,
+				B59238BA1EADB70C00C686D8 /* TDCommentViewController.m */,
+				B59238BD1EADBD4D00C686D8 /* Models */,
+			);
+			path = TDCommentViewController;
+			sourceTree = "<group>";
+		};
+		B59238BD1EADBD4D00C686D8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B59238BE1EADBD4D00C686D8 /* CommentDetailItem.h */,
+				B59238BF1EADBD4D00C686D8 /* CommentDetailItem.m */,
+				B59238C01EADBD4D00C686D8 /* CommentTopItem.h */,
+				B59238C11EADBD4D00C686D8 /* CommentTopItem.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B59238CC1EADCC4200C686D8 /* QRViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B59238CD1EADCC4200C686D8 /* QRViewController.h */,
+				B59238CE1EADCC4200C686D8 /* QRViewController.m */,
+			);
+			path = QRViewController;
+			sourceTree = "<group>";
+		};
+		B59238D01EADD0BE00C686D8 /* ChooseCourseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B59238D11EADD0BE00C686D8 /* controller */,
+				B59238D61EADD0BE00C686D8 /* model */,
+				B59238DF1EADD0BE00C686D8 /* view */,
+			);
+			path = ChooseCourseViewController;
+			sourceTree = "<group>";
+		};
+		B59238D11EADD0BE00C686D8 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				B59238D21EADD0BE00C686D8 /* TDActivityViewController.h */,
+				B59238D31EADD0BE00C686D8 /* TDActivityViewController.m */,
+				B59238D41EADD0BE00C686D8 /* TDChooseCourseViewController.h */,
+				B59238D51EADD0BE00C686D8 /* TDChooseCourseViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		B59238D61EADD0BE00C686D8 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				B59238D71EADD0BE00C686D8 /* ActivityListItem.h */,
+				B59238D81EADD0BE00C686D8 /* ActivityListItem.m */,
+				B59238D91EADD0BE00C686D8 /* ChooseCourseItem.h */,
+				B59238DA1EADD0BE00C686D8 /* ChooseCourseItem.m */,
+				B59238DB1EADD0BE00C686D8 /* ChooseCourseModel.h */,
+				B59238DC1EADD0BE00C686D8 /* ChooseCourseModel.m */,
+				B59238DD1EADD0BE00C686D8 /* DataItem.h */,
+				B59238DE1EADD0BE00C686D8 /* DataItem.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		B59238DF1EADD0BE00C686D8 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				B59238E01EADD0BE00C686D8 /* TDBottomCouseView.h */,
+				B59238E11EADD0BE00C686D8 /* TDBottomCouseView.m */,
+				B59238E21EADD0BE00C686D8 /* TDChooseCourseCell.h */,
+				B59238E31EADD0BE00C686D8 /* TDChooseCourseCell.m */,
+				B59238E41EADD0BE00C686D8 /* TDChooseCourseView.h */,
+				B59238E51EADD0BE00C686D8 /* TDChooseCourseView.m */,
+				B59238E61EADD0BE00C686D8 /* TDRecommendCell.h */,
+				B59238E71EADD0BE00C686D8 /* TDRecommendCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		BE0D454E192DE63900D720D6 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -3811,7 +4018,6 @@
 				77AFD10C1C1A63C3001985FD /* UserAgentGenerationOperation.swift */,
 				77AFD10F1C1B4F79001985FD /* NSString+TestExamples.h */,
 				77AFD1101C1B4F79001985FD /* NSString+TestExamples.m */,
-				777DE7171C1649630068E280 /* CourseCatalogDetailViewControllerTests.swift */,
 				778F177D1C0E049B0099BF93 /* CourseCatalogViewControllerTests.swift */,
 				77CBF5591BFBE89300B4F121 /* CourseAnnouncementsViewControllerTests.swift */,
 				7702A3721BF54D9E00D2A63F /* OEXMySettingsViewControllerTests.swift */,
@@ -4287,6 +4493,7 @@
 				69ECC6191D50D1170030CF87 /* bt_grey_deactive.png in Resources */,
 				B50DF98E1EAAF15B001F38BD /* UserDiscountTableViewCell.xib in Resources */,
 				6926CDAC1D59BE3600A16E22 /* ic_next.png in Resources */,
+				B59238B11EADB6D100C686D8 /* OutlineViewController.xib in Resources */,
 				19BB62311A9C656B007DBF47 /* OEXMySettingsViewController.xib in Resources */,
 				9ED269D21AF114B900328A34 /* OEXLoginViewController.storyboard in Resources */,
 				69ECC62C1D50D1170030CF87 /* ic_back.png in Resources */,
@@ -4633,6 +4840,7 @@
 				BE0D4551192DE65200D720D6 /* OEXInterface.m in Sources */,
 				B518BEC21EA9E6F00027569D /* TDTeacherCommentModel.m in Sources */,
 				B58C1F0F1EAB5ACB00AB7B7E /* TDBindPhoneViewController.m in Sources */,
+				B59238EF1EADD0BE00C686D8 /* TDChooseCourseCell.m in Sources */,
 				77F9C1741B0D496B004D39E7 /* CourseStructureAPI.swift in Sources */,
 				779376571BF15C1B00900A8C /* FindCoursesWebViewHelper.swift in Sources */,
 				6919F5FF1D65CD27006935C8 /* OEXColors.swift in Sources */,
@@ -4655,13 +4863,16 @@
 				7726BD1D1A36572F003B3354 /* NSMutableDictionary+OEXSafeAccess.m in Sources */,
 				B50DF9821EAAF15B001F38BD /* UserFirstViewController.m in Sources */,
 				778F177C1C0D12780099BF93 /* CourseCatalogAPI.swift in Sources */,
+				B59238EB1EADD0BE00C686D8 /* ChooseCourseItem.m in Sources */,
 				B4B285E21A9A497A00DD603A /* OEXSegmentConfig.m in Sources */,
 				B50DF98B1EAAF15B001F38BD /* UserCouponTableViewCell.m in Sources */,
 				7772BEA31AFA68330081CA7A /* ConstraintAttributes.swift in Sources */,
 				773A04801AF2E6DA0076532C /* CourseOutlineTableSource.swift in Sources */,
 				191A002B19405E1B004F7902 /* OEXCourse.m in Sources */,
 				E0A2461F1D5DA12A0066C766 /* AppStoreConfig.swift in Sources */,
+				B592389F1EADB59A00C686D8 /* TDProfessorCell.m in Sources */,
 				7778F0981ABB1A6C00B4CDA0 /* NSError+OEXKnownErrors.m in Sources */,
+				B59238ED1EADD0BE00C686D8 /* DataItem.m in Sources */,
 				B518BE6F1EA9DD950027569D /* TDUserCenterView.swift in Sources */,
 				B4B6D6041A949EFC000F44E8 /* OEXRegistrationRestriction.m in Sources */,
 				77BFD86A1BB9E15B001D7BE5 /* Strings.swift in Sources */,
@@ -4670,6 +4881,7 @@
 				E0AF4E8E1BFB19CC0083753C /* PassthroughView.swift in Sources */,
 				BD7C6C3E1DCA32370004D135 /* OEXFonts.swift in Sources */,
 				E00523431CF81D9800B7F5C3 /* DiscussionBlockViewController.swift in Sources */,
+				B59238B31EADB6D100C686D8 /* OutlineSecondItem.m in Sources */,
 				7772BEA61AFA68330081CA7A /* ConstraintMaker.swift in Sources */,
 				5DD0FFCF1B1D225C00837121 /* DiscussionNewPostViewController.swift in Sources */,
 				B518BEC51EA9E6F00027569D /* TDTimeModel.m in Sources */,
@@ -4682,8 +4894,10 @@
 				B54C8AC81EA8BF670002FCED /* WYAlertView.m in Sources */,
 				7731813B1B6C1442000CC050 /* SeparatorInsetable.swift in Sources */,
 				B4B285DC1A9A490400DD603A /* OEXFacebookConfig.m in Sources */,
+				B59238C31EADBD4D00C686D8 /* CommentTopItem.m in Sources */,
 				9C9B7F6C1A8CC68400A857B2 /* OEXFindCoursesViewController.m in Sources */,
 				B518BEC71EA9E6F00027569D /* TDOrderAssitantCell.m in Sources */,
+				B59238B51EADB6D100C686D8 /* TDOutLineCell.m in Sources */,
 				B518BE911EA9E6AB0027569D /* TDAssistantTopCell.m in Sources */,
 				191A00201940560D004F7902 /* OEXDataParser.m in Sources */,
 				774B39391B5DD85A00595D33 /* UIView+LayoutDirection.swift in Sources */,
@@ -4693,6 +4907,7 @@
 				1918AFAE1948357700F40345 /* OEXLastAccessedTableViewCell.m in Sources */,
 				774BC7F41B4B0D700084F902 /* DiscussionTopic.swift in Sources */,
 				19EA0F5D1965CB3700B684B0 /* OEXCustomEditingView.m in Sources */,
+				B59238CF1EADCC4200C686D8 /* QRViewController.m in Sources */,
 				B518BE8B1EA9E6AB0027569D /* TDAssistantServiceViewController.m in Sources */,
 				1913DD4419502E5D00573977 /* OEXVideoSummary.m in Sources */,
 				9EAB5BE91B564C2F00CA9F3C /* ProgressController.swift in Sources */,
@@ -4706,6 +4921,7 @@
 				46CECC3C1B041D270073C63A /* CourseDashboardCell.swift in Sources */,
 				778F177A1C0D125A0099BF93 /* CoursesTableViewController.swift in Sources */,
 				77ADF4AF1AC1F80E00AC8955 /* OEXGoogleAuthProvider.m in Sources */,
+				B59238EE1EADD0BE00C686D8 /* TDBottomCouseView.m in Sources */,
 				1A7CEA331BABA8C70043A58C /* ProfileImageView.swift in Sources */,
 				77236EED1C21C376006AC1A4 /* Paginator.swift in Sources */,
 				7727EC351BBC73F300C9987F /* RevealViewController.swift in Sources */,
@@ -4718,11 +4934,13 @@
 				7725016A1C80FB5C002549A9 /* ServerChangedChecker.swift in Sources */,
 				E07107931C7591360004B76C /* DiscussionHelper.swift in Sources */,
 				77092C751B42E4C1004AA1A1 /* UIStatusBarStyle+Styles.swift in Sources */,
+				B59238E81EADD0BE00C686D8 /* TDActivityViewController.m in Sources */,
 				191A002E19405E97004F7902 /* OEXLatestUpdates.m in Sources */,
 				1AFEB1B61BBD5B95004C471D /* ProfilePictureTaker.swift in Sources */,
 				198826F1195D6979005D4D8A /* OEXMyVideosViewController.m in Sources */,
 				77E647CE1C90CAB800B6740D /* NSAttributedString+OEXFormatting.m in Sources */,
 				E09B9D6B1D06C9700080BAE0 /* VersionUpgradeInfoController.swift in Sources */,
+				B59238EA1EADD0BE00C686D8 /* ActivityListItem.m in Sources */,
 				B518C1731EA9FF1C0027569D /* TDVideoBarView.m in Sources */,
 				9E882B6A1BBA9825007347A2 /* DiscussionTopicCell.swift in Sources */,
 				B4B285ED1A9B429200DD603A /* OEXNetworkUtility.m in Sources */,
@@ -4736,6 +4954,7 @@
 				9CADE2F71A91E91A00ACDAF7 /* NSURL+OEXPathExtensions.m in Sources */,
 				1AB676AE1BA0964B002AD0EB /* OEXVideoPlayerSettings.swift in Sources */,
 				9EA4788B1BE76A7700393FA6 /* DiscussionSearchBarDelegate.swift in Sources */,
+				B59238F11EADD0BE00C686D8 /* TDRecommendCell.m in Sources */,
 				77D76BFD1AA5076D00C51C2C /* OEXLocalizedString.m in Sources */,
 				778F17781C0D123F0099BF93 /* CourseCatalogViewController.swift in Sources */,
 				1AB539E41BFA24DC0065501F /* CertificateViewController.swift in Sources */,
@@ -4757,6 +4976,7 @@
 				77E209851AF158190071316D /* CourseOutline.swift in Sources */,
 				7772BEA51AFA68330081CA7A /* ConstraintItem.swift in Sources */,
 				1A8172531C3C21DE007262AA /* TwitterConfig.swift in Sources */,
+				B59238F01EADD0BE00C686D8 /* TDChooseCourseView.m in Sources */,
 				B4D5C7ED1A6FBAA300427D1D /* OEXSession.m in Sources */,
 				B4B6D6181A949F0F000F44E8 /* OEXRegistrationFieldPasswordView.m in Sources */,
 				B4B6D6481A95CF33000F44E8 /* OEXUserLicenseAgreementViewController.m in Sources */,
@@ -4775,9 +4995,11 @@
 				B54C8ACB1EA8BF8A0002FCED /* UIColor+extend.m in Sources */,
 				770848BA1B200C76002FEEEE /* ViewTopMessageController.swift in Sources */,
 				778B82EC1A520F2A0040D9E0 /* OEXEnvironment.m in Sources */,
+				B59238BC1EADB70C00C686D8 /* TDCommentViewController.m in Sources */,
 				9E30B4021B00BFB0007F673E /* CourseDashboardViewController.swift in Sources */,
 				77503E8A1B275F4500C47229 /* UIDevice+OSVersion.swift in Sources */,
 				B50DF98A1EAAF15B001F38BD /* UserCouponItem.m in Sources */,
+				B59238B41EADB6D100C686D8 /* OutlineThirdItem.m in Sources */,
 				B41F22BB1A113D3D0022E01F /* OEXDownloadManager.m in Sources */,
 				B4B6D61B1A949F0F000F44E8 /* OEXRegistrationFieldCheckBoxView.m in Sources */,
 				7772BEA21AFA68330081CA7A /* Constraint.swift in Sources */,
@@ -4828,6 +5050,7 @@
 				1A8AC0C01BB49EC5009D8F5E /* UserProfile.swift in Sources */,
 				1AC147371BCEB14900E0A230 /* CGRect+OEXHelpers.swift in Sources */,
 				B518BECE1EA9E6F00027569D /* TDTalkOrderViewController.m in Sources */,
+				B59238B01EADB6D100C686D8 /* OutlineViewController.m in Sources */,
 				B50211F21EA85490001DE1E2 /* UIView+Toast.m in Sources */,
 				B518BED01EA9E6F00027569D /* TDTeacherDetailViewController.m in Sources */,
 				7714A2601AB37CF7004C2254 /* OEXRegistrationFieldError.m in Sources */,
@@ -4849,6 +5072,7 @@
 				77000A371A76EF8C007D306C /* NSString+OEXValidation.m in Sources */,
 				9EC0AC7F1BCE371D00291B64 /* UIButton+Animations.swift in Sources */,
 				E08A008B1CF7546200F92DE7 /* DiscussionModel.swift in Sources */,
+				B59238C21EADBD4D00C686D8 /* CommentDetailItem.m in Sources */,
 				9ED168B01B29A9EF00AA7B5B /* CouseLastAccessed.swift in Sources */,
 				B518BECD1EA9E6F00027569D /* TDOrderTeacherSuccessViewController.m in Sources */,
 				B4B6D61A1A949F0F000F44E8 /* OEXRegistrationFieldTextAreaView.m in Sources */,
@@ -4873,6 +5097,7 @@
 				B518BED21EA9E6F00027569D /* TDTeacherTimesViewController.m in Sources */,
 				1AC147391BCEC09F00E0A230 /* UIImage+OEXHelpers.swift in Sources */,
 				775DF4181AFAAC8C00F96B2F /* DataManager.swift in Sources */,
+				B59238B21EADB6D100C686D8 /* OutlineFirstItem.m in Sources */,
 				77C182AC1CD2E60E00AE1474 /* StackPaginationManipulator.swift in Sources */,
 				5D7EACC81B3E202C000A6C36 /* DiscussionAPI.swift in Sources */,
 				77EA92261BB4590A00EC625A /* DownloadsAccessoryView.swift in Sources */,
@@ -4967,6 +5192,7 @@
 				77F76A6E1B0BD32A00ED3E39 /* OEXSession+Authorization.swift in Sources */,
 				9E0CC1031BA9574E00A1CFDB /* SpinnerButton.swift in Sources */,
 				191A002419405B91004F7902 /* OEXUserDetails.m in Sources */,
+				B59238BB1EADB70C00C686D8 /* TDCommentCell.m in Sources */,
 				77BECB0D1B0A8BBD00894276 /* UIEdgeInsets+Geometry.swift in Sources */,
 				77AF07751CB311B200A42704 /* UserProfileView.swift in Sources */,
 				77236EEB1C21C32E006AC1A4 /* PaginationController.swift in Sources */,
@@ -4993,6 +5219,7 @@
 				77E648591C91235A00B6740D /* OEXConfig+AppFeatures.swift in Sources */,
 				77E00B711B82A06F00573622 /* GrowingTextViewController.swift in Sources */,
 				BD7C6C421DCA33540004D135 /* OEXFontsDataFactory.swift in Sources */,
+				B59238E91EADD0BE00C686D8 /* TDChooseCourseViewController.m in Sources */,
 				771273301BA8FAD2008BA397 /* OEXAnalytics+Swift.swift in Sources */,
 				77E6487F1C9133C600B6740D /* SessionUsernameProvider.swift in Sources */,
 				E03E6A171D38EB9000944AAA /* SnackbarViews.swift in Sources */,
@@ -5002,6 +5229,7 @@
 				7748F5781AEAB5C200767700 /* OEXSwitchStyle.m in Sources */,
 				B42DA1891A1539F000E3AD4E /* OEXFileUtility.m in Sources */,
 				777EFEFD1A7AFF0E00F8BF06 /* OEXRouter.m in Sources */,
+				B59238EC1EADD0BE00C686D8 /* ChooseCourseModel.m in Sources */,
 				B518BEF21EA9E9F40027569D /* PurchaseModel.m in Sources */,
 				9EC6E0FE1BDE106500729704 /* IrregularBorderView.swift in Sources */,
 				8F562F881A1F2D2C00320DB3 /* OEXGoogleSocial.m in Sources */,
@@ -5038,6 +5266,7 @@
 				1AE0A6CA1BF4FF9000E14917 /* UserCourseEnrollment.swift in Sources */,
 				77503E8E1B287DBF00C47229 /* KeyboardInsetsSource.swift in Sources */,
 				7772BE841AF834EC0081CA7A /* CourseOutlineQuerier.swift in Sources */,
+				B59238A01EADB59A00C686D8 /* TDProfessorViewController.m in Sources */,
 				B518BEC11EA9E6F00027569D /* TDTalkModel.m in Sources */,
 				77B463971A30F65E0083453A /* OEXStyles.m in Sources */,
 				7772BEB21AFA6C0F0081CA7A /* FontAwesome.swift in Sources */,
@@ -5079,7 +5308,6 @@
 				77CBF55A1BFBE89300B4F121 /* CourseAnnouncementsViewControllerTests.swift in Sources */,
 				775DF4151AFAA36100F96B2F /* CourseContentPageViewControllerTests.swift in Sources */,
 				77BC3E6B1AE1615700E51529 /* OEXPushNotificationProcessorTests.m in Sources */,
-				777DE7181C1649630068E280 /* CourseCatalogDetailViewControllerTests.swift in Sources */,
 				77503E981B2F53C300C47229 /* StreamTests.swift in Sources */,
 				778F17711C0CFD310099BF93 /* OEXRouterTests.swift in Sources */,
 				773B1D491B1F818300B861DF /* XCTestCase+Async.swift in Sources */,
