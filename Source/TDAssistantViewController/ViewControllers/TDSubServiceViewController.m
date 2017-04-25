@@ -614,8 +614,8 @@
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提醒"
                                                         message:@"您还没下载Classrooms，如需进入教室，请点击确定"
                                                        delegate:self
-                                              cancelButtonTitle:@"取消"
-                                              otherButtonTitles:@"确定", nil];
+                                              cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)
+                                              otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
     [alertView show];
 }
 

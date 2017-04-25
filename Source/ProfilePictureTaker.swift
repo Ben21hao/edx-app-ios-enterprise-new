@@ -49,7 +49,6 @@ class ProfilePictureTaker : NSObject {
         }
         alert.addCancelAction()
         delegate?.showChooserAlert(alert)
-        
     }
     
  
@@ -69,23 +68,37 @@ class ProfilePictureTaker : NSObject {
         }
         self.delegate?.showImagePickerController(imagePicker)
     }
-    
 }
 
 
 extension ProfilePictureTaker : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+//        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+//            let rotatedImage = image.rotateUp()
+//            let cropper = CropViewController(image: rotatedImage) { [weak self] maybeImage in
+//                if let newImage = maybeImage {
+//                    self?.delegate?.imagePicked(newImage, picker: picker)
+//                } else {
+//                    self?.delegate?.cancelPicker(picker)
+//                }
+//            }
+//            picker.pushViewController(cropper, animated: true)
+//        } else {
+//            fatalError("no image returned from picker")
+//        }
+        
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            let rotatedImage = image.rotateUp()
-            let cropper = CropViewController(image: rotatedImage) { [weak self] maybeImage in
-                if let newImage = maybeImage {
-                    self?.delegate?.imagePicked(newImage, picker: picker)
-                } else {
-                    self?.delegate?.cancelPicker(picker)
-                }
+            
+            let omageHeight = image.size.height * (TDScreenWidth / image.size.width);
+            let orImage : UIImage = image.resizeImageWithSize(CGSizeMake(TDScreenWidth, omageHeight))
+            let cutViewController = TDCutImageViewController.init(image: orImage, delegate: self)
+            cutViewController.ovalClip = true
+            cutViewController.cancelHandle = { (AnyObject) -> () in
+                self.delegate?.cancelPicker(picker)
             }
-            picker.pushViewController(cropper, animated: true)
+            picker.pushViewController(cutViewController, animated: true)
+            
         } else {
             fatalError("no image returned from picker")
         }

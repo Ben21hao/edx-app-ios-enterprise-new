@@ -1,0 +1,11 @@
+[
+ { "value" : "p", "name" : "博士" },
+ { "value" : "m", "name" : "硕士" },
+ { "value" : "b", "name" : "学士" },
+ { "value" : "a", "name" : "肆业证书" },
+ { "value" : "hs", "name" : "高中" },
+ { "value" : "jhs", "name" : "初中" },
+ { "value" : "el", "name" : "小学" },
+ { "value" : "none", "name" : "未受正规教育" },
+ { "value" : "other", "name" : "其他教育程度" }
+ ]

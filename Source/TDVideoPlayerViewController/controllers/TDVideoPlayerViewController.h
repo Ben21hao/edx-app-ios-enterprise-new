@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TDVideoPlayerViewController : UIViewController
+@interface TDVideoPlayerViewController : TDBaseViewController
 
 @property (nonatomic,strong) NSString *url;
 @property (nonatomic,strong) NSString *courseName;

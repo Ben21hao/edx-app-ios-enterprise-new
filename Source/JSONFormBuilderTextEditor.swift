@@ -8,8 +8,9 @@
 
 import Foundation
 
-class JSONFormBuilderTextEditorViewController: UIViewController {
+class JSONFormBuilderTextEditorViewController: TDSwiftBaseViewController {
     let textView = OEXPlaceholderTextView()
+    let handInBtn = UIButton.init(type: .Custom)
     var text: String { return textView.text }
     
     var doneEditing: ((value: String)->())?
@@ -23,13 +24,25 @@ class JSONFormBuilderTextEditorViewController: UIViewController {
         textView.textContainer.lineFragmentPadding = 0
         textView.textContainerInset = OEXStyles.sharedStyles().standardTextViewInsets
         textView.typingAttributes = OEXStyles.sharedStyles().textAreaBodyStyle.attributes
+        //        textView.placeholder = "请输入昵称"
         textView.placeholderTextColor = OEXStyles.sharedStyles().neutralBase()
         textView.textColor = OEXStyles.sharedStyles().neutralBlackT()
-
-        textView.placeholder = placeholder ?? ""
-        textView.text = text ?? ""
+        textView.font = UIFont.init(name: "OpenSans", size: 16)
+        textView.backgroundColor = UIColor.whiteColor()
+        textView.layer.cornerRadius = 4.0
+        textView.layer.borderColor = UIColor.init(RGBHex: 0xccd1d9, alpha: 1).CGColor
+        textView.layer.borderWidth = 0.5;
         textView.delegate = self
         
+        textView.text = text ?? ""
+        if let placeholder = placeholder {
+            textView.placeholder = placeholder
+        }
+        
+        handInBtn.setTitle(Strings.submit, forState: .Normal)
+        handInBtn.addTarget(self, action: #selector(JSONFormBuilderTextEditorViewController.handinButtonAction), forControlEvents: .TouchUpInside)
+        handInBtn.backgroundColor = OEXStyles.sharedStyles().baseColor1()
+        handInBtn.layer.cornerRadius = 4.0
         setupViews()
     }
 
@@ -39,6 +52,7 @@ class JSONFormBuilderTextEditorViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         OEXAnalytics.sharedAnalytics().trackScreenWithName(OEXAnalyticsScreenEditTextFormValue)
     }
 
@@ -46,18 +60,53 @@ class JSONFormBuilderTextEditorViewController: UIViewController {
         view.addSubview(textView)
         
         textView.snp_makeConstraints { (make) -> Void in
-            make.top.equalTo(view.snp_topMargin).offset(15)
+            make.top.equalTo(view.snp_topMargin).offset(18)
             make.leading.equalTo(view.snp_leadingMargin)
             make.trailing.equalTo(view.snp_trailingMargin)
-            make.bottom.equalTo(view.snp_bottomMargin)
+            make.height.equalTo(41)
+        }
+        
+        view.addSubview(handInBtn)
+        handInBtn.snp_makeConstraints { (make) in
+            make.top.equalTo(view.snp_topMargin).offset(77)
+            make.leading.equalTo(view.snp_leadingMargin)
+            make.trailing.equalTo(view.snp_trailingMargin)
+            make.height.equalTo(41)
         }
     }
     
-    override func willMoveToParentViewController(parent: UIViewController?) {
-        if parent == nil { //removing from the hierarchy
-            doneEditing?(value: textView.text)
+    func handinButtonAction() {
+        self.textView.resignFirstResponder()
+        
+        if textView.text.characters.count == 0 { //昵称不能为空
+            let alertView = UIAlertView.init(title: Strings.reminder, message: Strings.nicknameNull, delegate: self, cancelButtonTitle: Strings.ok)
+            alertView.show()
+            
+        } else if textView.text.characters.count <= 6 {
+            let baseTool = TDBaseToolModel.init()
+            baseTool.checkNickname(textView.text, view: self.view)
+            baseTool.checkNickNameHandle = {(AnyObject) -> () in
+                
+                if AnyObject == true {
+                    self.doneEditing?(value: self.textView.text) //block 反向传值
+                    
+                    let dic : NSDictionary = ["nickName" : self.textView.text]
+                    NSNotificationCenter.defaultCenter().postNotificationName("NiNameNotification_Change", object:dic)
+                    self.navigationController?.popViewControllerAnimated(true)
+                }
+            }
+            
+        } else { //不能超过六个字
+            let alertView = UIAlertView.init(title: Strings.reminder, message: Strings.nicknameNumber, delegate: self, cancelButtonTitle: Strings.ok)
+            alertView.show()
         }
     }
+    
+//    override func willMoveToParentViewController(parent: UIViewController?) {
+//        if parent == nil { //removing from the hierarchy
+//            doneEditing?(value: textView.text)
+//        }
+//    }
 }
 
 extension JSONFormBuilderTextEditorViewController : UITextViewDelegate {

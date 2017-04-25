@@ -210,7 +210,7 @@ class DiscussionResponseCell: UITableViewCell {
 }
 
 
-class DiscussionResponsesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DiscussionNewCommentViewControllerDelegate, DiscussionCommentsViewControllerDelegate, InterfaceOrientationOverriding {
+class DiscussionResponsesViewController: TDSwiftBaseViewController, UITableViewDataSource, UITableViewDelegate, DiscussionNewCommentViewControllerDelegate, DiscussionCommentsViewControllerDelegate, InterfaceOrientationOverriding {
     typealias Environment = protocol<NetworkManagerProvider, OEXRouterProvider, OEXConfigProvider, OEXAnalyticsProvider>
 
     enum TableSection : Int {
@@ -266,7 +266,7 @@ class DiscussionResponsesViewController: UIViewController, UITableViewDataSource
                 }, forEvents: UIControlEvents.TouchUpInside)
         }
         
-        self.navigationItem.title = navigationItemTitleForThread(thread)
+        self.titleViewLabel.text = navigationItemTitleForThread(thread)
         
         tableView.reloadSections(NSIndexSet(index: TableSection.Post.rawValue) , withRowAnimation: .Fade)
     }
@@ -312,7 +312,7 @@ class DiscussionResponsesViewController: UIViewController, UITableViewDataSource
         tableView.rowHeight = UITableViewAutomaticDimension
         
         loadController?.setupInController(self, contentView: contentView)
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .Plain, target: nil, action: nil)
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .Plain, target: nil, action: nil)
         
         markThreadAsRead()
     }

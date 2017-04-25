@@ -90,7 +90,6 @@
 		46CECC3A1B041CDC0073C63A /* CourseCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CECC391B041CDC0073C63A /* CourseCardView.swift */; };
 		46CECC3C1B041D270073C63A /* CourseDashboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CECC3B1B041D270073C63A /* CourseDashboardCell.swift */; };
 		46CECC401B041FCA0073C63A /* DiscussionTopicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CECC3F1B041FCA0073C63A /* DiscussionTopicsViewController.swift */; };
-		46CECC441B055B0F0073C63A /* CourseDashboardViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CECC431B055B0F0073C63A /* CourseDashboardViewControllerTests.swift */; };
 		5D43B1861B0C1F9200448B52 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D43B1801B0C1F9200448B52 /* PostTableViewCell.swift */; };
 		5D43B1871B0C1F9200448B52 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D43B1811B0C1F9200448B52 /* PostsViewController.swift */; };
 		5D43B18A1B0C1F9200448B52 /* MenuOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D43B1841B0C1F9200448B52 /* MenuOptionsViewController.swift */; };
@@ -714,6 +713,7 @@
 		B54C8AC81EA8BF670002FCED /* WYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8AC71EA8BF670002FCED /* WYAlertView.m */; };
 		B54C8ACB1EA8BF8A0002FCED /* UIColor+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8ACA1EA8BF8A0002FCED /* UIColor+extend.m */; };
 		B54C8ACF1EA8BF950002FCED /* JHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8ACE1EA8BF950002FCED /* JHTextField.m */; };
+		B57A0E931EAEECBB00323A47 /* educations.json in Resources */ = {isa = PBXBuildFile; fileRef = B57A0E911EAEECBB00323A47 /* educations.json */; };
 		B58C1F0E1EAB5ACB00AB7B7E /* TDBindEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B58C1F091EAB5ACB00AB7B7E /* TDBindEmailViewController.m */; };
 		B58C1F0F1EAB5ACB00AB7B7E /* TDBindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B58C1F0B1EAB5ACB00AB7B7E /* TDBindPhoneViewController.m */; };
 		B58C1F101EAB5ACB00AB7B7E /* TDBindSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B58C1F0D1EAB5ACB00AB7B7E /* TDBindSuccessViewController.m */; };
@@ -967,7 +967,6 @@
 		46CECC3B1B041D270073C63A /* CourseDashboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDashboardCell.swift; sourceTree = "<group>"; };
 		46CECC3D1B041FAF0073C63A /* DiscussionTopicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionTopicCell.swift; sourceTree = "<group>"; };
 		46CECC3F1B041FCA0073C63A /* DiscussionTopicsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionTopicsViewController.swift; sourceTree = "<group>"; };
-		46CECC431B055B0F0073C63A /* CourseDashboardViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDashboardViewControllerTests.swift; sourceTree = "<group>"; };
 		4C3EB70CB728DFC1B9BC8CB8 /* libPods-edXTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-edXTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D43B1801B0C1F9200448B52 /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		5D43B1811B0C1F9200448B52 /* PostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
@@ -1765,6 +1764,8 @@
 		B54C8ACA1EA8BF8A0002FCED /* UIColor+extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+extend.m"; sourceTree = "<group>"; };
 		B54C8ACD1EA8BF950002FCED /* JHTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHTextField.h; sourceTree = "<group>"; };
 		B54C8ACE1EA8BF950002FCED /* JHTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHTextField.m; sourceTree = "<group>"; };
+		B57A0E921EAEECBB00323A47 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = en.lproj/educations.json; sourceTree = "<group>"; };
+		B57A0E941EAEECD400323A47 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "zh-Hans"; path = "zh-Hans.lproj/educations.json"; sourceTree = "<group>"; };
 		B58C1F081EAB5ACB00AB7B7E /* TDBindEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBindEmailViewController.h; sourceTree = "<group>"; };
 		B58C1F091EAB5ACB00AB7B7E /* TDBindEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBindEmailViewController.m; sourceTree = "<group>"; };
 		B58C1F0A1EAB5ACB00AB7B7E /* TDBindPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBindPhoneViewController.h; sourceTree = "<group>"; };
@@ -2172,6 +2173,7 @@
 				1A55019E1BBA30C900D5F9DD /* profiles.json */,
 				1A03DEA51BBC72BA006783FB /* countries.json */,
 				1AFEB1BB1BBD88F3004C471D /* languages.json */,
+				B57A0E911EAEECBB00323A47 /* educations.json */,
 			);
 			name = "User Profiles";
 			sourceTree = "<group>";
@@ -3511,9 +3513,9 @@
 		B518BE961EA9E6F00027569D /* TDOrderAssistantViewController */ = {
 			isa = PBXGroup;
 			children = (
+				B518BEAF1EA9E6F00027569D /* ViewController */,
 				B518BE971EA9E6F00027569D /* Model */,
 				B518BEA41EA9E6F00027569D /* View */,
-				B518BEAF1EA9E6F00027569D /* ViewController */,
 			);
 			path = TDOrderAssistantViewController;
 			sourceTree = "<group>";
@@ -4034,7 +4036,6 @@
 				771FA0151B4588D80067F22D /* CourseDataManagerTests.swift */,
 				778345501B45D697009C7853 /* ContentInsetsControllerTests.swift */,
 				775DF4141AFAA36100F96B2F /* CourseContentPageViewControllerTests.swift */,
-				46CECC431B055B0F0073C63A /* CourseDashboardViewControllerTests.swift */,
 				77691FB11B3C824E003922F2 /* CourseOutlineQuerierTests.swift */,
 				77691FAE1B3C81E4003922F2 /* CourseOutlineViewControllerTests.swift */,
 				9E9AA36B1B3174E300CD7D44 /* CourseLastAccessedTests.swift */,
@@ -4495,6 +4496,7 @@
 				6926CDAC1D59BE3600A16E22 /* ic_next.png in Resources */,
 				B59238B11EADB6D100C686D8 /* OutlineViewController.xib in Resources */,
 				19BB62311A9C656B007DBF47 /* OEXMySettingsViewController.xib in Resources */,
+				B57A0E931EAEECBB00323A47 /* educations.json in Resources */,
 				9ED269D21AF114B900328A34 /* OEXLoginViewController.storyboard in Resources */,
 				69ECC62C1D50D1170030CF87 /* ic_back.png in Resources */,
 				69ECC60E1D50D1170030CF87 /* Icon-60@3x.png in Resources */,
@@ -5346,7 +5348,6 @@
 				F2C1F0D81CFDDC400051743C /* NetworkManagerTests.swift in Sources */,
 				7753914B1C98A16600FA959C /* VideoBlockViewControllerTests.swift in Sources */,
 				E0FC64C31C85B492004E3E92 /* DiscussionDataParsingTests.swift in Sources */,
-				46CECC441B055B0F0073C63A /* CourseDashboardViewControllerTests.swift in Sources */,
 				770A27AC1A702B6500DFC6FF /* OEXDataParserTests.m in Sources */,
 				77E2097F1AF032CC0071316D /* UIControl+OEXBlockActionsTests.m in Sources */,
 				77F76A701B0BD5EC00ED3E39 /* OEXSession+AuthorizationTests.swift in Sources */,
@@ -5472,6 +5473,15 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
+		B57A0E911EAEECBB00323A47 /* educations.json */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B57A0E921EAEECBB00323A47 /* en */,
+				B57A0E941EAEECD400323A47 /* zh-Hans */,
+			);
+			name = educations.json;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -5536,9 +5546,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Libraries/",
-					"$(PROJECT_DIR)/Source/TDMoneyTool/AliPay",
-					"$(PROJECT_DIR)/Source/TDMoneyTool/aliPay",
-					"$(PROJECT_DIR)/Source/aliPay",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -6000,9 +6007,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Libraries/",
-					"$(PROJECT_DIR)/Source/TDMoneyTool/AliPay",
-					"$(PROJECT_DIR)/Source/TDMoneyTool/aliPay",
-					"$(PROJECT_DIR)/Source/aliPay",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Source/edX-Prefix.pch";
@@ -6088,9 +6092,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Libraries/",
-					"$(PROJECT_DIR)/Source/TDMoneyTool/AliPay",
-					"$(PROJECT_DIR)/Source/TDMoneyTool/aliPay",
-					"$(PROJECT_DIR)/Source/aliPay",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

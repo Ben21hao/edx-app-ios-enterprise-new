@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TDOrderAssistantViewController : UIViewController
+@interface TDOrderAssistantViewController : TDBaseViewController
 
 @property (nonatomic,assign) NSInteger whereFrom;//1 我的课程；2 发现课程
 @property (nonatomic,strong) NSString *courseId;//课程id

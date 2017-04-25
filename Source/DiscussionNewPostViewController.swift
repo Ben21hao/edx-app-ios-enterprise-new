@@ -126,12 +126,15 @@ public class DiscussionNewPostViewController: UIViewController, UITextViewDelega
     override public func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor(), NSFontAttributeName : UIFont(name: "OpenSans", size: 18.0)!]
         self.navigationItem.title = Strings.post
+        
         let cancelItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: nil, action: nil)
         cancelItem.oex_setAction { [weak self]() -> Void in
             self?.dismissViewControllerAnimated(true, completion: nil)
         }
         self.navigationItem.leftBarButtonItem = cancelItem
+        
         contentTitleLabel.isAccessibilityElement = false
         titleLabel.isAccessibilityElement = false
         titleLabel.attributedText = NSAttributedString.joinInNaturalLayout([titleTextStyle.attributedStringWithText(Strings.title), titleTextStyle.attributedStringWithText(Strings.asteric)])
@@ -143,7 +146,7 @@ public class DiscussionNewPostViewController: UIViewController, UITextViewDelega
         contentTextView.delegate = self
         titleTextField.accessibilityLabel = Strings.title
         
-        self.view.backgroundColor = OEXStyles.sharedStyles().neutralXXLight()
+        self.view.backgroundColor = OEXStyles.sharedStyles().baseColor5()
         
         configureSegmentControl()
         titleTextField.defaultTextAttributes = OEXStyles.sharedStyles().textAreaBodyStyle.attributes
@@ -307,7 +310,8 @@ public class DiscussionNewPostViewController: UIViewController, UITextViewDelega
             make.trailing.equalTo(self.topicButton)
             make.leading.equalTo(self.topicButton)
             make.top.equalTo(self.topicButton.snp_bottom).offset(-3)
-            make.bottom.equalTo(self.view.snp_bottom)
+//            make.bottom.equalTo(self.view.snp_bottom)
+            make.height.equalTo((self.optionsViewController?.options.count)! * 30)
         }
         
         self.optionsViewController?.view.alpha = 0.0

@@ -26,6 +26,14 @@ extension UserProfile : FormData {
             return bio
         case .AccountPrivacy:
             return accountPrivacy?.rawValue
+        case .Education:
+            return educationCode.flatMap{ String($0) }
+        case .Nickname:
+            return nickname
+        case .email:
+            return email
+        case .phone:
+            return phone
         default:
             return nil
         }
@@ -43,6 +51,14 @@ extension UserProfile : FormData {
             return country
         case .Bio:
             return bio
+        case .Education:
+            return educat
+        case .Nickname:
+            return nickname
+        case .email:
+            return email
+        case .phone:
+            return phone
         default:
             return nil
         }
@@ -73,12 +89,32 @@ extension UserProfile : FormData {
                 updateDictionary[key] = value ?? NSNull()
             }
             bio = value
+        case .Education:
+            if value != educationCode {
+                updateDictionary[key] = value ?? NSNull()
+            }
+            educationCode = value
+        case .Nickname:
+            if value != nickname {
+                updateDictionary[key] = value ?? NSNull()
+            }
+            nickname = value
+        case .email:
+            if value != email {
+                updateDictionary[key] = value ?? NSNull()
+            }
+            email = value
+        case .phone:
+            if value != phone {
+                updateDictionary[key] = value ?? NSNull()
+            }
+            phone = value
+            
         case .AccountPrivacy:
             setLimitedProfile(NSString(string: value!).boolValue)
         default: break
             
         }
-        
     }
 }
 
@@ -171,6 +207,8 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
             JSONFormBuilder.registerCells(tableView)
             fields = form.fields!
         }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UserProfileEditViewController.reloadProfile(_:)), name: "NiNameNotification_Change", object: nil)
     }
     
     override func viewWillLayoutSubviews() {
@@ -212,6 +250,9 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
         self.titleLabel?.font = UIFont(name:"OpenSans",size:18.0)
         self.titleLabel?.textColor = UIColor.whiteColor()
         self.navigationItem.titleView = self.titleLabel
+        
+        navigationItem.backBarButtonItem?.title = " "
+        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor(), NSFontAttributeName : UIFont(name: "OpenSans", size: 18.0)!]
     }
     
     func leftBarItemAction() {
@@ -351,7 +392,6 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
             alertView.removeFromSuperview()
         }
         self.view.addSubview(alertView)
-        
     }
     
     func jumpToController(type : NSInteger) {
@@ -473,14 +513,15 @@ private class ErrorToastView : UIView {
 
 }
 
+//MARK: imagePicker Delegate
 extension UserProfileEditViewController : ProfilePictureTakerDelegate {
-
-    func showImagePickerController(picker: UIImagePickerController) {
-        self.presentViewController(picker, animated: true, completion: nil)
-    }
     
     func showChooserAlert(alert: UIAlertController) {
         self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func showImagePickerController(picker: UIImagePickerController) {
+        self.presentViewController(picker, animated: true, completion: nil)
     }
     
     func deleteImage() {
@@ -545,4 +586,19 @@ extension UserProfileEditViewController : ProfilePictureTakerDelegate {
             }
         }
     }
+    
+    func reloadProfile(notifi : NSNotification) {
+        
+        let networkRequest = ProfileAPI.profileUpdateRequest(self.profile)
+        environment.networkManager.taskForRequest(networkRequest) { result in
+            if let _ = result.error {
+                self.showToast("无法更新昵称")
+                
+            } else {
+                let nickName = notifi.object?.valueForKey("nickName") as? String
+                self.banner.usernameLabel.text = nickName
+            }
+        }
+    }
+
 }

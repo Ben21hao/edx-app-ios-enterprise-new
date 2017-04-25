@@ -90,6 +90,9 @@
 #import "TDVideoPlayerViewController.h"
 #import "TDOrderAssistantViewController.h"
 #import "TDChooseCourseViewController.h"
+#import "TDCutImageViewController.h"
+#import "UIImage+Crop.h"
+
 //#import "TDAutenPhotoViewController.h"
 //#import "TDMessageShowViewController.h"
 //#import "TDAuthenSuccessViewController.h"

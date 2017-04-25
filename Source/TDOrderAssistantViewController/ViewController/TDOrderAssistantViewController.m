@@ -21,7 +21,6 @@
 @interface TDOrderAssistantViewController () <UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
-@property (nonatomic,strong) UIButton *leftButton;
 
 @property (nonatomic,strong) TDBaseToolModel *baseTool;
 @property (nonatomic,assign) NSInteger page;
@@ -45,10 +44,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"助教";
+    self.titleViewLabel.text = @"助教";
     
     [self setViewConstraint];
-    [self setLeftNavigationBar];
     
     self.baseTool = [[TDBaseToolModel alloc] init];
     
@@ -290,26 +288,6 @@
         [weakSelf pullDownRefresh];
     };
     [self.navigationController pushViewController:talkVC animated:YES];
-}
-
-#pragma mark - 导航栏左边按钮
-- (void)setLeftNavigationBar {
-    
-    self.leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 48, 48)];
-    [self.leftButton setImage:[UIImage imageNamed:@"backImagee"] forState:UIControlStateNormal];
-    self.leftButton.imageEdgeInsets = UIEdgeInsetsMake(0, -23, 0, 23);
-    
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-        self.navigationController.interactivePopGestureRecognizer.delegate = self;
-    }
-    
-    [self.leftButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftButton];
-}
-
-- (void)backButtonAction:(UIButton *)sender {
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UI

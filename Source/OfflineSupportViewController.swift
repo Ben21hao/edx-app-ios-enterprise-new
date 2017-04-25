@@ -38,6 +38,7 @@ public class OfflineSupportViewController: UIViewController {
     }
     
     func setTitleLabelNaviBar() {
+        
         self.titleViewLabel.textAlignment = .Center
         self.titleViewLabel.font = UIFont.init(name: "OpenSans", size: 18.0)
         self.titleViewLabel.textColor = UIColor.whiteColor()

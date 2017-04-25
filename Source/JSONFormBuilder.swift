@@ -149,6 +149,8 @@ class JSONFormBuilder {
         func applyData(field: Field, data: FormData) {
             choiceView.titleText = Strings.formLabel(label: field.title!)
             choiceView.valueText = data.displayValueForKey(field.name) ?? field.placeholder ?? ""
+            
+            print("名称和标题 ==1==  " + field.name + field.title!  + " === " + choiceView.titleText!+choiceView.valueText!)
         }
     }
     
@@ -176,9 +178,10 @@ class JSONFormBuilder {
         }
         
         func applyData(field: Field, data: FormData) {
-            choiceView.titleText = Strings.formLabel(label: field.title ?? "")
-            let placeholderText = field.placeholder
-            choiceView.valueText = data.valueForField(field.name) ?? placeholderText ?? ""
+            choiceView.titleText = Strings.formLabel(label: field.title!)
+            choiceView.valueText = data.valueForField(field.name) ?? field.placeholder ?? ""
+            
+             print("名称和标题 ==2==  " + field.name + field.title! + " === " + choiceView.titleText!+choiceView.valueText!)
         }
     }
     
@@ -225,6 +228,7 @@ class JSONFormBuilder {
             case StringType = "string"
             case CountryType = "country"
             case LanguageType = "language"
+            case EducationType = "education"
             
             init(_ rawValue: String?) {
                 guard let val = rawValue else { self = .StringType; return }                
@@ -233,6 +237,8 @@ class JSONFormBuilder {
                     self = .CountryType
                 case "language":
                     self = .LanguageType
+                case "Education":
+                    self = .EducationType
                 default:
                     self = .StringType
                 }
@@ -242,7 +248,7 @@ class JSONFormBuilder {
         let type: FieldType
         let name: String
         var cellIdentifier: String { return type.cellIdentifier }
-        var title: String?
+        let title: String?
         
         let instructions: String?
         let subInstructions: String?
@@ -255,15 +261,15 @@ class JSONFormBuilder {
         init (json: JSON) {
             type = FieldType(jsonVal: json["type"].string)!
             title = json["label"].string
-            name = json["name"].string!
+            name = json["name"].string!//昵称
             
             instructions = json["instructions"].string
             subInstructions = json["sub_instructions"].string
-            options = json["options"].dictionary
-            dataType = DataType(json["data_type"].string)
+            options = json["options"].dictionary//详情
+            dataType = DataType(json["data_type"].string)//选择样式
             defaultValue = json["default"].string
             accessibilityHint = json["accessibility_hint"].string
-            placeholder = json["placeholder"].string
+            placeholder = json["placeholder"].string//关于我
         }
         
         private func attributedChooserRow(icon: Icon, title: String, value: String?) -> NSAttributedString {
@@ -283,13 +289,15 @@ class JSONFormBuilder {
             let selectionController = JSONFormTableViewController<String>()
             var tableData = [ChooserDatum<String>]()
             
-            if let rangeMin:Int = options?["range_min"]?.int, rangeMax:Int = options?["range_max"]?.int {
+            if let rangeMin:Int = options?["range_min"]?.int, rangeMax:Int = options?["range_max"]?.int {//年份
                 let range = rangeMin...rangeMax
                 let titles = range.map { String($0)} .reverse()
                 tableData = titles.map { ChooserDatum(value: $0, title: $0, attributedTitle: nil) }
-            } else if let file = options?["reference"]?.string {
+                
+            } else if let file = options?["reference"]?.string {//具体内容数组
                 do {
-                    let json = try loadJSON(file)
+                    let json = try loadJSON(file)  //解析具体json文件
+                    print("hhhhhhhhhhhhhhhhhhhh\(json.array)")
                     if let values = json.array {
                         tableData = values.map { ChooserDatum(value: $0["value"].string!, title: $0["name"].string, attributedTitle: nil)}
                     }
@@ -301,13 +309,16 @@ class JSONFormBuilder {
             var defaultRow = -1
             
             let allowsNone = options?["allows_none"]?.bool ?? false
-            if allowsNone {
-                let noneTitle = Strings.Profile.noField(fieldName: title!.oex_lowercaseStringInCurrentLocale())
+            if allowsNone {//插入第一行
+                //未选择+国家，语言等
+//                let noneTitle = Strings.Profile.noField(fieldName: title!.oex_lowercaseStringInCurrentLocale()) //第一个字符变小写
+//                let noneTitle = Strings.Profile.noField(fieldName: title!) //title -- 最高学历，国家等；
+                let noneTitle = Strings.unSelected;
                 tableData.insert(ChooserDatum(value: "--", title: noneTitle, attributedTitle: nil), atIndex: 0)
                 defaultRow = 0
             }
             
-            if let alreadySetValue = data.valueForField(name) {
+            if let alreadySetValue = data.valueForField(name) {//拿到选择的行
                 defaultRow = tableData.indexOf { equalsCaseInsensitive($0.value, alreadySetValue) } ?? defaultRow
             }
             
@@ -327,25 +338,32 @@ class JSONFormBuilder {
                     tableData.insert(ChooserDatum(value: id, title: nil, attributedTitle: title), atIndex: 0)
                     if defaultRow >= 0 { defaultRow += 1 }
                 }
+            } else if dataType == .EducationType {
+                if let id = NSLocale.currentLocale().objectForKey(NSLocaleIdentifier) as? String {
+                    let education = NSLocale.currentLocale().displayNameForKey(NSLocaleIdentifier, value: id)
+                    let title = attributedChooserRow(Icon.User, title: Strings.Profile.currentLanguageLabel, value: education)
+                    
+                    tableData.insert(ChooserDatum(value: id, title: nil, attributedTitle: title), atIndex: 0)
+                    if defaultRow >= 0 { defaultRow += 1 }
+                }
             }
             
             let dataSource = ChooserDataSource(data: tableData)
             dataSource.selectedIndex = defaultRow
-            
             
             selectionController.dataSource = dataSource
             selectionController.title = title
             selectionController.instructions = instructions
             selectionController.subInstructions = subInstructions
             
-            selectionController.doneChoosing = { value in
+            selectionController.doneChoosing = { value in//选择的回调
                 if allowsNone && value != nil && value! == "--" {
                     data.setValue(nil, key: self.name)
                 } else {
                     data.setValue(value, key: self.name)
                 }
             }
-            
+            controller.navigationItem.title = ""
             controller.navigationController?.pushViewController(selectionController, animated: true)
         }
         
@@ -357,9 +375,9 @@ class JSONFormBuilder {
             case .TextArea:
                 let text = data.valueForField(name)
                 let textController = JSONFormBuilderTextEditorViewController(text: text, placeholder: placeholder)
-                textController.title = title
+                textController.titleViewLabel.text = title
                 
-                textController.doneEditing = { value in
+                textController.doneEditing = { value in//输入的回调
                     if value == "" {
                         data.setValue(nil, key: self.name)
                     } else {
@@ -367,6 +385,7 @@ class JSONFormBuilder {
                     }
                 }
                 
+                controller.navigationItem.title = ""
                 controller.navigationController?.pushViewController(textController, animated: true)
             case .Switch:
                 //no action on cell selection - let control in cell handle action

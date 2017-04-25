@@ -22,7 +22,7 @@ private class JSONFormTableSelectionCell: UITableViewCell {
 private let cellIdentifier = "Cell"
 
 /** Options Selector Table */
-class JSONFormTableViewController<T>: UITableViewController {
+class JSONFormTableViewController<T>: UITableViewController,UIGestureRecognizerDelegate {
     
     var dataSource: ChooserDataSource<T>?
     var instructions: String?
@@ -64,11 +64,14 @@ class JSONFormTableViewController<T>: UITableViewController {
             headerView.frame = CGRect(origin: CGPointZero, size: size)
             
             tableView.tableHeaderView = headerView
+            tableView.tableFooterView = UIView.init()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setNaviewgatinBar()
         
         tableView.registerClass(JSONFormTableSelectionCell.self, forCellReuseIdentifier: cellIdentifier)
         tableView.dataSource = dataSource
@@ -90,6 +93,27 @@ class JSONFormTableViewController<T>: UITableViewController {
         guard let index = dataSource?.selectedIndex else { return }
         tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0), atScrollPosition: .Middle, animated: false)
     }
+    
+    func setNaviewgatinBar() {
+        
+        let leftButton = UIButton.init(frame: CGRectMake(0, 0, 48, 48))
+        leftButton.setImage(UIImage.init(named: "backImagee"), forState: .Normal)
+        leftButton.imageEdgeInsets = UIEdgeInsetsMake(0, -23, 0, 23)
+        leftButton.addTarget(self, action: #selector(leftBarItemAction), forControlEvents: .TouchUpInside)
+        leftButton.showsTouchWhenHighlighted = true
+        
+        self.navigationController?.interactivePopGestureRecognizer?.enabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
+        let leftBarItem = UIBarButtonItem.init(customView: leftButton)
+        self.navigationItem.leftBarButtonItem = leftBarItem
+
+    }
+    
+    func leftBarItemAction() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+
     
     override func willMoveToParentViewController(parent: UIViewController?) {
         if parent == nil { //removing from the hierarchy

@@ -13,7 +13,7 @@ private let notificationLabelLeadingOffset = 20.0
 private let notificationLabelTrailingOffset = -10.0
 private let notificationBarHeight = 50.0
 
-@objc protocol CourseAnnouncementsViewControllerEnvironment : OEXConfigProvider, DataManagerProvider, NetworkManagerProvider, ReachabilityProvider, OEXRouterProvider, OEXAnalyticsProvider {}
+@objc protocol CourseAnnouncementsViewControllerEnvironment : OEXConfigProvider, DataManagerProvider, NetworkManagerProvider, ReachabilityProvider, OEXRouterProvider {}
 
 extension RouterEnvironment : CourseAnnouncementsViewControllerEnvironment {}
 
@@ -27,7 +27,7 @@ private func announcementsDeserializer(response: NSHTTPURLResponse, json: JSON) 
 }
 
 
-class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebViewDelegate, LoadStateViewReloadSupport {
+class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebViewDelegate,UIGestureRecognizerDelegate {
     private let environment: CourseAnnouncementsViewControllerEnvironment
     
     let courseID: String
@@ -42,7 +42,8 @@ class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebView
     
     private let fontStyle = OEXTextStyle(weight : .Normal, size: .Base, color: OEXStyles.sharedStyles().neutralBlack())
     private let switchStyle = OEXStyles.sharedStyles().standardSwitchStyle()
-    
+    //自定义标题
+    private var titleL : UILabel?
     init(environment: CourseAnnouncementsViewControllerEnvironment, courseID: String) {
         self.courseID = courseID
         self.environment = environment
@@ -60,6 +61,18 @@ class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let leftButton = UIButton.init(frame: CGRectMake(0, 0, 48, 48))
+        leftButton.setImage(UIImage.init(named: "backImagee"), forState: .Normal)
+        leftButton.imageEdgeInsets = UIEdgeInsetsMake(0, -23, 0, 23)
+        leftButton.addTarget(self, action: #selector(leftBarItemAction), forControlEvents: .TouchUpInside)
+        
+        self.navigationController?.interactivePopGestureRecognizer?.enabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
+        let leftBarItem = UIBarButtonItem.init(customView: leftButton)
+        self.navigationItem.leftBarButtonItem = leftBarItem
         
         addSubviews()
         setConstraints()
@@ -102,11 +115,14 @@ class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebView
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.loadContent()
-        environment.analytics.trackScreenWithName(OEXAnalyticsScreenAnnouncements, courseID: courseID, value: nil)
     }
     
     override func reloadViewData() {
         loadContent()
+    }
+    
+    func leftBarItemAction() {
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     private func loadContent() {
@@ -124,6 +140,7 @@ class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebView
     //MARK: - Setup UI
     private func addSubviews() {
         self.view.addSubview(webView)
+        
         self.view.addSubview(notificationBar)
         notificationBar.addSubview(notificationLabel)
         notificationBar.addSubview(notificationSwitch)
@@ -153,8 +170,10 @@ class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebView
             }
         }
         
+        notificationBar.hidden = true
         webView.snp_makeConstraints { (make) -> Void in
-            make.top.equalTo(notificationBar.snp_bottom)
+//            make.top.equalTo(notificationBar.snp_bottom)
+            make.top.equalTo(self.view)//隐藏上面的允许接收通知bar
             make.leading.equalTo(self.view)
             make.trailing.equalTo(self.view)
             make.bottom.equalTo(self.view)
@@ -162,7 +181,8 @@ class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebView
     }
     
     private func setStyles() {
-        self.navigationItem.title = Strings.courseAnnouncements
+        self.titleViewLabel.text = Strings.courseAnnouncements
+        
         notificationBar.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
         switchStyle.applyToSwitch(notificationSwitch)
         notificationLabel.attributedText = fontStyle.attributedStringWithText(Strings.notificationsEnabled)
@@ -179,7 +199,7 @@ class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebView
         var html:String = String()
         
         for (index,announcement) in announcements.enumerate() {
-                html += "<div class=\"announcement-header\">\(announcement.heading ?? "")</div>"
+                html += "<div class=\"announcement-header\">\(announcement.heading!)</div>"
                 html += "<hr class=\"announcement\"/>"
                 html += announcement.content ?? ""
                 if(index + 1 < announcements.count)
@@ -208,13 +228,8 @@ class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebView
         self.loadController.state = .Loaded
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         self.loadController.state = LoadState.failed(error)
-    }
-    
-    //MARK:- LoadStateViewReloadSupport method
-    func loadStateViewReload() {
-        loadContent()
     }
 }
 

@@ -47,7 +47,7 @@ struct CertificateDashboardItem: CourseDashboardItem {
     }
 }
 
-public class CourseDashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
+public class CourseDashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate {
     
     public typealias Environment = protocol<OEXAnalyticsProvider, OEXConfigProvider, DataManagerProvider, NetworkManagerProvider, OEXRouterProvider, OEXInterfaceProvider, OEXRouterProvider>
     
@@ -67,7 +67,8 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     
     private let loadController = LoadStateViewController()
     private let courseStream = BackedStream<UserCourseEnrollment>()
-    
+    //自定义标题
+    private var titleL : UILabel?
     private lazy var progressController : ProgressController = {
         ProgressController(owner: self, router: self.environment.router, dataInterface: self.environment.interface)
     }()
@@ -78,8 +79,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         
         super.init(nibName: nil, bundle: nil)
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .Plain, target: nil, action: nil)
-    }
+}
     
     public required init?(coder aDecoder: NSCoder) {
         // required by the compiler because UIViewController implements NSCoding,
@@ -90,7 +90,18 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = OEXStyles.sharedStyles().neutralXLight()
+        self.view.backgroundColor = OEXStyles.sharedStyles().neutralWhite()
+        
+        let leftButton = UIButton.init(frame: CGRectMake(0, 0, 48, 48))
+        leftButton.setImage(UIImage.init(named: "backImagee"), forState: .Normal)
+        leftButton.imageEdgeInsets = UIEdgeInsetsMake(0, -23, 0, 23)
+        
+        self.navigationController?.interactivePopGestureRecognizer?.enabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
+        leftButton.addTarget(self, action: #selector(leftBarItemAction), forControlEvents: .TouchUpInside)
+        let leftBarItem = UIBarButtonItem.init(customView: leftButton)
+        self.navigationItem.leftBarButtonItem = leftBarItem
         
         self.navigationItem.rightBarButtonItem = self.progressController.navigationItem()
         
@@ -149,9 +160,16 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         }
     }
     
+    func leftBarItemAction() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     private func resultLoaded(result : Result<UserCourseEnrollment>) {
         switch result {
-        case let .Success(enrollment): self.loadedCourseWithEnrollment(enrollment)
+            
+        case let .Success(enrollment):
+            self.loadedCourseWithEnrollment(enrollment)
+            
         case let .Failure(error):
             if !courseStream.active {
                 // enrollment list is cached locally, so if the stream is still active we may yet load the course
@@ -163,11 +181,19 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     }
     
     private func loadedCourseWithEnrollment(enrollment: UserCourseEnrollment) {
-        navigationItem.title = enrollment.course.name
-        CourseCardViewModel.onDashboard(enrollment.course).apply(courseCard, networkManager: self.environment.networkManager,type: 4)
+        //添加标题文本
+        self.titleL = UILabel(frame:CGRect(x:0, y:0, width:40, height:40))
+        self.titleL?.text = enrollment.course.name
+        self.navigationItem.titleView = self.titleL
+        self.titleL?.font = UIFont(name:"OpenSans",size:18.0)
+        self.titleL?.textColor = UIColor.whiteColor()
+        
+        CourseCardViewModel.onDashboard(enrollment.course).apply(courseCard, networkManager: self.environment.networkManager,type:4)
         verifyAccessForCourse(enrollment.course)
         prepareTableViewData(enrollment)
         self.tableView.reloadData()
+        
+        //分享按钮
         shareButton.hidden = enrollment.course.course_about == nil || !environment.config.courseSharingEnabled
         shareButton.oex_removeAllActions()
         shareButton.oex_addAction({[weak self] _ in
@@ -175,13 +201,18 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
             }, forEvents: .TouchUpInside)
     }
     
-    private func shareCourse(course: OEXCourse) {
+    //share sheet
+    private func shareCourse(course: OEXCourse) { //分享课程
+        
         if let urlString = course.course_about, url = NSURL(string: urlString) {
             let analytics = environment.analytics
             let courseID = self.courseID
             let controller = shareHashtaggedTextAndALink({ hashtagOrPlatform in
+                
                 Strings.shareACourse(platformName: hashtagOrPlatform)
+                
                 }, url: url, analyticsCallback: { analyticsType in
+                    
                 analytics.trackCourseShared(courseID, url: urlString, socialTarget: analyticsType)
             })
             self.presentViewController(controller, animated: true, completion: nil)
@@ -250,15 +281,18 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
             cellItems.append(item)
         }
         
-        if shouldShowHandouts(enrollment.course) {
-            item = StandardCourseDashboardItem(title: Strings.courseDashboardHandouts, detail: Strings.courseDashboardHandoutsDetail, icon: .Handouts) {[weak self] () -> Void in
-                self?.showHandouts()
-            }
-            cellItems.append(item)
+        item = StandardCourseDashboardItem(title: Strings.courseDashboardHandouts, detail: Strings.courseDashboardHandoutsDetail, icon: .Handouts) {[weak self] () -> Void in
+            self?.showHandouts()
         }
+        cellItems.append(item)
         
         item = StandardCourseDashboardItem(title: Strings.courseDashboardAnnouncements, detail: Strings.courseDashboardAnnouncementsDetail, icon: .Announcements) {[weak self] () -> Void in
             self?.showAnnouncements()
+        }
+        cellItems.append(item)
+        
+        item = StandardCourseDashboardItem(title: Strings.classTitle, detail: Strings.entetClass, icon: .Group) {[weak self] () -> Void in
+            self?.showQRViewController()
         }
         cellItems.append(item)
     }
@@ -269,10 +303,6 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         let courseHasDiscussions = course.hasDiscussionsEnabled ?? false
         return canShowDiscussions && courseHasDiscussions
     }
-    
-    private func shouldShowHandouts(course: OEXCourse) -> Bool {
-        return !(course.course_handouts?.isEmpty ?? true)
-    }
 
     private func getCertificateUrl(enrollment: UserCourseEnrollment) -> String? {
         guard environment.config.discussionsEnabled else { return nil }
@@ -281,7 +311,6 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     
     
     // MARK: - TableView Data and Delegate
-    
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellItems.count
     }
@@ -305,21 +334,26 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         dashboardItem.action()
     }
     
-    private func showCourseware() {
+    private func showCourseware() { //课件
         self.environment.router?.showCoursewareForCourseWithID(courseID, fromController: self)
     }
     
-    private func showDiscussionsForCourseID(courseID: String) {
+    private func showDiscussionsForCourseID(courseID: String) { //讨论
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .Plain, target: nil, action: nil)
         self.environment.router?.showDiscussionTopicsFromController(self, courseID: courseID)
     }
     
-    private func showHandouts() {
+    private func showHandouts() { //资料
         self.environment.router?.showHandoutsFromController(self, courseID: courseID)
     }
     
-    private func showAnnouncements() {
+    private func showAnnouncements() { //公告
         self.environment.router?.showAnnouncementsForCourseWithID(courseID)
+    }
+    
+    private func showQRViewController() { //班级
+        let vc = QRViewController();
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override public func viewDidLayoutSubviews() {
@@ -340,10 +374,6 @@ extension CourseDashboardViewController {
     
     func t_canVisitDiscussions() -> Bool {
         return self.cellItems.firstIndexMatching({ (item: CourseDashboardItem) in return (item is StandardCourseDashboardItem) && (item as! StandardCourseDashboardItem).icon == .Discussions }) != nil
-    }
-    
-    func t_canVisitHandouts() -> Bool {
-        return self.cellItems.firstIndexMatching({ (item: CourseDashboardItem) in return (item is StandardCourseDashboardItem) && (item as! StandardCourseDashboardItem).icon == .Handouts }) != nil
     }
 
     func t_canVisitCertificate() -> Bool {

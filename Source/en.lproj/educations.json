@@ -1,0 +1,11 @@
+ [
+  { "value" : "p", "name" : "Doctorate" },
+  { "value" : "m", "name" : "Master" },
+  { "value" : "b", "name" : "Bachelor" },
+  { "value" : "a", "name" : "Associate Degree" },
+  { "value" : "hs", "name" : "High School" },
+  { "value" : "jhs", "name" : "Junior High School" },
+  { "value" : "el", "name" : "Primary School" },
+  { "value" : "none", "name" : "Informal Education" },
+  { "value" : "other", "name" : "Others" }
+  ]

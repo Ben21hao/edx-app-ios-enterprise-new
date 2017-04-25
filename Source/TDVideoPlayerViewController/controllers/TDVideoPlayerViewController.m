@@ -19,9 +19,7 @@
 
 static const NSTimeInterval RewindTimeInterval = 30;
 
-@interface TDVideoPlayerViewController () <UIGestureRecognizerDelegate>
-
-@property (nonatomic,strong) UIButton *leftButton;
+@interface TDVideoPlayerViewController ()
 
 @property (nonatomic,strong) MPMoviePlayerController *moviePlayer;
 
@@ -56,8 +54,7 @@ static const NSTimeInterval RewindTimeInterval = 30;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = self.courseName;
-    [self setLeftNavigationBar];
+    self.titleViewLabel.text = self.courseName;
     [self setViewConstaint];
     
     self.isShowControlBar = YES;
@@ -80,24 +77,6 @@ static const NSTimeInterval RewindTimeInterval = 30;
     
     [self.moviePlayer stop];
     [self stopDurationTimer];
-}
-
-#pragma mark - 导航栏左边按钮
-- (void)setLeftNavigationBar {
-    
-    self.leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 48, 48)];
-    [self.leftButton setImage:[UIImage imageNamed:@"backImagee"] forState:UIControlStateNormal];
-    self.leftButton.showsTouchWhenHighlighted = YES;
-    self.leftButton.imageEdgeInsets = UIEdgeInsetsMake(0, -23, 0, 23);
-    
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-        self.navigationController.interactivePopGestureRecognizer.delegate = self;
-    }
-    
-    [self.leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.leftButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftButton];
 }
 
 - (void)backButtonAction:(UIButton *)sender {

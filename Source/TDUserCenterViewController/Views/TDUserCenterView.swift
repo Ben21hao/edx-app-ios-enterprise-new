@@ -48,6 +48,7 @@ class TDUserCenterView: UIView,UITableViewDataSource {
         self.tableView.backgroundColor = OEXStyles.sharedStyles().baseColor6()
         self.tableView.tableFooterView = UIView.init()
         self.tableView.dataSource = self
+        self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
 
         self.addSubview(self.tableView)
         self.tableView.snp_makeConstraints { (make) in

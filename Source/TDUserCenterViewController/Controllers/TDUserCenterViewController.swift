@@ -115,17 +115,17 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     
     func gotoAuthenVc() {//身份验证
 //        if contentView.statusCode == 400  { // 400 未认证
-//            let photoViewController = TDAutenPhotoViewController.init()
+//            let photoViewController = TDAutenPhotoViewController()
 //            photoViewController.username = session.currentUser?.username
 //            self.navigationController?.pushViewController(photoViewController, animated: true)
-//            
-//        } else if contentView.statusCode == 200 || contentView.statusCode == 202 { //200 提交成功，202 认证失败
-//            let messageShowController = TDMessageShowViewController.init()
+//        }
+//        else if contentView.statusCode == 200 || contentView.statusCode == 202 { //200 提交成功，202 认证失败
+//            let messageShowController = TDMessageShowViewController()
 //            messageShowController.username = session.currentUser?.username
 //            self.navigationController?.pushViewController(messageShowController, animated: true)
-//            
-//        } else if contentView.statusCode == 201 { //已认证
-//            let successViewController = TDAuthenSuccessViewController.init()
+//        }
+//        else if contentView.statusCode == 201 { //已认证
+//            let successViewController = TDAuthenSuccessViewController()
 //            self.navigationController?.pushViewController(successViewController, animated: true)
 //        }
     }

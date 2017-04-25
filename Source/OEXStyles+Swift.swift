@@ -28,11 +28,11 @@ struct ShadowStyle {
 extension OEXStyles {
     
     var navigationTitleTextStyle : OEXTextStyle {
-        return OEXTextStyle(weight: .SemiBold, size: .Base, color : navigationItemTintColor())
+        return OEXTextStyle(weight: .SemiBold, size: .XLarge, color : navigationItemTintColor())
     }
     
     var navigationButtonTextStyle : OEXTextStyle {
-        return OEXTextStyle(weight: .SemiBold, size: .Small, color: nil)
+        return OEXTextStyle(weight: .Normal, size: .Large, color: nil)
     }
     
     private var searchBarTextStyle : OEXTextStyle {
@@ -45,8 +45,8 @@ extension OEXStyles {
         UINavigationBar.appearance().barTintColor = navigationBarColor()
         UINavigationBar.appearance().barStyle = UIBarStyle.Black
         UINavigationBar.appearance().tintColor = navigationItemTintColor()
-        UINavigationBar.appearance().titleTextAttributes = navigationTitleTextStyle.attributes
-        UIBarButtonItem.appearance().setTitleTextAttributes(navigationButtonTextStyle.attributes, forState: .Normal)
+        UINavigationBar.appearance().titleTextAttributes = navigationTitleTextStyle.attributes//导航栏标题字体设置
+        UIBarButtonItem.appearance().setTitleTextAttributes(navigationButtonTextStyle.attributes, forState: .Normal)//导航栏左右按字体设置
         
         UIToolbar.appearance().tintColor = navigationBarColor()
         

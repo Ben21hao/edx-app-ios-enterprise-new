@@ -276,6 +276,8 @@ public class DiscussionNewCommentViewController: UIViewController, UITextViewDel
         addCommentButton.applyButtonStyle(environment.styles.filledPrimaryButtonStyle, withTitle: buttonTitle)
         self.contentTitleLabel.attributedText = NSAttributedString.joinInNaturalLayout([responseTextViewStyle.attributedStringWithText(titleText), responseTextViewStyle.attributedStringWithText(Strings.asteric)])
         self.contentTitleLabel.isAccessibilityElement = false
+        
+        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor(), NSFontAttributeName : UIFont(name: "OpenSans", size: 18.0)!]
         self.navigationItem.title = navigationItemTitle
             
         if case .Comment(_) = self.context, let thread = thread{

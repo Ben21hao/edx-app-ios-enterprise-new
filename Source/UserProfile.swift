@@ -160,6 +160,30 @@ extension UserProfile { //ViewModel
         return languageCode.flatMap { return NSLocale.currentLocale().displayNameForKey(NSLocaleLanguageCode, value: $0) }
     }
     
+    var educat: String? {
+        if educationCode == "p" {
+            return Strings.dDegree
+        } else if educationCode == "m" {
+            return Strings.mDegree
+        } else if educationCode == "b" {
+            return Strings.bDegree
+        } else if educationCode == "a" {
+            return Strings.aDegree
+        } else if educationCode == "hs" {
+            return Strings.hsDegree
+        } else if educationCode == "jhs" {
+            return Strings.jhsDegree
+        } else if educationCode == "el" {
+            return Strings.elDegree
+        } else if educationCode == "none" {
+            return Strings.noneDegree
+        } else if educationCode == "other" {
+            return Strings.otherDegree
+        } else {
+            return educationCode
+        }
+    }
+    
     var sharingLimitedProfile: Bool {
         get {
             return (parentalConsent ?? false) || (accountPrivacy == nil) || (accountPrivacy! == .Private)

@@ -108,6 +108,8 @@ public class MenuOptionsViewController: UIViewController, UITableViewDataSource,
     }
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        tableView.tableFooterView = UIView.init()
+        
         let cell = tableView.dequeueReusableCellWithIdentifier(MenuOptionTableViewCell.identifier, forIndexPath: indexPath) as! MenuOptionTableViewCell
         
         // Configure the cell...

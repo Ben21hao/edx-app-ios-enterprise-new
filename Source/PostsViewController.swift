@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PullRefreshControllerDelegate, InterfaceOrientationOverriding, DiscussionNewPostViewControllerDelegate {
+class PostsViewController: TDSwiftBaseViewController, UITableViewDataSource, UITableViewDelegate, PullRefreshControllerDelegate, InterfaceOrientationOverriding, DiscussionNewPostViewControllerDelegate {
 
     typealias Environment = protocol<NetworkManagerProvider, OEXRouterProvider, OEXAnalyticsProvider, OEXStylesProvider>
     
@@ -161,7 +161,7 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.registerClass(PostTableViewCell.classForCoder(), forCellReuseIdentifier: PostTableViewCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView.init()
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.applyStandardSeparatorInsets()
@@ -323,7 +323,7 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     private func setStyles() {
         
-        view.backgroundColor = environment.styles.standardBackgroundColor()
+        view.backgroundColor = environment.styles.baseColor5()
         
         self.refineLabel.attributedText = self.refineTextStyle.attributedStringWithText(Strings.refine)
         
@@ -345,8 +345,7 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         newPostButton.contentVerticalAlignment = .Center
         
-        self.navigationItem.title = context?.navigationItemTitle
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .Plain, target: nil, action: nil)
+        self.titleViewLabel.text = context?.navigationItemTitle
         
         viewSeparator.backgroundColor = environment.styles.neutralXLight()
     }
@@ -436,7 +435,7 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
             if let topics = response.data {
                 //Sending signle topic id so always get a single topic
                 self?.context = .Topic(topics[0])
-                self?.navigationItem.title = self?.context?.navigationItemTitle
+                self?.titleViewLabel.text = self?.context?.navigationItemTitle
                 self?.setConstraints()
                 self?.loadContent()
             }
@@ -452,6 +451,7 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func updateHeaderViewVisibility() {
+        tableView.scrollEnabled =  posts.count * 53 > TDScreenHeight - 180 ? true : false
         
         // if post has results then set hasResults yes
         hasResults = context?.allowsPosting ?? false && self.posts.count > 0
@@ -656,6 +656,8 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        tableView.tableFooterView = UIView.init()
+        
         let cell = tableView.dequeueReusableCellWithIdentifier(PostTableViewCell.identifier, forIndexPath: indexPath) as! PostTableViewCell
         cell.useThread(posts[indexPath.row], selectedOrderBy : selectedOrderBy)
         cell.applyStandardSeparatorInsets()

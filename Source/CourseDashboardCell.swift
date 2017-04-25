@@ -13,9 +13,9 @@ class CourseDashboardCell: UITableViewCell {
     static let identifier = "CourseDashboardCellIdentifier"
     
     //TODO: all these should be adjusted once the final UI is ready
-    private let ICON_SIZE : CGFloat = OEXTextStyle.pointSizeForTextSize(OEXTextSize.XXLarge)
-    private let ICON_MARGIN : CGFloat = 30.0
-    private let LABEL_MARGIN : CGFloat = 75.0
+    private let ICON_SIZE : CGFloat = OEXTextStyle.pointSizeForTextSize(OEXTextSize.XXXLarge)
+    private let ICON_MARGIN : CGFloat = 18.0
+    private let LABEL_MARGIN : CGFloat = 68.0
     private let LABEL_SIZE_HEIGHT = 20.0
     private let CONTAINER_SIZE_HEIGHT = 60.0
     private let CONTAINER_MARGIN_BOTTOM = 15.0
@@ -42,7 +42,9 @@ class CourseDashboardCell: UITableViewCell {
 
     func useItem(item : StandardCourseDashboardItem) {
         self.titleLabel.attributedText = titleTextStyle.attributedStringWithText(item.title)
+        self.titleLabel.font = UIFont.systemFontOfSize(16);
         self.detailLabel.attributedText = detailTextStyle.attributedStringWithText(item.detail)
+        self.detailLabel.font = UIFont.systemFontOfSize(14);
         self.iconView.image = item.icon.imageWithFontSize(ICON_SIZE)
     }
     
