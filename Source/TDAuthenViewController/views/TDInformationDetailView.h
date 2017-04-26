@@ -10,4 +10,11 @@
 
 @interface TDInformationDetailView : UIView
 
+@property (nonatomic,strong) UITableView *tableView;
+
+@property (nonatomic,strong) NSString *name;
+@property (nonatomic,strong) NSString *identifyID;
+@property (nonatomic,strong) NSString *birthDate;
+@property (nonatomic,strong) NSString *sexStr;
+
 @end

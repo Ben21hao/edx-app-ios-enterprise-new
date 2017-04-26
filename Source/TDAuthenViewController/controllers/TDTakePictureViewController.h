@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TDTakePictureViewController : UIViewController
+typedef NS_ENUM(NSInteger,TDAuthenFrom) {
+    TDAuthenFromProfile,
+    TDAuthenFromPhoto
+};
+
+@interface TDTakePictureViewController : TDBaseViewController
+
+@property (nonatomic,assign) NSInteger whereFrom;
+@property (nonatomic,strong) NSString *username;
+@property (nonatomic,strong) UIImage *faceImage;
 
 @end

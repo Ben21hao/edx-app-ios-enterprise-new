@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TDUserInformationViewController : UIViewController
+@interface TDUserInformationViewController : TDBaseViewController
+
+@property (nonatomic,strong) NSString *username;
+@property (nonatomic,strong) UIImage *faceImage;
+@property (nonatomic,strong) UIImage *identifyImage;
 
 @end

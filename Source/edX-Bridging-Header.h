@@ -95,6 +95,6 @@
 #import "TDRechargeViewController.h"
 #import "WaitForPayViewController.h"
 
-//#import "TDAutenPhotoViewController.h"
-//#import "TDMessageShowViewController.h"
-//#import "TDAuthenSuccessViewController.h"
+#import "TDTakePictureViewController.h"
+#import "TDInformationDetailViewController.h"
+#import "TDAuthenSuccessViewController.h"

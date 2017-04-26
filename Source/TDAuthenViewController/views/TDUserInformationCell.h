@@ -10,4 +10,8 @@
 
 @interface TDUserInformationCell : UITableViewCell
 
+@property (nonatomic,strong) UILabel *titleLabel;
+@property (nonatomic,strong) UITextField *detailTextField;
+@property (nonatomic,assign) BOOL isDisclosure;
+
 @end

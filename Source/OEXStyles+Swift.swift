@@ -28,7 +28,7 @@ struct ShadowStyle {
 extension OEXStyles {
     
     var navigationTitleTextStyle : OEXTextStyle {
-        return OEXTextStyle(weight: .SemiBold, size: .XLarge, color : navigationItemTintColor())
+        return OEXTextStyle(weight: .Normal, size: .XLarge, color : navigationItemTintColor())
     }
     
     var navigationButtonTextStyle : OEXTextStyle {
