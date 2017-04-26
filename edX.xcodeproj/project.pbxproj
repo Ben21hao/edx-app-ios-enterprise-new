@@ -61,7 +61,6 @@
 		1A5501A41BBAB8BD00D5F9DD /* JSONFormBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5501A31BBAB8BD00D5F9DD /* JSONFormBuilder.swift */; };
 		1A5AC5801B94ED0D00885187 /* CourseCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5AC57F1B94ED0D00885187 /* CourseCardViewModel.swift */; };
 		1A67E5411BD7D61800C53401 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A67E5401BD7D61800C53401 /* Feed.swift */; };
-		1A6D90931D0A05D500D01BEA /* StartupViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6D90921D0A05D500D01BEA /* StartupViewControllerTests.swift */; };
 		1A6E86241BB9C6500039A216 /* OEXStyles+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6E86231BB9C6500039A216 /* OEXStyles+Profile.swift */; };
 		1A7CEA331BABA8C70043A58C /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7CEA321BABA8C70043A58C /* ProfileImageView.swift */; };
 		1A8172511C3C1F2E007262AA /* OEXConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8172501C3C1F2E007262AA /* OEXConfig.swift */; };
@@ -70,7 +69,6 @@
 		1A8AC0C01BB49EC5009D8F5E /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8AC0BF1BB49EC5009D8F5E /* UserProfile.swift */; };
 		1A9A1E481B8F3BB8005AE336 /* OEXCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9A1E471B8F3BB8005AE336 /* OEXCheckBox.swift */; };
 		1AA79ABA1BAC7F710011D381 /* ProfileAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA79AB91BAC7F710011D381 /* ProfileAPI.swift */; };
-		1AAD95F61CEA222500BBF70C /* StartupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAD95F51CEA222500BBF70C /* StartupViewController.swift */; };
 		1AAD95F81CEB725900BBF70C /* OEXTextStyle+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAD95F71CEB725900BBF70C /* OEXTextStyle+Swift.swift */; };
 		1AB539E41BFA24DC0065501F /* CertificateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB539E31BFA24DC0065501F /* CertificateViewController.swift */; };
 		1AB539F51BFDFBC10065501F /* DebugMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB539F41BFDFBC10065501F /* DebugMenuViewController.swift */; };
@@ -708,6 +706,7 @@
 		B518C1721EA9FF1C0027569D /* TDCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B518C16E1EA9FF1C0027569D /* TDCaptionView.m */; };
 		B518C1731EA9FF1C0027569D /* TDVideoBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B518C1701EA9FF1C0027569D /* TDVideoBarView.m */; };
 		B53EA90D1EA621BE00CEC936 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53EA90C1EA621BE00CEC936 /* Images.xcassets */; };
+		B546EDA21EB09167007F21A9 /* StartupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B546EDA11EB09167007F21A9 /* StartupViewController.swift */; };
 		B54C8AC81EA8BF670002FCED /* WYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8AC71EA8BF670002FCED /* WYAlertView.m */; };
 		B54C8ACB1EA8BF8A0002FCED /* UIColor+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8ACA1EA8BF8A0002FCED /* UIColor+extend.m */; };
 		B54C8ACF1EA8BF950002FCED /* JHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8ACE1EA8BF950002FCED /* JHTextField.m */; };
@@ -768,6 +767,14 @@
 		B5FAF7581EB04A69000C2169 /* CouponsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FAF7561EB04A69000C2169 /* CouponsViewController.xib */; };
 		B5FAF75C1EB04ABF000C2169 /* CouponsNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF75A1EB04ABF000C2169 /* CouponsNameTableViewCell.m */; };
 		B5FAF75D1EB04ABF000C2169 /* CouponsNameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FAF75B1EB04ABF000C2169 /* CouponsNameTableViewCell.xib */; };
+		B5FAF7641EB0515D000C2169 /* TDTakePictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF7631EB0515D000C2169 /* TDTakePictureViewController.m */; };
+		B5FAF7671EB05207000C2169 /* TDTakePitureView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF7661EB05207000C2169 /* TDTakePitureView.m */; };
+		B5FAF76A1EB0558C000C2169 /* TDUserInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF7691EB0558C000C2169 /* TDUserInformationViewController.m */; };
+		B5FAF76D1EB0563E000C2169 /* TDUserInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF76C1EB0563E000C2169 /* TDUserInformationView.m */; };
+		B5FAF7701EB05700000C2169 /* TDUserInformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF76F1EB05700000C2169 /* TDUserInformationCell.m */; };
+		B5FAF7761EB059DB000C2169 /* TDInformationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF7751EB059DB000C2169 /* TDInformationDetailViewController.m */; };
+		B5FAF7791EB06EA9000C2169 /* TDInformationDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF7781EB06EA9000C2169 /* TDInformationDetailView.m */; };
+		B5FAF77C1EB06FDB000C2169 /* TDAuthenSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF77B1EB06FDB000C2169 /* TDAuthenSuccessViewController.m */; };
 		BD3838541DD1CA7E00805697 /* OEXFontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */; };
 		BD7C6C3E1DCA32370004D135 /* OEXFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */; };
 		BD7C6C401DCA329A0004D135 /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = BD7C6C3F1DCA329A0004D135 /* fonts.json */; };
@@ -965,7 +972,6 @@
 		1A5501A31BBAB8BD00D5F9DD /* JSONFormBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFormBuilder.swift; sourceTree = "<group>"; };
 		1A5AC57F1B94ED0D00885187 /* CourseCardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCardViewModel.swift; sourceTree = "<group>"; };
 		1A67E5401BD7D61800C53401 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
-		1A6D90921D0A05D500D01BEA /* StartupViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartupViewControllerTests.swift; sourceTree = "<group>"; };
 		1A6E86231BB9C6500039A216 /* OEXStyles+Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OEXStyles+Profile.swift"; sourceTree = "<group>"; };
 		1A7CEA321BABA8C70043A58C /* ProfileImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		1A8172501C3C1F2E007262AA /* OEXConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXConfig.swift; sourceTree = "<group>"; };
@@ -974,7 +980,6 @@
 		1A8AC0BF1BB49EC5009D8F5E /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		1A9A1E471B8F3BB8005AE336 /* OEXCheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXCheckBox.swift; sourceTree = "<group>"; };
 		1AA79AB91BAC7F710011D381 /* ProfileAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileAPI.swift; sourceTree = "<group>"; };
-		1AAD95F51CEA222500BBF70C /* StartupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartupViewController.swift; sourceTree = "<group>"; };
 		1AAD95F71CEB725900BBF70C /* OEXTextStyle+Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OEXTextStyle+Swift.swift"; sourceTree = "<group>"; };
 		1AB539E31BFA24DC0065501F /* CertificateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateViewController.swift; sourceTree = "<group>"; };
 		1AB539F41BFDFBC10065501F /* DebugMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugMenuViewController.swift; sourceTree = "<group>"; };
@@ -1782,6 +1787,7 @@
 		B518C16F1EA9FF1C0027569D /* TDVideoBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDVideoBarView.h; sourceTree = "<group>"; };
 		B518C1701EA9FF1C0027569D /* TDVideoBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDVideoBarView.m; sourceTree = "<group>"; };
 		B53EA90C1EA621BE00CEC936 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../edX/Images.xcassets; sourceTree = "<group>"; };
+		B546EDA11EB09167007F21A9 /* StartupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartupViewController.swift; sourceTree = "<group>"; };
 		B54C8AC61EA8BF670002FCED /* WYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYAlertView.h; sourceTree = "<group>"; };
 		B54C8AC71EA8BF670002FCED /* WYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYAlertView.m; sourceTree = "<group>"; };
 		B54C8AC91EA8BF8A0002FCED /* UIColor+extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+extend.h"; sourceTree = "<group>"; };
@@ -1892,6 +1898,22 @@
 		B5FAF7591EB04ABF000C2169 /* CouponsNameTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsNameTableViewCell.h; sourceTree = "<group>"; };
 		B5FAF75A1EB04ABF000C2169 /* CouponsNameTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsNameTableViewCell.m; sourceTree = "<group>"; };
 		B5FAF75B1EB04ABF000C2169 /* CouponsNameTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponsNameTableViewCell.xib; sourceTree = "<group>"; };
+		B5FAF7621EB0515D000C2169 /* TDTakePictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDTakePictureViewController.h; sourceTree = "<group>"; };
+		B5FAF7631EB0515D000C2169 /* TDTakePictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTakePictureViewController.m; sourceTree = "<group>"; };
+		B5FAF7651EB05207000C2169 /* TDTakePitureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDTakePitureView.h; sourceTree = "<group>"; };
+		B5FAF7661EB05207000C2169 /* TDTakePitureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTakePitureView.m; sourceTree = "<group>"; };
+		B5FAF7681EB0558C000C2169 /* TDUserInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDUserInformationViewController.h; sourceTree = "<group>"; };
+		B5FAF7691EB0558C000C2169 /* TDUserInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDUserInformationViewController.m; sourceTree = "<group>"; };
+		B5FAF76B1EB0563E000C2169 /* TDUserInformationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDUserInformationView.h; sourceTree = "<group>"; };
+		B5FAF76C1EB0563E000C2169 /* TDUserInformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDUserInformationView.m; sourceTree = "<group>"; };
+		B5FAF76E1EB05700000C2169 /* TDUserInformationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDUserInformationCell.h; sourceTree = "<group>"; };
+		B5FAF76F1EB05700000C2169 /* TDUserInformationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDUserInformationCell.m; sourceTree = "<group>"; };
+		B5FAF7741EB059DB000C2169 /* TDInformationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDInformationDetailViewController.h; sourceTree = "<group>"; };
+		B5FAF7751EB059DB000C2169 /* TDInformationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDInformationDetailViewController.m; sourceTree = "<group>"; };
+		B5FAF7771EB06EA9000C2169 /* TDInformationDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDInformationDetailView.h; sourceTree = "<group>"; };
+		B5FAF7781EB06EA9000C2169 /* TDInformationDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDInformationDetailView.m; sourceTree = "<group>"; };
+		B5FAF77A1EB06FDB000C2169 /* TDAuthenSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAuthenSuccessViewController.h; sourceTree = "<group>"; };
+		B5FAF77B1EB06FDB000C2169 /* TDAuthenSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAuthenSuccessViewController.m; sourceTree = "<group>"; };
 		BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFontsTests.swift; sourceTree = "<group>"; };
 		BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFonts.swift; sourceTree = "<group>"; };
 		BD7C6C3F1DCA329A0004D135 /* fonts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
@@ -2223,6 +2245,7 @@
 		1A6B23CE1BAB4A5100FD7309 /* User Profiles */ = {
 			isa = PBXGroup;
 			children = (
+				B5FAF75E1EB0502B000C2169 /* TDAuthenViewController */,
 				B5FAF6E01EB03AB1000C2169 /* TDWaitforPayViewControllers */,
 				B5FAF6D71EB0319F000C2169 /* TDRechargeSuccessViewController */,
 				B5FAF6C61EB02CC2000C2169 /* TDRechargeViewController */,
@@ -2728,7 +2751,7 @@
 			children = (
 				B4B6D5E31A9490E9000F44E8 /* OEXLoginSplashViewController.h */,
 				B4B6D5E41A9490E9000F44E8 /* OEXLoginSplashViewController.m */,
-				1AAD95F51CEA222500BBF70C /* StartupViewController.swift */,
+				B546EDA11EB09167007F21A9 /* StartupViewController.swift */,
 				BECB7B671924EE11009C77F1 /* OEXLoginViewController.h */,
 				BECB7B681924EE11009C77F1 /* OEXLoginViewController.m */,
 				B4B6D5E61A9490FC000F44E8 /* OEXRegistrationViewController.h */,
@@ -4018,6 +4041,53 @@
 			path = models;
 			sourceTree = "<group>";
 		};
+		B5FAF75E1EB0502B000C2169 /* TDAuthenViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B5FAF75F1EB0502B000C2169 /* controllers */,
+				B5FAF7601EB0502B000C2169 /* modes */,
+				B5FAF7611EB0502B000C2169 /* views */,
+			);
+			path = TDAuthenViewController;
+			sourceTree = "<group>";
+		};
+		B5FAF75F1EB0502B000C2169 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B5FAF7621EB0515D000C2169 /* TDTakePictureViewController.h */,
+				B5FAF7631EB0515D000C2169 /* TDTakePictureViewController.m */,
+				B5FAF7681EB0558C000C2169 /* TDUserInformationViewController.h */,
+				B5FAF7691EB0558C000C2169 /* TDUserInformationViewController.m */,
+				B5FAF7741EB059DB000C2169 /* TDInformationDetailViewController.h */,
+				B5FAF7751EB059DB000C2169 /* TDInformationDetailViewController.m */,
+				B5FAF77A1EB06FDB000C2169 /* TDAuthenSuccessViewController.h */,
+				B5FAF77B1EB06FDB000C2169 /* TDAuthenSuccessViewController.m */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		B5FAF7601EB0502B000C2169 /* modes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = modes;
+			sourceTree = "<group>";
+		};
+		B5FAF7611EB0502B000C2169 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				B5FAF7651EB05207000C2169 /* TDTakePitureView.h */,
+				B5FAF7661EB05207000C2169 /* TDTakePitureView.m */,
+				B5FAF76B1EB0563E000C2169 /* TDUserInformationView.h */,
+				B5FAF76C1EB0563E000C2169 /* TDUserInformationView.m */,
+				B5FAF7771EB06EA9000C2169 /* TDInformationDetailView.h */,
+				B5FAF7781EB06EA9000C2169 /* TDInformationDetailView.m */,
+				B5FAF76E1EB05700000C2169 /* TDUserInformationCell.h */,
+				B5FAF76F1EB05700000C2169 /* TDUserInformationCell.m */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
 		BE0D454E192DE63900D720D6 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -4301,7 +4371,6 @@
 				E03E6A1E1D38F28000944AAA /* UIView+UIViewControllerTests.swift */,
 				E03E6A211D38F77C00944AAA /* OfflineSupportViewControllerTests.swift */,
 				E00A33C01D3CEB3400963D8F /* SnackbarViewsTests.swift */,
-				1A6D90921D0A05D500D01BEA /* StartupViewControllerTests.swift */,
 				E0A246201D5DB3FD0066C766 /* AppUpgradeConfigTests.swift */,
 				694D34A11D76B75F0047F3F4 /* UIAlertController+OEXBlockActionsTests.swift */,
 				E02165AE1E39D3040058D685 /* UIImage_OEXHelpersTests.swift */,
@@ -5051,6 +5120,7 @@
 				77E6486E1C912DA200B6740D /* NetworkManager+StandardInterceptors.swift in Sources */,
 				7742F8DD1C3C979D009E555A /* EnrollmentConfig.swift in Sources */,
 				9E71B73F1B1D9DBD009C81E2 /* OEXStyles+Swift.swift in Sources */,
+				B5FAF7641EB0515D000C2169 /* TDTakePictureViewController.m in Sources */,
 				1AB539FC1C0396770065501F /* OEXAnayltics+Certificates.swift in Sources */,
 				1A6E86241BB9C6500039A216 /* OEXStyles+Profile.swift in Sources */,
 				193B504519459C2F0038E11C /* OEXCustomButton.m in Sources */,
@@ -5081,6 +5151,7 @@
 				E0C6EF971BFF4B9900B315E3 /* UIButton+TintColor.swift in Sources */,
 				B498405919753C6C00019D1F /* CLVideoPlayer.m in Sources */,
 				B4B6D62A1A949F1B000F44E8 /* OEXRegistrationFieldSelectController.m in Sources */,
+				B5FAF7701EB05700000C2169 /* TDUserInformationCell.m in Sources */,
 				B4B6D5E51A9490E9000F44E8 /* OEXLoginSplashViewController.m in Sources */,
 				7726BD1D1A36572F003B3354 /* NSMutableDictionary+OEXSafeAccess.m in Sources */,
 				B50DF9821EAAF15B001F38BD /* UserFirstViewController.m in Sources */,
@@ -5165,10 +5236,12 @@
 				B5FAF6F81EB03AB1000C2169 /* OrderItem.m in Sources */,
 				198826F1195D6979005D4D8A /* OEXMyVideosViewController.m in Sources */,
 				77E647CE1C90CAB800B6740D /* NSAttributedString+OEXFormatting.m in Sources */,
+				B5FAF77C1EB06FDB000C2169 /* TDAuthenSuccessViewController.m in Sources */,
 				E09B9D6B1D06C9700080BAE0 /* VersionUpgradeInfoController.swift in Sources */,
 				B59238EA1EADD0BE00C686D8 /* ActivityListItem.m in Sources */,
 				B518C1731EA9FF1C0027569D /* TDVideoBarView.m in Sources */,
 				9E882B6A1BBA9825007347A2 /* DiscussionTopicCell.swift in Sources */,
+				B546EDA21EB09167007F21A9 /* StartupViewController.swift in Sources */,
 				B4B285ED1A9B429200DD603A /* OEXNetworkUtility.m in Sources */,
 				B5FAF6FD1EB03AB1000C2169 /* WaitForPayTableViewCell.m in Sources */,
 				BE0D454A192DD4F800D720D6 /* OEXNetworkInterface.m in Sources */,
@@ -5196,7 +5269,6 @@
 				B58C1F101EAB5ACB00AB7B7E /* TDBindSuccessViewController.m in Sources */,
 				775434891AD8121200635A40 /* OEXParsePushProvider.m in Sources */,
 				B5FAF74F1EB047D2000C2169 /* PayTableViewCell.m in Sources */,
-				1AAD95F61CEA222500BBF70C /* StartupViewController.swift in Sources */,
 				1A5501A21BBA323700D5F9DD /* ProfileBanner.swift in Sources */,
 				77C6BBCA1CB4BC6F0026C37B /* AccomplishmentsView.swift in Sources */,
 				B518BE8E1EA9E6AB0027569D /* TDTeachOrderDetailViewController.m in Sources */,
@@ -5247,6 +5319,7 @@
 				69F5FACB1E28B0AD00F6ACC6 /* VideoTranscriptTableViewCell.swift in Sources */,
 				699FF8501E559E6B00AD98A5 /* OEXInterface+AppReview.swift in Sources */,
 				773A04781AF2D5DE0076532C /* CourseOutlineViewController.swift in Sources */,
+				B5FAF76D1EB0563E000C2169 /* TDUserInformationView.m in Sources */,
 				B50DF9B01EAAF6B9001F38BD /* TDBaseTableview.m in Sources */,
 				B4D5C7EB1A6FBAA300427D1D /* OEXAccessToken.m in Sources */,
 				7C2DD5531D4A8669006148E0 /* UserPreferenceManager.swift in Sources */,
@@ -5291,6 +5364,7 @@
 				B5FAF7571EB04A69000C2169 /* CouponsViewController.m in Sources */,
 				77AFD1111C1B4F79001985FD /* NSString+TestExamples.m in Sources */,
 				B518BECB1EA9E6F00027569D /* TDCreateOrderViewController.m in Sources */,
+				B5FAF76A1EB0558C000C2169 /* TDUserInformationViewController.m in Sources */,
 				B518BED11EA9E6F00027569D /* TDTeacherMessageViewController.m in Sources */,
 				9E5EDA691AFB603A002ADC64 /* CourseAnnouncementsViewController.swift in Sources */,
 				B498405C19753C6C00019D1F /* CLButton.m in Sources */,
@@ -5329,6 +5403,7 @@
 				B518BED21EA9E6F00027569D /* TDTeacherTimesViewController.m in Sources */,
 				1AC147391BCEC09F00E0A230 /* UIImage+OEXHelpers.swift in Sources */,
 				775DF4181AFAAC8C00F96B2F /* DataManager.swift in Sources */,
+				B5FAF7671EB05207000C2169 /* TDTakePitureView.m in Sources */,
 				B59238B21EADB6D100C686D8 /* OutlineFirstItem.m in Sources */,
 				77C182AC1CD2E60E00AE1474 /* StackPaginationManipulator.swift in Sources */,
 				5D7EACC81B3E202C000A6C36 /* DiscussionAPI.swift in Sources */,
@@ -5393,6 +5468,7 @@
 				1A3F456C1BED00FB0077A40C /* IconButton.swift in Sources */,
 				B498405A19753C6C00019D1F /* CLVideoPlayerControls.m in Sources */,
 				B518BE901EA9E6AB0027569D /* TDAssistantFootCell.m in Sources */,
+				B5FAF7761EB059DB000C2169 /* TDInformationDetailViewController.m in Sources */,
 				B4B6D6311A949F71000F44E8 /* OEXRegistrationFieldControllerFactory.m in Sources */,
 				B518C1721EA9FF1C0027569D /* TDCaptionView.m in Sources */,
 				B518BE951EA9E6AB0027569D /* TDVideoShareCell.m in Sources */,
@@ -5473,6 +5549,7 @@
 				69C12C661E07F5F8004E7261 /* VideoTranscript.swift in Sources */,
 				B518BEC81EA9E6F00027569D /* TDOrderCommentCell.m in Sources */,
 				E03E6A151D38C91F00944AAA /* OfflineSupportViewController.swift in Sources */,
+				B5FAF7791EB06EA9000C2169 /* TDInformationDetailView.m in Sources */,
 				B5FAF6FF1EB03AB1000C2169 /* WechatPayView.m in Sources */,
 				B518BE8D1EA9E6AB0027569D /* TDSubServiceViewController.m in Sources */,
 				B4B6D6291A949F1B000F44E8 /* OEXRegistrationFieldEmailController.m in Sources */,
@@ -5536,7 +5613,6 @@
 				778CC8271BBEDD9700DCCAE4 /* MockAnalyticsTracker.swift in Sources */,
 				778F177E1C0E049B0099BF93 /* CourseCatalogViewControllerTests.swift in Sources */,
 				77E00B731B83997E00573622 /* DiscussionNewCommentViewControllerTests.swift in Sources */,
-				1A6D90931D0A05D500D01BEA /* StartupViewControllerTests.swift in Sources */,
 				7768745B1CDCCB1E001DFB77 /* RemoteImageTests.swift in Sources */,
 				77AB8C851B345F6400AB3FC0 /* NSString+OEXCryptoTests.swift in Sources */,
 				8F7F6DAD1A795AA60063B9D6 /* OEXSessionTests.m in Sources */,
