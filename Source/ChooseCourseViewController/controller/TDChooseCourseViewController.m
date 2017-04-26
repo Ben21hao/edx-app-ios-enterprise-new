@@ -8,7 +8,7 @@
 
 #import "TDChooseCourseViewController.h"
 #import "TDActivityViewController.h"
-//#import "SubmitCourseViewController.h"
+#import "SubmitCourseViewController.h"
 
 #import "ActivityListItem.h"//活动
 #import "ChooseCourseItem.h"//课程
@@ -237,18 +237,18 @@
         [self.view makeToast:@"请选择课程" duration:1.08 position:CSToastPositionCenter];
         return;
     }
-//    SubmitCourseViewController *submitVC = [[SubmitCourseViewController alloc] init];
-//    submitVC.totalM = [self.totalMoney floatValue];//总价格
-//    submitVC.username = self.username;
-//    submitVC.activity_id = self.activityItem.activity_id;//活动id
-//    submitVC.array0 = self.selectCourseArray;
-//    submitVC.hideShowPurchase = self.hideShowPurchase;
-//    if ([self.giftCoin floatValue] > 0) {
-//        submitVC.giftCoin = self.giftCoin;
-//    }
-//    
-//    [self.navigationItem setTitle:@""];
-//    [self.navigationController pushViewController:submitVC animated:YES];
+    SubmitCourseViewController *submitVC = [[SubmitCourseViewController alloc] init];
+    submitVC.totalM = [self.totalMoney floatValue];//总价格
+    submitVC.username = self.username;
+    submitVC.activity_id = self.activityItem.activity_id;//活动id
+    submitVC.array0 = self.selectCourseArray;
+    submitVC.hideShowPurchase = self.hideShowPurchase;
+    if ([self.giftCoin floatValue] > 0) {
+        submitVC.giftCoin = self.giftCoin;
+    }
+    
+    [self.navigationItem setTitle:@""];
+    [self.navigationController pushViewController:submitVC animated:YES];
 }
 
 - (BOOL)judgeHasCourseSelect {//至少选择一门课程

@@ -7,7 +7,7 @@
 //
 
 #import "TDOrderTeacherSuccessViewController.h"
-//#import "TDRechargeViewController.h"
+#import "TDRechargeViewController.h"
 
 @interface TDOrderTeacherSuccessViewController () <UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
@@ -102,9 +102,9 @@
         [self.navigationController popToViewController:self.navigationController.childViewControllers[index] animated:YES];
    
     } else {//充值
-//        TDRechargeViewController *rechargeVC = [[TDRechargeViewController alloc] init];
-//        rechargeVC.username = self.username;
-//        [self.navigationController pushViewController:rechargeVC animated:YES];
+        TDRechargeViewController *rechargeVC = [[TDRechargeViewController alloc] init];
+        rechargeVC.username = self.username;
+        [self.navigationController pushViewController:rechargeVC animated:YES];
     }
 }
 

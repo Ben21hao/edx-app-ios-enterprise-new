@@ -92,6 +92,8 @@
 #import "TDChooseCourseViewController.h"
 #import "TDCutImageViewController.h"
 #import "UIImage+Crop.h"
+#import "TDRechargeViewController.h"
+#import "WaitForPayViewController.h"
 
 //#import "TDAutenPhotoViewController.h"
 //#import "TDMessageShowViewController.h"

@@ -697,8 +697,6 @@
 		B518BED01EA9E6F00027569D /* TDTeacherDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B518BEBB1EA9E6F00027569D /* TDTeacherDetailViewController.m */; };
 		B518BED11EA9E6F00027569D /* TDTeacherMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B518BEBD1EA9E6F00027569D /* TDTeacherMessageViewController.m */; };
 		B518BED21EA9E6F00027569D /* TDTeacherTimesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B518BEBF1EA9E6F00027569D /* TDTeacherTimesViewController.m */; };
-		B518BEF11EA9E9F40027569D /* PurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B518BEEE1EA9E9F40027569D /* PurchaseManager.m */; };
-		B518BEF21EA9E9F40027569D /* PurchaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B518BEF01EA9E9F40027569D /* PurchaseModel.m */; };
 		B518BF841EA9EC4B0027569D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B518BF831EA9EC4B0027569D /* StoreKit.framework */; };
 		B518BF861EA9EC600027569D /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B518BF851EA9EC600027569D /* libsqlite3.tbd */; };
 		B518BF881EA9EC770027569D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B518BF871EA9EC770027569D /* libz.tbd */; };
@@ -740,6 +738,36 @@
 		B59238EF1EADD0BE00C686D8 /* TDChooseCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238E31EADD0BE00C686D8 /* TDChooseCourseCell.m */; };
 		B59238F01EADD0BE00C686D8 /* TDChooseCourseView.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238E51EADD0BE00C686D8 /* TDChooseCourseView.m */; };
 		B59238F11EADD0BE00C686D8 /* TDRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238E71EADD0BE00C686D8 /* TDRecommendCell.m */; };
+		B5FAF6D31EB02CC2000C2169 /* TDRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6C91EB02CC2000C2169 /* TDRechargeViewController.m */; };
+		B5FAF6D41EB02CC2000C2169 /* TDSelectPayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6CC1EB02CC2000C2169 /* TDSelectPayModel.m */; };
+		B5FAF6D51EB02CC2000C2169 /* TDRechargeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6CF1EB02CC2000C2169 /* TDRechargeView.m */; };
+		B5FAF6D61EB02CC2000C2169 /* TDSelectPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6D11EB02CC2000C2169 /* TDSelectPayCell.m */; };
+		B5FAF6DD1EB0319F000C2169 /* SuccessRechargeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6D91EB0319F000C2169 /* SuccessRechargeModel.m */; };
+		B5FAF6DE1EB0319F000C2169 /* SuccessRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6DB1EB0319F000C2169 /* SuccessRechargeViewController.m */; };
+		B5FAF6DF1EB0319F000C2169 /* SuccessRechargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FAF6DC1EB0319F000C2169 /* SuccessRechargeViewController.xib */; };
+		B5FAF6F61EB03AB1000C2169 /* WaitForPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6E31EB03AB1000C2169 /* WaitForPayViewController.m */; };
+		B5FAF6F71EB03AB1000C2169 /* WaitForPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FAF6E41EB03AB1000C2169 /* WaitForPayViewController.xib */; };
+		B5FAF6F81EB03AB1000C2169 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6E71EB03AB1000C2169 /* OrderItem.m */; };
+		B5FAF6F91EB03AB1000C2169 /* SubOrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6E91EB03AB1000C2169 /* SubOrderItem.m */; };
+		B5FAF6FA1EB03AB1000C2169 /* AliPayView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6EC1EB03AB1000C2169 /* AliPayView.m */; };
+		B5FAF6FB1EB03AB1000C2169 /* AliPayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FAF6ED1EB03AB1000C2169 /* AliPayView.xib */; };
+		B5FAF6FC1EB03AB1000C2169 /* TDPayMoneyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6EF1EB03AB1000C2169 /* TDPayMoneyView.m */; };
+		B5FAF6FD1EB03AB1000C2169 /* WaitForPayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6F11EB03AB1000C2169 /* WaitForPayTableViewCell.m */; };
+		B5FAF6FE1EB03AB1000C2169 /* WaitForPayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FAF6F21EB03AB1000C2169 /* WaitForPayTableViewCell.xib */; };
+		B5FAF6FF1EB03AB1000C2169 /* WechatPayView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6F41EB03AB1000C2169 /* WechatPayView.m */; };
+		B5FAF7001EB03AB1000C2169 /* WechatPayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FAF6F51EB03AB1000C2169 /* WechatPayView.xib */; };
+		B5FAF7421EB045C8000C2169 /* SubmitCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF73D1EB045C8000C2169 /* SubmitCourseViewController.m */; };
+		B5FAF7431EB045C8000C2169 /* SubmitCourseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FAF73E1EB045C8000C2169 /* SubmitCourseViewController.xib */; };
+		B5FAF7441EB045C8000C2169 /* SubmiteSecondCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF7411EB045C8000C2169 /* SubmiteSecondCell.m */; };
+		B5FAF7471EB04697000C2169 /* JHCouponsAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF7461EB04697000C2169 /* JHCouponsAlertView.m */; };
+		B5FAF74B1EB04789000C2169 /* CouponsNameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF74A1EB04789000C2169 /* CouponsNameItem.m */; };
+		B5FAF74F1EB047D2000C2169 /* PayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF74D1EB047D2000C2169 /* PayTableViewCell.m */; };
+		B5FAF7501EB047D2000C2169 /* PayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FAF74E1EB047D2000C2169 /* PayTableViewCell.xib */; };
+		B5FAF7531EB049B5000C2169 /* TDBuySuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF7521EB049B5000C2169 /* TDBuySuccessViewController.m */; };
+		B5FAF7571EB04A69000C2169 /* CouponsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF7551EB04A69000C2169 /* CouponsViewController.m */; };
+		B5FAF7581EB04A69000C2169 /* CouponsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FAF7561EB04A69000C2169 /* CouponsViewController.xib */; };
+		B5FAF75C1EB04ABF000C2169 /* CouponsNameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF75A1EB04ABF000C2169 /* CouponsNameTableViewCell.m */; };
+		B5FAF75D1EB04ABF000C2169 /* CouponsNameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FAF75B1EB04ABF000C2169 /* CouponsNameTableViewCell.xib */; };
 		BD3838541DD1CA7E00805697 /* OEXFontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */; };
 		BD7C6C3E1DCA32370004D135 /* OEXFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */; };
 		BD7C6C401DCA329A0004D135 /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = BD7C6C3F1DCA329A0004D135 /* fonts.json */; };
@@ -1740,10 +1768,6 @@
 		B518BEBD1EA9E6F00027569D /* TDTeacherMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTeacherMessageViewController.m; sourceTree = "<group>"; };
 		B518BEBE1EA9E6F00027569D /* TDTeacherTimesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDTeacherTimesViewController.h; sourceTree = "<group>"; };
 		B518BEBF1EA9E6F00027569D /* TDTeacherTimesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTeacherTimesViewController.m; sourceTree = "<group>"; };
-		B518BEED1EA9E9F40027569D /* PurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseManager.h; sourceTree = "<group>"; };
-		B518BEEE1EA9E9F40027569D /* PurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseManager.m; sourceTree = "<group>"; };
-		B518BEEF1EA9E9F40027569D /* PurchaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseModel.h; sourceTree = "<group>"; };
-		B518BEF01EA9E9F40027569D /* PurchaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseModel.m; sourceTree = "<group>"; };
 		B518BF831EA9EC4B0027569D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B518BF851EA9EC600027569D /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		B518BF871EA9EC770027569D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -1817,6 +1841,57 @@
 		B59238E51EADD0BE00C686D8 /* TDChooseCourseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDChooseCourseView.m; sourceTree = "<group>"; };
 		B59238E61EADD0BE00C686D8 /* TDRecommendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDRecommendCell.h; sourceTree = "<group>"; };
 		B59238E71EADD0BE00C686D8 /* TDRecommendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRecommendCell.m; sourceTree = "<group>"; };
+		B5FAF6C81EB02CC2000C2169 /* TDRechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDRechargeViewController.h; sourceTree = "<group>"; };
+		B5FAF6C91EB02CC2000C2169 /* TDRechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRechargeViewController.m; sourceTree = "<group>"; };
+		B5FAF6CB1EB02CC2000C2169 /* TDSelectPayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSelectPayModel.h; sourceTree = "<group>"; };
+		B5FAF6CC1EB02CC2000C2169 /* TDSelectPayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSelectPayModel.m; sourceTree = "<group>"; };
+		B5FAF6CE1EB02CC2000C2169 /* TDRechargeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDRechargeView.h; sourceTree = "<group>"; };
+		B5FAF6CF1EB02CC2000C2169 /* TDRechargeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRechargeView.m; sourceTree = "<group>"; };
+		B5FAF6D01EB02CC2000C2169 /* TDSelectPayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSelectPayCell.h; sourceTree = "<group>"; };
+		B5FAF6D11EB02CC2000C2169 /* TDSelectPayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSelectPayCell.m; sourceTree = "<group>"; };
+		B5FAF6D81EB0319F000C2169 /* SuccessRechargeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuccessRechargeModel.h; sourceTree = "<group>"; };
+		B5FAF6D91EB0319F000C2169 /* SuccessRechargeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuccessRechargeModel.m; sourceTree = "<group>"; };
+		B5FAF6DA1EB0319F000C2169 /* SuccessRechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuccessRechargeViewController.h; sourceTree = "<group>"; };
+		B5FAF6DB1EB0319F000C2169 /* SuccessRechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuccessRechargeViewController.m; sourceTree = "<group>"; };
+		B5FAF6DC1EB0319F000C2169 /* SuccessRechargeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccessRechargeViewController.xib; sourceTree = "<group>"; };
+		B5FAF6E21EB03AB1000C2169 /* WaitForPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitForPayViewController.h; sourceTree = "<group>"; };
+		B5FAF6E31EB03AB1000C2169 /* WaitForPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitForPayViewController.m; sourceTree = "<group>"; };
+		B5FAF6E41EB03AB1000C2169 /* WaitForPayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaitForPayViewController.xib; sourceTree = "<group>"; };
+		B5FAF6E61EB03AB1000C2169 /* OrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderItem.h; sourceTree = "<group>"; };
+		B5FAF6E71EB03AB1000C2169 /* OrderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderItem.m; sourceTree = "<group>"; };
+		B5FAF6E81EB03AB1000C2169 /* SubOrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubOrderItem.h; sourceTree = "<group>"; };
+		B5FAF6E91EB03AB1000C2169 /* SubOrderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubOrderItem.m; sourceTree = "<group>"; };
+		B5FAF6EB1EB03AB1000C2169 /* AliPayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliPayView.h; sourceTree = "<group>"; };
+		B5FAF6EC1EB03AB1000C2169 /* AliPayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AliPayView.m; sourceTree = "<group>"; };
+		B5FAF6ED1EB03AB1000C2169 /* AliPayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AliPayView.xib; sourceTree = "<group>"; };
+		B5FAF6EE1EB03AB1000C2169 /* TDPayMoneyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDPayMoneyView.h; sourceTree = "<group>"; };
+		B5FAF6EF1EB03AB1000C2169 /* TDPayMoneyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDPayMoneyView.m; sourceTree = "<group>"; };
+		B5FAF6F01EB03AB1000C2169 /* WaitForPayTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitForPayTableViewCell.h; sourceTree = "<group>"; };
+		B5FAF6F11EB03AB1000C2169 /* WaitForPayTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitForPayTableViewCell.m; sourceTree = "<group>"; };
+		B5FAF6F21EB03AB1000C2169 /* WaitForPayTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaitForPayTableViewCell.xib; sourceTree = "<group>"; };
+		B5FAF6F31EB03AB1000C2169 /* WechatPayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatPayView.h; sourceTree = "<group>"; };
+		B5FAF6F41EB03AB1000C2169 /* WechatPayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WechatPayView.m; sourceTree = "<group>"; };
+		B5FAF6F51EB03AB1000C2169 /* WechatPayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WechatPayView.xib; sourceTree = "<group>"; };
+		B5FAF73C1EB045C8000C2169 /* SubmitCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitCourseViewController.h; sourceTree = "<group>"; };
+		B5FAF73D1EB045C8000C2169 /* SubmitCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitCourseViewController.m; sourceTree = "<group>"; };
+		B5FAF73E1EB045C8000C2169 /* SubmitCourseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubmitCourseViewController.xib; sourceTree = "<group>"; };
+		B5FAF7401EB045C8000C2169 /* SubmiteSecondCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmiteSecondCell.h; sourceTree = "<group>"; };
+		B5FAF7411EB045C8000C2169 /* SubmiteSecondCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmiteSecondCell.m; sourceTree = "<group>"; };
+		B5FAF7451EB04697000C2169 /* JHCouponsAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHCouponsAlertView.h; sourceTree = "<group>"; };
+		B5FAF7461EB04697000C2169 /* JHCouponsAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHCouponsAlertView.m; sourceTree = "<group>"; };
+		B5FAF7491EB04789000C2169 /* CouponsNameItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsNameItem.h; sourceTree = "<group>"; };
+		B5FAF74A1EB04789000C2169 /* CouponsNameItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsNameItem.m; sourceTree = "<group>"; };
+		B5FAF74C1EB047D2000C2169 /* PayTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayTableViewCell.h; sourceTree = "<group>"; };
+		B5FAF74D1EB047D2000C2169 /* PayTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayTableViewCell.m; sourceTree = "<group>"; };
+		B5FAF74E1EB047D2000C2169 /* PayTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayTableViewCell.xib; sourceTree = "<group>"; };
+		B5FAF7511EB049B5000C2169 /* TDBuySuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBuySuccessViewController.h; sourceTree = "<group>"; };
+		B5FAF7521EB049B5000C2169 /* TDBuySuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBuySuccessViewController.m; sourceTree = "<group>"; };
+		B5FAF7541EB04A69000C2169 /* CouponsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsViewController.h; sourceTree = "<group>"; };
+		B5FAF7551EB04A69000C2169 /* CouponsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsViewController.m; sourceTree = "<group>"; };
+		B5FAF7561EB04A69000C2169 /* CouponsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponsViewController.xib; sourceTree = "<group>"; };
+		B5FAF7591EB04ABF000C2169 /* CouponsNameTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsNameTableViewCell.h; sourceTree = "<group>"; };
+		B5FAF75A1EB04ABF000C2169 /* CouponsNameTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsNameTableViewCell.m; sourceTree = "<group>"; };
+		B5FAF75B1EB04ABF000C2169 /* CouponsNameTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponsNameTableViewCell.xib; sourceTree = "<group>"; };
 		BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFontsTests.swift; sourceTree = "<group>"; };
 		BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFonts.swift; sourceTree = "<group>"; };
 		BD7C6C3F1DCA329A0004D135 /* fonts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
@@ -2148,9 +2223,11 @@
 		1A6B23CE1BAB4A5100FD7309 /* User Profiles */ = {
 			isa = PBXGroup;
 			children = (
+				B5FAF6E01EB03AB1000C2169 /* TDWaitforPayViewControllers */,
+				B5FAF6D71EB0319F000C2169 /* TDRechargeSuccessViewController */,
+				B5FAF6C61EB02CC2000C2169 /* TDRechargeViewController */,
 				B58C1F071EAB5ACB00AB7B7E /* TDBindAcountViewController */,
 				B50DF9471EAAEF1F001F38BD /* TDCouponViewController */,
-				B518BEEB1EA9E9A00027569D /* TDMoneyTool */,
 				B518BE961EA9E6F00027569D /* TDOrderAssistantViewController */,
 				B518BE721EA9E6AB0027569D /* TDAssistantViewController */,
 				B518BE661EA9DD950027569D /* TDUserCenterViewController */,
@@ -3058,6 +3135,7 @@
 		9C9B7F701A8CC68D00A857B2 /* Course Enrollment */ = {
 			isa = PBXGroup;
 			children = (
+				B5FAF73A1EB045C8000C2169 /* TDSubMitCourseViewController */,
 				B59238D01EADD0BE00C686D8 /* ChooseCourseViewController */,
 				B59238CC1EADCC4200C686D8 /* QRViewController */,
 				B59238B61EADB70C00C686D8 /* TDCommentViewController */,
@@ -3579,25 +3657,6 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		B518BEEB1EA9E9A00027569D /* TDMoneyTool */ = {
-			isa = PBXGroup;
-			children = (
-				B518BEEC1EA9E9F40027569D /* PurchasePay */,
-			);
-			path = TDMoneyTool;
-			sourceTree = "<group>";
-		};
-		B518BEEC1EA9E9F40027569D /* PurchasePay */ = {
-			isa = PBXGroup;
-			children = (
-				B518BEED1EA9E9F40027569D /* PurchaseManager.h */,
-				B518BEEE1EA9E9F40027569D /* PurchaseManager.m */,
-				B518BEEF1EA9E9F40027569D /* PurchaseModel.h */,
-				B518BEF01EA9E9F40027569D /* PurchaseModel.m */,
-			);
-			path = PurchasePay;
-			sourceTree = "<group>";
-		};
 		B518C1671EA9FF1C0027569D /* TDVideoPlayerViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3806,6 +3865,157 @@
 				B59238E71EADD0BE00C686D8 /* TDRecommendCell.m */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		B5FAF6C61EB02CC2000C2169 /* TDRechargeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B5FAF6C71EB02CC2000C2169 /* controllers */,
+				B5FAF6CA1EB02CC2000C2169 /* models */,
+				B5FAF6CD1EB02CC2000C2169 /* views */,
+			);
+			path = TDRechargeViewController;
+			sourceTree = "<group>";
+		};
+		B5FAF6C71EB02CC2000C2169 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B5FAF6C81EB02CC2000C2169 /* TDRechargeViewController.h */,
+				B5FAF6C91EB02CC2000C2169 /* TDRechargeViewController.m */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		B5FAF6CA1EB02CC2000C2169 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				B5FAF6CB1EB02CC2000C2169 /* TDSelectPayModel.h */,
+				B5FAF6CC1EB02CC2000C2169 /* TDSelectPayModel.m */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		B5FAF6CD1EB02CC2000C2169 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				B5FAF6CE1EB02CC2000C2169 /* TDRechargeView.h */,
+				B5FAF6CF1EB02CC2000C2169 /* TDRechargeView.m */,
+				B5FAF6D01EB02CC2000C2169 /* TDSelectPayCell.h */,
+				B5FAF6D11EB02CC2000C2169 /* TDSelectPayCell.m */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		B5FAF6D71EB0319F000C2169 /* TDRechargeSuccessViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B5FAF6D81EB0319F000C2169 /* SuccessRechargeModel.h */,
+				B5FAF6D91EB0319F000C2169 /* SuccessRechargeModel.m */,
+				B5FAF6DA1EB0319F000C2169 /* SuccessRechargeViewController.h */,
+				B5FAF6DB1EB0319F000C2169 /* SuccessRechargeViewController.m */,
+				B5FAF6DC1EB0319F000C2169 /* SuccessRechargeViewController.xib */,
+			);
+			path = TDRechargeSuccessViewController;
+			sourceTree = "<group>";
+		};
+		B5FAF6E01EB03AB1000C2169 /* TDWaitforPayViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B5FAF6E11EB03AB1000C2169 /* controllers */,
+				B5FAF6E51EB03AB1000C2169 /* modes */,
+				B5FAF6EA1EB03AB1000C2169 /* views */,
+			);
+			path = TDWaitforPayViewControllers;
+			sourceTree = "<group>";
+		};
+		B5FAF6E11EB03AB1000C2169 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B5FAF6E21EB03AB1000C2169 /* WaitForPayViewController.h */,
+				B5FAF6E31EB03AB1000C2169 /* WaitForPayViewController.m */,
+				B5FAF6E41EB03AB1000C2169 /* WaitForPayViewController.xib */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		B5FAF6E51EB03AB1000C2169 /* modes */ = {
+			isa = PBXGroup;
+			children = (
+				B5FAF6E61EB03AB1000C2169 /* OrderItem.h */,
+				B5FAF6E71EB03AB1000C2169 /* OrderItem.m */,
+				B5FAF6E81EB03AB1000C2169 /* SubOrderItem.h */,
+				B5FAF6E91EB03AB1000C2169 /* SubOrderItem.m */,
+			);
+			path = modes;
+			sourceTree = "<group>";
+		};
+		B5FAF6EA1EB03AB1000C2169 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				B5FAF6EB1EB03AB1000C2169 /* AliPayView.h */,
+				B5FAF6EC1EB03AB1000C2169 /* AliPayView.m */,
+				B5FAF6ED1EB03AB1000C2169 /* AliPayView.xib */,
+				B5FAF6EE1EB03AB1000C2169 /* TDPayMoneyView.h */,
+				B5FAF6EF1EB03AB1000C2169 /* TDPayMoneyView.m */,
+				B5FAF6F01EB03AB1000C2169 /* WaitForPayTableViewCell.h */,
+				B5FAF6F11EB03AB1000C2169 /* WaitForPayTableViewCell.m */,
+				B5FAF6F21EB03AB1000C2169 /* WaitForPayTableViewCell.xib */,
+				B5FAF6F31EB03AB1000C2169 /* WechatPayView.h */,
+				B5FAF6F41EB03AB1000C2169 /* WechatPayView.m */,
+				B5FAF6F51EB03AB1000C2169 /* WechatPayView.xib */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		B5FAF73A1EB045C8000C2169 /* TDSubMitCourseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B5FAF7481EB04789000C2169 /* models */,
+				B5FAF73B1EB045C8000C2169 /* controllers */,
+				B5FAF73F1EB045C8000C2169 /* views */,
+			);
+			path = TDSubMitCourseViewController;
+			sourceTree = "<group>";
+		};
+		B5FAF73B1EB045C8000C2169 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B5FAF73C1EB045C8000C2169 /* SubmitCourseViewController.h */,
+				B5FAF73D1EB045C8000C2169 /* SubmitCourseViewController.m */,
+				B5FAF73E1EB045C8000C2169 /* SubmitCourseViewController.xib */,
+				B5FAF7511EB049B5000C2169 /* TDBuySuccessViewController.h */,
+				B5FAF7521EB049B5000C2169 /* TDBuySuccessViewController.m */,
+				B5FAF7541EB04A69000C2169 /* CouponsViewController.h */,
+				B5FAF7551EB04A69000C2169 /* CouponsViewController.m */,
+				B5FAF7561EB04A69000C2169 /* CouponsViewController.xib */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		B5FAF73F1EB045C8000C2169 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				B5FAF74C1EB047D2000C2169 /* PayTableViewCell.h */,
+				B5FAF74D1EB047D2000C2169 /* PayTableViewCell.m */,
+				B5FAF74E1EB047D2000C2169 /* PayTableViewCell.xib */,
+				B5FAF7401EB045C8000C2169 /* SubmiteSecondCell.h */,
+				B5FAF7411EB045C8000C2169 /* SubmiteSecondCell.m */,
+				B5FAF7451EB04697000C2169 /* JHCouponsAlertView.h */,
+				B5FAF7461EB04697000C2169 /* JHCouponsAlertView.m */,
+				B5FAF7591EB04ABF000C2169 /* CouponsNameTableViewCell.h */,
+				B5FAF75A1EB04ABF000C2169 /* CouponsNameTableViewCell.m */,
+				B5FAF75B1EB04ABF000C2169 /* CouponsNameTableViewCell.xib */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		B5FAF7481EB04789000C2169 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				B5FAF7491EB04789000C2169 /* CouponsNameItem.h */,
+				B5FAF74A1EB04789000C2169 /* CouponsNameItem.m */,
+			);
+			path = models;
 			sourceTree = "<group>";
 		};
 		BE0D454E192DE63900D720D6 /* Data */ = {
@@ -4454,6 +4664,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69ECC6151D50D1170030CF87 /* bt_facebook.png in Resources */,
+				B5FAF7001EB03AB1000C2169 /* WechatPayView.xib in Resources */,
 				69ECC6171D50D1170030CF87 /* bt_google.png in Resources */,
 				9ED269CA1AF0D62B00328A34 /* OEXMyVideosSubSectionViewController.storyboard in Resources */,
 				69ECC62E1D50D1170030CF87 /* ic_cancel.png in Resources */,
@@ -4477,6 +4688,7 @@
 				69ECC6401D50D1170030CF87 /* iTunesArtwork in Resources */,
 				69ECC6441D50D1170030CF87 /* loginScreenImage@2x.png in Resources */,
 				6960892C1D53935500EE66DD /* courseCertificate@2x.png in Resources */,
+				B5FAF6FE1EB03AB1000C2169 /* WaitForPayTableViewCell.xib in Resources */,
 				69ECC61D1D50D1170030CF87 /* bt_logout_default.png in Resources */,
 				69ECC6501D50D1170030CF87 /* Default@2x.png in Resources */,
 				69ECC6341D50D1170030CF87 /* ic_next_deactive.png in Resources */,
@@ -4492,13 +4704,17 @@
 				69ECC60D1D50D1170030CF87 /* Icon-60@2x.png in Resources */,
 				69ECC60A1D50D1170030CF87 /* Icon-29@3x.png in Resources */,
 				69ECC6191D50D1170030CF87 /* bt_grey_deactive.png in Resources */,
+				B5FAF7431EB045C8000C2169 /* SubmitCourseViewController.xib in Resources */,
 				B50DF98E1EAAF15B001F38BD /* UserDiscountTableViewCell.xib in Resources */,
 				6926CDAC1D59BE3600A16E22 /* ic_next.png in Resources */,
 				B59238B11EADB6D100C686D8 /* OutlineViewController.xib in Resources */,
 				19BB62311A9C656B007DBF47 /* OEXMySettingsViewController.xib in Resources */,
 				B57A0E931EAEECBB00323A47 /* educations.json in Resources */,
+				B5FAF7581EB04A69000C2169 /* CouponsViewController.xib in Resources */,
 				9ED269D21AF114B900328A34 /* OEXLoginViewController.storyboard in Resources */,
 				69ECC62C1D50D1170030CF87 /* ic_back.png in Resources */,
+				B5FAF6FB1EB03AB1000C2169 /* AliPayView.xib in Resources */,
+				B5FAF7501EB047D2000C2169 /* PayTableViewCell.xib in Resources */,
 				69ECC60E1D50D1170030CF87 /* Icon-60@3x.png in Resources */,
 				69ECC5FD1D50D1170030CF87 /* FontAwesome.otf in Resources */,
 				77DC29601ABCA0F200FAD22C /* OEXLoginSplashViewController.xib in Resources */,
@@ -4514,6 +4730,7 @@
 				69ECC63C1D50D1170030CF87 /* icon_facebook_white.png in Resources */,
 				69ECC6381D50D1170030CF87 /* ic_unwatched@2x.png in Resources */,
 				69ECC6281D50D1170030CF87 /* check.png in Resources */,
+				B5FAF6F71EB03AB1000C2169 /* WaitForPayViewController.xib in Resources */,
 				5DD0FFD21B1D23DA00837121 /* DiscussionNewPostViewController.xib in Resources */,
 				69ECC6521D50D1170030CF87 /* inline-content.css in Resources */,
 				69ECC64C1D50D1170030CF87 /* Default-568h@2x.png in Resources */,
@@ -4562,6 +4779,7 @@
 				69ECC63A1D50D1170030CF87 /* ic_watched@2x.png in Resources */,
 				69ECC6061D50D1170030CF87 /* OpenSans-Semibold.ttf in Resources */,
 				69ECC63B1D50D1170030CF87 /* ic_watched@3x.png in Resources */,
+				B5FAF75D1EB04ABF000C2169 /* CouponsNameTableViewCell.xib in Resources */,
 				19A1339519CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.xib in Resources */,
 				805329101B0E80E50093B177 /* DiscussionResponses.storyboard in Resources */,
 				6960892D1D53935500EE66DD /* courseCertificate@3x.png in Resources */,
@@ -4572,6 +4790,7 @@
 				B50DF9851EAAF15B001F38BD /* UserSecondViewController.xib in Resources */,
 				69ECC6001D50D1170030CF87 /* OpenSans-ExtraBold.ttf in Resources */,
 				BD837BB91DC8D5D400341EFD /* Icon-76@2x.png in Resources */,
+				B5FAF6DF1EB0319F000C2169 /* SuccessRechargeViewController.xib in Resources */,
 				BD837BBB1DC8D5DF00341EFD /* Icon-40.png in Resources */,
 				69ECC60B1D50D1170030CF87 /* Icon-40@2x.png in Resources */,
 			);
@@ -4856,6 +5075,7 @@
 				770848C41B21334F002FEEEE /* OEXMathUtilities.m in Sources */,
 				F22A0ABB1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift in Sources */,
 				9EC6E1001BDE40E100729704 /* OEXCourse+Swift.swift in Sources */,
+				B5FAF7441EB045C8000C2169 /* SubmiteSecondCell.m in Sources */,
 				7706AAC11BCFEEBF00728432 /* NSAttributedString+Formatting.swift in Sources */,
 				778D53351B3D96E900441A98 /* ListCursor.swift in Sources */,
 				E0C6EF971BFF4B9900B315E3 /* UIButton+TintColor.swift in Sources */,
@@ -4874,6 +5094,7 @@
 				E0A2461F1D5DA12A0066C766 /* AppStoreConfig.swift in Sources */,
 				B592389F1EADB59A00C686D8 /* TDProfessorCell.m in Sources */,
 				7778F0981ABB1A6C00B4CDA0 /* NSError+OEXKnownErrors.m in Sources */,
+				B5FAF6DE1EB0319F000C2169 /* SuccessRechargeViewController.m in Sources */,
 				B59238ED1EADD0BE00C686D8 /* DataItem.m in Sources */,
 				B518BE6F1EA9DD950027569D /* TDUserCenterView.swift in Sources */,
 				B4B6D6041A949EFC000F44E8 /* OEXRegistrationRestriction.m in Sources */,
@@ -4904,6 +5125,7 @@
 				191A00201940560D004F7902 /* OEXDataParser.m in Sources */,
 				774B39391B5DD85A00595D33 /* UIView+LayoutDirection.swift in Sources */,
 				9EDCC51E1B395BDE00A4F39D /* CourseInfoAPI.swift in Sources */,
+				B5FAF74B1EB04789000C2169 /* CouponsNameItem.m in Sources */,
 				7758FFDE1C32FD6A0072355B /* EnrollmentShared.swift in Sources */,
 				5D43B1861B0C1F9200448B52 /* PostTableViewCell.swift in Sources */,
 				1918AFAE1948357700F40345 /* OEXLastAccessedTableViewCell.m in Sources */,
@@ -4924,6 +5146,7 @@
 				778F177A1C0D125A0099BF93 /* CoursesTableViewController.swift in Sources */,
 				77ADF4AF1AC1F80E00AC8955 /* OEXGoogleAuthProvider.m in Sources */,
 				B59238EE1EADD0BE00C686D8 /* TDBottomCouseView.m in Sources */,
+				B5FAF6FA1EB03AB1000C2169 /* AliPayView.m in Sources */,
 				1A7CEA331BABA8C70043A58C /* ProfileImageView.swift in Sources */,
 				77236EED1C21C376006AC1A4 /* Paginator.swift in Sources */,
 				7727EC351BBC73F300C9987F /* RevealViewController.swift in Sources */,
@@ -4939,6 +5162,7 @@
 				B59238E81EADD0BE00C686D8 /* TDActivityViewController.m in Sources */,
 				191A002E19405E97004F7902 /* OEXLatestUpdates.m in Sources */,
 				1AFEB1B61BBD5B95004C471D /* ProfilePictureTaker.swift in Sources */,
+				B5FAF6F81EB03AB1000C2169 /* OrderItem.m in Sources */,
 				198826F1195D6979005D4D8A /* OEXMyVideosViewController.m in Sources */,
 				77E647CE1C90CAB800B6740D /* NSAttributedString+OEXFormatting.m in Sources */,
 				E09B9D6B1D06C9700080BAE0 /* VersionUpgradeInfoController.swift in Sources */,
@@ -4946,6 +5170,7 @@
 				B518C1731EA9FF1C0027569D /* TDVideoBarView.m in Sources */,
 				9E882B6A1BBA9825007347A2 /* DiscussionTopicCell.swift in Sources */,
 				B4B285ED1A9B429200DD603A /* OEXNetworkUtility.m in Sources */,
+				B5FAF6FD1EB03AB1000C2169 /* WaitForPayTableViewCell.m in Sources */,
 				BE0D454A192DD4F800D720D6 /* OEXNetworkInterface.m in Sources */,
 				B419295E1A8A3F1900448AD5 /* OEXNetworkManager.m in Sources */,
 				B50211A21EA852B7001DE1E2 /* TDAboutWeViewController.m in Sources */,
@@ -4970,6 +5195,7 @@
 				BECB7B691924EE11009C77F1 /* OEXLoginViewController.m in Sources */,
 				B58C1F101EAB5ACB00AB7B7E /* TDBindSuccessViewController.m in Sources */,
 				775434891AD8121200635A40 /* OEXParsePushProvider.m in Sources */,
+				B5FAF74F1EB047D2000C2169 /* PayTableViewCell.m in Sources */,
 				1AAD95F61CEA222500BBF70C /* StartupViewController.swift in Sources */,
 				1A5501A21BBA323700D5F9DD /* ProfileBanner.swift in Sources */,
 				77C6BBCA1CB4BC6F0026C37B /* AccomplishmentsView.swift in Sources */,
@@ -4988,7 +5214,6 @@
 				E01F45671E03D04100B9D7DC /* FirebaseAnalyticsTracker.swift in Sources */,
 				9EEB85A71BD6564E000F3E9E /* PressableCustomButton.swift in Sources */,
 				B50DF9881EAAF15B001F38BD /* UserYouViewController.m in Sources */,
-				B518BEF11EA9E9F40027569D /* PurchaseManager.m in Sources */,
 				B4B6D62C1A949F1B000F44E8 /* OEXRegistrationFieldPasswordController.m in Sources */,
 				1A3671F51BB03C7A00704032 /* OEXRearTableViewController.swift in Sources */,
 				B50DF9AE1EAAF6B9001F38BD /* TDBaseToolModel.m in Sources */,
@@ -5006,6 +5231,7 @@
 				B4B6D61B1A949F0F000F44E8 /* OEXRegistrationFieldCheckBoxView.m in Sources */,
 				7772BEA21AFA68330081CA7A /* Constraint.swift in Sources */,
 				77FDF4111AFBF0C300E8C639 /* VideoBlockViewController.swift in Sources */,
+				B5FAF7531EB049B5000C2169 /* TDBuySuccessViewController.m in Sources */,
 				1918AFB11948359300F40345 /* OEXCourseDetailTableViewCell.m in Sources */,
 				B50211A71EA8530E001DE1E2 /* OEXMySettingsViewController.m in Sources */,
 				77AFD11C1C1B76D0001985FD /* NSObject+SafeKVO.swift in Sources */,
@@ -5046,11 +5272,13 @@
 				199B9B751935E35D00081A09 /* OEXHelperVideoDownload.m in Sources */,
 				B518BEC01EA9E6F00027569D /* TDAssistantCommentTagModel.m in Sources */,
 				BECB7B1F1924C0C3009C77F1 /* OEXAppDelegate.m in Sources */,
+				B5FAF6D31EB02CC2000C2169 /* TDRechargeViewController.m in Sources */,
 				B4B6D6151A949F0F000F44E8 /* OEXRegistrationFormTextField.m in Sources */,
 				1904A14F1A1386C2006A5524 /* ResourceData.m in Sources */,
 				1940D8CB1A230E25000318A3 /* OEXAnalytics.m in Sources */,
 				1A8AC0C01BB49EC5009D8F5E /* UserProfile.swift in Sources */,
 				1AC147371BCEB14900E0A230 /* CGRect+OEXHelpers.swift in Sources */,
+				B5FAF7421EB045C8000C2169 /* SubmitCourseViewController.m in Sources */,
 				B518BECE1EA9E6F00027569D /* TDTalkOrderViewController.m in Sources */,
 				B59238B01EADB6D100C686D8 /* OutlineViewController.m in Sources */,
 				B50211F21EA85490001DE1E2 /* UIView+Toast.m in Sources */,
@@ -5060,6 +5288,7 @@
 				B54C8ACF1EA8BF950002FCED /* JHTextField.m in Sources */,
 				B50DF9941EAAF299001F38BD /* JHFindPWDView.m in Sources */,
 				77000A4A1A7757E0007D306C /* NSDate+OEXComparisons.m in Sources */,
+				B5FAF7571EB04A69000C2169 /* CouponsViewController.m in Sources */,
 				77AFD1111C1B4F79001985FD /* NSString+TestExamples.m in Sources */,
 				B518BECB1EA9E6F00027569D /* TDCreateOrderViewController.m in Sources */,
 				B518BED11EA9E6F00027569D /* TDTeacherMessageViewController.m in Sources */,
@@ -5074,6 +5303,7 @@
 				77000A371A76EF8C007D306C /* NSString+OEXValidation.m in Sources */,
 				9EC0AC7F1BCE371D00291B64 /* UIButton+Animations.swift in Sources */,
 				E08A008B1CF7546200F92DE7 /* DiscussionModel.swift in Sources */,
+				B5FAF6D61EB02CC2000C2169 /* TDSelectPayCell.m in Sources */,
 				B59238C21EADBD4D00C686D8 /* CommentDetailItem.m in Sources */,
 				9ED168B01B29A9EF00AA7B5B /* CouseLastAccessed.swift in Sources */,
 				B518BECD1EA9E6F00027569D /* TDOrderTeacherSuccessViewController.m in Sources */,
@@ -5110,6 +5340,7 @@
 				77DCD2391C2B13AA00CAEBB5 /* EnrolledCoursesFooterView.swift in Sources */,
 				77ADF4A91AC1B57800AC8955 /* UIImage+OEXColors.m in Sources */,
 				69F998571E6FEB2400CDFA9C /* OEXAnalytics+AppReview.swift in Sources */,
+				B5FAF6D51EB02CC2000C2169 /* TDRechargeView.m in Sources */,
 				77D7FD261B04ED45002ACA8C /* Icon.swift in Sources */,
 				770A27931A69933D00DFC6FF /* NSArray+OEXSafeAccess.m in Sources */,
 				77503E8C1B278B9A00C47229 /* RegistrationFieldSelectView.swift in Sources */,
@@ -5139,9 +5370,11 @@
 				B518BEC61EA9E6F00027569D /* TDAssistantServiceModel.m in Sources */,
 				770C514D1B1685F5009B9696 /* AuthenticatedWebViewController.swift in Sources */,
 				770A279D1A6F150B00DFC6FF /* OEXVideoPathEntry.m in Sources */,
+				B5FAF7471EB04697000C2169 /* JHCouponsAlertView.m in Sources */,
 				B4B6D6161A949F0F000F44E8 /* OEXRegistrationFieldEmailView.m in Sources */,
 				9C9B7F6D1A8CC68400A857B2 /* OEXCourseInfoViewController.m in Sources */,
 				B518BECC1EA9E6F00027569D /* TDOrderAssistantViewController.m in Sources */,
+				B5FAF6D41EB02CC2000C2169 /* TDSelectPayModel.m in Sources */,
 				B50DF9AD1EAAF6B9001F38BD /* TDSwiftBaseViewController.swift in Sources */,
 				199B9B6F1935C72900081A09 /* DACircularProgressView.m in Sources */,
 				1AA79ABA1BAC7F710011D381 /* ProfileAPI.swift in Sources */,
@@ -5176,6 +5409,7 @@
 				77D470571C11EB4D00C6F0C9 /* ChoiceLabel.swift in Sources */,
 				77FDF4191B02910D00E8C639 /* IconMessageView.swift in Sources */,
 				19321F6219615E3300B7D75C /* OEXMyVideosSubSectionViewController.m in Sources */,
+				B5FAF6F91EB03AB1000C2169 /* SubOrderItem.m in Sources */,
 				77DCD23B1C2B14BA00CAEBB5 /* UITableView+Layout.swift in Sources */,
 				77509D941BE1710200B10CD3 /* TZStackView.swift in Sources */,
 				B518C1711EA9FF1C0027569D /* TDVideoPlayerViewController.m in Sources */,
@@ -5192,6 +5426,7 @@
 				B518BE6E1EA9DD950027569D /* TDUserCenterViewController.swift in Sources */,
 				1A81971B1C060FA50030254D /* ShareHelper.swift in Sources */,
 				77F76A6E1B0BD32A00ED3E39 /* OEXSession+Authorization.swift in Sources */,
+				B5FAF75C1EB04ABF000C2169 /* CouponsNameTableViewCell.m in Sources */,
 				9E0CC1031BA9574E00A1CFDB /* SpinnerButton.swift in Sources */,
 				191A002419405B91004F7902 /* OEXUserDetails.m in Sources */,
 				B59238BB1EADB70C00C686D8 /* TDCommentCell.m in Sources */,
@@ -5205,6 +5440,7 @@
 				B50211A41EA852B7001DE1E2 /* TDSettingViewController.m in Sources */,
 				1ACD163C1BB1BE63006ACC82 /* UserProfileViewController.swift in Sources */,
 				B50DF9AC1EAAF6B9001F38BD /* TDCutImageViewController.m in Sources */,
+				B5FAF6DD1EB0319F000C2169 /* SuccessRechargeModel.m in Sources */,
 				5D836DCA1B2FA12E00411CAB /* DiscussionNewCommentViewController.swift in Sources */,
 				1AFEB1B11BBD51EE004C471D /* JSONFormBuilderChooser.swift in Sources */,
 				19321F651961698B00B7D75C /* OEXDownloadTableCell.m in Sources */,
@@ -5232,19 +5468,21 @@
 				B42DA1891A1539F000E3AD4E /* OEXFileUtility.m in Sources */,
 				777EFEFD1A7AFF0E00F8BF06 /* OEXRouter.m in Sources */,
 				B59238EC1EADD0BE00C686D8 /* ChooseCourseModel.m in Sources */,
-				B518BEF21EA9E9F40027569D /* PurchaseModel.m in Sources */,
 				9EC6E0FE1BDE106500729704 /* IrregularBorderView.swift in Sources */,
 				8F562F881A1F2D2C00320DB3 /* OEXGoogleSocial.m in Sources */,
 				69C12C661E07F5F8004E7261 /* VideoTranscript.swift in Sources */,
 				B518BEC81EA9E6F00027569D /* TDOrderCommentCell.m in Sources */,
 				E03E6A151D38C91F00944AAA /* OfflineSupportViewController.swift in Sources */,
+				B5FAF6FF1EB03AB1000C2169 /* WechatPayView.m in Sources */,
 				B518BE8D1EA9E6AB0027569D /* TDSubServiceViewController.m in Sources */,
 				B4B6D6291A949F1B000F44E8 /* OEXRegistrationFieldEmailController.m in Sources */,
 				E0ED96E71D6EED1C00B48B64 /* OEXCourseInfoViewController+Swift.swift in Sources */,
 				B518BE941EA9E6AB0027569D /* TDSuTitleCell.m in Sources */,
 				773B1D421B1F48F100B861DF /* CourseOutlineHeaderView.swift in Sources */,
+				B5FAF6F61EB03AB1000C2169 /* WaitForPayViewController.m in Sources */,
 				778B61061B06BD2100489532 /* NSNotificationCenter+SafeSwift.swift in Sources */,
 				B4B6D6011A949EFC000F44E8 /* OEXRegistrationError.m in Sources */,
+				B5FAF6FC1EB03AB1000C2169 /* TDPayMoneyView.m in Sources */,
 				1904A14D1A1386C2006A5524 /* edXDB.xcdatamodel in Sources */,
 				E03E6A191D38EC7500944AAA /* UIView+UIViewController.swift in Sources */,
 				77EC889E1AB787630050F9CF /* OEXAnalyticsData.m in Sources */,

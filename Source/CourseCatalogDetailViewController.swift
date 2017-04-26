@@ -135,9 +135,9 @@ class CourseCatalogDetailViewController: UIViewController,UIScrollViewDelegate,U
 //            self.view.makeToast("即将开课，请耐心等候", duration: 1.09, position: CSToastPositionCenter)
         }
         if tag == 2 { //待支付
-//            let userCouponVC1 = WaitForPayViewController()
-//            userCouponVC1.username = session.currentUser?.username //传当前用户名
-//            self.navigationController?.pushViewController(userCouponVC1, animated: true)
+            let userCouponVC1 = WaitForPayViewController()
+            userCouponVC1.username = session.currentUser?.username //传当前用户名
+            self.navigationController?.pushViewController(userCouponVC1, animated: true)
         }
         if tag == 1 { //选课表
             let vc = TDChooseCourseViewController();
