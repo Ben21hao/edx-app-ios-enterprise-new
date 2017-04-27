@@ -110,7 +110,7 @@ static OEXStyles* sSharedStyles;
 }
 
 - (UIColor*)primaryBaseColor {
-    return [self.oexColors colorForIdentifier:ColorsIdentifiersPrimaryBaseColor];
+    return [self baseColor1];
 }
 
 - (UIColor*)primaryLightColor {

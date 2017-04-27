@@ -48,7 +48,7 @@ extension OEXStyles {
         UINavigationBar.appearance().titleTextAttributes = navigationTitleTextStyle.attributes//导航栏标题字体设置
         UIBarButtonItem.appearance().setTitleTextAttributes(navigationButtonTextStyle.attributes, forState: .Normal)//导航栏左右按字体设置
         
-        UIToolbar.appearance().tintColor = navigationBarColor()
+        UIToolbar.appearance().tintColor = navigationBarColor() //导航背景色
         
         let styleAttributes = OEXTextStyle(weight: .Normal, size : .Small, color : self.neutralBlack()).attributes
         UISegmentedControl.appearance().setTitleTextAttributes(styleAttributes, forState: UIControlState.Selected)

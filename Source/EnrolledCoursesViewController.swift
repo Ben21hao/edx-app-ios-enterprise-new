@@ -23,6 +23,7 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
     private let userPreferencesFeed: Feed<UserPreference?>
 
     init(environment: Environment) {
+        
         self.tableController = CoursesTableViewController(environment: environment, context: .EnrollmentList)
         self.enrollmentFeed = environment.dataManager.enrollmentManager.feed
         self.userPreferencesFeed = environment.dataManager.userPreferenceManager.feed
@@ -30,7 +31,7 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
         
         super.init(env: environment)
         self.titleViewLabel.text = Strings.myCourses
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .Plain, target: nil, action: nil)
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .Plain, target: nil, action: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -41,38 +42,31 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
         super.viewDidLoad()
 
         self.view.accessibilityIdentifier = "enrolled-courses-screen"
-
-        addChildViewController(tableController)
-        tableController.didMoveToParentViewController(self)
-        self.loadController.setupInController(self, contentView: tableController.view)
         
-        self.view.addSubview(tableController.view)
-        tableController.view.snp_makeConstraints {make in
-            make.edges.equalTo(self.view)
-        }
-        
-        tableController.delegate = self
-        
-        self.view.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
-        
-        refreshController.setupInScrollView(self.tableController.tableView)
-        refreshController.delegate = self
-        
-        insetsController.setupInController(self, scrollView: tableController.tableView)
-        insetsController.addSource(self.refreshController)
-
-        // We visually separate each course card so we also need a little padding
-        // at the bottom to match
-        insetsController.addSource(
-            ConstantInsetsSource(insets: UIEdgeInsets(top: 0, left: 0, bottom: StandardVerticalMargin, right: 0), affectsScrollIndicators: false)
-        )
+        setviewConfig()
         
         self.enrollmentFeed.refresh()
         self.userPreferencesFeed.refresh()
         
-        setupListener()
+        let currentUser = OEXRouter.sharedRouter().environment.session.currentUser
+        if (currentUser != nil) {//登陆状态
+            
+            refreshController.setupInScrollView(self.tableController.tableView)
+            refreshController.delegate = self
+            
+            setupListener()
+            
+        } else {
+            self.tableController.tableView.reloadData()
+            self.loadController.state = .Loaded
+        }
+        
         setupFooter()
         setupObservers()
+        
+        if !environment.reachability.isReachable() {
+            self.loadController.state = .Loaded
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -86,7 +80,8 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
         refreshIfNecessary()
     }
 
-    private func setupListener() {
+    private func setupListener() {//数据
+        
         enrollmentFeed.output.listen(self) {[weak self] result in
             if !(self?.enrollmentFeed.output.active ?? false) {
                 self?.refreshController.endRefreshing()
@@ -94,17 +89,16 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
             
             switch result {
             case let .Success(enrollments):
+                
                 if let enrollments = enrollments {
-                    self?.tableController.courses = enrollments.flatMap { $0.course } ?? []
+                    self?.tableController.courses = enrollments.flatMap { $0.course } ?? [] //flatMap去掉nil项的数组 -- 数据
                     self?.tableController.tableView.reloadData()
                     self?.loadController.state = .Loaded
-                    if enrollments.count <= 0 {
-                        self?.enrollmentsEmptyState()
-                    }
-                }
-                else {
+                    
+                } else {
                     self?.loadController.state = .Initial
                 }
+                
             case let .Failure(error):
                 self?.loadController.state = LoadState.failed(error)
                 if error.errorIsThisType(NSError.oex_outdatedVersionError()) {
@@ -112,6 +106,31 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
                 }
             }
         }
+    }
+    
+    private func setviewConfig() {
+        
+        addChildViewController(tableController)
+        tableController.didMoveToParentViewController(self)
+        self.loadController.setupInController(self, contentView: tableController.view)
+        
+        self.view.addSubview(tableController.view)
+        tableController.view.snp_makeConstraints {make in
+            make.edges.equalTo(self.view)
+        }
+        
+        tableController.delegate = self
+        
+        self.view.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
+        
+        insetsController.setupInController(self, scrollView: tableController.tableView)
+        insetsController.addSource(self.refreshController)
+        
+        // We visually separate each course card so we also need a little padding
+        // at the bottom to match
+        insetsController.addSource(
+            ConstantInsetsSource(insets: UIEdgeInsets(top: 0, left: 0, bottom: StandardVerticalMargin, right: 0), affectsScrollIndicators: false)
+        )
     }
     
     private func setupFooter() {

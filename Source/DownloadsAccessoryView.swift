@@ -28,8 +28,9 @@ class DownloadsAccessoryView : UIView {
         
         super.init(frame: frame)
         
-        downloadButton.tintColor = OEXStyles.sharedStyles().neutralBase()
-        downloadButton.contentEdgeInsets = UIEdgeInsetsMake(15, 10, 15, 10)
+//        downloadButton.tintColor = OEXStyles.sharedStyles().neutralBase()
+//        downloadButton.contentEdgeInsets = UIEdgeInsetsMake(15, 10, 15, 10)
+//        downloadButton.titleLabel?.font = UIFont.init(name: "FontAwesome", size: 20)
         downloadButton.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal)
         countLabel.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal)
         downloadSpinner.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal)
@@ -43,6 +44,7 @@ class DownloadsAccessoryView : UIView {
         downloadSpinner.accessibilityTraits = UIAccessibilityTraitNotEnabled;
         countLabel.accessibilityTraits = UIAccessibilityTraitNotEnabled;
         downloadButton.accessibilityTraits = UIAccessibilityTraitNotEnabled;
+//        downloadButton.backgroundColor = UIColor.redColor()
         
         downloadSpinner.stopAnimating()
         
@@ -54,6 +56,7 @@ class DownloadsAccessoryView : UIView {
             make.trailing.equalTo(self)
             make.top.equalTo(self)
             make.bottom.equalTo(self)
+            make.width.equalTo(39)
         }
         
         countLabel.snp_makeConstraints {make in
@@ -68,9 +71,10 @@ class DownloadsAccessoryView : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func useIcon(icon : Icon?) {
-        downloadButton.setImage(icon?.imageWithFontSize(iconFontSize), forState:.Normal)
-    }
+//    private func useIcon(icon : Icon?) {
+//        downloadButton.setImage(icon?.imageWithFontSize(iconFontSize), forState:.Normal)
+////        downloadButton.setTitle("\u{0041}", forState: .Normal) //开始f0ed 云f299 圆f058
+//    }
     
     var downloadAction : (() -> Void)? = nil {
         didSet {
@@ -92,7 +96,8 @@ class DownloadsAccessoryView : UIView {
         didSet {
             switch state {
             case .Available:
-                useIcon(.ContentCanDownload)
+//                useIcon(.CloudDownload)
+                downloadButton.setImage(UIImage.init(named: "no_download"), forState: .Normal)
                 downloadSpinner.hidden = true
                 downloadButton.userInteractionEnabled = true
                 downloadButton.hidden = false
@@ -118,7 +123,10 @@ class DownloadsAccessoryView : UIView {
                 self.accessibilityLabel = Strings.downloading
                 self.accessibilityTraits = UIAccessibilityTraitButton
             case .Done:
-                useIcon(.ContentDidDownload)
+//                useIcon(.CheckCircle)
+                downloadButton.setImage(UIImage.init(named: "had_download"), forState: .Normal)
+                downloadButton.tintColor = OEXStyles.sharedStyles().neutralBase()
+                
                 downloadSpinner.hidden = true
                 self.userInteractionEnabled = false
                 downloadButton.hidden = false

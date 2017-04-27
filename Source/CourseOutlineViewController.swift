@@ -16,7 +16,8 @@ public class CourseOutlineViewController :
     CourseContentPageViewControllerDelegate,
     CourseLastAccessedControllerDelegate,
     PullRefreshControllerDelegate,
-    LoadStateViewReloadSupport
+    LoadStateViewReloadSupport,
+    UIGestureRecognizerDelegate
 {
     public typealias Environment = protocol<OEXAnalyticsProvider, DataManagerProvider, OEXInterfaceProvider, NetworkManagerProvider, ReachabilityProvider, OEXRouterProvider>
 
@@ -35,6 +36,7 @@ public class CourseOutlineViewController :
     private let insetsController : ContentInsetsController
     private var lastAccessedController : CourseLastAccessedController
     
+    let leftButton = UIButton.init(frame: CGRectMake(0, 0, 48, 48))
     
     /// Strictly a test variable used as a trigger flag. Not to be used out of the test scope
     private var t_hasTriggeredSetLastAccessed = false
@@ -88,7 +90,9 @@ public class CourseOutlineViewController :
         
         insetsController.setupInController(self, scrollView : self.tableController.tableView)
         insetsController.addSource(tableController.refreshController)
+        
         self.view.setNeedsUpdateConstraints()
+        self.setLeftNavigationBar()
         addListeners()
     }
     
@@ -112,8 +116,24 @@ public class CourseOutlineViewController :
         )
     }
     
+    func setLeftNavigationBar() {
+        self.leftButton.setImage(UIImage.init(named: "backImagee"), forState: .Normal)
+        self.leftButton.showsTouchWhenHighlighted = true
+        self.leftButton.imageEdgeInsets = UIEdgeInsetsMake(0, -23, 0, 23)
+        
+        self.navigationController?.interactivePopGestureRecognizer?.enabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
+        self.leftButton.addTarget(self, action: #selector(leftButtonAction), forControlEvents: .TouchUpInside)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: self.leftButton)
+    }
+    
+    func leftButtonAction() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     override public func shouldAutorotate() -> Bool {
-        return true
+        return false
     }
     
     override public func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
@@ -139,7 +159,8 @@ public class CourseOutlineViewController :
     }
     
     private func setupNavigationItem(block : CourseBlock) {
-        self.navigationItem.title = block.displayName
+//        self.navigationItem.title = block.displayName
+        self.titleViewLabel.text = block.displayName
     }
     
     private func reload() {

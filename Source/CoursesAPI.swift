@@ -27,4 +27,14 @@ struct CoursesAPI {
             deserializer: .JSONResponse(enrollmentsDeserializer)
         )
     }
+    
+    /* 我的课程 */
+//    static func getUserEnrollments(username: String) -> NetworkRequest<[UserCourseEnrollment]> {
+//        return NetworkRequest(
+//            method: .GET,
+//            path: "api/mobile/v0.5/users/{username}/course_enrollments/".oex_formatWithParameters(["username": username]),
+//            requiresAuth: true,
+//            deserializer: .JSONResponse(enrollmentsDeserializer)
+//        )
+//    }
 }

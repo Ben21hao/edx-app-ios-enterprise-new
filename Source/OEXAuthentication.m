@@ -55,21 +55,38 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
 //This method gets called when user try to login with username password
 + (void)requestTokenWithUser:(NSString* )username password:(NSString* )password completionHandler:(OEXURLRequestHandler)completionBlock {
     NSString* body = [self plainTextAuthorizationHeaderForUserName:username password:password];
+    
     NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
     [sessionConfig setHTTPAdditionalHeaders:[sessionConfig defaultHTTPHeaders]];
-    NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [OEXConfig sharedConfig].apiHostURL, AUTHORIZATION_URL]]];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [OEXConfig sharedConfig].apiHostURL, AUTHORIZATION_URL]];
+    
+    NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
     NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig];
     [[session dataTaskWithRequest:request completionHandler:^(NSData* data, NSURLResponse* response, NSError* error) {
+        
             NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*) response;
             if(httpResp.statusCode == OEXHTTPStatusCode200OK) {
+                
                 NSError* error;
                 NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                 OEXAccessToken* token = [[OEXAccessToken alloc] initWithTokenDetails:dictionary];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [OEXAuthentication handleSuccessfulLoginWithToken:token completionHandler:completionBlock];
-                });
+                
+                NSLog(@"url -- %@ , dictionary--%@",url,dictionary);
+                NSInteger code = [dictionary[@"code"] integerValue];
+                if (code == 402) { //账号未激活
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completionBlock(nil, nil, nil);//暂时这样处理
+                    });
+                    
+                } else {
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [OEXAuthentication handleSuccessfulLoginWithToken:token completionHandler:completionBlock];
+                    });
+                }
             }
             else {
                 dispatch_async(dispatch_get_main_queue(), ^{

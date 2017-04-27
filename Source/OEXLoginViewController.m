@@ -9,6 +9,7 @@
 @import edXCore;
 
 #import "OEXLoginViewController.h"
+#import "TDRegisterViewController.h"
 
 #import "edX-Swift.h"
 
@@ -76,31 +77,68 @@
 
 @property (weak, nonatomic, nullable) IBOutlet UITextField* tf_EmailID;
 @property (weak, nonatomic, nullable) IBOutlet UITextField* tf_Password;
+@property (weak, nonatomic) IBOutlet UIButton *eyesButton;
+@property (weak, nonatomic) IBOutlet UIImageView *passwordBgView;
+@property (weak, nonatomic) IBOutlet UIImageView *acountBgView;
+
 @property (weak, nonatomic, nullable) IBOutlet UIButton* btn_TroubleLogging;
 @property (weak, nonatomic, nullable) IBOutlet UIButton* btn_Login;
+@property (weak, nonatomic) IBOutlet UIButton *registerButton;
+
 @property (weak, nonatomic, nullable) IBOutlet UIScrollView* scroll_Main;
 @property (weak, nonatomic, nullable) IBOutlet UIImageView* img_Map;
 @property (weak, nonatomic, nullable) IBOutlet UIImageView* img_Logo;
 @property (weak, nonatomic, nullable) IBOutlet UILabel* lbl_Redirect;
 @property (weak, nonatomic, nullable) IBOutlet UIActivityIndicatorView* activityIndicator;
-@property (strong, nonatomic) IBOutlet UILabel* versionLabel;
+@property (strong, nonatomic) IBOutlet UILabel *versionLabel;
 
 @property (nonatomic, assign) id <OEXExternalAuthProvider> authProvider;
-@property (nonatomic) OEXTextStyle *placeHolderStyle;
-@property (nonatomic) OEXMutableTextStyle *buttonsTitleStyle;
-
 
 @end
 
 @implementation OEXLoginViewController
 
-- (void)layoutSubviews {
-    if(!([self isFacebookEnabled] || [self isGoogleEnabled])) {
-        self.lbl_OrSignIn.hidden = YES;
-        self.seperatorLeft.hidden = YES;
-        self.seperatorRight.hidden = YES;
-    }
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self setNavigationBarStye];
+    [self setViewConstrainStye];
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //Analytics Screen record
+    [[OEXAnalytics sharedAnalytics] trackScreenWithName:@"Login"];
+    
+    OEXAppDelegate* appD = (OEXAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.reachable = [appD.reachability isReachable];
+    
+    //EULA
+    [self hideEULA:YES];
+    
+    [self addNotificationCenter];
+    
+    //Tap to dismiss keyboard
+    [self.view setUserInteractionEnabled:YES];
+    self.view.exclusiveTouch = YES;
+    UIGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedToDismiss)];
+    [self.view addGestureRecognizer:tapGesture];
+    
+    //To set all the components tot default property
+    [self layoutSubviews];
+    [self setToDefaultProperties];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.view setUserInteractionEnabled:NO];
+}
+
+- (void)layoutSubviews {
+    
     if(IS_IPHONE_4) {
         self.constraint_MapTop.constant = 70;
         self.constraint_UsernameTop.constant = 20;
@@ -111,7 +149,7 @@
         self.constraint_SignInTop.constant = 13;
         self.constraint_ActivityIndTop.constant = 43;
         self.constraint_SignTop.constant = 9;
-
+        
         if([self isGoogleEnabled] || [self isFacebookEnabled]) {
             self.constraint_LeftSepTop.constant = 18;
             self.constraint_RightSepTop.constant = 18;
@@ -119,9 +157,6 @@
             self.constraint_EULATop.constant = 73;
         }
         else {
-            self.lbl_OrSignIn.hidden = YES;
-            self.seperatorLeft.hidden = YES;
-            self.seperatorRight.hidden = YES;
             self.constraint_LeftSepTop.constant = 18;
             self.constraint_RightSepTop.constant = 18;
             self.constraint_BySigningTop.constant = 18;
@@ -134,7 +169,6 @@
         self.constraint_UserGreyTop.constant = 25;
         self.constraint_PasswordTop.constant = 12;
         self.constraint_PassGreyTop.constant = 12;
-        self.constraint_ForgotTop.constant = 12;
         self.constraint_SignInTop.constant = 20;
         self.constraint_ActivityIndTop.constant = 55;
         self.constraint_SignTop.constant = 15;
@@ -151,81 +185,59 @@
     }
 }
 
+#pragma mark - add notification
+- (void)addNotificationCenter {
+    // Scrolling on keyboard hide and show
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange:) name:kReachabilityChangedNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setSignInToDefaultState:) name:UIApplicationDidBecomeActiveNotification object:nil];
 
-#pragma mark - NSURLConnection Delegtates
-
-#pragma mark - Init
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self.view setUserInteractionEnabled:NO];
 }
+
+#pragma mark - 导航栏
+- (void)setNavigationBarStye {
+    self.navigationController.navigationBar.titleTextAttributes = @{
+                                                                    NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:18]
+                                                                    };
+    self.navigationItem.title = [Strings signInText];
+    
+//    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 68, 48)];
+//    rightButton.contentEdgeInsets = UIEdgeInsetsMake(0, 16, 0, -16);
+//    rightButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:16.0];
+//    rightButton.titleLabel.textAlignment = NSTextAlignmentRight;
+//    rightButton.showsTouchWhenHighlighted = YES;
+//    [rightButton setTitle:NSLocalizedString(@"JUMP_OVER", nil) forState:UIControlStateNormal];
+//    [rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [rightButton addTarget:self action:@selector(rightButtonAciton:) forControlEvents:UIControlEventTouchUpInside];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    
+    
+    //    if (self.environment.config.isRegistrationEnabled) {
+    //        UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_cancel"] style:UIBarButtonItemStylePlain target:self action:@selector(navigateBack)];
+    //        closeButton.accessibilityLabel = [Strings close];
+    //        self.navigationItem.leftBarButtonItem = closeButton;
+    //    }
+}
+
+- (void)rightButtonAciton:(UIButton *)sender {
+    [self.delegate loginViewControllerDidLogin:self];
+}
+
+//- (void)navigateBack {
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
+
+
 - (BOOL)isFacebookEnabled {
     return ![OEXNetworkUtility isOnZeroRatedNetwork] && [self.environment.config facebookConfig].enabled;
 }
 
 - (BOOL)isGoogleEnabled {
     return ![OEXNetworkUtility isOnZeroRatedNetwork] && [self.environment.config googleConfig].enabled;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self setTitle:[Strings signInText]];
-
-    NSMutableArray* providers = [[NSMutableArray alloc] init];
-    if([self isGoogleEnabled]) {
-        [providers addObject:[[OEXGoogleAuthProvider alloc] init]];
-    }
-    if([self isFacebookEnabled]) {
-        [providers addObject:[[OEXFacebookAuthProvider alloc] init]];
-    }
-
-    __weak __typeof(self) owner = self;
-    OEXExternalAuthOptionsView* externalAuthOptions = [[OEXExternalAuthOptionsView alloc] initWithFrame:self.externalAuthContainer.bounds providers:providers tapAction:^(id<OEXExternalAuthProvider> provider) {
-        [owner externalLoginWithProvider:provider];
-    }];
-    [self.externalAuthContainer addSubview:externalAuthOptions];
-    [externalAuthOptions mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.externalAuthContainer);
-    }];
-
-    [self.lbl_OrSignIn setText:[Strings orSignInWith]];
-    [self.lbl_OrSignIn setTextColor:[UIColor colorWithRed:60.0 / 255.0 green:64.0 / 255.0 blue:69.0 / 255.0 alpha:1.0]];
-    
-    if (self.environment.config.isRegistrationEnabled) {
-        UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_cancel"] style:UIBarButtonItemStylePlain target:self action:@selector(navigateBack)];
-        closeButton.accessibilityLabel = [Strings close];
-        self.navigationItem.leftBarButtonItem = closeButton;
-    }
-    
-    [self setExclusiveTouch];
-
-    if ([self isRTL]) {
-        [self.btn_TroubleLogging setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-    }
-    
-    self.tf_EmailID.textAlignment = NSTextAlignmentNatural;
-    self.tf_Password.textAlignment = NSTextAlignmentNatural;
-    self.img_Logo.isAccessibilityElement = YES;
-    self.img_Logo.accessibilityLabel = [[OEXConfig sharedConfig] platformName];
-
-    NSString* environmentName = self.environment.config.environmentName;
-    if(environmentName.length > 0) {
-        NSString* appVersion = [NSBundle mainBundle].oex_buildVersionString;
-        self.versionLabel.text = [Strings versionDisplayWithNumber:appVersion environment:environmentName];
-    }
-    else {
-        self.versionLabel.text = @"";
-    }
-    
-    _placeHolderStyle = [[OEXTextStyle alloc] initWithWeight:OEXTextWeightNormal size:OEXTextSizeBase color:[[OEXStyles sharedStyles] neutralDark]];
-    _buttonsTitleStyle = [[OEXMutableTextStyle alloc] initWithWeight:OEXTextWeightBold size:OEXTextSizeBase color:[[OEXStyles sharedStyles] primaryBaseColor]];
-}
-
-- (void)navigateBack {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)setExclusiveTouch {
@@ -243,51 +255,14 @@
     self.img_SeparatorEULA.hidden = hide;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
-    //Analytics Screen record
-    [[OEXAnalytics sharedAnalytics] trackScreenWithName:@"Login"];
-
-    OEXAppDelegate* appD = (OEXAppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.reachable = [appD.reachability isReachable];
-
-    [self.view setUserInteractionEnabled:YES];
-    self.view.exclusiveTouch = YES;
-
-    //EULA
-    [self hideEULA:YES];
-
-    // Scrolling on keyboard hide and show
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange:) name:kReachabilityChangedNotification object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setSignInToDefaultState:) name:UIApplicationDidBecomeActiveNotification object:nil];
-
-    //Tap to dismiss keyboard
-    UIGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                              action:@selector(tappedToDismiss)];
-    [self.view addGestureRecognizer:tapGesture];
-
-    //To set all the components tot default property
-    [self layoutSubviews];
-    [self setToDefaultProperties];
-}
-
 - (NSString*)signInButtonText {
     return [Strings signInText];
 }
 
 - (void)handleActivationDuringLogin {
     if(self.authProvider != nil) {
-        [self.btn_Login applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[self signInButtonText]];
+        [self.btn_Login setTitle:[self signInButtonText] forState:UIControlStateNormal];
+        
         [self.activityIndicator stopAnimating];
         [self.view setUserInteractionEnabled:YES];
 
@@ -310,31 +285,104 @@
     [[OEXGoogleSocial sharedInstance] setHandledOpenUrl:NO];
 }
 
+- (void)setViewConstrainStye {
+    
+    NSMutableArray* providers = [[NSMutableArray alloc] init];
+    if([self isGoogleEnabled]) {
+        [providers addObject:[[OEXGoogleAuthProvider alloc] init]];
+    }
+    if([self isFacebookEnabled]) {
+        [providers addObject:[[OEXFacebookAuthProvider alloc] init]];
+    }
+    
+    __weak __typeof(self) owner = self;
+    OEXExternalAuthOptionsView* externalAuthOptions = [[OEXExternalAuthOptionsView alloc] initWithFrame:self.externalAuthContainer.bounds providers:providers tapAction:^(id<OEXExternalAuthProvider> provider) {
+        [owner externalLoginWithProvider:provider];
+    }];
+    [self.externalAuthContainer addSubview:externalAuthOptions];
+    [externalAuthOptions mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.externalAuthContainer);
+    }];
+    
+    [self.lbl_OrSignIn setText:[Strings noAccount]];
+    [self.lbl_OrSignIn setTextColor:[UIColor colorWithHexString:colorHexStr8]];
+    
+    [self setExclusiveTouch];
+    
+    if ([self isRTL]) {
+        [self.btn_TroubleLogging setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+    }
+    
+    self.img_Logo.isAccessibilityElement = YES;
+    self.img_Logo.accessibilityLabel = [[OEXConfig sharedConfig] platformName];
+    
+    NSString* environmentName = self.environment.config.environmentName;
+    if(environmentName.length > 0) {
+        NSString* appVersion = [NSBundle mainBundle].oex_buildVersionString;
+        self.versionLabel.text = [Strings versionDisplayWithNumber:appVersion environment:environmentName];
+    } else {
+        self.versionLabel.text = @"";
+    }
+    
+    self.eyesButton.titleLabel.font = [UIFont fontWithName:@"FontAwesome" size:20.0];
+    [self.eyesButton setTitle:@"\U0000f070" forState:UIControlStateNormal];
+    [self.eyesButton setTitleColor:[UIColor colorWithHexString:colorHexStr8] forState:UIControlStateNormal];
+    [self.eyesButton addTarget:self action:@selector(eyesButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.btn_Login.layer.cornerRadius = 4;
+    self.btn_Login.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
+    self.registerButton.showsTouchWhenHighlighted = YES;
+    
+    [self textField:self.tf_Password backgroundWithView:self.passwordBgView];
+    [self textField:self.tf_EmailID backgroundWithView:self.acountBgView];
+    
+    /* 隐藏注册 */
+    self.registerButton.hidden = YES;
+    self.seperatorLeft.hidden = YES;
+    self.seperatorRight.hidden = YES;
+    self.lbl_OrSignIn.hidden = YES;
+}
+
+- (void)textField:(UITextField *)textField backgroundWithView:(UIImageView *)image  {
+    image.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
+    image.layer.borderWidth = 0.5;
+    image.layer.borderColor = [UIColor colorWithHexString:colorHexStr7].CGColor;
+    image.layer.masksToBounds = YES;
+    image.layer.cornerRadius = 4;
+    
+    textField.textColor = [UIColor colorWithHexString:colorHexStr9];
+    textField.placeholder = [Strings usernamePlaceholder];
+    textField.text = @"";
+    textField.accessibilityLabel = nil;
+    textField.textAlignment = NSTextAlignmentNatural;
+}
+
+- (void)eyesButtonAction:(UIButton *)sender {
+    
+    self.tf_Password.secureTextEntry = !self.tf_Password.secureTextEntry;
+    [self.eyesButton setTitle:self.tf_Password.secureTextEntry == YES ? @"\U0000f070" : @"\U0000f06e" forState:UIControlStateNormal];
+}
+
 - (void)setToDefaultProperties {
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.tf_EmailID.attributedPlaceholder = [_placeHolderStyle attributedStringWithText:[Strings usernamePlaceholder]];
-    self.tf_Password.attributedPlaceholder = [_placeHolderStyle attributedStringWithText:[Strings passwordPlaceholder]];
-    self.tf_EmailID.text = @"";
-    self.tf_Password.text = @"";
-    self.tf_EmailID.accessibilityLabel = nil;
-    self.tf_Password.accessibilityLabel = nil;
 
     self.lbl_Redirect.text = [Strings redirectText];
     self.lbl_Redirect.isAccessibilityElement = NO;
-    [self.btn_TroubleLogging setAttributedTitle:[_buttonsTitleStyle attributedStringWithText:[Strings troubleInLoginButton]] forState:UIControlStateNormal];
-    [self.btn_TroubleLogging setTitleColor:[[OEXStyles sharedStyles] primaryBaseColor] forState:UIControlStateNormal];
-    [self.btn_OpenEULA setTitleColor:[[OEXStyles sharedStyles] primaryBaseColor] forState:UIControlStateNormal];
-    _buttonsTitleStyle.weight = OEXTextWeightNormal;
-    _buttonsTitleStyle.size = OEXTextSizeXXSmall;
+    
+    [self.btn_TroubleLogging setTitle:[Strings troubleInLoginButton] forState:UIControlStateNormal];
+    [self.btn_TroubleLogging setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
+    
+    [self.btn_OpenEULA setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
 
     NSString *termsText = [Strings registrationAgreementButtonTitleWithPlatformName:self.environment.config.platformName];
-    [self.btn_OpenEULA setAttributedTitle:[_buttonsTitleStyle attributedStringWithText:termsText] forState:UIControlStateNormal];
+    [self.btn_OpenEULA setTitle:termsText forState:UIControlStateNormal];
     self.btn_OpenEULA.titleLabel.adjustsFontSizeToFitWidth = YES;
 
     self.btn_OpenEULA.accessibilityTraits = UIAccessibilityTraitLink;
     self.btn_OpenEULA.accessibilityLabel = [NSString stringWithFormat:@"%@,%@",[Strings redirectText], termsText];
     
-    [self.btn_Login applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[self signInButtonText]];
+    [self.btn_Login setTitle:[self signInButtonText] forState:UIControlStateNormal];
     [self.activityIndicator stopAnimating];
 
     NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:USER_EMAIL];
@@ -357,7 +405,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.view setUserInteractionEnabled:YES];
         });
-        [self.btn_Login applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[self signInButtonText]];
+        [self.btn_Login setTitle:[self signInButtonText] forState:UIControlStateNormal];
 
         [self.activityIndicator stopAnimating];
     }
@@ -370,28 +418,33 @@
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
+#pragma mark - 忘记密码
 - (IBAction)troubleLoggingClicked:(id)sender {
+    
     if(self.reachable) {
         [self.view setUserInteractionEnabled:NO];
 
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings resetPasswordTitle]
-                                                        message:[Strings resetPasswordPopupText]
-                                                       delegate:self
-                                              cancelButtonTitle:[Strings cancel]
-                                              otherButtonTitles:[Strings ok], nil];
-
-        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-        UITextField* textfield = [alert textFieldAtIndex:0];
-        textfield.keyboardType = UIKeyboardTypeEmailAddress;
-
-        if([self.tf_EmailID.text length] > 0) {
-            UITextField* tf = [alert textFieldAtIndex:0];
-            [[alert textFieldAtIndex:0] setAttributedPlaceholder:[_placeHolderStyle attributedStringWithText:[Strings emailAddressPrompt]]];
-            tf.text = self.tf_EmailID.text;
-        }
-
-        alert.tag = 1001;
-        [alert show];
+        /* 弹框重置密码 */
+//        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings resetPasswordTitle]
+//                                                        message:[Strings resetPasswordPopupText]
+//                                                       delegate:self
+//                                              cancelButtonTitle:[Strings cancel]
+//                                              otherButtonTitles:[Strings ok], nil];
+//
+//        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+//        UITextField* textfield = [alert textFieldAtIndex:0];
+//        textfield.keyboardType = UIKeyboardTypeEmailAddress;
+//
+//        if([self.tf_EmailID.text length] > 0) {
+//            UITextField* tf = [alert textFieldAtIndex:0];
+//            [[alert textFieldAtIndex:0] setPlaceholder:[Strings emailAddressPrompt]];
+//            tf.text = self.tf_EmailID.text;
+//        }
+//
+//        alert.tag = 1001;
+//        [alert show];
+        
+        [self pushRegisterViewController:1];
     }
     else {
         // error
@@ -402,6 +455,20 @@
     }
 }
 
+#pragma mark - 注册
+- (IBAction)registerButtonClicked:(UIButton *)sender {
+    [self pushRegisterViewController:0];
+}
+
+- (void)pushRegisterViewController:(NSInteger)type {
+    
+    TDRegisterViewController *registerViewController = [[TDRegisterViewController alloc] init];
+    registerViewController.whereFrom = &(type);
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:registerViewController];
+    [self presentViewController:navController animated:YES completion:nil];
+}
+
+#pragma mark - 登录
 - (IBAction)loginClicked:(id)sender {
     [self.view setUserInteractionEnabled:NO];
 
@@ -432,20 +499,33 @@
                                                             ];
 
         [self.view setUserInteractionEnabled:YES];
-    }
-    else {
+        
+    } else {
+        [self.view setUserInteractionEnabled:NO];
+        [self.activityIndicator startAnimating];
+        [self.btn_Login setTitle:[Strings signInButtonTextOnSignIn] forState:UIControlStateNormal];
+        
         self.signInID = _tf_EmailID.text;
         self.signInPassword = _tf_Password.text;
 
-        [OEXAuthentication requestTokenWithUser:_signInID
-                                       password:_signInPassword
-                              completionHandler:^(NSData* data, NSURLResponse* response, NSError* error) {
-            [self handleLoginResponseWith:data response:response error:error];
-        } ];
-
-        [self.view setUserInteractionEnabled:NO];
-        [self.activityIndicator startAnimating];
-        [self.btn_Login applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[Strings signInButtonTextOnSignIn]];
+        [OEXAuthentication requestTokenWithUser:_signInID password:_signInPassword completionHandler:^(NSData* data, NSURLResponse* response, NSError* error) {
+            
+            if (data == nil && response == nil && error == nil) {
+                [self.view setUserInteractionEnabled:YES];
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                [self.activityIndicator stopAnimating];
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"NEED_ACTIVITY", nil)
+                                                                    message:NSLocalizedString(@"SEND_EMAIL_ACTIVITY", nil)
+                                                                   delegate:self
+                                                          cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)
+                                                          otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+                alertView.tag = 2001;
+                [alertView show];
+            } else {
+                [self handleLoginResponseWith:data response:response error:error];
+            }
+        }];
     }
 }
 
@@ -512,7 +592,7 @@
 
     [self.view setUserInteractionEnabled:NO];
     [self.activityIndicator startAnimating];
-    [self.btn_Login applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[[Strings signInButtonTextOnSignIn] oex_uppercaseStringInCurrentLocale]];
+    [self.btn_Login setTitle:[Strings signInButtonTextOnSignIn] forState:UIControlStateNormal];
 }
 
 - (void)loginHandleLoginError:(NSError*)error {
@@ -557,8 +637,8 @@
     }
 
     [self.activityIndicator stopAnimating];
-    [self.btn_Login applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[self signInButtonText]];
-
+    [self.btn_Login setTitle:[self signInButtonText] forState:UIControlStateNormal];
+    
     [self.view setUserInteractionEnabled:YES];
 
     [self tappedToDismiss];
@@ -567,7 +647,8 @@
 - (void) showUpdateRequiredMessage {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [self.activityIndicator stopAnimating];
-    [self.btn_Login applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[self signInButtonText]];
+    [self.btn_Login setTitle:[self signInButtonText] forState:UIControlStateNormal];
+    
     [self.view setUserInteractionEnabled:YES];
     [self tappedToDismiss];
     
@@ -603,14 +684,12 @@
 }
 
 #pragma mark UI
-
 - (void)tappedToDismiss {
     [_tf_EmailID resignFirstResponder];
     [_tf_Password resignFirstResponder];
 }
 
-#pragma mark UIAlertView Delegate
-
+#pragma mark - UIAlertView Delegate
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     [self.view setUserInteractionEnabled:YES];
 
@@ -634,7 +713,31 @@
                 [self resetPassword];
             }
         }
+    } else if (alertView.tag == 2001) {
+        if (buttonIndex == 1) {
+            [self resendEmail];
+        }
     }
+}
+
+
+
+#pragma mark - 重发邮件
+- (void)resendEmail {
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setValue:self.tf_EmailID.text forKey:@"email"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/account/resend_active_email/",ELITEU_URL];
+    [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [self.view makeToast:NSLocalizedString(@"SEND_EMAIL_SUCCESS", nil) duration:1.08 position:CSToastPositionTop];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"重发邮件 -- %ld",(long)error.code);
+    }];
 }
 
 - (void)resetPassword {
@@ -682,7 +785,6 @@
 }
 
 #pragma mark TextField Delegate
-
 - (BOOL)textFieldShouldReturn:(UITextField*)textField;
 {
     if(textField == self.tf_EmailID) {
@@ -759,7 +861,7 @@
     }
 }
 
-- (BOOL) isRTL {
+- (BOOL)isRTL {
     return [UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft;
 }
 
@@ -767,11 +869,11 @@
     return [OEXStyles sharedStyles].standardStatusBarStyle;
 }
 
-- (BOOL) shouldAutorotate {
-    return false;
+- (BOOL)shouldAutorotate {
+    return NO;
 }
 
-- (UIInterfaceOrientationMask) supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
 }
 

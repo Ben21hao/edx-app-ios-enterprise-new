@@ -1,14 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Login-->
         <scene sceneID="Slz-r3-iLv">
@@ -45,7 +50,7 @@
                                             </mask>
                                         </variation>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="TTs-EL-Jso">
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="edx_logo_login" translatesAutoresizingMaskIntoConstraints="NO" id="TTs-EL-Jso">
                                         <rect key="frame" x="35" y="6" width="313" height="155"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="MUA-79-jE4"/>
@@ -58,7 +63,7 @@
                                             </mask>
                                         </variation>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bt_grey_default.png" translatesAutoresizingMaskIntoConstraints="NO" id="huu-Bj-C7B">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="huu-Bj-C7B">
                                         <rect key="frame" x="40" y="181" width="303" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="9nW-ld-e5Q"/>
@@ -83,7 +88,7 @@
                                             <constraint firstAttribute="width" constant="228" id="ZOd-93-dfn"/>
                                             <constraint firstAttribute="height" constant="40" id="jyg-Ls-Yd1"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -95,7 +100,7 @@
                                             <outlet property="delegate" destination="riJ-LC-sPF" id="Uas-Ch-tfm"/>
                                         </connections>
                                     </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bt_grey_default.png" translatesAutoresizingMaskIntoConstraints="NO" id="w4q-wU-kRm">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w4q-wU-kRm">
                                         <rect key="frame" x="40" y="229" width="303" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="488-82-bh6"/>
@@ -118,7 +123,7 @@
                                             <constraint firstAttribute="width" constant="228" id="JRo-yh-kZE"/>
                                             <constraint firstAttribute="height" constant="40" id="Wsp-ac-9iR"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES"/>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -130,11 +135,23 @@
                                             <outlet property="delegate" destination="riJ-LC-sPF" id="TAL-DA-nTV"/>
                                         </connections>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Env-PU-3Ck">
+                                        <rect key="frame" x="303" y="234" width="32" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="Gtp-bT-l2G"/>
+                                            <constraint firstAttribute="height" constant="30" id="mWi-5o-Jab"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="eyes">
+                                            <color key="titleColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
                                     <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tp9-tH-kdk">
-                                        <rect key="frame" x="40" y="277" width="123" height="17"/>
+                                        <rect key="frame" x="40" y="277" width="100" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="qfK-nC-mRI"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
                                         <state key="normal" title="Trouble logging In"/>
                                         <connections>
                                             <action selector="troubleLoggingClicked:" destination="riJ-LC-sPF" eventType="touchUpInside" id="dqP-Qk-baX"/>
@@ -146,6 +163,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="7b9-sy-3PM"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="16"/>
                                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="SIGN IN">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -171,7 +189,7 @@
                                         </variation>
                                     </activityIndicatorView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="108" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or Sign in with" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="191" translatesAutoresizingMaskIntoConstraints="NO" id="9O4-tw-OUv" customClass="OEXCustomLabel">
-                                        <rect key="frame" x="138" y="351" width="107" height="20"/>
+                                        <rect key="frame" x="138" y="360" width="107" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="107" id="Htp-oO-a4C"/>
                                             <constraint firstAttribute="height" constant="20" id="jyy-je-BmG"/>
@@ -181,19 +199,19 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator.png" translatesAutoresizingMaskIntoConstraints="NO" id="2of-Hn-kff">
-                                        <rect key="frame" x="40" y="360" width="101" height="2"/>
+                                        <rect key="frame" x="40" y="369" width="101" height="2"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="KON-qe-xti"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator.png" translatesAutoresizingMaskIntoConstraints="NO" id="Pqx-qN-yU2">
-                                        <rect key="frame" x="241" y="360" width="102" height="2"/>
+                                        <rect key="frame" x="241" y="369" width="102" height="2"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="OmA-hw-yhx"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="106" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By signing into the app, you agree to the" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="191" translatesAutoresizingMaskIntoConstraints="NO" id="ZfV-aD-lBt" customClass="OEXCustomLabel">
-                                        <rect key="frame" x="92.5" y="411" width="198" height="13"/>
+                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="106" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By signing into the app, you agree to the" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="191" translatesAutoresizingMaskIntoConstraints="NO" id="ZfV-aD-lBt" customClass="OEXCustomLabel">
+                                        <rect key="frame" x="93" y="420" width="198" height="13"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="13" id="TLP-cU-G6l"/>
                                             <constraint firstAttribute="width" constant="198" id="cb4-zD-OcS"/>
@@ -210,8 +228,8 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <button opaque="NO" tag="106" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYz-SW-wBv">
-                                        <rect key="frame" x="106" y="420" width="171" height="21"/>
+                                    <button hidden="YES" opaque="NO" tag="106" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYz-SW-wBv">
+                                        <rect key="frame" x="106" y="429" width="171" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="FFH-LG-Rhl"/>
                                             <constraint firstAttribute="width" constant="191" id="jbK-Ay-hDf"/>
@@ -227,18 +245,29 @@
                                             <action selector="openEULA:" destination="riJ-LC-sPF" eventType="touchUpInside" id="Dzg-tS-ZFq"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahW-UE-xWc">
-                                        <rect key="frame" x="173.5" y="449" width="36" height="12"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahW-UE-xWc">
+                                        <rect key="frame" x="174" y="458" width="36" height="12"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view tag="104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BU5-Og-2jn" customClass="OEXExternalAuthOptionsView">
-                                        <rect key="frame" x="40" y="375" width="303" height="33"/>
+                                    <view hidden="YES" tag="104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BU5-Og-2jn" customClass="OEXExternalAuthOptionsView">
+                                        <rect key="frame" x="40" y="384" width="303" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="33" placeholder="YES" id="NlG-Ps-z8A"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oEw-bX-WVd">
+                                        <rect key="frame" x="148" y="398" width="88" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="88" id="4XT-Tm-Ksd"/>
+                                            <constraint firstAttribute="height" constant="48" id="xXN-D4-MUy"/>
+                                        </constraints>
+                                        <state key="normal" title="注册"/>
+                                        <connections>
+                                            <action selector="registerButtonClicked:" destination="riJ-LC-sPF" eventType="touchUpInside" id="7gz-oG-sGj"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="dcW-Go-srk" firstAttribute="top" secondItem="EXv-n9-pKW" secondAttribute="bottom" constant="8" id="06n-uK-Qm2"/>
@@ -263,7 +292,7 @@
                                     <constraint firstAttribute="trailing" secondItem="5Ki-dQ-Zuc" secondAttribute="trailing" constant="54" id="Jpr-eN-Jam"/>
                                     <constraint firstAttribute="trailing" secondItem="dcW-Go-srk" secondAttribute="trailing" constant="46" id="Kqj-N0-V22"/>
                                     <constraint firstAttribute="trailing" secondItem="hfa-gq-20d" secondAttribute="trailing" constant="35" id="LXJ-sW-Z9Z"/>
-                                    <constraint firstItem="9O4-tw-OUv" firstAttribute="top" secondItem="gKO-wT-mn0" secondAttribute="bottom" constant="9" id="MI6-Y1-sfz"/>
+                                    <constraint firstItem="9O4-tw-OUv" firstAttribute="top" secondItem="gKO-wT-mn0" secondAttribute="bottom" constant="18" id="MI6-Y1-sfz"/>
                                     <constraint firstAttribute="centerX" secondItem="TTs-EL-Jso" secondAttribute="centerX" constant="-4.5" id="Ogo-10-kPE"/>
                                     <constraint firstItem="hfa-gq-20d" firstAttribute="top" secondItem="XeO-S4-8zQ" secondAttribute="top" constant="10" id="P9C-uk-42e"/>
                                     <constraint firstItem="TTs-EL-Jso" firstAttribute="top" secondItem="XeO-S4-8zQ" secondAttribute="top" constant="58" id="QMK-RP-Dwj"/>
@@ -281,6 +310,7 @@
                                     <constraint firstItem="EXv-n9-pKW" firstAttribute="centerX" secondItem="huu-Bj-C7B" secondAttribute="centerX" id="YVn-R1-RcM"/>
                                     <constraint firstItem="hfa-gq-20d" firstAttribute="centerX" secondItem="dcW-Go-srk" secondAttribute="centerX" id="ZBt-RH-5zI"/>
                                     <constraint firstItem="cYz-SW-wBv" firstAttribute="centerX" secondItem="XeO-S4-8zQ" secondAttribute="centerX" id="Zwh-xf-iTL"/>
+                                    <constraint firstAttribute="trailing" secondItem="Env-PU-3Ck" secondAttribute="trailing" constant="48" id="a3e-9R-HF1"/>
                                     <constraint firstItem="hfa-gq-20d" firstAttribute="top" secondItem="TTs-EL-Jso" secondAttribute="bottom" constant="-78" id="aGr-2P-jxF"/>
                                     <constraint firstItem="BU5-Og-2jn" firstAttribute="leading" secondItem="2of-Hn-kff" secondAttribute="leading" id="aUS-8l-qES"/>
                                     <constraint firstItem="huu-Bj-C7B" firstAttribute="top" secondItem="hfa-gq-20d" secondAttribute="bottom" constant="20" id="aY0-AX-sjm"/>
@@ -288,11 +318,13 @@
                                     <constraint firstItem="Tp9-tH-kdk" firstAttribute="leading" secondItem="XeO-S4-8zQ" secondAttribute="leading" constant="40" id="cBk-MT-ZNf"/>
                                     <constraint firstItem="TTs-EL-Jso" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hfa-gq-20d" secondAttribute="bottom" id="cvm-No-bAR"/>
                                     <constraint firstItem="EXv-n9-pKW" firstAttribute="leading" secondItem="XeO-S4-8zQ" secondAttribute="leading" constant="46" id="e5Y-r9-L0p"/>
+                                    <constraint firstItem="oEw-bX-WVd" firstAttribute="top" secondItem="9O4-tw-OUv" secondAttribute="bottom" constant="18" id="egH-6a-Ogt"/>
                                     <constraint firstItem="ZfV-aD-lBt" firstAttribute="top" secondItem="BU5-Og-2jn" secondAttribute="bottom" constant="3" id="gP0-Ms-PjD"/>
                                     <constraint firstAttribute="trailing" secondItem="w4q-wU-kRm" secondAttribute="trailing" constant="40" id="gVw-v1-eKf"/>
                                     <constraint firstAttribute="bottom" secondItem="ZfV-aD-lBt" secondAttribute="bottom" constant="73" id="hB1-YP-FkD"/>
                                     <constraint firstItem="gKO-wT-mn0" firstAttribute="top" secondItem="Tp9-tH-kdk" secondAttribute="bottom" constant="8" id="hsA-cL-dmn"/>
                                     <constraint firstItem="ahW-UE-xWc" firstAttribute="top" secondItem="cYz-SW-wBv" secondAttribute="bottom" constant="8" id="itP-fL-BN2"/>
+                                    <constraint firstItem="Env-PU-3Ck" firstAttribute="centerY" secondItem="dcW-Go-srk" secondAttribute="centerY" id="jKB-dq-UVN"/>
                                     <constraint firstAttribute="bottom" secondItem="ahW-UE-xWc" secondAttribute="bottom" constant="138" id="jy5-Pa-9d6"/>
                                     <constraint firstItem="TTs-EL-Jso" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hfa-gq-20d" secondAttribute="leading" id="k5k-AD-EcL"/>
                                     <constraint firstItem="BU5-Og-2jn" firstAttribute="top" secondItem="9O4-tw-OUv" secondAttribute="bottom" constant="4" id="kms-gg-pIx"/>
@@ -307,6 +339,7 @@
                                     <constraint firstItem="9O4-tw-OUv" firstAttribute="centerX" secondItem="ZfV-aD-lBt" secondAttribute="centerX" id="oy4-ci-zPG"/>
                                     <constraint firstAttribute="trailing" secondItem="2of-Hn-kff" secondAttribute="trailing" constant="210" id="qGY-UC-u4o"/>
                                     <constraint firstAttribute="trailing" secondItem="gKO-wT-mn0" secondAttribute="trailing" constant="40" id="rec-Tq-Vqf"/>
+                                    <constraint firstItem="oEw-bX-WVd" firstAttribute="centerX" secondItem="XeO-S4-8zQ" secondAttribute="centerX" id="rmx-C0-FCo"/>
                                     <constraint firstItem="TTs-EL-Jso" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hfa-gq-20d" secondAttribute="trailing" id="rrw-ue-zYf"/>
                                     <constraint firstItem="gKO-wT-mn0" firstAttribute="leading" secondItem="XeO-S4-8zQ" secondAttribute="leading" constant="40" id="sfP-g9-UK0"/>
                                     <constraint firstAttribute="trailing" secondItem="Pqx-qN-yU2" secondAttribute="trailing" constant="40" id="t4q-ib-lp6"/>
@@ -319,6 +352,8 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="8VG-bG-bsd"/>
+                                        <exclude reference="Ogo-10-kPE"/>
+                                        <exclude reference="QMK-RP-Dwj"/>
                                         <exclude reference="5At-WC-HPh"/>
                                         <exclude reference="A46-z9-ghc"/>
                                         <exclude reference="DY6-ao-1rI"/>
@@ -327,8 +362,6 @@
                                         <exclude reference="ZBt-RH-5zI"/>
                                         <exclude reference="aGr-2P-jxF"/>
                                         <exclude reference="mDT-tx-307"/>
-                                        <exclude reference="Ogo-10-kPE"/>
-                                        <exclude reference="QMK-RP-Dwj"/>
                                         <exclude reference="6Fh-e6-fEp"/>
                                         <exclude reference="CRV-47-xcF"/>
                                         <exclude reference="X0j-N8-9ZC"/>
@@ -339,10 +372,10 @@
                                         <exclude reference="qGY-UC-u4o"/>
                                         <exclude reference="Uuj-wm-SUE"/>
                                         <exclude reference="hB1-YP-FkD"/>
-                                        <exclude reference="l0T-3k-yIM"/>
-                                        <exclude reference="mEF-9f-cVA"/>
                                         <exclude reference="Jpr-eN-Jam"/>
                                         <exclude reference="RNV-2E-14V"/>
+                                        <exclude reference="mEF-9f-cVA"/>
+                                        <exclude reference="l0T-3k-yIM"/>
                                         <exclude reference="DeT-Ul-YDQ"/>
                                         <exclude reference="itP-fL-BN2"/>
                                     </mask>
@@ -390,6 +423,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="acountBgView" destination="huu-Bj-C7B" id="ff5-25-6K4"/>
                         <outlet property="activityIndicator" destination="5Ki-dQ-Zuc" id="TO6-Z5-8Lc"/>
                         <outlet property="btn_Login" destination="gKO-wT-mn0" id="G3A-QX-wde"/>
                         <outlet property="btn_OpenEULA" destination="cYz-SW-wBv" id="s64-5e-XLZ"/>
@@ -401,10 +435,13 @@
                         <outlet property="constraint_UserGreyTop" destination="CRV-47-xcF" id="zx9-kR-CdL"/>
                         <outlet property="constraint_UsernameTop" destination="X0j-N8-9ZC" id="4ea-Ma-KGE"/>
                         <outlet property="externalAuthContainer" destination="BU5-Og-2jn" id="eF5-kb-ltz"/>
+                        <outlet property="eyesButton" destination="Env-PU-3Ck" id="y2Q-w6-fQ0"/>
                         <outlet property="img_Logo" destination="TTs-EL-Jso" id="Iyg-rx-RPR"/>
                         <outlet property="img_Map" destination="hfa-gq-20d" id="MgI-y3-0PJ"/>
                         <outlet property="lbl_OrSignIn" destination="9O4-tw-OUv" id="oYy-xu-wnX"/>
                         <outlet property="lbl_Redirect" destination="ZfV-aD-lBt" id="Hk4-xQ-nhk"/>
+                        <outlet property="passwordBgView" destination="w4q-wU-kRm" id="ZKM-JA-bVM"/>
+                        <outlet property="registerButton" destination="oEw-bX-WVd" id="sWU-0s-ccS"/>
                         <outlet property="scroll_Main" destination="XeO-S4-8zQ" id="4rN-yO-BlG"/>
                         <outlet property="seperatorLeft" destination="2of-Hn-kff" id="VdZ-mG-qpm"/>
                         <outlet property="seperatorRight" destination="Pqx-qN-yU2" id="OgF-L0-32m"/>
@@ -419,9 +456,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bt_grey_default.png" width="525" height="100"/>
+        <image name="edx_logo_login" width="240" height="102"/>
         <image name="loginScreenImage.png" width="320" height="171"/>
-        <image name="logo.png" width="141" height="65"/>
         <image name="separator.png" width="526" height="2"/>
     </resources>
 </document>

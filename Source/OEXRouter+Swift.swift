@@ -285,14 +285,14 @@ extension OEXRouter {
 
         let splashController: UIViewController
         
-        if !environment.config.isRegistrationEnabled {
+//        if !environment.config.isRegistrationEnabled {
             splashController = loginViewController()
-        }
-        else if environment.config.newLogistrationFlowEnabled {
-            splashController = StartupViewController(environment: environment)
-        } else {
-            splashController = OEXLoginSplashViewController(environment: environment)
-        }
+//        }
+//        else if environment.config.newLogistrationFlowEnabled {
+//            splashController = StartupViewController(environment: environment)
+//        } else {
+//            splashController = OEXLoginSplashViewController(environment: environment)
+//        }
         
         makeContentControllerCurrent(splashController)
     }

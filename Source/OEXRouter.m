@@ -149,10 +149,9 @@ OEXRegistrationViewControllerDelegate
 }
 
 - (void)showLoggedOutScreen {
-    [self showLoginScreenFromController:nil completion:^{
+//    [self showLoginScreenFromController:nil completion:^{
         [self showSplash];
-    }];
-    
+//    }];
 }
 
 - (void)showAnnouncementsForCourseWithID:(NSString *)courseID {

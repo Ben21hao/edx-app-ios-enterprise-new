@@ -31,14 +31,31 @@ class CourseCatalogViewController: UIViewController, CoursesTableViewControllerD
     }
     
     private lazy var paginationController : PaginationController<OEXCourse> = {
-        let username = self.environment.session.currentUser?.username ?? ""
-        precondition(username != "", "Shouldn't be showing course catalog without a logged in user")
-        let organizationCode =  self.environment.config.organizationCode()
+//        let username = self.environment.session.currentUser?.username ?? ""
+//        precondition(username != "", "Shouldn't be showing course catalog without a logged in user")
+//        let organizationCode =  self.environment.config.organizationCode()
+//        
+//        let paginator = WrappedPaginator(networkManager: self.environment.networkManager) { page in
+//            return CourseCatalogAPI.getCourseCatalog(username, page: page, organizationCode: organizationCode)
+//        }
+//        return PaginationController(paginator: paginator, tableView: self.tableController.tableView)
         
-        let paginator = WrappedPaginator(networkManager: self.environment.networkManager) { page in
-            return CourseCatalogAPI.getCourseCatalog(username, page: page, organizationCode: organizationCode)
+        var username = self.environment.session.currentUser?.username ?? ""
+        if username == ""{
+            username = ""
+            let paginator = WrappedPaginator(networkManager: self.environment.networkManager) { page in
+                return CourseCatalogAPI.getCourseCatalog(username, page: page)//获取所有课程
+            }
+            return PaginationController(paginator: paginator, tableView: self.tableController.tableView)
+            
+        } else{
+            precondition(username != "", "Shouldn't be showing course catalog without a logged in user")
+            
+            let paginator = WrappedPaginator(networkManager: self.environment.networkManager) { page in
+                return CourseCatalogAPI.getCourseCatalog(username, page: page)
+            }
+            return PaginationController(paginator: paginator, tableView: self.tableController.tableView)
         }
-        return PaginationController(paginator: paginator, tableView: self.tableController.tableView)
     }()
     
     override func viewDidLoad() {

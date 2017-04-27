@@ -40,6 +40,7 @@ class OEXRearTableViewController : UITableViewController {
     
     @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var userEmailLabel: UILabel!
+    @IBOutlet weak var loginButton: UIButton!
 
     @IBOutlet var userProfilePicture: UIImageView!
     @IBOutlet weak var appVersionButton: UIButton!
@@ -49,6 +50,7 @@ class OEXRearTableViewController : UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupProfileLoader()
         updateUIWithUserInfo()
         
@@ -68,7 +70,8 @@ class OEXRearTableViewController : UITableViewController {
         findCoursesLabel.text = Strings.findCourses.oex_uppercaseStringInCurrentLocale()
         settingsLabel.text = Strings.mySettings.oex_uppercaseStringInCurrentLocale()
         submitFeedbackLabel.text = Strings.SubmitFeedback.optionTitle.oex_uppercaseStringInCurrentLocale()
-        logoutButton.setTitle(Strings.logout.oex_uppercaseStringInCurrentLocale(), forState: .Normal)
+        logoutButton.setTitle(Strings.logout, forState: .Normal)
+        loginButton.setTitle(Strings.signIn, forState: .Normal)
         
         setNaturalTextAlignment()
         setAccessibilityLabels()
@@ -158,9 +161,26 @@ class OEXRearTableViewController : UITableViewController {
             if currentUser!.mobile == nil{ //如果手机为空,显示邮箱
                 userEmailLabel.text = baseTool.setEmailStyle(currentUser!.email)
             }
+            
+            setButtonHiddenOrNo(true)
+        } else {
+            
+            setButtonHiddenOrNo(false)
         }
         
          profileFeed?.refresh()
+    }
+    
+    func setButtonHiddenOrNo(isHidden: Bool) {
+        
+        loginButton.hidden = isHidden
+        loginButton.layer.cornerRadius = 5.0
+        loginButton.backgroundColor = OEXStyles.sharedStyles().baseColor2()
+        
+        userNameLabel.hidden = !isHidden
+        userEmailLabel.hidden = !isHidden
+        
+        logoutButton.hidden = !isHidden
     }
     
     private func setNaturalTextAlignment() {
@@ -255,7 +275,15 @@ class OEXRearTableViewController : UITableViewController {
         return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
     }
     
+    @IBAction func loginButtonClicked(sender: UIButton) {
+        logoutAction()
+    }
+    
     @IBAction func logoutClicked(sender: UIButton) {
+        logoutAction()
+    }
+    
+    func logoutAction() {
         OEXFileUtility.nukeUserPIIData()
         self.environment.router?.logout()
     }
