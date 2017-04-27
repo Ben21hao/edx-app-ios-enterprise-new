@@ -74,6 +74,8 @@
     }
 #endif
 
+    self.table_Downloads.tableFooterView = [UIView new];
+    
     //Initialize Downloading arr
     self.arr_downloadingVideo = [[NSMutableArray alloc] init];
 

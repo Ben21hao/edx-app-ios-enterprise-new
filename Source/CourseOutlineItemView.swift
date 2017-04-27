@@ -72,8 +72,8 @@ public class CourseOutlineItemView: UIView {
         leadingImageButton.accessibilityTraits = UIAccessibilityTraitImage
         titleLabel.setContentHuggingPriority(UILayoutPriorityDefaultLow, forAxis: .Horizontal)
         
-        checkmark.image = Icon.Graded.imageWithFontSize(10)
-        checkmark.tintColor = OEXStyles.sharedStyles().primaryBaseColor()
+        checkmark.image = Icon.CheckCircle.imageWithFontSize(15)
+        checkmark.tintColor = OEXStyles.sharedStyles().neutralBase()
         
         isGraded = false
         addSubviews()
@@ -146,7 +146,7 @@ public class CourseOutlineItemView: UIView {
         checkmark.snp_makeConstraints { (make) -> Void in
             make.centerY.equalTo(subtitleLabel.snp_centerY)
             make.leading.equalTo(subtitleLabel.snp_trailing).offset(5)
-            make.size.equalTo(CGSizeMake(SmallIconSize, SmallIconSize))
+//            make.size.equalTo(CGSizeMake(SmallIconSize, SmallIconSize))
         }
         
         trailingContainer.snp_makeConstraints { (make) -> Void in

@@ -32,7 +32,7 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
         self.courseQuerier = environment.dataManager.courseDataManager.querierForCourseWithID(courseID)
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -140,8 +140,8 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
             let courseID = courseQuerier.courseID
             cell.videos = videoStream.map({[weak self] videoIDs in
                 let videos = self?.environment.dataManager.interface?.statesForVideosWithIDs(videoIDs, courseID: courseID) ?? []
-                return videos.filter { video in (video.summary?.isSupportedVideo ?? false)}
-            })
+                return videos.filter { video in !video.summary!.onlyOnWeb }
+                })
             cell.delegate = self
             return cell
         case .Discussion:

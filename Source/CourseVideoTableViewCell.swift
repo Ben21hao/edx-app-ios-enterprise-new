@@ -27,9 +27,9 @@ class CourseVideoTableViewCell: UITableViewCell, CourseBlockContainerCell {
     var block : CourseBlock? = nil {
         didSet {
             content.setTitleText(block?.displayName)
-            if let video = block?.type.asVideo {
-                video.isSupportedVideo ? (downloadView.hidden = false) : (downloadView.hidden = true)
-            }
+//            if let video = block?.type.asVideo {
+//                video.isSupportedVideo ? (downloadView.hidden = false) : (downloadView.hidden = true)
+//            }
         }
     }
         

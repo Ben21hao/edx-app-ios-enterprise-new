@@ -19,18 +19,18 @@ class CourseSectionTableViewCell: UITableViewCell, CourseBlockContainerCell {
     
     private let content = CourseOutlineItemView()
     private let downloadView = DownloadsAccessoryView()
-
+    
     weak var delegate : CourseSectionTableViewCellDelegate?
     
     private let videosStream = BackedStream<[OEXHelperVideoDownload]>()
-
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(content)
         content.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(contentView)
         }
-
+        
         downloadView.downloadAction = {[weak self] _ in
             if let owner = self, block = owner.block, videos = self?.videosStream.value {
                 owner.delegate?.sectionCellChoseDownload(owner, videos: videos, forBlock: block)
@@ -113,5 +113,4 @@ class CourseSectionTableViewCell: UITableViewCell, CourseBlockContainerCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }

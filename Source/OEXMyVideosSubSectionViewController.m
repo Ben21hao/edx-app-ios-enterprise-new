@@ -638,7 +638,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 
 #pragma mark - Implement next video play functionality
 
-- (void)CheckIfLastVideoPlayed:(NSIndexPath*)indexPath {
+- (void)CheckIfLastVideoPlayed:(NSIndexPath *)indexPath {
     NSInteger totalSections = [self.table_SubSectionVideos numberOfSections];
     // get last index of the table
     NSInteger totalRows = [self.table_SubSectionVideos numberOfRowsInSection:totalSections - 1];
