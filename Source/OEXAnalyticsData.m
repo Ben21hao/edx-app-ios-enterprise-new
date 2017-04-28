@@ -3,13 +3,14 @@
 //  edXVideoLocker
 //
 //  Created by Akiva Leffert on 3/16/15.
-//  Copyright (c) 2015-2016 edX. All rights reserved.
+//  Copyright (c) 2015 edX. All rights reserved.
 //
 
 #import "OEXAnalyticsData.h"
 
 NSString* const OEXAnalyticsKeyBlockID = @"block-id";
 NSString* const OEXAnalyticsKeyCourseID = @"course-id";
+NSString* const OEXAnalyticsKeyNavigationMode = @"navigation-mode";
 NSString* const OEXAnalyticsKeyOrientation = @"device-orientation";
 NSString* const OEXAnalyticsKeyProvider = @"provider";
 NSString* const OEXAnalyticsKeySupported = @"supported";
@@ -20,14 +21,18 @@ NSString* const OEXAnalyticsKeyQueryString = @"query_string";
 
 NSString* const OEXAnalyticsEventAnnouncementNotificationReceived = @"edx.bi.app.notification.course.update.received";
 NSString* const OEXAnalyticsEventAnnouncementNotificationTapped = @"edx.bi.app.notification.course.update.tapped";
-NSString* const OEXAnalyticsEventPictureSet = @"edx.bi.app.profile.setphoto";
-NSString* const OEXAnalyticsEventProfileViewed = @"edx.bi.app.profile.view";
-
+NSString* const OEXAnalyticsEventCourseEnrollment = @"edx.bi.app.course.enroll.clicked";
+NSString* const OEXAnalyticsEventPictureSet = @"edx.bi.app.profile.view";
+NSString* const OEXAnalyticsEventProfileViewed = @"edx.bi.app.profile.setphoto";
+NSString* const OEXAnalyticsEventRegistration = @"edx.bi.app.user.register.clicked";
+NSString* const OEXAnalyticsEventOpenInBrowser = @"edx.bi.app.navigation.open-in-browser";
 NSString* const OEXAnalyticsEventComponentViewed = @"edx.bi.app.navigation.component.viewed";
+NSString* const OEXAnalyticsEventOutlineModeChanged = @"edx.bi.app.navigation.switched-mode.clicked";
 NSString* const OEXAnalyticsEventScreen = @"edx.bi.app.navigation.screen";
 NSString* const OEXAnalyticsEventCertificateShared = @"edx.bi.app.certificate.shared";
 NSString* const OEXAnalyticsEventCourseShared = @"edx.bi.app.course.shared";
 
+NSString* const OEXAnalyticsCategoryConversion = @"conversion";
 NSString* const OEXAnalyticsCategoryNavigation = @"navigation";
 NSString* const OEXAnalyticsCategoryNotifications = @"notifications";
 NSString* const OEXAnalyticsCategoryProfile = @"profiles";
@@ -42,20 +47,11 @@ NSString* const OEXAnalyticsValueOrientationPortrait = @"portrait";
 NSString* const OEXAnalyticsValuePhotoSourceCamera = @"camera";
 NSString* const OEXAnalyticsValuePhotoSourceLibrary = @"library";
 
-NSString* const OEXAnalyticsScreenLaunch = @"Launch";
-NSString* const OEXAnalyticsScreenRegister = @"Register";
 NSString* const OEXAnalyticsScreenCourseDashboard = @"Course Dashboard";
 NSString* const OEXAnalyticsScreenMyCourses = @"My Courses";
 NSString* const OEXAnalyticsScreenCourseOutline = @"Course Outline";
 NSString* const OEXAnalyticsScreenSectionOutline = @"Section Outline";
 NSString* const OEXAnalyticsScreenUnitDetail = @"Unit Detail";
-NSString* const OEXAnalyticsScreenHandouts = @"Course Handouts";
-NSString* const OEXAnalyticsScreenAnnouncements = @"Course Announcements";
-NSString* const OEXAnalyticsScreenFindCourses = @"Find Courses";
-NSString* const OEXAnalyticsScreenCourseInfo = @"Course Info";
-NSString* const OEXAnalyticsScreenMyVideosAllVideos = @"My Videos - All Videos";
-NSString* const OEXAnalyticsScreenMyVideosRecentVideos = @"My Videos - Recent Videos";
-NSString* const OEXAnalyticsScreenMyVideosCourseVideos = @"My Videos - Course Videos";
 NSString* const OEXAnalyticsScreenProfileView = @"Profile View";
 NSString* const OEXAnalyticsScreenProfileEdit = @"Profile Edit";
 NSString* const OEXAnalyticsScreenCropPhoto = @"Crop Photo";
@@ -70,5 +66,16 @@ NSString* const OEXAnalyticsScreenViewThread = @"Forum: View Thread";
 NSString* const OEXAnalyticsScreenAddThreadResponse = @"Forum: Add Thread Response";
 NSString* const OEXAnalyticsScreenAddResponseComment = @"Forum: Add Response Comment";
 NSString* const OEXAnalyticsScreenViewResponseComments = @"Forum: View Response Comments";
+
+NSString* const OEXAnalyticsScreenFindCourses = @"Find Courses";
+NSString* const OEXAnalyticsScreenLaunch = @"Launch";
+NSString* const OEXAnalyticsScreenMyVideosAllVideos = @"My Videos - All Videos";
+NSString* const OEXAnalyticsScreenMyVideosRecentVideos = @"My Videos - Recent Videos";
+NSString* const OEXAnalyticsScreenMyVideosCourseVideos = @"My Videos - Course Videos";
+NSString* const OEXAnalyticsScreenRegister = @"Register";
+NSString* const OEXAnalyticsScreenAnnouncements = @"Course Announcements";
 NSString* const OEXAnalyticsScreenDownloads = @"Downloads";
+NSString* const OEXAnalyticsScreenCourseInfo = @"Course Info";
 NSString* const OEXAnalyticsScreenSettings = @"Settings";
+NSString* const OEXAnalyticsScreenHandouts = @"Course Handouts";
+

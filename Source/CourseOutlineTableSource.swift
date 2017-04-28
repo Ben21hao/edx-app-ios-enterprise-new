@@ -9,9 +9,9 @@
 import UIKit
 
 protocol CourseOutlineTableControllerDelegate : class {
-    func outlineTableController(controller : CourseOutlineTableController, choseBlock:CourseBlock, withParentID:CourseBlockID)
-    func outlineTableController(controller : CourseOutlineTableController, choseDownloadVideos videos:[OEXHelperVideoDownload], rootedAtBlock block: CourseBlock)
-    func outlineTableController(controller : CourseOutlineTableController, choseDownloadVideoForBlock block:CourseBlock)
+    func outlineTableControllerSelectRow(controller : CourseOutlineTableController, choseBlock:CourseBlock, withParentID:CourseBlockID)
+    func outlineTableControllerChooseDownloadVideo(controller : CourseOutlineTableController, choseDownloadVideos videos:[OEXHelperVideoDownload], rootedAtBlock block: CourseBlock)
+    func outlineTableControllerChoseDownloadVideoForBlock(controller : CourseOutlineTableController, choseDownloadVideoForBlock block:CourseBlock)
     func outlineTableControllerChoseShowDownloads(controller : CourseOutlineTableController)
 }
 
@@ -32,7 +32,7 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
         self.courseQuerier = environment.dataManager.courseDataManager.querierForCourseWithID(courseID)
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -41,7 +41,6 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
     var highlightedBlockID : CourseBlockID? = nil
     
     override func viewDidLoad() {
-        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView(frame: CGRectZero)
@@ -78,7 +77,8 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
         if let path = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRowAtIndexPath(path, animated: false)
         }
-        if let highlightID = highlightedBlockID, indexPath = indexPathForBlockWithID(highlightID) {
+        if let highlightID = highlightedBlockID, indexPath = indexPathForBlockWithID(highlightID)
+        {
             tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
         }
     }
@@ -109,34 +109,28 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let group = groups[indexPath.section]
         let nodes = group.children
         let block = nodes[indexPath.row]
-        
         switch nodes[indexPath.row].displayType {
-        case .Video://视频
+        case .Video:
             let cell = tableView.dequeueReusableCellWithIdentifier(CourseVideoTableViewCell.identifier, forIndexPath: indexPath) as! CourseVideoTableViewCell
             cell.block = block
-            cell.localState = environment.dataManager.interface?.stateForVideoWithID(block.blockID, courseID : courseQuerier.courseID)//主要找出loacalSte的值
+            cell.localState = environment.dataManager.interface?.stateForVideoWithID(block.blockID, courseID : courseQuerier.courseID)
             cell.delegate = self
             return cell
-            
         case .HTML(.Base):
             let cell = tableView.dequeueReusableCellWithIdentifier(CourseHTMLTableViewCell.identifier, forIndexPath: indexPath) as! CourseHTMLTableViewCell
             cell.block = block
             return cell
-            
         case .HTML(.Problem):
             let cell = tableView.dequeueReusableCellWithIdentifier(CourseProblemTableViewCell.identifier, forIndexPath: indexPath) as! CourseProblemTableViewCell
             cell.block = block
             return cell
-            
         case .Unknown:
             let cell = tableView.dequeueReusableCellWithIdentifier(CourseUnknownTableViewCell.identifier, forIndexPath: indexPath) as! CourseUnknownTableViewCell
             cell.block = block
             return cell
-            
         case .Outline, .Unit:
             let cell = tableView.dequeueReusableCellWithIdentifier(CourseSectionTableViewCell.identifier, forIndexPath: indexPath) as! CourseSectionTableViewCell
             cell.block = nodes[indexPath.row]
@@ -147,10 +141,9 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
             cell.videos = videoStream.map({[weak self] videoIDs in
                 let videos = self?.environment.dataManager.interface?.statesForVideosWithIDs(videoIDs, courseID: courseID) ?? []
                 return videos.filter { video in !video.summary!.onlyOnWeb }
-                })
+            })
             cell.delegate = self
             return cell
-            
         case .Discussion:
             let cell = tableView.dequeueReusableCellWithIdentifier(DiscussionTableViewCell.identifier, forIndexPath: indexPath) as! DiscussionTableViewCell
             cell.block = block
@@ -171,11 +164,11 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let group = groups[indexPath.section]
         let chosenBlock = group.children[indexPath.row]
-        self.delegate?.outlineTableController(self, choseBlock: chosenBlock, withParentID: group.block.blockID)
+        self.delegate?.outlineTableControllerSelectRow(self, choseBlock: chosenBlock, withParentID: group.block.blockID)
     }
     
     func videoCellChoseDownload(cell: CourseVideoTableViewCell, block : CourseBlock) {
-        self.delegate?.outlineTableController(self, choseDownloadVideoForBlock: block)
+        self.delegate?.outlineTableControllerChoseDownloadVideoForBlock(self, choseDownloadVideoForBlock: block)
     }
     
     func videoCellChoseShowDownloads(cell: CourseVideoTableViewCell) {
@@ -187,7 +180,7 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
     }
     
     func sectionCellChoseDownload(cell: CourseSectionTableViewCell, videos: [OEXHelperVideoDownload], forBlock block : CourseBlock) {
-        self.delegate?.outlineTableController(self, choseDownloadVideos: videos, rootedAtBlock:block)
+        self.delegate?.outlineTableControllerChooseDownloadVideo(self, choseDownloadVideos: videos, rootedAtBlock:block)
     }
     
     func choseViewLastAccessedWithItem(item : CourseLastAccessed) {
@@ -195,7 +188,7 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
             let childNodes = group.children
             let currentLastViewedIndex = childNodes.firstIndexMatching({$0.blockID == item.moduleId})
             if let matchedIndex = currentLastViewedIndex {
-                self.delegate?.outlineTableController(self, choseBlock: childNodes[matchedIndex], withParentID: group.block.blockID)
+                self.delegate?.outlineTableControllerSelectRow(self, choseBlock: childNodes[matchedIndex], withParentID: group.block.blockID)
                 break
             }
         }

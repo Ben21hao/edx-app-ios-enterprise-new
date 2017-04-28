@@ -3,10 +3,10 @@
 //  edXVideoLocker
 //
 //  Created by Rahul Varma on 24/11/14.
-//  Copyright (c) 2014-2016 edX. All rights reserved.
+//  Copyright (c) 2014 edX. All rights reserved.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 @protocol OEXAnalyticsTracker;
 
@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OEXAnalyticsEvent : NSObject <NSCopying>
+@interface OEXAnalyticsEvent : NSObject
 
 @property (copy, nonatomic, nullable) NSString* openInBrowserURL;
 @property (copy, nonatomic, nullable) NSString* courseID;
@@ -112,9 +112,9 @@ NS_ASSUME_NONNULL_BEGIN
                          Mode:(BOOL)isFullscreen
                       UnitURL:(NSString*)unitUrl;
 
-- (void)trackOpenInBrowserWithURL:(NSString*)URL courseID:(NSString*)courseID blockID:(NSString*)blockID minifiedBlockID: (NSString*)minifiedBlockID supported:(BOOL)supported;
+- (void)trackOpenInBrowserWithURL:(NSString*)URL courseID:(NSString*)courseID blockID:(NSString*)block supported:(BOOL)supported;
 
-- (void)trackViewedComponentForCourseWithID:(NSString*)courseID blockID:(NSString*)blockID minifiedBlockID: (NSString*)minifiedBlockID;
+- (void)trackViewedComponentForCourseWithID:(NSString*)courseID blockID:(NSString*)block;
 
 // Notification events
 - (void)trackAnnouncementNotificationReceivedWithCourseID:(NSString*)courseID;

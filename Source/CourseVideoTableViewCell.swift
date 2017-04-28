@@ -27,16 +27,13 @@ class CourseVideoTableViewCell: UITableViewCell, CourseBlockContainerCell {
     var block : CourseBlock? = nil {
         didSet {
             content.setTitleText(block?.displayName)
-//            if let video = block?.type.asVideo {
-//                video.isSupportedVideo ? (downloadView.hidden = false) : (downloadView.hidden = true)
-//            }
         }
     }
         
     var localState : OEXHelperVideoDownload? {
         didSet {
             updateDownloadViewForVideoState()
-            content.setDetailText(OEXDateFormatting.formatSecondsAsVideoLength(localState?.summary?.duration ?? 0))
+            content.setDetailText(OEXDateFormatting.formatSecondsAsVideoLength(Double((localState?.summary?.duration)!) ?? 0))
         }
     }
     
@@ -69,7 +66,6 @@ class CourseVideoTableViewCell: UITableViewCell, CourseBlockContainerCell {
         
         content.trailingView = downloadView
         downloadView.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, forAxis: .Horizontal)
-        
     }
 
     required init?(coder aDecoder: NSCoder) {

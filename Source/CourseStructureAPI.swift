@@ -19,13 +19,13 @@ public struct CourseOutlineAPI {
         
         var query : [String:JSON] {
             var result =
-            [
-                "requested_fields" : JSON(fields.joinWithSeparator(",")),
-                "block_counts" : JSON(blockCount.joinWithSeparator(",")),
-                "student_view_data" : JSON(studentViewData.map({ $0.rawValue }).joinWithSeparator(",")),
-                "depth": "all",
-                "nav_depth": 3,
-                "course_id": JSON(courseID)
+                [
+                    "requested_fields" : JSON(fields.joinWithSeparator(",")),
+                    "block_counts" : JSON(blockCount.joinWithSeparator(",")),
+                    "student_view_data" : JSON(studentViewData.map({ $0.rawValue }).joinWithSeparator(",")),
+                    "depth": "all",
+                    "nav_depth": 3,
+                    "course_id": JSON(courseID)
             ]
             
             if let username = username {
@@ -49,6 +49,7 @@ public struct CourseOutlineAPI {
             blockCount : [CourseBlock.Category.Video.rawValue],
             studentViewData : [CourseBlock.Category.Video, CourseBlock.Category.Discussion]
         )
+        print("课程大纲  --------- ==== \(courseID)\n --- \(parameters) ")
         return NetworkRequest(
             method : .GET,
             path : "/api/courses/v1/blocks/",
@@ -57,4 +58,5 @@ public struct CourseOutlineAPI {
             deserializer : .JSONResponse(deserializer)
         )
     }
+
 }

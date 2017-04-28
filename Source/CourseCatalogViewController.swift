@@ -78,6 +78,7 @@ class CourseCatalogViewController: UIViewController, CoursesTableViewControllerD
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         environment.analytics.trackScreenWithName(OEXAnalyticsScreenFindCourses)
     }
     

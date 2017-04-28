@@ -119,6 +119,19 @@ public class Stream<A> : StreamDependency {
             finally?()
         }
     }
+//    private func joinHandlers<A>(success success : A -> Void, failure : NSError -> Void, finally : (Void -> Void)?) -> Result<A> -> Void {
+//        return {
+//            switch $0 {
+//            case let .Success(v):
+//                success(v)
+//            case let .Failure(e):
+////                failure(e)
+//                success(v)
+//            }
+//            finally?()
+//        }
+//    }
+
     
     /// Add a listener to a stream.
     ///
@@ -157,6 +170,9 @@ public class Stream<A> : StreamDependency {
     /// - parameter success: The action to fire when the stream receives a Success result.
     /// - parameter failure: The action to fire when the stream receives a Failure result.
     /// - parameter finally: An action that will be executed after both the success and failure actions
+//    public func listen(owner : NSObject, fireIfAlreadyLoaded : Bool = true, success : A -> Void, failure : NSError -> Void, finally : (Void -> Void)? = nil) -> Removable {
+//        return listen(owner, fireIfAlreadyLoaded: fireIfAlreadyLoaded, action: joinHandlers(success:success, failure:failure, finally:finally))
+//    }
     public func listen(owner : NSObject, fireIfAlreadyLoaded : Bool = true, success : A -> Void, failure : NSError -> Void, finally : (Void -> Void)? = nil) -> Removable {
         return listen(owner, fireIfAlreadyLoaded: fireIfAlreadyLoaded, action: joinHandlers(success:success, failure:failure, finally:finally))
     }

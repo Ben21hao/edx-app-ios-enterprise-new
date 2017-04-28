@@ -23,6 +23,7 @@ extern NSString* const OEXVideoEncodingMobileLow;
 @property (readonly, nonatomic, copy, nullable) NSString* name;
 @property (readonly, nonatomic, copy, nullable) NSString* URL;
 @property (readonly, nonatomic, strong, nullable) NSNumber* size;
+@property (readonly, nonatomic) BOOL isYoutube;
 
 /// [String], ordered by preference
 + (NSArray*)knownEncodingNames;

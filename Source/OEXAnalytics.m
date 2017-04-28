@@ -3,7 +3,7 @@
 //  edXVideoLocker
 //
 //  Created by Rahul Varma on 24/11/14.
-//  Copyright (c) 2014-2016 edX. All rights reserved.
+//  Copyright (c) 2014 edX. All rights reserved.
 //
 
 @import edXCore;
@@ -15,20 +15,8 @@
 #import "NSMutableDictionary+OEXSafeAccess.h"
 #import "NSNotificationCenter+OEXSafeAccess.h"
 #import "OEXSession.h"
-#import "edx-Swift.h"
 
 @implementation OEXAnalyticsEvent
-
-- (id)copyWithZone:(NSZone *)zone {
-    OEXAnalyticsEvent* event = [[OEXAnalyticsEvent allocWithZone:zone] init];
-    event.openInBrowserURL = self.openInBrowserURL;
-    event.courseID = self.courseID;
-    event.name = self.name;
-    event.displayName = self.displayName;
-    event.category = self.category;
-    event.label = self.label;
-    return self;
-}
 
 - (NSString*)description {
     NSMutableDictionary* info = [[NSMutableDictionary alloc] init];
@@ -270,7 +258,7 @@ static OEXAnalytics* sAnalytics;
                     SkipType:(NSString*)skip_value {
 
     OEXAnalyticsVideoEvent* event = [[OEXAnalyticsVideoEvent alloc] init];
-    event.displayName = @"Seeked Video";
+    event.displayName = @"Video Seeked";
     event.name = value_video_seeked;
     event.courseID = courseId;
     event.openInBrowserURL = unitUrl;
@@ -379,7 +367,7 @@ static OEXAnalytics* sAnalytics;
     [info safeSetObject:@(currentTime) forKey:key_current_time];
 
     OEXAnalyticsVideoEvent* event = [[OEXAnalyticsVideoEvent alloc] init];
-    event.name = value_fullscreen;
+    event.name = value_single_download;
     event.displayName = @"Screen Toggled";
     event.courseID = courseId;
     event.openInBrowserURL = unitUrl;
@@ -388,11 +376,13 @@ static OEXAnalytics* sAnalytics;
     [self trackVideoPlayerEvent:event withInfo:info];
 }
 
-- (void)trackUserLogin:(NSString*)method {
+- (void)trackUserLogin:(NSString *)method {
     NSMutableDictionary* info = @{}.mutableCopy;
     [info safeSetObject:method forKey:key_method];
 
-    OEXAnalyticsEvent* event = [OEXAnalytics loginEvent];
+    OEXAnalyticsEvent* event = [[OEXAnalyticsEvent alloc] init];
+    event.name = value_login;
+    event.displayName = @"User Login";
     [self trackEvent:event forComponent:nil withInfo:info];
 }
 
@@ -404,7 +394,11 @@ static OEXAnalytics* sAnalytics;
 }
 
 - (void)trackRegistrationWithProvider:(NSString *)provider {
-    OEXAnalyticsEvent* event = [OEXAnalytics registerEvent];
+    OEXAnalyticsEvent* event = [[OEXAnalyticsEvent alloc] init];
+    event.name = OEXAnalyticsEventRegistration;
+    event.displayName = @"Create Account Clicked";
+    event.category = OEXAnalyticsCategoryConversion;
+    event.label = [NSString stringWithFormat:@"iOS v%@", [[NSBundle mainBundle] oex_shortVersionString]];
     
     NSMutableDictionary* properties = [[NSMutableDictionary alloc] init];
     [properties setObjectOrNil:provider forKey:OEXAnalyticsKeyProvider];
@@ -414,11 +408,10 @@ static OEXAnalytics* sAnalytics;
 
 #pragma mark - Course Navigation
 
-- (void)trackViewedComponentForCourseWithID:(NSString*)courseID blockID:(NSString*)blockID minifiedBlockID: (NSString*)minifiedBlockID {
+- (void)trackViewedComponentForCourseWithID:(NSString*)courseID blockID:(NSString*)blockID {
     NSMutableDictionary* info = [[NSMutableDictionary alloc] init];
     [info safeSetObject:blockID forKey:OEXAnalyticsKeyBlockID];
     [info safeSetObject:courseID forKey:OEXAnalyticsKeyCourseID];
-    [info safeSetObject:minifiedBlockID forKey:FirebaseAnalyticsTracker.minifiedBlockIDKey];
     
     OEXAnalyticsEvent* event = [[OEXAnalyticsEvent alloc] init];
     event.name = OEXAnalyticsEventComponentViewed;
@@ -431,11 +424,10 @@ static OEXAnalytics* sAnalytics;
 
 #pragma mark - View on web
 
-- (void)trackOpenInBrowserWithURL:(NSString*)URL courseID:(NSString*)courseID blockID:(NSString*)blockID minifiedBlockID: (NSString*)minifiedBlockID supported:(BOOL)supported {
+- (void)trackOpenInBrowserWithURL:(NSString*)URL courseID:(NSString*)courseID blockID:(NSString*)blockID supported:(BOOL)supported {
     NSMutableDictionary* info = @{}.mutableCopy;
-    [info safeSetObject:courseID forKey:OEXAnalyticsKeyCourseID];
     [info safeSetObject:blockID forKey:OEXAnalyticsKeyBlockID];
-    [info safeSetObject:minifiedBlockID forKey:FirebaseAnalyticsTracker.minifiedBlockIDKey];
+    [info safeSetObject:courseID forKey:OEXAnalyticsKeyCourseID];
     [info safeSetObject:@(supported) forKey:OEXAnalyticsKeySupported];
     [info safeSetObject:URL forKey:key_target_url];
     
@@ -488,7 +480,11 @@ static OEXAnalytics* sAnalytics;
 }
 
 - (void)trackUserEnrolledInCourse:(NSString*)courseID {
-    OEXAnalyticsEvent* event = [OEXAnalytics enrollEvent:courseID];
+    OEXAnalyticsEvent* event = [[OEXAnalyticsEvent alloc] init];
+    event.name = OEXAnalyticsEventCourseEnrollment;
+    event.displayName = @"Enroll Course Clicked";
+    event.category = OEXAnalyticsCategoryConversion;
+    event.label = courseID;
     [self trackEvent:event forComponent:nil withInfo:@{}];
 }
 

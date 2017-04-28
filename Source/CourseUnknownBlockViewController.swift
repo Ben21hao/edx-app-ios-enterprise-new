@@ -10,14 +10,13 @@ import UIKit
 
 class CourseUnknownBlockViewController: UIViewController, CourseBlockViewController {
     
-    typealias Environment = protocol<DataManagerProvider, OEXInterfaceProvider, OEXAnalyticsProvider>
+    typealias Environment = protocol<DataManagerProvider>
     
     let environment : Environment
 
     let blockID : CourseBlockID?
     let courseID : String
-    var block: CourseBlock?
-    var messageView : IconMessageView?
+    let messageView : IconMessageView
     
     var loader : Stream<NSURL?>?
     init(blockID : CourseBlockID?, courseID : String, environment : Environment) {
@@ -25,53 +24,21 @@ class CourseUnknownBlockViewController: UIViewController, CourseBlockViewControl
         self.courseID = courseID
         self.environment = environment
         
+        messageView = IconMessageView(icon: Icon.CourseUnknownContent, message: Strings.courseContentUnknown)
+        
         super.init(nibName: nil, bundle: nil)
         
-        let courseQuerier = environment.dataManager.courseDataManager.querierForCourseWithID(self.courseID)
-        courseQuerier.blockWithID(blockID).extendLifetimeUntilFirstResult (
-            success:
-            { [weak self] block in
-                self?.block = block
-                if let video = block.type.asVideo where video.isYoutubeVideo{
-                    self?.showYoutubeMessage(Strings.Video.viewOnYoutube, message: Strings.Video.onlyOnYoutube, icon: Icon.CourseModeVideo, videoUrl: video.videoURL)
-                }
-                else {
-                    self?.showError()
-                }
-            },
-            failure: {[weak self] _ in
-                self?.showError()
-            }
-        )
-    }
-    
-    private func showYoutubeMessage(buttonTitle: String, message: String, icon: Icon, videoUrl: String?) {
-        messageView = IconMessageView(icon: icon, message: message)
-        messageView?.buttonInfo = MessageButtonInfo(title : buttonTitle)
-        {
-            if let videoURL = videoUrl, url =  NSURL(string: videoURL) {
-                UIApplication.sharedApplication().openURL(url)
-            }
-        }
         
-        view.addSubview(messageView!)
-    }
-    
-    private func showError() {
-        messageView = IconMessageView(icon: Icon.CourseUnknownContent, message: Strings.courseContentUnknown)
-        messageView?.buttonInfo = MessageButtonInfo(title : Strings.openInBrowser)
-        {
+        messageView.buttonInfo = MessageButtonInfo(title : Strings.openInBrowser)
+            {
             [weak self] in
-            self?.loader?.listen(self!, success : {url -> Void in
-                if let url = url {
-                    UIApplication.sharedApplication().openURL(url)
-                    self?.logOpenInBrowserEvent()
+            self?.loader?.listen(self!, success : {URL -> Void in
+                if let URL = URL {
+                    UIApplication.sharedApplication().openURL(URL)
                 }
-                }, failure : {_ in
+            }, failure : {_ in
             })
         }
-        
-        view.addSubview(messageView!)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -82,6 +49,7 @@ class CourseUnknownBlockViewController: UIViewController, CourseBlockViewControl
         super.viewDidLoad()
         
         self.view.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
+        self.view.addSubview(messageView)
         
     }
     
@@ -98,13 +66,13 @@ class CourseUnknownBlockViewController: UIViewController, CourseBlockViewControl
     }
     
     private func applyPortraitConstraints() {
-        messageView?.snp_remakeConstraints { (make) -> Void in
+        messageView.snp_remakeConstraints { (make) -> Void in
             make.edges.equalTo(view)
         }
     }
     
     private func applyLandscapeConstraints() {
-        messageView?.snp_remakeConstraints { (make) -> Void in
+        messageView.snp_remakeConstraints { (make) -> Void in
             make.edges.equalTo(view)
             let barHeight = navigationController?.toolbar.frame.size.height ?? 0.0
             make.bottom.equalTo(view.snp_bottom).offset(-barHeight)
@@ -121,11 +89,14 @@ class CourseUnknownBlockViewController: UIViewController, CourseBlockViewControl
         }
     }
     
-    private func logOpenInBrowserEvent() {
-        guard let block = block else { return }
-        
-        environment.analytics.trackOpenInBrowserWithURL(block.blockURL?.absoluteString ?? "", courseID: courseID, blockID: block.blockID, minifiedBlockID: block.minifiedBlockID ?? "", supported: block.multiDevice)
-        
+}
+
+extension UIViewController {
+    func isVerticallyCompact() -> Bool {
+        return self.traitCollection.verticalSizeClass == .Compact
     }
     
+    func currentOrientation() -> UIInterfaceOrientation {
+        return UIApplication.sharedApplication().statusBarOrientation
+    }
 }

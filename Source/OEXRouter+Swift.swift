@@ -45,7 +45,7 @@ extension CourseBlock {
         case .Chapter: return .Outline
         case .Section: return .Outline
         case .Unit: return .Unit
-        case let .Video(summary): return (summary.isSupportedVideo) ? .Video : .Unknown
+        case let .Video(summary): return summary.onlyOnWeb ? .Unknown : .Video
         case let .Discussion(discussionModel): return .Discussion(discussionModel)
         }
     }
@@ -87,7 +87,7 @@ extension OEXRouter {
         }
     }
     
-    private func controllerForBlockWithID(blockID : CourseBlockID?, type : CourseBlockDisplayType, courseID : String) -> UIViewController {
+    func controllerForBlockWithID(blockID : CourseBlockID?, type : CourseBlockDisplayType, courseID : String) -> UIViewController {
         switch type {
         case .Outline:
             let outlineController = CourseOutlineViewController(environment: self.environment, courseID: courseID, rootID: blockID)

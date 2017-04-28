@@ -11,6 +11,7 @@
 NSString* const OEXVideoEncodingYoutube = @"youtube";
 NSString* const OEXVideoEncodingMobileHigh = @"mobile_high";
 NSString* const OEXVideoEncodingMobileLow = @"mobile_low";
+
 NSString* const OEXVideoEncodingFallback = @"fallback";
 
 @interface OEXVideoEncoding ()
@@ -47,5 +48,11 @@ NSString* const OEXVideoEncodingFallback = @"fallback";
     }
     return self;
 }
+
+- (BOOL)isYoutube {
+    return [self.name isEqualToString:OEXVideoEncodingYoutube];
+}
+
+
 
 @end

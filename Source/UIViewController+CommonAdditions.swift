@@ -9,13 +9,7 @@
 import Foundation
 
 extension UIViewController {
-    func isVerticallyCompact() -> Bool {
-        return self.traitCollection.verticalSizeClass == .Compact
-    }
-    
-    func currentOrientation() -> UIInterfaceOrientation {
-        return UIApplication.sharedApplication().statusBarOrientation
-    }
+
 
     func topMostController() -> UIViewController? {
         var topController = UIApplication.sharedApplication().keyWindow?.rootViewController
