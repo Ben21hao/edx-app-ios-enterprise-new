@@ -700,6 +700,8 @@
 		B518C1731EA9FF1C0027569D /* TDVideoBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B518C1701EA9FF1C0027569D /* TDVideoBarView.m */; };
 		B52590E01EB2E16B003A950D /* CourseOutlineModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52590DF1EB2E16B003A950D /* CourseOutlineModeController.swift */; };
 		B52590E21EB2E222003A950D /* OpenOnWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52590E11EB2E222003A950D /* OpenOnWebController.swift */; };
+		B52590E91EB32852003A950D /* PurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B52590E61EB32852003A950D /* PurchaseManager.m */; };
+		B52590EA1EB32852003A950D /* PurchaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B52590E81EB32852003A950D /* PurchaseModel.m */; };
 		B53EA90D1EA621BE00CEC936 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53EA90C1EA621BE00CEC936 /* Images.xcassets */; };
 		B546EDA21EB09167007F21A9 /* StartupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B546EDA11EB09167007F21A9 /* StartupViewController.swift */; };
 		B54C8AC81EA8BF670002FCED /* WYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8AC71EA8BF670002FCED /* WYAlertView.m */; };
@@ -1781,6 +1783,10 @@
 		B518C1701EA9FF1C0027569D /* TDVideoBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDVideoBarView.m; sourceTree = "<group>"; };
 		B52590DF1EB2E16B003A950D /* CourseOutlineModeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseOutlineModeController.swift; sourceTree = "<group>"; };
 		B52590E11EB2E222003A950D /* OpenOnWebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenOnWebController.swift; sourceTree = "<group>"; };
+		B52590E51EB32852003A950D /* PurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseManager.h; sourceTree = "<group>"; };
+		B52590E61EB32852003A950D /* PurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseManager.m; sourceTree = "<group>"; };
+		B52590E71EB32852003A950D /* PurchaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseModel.h; sourceTree = "<group>"; };
+		B52590E81EB32852003A950D /* PurchaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseModel.m; sourceTree = "<group>"; };
 		B53EA90C1EA621BE00CEC936 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../edX/Images.xcassets; sourceTree = "<group>"; };
 		B546EDA11EB09167007F21A9 /* StartupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartupViewController.swift; sourceTree = "<group>"; };
 		B54C8AC61EA8BF670002FCED /* WYAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYAlertView.h; sourceTree = "<group>"; };
@@ -2250,6 +2256,7 @@
 		1A6B23CE1BAB4A5100FD7309 /* User Profiles */ = {
 			isa = PBXGroup;
 			children = (
+				B52590E31EB32852003A950D /* TDPaymentTool */,
 				B5FAF75E1EB0502B000C2169 /* TDAuthenViewController */,
 				B5FAF6E01EB03AB1000C2169 /* TDWaitforPayViewControllers */,
 				B5FAF6D71EB0319F000C2169 /* TDRechargeSuccessViewController */,
@@ -3723,6 +3730,25 @@
 				B518C1701EA9FF1C0027569D /* TDVideoBarView.m */,
 			);
 			path = views;
+			sourceTree = "<group>";
+		};
+		B52590E31EB32852003A950D /* TDPaymentTool */ = {
+			isa = PBXGroup;
+			children = (
+				B52590E41EB32852003A950D /* TDPurchaseManager */,
+			);
+			path = TDPaymentTool;
+			sourceTree = "<group>";
+		};
+		B52590E41EB32852003A950D /* TDPurchaseManager */ = {
+			isa = PBXGroup;
+			children = (
+				B52590E51EB32852003A950D /* PurchaseManager.h */,
+				B52590E61EB32852003A950D /* PurchaseManager.m */,
+				B52590E71EB32852003A950D /* PurchaseModel.h */,
+				B52590E81EB32852003A950D /* PurchaseModel.m */,
+			);
+			path = TDPurchaseManager;
 			sourceTree = "<group>";
 		};
 		B54C8AC51EA8BF670002FCED /* TDAlertView */ = {
@@ -5215,6 +5241,7 @@
 				B54C8AC81EA8BF670002FCED /* WYAlertView.m in Sources */,
 				7731813B1B6C1442000CC050 /* SeparatorInsetable.swift in Sources */,
 				B4B285DC1A9A490400DD603A /* OEXFacebookConfig.m in Sources */,
+				B52590EA1EB32852003A950D /* PurchaseModel.m in Sources */,
 				B59238C31EADBD4D00C686D8 /* CommentTopItem.m in Sources */,
 				9C9B7F6C1A8CC68400A857B2 /* OEXFindCoursesViewController.m in Sources */,
 				B518BEC71EA9E6F00027569D /* TDOrderAssitantCell.m in Sources */,
@@ -5255,6 +5282,7 @@
 				1AB539F81BFE046C0065501F /* DebugMenuLogger.swift in Sources */,
 				9ED168AE1B29A4ED00AA7B5B /* UserAPI.swift in Sources */,
 				7725016A1C80FB5C002549A9 /* ServerChangedChecker.swift in Sources */,
+				B52590E91EB32852003A950D /* PurchaseManager.m in Sources */,
 				E07107931C7591360004B76C /* DiscussionHelper.swift in Sources */,
 				77092C751B42E4C1004AA1A1 /* UIStatusBarStyle+Styles.swift in Sources */,
 				B59238E81EADD0BE00C686D8 /* TDActivityViewController.m in Sources */,

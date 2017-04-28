@@ -17,8 +17,8 @@
 #import "WaitForPayTableViewCell.h"
 
 #import "edX-Swift.h"
-//#import "PurchaseManager.h"
-//#import "TDBaseToolModel.h"
+#import "PurchaseManager.h"
+#import "TDBaseToolModel.h"
 #import "OrderItem.h"
 #import "SubOrderItem.h"
 #import "Reachability.h"
@@ -59,7 +59,7 @@
 @property (nonatomic,strong) UIButton *backButton;
 
 @property (nonatomic,strong) TDBaseToolModel *baseTool;
-//@property (nonatomic,assign) BOOL hideShowPurchase;//0 为审核中；1 为审核通过
+@property (nonatomic,assign) BOOL hideShowPurchase;//0 为审核中；1 为审核通过
 //@property (nonatomic,strong) PurchaseManager *purchaseManager;
 
 @end
@@ -139,11 +139,11 @@ static NSString *cellID = @"WaitForPayTableViewCell";
     [self.backButton addTarget:self action:@selector(backButtonAction) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
     
-//    WS(weakSelf);
-//    self.baseTool.judHidePurchseHandle = ^(BOOL isHidePurchase){
-//        weakSelf.hideShowPurchase = isHidePurchase;
-//    };
-//    [self.baseTool showPurchase];
+    WS(weakSelf);
+    self.baseTool.judHidePurchseHandle = ^(BOOL isHidePurchase){
+        weakSelf.hideShowPurchase = isHidePurchase;
+    };
+    [self.baseTool showPurchase];
 
 }
 

@@ -14,7 +14,7 @@
 #import "TDRechargeView.h"
 #import "TDBaseToolModel.h"
 
-//#import "PurchaseManager.h"
+#import "PurchaseManager.h"
 //#import "weChatParamsItem.h"
 //#import "aliPayParamsItem.h"
 
@@ -41,7 +41,7 @@
 @property (nonatomic,strong) TDBaseToolModel *baseTool;
 @property (nonatomic,assign) BOOL isHidePurchase; //是否隐藏内购
 
-//@property (nonatomic,strong) PurchaseManager *purchaseManager;//内购工具类
+@property (nonatomic,strong) PurchaseManager *purchaseManager;//内购工具类
 @property (nonatomic,assign) BOOL isPurchassing; //正在进行内购
 
 //@property (nonatomic,strong) weChatParamsItem *weChatItem;
@@ -72,34 +72,34 @@
     [self.baseTool showPurchase];
     
     self.isPurchassing = NO;
-//    self.purchaseManager = [[PurchaseManager alloc] init];
-//    self.purchaseManager.rqToUpStateHandle = ^(int state,NSString *receiveStr) {
-//        
-//        if (state == SKPaymentTransactionStatePurchased) {//成功
-//            weakSelf.purchaseManager.purchaseModel.apple_receipt = receiveStr;
-//            
-//            [weakSelf.purchaseManager verificationAction:1];
-//            
-//            //TODO:保存订单信息和receipt在本地，做丢单处理
-//        }else if (state == SKPaymentTransactionStatePurchasing) {
-//            
-//        } else if (state == SKPaymentTransactionStateFailed) {
-//            weakSelf.isPurchassing = NO;
-//            [SVProgressHUD dismiss];
-//        }
-//    };
-//    
-//    self.purchaseManager.vertificationHandle = ^(id dataObject,NSString *tips){
-//        if ([tips isEqualToString:NSLocalizedString(@"RECHARGE_SUCCESS", nil)]) {
-//            [weakSelf.view makeToast:NSLocalizedString(@"RECHARGE_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
-//            [weakSelf successPay];
-//            
-//        } else {
-//            //TODO:丢单处理
-//        }
-//        weakSelf.isPurchassing = NO;
-//        [SVProgressHUD dismiss];
-//    };
+    self.purchaseManager = [[PurchaseManager alloc] init];
+    self.purchaseManager.rqToUpStateHandle = ^(int state,NSString *receiveStr) {
+        
+        if (state == SKPaymentTransactionStatePurchased) {//成功
+            weakSelf.purchaseManager.purchaseModel.apple_receipt = receiveStr;
+            
+            [weakSelf.purchaseManager verificationAction:1];
+            
+            //TODO:保存订单信息和receipt在本地，做丢单处理
+        }else if (state == SKPaymentTransactionStatePurchasing) {
+            
+        } else if (state == SKPaymentTransactionStateFailed) {
+            weakSelf.isPurchassing = NO;
+            [SVProgressHUD dismiss];
+        }
+    };
+    
+    self.purchaseManager.vertificationHandle = ^(id dataObject,NSString *tips){
+        if ([tips isEqualToString:NSLocalizedString(@"RECHARGE_SUCCESS", nil)]) {
+            [weakSelf.view makeToast:NSLocalizedString(@"RECHARGE_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
+            [weakSelf successPay];
+            
+        } else {
+            //TODO:丢单处理
+        }
+        weakSelf.isPurchassing = NO;
+        [SVProgressHUD dismiss];
+    };
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successPay) name:@"aliPaySuccess" object:nil];
 }
 
@@ -304,10 +304,10 @@
 //                [self payByAliPay];
 //                
 //            } else if (type == 3) {
-//                self.purchaseManager.purchaseModel.total_fee = self.rechargeMoney;
-//                self.purchaseManager.purchaseModel.userName = self.username;
-//                self.purchaseManager.purchaseModel.trader_num = responseObject[@"data"][@"order_id"];
-//                [self rqPayByApple];
+                self.purchaseManager.purchaseModel.total_fee = self.rechargeMoney;
+                self.purchaseManager.purchaseModel.userName = self.username;
+                self.purchaseManager.purchaseModel.trader_num = responseObject[@"data"][@"order_id"];
+                [self rqPayByApple];
 //            }
         } else {
             
@@ -331,35 +331,35 @@
 
 #pragma mark - 苹果内购
 - (void)rqPayByApple {
-//    [SVProgressHUD showWithStatus:NSLocalizedString(@"IS_RECHARGE", nil)];
-//    SVProgressHUD.defaultMaskType = SVProgressHUDMaskTypeBlack;
-//    SVProgressHUD.defaultStyle = SVProgressHUDAnimationTypeNative;
-//    
-//    int payType = 1;
-//    switch ([self.rechargeMoney intValue]) {
-//        case 98:
-//            payType = 1;
-//            break;
-//        case 198:
-//            payType = 2;
-//            break;
-//        case 298:
-//            payType = 3;
-//            break;
-//        case 488:
-//            payType = 4;
-//            break;
-//        case 798:
-//            payType = 5;
-//            break;
-//        case 998:
-//            payType = 6;
-//            break;
-//        default:
-//            break;
-//    }
-//    self.isPurchassing = YES;
-//    [self.purchaseManager reqToUpMoneyFromApple:payType];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"IS_RECHARGE", nil)];
+    SVProgressHUD.defaultMaskType = SVProgressHUDMaskTypeBlack;
+    SVProgressHUD.defaultStyle = SVProgressHUDAnimationTypeNative;
+    
+    int payType = 1;
+    switch ([self.rechargeMoney intValue]) {
+        case 98:
+            payType = 1;
+            break;
+        case 198:
+            payType = 2;
+            break;
+        case 298:
+            payType = 3;
+            break;
+        case 488:
+            payType = 4;
+            break;
+        case 798:
+            payType = 5;
+            break;
+        case 998:
+            payType = 6;
+            break;
+        default:
+            break;
+    }
+    self.isPurchassing = YES;
+    [self.purchaseManager reqToUpMoneyFromApple:payType];
 }
 
 #pragma mark - textField Delegate
