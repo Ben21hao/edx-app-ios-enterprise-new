@@ -89,9 +89,9 @@ extension OEXRouter {
     
     private func controllerForBlockWithID(blockID : CourseBlockID?, type : CourseBlockDisplayType, courseID : String) -> UIViewController {
         switch type {
-            case .Outline:
-                let outlineController = CourseOutlineViewController(environment: self.environment, courseID: courseID, rootID: blockID)
-                return outlineController
+        case .Outline:
+            let outlineController = CourseOutlineViewController(environment: self.environment, courseID: courseID, rootID: blockID)
+            return outlineController
         case .Unit:
             return unitControllerForCourseID(courseID, blockID: blockID, initialChildID: nil)
         case .HTML:

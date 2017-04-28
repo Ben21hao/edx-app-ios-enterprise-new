@@ -69,6 +69,7 @@ class CourseVideoTableViewCell: UITableViewCell, CourseBlockContainerCell {
         
         content.trailingView = downloadView
         downloadView.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, forAxis: .Horizontal)
+        
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -41,6 +41,7 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
     var highlightedBlockID : CourseBlockID? = nil
     
     override func viewDidLoad() {
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView(frame: CGRectZero)
@@ -77,8 +78,7 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
         if let path = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRowAtIndexPath(path, animated: false)
         }
-        if let highlightID = highlightedBlockID, indexPath = indexPathForBlockWithID(highlightID)
-        {
+        if let highlightID = highlightedBlockID, indexPath = indexPathForBlockWithID(highlightID) {
             tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: false)
         }
     }
@@ -109,28 +109,34 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let group = groups[indexPath.section]
         let nodes = group.children
         let block = nodes[indexPath.row]
+        
         switch nodes[indexPath.row].displayType {
-        case .Video:
+        case .Video://视频
             let cell = tableView.dequeueReusableCellWithIdentifier(CourseVideoTableViewCell.identifier, forIndexPath: indexPath) as! CourseVideoTableViewCell
             cell.block = block
-            cell.localState = environment.dataManager.interface?.stateForVideoWithID(block.blockID, courseID : courseQuerier.courseID)
+            cell.localState = environment.dataManager.interface?.stateForVideoWithID(block.blockID, courseID : courseQuerier.courseID)//主要找出loacalSte的值
             cell.delegate = self
             return cell
+            
         case .HTML(.Base):
             let cell = tableView.dequeueReusableCellWithIdentifier(CourseHTMLTableViewCell.identifier, forIndexPath: indexPath) as! CourseHTMLTableViewCell
             cell.block = block
             return cell
+            
         case .HTML(.Problem):
             let cell = tableView.dequeueReusableCellWithIdentifier(CourseProblemTableViewCell.identifier, forIndexPath: indexPath) as! CourseProblemTableViewCell
             cell.block = block
             return cell
+            
         case .Unknown:
             let cell = tableView.dequeueReusableCellWithIdentifier(CourseUnknownTableViewCell.identifier, forIndexPath: indexPath) as! CourseUnknownTableViewCell
             cell.block = block
             return cell
+            
         case .Outline, .Unit:
             let cell = tableView.dequeueReusableCellWithIdentifier(CourseSectionTableViewCell.identifier, forIndexPath: indexPath) as! CourseSectionTableViewCell
             cell.block = nodes[indexPath.row]
@@ -144,6 +150,7 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
                 })
             cell.delegate = self
             return cell
+            
         case .Discussion:
             let cell = tableView.dequeueReusableCellWithIdentifier(DiscussionTableViewCell.identifier, forIndexPath: indexPath) as! DiscussionTableViewCell
             cell.block = block

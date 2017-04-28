@@ -164,7 +164,6 @@ class OEXRearTableViewController : UITableViewController {
             
             setButtonHiddenOrNo(true)
         } else {
-            
             setButtonHiddenOrNo(false)
         }
         
