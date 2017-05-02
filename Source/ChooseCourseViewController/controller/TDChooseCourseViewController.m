@@ -9,6 +9,7 @@
 #import "TDChooseCourseViewController.h"
 #import "TDActivityViewController.h"
 #import "SubmitCourseViewController.h"
+#import "TDSubmitCourseViewController.h"
 
 #import "ActivityListItem.h"//活动
 #import "ChooseCourseItem.h"//课程
@@ -237,7 +238,7 @@
         [self.view makeToast:@"请选择课程" duration:1.08 position:CSToastPositionCenter];
         return;
     }
-    SubmitCourseViewController *submitVC = [[SubmitCourseViewController alloc] init];
+    TDSubmitCourseViewController *submitVC = [[TDSubmitCourseViewController alloc] init];
     submitVC.totalM = [self.totalMoney floatValue];//总价格
     submitVC.username = self.username;
     submitVC.activity_id = self.activityItem.activity_id;//活动id

@@ -12,7 +12,7 @@
 
 @property (nonatomic,strong) NSString *imageStr;
 @property (nonatomic,strong) NSString *payStr;
-@property (nonatomic,assign) BOOL isSelected;
-@property (nonatomic,strong) NSString *payType;
+@property (nonatomic,assign) BOOL isSelected; //是否选中
+@property (nonatomic,strong) NSString *payType;//支付类型
 
 @end

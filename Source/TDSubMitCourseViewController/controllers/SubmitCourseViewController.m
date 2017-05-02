@@ -14,8 +14,9 @@
 
 #import "WaitForPayTableViewCell.h"
 #import "PayTableViewCell.h"
-#import "JHCouponsAlertView.h"
 #import "SubmiteSecondCell.h"
+
+#import "JHCouponsAlertView.h"
 
 #import "TDBaseToolModel.h"
 #import "CouponsNameItem.h"
@@ -24,25 +25,25 @@
 #import "edX-Swift.h"
 #import "OEXRouter.h"
 
+#import <MJExtension/MJExtension.h>
 #import <UIImageView+WebCache.h>
 #import "UIColor+JHHexColor.h"
-#import "OEXSession.h"
 #import <AFNetworking.h>
-#import <MJExtension/MJExtension.h>
 #import "Reachability.h"
+#import "OEXSession.h"
 
-//#import <AlipaySDK/AlipaySDK.h>
-//#import "Order.h"
-//#import "DataSigner.h"
-//#import "WechatAuthSDK.h"
-//#import "weChatParamsItem.h"
-//#import "aliPayParamsItem.h"
-//#import "dataUrlItem.h"
-//#import "aliData.h"
-//#import "WXApiObject.h"
-//#import "WXApi.h"
-//#import "WeChatPay.h"
-//#import "Encryption.h"//md5加密
+#import <AlipaySDK/AlipaySDK.h>
+#import "aliPayParamsItem.h"
+#import "DataSigner.h"
+#import "dataUrlItem.h"
+#import "aliData.h"
+#import "Order.h"
+
+#import "weChatParamsItem.h"
+#import "WeChatPay.h"
+#import "WXApi.h"
+
+#import "Encryption.h"//md5加密
 
 @interface SubmitCourseViewController ()<JHCouponsAlertViewDelegate,UIAlertViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate>
 
@@ -56,12 +57,13 @@
 @property (nonatomic,strong) UIButton *submitCourse;
 
 @property (nonatomic,assign) NSInteger payWay;
-//@property (nonatomic,strong) weChatParamsItem *weChatItem;
-//@property (nonatomic,strong) aliPayParamsItem *aliPayItem;
-//@property (nonatomic,strong) dataUrlItem *dataUrlItem;
+
+@property (nonatomic,strong) weChatParamsItem *weChatItem;
+@property (nonatomic,strong) aliPayParamsItem *aliPayItem;
+
 @property (nonatomic,assign) float payMoney;
 @property (nonatomic,assign) float cutBaodian;
-@property (nonatomic,strong) JHCouponsAlertView *alert;
+@property (nonatomic,strong) JHCouponsAlertView *inputAlert;
 @property (nonatomic,strong) NSNumber *remain_score;
 @property (nonatomic,strong) NSString *score_rate;
 @property (nonatomic,strong) NSString *usedcoin;
@@ -119,7 +121,7 @@ static NSString *payIdentify = @"PayTableViewCell";
     [self setLoadDataView];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySuccess) name:@"aliPaySuccess" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backButtonAction) name:@"aliPayFail" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backButtonNotiAction) name:@"aliPayFail" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -161,6 +163,10 @@ static NSString *payIdentify = @"PayTableViewCell";
     }
 }
 
+- (void)backButtonNotiAction {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (void)initialization { //选中第一个
     if (self.isWechatInstall) {
         self.payWay = 1;
@@ -169,10 +175,6 @@ static NSString *payIdentify = @"PayTableViewCell";
     }
     _first = [NSIndexPath indexPathForRow:0 inSection:2];
     [self.tableView selectRowAtIndexPath:_first animated:YES scrollPosition:UITableViewScrollPositionNone];
-}
-
-- (void)backButtonAction {
-    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - 支付成功
@@ -213,8 +215,7 @@ static NSString *payIdentify = @"PayTableViewCell";
 
 - (void)setText{
     
-//    self.isWechatInstall = [WXApi isWXAppInstalled];
-    self.isWechatInstall = YES;
+    self.isWechatInstall = [WXApi isWXAppInstalled];
     self.leftTielArray = self.hideShowPurchase ? @[NSLocalizedString(@"COUPON_PAPER", nil),NSLocalizedString(@"COINS_VALUE", nil)] : @[];
     _payImgArr = self.isWechatInstall ? @[@"weChat",@"zhifu"] : @[@"zhifu"];
     _payImgArr1 = self.isWechatInstall ? @[NSLocalizedString(@"WECHAT_PAY", nil),NSLocalizedString(@"ALI_PAY", nil)] : @[NSLocalizedString(@"ALI_PAY", nil)];
@@ -324,7 +325,7 @@ static NSString *payIdentify = @"PayTableViewCell";
             [self gotoWaitForPayView];
             
         } else {
-            if (self.payWay > self.cutBaodian) {
+            if (self.payMoney > self.cutBaodian) {
                 self.payMoney = self.cutBaodian;
             }
             
@@ -428,104 +429,105 @@ static NSString *payIdentify = @"PayTableViewCell";
 #pragma mark - 创建订单
 - (void)createOrderWitType:(NSInteger)type {
     
-//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    
-//    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-//    [dic setValue:self.username forKey:@"username"];
-//    [dic setValue:self.activity_id forKey:@"activity_id"];
-//    [dic setValue:self.coupon_id forKey:@"coupon_id"];
-//    [dic setValue:self.courseIds forKey:@"course_ids"];
-//    [dic setValue:self.usedcoin forKey:@"used_coin"];
-//    NSString *priceStr = [self.moneyLabel.text substringFromIndex:1];//总金额
-//    if ([priceStr floatValue] <= 0) {
-//        [self.view makeToast:NSLocalizedString(@"NO_LESSTHAN_ZERO", nil) duration:1.08 position:CSToastPositionCenter];
-//        return;
-//    }
-//    [dic setValue:priceStr forKey:@"apply_amount"];
-//    //    [dic setValue:[NSNumber numberWithFloat:self.payMoney] forKey:@"apply_amount"];
-//    
-//    if (type == 1) {//微信
-//        [dic setValue:@1 forKey:@"pay_method"];
-//    } else if (type == 2) {//支付宝
-//        [dic setValue:@2 forKey:@"pay_method"];
-//    }
-//    
-//    WS(weakSelf);
-//    NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/generate_prepaid_order_and_pay_for_course/",ELITEU_URL];
-//    [manager POST:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSLog(@"创建订单成功--payParams%@",responseObject);
-//        
-//        NSDictionary *responDic = (NSDictionary *)responseObject;
-//        id code = responDic[@"code"];
-//        if ([code intValue] == 200) {
-//            weakSelf.orderId = responseObject[@"data"][@"order_id"];
-//            weakSelf.hadCreateOrder = YES;
-//            
-//            if (type == 1) {
-//                self.weChatItem = [weChatParamsItem mj_objectWithKeyValues:responseObject[@"data"]];
-//                [self wechatPay];
-//            } else if (type == 2) {
-//                _aliPayItem = [aliPayParamsItem mj_objectWithKeyValues:responseObject];
-//                [self aliPay];
-//            }
-//        
-//        } else {
-//            [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
-//            NSLog(@"--%@",responDic[@"msg"]);
-//        }
-//        
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
-//        NSLog(@"error--%@",error);
-//    }];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setValue:self.username forKey:@"username"];
+    [dic setValue:self.activity_id forKey:@"activity_id"];
+    [dic setValue:self.coupon_id forKey:@"coupon_id"];
+    [dic setValue:self.courseIds forKey:@"course_ids"];
+    [dic setValue:self.usedcoin forKey:@"used_coin"];
+    NSString *priceStr = [self.moneyLabel.text substringFromIndex:1];//总金额
+    if ([priceStr floatValue] <= 0) {
+        [self.view makeToast:NSLocalizedString(@"NO_LESSTHAN_ZERO", nil) duration:1.08 position:CSToastPositionCenter];
+        return;
+    }
+    [dic setValue:priceStr forKey:@"apply_amount"];
+    //    [dic setValue:[NSNumber numberWithFloat:self.payMoney] forKey:@"apply_amount"];
+    
+    if (type == 1) {//微信
+        [dic setValue:@1 forKey:@"pay_method"];
+    } else if (type == 2) {//支付宝
+        [dic setValue:@2 forKey:@"pay_method"];
+    }
+    
+    WS(weakSelf);
+    NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/generate_prepaid_order_and_pay_for_course/",ELITEU_URL];
+    [manager POST:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"创建订单成功--payParams%@",responseObject);
+        
+        NSDictionary *responDic = (NSDictionary *)responseObject;
+        id code = responDic[@"code"];
+        if ([code intValue] == 200) {
+            weakSelf.orderId = responseObject[@"data"][@"order_id"];
+            weakSelf.hadCreateOrder = YES;
+            
+            if (type == 1) {
+                self.weChatItem = [weChatParamsItem mj_objectWithKeyValues:responseObject[@"data"]];
+                [self payByWeChat];
+            } else if (type == 2) {
+                _aliPayItem = [aliPayParamsItem mj_objectWithKeyValues:responseObject];
+                [self payByAliPay];
+            }
+        
+        } else {
+            [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+            NSLog(@"--%@",responDic[@"msg"]);
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        NSLog(@"error--%@",error);
+    }];
 }
 
 #pragma mark ==微信支付
-- (void)wechatPay {
-//    [[[WeChatPay alloc] init] submitPostWechatPay:self.weChatItem];
+- (void)payByWeChat {
+    [[[WeChatPay alloc] init] submitPostWechatPay:self.weChatItem];
 }
 
-#pragma mark ==支付宝==
-- (void)aliPay {
+#pragma mark - 支付宝支付
+- (void)payByAliPay {
     
-//    Order *order = [[Order alloc] init];
-//    order.partner = _aliPayItem.data.data_url.partner;
-//    order.sellerID = _aliPayItem.data.data_url.seller_id;
-//    order.outTradeNO = _aliPayItem.data.data_url.out_trade_no; //订单ID（由商家自行制定）
-//    NSLog(@"order.outTradeNO--%@",order.outTradeNO);
-//    order.subject = _aliPayItem.data.data_url.subject; //商品标题
-//    order.body = _aliPayItem.data.data_url.body; //商品描述
-//    order.totalFee = _aliPayItem.data.data_url.total_fee;//商品价格
-//    order.notifyURL =  _aliPayItem.data.data_url.notify_url; //回调URL
-//    order.service = _aliPayItem.data.data_url.service;
-//    order.paymentType = @"1";
-//    order.inputCharset = @"utf-8";
-//    //    order.itBPay = @"30m";
-//    //    order.showURL = @"m.alipay.com";
-//    
-//    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
-//    //    NSString *appScheme = @"alisdkdemo";
-//    NSString *appScheme = @"org.eliteu.mobile";
-//    //将商品信息拼接成字符串
-//    NSString *orderSpec = [order description];
-//    NSLog(@"orderSpec = %@",orderSpec);
-//    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
-//    //    id<DataSigner> signer = CreateRSADataSigner(privateKey);
-//    //    NSString *signedString = [signer signString:orderSpec];
-//    
-//    NSString *base64String = _aliPayItem.data.data_url.sign;
-//    NSString *signedString = [self urlEncodedString:base64String];
-//    //将签名成功字符串格式化为订单字符串,请严格按照该格式
-//    NSString *orderString = nil;
-//    if (signedString != nil) {
-//        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",orderSpec, signedString, @"RSA"];
-//        NSLog(@"orderString = %@",orderString);
-//        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-//            //【callback处理支付结果】
-//            NSLog(@"A--reslut = %@",resultDic);
-//        }];
-//    }
+    Order *order = [[Order alloc] init];
+    order.partner = _aliPayItem.data.data_url.partner;
+    order.sellerID = _aliPayItem.data.data_url.seller_id;
+    order.outTradeNO = _aliPayItem.data.data_url.out_trade_no; //订单ID（由商家自行制定）
+    NSLog(@"order.outTradeNO--%@",order.outTradeNO);
+    order.subject = _aliPayItem.data.data_url.subject; //商品标题
+    order.body = _aliPayItem.data.data_url.body; //商品描述
+    order.totalFee = _aliPayItem.data.data_url.total_fee;//商品价格
+    order.notifyURL =  _aliPayItem.data.data_url.notify_url; //回调URL
+    order.service = _aliPayItem.data.data_url.service;
+    order.paymentType = @"1";
+    order.inputCharset = @"utf-8";
+    //    order.itBPay = @"30m";
+    //    order.showURL = @"m.alipay.com";
+    
+    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
+    //    NSString *appScheme = @"alisdkdemo";
+    NSString *appScheme = @"org.eliteu.mobile";
+    //将商品信息拼接成字符串
+    NSString *orderSpec = [order description];
+    NSLog(@"orderSpec = %@",orderSpec);
+    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
+    //    id<DataSigner> signer = CreateRSADataSigner(privateKey);
+    //    NSString *signedString = [signer signString:orderSpec];
+    
+    NSString *base64String = _aliPayItem.data.data_url.sign;
+    NSString *signedString = [self urlEncodedString:base64String];
+    //将签名成功字符串格式化为订单字符串,请严格按照该格式
+    NSString *orderString = nil;
+    if (signedString != nil) {
+        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",orderSpec, signedString, @"RSA"];
+        NSLog(@"orderString = %@",orderString);
+        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+            //【callback处理支付结果】
+            NSLog(@"A--reslut = %@",resultDic);
+        }];
+    }
 }
+
 - (NSString*)urlEncodedString:(NSString *)string {
     
     NSString * encodedString = (__bridge_transfer  NSString*) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (__bridge CFStringRef)string, NULL, (__bridge CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8 );
@@ -536,14 +538,14 @@ static NSString *payIdentify = @"PayTableViewCell";
 #pragma mark - 输入宝典弹窗
 - (void)inputAlertShow {
     
-    self.alert = [[JHCouponsAlertView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.alert.textF2.keyboardType = UIKeyboardTypeNumberPad;
-    self.alert.textF2.delegate = self;
+    self.inputAlert = [[JHCouponsAlertView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.inputAlert.textF2.keyboardType = UIKeyboardTypeNumberPad;
+    self.inputAlert.textF2.delegate = self;
     
     UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backKeyBoards)];
-    [self.alert addGestureRecognizer:tapGesture];
-    self.alert.delegate = self;
-    [self.alert show];
+    [self.inputAlert addGestureRecognizer:tapGesture];
+    self.inputAlert.delegate = self;
+    [self.inputAlert show];
     
     float score = [self.remain_score floatValue];
     float rate = [self.score_rate floatValue];
@@ -554,12 +556,12 @@ static NSString *payIdentify = @"PayTableViewCell";
     int usedM = currentM * 10 * rate;
     
     if (score > usedM) {
-        self.alert.textF1.text = [Strings hadCoinsNumberWithCount:[NSString stringWithFormat:@"%.2f",score] number:[NSString stringWithFormat:@"%d.00",usedM]];
+        self.inputAlert.textF1.text = [Strings hadCoinsNumberWithCount:[NSString stringWithFormat:@"%.2f",score] number:[NSString stringWithFormat:@"%d.00",usedM]];
         _maxCoin = usedM;
         self.warmingStr = NSLocalizedString(@"MORE_COINS_REMAIND", nil);
         
     }  else{
-        self.alert.textF1.text = [Strings hadCoinsNumberWithCount:[NSString stringWithFormat:@"%.2f",score] number:[NSString stringWithFormat:@"%.2f",score]];
+        self.inputAlert.textF1.text = [Strings hadCoinsNumberWithCount:[NSString stringWithFormat:@"%.2f",score] number:[NSString stringWithFormat:@"%.2f",score]];
         _maxCoin = score;
         self.warmingStr = NSLocalizedString(@"MORE_COINS_AVALIDE", nil);
     }
@@ -577,7 +579,7 @@ static NSString *payIdentify = @"PayTableViewCell";
         if (coin > self.maxCoin) {//最多可用宝典
             
             alertView.textF2.text = nil;
-            _alert.hidden = YES;
+            self.inputAlert.hidden = YES;
             
             [self.view makeToast:self.warmingStr duration:1.08 position:CSToastPositionCenter];
             
@@ -594,11 +596,15 @@ static NSString *payIdentify = @"PayTableViewCell";
         }
     }
     
-    _alert.hidden = YES;
-    _alert = nil;
+    self.inputAlert.hidden = YES;
+    self.inputAlert = nil;
     self.view.userInteractionEnabled = YES;
     
     [self initialization];
+}
+//退回键盘
+- (void)backKeyBoards{
+    [[[UIApplication sharedApplication]keyWindow] endEditing:YES];
 }
 
 #pragma mark - 优惠券
@@ -700,15 +706,6 @@ static NSString *payIdentify = @"PayTableViewCell";
     
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {//优惠券
-//            if (self.hideShowPurchase) {
-//                if (self.isNoCoupon) {
-//                    [self.view makeToast:@"暂无优惠券" duration:1.08 position:CSToastPositionCenter];
-//                } else {
-//                    [self gotoCoupon:indexPath];
-//                }
-//            } else {
-//                [self inputAlertShow];
-//            }
             self.hideShowPurchase ? [self gotoCoupon:indexPath] : [self inputAlertShow];
             
         } else if (indexPath.row == 1) {
@@ -798,12 +795,6 @@ static NSString *payIdentify = @"PayTableViewCell";
         return 48;
     }
     else return 0;
-}
-
-
-//退回键盘
-- (void)backKeyBoards{
-    [[[UIApplication sharedApplication]keyWindow] endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {

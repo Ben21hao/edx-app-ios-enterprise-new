@@ -15,15 +15,15 @@
 #import "TDBaseToolModel.h"
 
 #import "PurchaseManager.h"
-//#import "weChatParamsItem.h"
-//#import "aliPayParamsItem.h"
 
-//#import "WeChatPay.h"
-//#import "Order.h"
-//#import "TDAliPayModel.h"
-//#import "TDAlipay.h"
-//#import "WXApi.h"
-//#import <AlipaySDK/AlipaySDK.h>
+#import "weChatParamsItem.h"
+#import "WeChatPay.h"
+#import "WXApi.h"
+
+#import <AlipaySDK/AlipaySDK.h>
+#import "TDAliPayModel.h"
+#import "TDAlipay.h"
+#import "Order.h"
 
 #import "edX-Swift.h"
 #import <MJExtension/MJExtension.h>
@@ -44,8 +44,8 @@
 @property (nonatomic,strong) PurchaseManager *purchaseManager;//内购工具类
 @property (nonatomic,assign) BOOL isPurchassing; //正在进行内购
 
-//@property (nonatomic,strong) weChatParamsItem *weChatItem;
-//@property (nonatomic,strong) TDAliPayModel *aliPayModel;
+@property (nonatomic,strong) weChatParamsItem *weChatItem;
+@property (nonatomic,strong) TDAliPayModel *aliPayModel;
 
 @end
 
@@ -80,7 +80,7 @@
             
             [weakSelf.purchaseManager verificationAction:1];
             
-            //TODO:保存订单信息和receipt在本地，做丢单处理
+        //TODO:保存订单信息和receipt在本地，做丢单处理
         }else if (state == SKPaymentTransactionStatePurchasing) {
             
         } else if (state == SKPaymentTransactionStateFailed) {
@@ -175,17 +175,16 @@
 #pragma mark - UI
 - (void)setUpView {
     
-//    int selectWX = [WXApi isWXAppInstalled] ? 0 : 1;
-    int selectWX = 0;
+    int selectWX = [WXApi isWXAppInstalled] ? 0 : 1;
     NSDictionary *dic1 = [NSDictionary dictionaryWithObjectsAndKeys:@"weChat",@"imageStr",NSLocalizedString(@"WECHAT_PAY", nil),@"payStr", @(1),@"isSelected",@"0",@"payType",nil];
     NSDictionary *dic2 = [NSDictionary dictionaryWithObjectsAndKeys:@"zhifu",@"imageStr",NSLocalizedString(@"ALI_PAY", nil),@"payStr", @(selectWX),@"isSelected",@"1",@"payType",nil];
     
-//    if ([WXApi isWXAppInstalled]) {
+    if ([WXApi isWXAppInstalled]) {
         self.payType = 0;
         [self dicChangeToModel:dic1];
-//    } else {
-//        self.payType = 1;
-//    }
+    } else {
+        self.payType = 1;
+    }
     [self dicChangeToModel:dic2];
     
     [self setViewConstraint:self.isHidePurchase ? 1 : 2]; //UI
@@ -237,6 +236,7 @@
 
 #pragma makr - 转为model
 - (void)dicChangeToModel:(NSDictionary *)dic {
+    
     TDSelectPayModel *model = [TDSelectPayModel mj_objectWithKeyValues:dic];
     if (model) {
         [self.payArray addObject:model];
@@ -295,20 +295,22 @@
         if ([code intValue] == 200) {
             self.orderId = responseObject[@"data"][@"order_id"];
             
-//            if (type == 1) {
-//                self.weChatItem = [weChatParamsItem mj_objectWithKeyValues:responseObject[@"data"]];
-//                [self payByWeChat];
-//                
-//            } else if (type == 2) {
-//                self.aliPayModel = [TDAliPayModel mj_objectWithKeyValues:responseDic[@"data"][@"data_url"]];
-//                [self payByAliPay];
-//                
-//            } else if (type == 3) {
+            if (type == 1) {
+                self.weChatItem = [weChatParamsItem mj_objectWithKeyValues:responseObject[@"data"]];
+                [self payByWeChat];
+                
+            }
+            else if (type == 2) {
+                self.aliPayModel = [TDAliPayModel mj_objectWithKeyValues:responseDic[@"data"][@"data_url"]];
+                [self payByAliPay];
+                
+            }
+            else if (type == 3) {
                 self.purchaseManager.purchaseModel.total_fee = self.rechargeMoney;
                 self.purchaseManager.purchaseModel.userName = self.username;
                 self.purchaseManager.purchaseModel.trader_num = responseObject[@"data"][@"order_id"];
                 [self rqPayByApple];
-//            }
+            }
         } else {
             
         }
@@ -320,13 +322,13 @@
 #pragma mark - 微信支付
 - (void)payByWeChat {
     
-//    [[[WeChatPay alloc] init] submitPostWechatPay:self.weChatItem];
+    [[[WeChatPay alloc] init] submitPostWechatPay:self.weChatItem];
 }
 
 #pragma mark - 支付宝支付
 - (void)payByAliPay {
     
-//    [[[TDAlipay alloc] init] submitPostAliPay:self.aliPayModel];
+    [[[TDAlipay alloc] init] submitPostAliPay:self.aliPayModel];
 }
 
 #pragma mark - 苹果内购
@@ -518,13 +520,5 @@
 
 
 @end
-
-
-
-
-
-
-
-
 
 

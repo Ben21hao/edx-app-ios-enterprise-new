@@ -36,6 +36,9 @@
 #import "OEXSession.h"
 #import "OEXSegmentConfig.h"
 
+#import "WXApi.h"
+#import <AlipaySDK/AlipaySDK.h>
+
 @interface OEXAppDelegate () <UIApplicationDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary* dictCompletionHandler;
@@ -49,6 +52,10 @@
 @synthesize window = _window;
 
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
+    
+    //1.向微信注册
+    [WXApi registerApp:APPID_Weixin];
+    
 #if DEBUG
     // Skip all this initialization if we're running the unit tests
     // So they can start from a clean state.
@@ -89,6 +96,96 @@
     return [topController supportedInterfaceOrientations];
 }
 
+//2.微信
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    return [WXApi handleOpenURL:url delegate:(id)self];
+}
+
+- (void)onResp:(BaseResp *)resp{
+    
+    if([resp isKindOfClass:[PayResp class]]){
+        NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
+        switch (resp.errCode) {
+            case WXSuccess:
+                strMsg = NSLocalizedString(@"PAY_SUCCESS", nil);
+                break;
+            case WXErrCodeUserCancel:
+                strMsg = NSLocalizedString(@"PAY_CANCEL", nil);
+                break;
+            case WXErrCodeSentFail:
+                strMsg = NSLocalizedString(@"PAY_FAIL", nil);
+                break;
+            case WXErrCodeAuthDeny:
+                strMsg = NSLocalizedString(@"PAY_AUTHENRIZATE_FAIL", nil);
+                break;
+            default:
+                strMsg = NSLocalizedString(@"NO_SUPPORT_WECHAT", nil);
+                break;
+        }
+        if (resp.errCode == WXSuccess) {
+            NSNotification *notice = [NSNotification notificationWithName:@"aliPaySuccess" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:notice];
+        } else {
+            NSString *strTitle = NSLocalizedString(@"PAY_RESULT", nil);
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
+            alert.delegate = self;
+            [alert show];
+        }
+    }
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
+    // NOTE: 9.0以后使用新API接口
+    //    NSLog(@"url--%@",url);
+    if ([url.host isEqualToString:@"safepay"]) {
+        //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSString *resultStatus = resultDic[@"resultStatus"];
+            
+            NSString *strTitle = NSLocalizedString(@"PAY_RESULT", nil);
+            NSString *str;
+            switch ([resultStatus integerValue]) {
+                case 6001:
+                    str = NSLocalizedString(@"PAY_CANCEL", nil);
+                    break;
+                case 9000:
+                    str = NSLocalizedString(@"PAY_SUCCESS", nil);
+                    break;
+                case 8000:
+                    str = NSLocalizedString(@"IS_HANDLE", nil);
+                    break;
+                case 4000:
+                    str = NSLocalizedString(@"PAY_FAIL", nil);
+                    break;
+                case 6002:
+                    str = NSLocalizedString(@"NETWORK_CONNET_FAIL", nil);
+                    break;
+                    
+                default:
+                    break;
+            }
+            if ([resultStatus isEqualToString:@"9000"]) {
+                NSNotification *notice = [NSNotification notificationWithName:@"aliPaySuccess" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:notice];
+                
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:str delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
+                alert.delegate = self;
+                [alert show];
+            }
+            
+            NSLog(@"B---result = %@",resultDic);
+        }];
+    }
+    //这里判断是否发起的请求为微信支付，如果是的话，用WXApi的方法调起微信客户端的支付页面（://pay 之前的那串字符串就是你的APPID，）
+    return  [WXApi handleOpenURL:url delegate:(id<WXApiDelegate>)self];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"aliPayFail" object:nil];
+}
+
 
 - (BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation {
     BOOL handled = false;
@@ -97,7 +194,6 @@
         if(handled) {
             return handled;
         }
-
     }
     
     if (self.environment.config.googleConfig.enabled){
@@ -105,6 +201,26 @@
         [[OEXGoogleSocial sharedInstance] setHandledOpenUrl:YES];
     }
    
+    ////微信支付成功时调用，回到第三方应用中
+    if ([url.scheme isEqualToString:APPID_Weixin]) {
+        return  [WXApi handleOpenURL:url delegate:(id<WXApiDelegate>)self];
+    }
+    //    如果极简开发包不可用，会跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给开发包
+    if ([url.host isEqualToString:@"safepay"]) {
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            //【由于在跳转支付宝客户端支付的过程中，商户app在后台很可能被系统kill了，所以pay接口的callback就会失效，请商户对standbyCallback返回的回调结果进行处理,就是在这个方法里面处理跟callback一样的逻辑】
+            NSLog(@"result = %@",resultDic);
+        }];
+    }
+    if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回authCode
+        
+        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
+            //【由于在跳转支付宝客户端支付的过程中，商户app在后台很可能被系统kill了，所以pay接口的callback就会失效，请商户对standbyCallback返回的回调结果进行处理,就是在这个方法里面处理跟callback一样的逻辑】
+            NSLog(@"result = %@",resultDic);
+        }];
+    }
+
+    
     return handled;
 }
 

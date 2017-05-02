@@ -28,18 +28,18 @@
 #import <MJExtension/MJExtension.h>
 #import <UIImageView+WebCache.h>
 
-//#import <AlipaySDK/AlipaySDK.h>
-//#import "Order.h"
-//#import "DataSigner.h"
-//#import "WechatAuthSDK.h"
-//#import "weChatParamsItem.h"
-//#import "aliPayParamsItem.h"
-//#import "dataUrlItem.h"
-//#import "aliData.h"
-//#import "WXApiObject.h"
-//#import "WXApi.h"
-//#import "Encryption.h"//md5加密
-//#import "WeChatPay.h"
+#import <AlipaySDK/AlipaySDK.h>
+#import "Order.h"
+#import "DataSigner.h"
+#import "WechatAuthSDK.h"
+#import "weChatParamsItem.h"
+#import "aliPayParamsItem.h"
+#import "dataUrlItem.h"
+#import "aliData.h"
+#import "WXApiObject.h"
+#import "WXApi.h"
+#import "Encryption.h"//md5加密
+#import "WeChatPay.h"
 
 @interface WaitForPayViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
@@ -50,8 +50,8 @@
 @property (nonatomic,strong) WechatPayView *wechatView;
 @property (nonatomic,strong) AliPayView *aliPayView;
 @property (nonatomic,strong) NSString *sendOrdID;//选择的订单
-//@property (nonatomic,strong) weChatParamsItem *weChatItem;
-//@property (nonatomic,strong) aliPayParamsItem *aliPayItem;
+@property (nonatomic,strong) weChatParamsItem *weChatItem;
+@property (nonatomic,strong) aliPayParamsItem *aliPayItem;
 @property (nonatomic,strong) NSString *orderMoney;//显示订单的价格
 @property (nonatomic,assign) int payWay;//记录支付方式
 @property (nonatomic,strong) NSString *orderId;
@@ -60,7 +60,7 @@
 
 @property (nonatomic,strong) TDBaseToolModel *baseTool;
 @property (nonatomic,assign) BOOL hideShowPurchase;//0 为审核中；1 为审核通过
-//@property (nonatomic,strong) PurchaseManager *purchaseManager;
+@property (nonatomic,strong) PurchaseManager *purchaseManager;
 
 @end
 
@@ -257,11 +257,11 @@ static NSString *cellID = @"WaitForPayTableViewCell";
     
     NSLog(@"send %@  ----->order %@",self.sendOrdID,order.order_id);
 
-//    if (self.hideShowPurchase) {
-    [self paySheetView:order];
-//    } else {
-//        [self createOrderWithType:3];
-//    }
+    if (self.hideShowPurchase) {
+        [self paySheetView:order];
+    } else {
+        [self createOrderWithType:3];
+    }
 }
 
 #pragma mark - 点击支付
@@ -279,78 +279,78 @@ static NSString *cellID = @"WaitForPayTableViewCell";
 #pragma mark - 创建订单
 - (void)createOrderWithType:(NSInteger)type {//1 微信支付；2 支付宝支付
     
-//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-//    [dic setValue:self.username forKey:@"username"];
-//    [dic setValue:self.sendOrdID forKey:@"order_id"];
-//    
-//    if (type == 1) {
-//        [dic setValue:@1 forKey:@"pay_method"];
-//    } else if (type == 2) {
-//        [dic setValue:@2 forKey:@"pay_method"];
-//    } else if (type == 3) {
-//        [dic setValue:@5 forKey:@"pay_method"];
-//    }
-//    
-////    WS(weakSelf);
-//    NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/get_pay_course_info/",ELITEU_URL];
-//    [manager POST:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        
-//        NSDictionary *responseDic = (NSDictionary *)responseObject;
-//        id code = responseDic[@"code"];
-//        if ([code intValue] == 200) {
-//            self.orderId = responseDic[@"data"][@"order_id"];
-//            if (type == 1) {
-//                _weChatItem = [weChatParamsItem mj_objectWithKeyValues:responseObject[@"data"]];
-//                [self wechatPay];
-//                
-//            } else if (type == 2) {
-//                _aliPayItem = [aliPayParamsItem mj_objectWithKeyValues:responseObject];
-//                [self aliPay];
-//            } else if (type == 3) {
-//                //            NSString *rechargeMoney = responseObject[@"data"][@"apply_amount"];
-//                //            weakSelf.purchaseManager.purchaseModel.total_fee = [NSString stringWithFormat:@"%@",rechargeMoney];
-//                //
-//                //            weakSelf.purchaseManager.purchaseModel.userName = self.username;
-//                //            weakSelf.purchaseManager.purchaseModel.trader_num = responseObject[@"data"][@"order_id"];
-//                //            
-//                //            [weakSelf rqPayByApple:rechargeMoney];
-//            }
-//        } else {
-//            NSLog(@"创建订单 === 》  %@",responseDic[@"msg"]);
-//        }
-//        
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        [self.view makeToast:@"网络忙，请重试！" duration:1.08 position:CSToastPositionCenter];
-//        NSLog(@"error--%@",error);
-//    }];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setValue:self.username forKey:@"username"];
+    [dic setValue:self.sendOrdID forKey:@"order_id"];
+    
+    if (type == 1) {
+        [dic setValue:@1 forKey:@"pay_method"];
+    } else if (type == 2) {
+        [dic setValue:@2 forKey:@"pay_method"];
+    } else if (type == 3) {
+        [dic setValue:@5 forKey:@"pay_method"];
+    }
+    
+//    WS(weakSelf);
+    NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/get_pay_course_info/",ELITEU_URL];
+    [manager POST:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *responseDic = (NSDictionary *)responseObject;
+        id code = responseDic[@"code"];
+        if ([code intValue] == 200) {
+            self.orderId = responseDic[@"data"][@"order_id"];
+            if (type == 1) {
+                _weChatItem = [weChatParamsItem mj_objectWithKeyValues:responseObject[@"data"]];
+                [self wechatPay];
+                
+            } else if (type == 2) {
+                _aliPayItem = [aliPayParamsItem mj_objectWithKeyValues:responseObject];
+                [self aliPay];
+            } else if (type == 3) {
+                //            NSString *rechargeMoney = responseObject[@"data"][@"apply_amount"];
+                //            weakSelf.purchaseManager.purchaseModel.total_fee = [NSString stringWithFormat:@"%@",rechargeMoney];
+                //
+                //            weakSelf.purchaseManager.purchaseModel.userName = self.username;
+                //            weakSelf.purchaseManager.purchaseModel.trader_num = responseObject[@"data"][@"order_id"];
+                //            
+                //            [weakSelf rqPayByApple:rechargeMoney];
+            }
+        } else {
+            NSLog(@"创建订单 === 》  %@",responseDic[@"msg"]);
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.view makeToast:@"网络忙，请重试！" duration:1.08 position:CSToastPositionCenter];
+        NSLog(@"error--%@",error);
+    }];
 }
 
-//- (void)rqPayByApple:(NSString *)rechargeMoney {
-//    int totalMoney = [rechargeMoney intValue];
-//    
-//    int payType = 1;
-//    if (totalMoney <= 100) {
-//        payType = 1;
-//    } else if (totalMoney <= 200 && totalMoney > 100){
-//        payType = 2;
-//    } else if (totalMoney <= 300 && totalMoney > 200) {
-//        payType = 3;
-//    } else if (totalMoney <= 500 && totalMoney > 300) {
-//        payType = 4;
-//    } else if (totalMoney <= 500 && totalMoney > 300) {
-//        payType = 5;
-//    }else {
-//        payType = 6;
-//    }
-//    
-//    [self.purchaseManager reqToUpMoneyFromApple:payType];
-//}
+- (void)rqPayByApple:(NSString *)rechargeMoney {
+    int totalMoney = [rechargeMoney intValue];
+    
+    int payType = 1;
+    if (totalMoney <= 100) {
+        payType = 1;
+    } else if (totalMoney <= 200 && totalMoney > 100){
+        payType = 2;
+    } else if (totalMoney <= 300 && totalMoney > 200) {
+        payType = 3;
+    } else if (totalMoney <= 500 && totalMoney > 300) {
+        payType = 4;
+    } else if (totalMoney <= 500 && totalMoney > 300) {
+        payType = 5;
+    }else {
+        payType = 6;
+    }
+    
+    [self.purchaseManager reqToUpMoneyFromApple:payType];
+}
 
 #pragma mark - 调起微信支付
 - (void)wechatPay {
     
-//    [[[WeChatPay alloc] init] submitPostWechatPay:self.weChatItem];
+    [[[WeChatPay alloc] init] submitPostWechatPay:self.weChatItem];
 }
 
 #pragma mark - 调起支付宝
@@ -361,41 +361,41 @@ static NSString *cellID = @"WaitForPayTableViewCell";
     return encodedString;
 }
 - (void)aliPay{
-//    Order *order = [[Order alloc] init];
-//    order.partner = _aliPayItem.data.data_url.partner;
-//    order.sellerID = _aliPayItem.data.data_url.seller_id;
-//    order.outTradeNO = _aliPayItem.data.data_url.out_trade_no; //订单ID（由商家自行制定）
-//    NSLog(@"order.outTradeNO--%@",order.outTradeNO);
-//    order.subject = _aliPayItem.data.data_url.subject; //商品标题
-//    order.body = _aliPayItem.data.data_url.body; //商品描述
-//    order.totalFee = _aliPayItem.data.data_url.total_fee;//商品价格
-//    order.notifyURL =  _aliPayItem.data.data_url.notify_url; //回调URL
-//    order.service = _aliPayItem.data.data_url.service;
-//    order.paymentType = @"1";
-//    order.inputCharset = @"utf-8";
-//    
-//    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
-//    //    NSString *appScheme = @"alisdkdemo";
-//    NSString *appScheme = @"org.eliteu.mobile";
-//    //将商品信息拼接成字符串
-//    NSString *orderSpec = [order description];
-//    NSLog(@"orderSpec = %@",orderSpec);
-//    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
-//    //    id<DataSigner> signer = CreateRSADataSigner(privateKey);
-//    //    NSString *signedString = [signer signString:orderSpec];
-//    
-//    NSString *base64String = _aliPayItem.data.data_url.sign;
-//    NSString *signedString = [self urlEncodedString:base64String];
-//    //将签名成功字符串格式化为订单字符串,请严格按照该格式
-//    NSString *orderString = nil;
-//    if (signedString != nil) {
-//        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",orderSpec, signedString, @"RSA"];
-//        NSLog(@"orderString = %@",orderString);
-//        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-//            //【callback处理支付结果】
-//            NSLog(@"A--reslut = %@",resultDic);
-//        }];
-//    }
+    Order *order = [[Order alloc] init];
+    order.partner = _aliPayItem.data.data_url.partner;
+    order.sellerID = _aliPayItem.data.data_url.seller_id;
+    order.outTradeNO = _aliPayItem.data.data_url.out_trade_no; //订单ID（由商家自行制定）
+    NSLog(@"order.outTradeNO--%@",order.outTradeNO);
+    order.subject = _aliPayItem.data.data_url.subject; //商品标题
+    order.body = _aliPayItem.data.data_url.body; //商品描述
+    order.totalFee = _aliPayItem.data.data_url.total_fee;//商品价格
+    order.notifyURL =  _aliPayItem.data.data_url.notify_url; //回调URL
+    order.service = _aliPayItem.data.data_url.service;
+    order.paymentType = @"1";
+    order.inputCharset = @"utf-8";
+    
+    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
+    //    NSString *appScheme = @"alisdkdemo";
+    NSString *appScheme = @"org.eliteu.mobile";
+    //将商品信息拼接成字符串
+    NSString *orderSpec = [order description];
+    NSLog(@"orderSpec = %@",orderSpec);
+    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
+    //    id<DataSigner> signer = CreateRSADataSigner(privateKey);
+    //    NSString *signedString = [signer signString:orderSpec];
+    
+    NSString *base64String = _aliPayItem.data.data_url.sign;
+    NSString *signedString = [self urlEncodedString:base64String];
+    //将签名成功字符串格式化为订单字符串,请严格按照该格式
+    NSString *orderString = nil;
+    if (signedString != nil) {
+        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",orderSpec, signedString, @"RSA"];
+        NSLog(@"orderString = %@",orderString);
+        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+            //【callback处理支付结果】
+            NSLog(@"A--reslut = %@",resultDic);
+        }];
+    }
 }
 
 #pragma mark - 选择支付方式
