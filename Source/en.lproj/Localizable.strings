@@ -854,6 +854,8 @@
 "BIND_EMAIL" = "Email Binding";
 /*提交*/
 "SUBMIT" = "Submit";
+/*提交*/
+"SUBMIT_ING" = "Submiting...";
 /*邮箱格式错误*/
 "EMAIL_FORMAT_ERROR" = "Format error";
 /*邮箱已存在*/

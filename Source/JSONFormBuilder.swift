@@ -178,8 +178,31 @@ class JSONFormBuilder {
         }
         
         func applyData(field: Field, data: FormData) {
+            
             choiceView.titleText = Strings.formLabel(label: field.title!)
-            choiceView.valueText = data.valueForField(field.name) ?? field.placeholder ?? ""
+            //            choiceView.valueText = data.valueForField(field.name) ?? field.placeholder ?? ""
+            
+            if data.valueForField(field.name) != nil {
+                
+                let valueStr : String? = data.valueForField(field.name)
+                if valueStr!.characters.count == 0 {
+                    choiceView.valueText = field.placeholder
+                } else {
+                    choiceView.valueText = valueStr
+                    
+                    let baseTool = TDBaseToolModel.init()
+                    let nameStr : String? = field.name
+                    if nameStr == "mobile" {
+                        choiceView.valueText = baseTool.setPhoneStyle(valueStr)
+                    }
+                    if nameStr == "email" {
+                        choiceView.valueText = baseTool.setEmailStyle(valueStr)
+                    }
+                }
+            } else {
+                choiceView.valueText = field.placeholder ?? ""
+            }
+           
             
              print("名称和标题 ==2==  " + field.name + field.title! + " === " + choiceView.titleText!+choiceView.valueText!)
         }
@@ -311,8 +334,8 @@ class JSONFormBuilder {
             let allowsNone = options?["allows_none"]?.bool ?? false
             if allowsNone {//插入第一行
                 //未选择+国家，语言等
-//                let noneTitle = Strings.Profile.noField(fieldName: title!.oex_lowercaseStringInCurrentLocale()) //第一个字符变小写
-//                let noneTitle = Strings.Profile.noField(fieldName: title!) //title -- 最高学历，国家等；
+                //                let noneTitle = Strings.Profile.noField(fieldName: title!.oex_lowercaseStringInCurrentLocale()) //第一个字符变小写
+                //                let noneTitle = Strings.Profile.noField(fieldName: title!) //title -- 最高学历，国家等；
                 let noneTitle = Strings.unSelected;
                 tableData.insert(ChooserDatum(value: "--", title: noneTitle, attributedTitle: nil), atIndex: 0)
                 defaultRow = 0

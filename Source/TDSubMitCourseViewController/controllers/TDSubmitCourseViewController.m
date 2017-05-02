@@ -91,6 +91,7 @@
     
     self.baseTool = [[TDBaseToolModel alloc] init];
     
+     [self setLoadDataView];
     [self configData];
     [self setViewConstraint];
 }
@@ -164,6 +165,7 @@
 
 #pragma mark - 提交
 - (void)submitButtonAction:(UIButton *)sender {
+    
     if (![self.baseTool networkingState]) {
         return;
     }
@@ -273,7 +275,13 @@
 #pragma mark - 创建订单
 - (void)createOrderWitType:(NSInteger)type {
     
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"SUBMIT_ING", nil)];
+    SVProgressHUD.defaultMaskType = SVProgressHUDMaskTypeBlack;
+    SVProgressHUD.defaultStyle = SVProgressHUDAnimationTypeNative;
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/JavaScript",@"text/html",@"text/plain", nil];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setValue:self.username forKey:@"username"];
@@ -318,8 +326,10 @@
             [self.view makeToast:NSLocalizedString(@"PAY_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
             NSLog(@"--%@",responDic[@"msg"]);
         }
+        [SVProgressHUD dismiss];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [SVProgressHUD dismiss];
         [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error--%@",error);
     }];

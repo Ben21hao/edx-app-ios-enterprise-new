@@ -202,7 +202,7 @@ class OEXRearTableViewController : UITableViewController {
         settingsLabel.accessibilityLabel = settingsLabel.text
         submitFeedbackLabel.accessibilityLabel = submitFeedbackLabel.text
         logoutButton.accessibilityLabel = logoutButton.titleLabel!.text
-        userProfilePicture.accessibilityLabel = Strings.accessibilityUserAvatar
+//        userProfilePicture.accessibilityLabel = Strings.accessibilityUserAvatar
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

@@ -27,6 +27,8 @@ class ProfilePictureTaker : NSObject {
         self.delegate = delegate
     }
     
+    var imagePicker = UIImagePickerController()
+    
     func start(alreadyHasImage: Bool) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         if UIImagePickerController.isSourceTypeAvailable(.Camera) {
@@ -54,7 +56,6 @@ class ProfilePictureTaker : NSObject {
  
     private func showImagePicker(sourceType : UIImagePickerControllerSourceType) {
         
-        let imagePicker = UIImagePickerController()
         let mediaType: String = kUTTypeImage as String
         imagePicker.mediaTypes = [mediaType]
         imagePicker.sourceType = sourceType
@@ -88,6 +89,8 @@ extension ProfilePictureTaker : UIImagePickerControllerDelegate, UINavigationCon
 //            fatalError("no image returned from picker")
 //        }
         
+        //        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+        //            self.delegate?.imagePicked(image, picker: picker)
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
             let omageHeight = image.size.height * (TDScreenWidth / image.size.width);
@@ -102,6 +105,10 @@ extension ProfilePictureTaker : UIImagePickerControllerDelegate, UINavigationCon
         } else {
             fatalError("no image returned from picker")
         }
+    }
+    
+    func cropImageDidFinishedWithImage(image : UIImage) {
+        self.delegate?.imagePicked(image, picker: self.imagePicker)
     }
     
 }
