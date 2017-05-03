@@ -31,9 +31,10 @@ public struct CourseCatalogAPI {
         case EmailOptIn = "email_opt_in"
         case Mobile = "mobile"
         case Org = "org"
+        case CompanyId = "company_id"
     }
     
-        public static func getCourseCatalog(userID: String, page : Int) -> NetworkRequest<Paginated<[OEXCourse]>> {
+        public static func getCourseCatalog(userID: String, company_id: String, page : Int) -> NetworkRequest<Paginated<[OEXCourse]>> {
 //    public static func getCourseCatalog(userID: String, page : Int, organizationCode: String?) -> NetworkRequest<Paginated<[OEXCourse]>> {
     
 //        var query = [Params.Mobile.rawValue: JSON(true), Params.User.rawValue: JSON(userID)]
@@ -41,11 +42,13 @@ public struct CourseCatalogAPI {
 //            query[Params.Org.rawValue] = JSON(orgCode)
 //        }
         
-       let query = [Params.Mobile.rawValue: JSON(true), Params.User.rawValue: JSON(userID)]
+       let query = [Params.Mobile.rawValue: JSON(true),
+                    Params.CompanyId.rawValue: JSON(company_id),
+                    Params.User.rawValue: JSON(userID)]
         
         return NetworkRequest(
             method: .GET,
-            path : "api/courses/v1/courses/",
+            path : "/api/mobile/enterprise/v0.5/companyfindcourses/", //api/courses/v1/
             query : query,
             requiresAuth : true,
             deserializer: .JSONResponse(coursesDeserializer)

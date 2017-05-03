@@ -15,11 +15,18 @@ struct CoursesAPI {
         return (json.array?.flatMap { UserCourseEnrollment(json: $0) }).toResult()
     }
     
-    static func getUserEnrollments(username: String, organizationCode: String?) -> NetworkRequest<[UserCourseEnrollment]> {
-        var path = "api/mobile/v0.5/users/{username}/course_enrollments/".oex_formatWithParameters(["username": username])
+    static func getUserEnrollments(username: String, organizationCode: String? ,companyId: String) -> NetworkRequest<[UserCourseEnrollment]> {
+        
+        print("username --->> \(username), companyId -->> \(companyId)")
+        
+        //api/mobile/v0.5/users/{username}/course_enrollments/
+        var path = "api/mobile/enterprise/v0.5/{companyId}/{username}/course_enrollments/".oex_formatWithParameters(["companyId": companyId, "username": username])
+        
         if let orgCode = organizationCode {
-            path = "api/mobile/v0.5/users/{username}/course_enrollments/?org={org}".oex_formatWithParameters(["username": username, "org": orgCode])
+            //"api/mobile/v0.5/users/{username}/course_enrollments/?org={org}"
+            path = "api/mobile/enterprise/v0.5/{companyId}/{username}/course_enrollments/?org={org}".oex_formatWithParameters(["companyId": companyId, "username": username, "org": orgCode])
         }
+        
         return NetworkRequest(
             method: .GET,
             path: path,
@@ -27,14 +34,4 @@ struct CoursesAPI {
             deserializer: .JSONResponse(enrollmentsDeserializer)
         )
     }
-    
-    /* 我的课程 */
-//    static func getUserEnrollments(username: String) -> NetworkRequest<[UserCourseEnrollment]> {
-//        return NetworkRequest(
-//            method: .GET,
-//            path: "api/mobile/v0.5/users/{username}/course_enrollments/".oex_formatWithParameters(["username": username]),
-//            requiresAuth: true,
-//            deserializer: .JSONResponse(enrollmentsDeserializer)
-//        )
-//    }
 }

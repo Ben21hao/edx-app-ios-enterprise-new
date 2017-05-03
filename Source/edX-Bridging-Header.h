@@ -98,3 +98,4 @@
 #import "TDTakePictureViewController.h"
 #import "TDInformationDetailViewController.h"
 #import "TDAuthenSuccessViewController.h"
+#import <UIImageView+WebCache.h>

@@ -20,11 +20,11 @@ public class ProfileAPI: NSObject {
     private static func imageResponseDeserializer(response : NSHTTPURLResponse) -> Result<()> {
         return Success()
     }
-    
+    //用户详细信息
     private class func path(username:String) -> String {
         return "/api/user/v1/accounts/{username}".oex_formatWithParameters(["username": username])
     }
-    
+    //用户信息请求
     class func profileRequest(username: String) -> NetworkRequest<UserProfile> {
         return NetworkRequest(
             method: HTTPMethod.GET,
@@ -42,7 +42,7 @@ public class ProfileAPI: NSObject {
         let request = profileRequest(username)
         return networkManager.streamForRequest(request)
     }
-
+    //更新用户信息
     class func profileUpdateRequest(profile: UserProfile) -> NetworkRequest<UserProfile> {
         let json = JSON(profile.updateDictionary)
         let request = NetworkRequest(method: HTTPMethod.PATCH,
@@ -53,7 +53,7 @@ public class ProfileAPI: NSObject {
             deserializer: .JSONResponse(profileDeserializer))
         return request
     }
-    
+     //更改头像
     class func uploadProfilePhotoRequest(username: String, imageData: NSData) -> NetworkRequest<()> {
         let path = "/api/user/v1/accounts/{username}/image".oex_formatWithParameters(["username" : username])
         return NetworkRequest(method: HTTPMethod.POST,
@@ -63,7 +63,7 @@ public class ProfileAPI: NSObject {
             headers: ["Content-Disposition":"attachment;filename=filename.jpg"],
             deserializer: .NoContent(imageResponseDeserializer))
     }
-    
+    //删除头像
     class func deleteProfilePhotoRequest(username: String) -> NetworkRequest<()> {
         let path = "/api/user/v1/accounts/{username}/image".oex_formatWithParameters(["username" : username])
         return NetworkRequest(method: HTTPMethod.DELETE,
