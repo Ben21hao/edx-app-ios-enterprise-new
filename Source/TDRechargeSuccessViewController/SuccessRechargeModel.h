@@ -14,7 +14,7 @@
 @property (nonatomic,strong) NSString *coin_record_id;//订单号
 @property (nonatomic,strong) NSString *give_coin;//赠送宝典
 @property (nonatomic,strong) NSString *remain_coin;//用户总剩余宝典
-@property (nonatomic,strong) NSString *suggest_coin;//本次充值宝典
+@property (nonatomic,strong) NSString *suggest_coin;//本次充值宝典(不含赠送)
 @property (nonatomic,strong) NSString *total_coin;//本次充值总宝典
 
 @end

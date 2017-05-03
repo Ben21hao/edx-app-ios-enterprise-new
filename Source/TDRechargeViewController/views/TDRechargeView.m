@@ -208,9 +208,18 @@
         make.centerY.mas_equalTo(footerVeiw.mas_centerY);
         make.height.mas_equalTo(42);
     }];
+    
+    self.activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 39, 39)];
+    [self.activityView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhite];
+    [footerVeiw addSubview:self.activityView];
+    
+    [self.activityView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.rechargeButton.mas_right).offset(-8);
+        make.centerY.mas_equalTo(self.rechargeButton.mas_centerY);
+    }];
+    
     return footerVeiw;
 }
-
 
 - (void)tapGestrure {
     [self.inputField resignFirstResponder];

@@ -7,7 +7,7 @@
 //
 
 #import "TDRechargeViewController.h"
-#import "SuccessRechargeViewController.h"
+#import "TDRechargeSuccessViewController.h"
 
 #import "TDSelectPayCell.h"
 #import "TDSelectPayModel.h"
@@ -100,6 +100,7 @@
         weakSelf.isPurchassing = NO;
         [SVProgressHUD dismiss];
     };
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successPay) name:@"aliPaySuccess" object:nil];
 }
 
@@ -123,11 +124,12 @@
         self.rechargeSuccessHandle();
     }
     
-    SuccessRechargeViewController *successVC = [[SuccessRechargeViewController alloc] init];
-    successVC.firstL = [NSString stringWithFormat:@"%.2f",[self.rechargeMoney floatValue]];//充值金额
-    successVC.secondL = [NSString stringWithFormat:@"%.2f",[self.rechargeMoney floatValue] * 10];//充值宝典
-    successVC.total = [NSString stringWithFormat:@"%.2f",self.currentCanons + [self.rechargeMoney floatValue]];
+    TDRechargeSuccessViewController *successVC = [[TDRechargeSuccessViewController alloc] init];
     successVC.orderId = self.orderId;
+    WS(weakSelf);
+    successVC.updateTotalCoinHandle = ^(NSString *totalStr){
+            weakSelf.rechargeView.topLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%@ %.2f)",NSLocalizedString(@"CURRENT_COINS", nil),[totalStr floatValue]] withFont:14 withColorStr:colorHexStr8];
+    };
     
     [self.navigationItem setTitle:@""];
     [self.navigationController pushViewController:successVC animated:YES];
@@ -268,6 +270,7 @@
     
     NSLog(@"充值金额 ----> %@",self.rechargeMoney);
     
+    [self.rechargeView.activityView startAnimating];
     self.view.userInteractionEnabled = NO;
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
@@ -314,7 +317,10 @@
         } else {
             
         }
+        
+        [self.rechargeView.activityView stopAnimating];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.rechargeView.activityView stopAnimating];
         NSLog(@"error--%@",error);
     }];
 }
@@ -472,6 +478,7 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
     UIView *sectionView = [[UIView alloc] init];
     sectionView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestrure)];
