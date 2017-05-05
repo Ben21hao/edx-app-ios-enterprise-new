@@ -607,6 +607,11 @@
 		B54C8ACB1EA8BF8A0002FCED /* UIColor+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8ACA1EA8BF8A0002FCED /* UIColor+extend.m */; };
 		B54C8ACF1EA8BF950002FCED /* JHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8ACE1EA8BF950002FCED /* JHTextField.m */; };
 		B55209F81EB9AD8500EC51C9 /* TDRechargeSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B55209F71EB9AD8500EC51C9 /* TDRechargeSuccessViewController.m */; };
+		B55209FD1EB9C96300EC51C9 /* TDCourseCatalogDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55209FC1EB9C96300EC51C9 /* TDCourseCatalogDetailViewController.swift */; };
+		B55209FF1EB9C98100EC51C9 /* TDCourseCatalogDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55209FE1EB9C98100EC51C9 /* TDCourseCatalogDetailView.swift */; };
+		B5520A011EB9CC7700EC51C9 /* TDCourseIntroduceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5520A001EB9CC7700EC51C9 /* TDCourseIntroduceCell.swift */; };
+		B5520A031EB9D4C800EC51C9 /* TDCourseMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5520A021EB9D4C800EC51C9 /* TDCourseMessageCell.swift */; };
+		B5520A051EB9DA1100EC51C9 /* TDCourseDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5520A041EB9DA1100EC51C9 /* TDCourseDataCell.swift */; };
 		B57A0E931EAEECBB00323A47 /* educations.json in Resources */ = {isa = PBXBuildFile; fileRef = B57A0E911EAEECBB00323A47 /* educations.json */; };
 		B58C1F0E1EAB5ACB00AB7B7E /* TDBindEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B58C1F091EAB5ACB00AB7B7E /* TDBindEmailViewController.m */; };
 		B58C1F0F1EAB5ACB00AB7B7E /* TDBindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B58C1F0B1EAB5ACB00AB7B7E /* TDBindPhoneViewController.m */; };
@@ -639,6 +644,7 @@
 		B5CF305E1EB1A75700F1BF6A /* TDPhoneRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CF30591EB1A75700F1BF6A /* TDPhoneRegisterViewController.m */; };
 		B5CF305F1EB1A75700F1BF6A /* TDRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CF305B1EB1A75700F1BF6A /* TDRegisterViewController.m */; };
 		B5CF30631EB1A79E00F1BF6A /* TDWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CF30621EB1A79E00F1BF6A /* TDWebViewController.m */; };
+		B5DE85071EBC1453007C78F4 /* TDCourseButtonsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DE85061EBC1453007C78F4 /* TDCourseButtonsCell.swift */; };
 		B5FAF6D31EB02CC2000C2169 /* TDRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6C91EB02CC2000C2169 /* TDRechargeViewController.m */; };
 		B5FAF6D41EB02CC2000C2169 /* TDSelectPayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6CC1EB02CC2000C2169 /* TDSelectPayModel.m */; };
 		B5FAF6D51EB02CC2000C2169 /* TDRechargeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6CF1EB02CC2000C2169 /* TDRechargeView.m */; };
@@ -1663,6 +1669,11 @@
 		B54C8ACE1EA8BF950002FCED /* JHTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHTextField.m; sourceTree = "<group>"; };
 		B55209F61EB9AD8500EC51C9 /* TDRechargeSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDRechargeSuccessViewController.h; sourceTree = "<group>"; };
 		B55209F71EB9AD8500EC51C9 /* TDRechargeSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRechargeSuccessViewController.m; sourceTree = "<group>"; };
+		B55209FC1EB9C96300EC51C9 /* TDCourseCatalogDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDCourseCatalogDetailViewController.swift; sourceTree = "<group>"; };
+		B55209FE1EB9C98100EC51C9 /* TDCourseCatalogDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDCourseCatalogDetailView.swift; sourceTree = "<group>"; };
+		B5520A001EB9CC7700EC51C9 /* TDCourseIntroduceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDCourseIntroduceCell.swift; sourceTree = "<group>"; };
+		B5520A021EB9D4C800EC51C9 /* TDCourseMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDCourseMessageCell.swift; sourceTree = "<group>"; };
+		B5520A041EB9DA1100EC51C9 /* TDCourseDataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDCourseDataCell.swift; sourceTree = "<group>"; };
 		B57A0E921EAEECBB00323A47 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = en.lproj/educations.json; sourceTree = "<group>"; };
 		B57A0E941EAEECD400323A47 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "zh-Hans"; path = "zh-Hans.lproj/educations.json"; sourceTree = "<group>"; };
 		B58C1F081EAB5ACB00AB7B7E /* TDBindEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBindEmailViewController.h; sourceTree = "<group>"; };
@@ -1726,6 +1737,7 @@
 		B5CF305B1EB1A75700F1BF6A /* TDRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRegisterViewController.m; sourceTree = "<group>"; };
 		B5CF30611EB1A79E00F1BF6A /* TDWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWebViewController.h; sourceTree = "<group>"; };
 		B5CF30621EB1A79E00F1BF6A /* TDWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWebViewController.m; sourceTree = "<group>"; };
+		B5DE85061EBC1453007C78F4 /* TDCourseButtonsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDCourseButtonsCell.swift; sourceTree = "<group>"; };
 		B5FAF6C81EB02CC2000C2169 /* TDRechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDRechargeViewController.h; sourceTree = "<group>"; };
 		B5FAF6C91EB02CC2000C2169 /* TDRechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRechargeViewController.m; sourceTree = "<group>"; };
 		B5FAF6CB1EB02CC2000C2169 /* TDSelectPayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSelectPayModel.h; sourceTree = "<group>"; };
@@ -2853,6 +2865,7 @@
 		9C9B7F701A8CC68D00A857B2 /* Course Enrollment */ = {
 			isa = PBXGroup;
 			children = (
+				B55209F91EB9C94000EC51C9 /* TDCourseCatalogDetailViewController */,
 				B5FAF73A1EB045C8000C2169 /* TDSubMitCourseViewController */,
 				B59238D01EADD0BE00C686D8 /* ChooseCourseViewController */,
 				B59238CC1EADCC4200C686D8 /* QRViewController */,
@@ -3637,6 +3650,36 @@
 			);
 			name = Test;
 			path = ../Test;
+			sourceTree = "<group>";
+		};
+		B55209F91EB9C94000EC51C9 /* TDCourseCatalogDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B55209FA1EB9C94000EC51C9 /* Controllers */,
+				B55209FB1EB9C94000EC51C9 /* Views */,
+			);
+			name = TDCourseCatalogDetailViewController;
+			path = Source/TDCourseCatalogDetailViewController;
+			sourceTree = SOURCE_ROOT;
+		};
+		B55209FA1EB9C94000EC51C9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B55209FC1EB9C96300EC51C9 /* TDCourseCatalogDetailViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B55209FB1EB9C94000EC51C9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B55209FE1EB9C98100EC51C9 /* TDCourseCatalogDetailView.swift */,
+				B5520A001EB9CC7700EC51C9 /* TDCourseIntroduceCell.swift */,
+				B5520A021EB9D4C800EC51C9 /* TDCourseMessageCell.swift */,
+				B5520A041EB9DA1100EC51C9 /* TDCourseDataCell.swift */,
+				B5DE85061EBC1453007C78F4 /* TDCourseButtonsCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		B58C1F071EAB5ACB00AB7B7E /* TDBindAcountViewController */ = {
@@ -4964,6 +5007,7 @@
 				9CADE2F71A91E91A00ACDAF7 /* NSURL+OEXPathExtensions.m in Sources */,
 				1AB676AE1BA0964B002AD0EB /* OEXVideoPlayerSettings.swift in Sources */,
 				9EA4788B1BE76A7700393FA6 /* DiscussionSearchBarDelegate.swift in Sources */,
+				B5DE85071EBC1453007C78F4 /* TDCourseButtonsCell.swift in Sources */,
 				B59238F11EADD0BE00C686D8 /* TDRecommendCell.m in Sources */,
 				77D76BFD1AA5076D00C51C2C /* OEXLocalizedString.m in Sources */,
 				778F17781C0D123F0099BF93 /* CourseCatalogViewController.swift in Sources */,
@@ -5017,6 +5061,7 @@
 				B4B6D61B1A949F0F000F44E8 /* OEXRegistrationFieldCheckBoxView.m in Sources */,
 				7772BEA21AFA68330081CA7A /* Constraint.swift in Sources */,
 				77FDF4111AFBF0C300E8C639 /* VideoBlockViewController.swift in Sources */,
+				B55209FD1EB9C96300EC51C9 /* TDCourseCatalogDetailViewController.swift in Sources */,
 				B5FAF7531EB049B5000C2169 /* TDBuySuccessViewController.m in Sources */,
 				1918AFB11948359300F40345 /* OEXCourseDetailTableViewCell.m in Sources */,
 				B50211A71EA8530E001DE1E2 /* OEXMySettingsViewController.m in Sources */,
@@ -5079,6 +5124,7 @@
 				B50DF9941EAAF299001F38BD /* JHFindPWDView.m in Sources */,
 				77000A4A1A7757E0007D306C /* NSDate+OEXComparisons.m in Sources */,
 				B5FAF7571EB04A69000C2169 /* CouponsViewController.m in Sources */,
+				B55209FF1EB9C98100EC51C9 /* TDCourseCatalogDetailView.swift in Sources */,
 				B518BECB1EA9E6F00027569D /* TDCreateOrderViewController.m in Sources */,
 				B5FAF76A1EB0558C000C2169 /* TDUserInformationViewController.m in Sources */,
 				B518BED11EA9E6F00027569D /* TDTeacherMessageViewController.m in Sources */,
@@ -5130,6 +5176,7 @@
 				77C182AA1CD2E46900AE1474 /* TablePaginationManipulator.swift in Sources */,
 				B4B6D6431A95335C000F44E8 /* OEXRegistrationAgreementController.m in Sources */,
 				0B1212221B4F089A002EE96C /* OEXCoursewareAccess.m in Sources */,
+				B5520A031EB9D4C800EC51C9 /* TDCourseMessageCell.swift in Sources */,
 				77DCD2391C2B13AA00CAEBB5 /* EnrolledCoursesFooterView.swift in Sources */,
 				77ADF4A91AC1B57800AC8955 /* UIImage+OEXColors.m in Sources */,
 				69F998571E6FEB2400CDFA9C /* OEXAnalytics+AppReview.swift in Sources */,
@@ -5166,6 +5213,7 @@
 				B5FAF7471EB04697000C2169 /* JHCouponsAlertView.m in Sources */,
 				B4B6D6161A949F0F000F44E8 /* OEXRegistrationFieldEmailView.m in Sources */,
 				9C9B7F6D1A8CC68400A857B2 /* OEXCourseInfoViewController.m in Sources */,
+				B5520A051EB9DA1100EC51C9 /* TDCourseDataCell.swift in Sources */,
 				B518BECC1EA9E6F00027569D /* TDOrderAssistantViewController.m in Sources */,
 				B5FAF6D41EB02CC2000C2169 /* TDSelectPayModel.m in Sources */,
 				B50DF9AD1EAAF6B9001F38BD /* TDSwiftBaseViewController.swift in Sources */,
@@ -5215,6 +5263,7 @@
 				7793764D1BED27D000900A8C /* BasicAuthCredential.swift in Sources */,
 				B50DF9AF1EAAF6B9001F38BD /* TDBaseScrollView.m in Sources */,
 				B52591791EB348C3003A950D /* openssl_wrapper.m in Sources */,
+				B5520A011EB9CC7700EC51C9 /* TDCourseIntroduceCell.swift in Sources */,
 				B4B6D62E1A949F1B000F44E8 /* OEXRegistrationFieldTextAreaController.m in Sources */,
 				B4B285E51A9A49FF00DD603A /* OEXFabricConfig.m in Sources */,
 				B5168B761EB832A000C80436 /* TDWaitforPayCell.m in Sources */,

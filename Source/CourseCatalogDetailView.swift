@@ -92,11 +92,13 @@ class CourseCatalogDetailView : UIView, UIWebViewDelegate,UIScrollViewDelegate {
         setup()
     }
     func setDetail() {
+        
         //学习时长
         clockLabel.font = UIFont.init(name: "FontAwesome", size: 20)
         clockLabel.text = "\u{f017}"
         clockLabel.textColor = UIColor.init(RGBHex: 0xaab2bd, alpha: 1)
         timeV.addSubview(clockLabel)
+        
         clockLabel.snp_makeConstraints { (make) in
             make.top.equalTo(timeV.snp_top).offset(18)
             make.left.equalTo(timeV.snp_left).offset(18)
@@ -106,6 +108,7 @@ class CourseCatalogDetailView : UIView, UIWebViewDelegate,UIScrollViewDelegate {
         firstL.textAlignment = NSTextAlignment.Center
         firstL.font = UIFont.systemFontOfSize(14)
         timeV.addSubview(firstL)
+        
         firstL.snp_makeConstraints { (make) in
             make.centerY.equalTo(clockLabel.snp_centerY)
             make.left.equalTo(clockLabel.snp_right).offset(20)
@@ -113,11 +116,13 @@ class CourseCatalogDetailView : UIView, UIWebViewDelegate,UIScrollViewDelegate {
         }
         secondL.font = UIFont.systemFontOfSize(14)
         timeV.addSubview(secondL)
+        
         secondL.snp_makeConstraints { (make) in
             make.centerY.equalTo(clockLabel.snp_centerY)
             make.left.equalTo(firstL.snp_right).offset(28)
             make.height.equalTo(48)
         }
+        
         timeV.addSubview(sepLine)
         sepLine.backgroundColor = UIColor.init(RGBHex: 0xCCD1D9, alpha: 1.0)
         sepLine.snp_makeConstraints { (make) in
@@ -132,30 +137,34 @@ class CourseCatalogDetailView : UIView, UIWebViewDelegate,UIScrollViewDelegate {
         peopleLabel.text = "\u{f007}"
         peopleLabel.textColor = UIColor.init(RGBHex: 0xaab2bd, alpha: 1)
         timeV.addSubview(peopleLabel)
+        
         peopleLabel.snp_makeConstraints { (make) in
             make.top.equalTo(sepLine.snp_bottom).offset(13)
             make.left.equalTo(timeV.snp_left).offset(18)
         }
         
-        timeV.addSubview(thirdL)
         thirdL.text = Strings.applicationNumber
         thirdL.font = UIFont.systemFontOfSize(14)
+        timeV.addSubview(thirdL)
+        
         thirdL.snp_makeConstraints { (make) in
             make.centerY.equalTo(peopleLabel.snp_centerY)
             make.left.equalTo(firstL.snp_left)
             make.height.equalTo(48)
         }
         
-        timeV.addSubview(fourthL)//人数
         fourthL.font = UIFont.systemFontOfSize(14)
+        timeV.addSubview(fourthL)//人数
+        
         fourthL.snp_makeConstraints { (make) in
             make.centerY.equalTo(peopleLabel.snp_centerY)
             make.left.equalTo(thirdL.snp_right).offset(28)
             make.height.equalTo(48)
         }
         
-        timeV.addSubview(line2)
         line2.backgroundColor = UIColor.init(RGBHex: 0xCCD1D9, alpha: 1.0)
+        timeV.addSubview(line2)
+        
         line2.snp_makeConstraints { (make) in
             make.top.equalTo(timeV.snp_top).offset(96)
             make.leading.equalTo(timeV.snp_leading).offset(6)
@@ -168,6 +177,7 @@ class CourseCatalogDetailView : UIView, UIWebViewDelegate,UIScrollViewDelegate {
         dateLabel.text = "\u{f133}"
         dateLabel.textColor = UIColor.init(RGBHex: 0xaab2bd, alpha: 1)
         timeV.addSubview(dateLabel)
+        
         dateLabel.snp_makeConstraints { (make) in
             make.top.equalTo(line2.snp_bottom).offset(13)
             make.left.equalTo(timeV.snp_left).offset(18)
@@ -176,6 +186,7 @@ class CourseCatalogDetailView : UIView, UIWebViewDelegate,UIScrollViewDelegate {
         fiveLabel.text = Strings.dateLimit
         fiveLabel.font = UIFont.systemFontOfSize(14)
         timeV.addSubview(fiveLabel)
+        
         fiveLabel.snp_makeConstraints { (make) in
             make.centerY.equalTo(dateLabel.snp_centerY)
             make.left.equalTo(firstL.snp_left)
@@ -192,6 +203,7 @@ class CourseCatalogDetailView : UIView, UIWebViewDelegate,UIScrollViewDelegate {
         sixLabel.numberOfLines = 0;
         sixLabel.lineBreakMode = .ByCharWrapping //以字符为单位换行
         timeV.addSubview(sixLabel)
+        
         sixLabel.snp_makeConstraints { (make) in
             make.top.equalTo(line2.snp_bottom).offset(13)
             make.left.equalTo(fiveLabel.snp_right).offset(28)
@@ -324,7 +336,7 @@ class CourseCatalogDetailView : UIView, UIWebViewDelegate,UIScrollViewDelegate {
             make.height.equalTo(30)
         }
         
-        let label5 = UILabel();
+        let label5 = UILabel()
         label5.font = UIFont.init(name: "FontAwesome", size: 20)
         label5.text = "\u{f0c0}"
         label5.textColor = UIColor.whiteColor()
@@ -354,7 +366,7 @@ class CourseCatalogDetailView : UIView, UIWebViewDelegate,UIScrollViewDelegate {
         }
         
         // 助教cell
-        let imgV06 = UIImageView.init(image: UIImage.init(named: "zhangjie"))
+        let imgV06 = UIImageView.init(image: UIImage.init(named: ""))
         sixthCell.addSubview(imgV06)
         
         imgV06.snp_makeConstraints { (make) in
@@ -364,14 +376,19 @@ class CourseCatalogDetailView : UIView, UIWebViewDelegate,UIScrollViewDelegate {
             make.height.equalTo(30)
         }
         
-        let label6 = UILabel();
+        let label6 = UILabel()
+        label6.backgroundColor = OEXStyles.sharedStyles().baseColor2()
         label6.font = UIFont.init(name: "FontAwesome", size: 20)
         label6.text = "\u{f0c0}"
         label6.textColor = UIColor.whiteColor()
+        label6.textAlignment = .Center
+        label6.layer.masksToBounds = true
+        label6.layer.cornerRadius = 6
         sixthCell.addSubview(label6);
         
         label6.snp_makeConstraints { (make) in
             make.center.equalTo(imgV06.snp_center)
+            make.size.equalTo(CGSizeMake(30, 30))
         }
         
         let sixLabel = UILabel()

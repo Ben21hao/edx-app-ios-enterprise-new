@@ -12,6 +12,7 @@ import edXCore
 
 
 class CourseCatalogDetailViewController: UIViewController,UIScrollViewDelegate,UIGestureRecognizerDelegate {
+    
     private let courseID: String
     private let coursePrice : Double
     private let courseName : String

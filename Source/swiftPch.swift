@@ -10,7 +10,8 @@ import UIKit
 
 //let ELITEU_URL = OEXConfig.sharedConfig().apiHostURL //swift不能从文件中读取域名
 
-let ELITEU_URL = "http://beta.eliteu.cn"
+let ELITEU_URL = "http://demo.eliteu.cn"
+//let ELITEU_URL = "http://beta.eliteu.cn"
 //let ELITEU_URL = "http://www.eliteu.cn"
 
 

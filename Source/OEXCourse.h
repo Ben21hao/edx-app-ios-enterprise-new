@@ -78,6 +78,8 @@ OEXStartType OEXStartTypeForString(NSString* type);
 @property (readonly, nonatomic, copy, nullable) NSString *end_at; //购买课程赠送宝典结束时间
 @property (readonly, nonatomic, copy, nullable) NSNumber *is_eliteu_course;//是否为付费课程
 
+@property (nonatomic,assign) int submitType; //0 已购买，1 立即加入, 2 查看待支付，3 即将开课
+
 @end
 
 
