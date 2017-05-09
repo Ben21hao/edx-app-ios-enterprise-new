@@ -17,7 +17,7 @@ class EnrolledCoursesFooterView : UIView {
     var findCoursesAction : (() -> Void)?
     
     private var findCoursesTextStyle : OEXTextStyle {
-        return OEXTextStyle(weight: .Normal, size: .Base, color: OEXStyles.sharedStyles().neutralDark())
+        return OEXTextStyle(weight: .SemiBold, size: .Base, color: OEXStyles.sharedStyles().neutralDark())
     }
     
     init() {
@@ -33,7 +33,11 @@ class EnrolledCoursesFooterView : UIView {
         self.findCoursesButton.applyButtonStyle(OEXStyles.sharedStyles().filledPrimaryButtonStyle, withTitle: Strings.EnrollmentList.findCourses)//.oex_uppercaseStringInCurrentLocale()大写字母
         
         container.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
-        container.applyBorderStyle(BorderStyle())
+//        container.applyBorderStyle(BorderStyle())
+        container.layer.cornerRadius = 4.0
+        container.layer.shadowColor = UIColor.init(RGBHex: 0xaab2bd, alpha: 1).CGColor
+        container.layer.shadowOffset = CGSizeMake(0, 1)
+        container.layer.shadowOpacity = 0.6
         
         container.snp_makeConstraints {make in
             make.top.equalTo(self).offset(CourseCardCell.margin)

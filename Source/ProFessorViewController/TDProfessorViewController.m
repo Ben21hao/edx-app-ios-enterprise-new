@@ -339,7 +339,8 @@
     }];
     
     //设置头像
-    [headerImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ELITEU_URL,self.imageUrl]] placeholderImage:[UIImage imageNamed:@"default_big"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    NSURL *headerUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ELITEU_URL,self.imageUrl]];
+    [headerImage sd_setImageWithURL:headerUrl placeholderImage:[UIImage imageNamed:@"default_big"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     }];
     
     nameLabel.text = [NSString stringWithFormat:@"%@\n%@ %@ %@",self.name,self.college,self.major,self.degrees];

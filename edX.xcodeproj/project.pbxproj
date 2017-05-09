@@ -639,6 +639,7 @@
 		B59238EF1EADD0BE00C686D8 /* TDChooseCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238E31EADD0BE00C686D8 /* TDChooseCourseCell.m */; };
 		B59238F01EADD0BE00C686D8 /* TDChooseCourseView.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238E51EADD0BE00C686D8 /* TDChooseCourseView.m */; };
 		B59238F11EADD0BE00C686D8 /* TDRecommendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238E71EADD0BE00C686D8 /* TDRecommendCell.m */; };
+		B5A3A0F61EC0764D00C48573 /* TDRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B5A3A0F51EC0764D00C48573 /* TDRequestManager.m */; };
 		B5CF305C1EB1A75700F1BF6A /* TDEmailRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CF30551EB1A75700F1BF6A /* TDEmailRegisterViewController.m */; };
 		B5CF305D1EB1A75700F1BF6A /* TDPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CF30571EB1A75700F1BF6A /* TDPasswordViewController.m */; };
 		B5CF305E1EB1A75700F1BF6A /* TDPhoneRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CF30591EB1A75700F1BF6A /* TDPhoneRegisterViewController.m */; };
@@ -1727,6 +1728,8 @@
 		B59238E51EADD0BE00C686D8 /* TDChooseCourseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDChooseCourseView.m; sourceTree = "<group>"; };
 		B59238E61EADD0BE00C686D8 /* TDRecommendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDRecommendCell.h; sourceTree = "<group>"; };
 		B59238E71EADD0BE00C686D8 /* TDRecommendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRecommendCell.m; sourceTree = "<group>"; };
+		B5A3A0F41EC0764D00C48573 /* TDRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDRequestManager.h; sourceTree = "<group>"; };
+		B5A3A0F51EC0764D00C48573 /* TDRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRequestManager.m; sourceTree = "<group>"; };
 		B5CF30541EB1A75700F1BF6A /* TDEmailRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDEmailRegisterViewController.h; sourceTree = "<group>"; };
 		B5CF30551EB1A75700F1BF6A /* TDEmailRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDEmailRegisterViewController.m; sourceTree = "<group>"; };
 		B5CF30561EB1A75700F1BF6A /* TDPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDPasswordViewController.h; sourceTree = "<group>"; };
@@ -3090,6 +3093,7 @@
 		B50211CD1EA85490001DE1E2 /* TDLibraryViewController */ = {
 			isa = PBXGroup;
 			children = (
+				B5A3A0F31EC072D000C48573 /* TDRequestManager */,
 				B52590FC1EB32DE5003A950D /* TDMd5Tool */,
 				B50DF9981EAAF6B9001F38BD /* TDBaseFile */,
 				B54C8ACC1EA8BF950002FCED /* TDTextField */,
@@ -3829,6 +3833,15 @@
 				B59238E71EADD0BE00C686D8 /* TDRecommendCell.m */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		B5A3A0F31EC072D000C48573 /* TDRequestManager */ = {
+			isa = PBXGroup;
+			children = (
+				B5A3A0F41EC0764D00C48573 /* TDRequestManager.h */,
+				B5A3A0F51EC0764D00C48573 /* TDRequestManager.m */,
+			);
+			path = TDRequestManager;
 			sourceTree = "<group>";
 		};
 		B5CF30531EB1A75700F1BF6A /* TDRegisterViewController */ = {
@@ -5002,6 +5015,7 @@
 				B50211A21EA852B7001DE1E2 /* TDAboutWeViewController.m in Sources */,
 				890D027F1967343A002CE7EC /* OEXCourseInfoCell.m in Sources */,
 				B50211FE1EA85818001DE1E2 /* ClipImg.m in Sources */,
+				B5A3A0F61EC0764D00C48573 /* TDRequestManager.m in Sources */,
 				E0A2461D1D5CA6950066C766 /* LogoutApi.swift in Sources */,
 				770A27961A6995DF00DFC6FF /* NSArray+OEXFunctional.m in Sources */,
 				9CADE2F71A91E91A00ACDAF7 /* NSURL+OEXPathExtensions.m in Sources */,

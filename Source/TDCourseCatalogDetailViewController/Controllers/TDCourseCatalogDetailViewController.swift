@@ -19,6 +19,8 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
     var courseModel: OEXCourse
     private let courseID: String
     private let courseName : String
+    private let companyID : String
+    private let username : String
     
     private lazy var loadController = LoadStateViewController()
     
@@ -35,6 +37,8 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         self.courseModel = OEXCourse()
         self.courseID = courseModel.course_id!
         self.courseName = courseModel.name!
+        self.companyID = self.session.currentUser?.company_id ?? ""
+        self.username = self.session.currentUser?.username ?? ""
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -51,8 +55,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         
         self.loadController.setupInController(self, contentView: courseDetailView)
         
-        let username = self.session.currentUser?.username ?? ""
-        if username != "" {
+        if self.username != "" {
             self.getData()
         }
         
@@ -64,7 +67,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         self.courseStream.listen(self, success: {[weak self] (course, enrolled) in
             
             self!.courseModel = course
-            print(" 时间 ----> \(self?.courseModel.start_display_info.displayDate) --> \(self?.courseModel.start_display_info.date)")
+            print(" 时间 ----> \(self?.courseModel.start_display_info.displayDate) --> \(self?.courseModel.start_display_info.date) -====>>>\((self?.courseModel.is_eliteu_course)!)")
             
             if enrolled { //已报名
                 self?.courseModel.submitType = 0//查看课程
@@ -97,10 +100,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
     }
     
     func getData() -> Void {
-        let domain = ELITEU_URL
-        let username = OEXRouter.sharedRouter().environment.session.currentUser?.username
-        let link = "/api/courses/v1/get_wait_order_list/?username="
-        let path = domain + link + username!
+        let path = "\(ELITEU_URL)/api/courses/v1/get_wait_order_list/?username=\(self.username)"
         let url:NSURL = NSURL(string: path)!
         
         let request : NSMutableURLRequest = NSMutableURLRequest(URL: url)
@@ -140,7 +140,8 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
     }
 
     private func loadCourseMessage() { //获取课程信息
-        let request = CourseCatalogAPI.getCourse(courseID)
+        
+        let request = CourseCatalogAPI.getCourse(courseID, companyID: self.companyID)
         let courseStream = environment.networkManager.streamForRequest(request)
         let enrolledStream = environment.dataManager.enrollmentManager.streamForCourseWithID(courseID).resultMap {
             return .Success($0.isSuccess)
@@ -243,8 +244,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
     internal func gotoStudyCommentVc() { //学员评价
         let vc = TDCommentViewController()
         vc.courseID = self.courseID
-        let currentUser = session.currentUser?.username//传当前用户名
-        vc.userName = currentUser;
+        vc.userName = self.username;//传当前用户名
         self.navigationController?.pushViewController(vc, animated: true)
     }
     internal func gotoClassVc() { //班级
@@ -256,7 +256,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         let vc = TDOrderAssistantViewController();
         vc.whereFrom = 2
         vc.courseId = self.courseID
-        vc.myName = session.currentUser?.username
+        vc.myName = self.username
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -269,16 +269,22 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
     }
     
     func gotoWaitForPayVc () { //待支付
-        let userCouponVC1 = WaitForPayViewController()
-        userCouponVC1.username = session.currentUser?.username //传当前用户名
-        self.navigationController?.pushViewController(userCouponVC1, animated: true)
+        let userCouponVC = WaitForPayViewController()
+        userCouponVC.username = self.username //传当前用户名
+        self.navigationController?.pushViewController(userCouponVC, animated: true)
     }
     
     func gotoChooseCourseVc() { //选择课表
-        let vc = TDChooseCourseViewController();
-        vc.username = session.currentUser?.username
-        vc.courseID = self.courseID
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        if self.courseModel.is_eliteu_course == true {//英荔课程
+            let vc = TDChooseCourseViewController();
+            vc.username = self.username
+            vc.courseID = self.courseID
+            self.navigationController?.pushViewController(vc, animated: true)
+
+        } else {
+            addOwnCompanyCourseHandle()
+        }
     }
     
     private func showCourseScreen(message message: String? = nil) { //跳到我的课程
@@ -289,6 +295,15 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
             dispatch_after(after, dispatch_get_main_queue()) {
                 NSNotificationCenter.defaultCenter().postNotificationName(EnrollmentShared.successNotification, object: message, userInfo: nil)
             }
+        }
+    }
+    
+    func addOwnCompanyCourseHandle() { //加入自己公司的课程
+        
+        let manager = TDRequestManager()
+        manager.addOwnCompanyCourse(self.courseID, username: self.username, companyID: self.companyID)
+        manager.addOwnCompanyCourseHandle = { () in
+            self.environment.router?.showMyCourses()
         }
     }
     

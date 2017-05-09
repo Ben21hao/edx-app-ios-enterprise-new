@@ -125,6 +125,7 @@
 - (void)paySuccess {
     TDBuySuccessViewController *buySuccessVC = [[TDBuySuccessViewController alloc] init];
     buySuccessVC.orderId = self.orderId;
+    NSLog(@"success %@ ",buySuccessVC.orderId);
     
     [self.navigationItem setTitle:@""];
     [self.navigationController pushViewController:buySuccessVC animated:YES];

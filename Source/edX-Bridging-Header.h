@@ -75,6 +75,7 @@
 
 
 #import "TDBaseToolModel.h"
+#import "TDRequestManager.h"
 #import "UIView+Toast.h"
 #import "UIColor+JHHexColor.h"
 #import "TDAssistantServiceViewController.h"

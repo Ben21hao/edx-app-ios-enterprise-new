@@ -101,31 +101,33 @@
     return [WXApi handleOpenURL:url delegate:(id)self];
 }
 
-- (void)onResp:(BaseResp *)resp{
+- (void)onResp:(BaseResp *)resp {
     
     if([resp isKindOfClass:[PayResp class]]){
-        NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
-        switch (resp.errCode) {
-            case WXSuccess:
-                strMsg = NSLocalizedString(@"PAY_SUCCESS", nil);
-                break;
-            case WXErrCodeUserCancel:
-                strMsg = NSLocalizedString(@"PAY_CANCEL", nil);
-                break;
-            case WXErrCodeSentFail:
-                strMsg = NSLocalizedString(@"PAY_FAIL", nil);
-                break;
-            case WXErrCodeAuthDeny:
-                strMsg = NSLocalizedString(@"PAY_AUTHENRIZATE_FAIL", nil);
-                break;
-            default:
-                strMsg = NSLocalizedString(@"NO_SUPPORT_WECHAT", nil);
-                break;
-        }
+        
         if (resp.errCode == WXSuccess) {
-            NSNotification *notice = [NSNotification notificationWithName:@"aliPaySuccess" object:nil];
-            [[NSNotificationCenter defaultCenter] postNotification:notice];
+            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"aliPaySuccess" object:nil]];
+            
         } else {
+            NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
+            switch (resp.errCode) {
+                case WXSuccess:
+                    strMsg = NSLocalizedString(@"PAY_SUCCESS", nil);
+                    break;
+                case WXErrCodeUserCancel:
+                    strMsg = NSLocalizedString(@"PAY_CANCEL", nil);
+                    break;
+                case WXErrCodeSentFail:
+                    strMsg = NSLocalizedString(@"PAY_FAIL", nil);
+                    break;
+                case WXErrCodeAuthDeny:
+                    strMsg = NSLocalizedString(@"PAY_AUTHENRIZATE_FAIL", nil);
+                    break;
+                default:
+                    strMsg = NSLocalizedString(@"NO_SUPPORT_WECHAT", nil);
+                    break;
+            }
+            
             NSString *strTitle = NSLocalizedString(@"PAY_RESULT", nil);
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
             alert.delegate = self;
@@ -165,8 +167,7 @@
                     break;
             }
             if ([resultStatus isEqualToString:@"9000"]) {
-                NSNotification *notice = [NSNotification notificationWithName:@"aliPaySuccess" object:nil];
-                [[NSNotificationCenter defaultCenter] postNotification:notice];
+                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"aliPaySuccess" object:nil]];
                 
             } else {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:str delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];

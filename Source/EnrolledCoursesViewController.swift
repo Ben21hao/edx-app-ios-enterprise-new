@@ -31,7 +31,6 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
         
         super.init(env: environment)
         self.titleViewLabel.text = Strings.myCourses
-//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .Plain, target: nil, action: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -109,7 +108,9 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
     }
     
     private func setviewConfig() {
+        self.view.backgroundColor = OEXStyles.sharedStyles().baseColor5()
         
+        tableController.delegate = self
         addChildViewController(tableController)
         tableController.didMoveToParentViewController(self)
         self.loadController.setupInController(self, contentView: tableController.view)
@@ -118,10 +119,6 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
         tableController.view.snp_makeConstraints {make in
             make.edges.equalTo(self.view)
         }
-        
-        tableController.delegate = self
-        
-        self.view.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
         
         insetsController.setupInController(self, scrollView: tableController.tableView)
         insetsController.addSource(self.refreshController)
@@ -133,7 +130,8 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
         )
     }
     
-    private func setupFooter() {
+    private func setupFooter() { //底部视图
+        
         if environment.config.courseEnrollmentConfig.isCourseDiscoveryEnabled() {
             let footer = EnrolledCoursesFooterView()
             footer.findCoursesAction = {[weak self] in
@@ -142,8 +140,8 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
             
             footer.sizeToFit()
             self.tableController.tableView.tableFooterView = footer
-        }
-        else {
+            
+        } else {
             tableController.tableView.tableFooterView = UIView()
         }
     }

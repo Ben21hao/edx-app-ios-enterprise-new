@@ -46,7 +46,7 @@ class TDCourseIntroduceCell: UITableViewCell {
         moreButton.snp_makeConstraints { (make) in
             make.left.equalTo(bgView.snp_left).offset(18)
             make.bottom.equalTo(bgView.snp_bottom).offset(0)
-            make.size.equalTo(CGSizeMake(88, 33))
+            make.size.equalTo(CGSizeMake(78, 33))
         }
         
         introduceLabel.snp_makeConstraints { (make) in

@@ -112,6 +112,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.dataDic[@"give_coin"] floatValue] > 0 ? 7 : 6;
 }

@@ -13,7 +13,7 @@ class CourseCardCell : UITableViewCell {
     
     private static let cellIdentifier = "CourseCardCell"
     private let courseView = CourseCardView(frame: CGRectZero)
-//    private var course : OEXCourse?
+    private var course : OEXCourse?
     private let courseCardBorderStyle = BorderStyle()
     
     override init(style : UITableViewCellStyle, reuseIdentifier : String?) {
@@ -30,8 +30,7 @@ class CourseCardCell : UITableViewCell {
         
         courseView.applyBorderStyle(courseCardBorderStyle)
         
-        self.contentView.backgroundColor = OEXStyles.sharedStyles().neutralXLight()
-        
+        self.contentView.backgroundColor = OEXStyles.sharedStyles().baseColor5()
         self.selectionStyle = .None
     }
 
@@ -76,7 +75,7 @@ class CoursesTableViewController: UITableViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.separatorStyle = .None
-        self.tableView.backgroundColor = OEXStyles.sharedStyles().neutralXLight()
+        self.tableView.backgroundColor = OEXStyles.sharedStyles().baseColor5()
         self.tableView.accessibilityIdentifier = "courses-table-view"
         
         self.tableView.snp_makeConstraints {make in
@@ -113,7 +112,7 @@ class CoursesTableViewController: UITableViewController {
         case .EnrollmentList:
             CourseCardViewModel.onHome(course).apply(cell.courseView, networkManager: self.environment.networkManager,type: 3)
         }
-//        cell.course = course
+        cell.course = course
 
         return cell
     }

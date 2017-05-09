@@ -55,11 +55,20 @@ public struct CourseCatalogAPI {
         ).paginated(page: page)
     }
     
-    public static func getCourse(courseID: String) -> NetworkRequest<OEXCourse> {
+    public static func getCourse(courseID: String, companyID : String) -> NetworkRequest<OEXCourse> {
         return NetworkRequest(
-            method: .GET,
-            path: "api/courses/v1/courses/{courseID}".oex_formatWithParameters(["courseID" : courseID]),
-            deserializer: .JSONResponse(courseDeserializer))
+        
+        // method: .GET,
+        // path: "/api/mobile/enterprise/v0.5/companycoursesdetail/{courseID}".oex_formatWithParameters(["courseID" : courseID]),
+        // deserializer: .JSONResponse(courseDeserializer))
+        
+        //api/courses/v1/courses/{courseID} 
+        // /api/mobile/enterprise/v0.5/companycoursesdetail/course-v1:EliteU+11067001+A1?company_id=600000001
+        
+        method: .GET,
+        path: "/api/mobile/enterprise/v0.5/companycoursesdetail/{courseID}".oex_formatWithParameters(["courseID" : courseID]),
+        query : [Params.CompanyId.rawValue: JSON(companyID)],
+        deserializer: .JSONResponse(courseDeserializer))
     }
     
     public static func enroll(courseID: String, emailOptIn: Bool = true) -> NetworkRequest<UserCourseEnrollment> {
