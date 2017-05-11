@@ -173,7 +173,7 @@
             [self.baseTool showPurchase];
  
         } else {
-            NSLog(@"----%@----",responDic[@"msg"]);
+            NSLog(@"-------->>> %@ -- %@",code,responDic[@"msg"]);
         }
         
         [self.loadIngView removeFromSuperview];

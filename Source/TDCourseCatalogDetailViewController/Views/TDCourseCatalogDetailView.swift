@@ -142,7 +142,11 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
                 case 0:
                     cell.submitButton.setTitle(Strings.CourseDetail.viewCourse, forState: .Normal)
                 case 1:
-                    cell.submitButton.setAttributedTitle(setSubmitTitle(), forState: .Normal)
+                    if self.courseModel.is_eliteu_course == true {
+                        cell.submitButton.setTitle(Strings.CourseDetail.enrollNow, forState: .Normal)
+                    } else {
+                        cell.submitButton.setAttributedTitle(setSubmitTitle(), forState: .Normal)
+                    }
                 case 2:
                     cell.submitButton.setTitle(Strings.viewPrepareOrder, forState: .Normal)
                 default:
@@ -180,6 +184,7 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
     }
     
     func setSubmitTitle() -> NSAttributedString {
+        
         let baseTool = TDBaseToolModel.init()
         let priceStr = baseTool.setDetailString("\(Strings.CourseDetail.enrollNow)￥\(String(format: "%.2f",(self.courseModel.course_price?.doubleValue)!))", withFont: 16, withColorStr: "#ffffff")
          return priceStr //马上加入

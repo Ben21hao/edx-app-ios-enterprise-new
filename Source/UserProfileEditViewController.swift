@@ -234,6 +234,7 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
     func setNaviewgatinBar() {
         
         let leftButton = UIButton.init(frame: CGRectMake(0, 0, 48, 48))
+        leftButton.showsTouchWhenHighlighted = true
         leftButton.setImage(UIImage.init(named: "backImagee"), forState: .Normal)
         leftButton.imageEdgeInsets = UIEdgeInsetsMake(0, -23, 0, 23)
         leftButton.addTarget(self, action: #selector(leftBarItemAction), forControlEvents: .TouchUpInside)

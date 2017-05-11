@@ -80,7 +80,7 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setValue:self.orderId forKey:@"order_id"];
     
-    NSLog(@"订单号 --》 %@ ==========  %@",self.orderId,dic);
+    NSLog(@"订单号 -->>> %@ ------>>> %@",self.orderId,dic);
     
     NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/get_order_status/",ELITEU_URL];
     
@@ -98,7 +98,7 @@
                 [self requestData];
             }
         }
-        NSLog(@"----- 支付成功 ----- %@",responDic);
+        NSLog(@"----- 支付成功 ----- code %@  -- > msg %@",code,responDic[@"msg"]);
         
         [self.loadIngView removeFromSuperview];
         

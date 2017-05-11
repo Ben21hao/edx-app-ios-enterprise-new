@@ -166,10 +166,17 @@ OEXRegistrationViewControllerDelegate
 }
 
 - (UIBarButtonItem*)showNavigationBarItem {
-    UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithImage:[UIImage MenuIcon] style:UIBarButtonItemStylePlain target:self action:@selector(showSidebar:)];
-    item.accessibilityLabel = [Strings accessibilityMenu];
-    item.accessibilityIdentifier = @"navigation-bar-button";
+//    UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithImage:[UIImage MenuIcon] style:UIBarButtonItemStylePlain target:self action:@selector(showSidebar:)];
+//    item.accessibilityLabel = [Strings accessibilityMenu];
+//    item.accessibilityIdentifier = @"navigation-bar-button";
     
+    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 48, 48)];
+    leftButton.imageEdgeInsets = UIEdgeInsetsMake(0, -18, 0, 18);
+    leftButton.showsTouchWhenHighlighted = YES;
+    [leftButton setImage:[UIImage MenuIcon] forState:UIControlStateNormal];
+    [leftButton addTarget:self action:@selector(showSidebar:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+
     return item;
 }
 

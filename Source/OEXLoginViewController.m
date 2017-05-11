@@ -463,7 +463,7 @@
 - (void)pushRegisterViewController:(NSInteger)type {
     
     TDRegisterViewController *registerViewController = [[TDRegisterViewController alloc] init];
-    registerViewController.whereFrom = &(type);
+    registerViewController.whereFrom = type;
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:registerViewController];
     [self presentViewController:navController animated:YES completion:nil];
 }

@@ -35,7 +35,6 @@
     self.titleL.font = [UIFont fontWithName:@"OpenSans" size:18.0];
     self.titleL.textColor = [UIColor whiteColor];
     self.navigationItem.titleView = self.titleL;
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -70,7 +69,7 @@
 
 -  (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     tableView.separatorColor = [UIColor colorWithHexString:colorHexStr6];
-    
+    tableView.separatorInset = UIEdgeInsetsZero;
     if (indexPath.row == 0) {
         TDSettingCell *cell = [[TDSettingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDWifiCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

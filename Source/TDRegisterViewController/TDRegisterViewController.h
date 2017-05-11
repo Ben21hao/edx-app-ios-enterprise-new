@@ -15,6 +15,6 @@ typedef NS_ENUM(NSInteger,TDRegisterViewFrom) {
 
 @interface TDRegisterViewController : TDBaseViewController
 
-@property (nonatomic,assign) NSInteger *whereFrom;
+@property (nonatomic,assign) NSInteger whereFrom;
 
 @end

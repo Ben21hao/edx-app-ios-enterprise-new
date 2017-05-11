@@ -60,6 +60,7 @@
 - (void)nextButtonAction:(UIButton *)sender {
     
     [self.accountTextField resignFirstResponder];
+    [self.activityView startAnimating];
     
     TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
     if (![baseTool networkingState]) {
@@ -78,8 +79,6 @@
                                                              shouldHide:YES];
         
     } else if (self.accountTextField.text.length > 0) {
-        
-        [self.activityView startAnimating];
         
         if ([baseTool isValidateMobile:self.accountTextField.text]) {//手机有效
             [self phoneForCheckNum];
