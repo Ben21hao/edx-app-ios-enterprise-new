@@ -446,6 +446,7 @@
     self.tableView = [[UITableView alloc] init];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.separatorInset = UIEdgeInsetsZero;
     self.tableView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     [self.view addSubview:self.tableView];
     
