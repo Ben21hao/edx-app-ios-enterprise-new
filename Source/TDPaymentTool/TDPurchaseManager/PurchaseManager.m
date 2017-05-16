@@ -76,15 +76,14 @@
 - (void)reqToUpMoneyFromApple:(int)type {
     [self buy:type];
 }
+
 -(void)buy:(int)type
 {
     buyType = type;
     if ([SKPaymentQueue canMakePayments]) {
         [self RequestProductData];
         NSLog(@"允许程序内付费购买");
-    }
-    else
-    {
+    } else {
         NSLog(@"不允许程序内付费购买");
         UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:@"提示"
                                                             message:@"您的手机没有打开程序内付费购买"

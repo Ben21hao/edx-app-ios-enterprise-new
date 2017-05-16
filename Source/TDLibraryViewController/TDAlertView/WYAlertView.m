@@ -238,7 +238,7 @@
             self.text.leftViewMode = UITextFieldViewModeAlways;
             self.text.backgroundColor = [UIColor getColor:@"f9f8f9"];
             [self.text setTextColor:[UIColor getColor:@"000000" alpha:0.6]];
-            self.text.placeholder = @"请输入手机号或邮箱号";
+            self.text.placeholder = NSLocalizedString(@"PHONE_OR_EMAIL", nil);
             [self.text setValue:[UIColor getColor:@"000000" alpha:0.5] forKeyPath:@"_placeholderLabel.textColor"];
             [self.text setValue:[UIFont systemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
             self.text.delegate = self;

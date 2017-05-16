@@ -44,7 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = @"助教";
+    self.titleViewLabel.text = NSLocalizedString(@"TEACH_ASSISTANT_TITLE", nil);
     
     [self setViewConstraint];
     
@@ -139,11 +139,11 @@
             if (type == 2) {
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }
-            [self.view makeToast:@"没有更多数据了" duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:NSLocalizedString(@"NO_MORE_DATA", nil) duration:1.08 position:CSToastPositionCenter];
             
         } else if ([code intValue] == 404) { //该课程暂无助教
             self.nullLabel.hidden = NO;
-            [self.view makeToast:@"该课程暂无助教" duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:NSLocalizedString(@"CURRENTLY_NO_TA", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
         self.loadingView.hidden = YES;
@@ -159,7 +159,7 @@
     self.nullLabel = [[UILabel alloc] init];
     self.nullLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     self.nullLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
-    self.nullLabel.text = @"暂无数据";
+    self.nullLabel.text = NSLocalizedString(@"CURRENTLY_NO_TA", nil);
     [self.view addSubview:self.nullLabel];
     
     [self.nullLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -255,14 +255,14 @@
                 
             } else if ([status intValue] == 0) {
                 [self reloadData:indexpath status:status];
-                [self.view makeToast:@"助教离线中" duration:1.08 position:CSToastPositionCenter];
+                [self.view makeToast:NSLocalizedString(@"TA_OFFLINE", nil) duration:1.08 position:CSToastPositionCenter];
             } else {
                 [self reloadData:indexpath status:status];
-                [self.view makeToast:@"助教忙碌中" duration:1.08 position:CSToastPositionCenter];
+                [self.view makeToast:NSLocalizedString(@"TA_BUSY", nil) duration:1.08 position:CSToastPositionCenter];
             }
             
         } else {
-            [self.view makeToast:@"助教忙碌中" duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:NSLocalizedString(@"SYSTEM_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
         NSLog(@"查询助教状态 --- %@%@",code ,responseDic[@"msg"]);

@@ -181,14 +181,21 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
                 paragraph.lineSpacing = 2
                 let attributes = [NSFontAttributeName : UIFont.init(name: "OpenSans", size: 12)!,NSForegroundColorAttributeName : OEXStyles.sharedStyles().baseColor9(),NSParagraphStyleAttributeName : paragraph]
                 
-                
                 let str = "\(Strings.noLimit)\n\(Strings.enrollMessage)"
                 let size = str.boundingRectWithSize(CGSizeMake(TDScreenWidth - 198, TDScreenHeight), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil).size
                 
                 return size.height + 128
                 
             } else {
-                return 88
+                if self.courseModel.submitType == 0 || self.courseModel.submitType == 3 {
+                    return 60
+                } else {
+                    if self.courseModel.is_eliteu_course == true {
+                        return self.courseModel.give_coin?.floatValue > 0 ? 88 : 60
+                    } else {
+                        return 60
+                    }
+                }
             }
         }
         return 60
@@ -277,6 +284,8 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
     func gotoChooseCourseVc() { //选择课表
         
         if self.courseModel.is_eliteu_course == true {//英荔课程
+            self.courseDetailView.activityView.stopAnimating()
+            
             let vc = TDChooseCourseViewController();
             vc.username = self.username
             vc.courseID = self.courseID
@@ -302,8 +311,13 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         
         let manager = TDRequestManager()
         manager.addOwnCompanyCourse(self.courseID, username: self.username, companyID: self.companyID)
-        manager.addOwnCompanyCourseHandle = { () in
-            self.environment.router?.showMyCourses()
+        manager.addOwnCompanyCourseHandle = { (type: NSInteger) -> () in
+            
+            self.courseDetailView.activityView.stopAnimating()
+            
+            if type == 200 || type == 400 {
+                self.environment.router?.showMyCourses()
+            }
         }
     }
     
@@ -318,6 +332,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         courseDetailView.submitButtonHandle = { () in
             switch self.courseModel.submitType { //0 已购买，1 立即加入, 2 查看待支付，3 即将开课
             case 0:
+                self.courseDetailView.activityView.stopAnimating()
                 self.showCourseScreen()
             case 1:
                 self.gotoChooseCourseVc()

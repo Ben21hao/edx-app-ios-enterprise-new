@@ -171,7 +171,8 @@
                 }
             };
             [self.baseTool showPurchase];
- 
+            [weakSelf.chooseView.tableView reloadData];
+            
         } else {
             NSLog(@"-------->>> %@ -- %@",code,responDic[@"msg"]);
         }

@@ -104,8 +104,9 @@ public class CourseOutlineViewController :
         self.navigationItem.leftBarButtonItem = leftBarItem
         
         //        navigationItem.rightBarButtonItems = [webController.barButtonItem,fixedSpace,modeController.barItem]//视频
-        let rightButton = UIButton.init(frame: CGRectMake(0, 0, 48, 48));
-        rightButton.setTitle("助教", forState: .Normal)
+        let rightButton = UIButton.init(frame: CGRectMake(0, 0, 88, 48))
+        rightButton.titleLabel!.adjustsFontSizeToFitWidth = true
+        rightButton.setTitle(Strings.teachAssistant, forState: .Normal)
         rightButton.addTarget(self, action: #selector(rightButtonAction), forControlEvents: .TouchUpInside)
         rightButton.titleLabel?.font = UIFont.init(name: "OpenSans", size: 16)
         let ringhtBarItem = UIBarButtonItem.init(customView: rightButton);

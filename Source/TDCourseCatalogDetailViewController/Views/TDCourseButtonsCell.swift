@@ -11,6 +11,7 @@ import UIKit
 class TDCourseButtonsCell: UITableViewCell {
     let bgView = UIView()
     let submitButton = UIButton()
+    let discountLabel = UILabel()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -30,7 +31,11 @@ class TDCourseButtonsCell: UITableViewCell {
         submitButton.titleLabel?.font = UIFont.init(name: "OpenSans", size: 16)
         bgView.addSubview(submitButton)
         
-//        submitButton.setTitle("立即加入", forState: .Normal)
+        discountLabel.font = UIFont.init(name: "OpenSans", size: 12)
+        discountLabel.textColor = OEXStyles.sharedStyles().baseColor3()
+        discountLabel.numberOfLines = 0
+        discountLabel.textAlignment = .Center
+        bgView.addSubview(discountLabel)
     }
     
     func setViewConstraint() {
@@ -42,8 +47,15 @@ class TDCourseButtonsCell: UITableViewCell {
         submitButton.snp_makeConstraints { (make) in
             make.left.equalTo(bgView.snp_left).offset(18)
             make.right.equalTo(bgView.snp_right).offset(-18)
-            make.centerY.equalTo(bgView)
+            make.top.equalTo(bgView.snp_top).offset(8)
             make.height.equalTo(44)
+        }
+        
+        discountLabel.snp_makeConstraints { (make) in
+            make.left.equalTo(bgView.snp_left).offset(18)
+            make.right.equalTo(bgView.snp_right).offset(-18)
+            make.top.equalTo(submitButton.snp_bottom).offset(8)
+            make.bottom.equalTo(bgView.snp_bottom).offset(-8)
         }
     }
     

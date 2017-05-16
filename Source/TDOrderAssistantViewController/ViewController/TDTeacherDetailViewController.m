@@ -57,7 +57,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = @"助教详情";
+    self.titleViewLabel.text = NSLocalizedString(@"TA_DETAILS", nil);
     
     [self setViewConstraint];
     
@@ -319,7 +319,7 @@
     UILabel *mottoLabel = [self setLabel];
     [headerView addSubview:mottoLabel];
     
-    UIButton *authenButton = [self setButtonWithTitle:@"认证助教" withColor:colorHexStr3];
+    UIButton *authenButton = [self setButtonWithTitle:NSLocalizedString(@"VERIFIED_TA", nil) withColor:colorHexStr3];
     [headerView addSubview:authenButton];
     
     UIButton *orderButton = [self setButtonWithTitle:[NSString stringWithFormat:@"服务%@单",self.model.service_times] withColor:colorHexStr3];

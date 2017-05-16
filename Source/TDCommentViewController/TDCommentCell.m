@@ -75,8 +75,8 @@ const CGFloat contentLabelFontSize = 14;
     
     self.moreButton = [[UIButton alloc] init];
     self.moreButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
-    [self.moreButton setTitle:@"显示更多" forState:UIControlStateNormal];
-    [self.moreButton setTitle:@"收起" forState:UIControlStateSelected];
+    [self.moreButton setTitle:NSLocalizedString(@"SHOW_MORE", nil) forState:UIControlStateNormal];
+    [self.moreButton setTitle:NSLocalizedString(@"PACK_UP", nil) forState:UIControlStateSelected];
     [self.moreButton setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
     [self.moreButton addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.bgView addSubview:self.moreButton];

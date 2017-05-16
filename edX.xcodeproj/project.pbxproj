@@ -1499,8 +1499,8 @@
 		B518BEA11EA9E6F00027569D /* TDTeacherTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTeacherTagModel.m; sourceTree = "<group>"; };
 		B518BEA21EA9E6F00027569D /* TDTimeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDTimeModel.h; sourceTree = "<group>"; };
 		B518BEA31EA9E6F00027569D /* TDTimeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTimeModel.m; sourceTree = "<group>"; };
-		B518BEA51EA9E6F00027569D /* TDAssistantServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAssistantServiceModel.h; sourceTree = "<group>"; };
-		B518BEA61EA9E6F00027569D /* TDAssistantServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAssistantServiceModel.m; sourceTree = "<group>"; };
+		B518BEA51EA9E6F00027569D /* TDAssistantServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDAssistantServiceModel.h; path = ../View/TDAssistantServiceModel.h; sourceTree = "<group>"; };
+		B518BEA61EA9E6F00027569D /* TDAssistantServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDAssistantServiceModel.m; path = ../View/TDAssistantServiceModel.m; sourceTree = "<group>"; };
 		B518BEA71EA9E6F00027569D /* TDOrderAssitantCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDOrderAssitantCell.h; sourceTree = "<group>"; };
 		B518BEA81EA9E6F00027569D /* TDOrderAssitantCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDOrderAssitantCell.m; sourceTree = "<group>"; };
 		B518BEA91EA9E6F00027569D /* TDOrderCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDOrderCommentCell.h; sourceTree = "<group>"; };
@@ -3349,6 +3349,8 @@
 				B518BEA11EA9E6F00027569D /* TDTeacherTagModel.m */,
 				B518BEA21EA9E6F00027569D /* TDTimeModel.h */,
 				B518BEA31EA9E6F00027569D /* TDTimeModel.m */,
+				B518BEA51EA9E6F00027569D /* TDAssistantServiceModel.h */,
+				B518BEA61EA9E6F00027569D /* TDAssistantServiceModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3356,8 +3358,6 @@
 		B518BEA41EA9E6F00027569D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B518BEA51EA9E6F00027569D /* TDAssistantServiceModel.h */,
-				B518BEA61EA9E6F00027569D /* TDAssistantServiceModel.m */,
 				B518BEA71EA9E6F00027569D /* TDOrderAssitantCell.h */,
 				B518BEA81EA9E6F00027569D /* TDOrderAssitantCell.m */,
 				B518BEA91EA9E6F00027569D /* TDOrderCommentCell.h */,

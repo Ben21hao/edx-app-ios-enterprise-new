@@ -21,11 +21,11 @@ struct CoursesAPI {
         print("username --->> \(username), == companyId -->> \(companyId)")
         
         //api/mobile/v0.5/users/{username}/course_enrollments/
-        var path = "api/mobile/enterprise/v0.5/{company_id}/{username}/course_enrollments/".oex_formatWithParameters(["company_id": companyId, "username": username])
+        var path = "api/mobile/enterprise/v0.5/{username}/course_enrollments/".oex_formatWithParameters(["username": username])
         
         if let orgCode = organizationCode {
             //"api/mobile/v0.5/users/{username}/course_enrollments/?org={org}"
-            path = "api/mobile/enterprise/v0.5/{company_id}/{username}/course_enrollments/?org={org}".oex_formatWithParameters(["company_id": companyId, "username": username, "org": orgCode])
+            path = "api/mobile/enterprise/v0.5/{username}/course_enrollments/?org={org}".oex_formatWithParameters(["username": username, "org": orgCode])
         }
         
         return NetworkRequest(

@@ -17,6 +17,7 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
     internal let tableView = UITableView()
     internal let courseCardView = CourseCardView()
     internal let playButton = UIButton()
+    internal let activityView = UIActivityIndicatorView.init(frame: CGRectMake(0, 0, 30, 30))
     
     internal var playButtonHandle : (() -> ())?
     internal var submitButtonHandle : (() -> ())?
@@ -65,6 +66,9 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
     }
     
     func submitButtonAction() { //提交
+        
+        self.activityView.startAnimating()
+        
         if (self.submitButtonHandle != nil) {
             self.submitButtonHandle!()
         }
@@ -143,17 +147,28 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
                     cell.submitButton.setTitle(Strings.CourseDetail.viewCourse, forState: .Normal)
                 case 1:
                     if self.courseModel.is_eliteu_course == true {
-                        cell.submitButton.setTitle(Strings.CourseDetail.enrollNow, forState: .Normal)
-                    } else {
                         cell.submitButton.setAttributedTitle(setSubmitTitle(), forState: .Normal)
+                        setButtonCellDiscountLabel(cell)
+                    } else {
+                       cell.submitButton.setTitle(Strings.CourseDetail.enrollNow, forState: .Normal)
                     }
                 case 2:
                     cell.submitButton.setTitle(Strings.viewPrepareOrder, forState: .Normal)
+                    setButtonCellDiscountLabel(cell)
                 default:
                     cell.submitButton.setTitle(Strings.willBeginCourse, forState: .Normal)
                 }
                 
                 cell.submitButton.addTarget(self, action: #selector(submitButtonAction), forControlEvents: .TouchUpInside)
+                
+                self.activityView.activityIndicatorViewStyle = .White
+                cell.submitButton.addSubview(self.activityView)
+                
+                self.activityView.snp_remakeConstraints(closure: { (make) in
+                    make.centerY.equalTo(cell.submitButton.snp_centerY)
+                    make.right.equalTo(cell.submitButton.snp_right).offset(-8)
+                })
+                
                 return cell
             }
             
@@ -177,9 +192,21 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
                 cell.titleLabel.text = Strings.classTitle
             default:
                 cell.leftLabel.text = "\u{f0c0}"
-                cell.titleLabel.text = "助教"
+                cell.titleLabel.text = Strings.teachAssistantTitle
             }
             return cell
+        }
+    }
+    
+    func setButtonCellDiscountLabel(cell: TDCourseButtonsCell) {
+        if (self.courseModel.give_coin?.floatValue)! > 0 {
+            let coinStr = NSString(format: "%.2f", (self.courseModel.give_coin?.floatValue)!)
+            
+            let baseTool = TDBaseToolModel.init()
+            let startStr = baseTool.interceptStr(self.courseModel.begin_at!)
+            let endStr = baseTool.interceptStr(self.courseModel.end_at!)
+            let giveStr = baseTool.setDetailString(Strings.receiveMind(startdate: startStr, enddate: endStr, number: coinStr as String), withFont: 12, withColorStr: "#f6bb42")
+            cell.discountLabel.attributedText = giveStr;
         }
     }
     
