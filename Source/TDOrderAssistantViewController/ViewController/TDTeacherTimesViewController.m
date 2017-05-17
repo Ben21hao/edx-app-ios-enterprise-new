@@ -12,6 +12,7 @@
 #import "TDTimeModel.h"
 
 #import <MJExtension/MJExtension.h>
+#import "edX-Swift.h"
 
 @interface TDTeacherTimesViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -117,7 +118,7 @@
         return;
     }
     
-    self.dateStr = [self dateFormatter:0];
+    self.dateStr = [self setDateStrFormatter:0];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setValue:self.assistantName forKey:@"username"];
     [dic setValue:self.dateStr forKey:@"plan_date"];
@@ -383,7 +384,7 @@
 
 - (void)requestNewData {
     [self judgeButtonEnable];
-    self.timesLabel.text = [self dateFormatter:1];
+    self.timesLabel.text = [self setDateStrFormatter:1];
     [self requestData];
 }
 /*
@@ -391,7 +392,7 @@
  0 : 2017-03-01
  1 : 今天，明天，后天，2017-03-04
  */
-- (NSString *)dateFormatter:(NSInteger)type {
+- (NSString *)setDateStrFormatter:(NSInteger)type {
     
     NSDate *senddate=[NSDate date];
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -401,18 +402,20 @@
     
     NSDate *beginningOfWeek = [gregorian dateFromComponents:components];
     NSDateFormatter *dateday = [[NSDateFormatter alloc] init];
-     [dateday setDateFormat:@"yyyy-MM-dd"];
+    [dateday setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *dateStr = [NSString stringWithFormat:@"%@",[dateday stringFromDate:beginningOfWeek]];
+    
     if (type == 1) {
         if (self.addDay == 0) {
-            [dateday setDateFormat:NSLocalizedString(@"TODAY", nil)];
+            dateStr = NSLocalizedString(@"TODAY", nil);
         } else if (self.addDay == 1) {
-            [dateday setDateFormat:NSLocalizedString(@"TOMORROW", nil)];
+            dateStr = NSLocalizedString(@"TOMORROW", nil);
         } else if (self.addDay == 2) {
-            [dateday setDateFormat:NSLocalizedString(@"AFTER_TOMOROW", nil)];
+            dateStr = NSLocalizedString(@"AFTER_TOMOROW", nil);
         }
     }
-    
-    NSString * dateStr = [NSString stringWithFormat:@"%@",[dateday stringFromDate:beginningOfWeek]];;
+
     NSLog(@"dateStr ==  %@",dateStr);
     return dateStr;
 }

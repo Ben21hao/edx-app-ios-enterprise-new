@@ -231,6 +231,7 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
         reloadViews()
     }
     
+    //MARK: 导航栏
     func setNaviewgatinBar() {
         
         let leftButton = UIButton.init(frame: CGRectMake(0, 0, 48, 48))
@@ -245,7 +246,6 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
         let leftBarItem = UIBarButtonItem.init(customView: leftButton)
         self.navigationItem.leftBarButtonItem = leftBarItem
         
-        //添加标题文本
         self.titleLabel = UILabel(frame:CGRect(x:0, y:0, width:40, height:40))
         self.titleLabel?.text = Strings.Profile.editTitle
         self.titleLabel?.font = UIFont(name:"OpenSans",size:18.0)
@@ -260,6 +260,7 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    //MARK: 更新个人资料
     private func updateProfile() {
         
         if profile.hasUpdates {
