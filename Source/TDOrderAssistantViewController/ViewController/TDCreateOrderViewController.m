@@ -193,15 +193,15 @@
             cell.detailTextLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%.2f%@",unitPrice,NSLocalizedString(@"COINTS_MIN", nil)] withFont:14 withColorStr:colorHexStr9];
             break;
         case 1:
-             cell.textLabel.text = NSLocalizedString(@"RESERCED_PERIOD", nil);
+            cell.textLabel.text = NSLocalizedString(@"RESERCED_PERIOD", nil);
             cell.detailTextLabel.text = self.timeStr;
             break;
         case 2:
-             cell.textLabel.text = NSLocalizedString(@"AVAILABLEPREPAID_COIS_COINS", nil);
+            cell.textLabel.text = NSLocalizedString(@"PREPAID_COIS", nil);
             cell.detailTextLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%@%@",self.iconStr,NSLocalizedString(@"COINS_VALUE", nil)] withFont:14 withColorStr:colorHexStr9];
             break;
         case 3:
-             cell.textLabel.text = NSLocalizedString(@"AVAILABLE_COINS", nil);
+            cell.textLabel.text = NSLocalizedString(@"AVAILABLE_COINS", nil);
             cell.detailTextLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%.2f%@",self.effectiveIcon,NSLocalizedString(@"COINS_VALUE", nil)] withFont:14 withColorStr:colorHexStr9];
             break;
         default:

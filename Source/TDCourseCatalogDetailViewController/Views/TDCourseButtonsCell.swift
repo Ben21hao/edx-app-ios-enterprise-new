@@ -32,7 +32,7 @@ class TDCourseButtonsCell: UITableViewCell {
         bgView.addSubview(submitButton)
         
         discountLabel.font = UIFont.init(name: "OpenSans", size: 12)
-        discountLabel.textColor = OEXStyles.sharedStyles().baseColor3()
+        discountLabel.textColor = OEXStyles.sharedStyles().baseColor4()
         discountLabel.numberOfLines = 0
         discountLabel.textAlignment = .Center
         bgView.addSubview(discountLabel)

@@ -286,7 +286,7 @@
     self.footerView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     
     if (self.isSuccess) {
-        self.moreOrderButton = [self setButton:@"继续预约"];
+        self.moreOrderButton = [self setButton:NSLocalizedString(@"NEW_APPOINTMENT", nil)];
         [self.moreOrderButton addTarget:self action:@selector(moreOrderButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.footerView addSubview:self.moreOrderButton];
         

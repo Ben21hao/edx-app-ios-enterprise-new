@@ -909,7 +909,7 @@
 /*输入其他金额*/
 "ENTER_OTHERPRICE" = "Enter amount";
 /*宝典*/
-"COINS_VALUE" = "Coins";
+"COINS_VALUE" = " Coins";
 /*赠送*/
 "GIVE_COINS" = " + gain {count} complimentary coins.";
 /*请选择或输入充值金额*/
@@ -1318,13 +1318,11 @@
 "MANAGEREMENT_CONSULTING" = "Management Consulting";
 
 /*助教 Teaching Assistant*/
-"TEACH_ASSISTANT" = "Teaching assistant";
-/*助教 Teaching Assistant*/
-"TEACH_ASSISTANT_TITLE" = "Teaching Assistant";
+"TEACH_ASSISTANT" = "Tutor";
 /*助教详情 Details*/
 "TA_DETAILS" = "Details";
 /*认证助教Verified TA*/
-"VERIFIED_TA" = "Verified TA";
+"VERIFIED_TA" = "Verified Tutor";
 /*个人主页 Homepage*/
 "HOMEPAGE" = "Homepage";
 /*个人简介 Personal Profile*/
@@ -1346,7 +1344,7 @@
 /*此课程暂无助教 Currently no available TA for this course.*/
 "CURRENTLY_NO_TA" = "Currently no available TA for this course.";
 /*该日期暂无服务安排 No TA service schedule for this date yet.*/
-"NO_TA_COURSE_SCHEDULE" = "No TA service schedule for this date yet.";
+"NO_TA_COURSE_SCHEDULE" = "No tutor service schedule for this date yet.";
 /*选择预约时间 Select a Period*/
 "SELECT_PERIOD" = "Select a Period";
 /*请选择预约时间 Please select a period*/
@@ -1372,7 +1370,7 @@
 /*收费标准 Payment standard*/
 "PAYMENT_STANDARD" = "Payment standard";
 /*宝典/分钟 Coin(s)/min */
-"COINTS_MIN" = "Coin(s)/min";
+"COINTS_MIN" = " Coin(s)/min";
 /*预约时间 Reserved Period*/
 "RESERCED_PERIOD" = "Reserved Period";
 /*预付宝典 Prepaid coins */
@@ -1398,7 +1396,7 @@
 /*充值 Top up */
 "TOP_UP_MONEY" = "Top up";
 /*助教不能预约自己 TA could not make appointment with themselves. */
-"APPOINTMENT_SELF" = "TA could not make appointment with themselves.";
+"APPOINTMENT_SELF" = "Tutor could not make appointment with themselves.";
 /*请先加入课程 Please enroll in the course first. */
 "ENROLL_COURSE_FIRST" = "Please enroll in the course first.";
 /*预约时间不能比当前时间早 The reserved period should not be earlier than current time. */
@@ -1418,9 +1416,9 @@
 /*预约信息 Details */
 "APPOINTMENT_DETAILS" = "Details ";
 /*助教服务 TA Service */
-"TA_SERVICE" = "TA Service";
+"TA_SERVICE" = "Tutor Service";
 /*评价 Rate TA */
-"RETE_TA" = "Rate TA";
+"RETE_TA" = "Rate Tutor";
 /*进入教室 Enter classroom */
 "ENTER_CLASSROOM" = "Enter classroom";
 /*待服务 Pending*/
@@ -1462,7 +1460,7 @@
 /*不满意 Not satisfied */
 "NOT_SATISFIED" = "Not satisfied";
 /*请输入您对助教的评价 Please type your comments about the TA. */
-"ENTER_COMMENTS_TA" = "Please type your comments about the TA.";
+"ENTER_COMMENTS_TA" = "Please type your comments about the tutor.";
 /*少于24小时无法取消预约单 Unable to cancel service beginning in less than 24 hours. */
 "UNABEL_CANCEL_SERVICE" = "Unable to cancel service beginning in less than 24 hours.";
 /*取消预约单失败 Unable to cancel this order. */
@@ -1482,9 +1480,9 @@
 /*查询失败 System error. */
 "SYSTEM_ERROR" = "System error.";
 /*该助教状态为忙碌 The status of TA is busy. */
-"TA_BUSY" = "The status of TA is busy.";
+"TA_BUSY" = "The status of tutor is busy.";
 /*该助教状态为离线 The status of TA is offline. */
-"TA_OFFLINE" = "The status of TA is offline.";
+"TA_OFFLINE" = "The status of tutor is offline.";
 /*发起即时服务失败 Unable to initiate an instant service. */
 "UNABEL_INIT_INSTANT" = "Unable to initiate an instant service.";
 /*输入内容超出字数限制 The length of content has exceeded the limit. */
@@ -1502,6 +1500,13 @@
 /*视频回放 Video replay*/
 "VIDEO_REPLAY" = "Video replay";
 /*查看服务记录 View TA service record(s)*/
-"VIEW_TA_SERVICE" = "View TA service record(s)";
+"VIEW_TA_SERVICE" = "View tutor service record(s)";
 /*%d天%d时%d分%d秒 */
 "TIME_COUNT_NUM" = "{day} d {hour} h {min} m {second} s";
+
+/*服务x单 X Order(s) */
+"SERVICE_ORDER_NUM" = "{count} Order(s)";
+/*继续预约 Make a new appointment */
+"NEW_APPOINTMENT" = "Make a new appointment";
+/*预约单不存在 The order does not exist. */
+"NOT_EXIST_ORDER" = "The order does not exist.";

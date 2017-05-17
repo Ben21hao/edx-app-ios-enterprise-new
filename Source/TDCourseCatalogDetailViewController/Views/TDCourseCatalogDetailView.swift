@@ -192,7 +192,7 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
                 cell.titleLabel.text = Strings.classTitle
             default:
                 cell.leftLabel.text = "\u{f0c0}"
-                cell.titleLabel.text = Strings.teachAssistantTitle
+                cell.titleLabel.text = Strings.teachAssistant
             }
             return cell
         }
@@ -205,7 +205,7 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
             let baseTool = TDBaseToolModel.init()
             let startStr = baseTool.interceptStr(self.courseModel.begin_at!)
             let endStr = baseTool.interceptStr(self.courseModel.end_at!)
-            let giveStr = baseTool.setDetailString(Strings.receiveMind(startdate: startStr, enddate: endStr, number: coinStr as String), withFont: 12, withColorStr: "#f6bb42")
+            let giveStr = baseTool.setDetailString(Strings.receiveMind(startdate: startStr, enddate: endStr, number: coinStr as String), withFont: 12, withColorStr: "#fa7f2b")
             cell.discountLabel.attributedText = giveStr;
         }
     }

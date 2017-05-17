@@ -3373,22 +3373,22 @@
 		B518BEAF1EA9E6F00027569D /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				B518BEB01EA9E6F00027569D /* TDCreateOrderViewController.h */,
-				B518BEB11EA9E6F00027569D /* TDCreateOrderViewController.m */,
 				B518BEB21EA9E6F00027569D /* TDOrderAssistantViewController.h */,
 				B518BEB31EA9E6F00027569D /* TDOrderAssistantViewController.m */,
-				B518BEB41EA9E6F00027569D /* TDOrderTeacherSuccessViewController.h */,
-				B518BEB51EA9E6F00027569D /* TDOrderTeacherSuccessViewController.m */,
 				B518BEB61EA9E6F00027569D /* TDTalkOrderViewController.h */,
 				B518BEB71EA9E6F00027569D /* TDTalkOrderViewController.m */,
-				B518BEB81EA9E6F00027569D /* TDTeacherCommentViewController.h */,
-				B518BEB91EA9E6F00027569D /* TDTeacherCommentViewController.m */,
-				B518BEBA1EA9E6F00027569D /* TDTeacherDetailViewController.h */,
-				B518BEBB1EA9E6F00027569D /* TDTeacherDetailViewController.m */,
-				B518BEBC1EA9E6F00027569D /* TDTeacherMessageViewController.h */,
-				B518BEBD1EA9E6F00027569D /* TDTeacherMessageViewController.m */,
 				B518BEBE1EA9E6F00027569D /* TDTeacherTimesViewController.h */,
 				B518BEBF1EA9E6F00027569D /* TDTeacherTimesViewController.m */,
+				B518BEB01EA9E6F00027569D /* TDCreateOrderViewController.h */,
+				B518BEB11EA9E6F00027569D /* TDCreateOrderViewController.m */,
+				B518BEB41EA9E6F00027569D /* TDOrderTeacherSuccessViewController.h */,
+				B518BEB51EA9E6F00027569D /* TDOrderTeacherSuccessViewController.m */,
+				B518BEBA1EA9E6F00027569D /* TDTeacherDetailViewController.h */,
+				B518BEBB1EA9E6F00027569D /* TDTeacherDetailViewController.m */,
+				B518BEB81EA9E6F00027569D /* TDTeacherCommentViewController.h */,
+				B518BEB91EA9E6F00027569D /* TDTeacherCommentViewController.m */,
+				B518BEBC1EA9E6F00027569D /* TDTeacherMessageViewController.h */,
+				B518BEBD1EA9E6F00027569D /* TDTeacherMessageViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";

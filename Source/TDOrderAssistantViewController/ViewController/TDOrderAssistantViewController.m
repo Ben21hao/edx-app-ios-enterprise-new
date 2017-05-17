@@ -44,7 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = NSLocalizedString(@"TEACH_ASSISTANT_TITLE", nil);
+    self.titleViewLabel.text = NSLocalizedString(@"TEACH_ASSISTANT", nil);
     
     [self setViewConstraint];
     

@@ -547,7 +547,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"Cancel_Order_Deal" object:nil];
             
         } else if ([code intValue] == 404) {
-            [self.view makeToast:@"预订单不存在" duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:NSLocalizedString(@"NOT_EXIST_ORDER", nil) duration:1.08 position:CSToastPositionCenter];
             
         } else {
             [self.view makeToast:NSLocalizedString(@"UNABEL_CANCEL_ORDER", nil) duration:1.08 position:CSToastPositionCenter];

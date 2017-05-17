@@ -12,6 +12,7 @@
 #import "TDBaseTableview.h"
 
 #import <UIImageView+WebCache.h>
+#import "edX-Swift.h"
 
 #define TITLEVIEW_HEIGHT 45
 #define HEADER_HEIGHT 239
@@ -322,7 +323,7 @@
     UIButton *authenButton = [self setButtonWithTitle:NSLocalizedString(@"VERIFIED_TA", nil) withColor:colorHexStr3];
     [headerView addSubview:authenButton];
     
-    UIButton *orderButton = [self setButtonWithTitle:[NSString stringWithFormat:@"服务%@单",self.model.service_times] withColor:colorHexStr3];
+    UIButton *orderButton = [self setButtonWithTitle:[Strings serviceOrderNumWithCount:[NSString stringWithFormat:@"%@",self.model.service_times]] withColor:colorHexStr3];
     [headerView addSubview:orderButton];
     
     if ([self.model.service_times intValue] == 0) {

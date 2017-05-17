@@ -1296,12 +1296,8 @@
 /*管理咨询项目Management Consulting*/
 "MANAGEREMENT_CONSULTING" = "管理咨询项目";
 
-
-
 /*助教 Teaching Assistant*/
 "TEACH_ASSISTANT" = "助教";
-/*助教 Teaching Assistant*/
-"TEACH_ASSISTANT_TITLE" = "助教";
 /*助教详情 Details*/
 "TA_DETAILS" = "助教详情";
 /*认证助教Verified TA*/
@@ -1339,7 +1335,6 @@
 /*后天 The day after tomorrow*/
 "AFTER_TOMOROW" = "后天";
 
-
 /*预约 Appointment*/
 "APPOINTMENT" = "预约";
 /*输入咨询问题 Describe Your Questions*/
@@ -1365,9 +1360,9 @@
 /*发起即时服务 Initiate Instant Service */
 "INIT_SERVICE" = "发起即时服务";
 /*收费标准:10分钟以内125.00宝典， Payment standard：125.00 coins for the first 10 minutes,*/
-"PAYMENT_NOTE" = "收费标准:10分钟以内125.0宝典，";
+"PAYMENT_NOTE" = "收费标准:10分钟以内125.00宝典，";
 /* 超出10分钟按12.50宝典/分钟计费  12.50 coins per minute afterwards.*/
-"PAYMENT_NOTE_LAST" = " 超出10分钟按12.5宝典/分钟计费";
+"PAYMENT_NOTE_LAST" = " 超出10分钟按12.50宝典/分钟计费";
 /*预约失败 Appointment Status */
 "APPOINTMENT_STATUS" = "预约失败";
 /*预约失败！Unable to make this appointment. */
@@ -1486,3 +1481,10 @@
 "VIEW_TA_SERVICE" = "查看服务记录";
 /*%d天%d时%d分%d秒 */
 "TIME_COUNT_NUM" = "{day}天{hour}时{min}分{second}秒";
+
+/*服务x单 X Order(s) */
+"SERVICE_ORDER_NUM" = "服务{count}单";
+/*继续预约 =>Make a new appointment */
+"NEW_APPOINTMENT" = "继续预约";
+/*预约单不存在 The order does not exist. */
+"NOT_EXIST_ORDER" = "预约单不存在";

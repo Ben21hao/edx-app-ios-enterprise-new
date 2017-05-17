@@ -94,6 +94,10 @@
                     [self gotoDownloadClassrooms];
                 }
             }
+        } else if ([code intValue] == 401) {//不能预约自己
+            [self.view makeToast:NSLocalizedString(@"APPOINTMENT_SELF", nil) duration:1.08 position:CSToastPositionCenter];
+        } else if ([code intValue] == 402) {//先加入课程
+            [self.view makeToast:NSLocalizedString(@"ENROLL_COURSE_FIRST", nil) duration:1.08 position:CSToastPositionCenter];
         } else if ([code intValue] == 500) {
             [self.view makeToast:NSLocalizedString(@"UNABEL_INIT_INSTANT", nil) duration:1.08 position:CSToastPositionCenter];
         } else {
