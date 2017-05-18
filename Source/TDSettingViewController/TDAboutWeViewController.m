@@ -12,7 +12,7 @@
 
 @property (nonatomic,strong) UIImageView *mapImage;
 @property (nonatomic,strong) UIImageView *eliteuImage;
-@property (nonatomic,strong) UILabel *webLabel;
+@property (nonatomic,strong) UITextView *webTextView;
 @property (nonatomic,strong) UILabel *verctionLabel;
 @property (nonatomic,strong) UILabel *companyLabel;
 
@@ -41,16 +41,23 @@
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     
     self.mapImage = [[UIImageView alloc] init];
-    self.mapImage.image = [UIImage imageNamed:@"bg_map"];
+    self.mapImage.image = [UIImage imageNamed:@"map_bg"];
     [self.view addSubview:self.mapImage];
     
     self.eliteuImage = [[UIImageView alloc] init];
     self.eliteuImage.image = [UIImage imageNamed:@"edx_logo_login"];
     [self.view addSubview:self.eliteuImage];
     
-    NSString *webSite = [NSString stringWithFormat:@"%@：www.eliteu.cn",NSLocalizedString(@"WEBSITE_COMPANY", nil)];
-    self.webLabel = [self setLabelConstraint:webSite];
-    self.webLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
+    NSString *webSiteStr = [NSString stringWithFormat:@"%@：www.eliteu.cn",NSLocalizedString(@"WEBSITE_COMPANY", nil)];
+    self.webTextView = [[UITextView alloc] init];
+    self.webTextView.font = [UIFont fontWithName:@"OpenSans" size:12];
+    self.webTextView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
+    self.webTextView.textColor = [UIColor colorWithHexString:colorHexStr8];
+    self.webTextView.editable = NO;
+    self.webTextView.showsVerticalScrollIndicator = NO;
+    self.webTextView.scrollEnabled = NO;
+    self.webTextView.text = webSiteStr;
+    [self.view addSubview:self.webTextView];
     
     NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
     NSString *version = infoDic[@"CFBundleShortVersionString"];
@@ -83,19 +90,13 @@
 - (void)setConstraint {
     
     NSInteger height = 151;
-    CGSize size = CGSizeMake(288, 122);
-    NSInteger top = 58;
     if (TDWidth  > 320 && TDWidth < 400) {
         height = 159;
-        size = CGSizeMake(313, 132);
-        top = 68;
     } else if (TDWidth > 400) {
         height = 168;
-        size = CGSizeMake(358, 151);
-        top = 78;
     }
     [self.mapImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view.mas_top).offset(top);
+        make.top.mas_equalTo(self.view.mas_top).offset(58);
         make.left.mas_equalTo(self.view.mas_left).offset(18);
         make.right.mas_equalTo(self.view.mas_right).offset(-18);
         make.height.mas_equalTo(height);
@@ -103,13 +104,12 @@
     
     [self.eliteuImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.mapImage.mas_centerX);
-        make.top.mas_equalTo(self.mapImage.mas_top).offset(8);
-        make.size.mas_equalTo(size);
+        make.centerY.mas_equalTo(self.mapImage.mas_centerY);
     }];
     
-    [self.webLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.webTextView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.mapImage.mas_centerX);
-        make.top.mas_equalTo(self.eliteuImage.mas_bottom).offset(0);
+        make.top.mas_equalTo(self.eliteuImage.mas_bottom).offset(18);
     }];
     
     [self.companyLabel mas_makeConstraints:^(MASConstraintMaker *make) {

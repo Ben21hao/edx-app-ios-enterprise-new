@@ -10,7 +10,7 @@ import UIKit
 
 public class TDSwiftBaseViewController: UIViewController,UIGestureRecognizerDelegate {
     
-    let titleViewLabel = UILabel.init(frame: CGRectMake(0, 0, TDScreenWidth - 198, 44))
+    let titleViewLabel = UILabel.init(frame: CGRectMake(0, 0, 198, 44))
     let leftButton = UIButton.init(frame: CGRectMake(0, 0, 48, 48))
     let rightButton = UIButton.init()
     let loadIngView = UIView.init()

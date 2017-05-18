@@ -36,7 +36,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XeO-S4-8zQ">
                                 <rect key="frame" x="-4" y="1" width="383" height="666"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginScreenImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="hfa-gq-20d">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_bg" translatesAutoresizingMaskIntoConstraints="NO" id="hfa-gq-20d">
                                         <rect key="frame" x="35" y="10" width="313" height="151"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="240" id="5Ly-rP-A7E"/>
@@ -456,8 +456,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="edx_logo_login" width="240" height="102"/>
-        <image name="loginScreenImage.png" width="320" height="171"/>
+        <image name="edx_logo_login" width="107" height="136"/>
+        <image name="map_bg" width="319" height="205"/>
         <image name="separator.png" width="526" height="2"/>
     </resources>
 </document>

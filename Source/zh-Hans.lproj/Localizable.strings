@@ -156,6 +156,26 @@
 "BY_AUTHOR" = "通过 {author_name}";
 /* Prefix used with Staff of Community TA on the posts screen */
 "BY_AUTHOR_LOWER_CASE" = "通过 {author_name}";
+
+/* Accessibility label for rating control of app review. */
+"APP_REVIEW.RATING_CONTROL_ACCESSIBILITY_LABEL" = "评分控制";
+/* Alert title for positive app review */
+"APP_REVIEW.RATE_THE_APP" = "评价此App";
+/* Positive review message */
+"APP_REVIEW.POSITIVE_REVIEW_MESSAGE" = "速撰写评论告诉他人你对这个App的看法。";
+/* Send feedback message for negative app review */
+"APP_REVIEW.SEND_FEEDBACK" = "提供反馈意见？";
+/* Help us improve message for negative app review */
+"APP_REVIEW.HELP_US_IMPROVE" = "请帮助我们改进App！";
+/* Maybe later message for positive/negative app review */
+"APP_REVIEW.MAYBE_LATER" = "稍后再说";
+/* Question for rating view */
+"APP_REVIEW.RATE_THE_APP_QUESTION" = "您会给本App打多少分？";
+/* Submit button for rating view */
+"APP_REVIEW.SUBMIT" = "提交";
+/* App Review message email title */
+"APP_REVIEW.MESSAGE_SUBJECT" = "用户评论";
+
 /* Course completion title */
 "CERTIFICATES.COURSE_COMPLETION_TITLE"="恭喜！";
 /* Course completion subtitle */
@@ -591,6 +611,8 @@
 "STARTING"="开始 - {start_date}";
 /* Label for posts pinned by Staff */
 "STAFF"="STAFF";
+/* Explore Subjects button text on the first screen */
+"STARTUP.EXPLORE_SUBJECTS"="探索主题";
 /* Button allowing user to submit feedback about the app via email */
 "SUBMIT_FEEDBACK.OPTION_TITLE" = "提交反馈";
 /* Support message email title */
