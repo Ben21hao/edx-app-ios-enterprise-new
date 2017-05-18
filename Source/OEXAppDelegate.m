@@ -68,6 +68,7 @@
         });
         return YES;
     }
+    /* 判断是否已登录 */
     if([[NSProcessInfo processInfo].arguments containsObject:@"-END_TO_END_TEST"]) {
         [[[OEXSession alloc] init] closeAndClearSession];
         [OEXFileUtility nukeUserData];

@@ -58,6 +58,7 @@ static NSString* OEXSessionClearedCache = @"OEXSessionClearedCache";
     return [self initWithCredentialStore:[[OEXPersistentCredentialStorage alloc] init]];
 }
 
+/* 保存登录的用户信息 */
 - (void)saveAccessToken:(OEXAccessToken*)token userDetails:(OEXUserDetails*)userDetails {
     [self.credentialStore clear];
     [self.credentialStore saveAccessToken:token userDetails:userDetails];
@@ -69,7 +70,7 @@ static NSString* OEXSessionClearedCache = @"OEXSessionClearedCache";
     }
 }
 
-- (void)loadTokenFromStore {
+- (void)loadTokenFromStore { //获取缓存的用户信息
     OEXAccessToken* tokenData = self.credentialStore.storedAccessToken;
     OEXUserDetails* userDetails = self.credentialStore.storedUserDetails;
 
@@ -83,6 +84,7 @@ static NSString* OEXSessionClearedCache = @"OEXSessionClearedCache";
     }
 }
 
+/* 清除用户登录的信息 */
 - (void)closeAndClearSession {
     [self.credentialStore clear];
     self.currentUser = nil;

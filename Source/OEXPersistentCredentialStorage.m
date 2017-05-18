@@ -16,9 +16,9 @@
 
 #import <Security/Security.h>
 
-#define kAccessTokenKey @"kAccessTokenKey"
-#define kUserDetailsKey @"kUserDetailsKey"
-#define kCredentialsService @"kCredentialsService"
+#define kAccessTokenKey @"kAccessTokenKey_enterprise"
+#define kUserDetailsKey @"kUserDetailsKey_enterprise"
+#define kCredentialsService @"kCredentialsService_enterprise"
 
 @implementation OEXPersistentCredentialStorage
 
@@ -31,6 +31,7 @@
     return sharedKeychainAccess;
 }
 
+/* 保存用户token和信息 */
 - (void)saveAccessToken:(OEXAccessToken*)accessToken userDetails:(OEXUserDetails*)userDetails {
     NSData* accessTokenData = [accessToken accessTokenData];
     NSData* userDetailsData = [userDetails userDetailsData];
@@ -38,7 +39,7 @@
     [self saveService:kCredentialsService data:sessionDictionary];
 }
 
-- (void)clear {
+- (void)clear {//清除
     [self deleteService:kCredentialsService];
     
     NSHTTPCookieStorage* cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
@@ -58,11 +59,11 @@
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
 }
 
-- (OEXAccessToken*)storedAccessToken {
+- (OEXAccessToken*)storedAccessToken {//获取已登录token
     return [OEXAccessToken accessTokenWithData:[[self loadService:kCredentialsService] objectForKey:kAccessTokenKey]];
 }
 
-- (OEXUserDetails*)storedUserDetails {
+- (OEXUserDetails*)storedUserDetails {//获取已登录的用户信息
     NSData* data = [[self loadService:kCredentialsService] objectForKey:kUserDetailsKey];
     if(data && [data isKindOfClass:[NSData class]]) {
         return [[OEXUserDetails alloc] initWithUserDetailsData:data];

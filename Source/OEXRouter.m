@@ -103,6 +103,7 @@ OEXRegistrationViewControllerDelegate
     self.currentContentController = controller;
 }
 
+/* 显示已登录页面 */
 - (void)showLoggedInContent {
     [self removeCurrentContentController];
     
@@ -119,10 +120,10 @@ OEXRegistrationViewControllerDelegate
 }
 
 - (void)showLoginScreenFromController:(UIViewController*)controller completion:(void(^)(void))completion {
-    [self presentViewController:[self loginViewController] fromController:[controller topMostController] completion:completion];
+    [self presentViewController:[self showLoginViewController] fromController:[controller topMostController] completion:completion];
 }
 
-- (UINavigationController *) loginViewController {
+- (UINavigationController *)showLoginViewController {
     OEXLoginViewController* loginController = [[UIStoryboard storyboardWithName:@"OEXLoginViewController" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginView"];
     loginController.delegate = self;
     loginController.environment = self.environment;
