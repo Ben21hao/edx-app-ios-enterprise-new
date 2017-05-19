@@ -187,14 +187,25 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
                 return size.height + 128
                 
             } else {
-                if self.courseModel.submitType == 0 || self.courseModel.submitType == 3 {
+//                if self.courseModel.submitType == 0 || self.courseModel.submitType == 3 {
+//                    return 60
+//                } else {
+//                    if self.courseModel.is_eliteu_course == true {
+//                        return self.courseModel.give_coin?.floatValue > 0 ? 88 : 60
+//                    } else {
+//                        return 60
+//                    }
+//                }
+                
+                switch self.courseModel.submitType { //0 已购买，1 立即加入, 2 查看待支付，3 即将开课
+                case 0:
                     return 60
-                } else {
-                    if self.courseModel.is_eliteu_course == true {
-                        return self.courseModel.give_coin?.floatValue > 0 ? 88 : 60
-                    } else {
-                        return 60
-                    }
+                case 1:
+                    return self.courseModel.give_coin?.floatValue > 0 ? 148 : 118
+                case 2:
+                    return self.courseModel.give_coin?.floatValue > 0 ? 148 : 118
+                default:
+                    return 60
                 }
             }
         }
@@ -341,6 +352,11 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
             default:
                 return
             }
+        }
+        
+        courseDetailView.auditionButtonHandle = { () in
+            //            self.courseDetailView.activityView.stopAnimating()
+            self.showCourseScreen()
         }
         
         courseDetailView.playButtonHandle = { () in

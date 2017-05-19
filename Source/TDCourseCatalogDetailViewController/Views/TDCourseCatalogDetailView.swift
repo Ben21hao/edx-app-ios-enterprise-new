@@ -21,6 +21,7 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
     
     internal var playButtonHandle : (() -> ())?
     internal var submitButtonHandle : (() -> ())?
+    internal var auditionButtonHandle : (() -> ())?
     internal var showAllTextHandle : ((Bool) -> ())?
     var showAllText = false
     var submitTitle : String?
@@ -67,10 +68,15 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
     
     func submitButtonAction() { //提交
         
-        self.activityView.startAnimating()
-        
         if (self.submitButtonHandle != nil) {
             self.submitButtonHandle!()
+        }
+    }
+    
+    func auditionButtonAction() {
+        self.activityView.startAnimating()
+        if self.auditionButtonHandle != nil {
+            self.auditionButtonHandle!()
         }
     }
     
@@ -145,6 +151,7 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
                 switch self.courseModel.submitType {
                 case 0:
                     cell.submitButton.setTitle(Strings.CourseDetail.viewCourse, forState: .Normal)
+                    cell.submitType = self.courseModel.submitType
                 case 1:
                     if self.courseModel.is_eliteu_course == true {
                         cell.submitButton.setAttributedTitle(setSubmitTitle(), forState: .Normal)
@@ -157,16 +164,19 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
                     setButtonCellDiscountLabel(cell)
                 default:
                     cell.submitButton.setTitle(Strings.willBeginCourse, forState: .Normal)
+                    cell.submitType = self.courseModel.submitType
                 }
                 
                 cell.submitButton.addTarget(self, action: #selector(submitButtonAction), forControlEvents: .TouchUpInside)
                 
+                cell.auditionButton.addTarget(self, action: #selector(auditionButtonAction), forControlEvents: .TouchUpInside)
+                
                 self.activityView.activityIndicatorViewStyle = .White
-                cell.submitButton.addSubview(self.activityView)
+                cell.auditionButton.addSubview(self.activityView)
                 
                 self.activityView.snp_remakeConstraints(closure: { (make) in
-                    make.centerY.equalTo(cell.submitButton.snp_centerY)
-                    make.right.equalTo(cell.submitButton.snp_right).offset(-8)
+                    make.centerY.equalTo(cell.auditionButton.snp_centerY)
+                    make.right.equalTo(cell.auditionButton.snp_right).offset(-8)
                 })
                 
                 return cell

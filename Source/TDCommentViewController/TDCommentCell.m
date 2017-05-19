@@ -262,6 +262,8 @@ const CGFloat contentLabelFontSize = 14;
         return;
     }
     
+    self.praiseButton.userInteractionEnabled = NO;
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setValue:self.detailItem.comment_id forKey:@"comment_id"];
@@ -295,7 +297,10 @@ const CGFloat contentLabelFontSize = 14;
         } else {
             NSLog(@" 点赞出错 ==  %@",code);
         }
+        self.praiseButton.userInteractionEnabled = YES;
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        self.praiseButton.userInteractionEnabled = YES;
         NSLog(@"errorCode---%ld---",(long)error.code);
     }];
 }
