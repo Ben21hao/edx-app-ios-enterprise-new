@@ -18,7 +18,7 @@ class CourseSectionTableViewCell: UITableViewCell, CourseBlockContainerCell {
     static let identifier = "CourseSectionTableViewCellIdentifier"
     
     private let content = CourseOutlineItemView()
-    private let downloadView = DownloadsAccessoryView()
+    private let downloadView = DownloadsAccessoryView()//下载按钮
     
     weak var delegate : CourseSectionTableViewCellDelegate?
     
@@ -36,7 +36,7 @@ class CourseSectionTableViewCell: UITableViewCell, CourseBlockContainerCell {
                 owner.delegate?.sectionCellChoseDownload(owner, videos: videos, forBlock: block)
             }
         }
-        videosStream.listen(self) {[weak self] downloads in
+        videosStream.listen(self) {[weak self] downloads in //数据
             if let downloads = downloads.value, state = self?.downloadStateForDownloads(downloads) {
                 self?.downloadView.state = state
                 self?.content.trailingView = self?.downloadView
@@ -64,6 +64,11 @@ class CourseSectionTableViewCell: UITableViewCell, CourseBlockContainerCell {
             }
         }
         downloadView.addGestureRecognizer(tapGesture)
+        
+        let fromDetailView = NSUserDefaults.standardUserDefaults().valueForKey("Come_From_Course_Detail")
+        if fromDetailView != nil {
+            downloadView.hidden = true
+        }
     }
     
     var videos : Stream<[OEXHelperVideoDownload]> = Stream() {

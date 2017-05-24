@@ -170,11 +170,11 @@ public class DiscussionTopicsViewController: OfflineSupportViewController, UITab
     }
     
     override public func shouldAutorotate() -> Bool {
-        return true
+        return false
     }
     
     override public func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .AllButUpsideDown
+        return .Portrait
     }
     
     // MARK: - TableView Data and Delegate

@@ -24,7 +24,6 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
     internal var auditionButtonHandle : (() -> ())?
     internal var showAllTextHandle : ((Bool) -> ())?
     var showAllText = false
-    var submitTitle : String?
     
     var courseModel = OEXCourse()
 
@@ -54,6 +53,12 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
         
         self.courseModel = course
         self.tableView.reloadData()
+    }
+    
+    func freeButtonStrHandle() { //试听按钮
+
+        let indexpath = NSIndexPath.init(forRow: 2, inSection: 0)
+        self.tableView.reloadRowsAtIndexPaths([indexpath], withRowAnimation: .None)
     }
     
     //MARK: 全文 - 收起
@@ -169,6 +174,7 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
                 
                 cell.submitButton.addTarget(self, action: #selector(submitButtonAction), forControlEvents: .TouchUpInside)
                 
+                cell.auditionButton.setTitle(self.courseModel.freeStr, forState: .Normal)
                 cell.auditionButton.addTarget(self, action: #selector(auditionButtonAction), forControlEvents: .TouchUpInside)
                 
                 self.activityView.activityIndicatorViewStyle = .White

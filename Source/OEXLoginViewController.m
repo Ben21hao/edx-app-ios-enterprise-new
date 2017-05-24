@@ -39,7 +39,8 @@
 #import "Reachability.h"
 #import "OEXStyles.h"
 
-#define USER_EMAIL @"USERNAME"
+#define USER_LOGIN_NAME @"User_Login_Name_Enterprise"
+#define USER_LOGIN_PASSWORD @"User_Login_Password_Enterprise"
 
 @interface OEXLoginViewController () <UIAlertViewDelegate>
 {
@@ -387,7 +388,7 @@
     [self.btn_Login setTitle:[self signInButtonText] forState:UIControlStateNormal];
     [self.activityIndicator stopAnimating];
 
-    NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:USER_EMAIL];
+    NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:USER_LOGIN_NAME];
 
     if(username) {
         _tf_EmailID.text = username;
@@ -670,10 +671,14 @@
     if([_tf_EmailID.text length] > 0) {
         // Set the language to blank
         [OEXInterface setCCSelectedLanguage:@""];
-        [[NSUserDefaults standardUserDefaults] setObject:_tf_EmailID.text forKey:USER_EMAIL];
+        [[NSUserDefaults standardUserDefaults] setObject:_tf_EmailID.text forKey:USER_LOGIN_NAME];
         // Analytics User Login
         [[OEXAnalytics sharedAnalytics] trackUserLogin:[self.authProvider backendName] ?: @"Password"];
     }
+    if (self.tf_Password.text.length > 0) {
+        [[NSUserDefaults standardUserDefaults] setObject:self.tf_Password.text forKey:USER_LOGIN_PASSWORD]; //登陆密码
+    }
+    
     [self tappedToDismiss];
     [self.activityIndicator stopAnimating];
 

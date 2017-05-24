@@ -21,6 +21,7 @@ public class UserProfile {
         case HasImage = "has_image"
         case ImageURL = "image_url_full"
         case Username = "username"
+        case User_id = "user_id" //用户id
         case LanguagePreferences = "language_proficiencies"
         case Country = "country"
         case Bio = "bio"
@@ -37,7 +38,7 @@ public class UserProfile {
         case coupon = "can_use_coupon_num"//优惠券
         case order = "wait_order_num"//未支付订单
         case vertify = "verify_status" //认证信息
-        case code = "code"
+        case code = "code"//认证
         case companyDic = "company"//公司dic
         case logoUrl = "logo"//公司logo
     }
@@ -45,6 +46,7 @@ public class UserProfile {
     let hasProfileImage: Bool
     let imageURL: String?
     let username: String?
+    let user_id: Int? //用户id
     var preferredLanguages: [NSDictionary]?
     var countryCode: String?
     var bio: String?
@@ -77,6 +79,7 @@ public class UserProfile {
             imageURL = nil
         }
         username = json[ProfileFields.Username].string
+        user_id = json[ProfileFields.User_id].int
         preferredLanguages = json[ProfileFields.LanguagePreferences].arrayObject as? [NSDictionary]
         countryCode = json[ProfileFields.Country].string
         bio = json[ProfileFields.Bio].string
@@ -102,10 +105,11 @@ public class UserProfile {
         print("json-----\(json)")
     }
     
-    internal init(username : String, bio : String? = nil, parentalConsent : Bool? = false, countryCode : String? = nil, accountPrivacy : ProfilePrivacy? = nil,name : String, education : String? = nil,nickname : String,remainscore : Double,phone : String,email : String,coupon : Double,order : Double) {
+    internal init(user_id : Int, username : String, bio : String? = nil, parentalConsent : Bool? = false, countryCode : String? = nil, accountPrivacy : ProfilePrivacy? = nil,name : String, education : String? = nil,nickname : String,remainscore : Double,phone : String,email : String,coupon : Double,order : Double) {
         
         self.accountPrivacy = accountPrivacy
         self.username = username
+        self.user_id = user_id
         self.hasProfileImage = false
         self.imageURL = nil
         self.parentalConsent = parentalConsent

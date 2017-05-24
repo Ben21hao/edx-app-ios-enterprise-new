@@ -67,7 +67,13 @@ class CourseVideoTableViewCell: UITableViewCell, CourseBlockContainerCell {
         downloadView.addGestureRecognizer(tapGesture)
         
         content.trailingView = downloadView
+        
         downloadView.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, forAxis: .Horizontal)
+        
+        let fromDetailView = NSUserDefaults.standardUserDefaults().valueForKey("Come_From_Course_Detail")
+        if fromDetailView != nil {
+            downloadView.hidden = true
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {

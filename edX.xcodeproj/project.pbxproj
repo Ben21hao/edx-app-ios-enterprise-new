@@ -527,6 +527,8 @@
 		B50DF9B01EAAF6B9001F38BD /* TDBaseTableview.m in Sources */ = {isa = PBXBuildFile; fileRef = B50DF9A61EAAF6B9001F38BD /* TDBaseTableview.m */; };
 		B50DF9B11EAAF6B9001F38BD /* TDBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = B50DF9A81EAAF6B9001F38BD /* TDBaseView.m */; };
 		B50DF9B21EAAF6B9001F38BD /* TDTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B50DF9AA1EAAF6B9001F38BD /* TDTextView.m */; };
+		B5148C101ED279CB00F6DACD /* TDRequestBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5148C0F1ED279CB00F6DACD /* TDRequestBaseModel.m */; };
+		B5148C131ED2815F00F6DACD /* TDFreeAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5148C121ED2815F00F6DACD /* TDFreeAlertView.m */; };
 		B5168B6D1EB826B300C80436 /* aliData.m in Sources */ = {isa = PBXBuildFile; fileRef = B5168B6C1EB826B300C80436 /* aliData.m */; };
 		B5168B701EB8274400C80436 /* dataUrlItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B5168B6F1EB8274400C80436 /* dataUrlItem.m */; };
 		B5168B731EB8294800C80436 /* TDSubmitCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5168B721EB8294800C80436 /* TDSubmitCourseViewController.m */; };
@@ -576,6 +578,7 @@
 		B518C1711EA9FF1C0027569D /* TDVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B518C16A1EA9FF1C0027569D /* TDVideoPlayerViewController.m */; };
 		B518C1721EA9FF1C0027569D /* TDCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B518C16E1EA9FF1C0027569D /* TDCaptionView.m */; };
 		B518C1731EA9FF1C0027569D /* TDVideoBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B518C1701EA9FF1C0027569D /* TDVideoBarView.m */; };
+		B52310F01ED43AE200D9433C /* TDVideoUrlPlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = B52310EF1ED43AE200D9433C /* TDVideoUrlPlayController.m */; };
 		B52590E01EB2E16B003A950D /* CourseOutlineModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52590DF1EB2E16B003A950D /* CourseOutlineModeController.swift */; };
 		B52590E21EB2E222003A950D /* OpenOnWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52590E11EB2E222003A950D /* OpenOnWebController.swift */; };
 		B52590E91EB32852003A950D /* PurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B52590E61EB32852003A950D /* PurchaseManager.m */; };
@@ -1448,6 +1451,10 @@
 		B50DF9A81EAAF6B9001F38BD /* TDBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBaseView.m; sourceTree = "<group>"; };
 		B50DF9A91EAAF6B9001F38BD /* TDTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDTextView.h; sourceTree = "<group>"; };
 		B50DF9AA1EAAF6B9001F38BD /* TDTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTextView.m; sourceTree = "<group>"; };
+		B5148C0E1ED279CB00F6DACD /* TDRequestBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDRequestBaseModel.h; sourceTree = "<group>"; };
+		B5148C0F1ED279CB00F6DACD /* TDRequestBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRequestBaseModel.m; sourceTree = "<group>"; };
+		B5148C111ED2815F00F6DACD /* TDFreeAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDFreeAlertView.h; sourceTree = "<group>"; };
+		B5148C121ED2815F00F6DACD /* TDFreeAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFreeAlertView.m; sourceTree = "<group>"; };
 		B5168B6B1EB826B300C80436 /* aliData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aliData.h; sourceTree = "<group>"; };
 		B5168B6C1EB826B300C80436 /* aliData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aliData.m; sourceTree = "<group>"; };
 		B5168B6E1EB8274400C80436 /* dataUrlItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dataUrlItem.h; sourceTree = "<group>"; };
@@ -1538,6 +1545,8 @@
 		B518C16E1EA9FF1C0027569D /* TDCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCaptionView.m; sourceTree = "<group>"; };
 		B518C16F1EA9FF1C0027569D /* TDVideoBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDVideoBarView.h; sourceTree = "<group>"; };
 		B518C1701EA9FF1C0027569D /* TDVideoBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDVideoBarView.m; sourceTree = "<group>"; };
+		B52310EE1ED43AE200D9433C /* TDVideoUrlPlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDVideoUrlPlayController.h; sourceTree = "<group>"; };
+		B52310EF1ED43AE200D9433C /* TDVideoUrlPlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDVideoUrlPlayController.m; sourceTree = "<group>"; };
 		B52590DF1EB2E16B003A950D /* CourseOutlineModeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseOutlineModeController.swift; sourceTree = "<group>"; };
 		B52590E11EB2E222003A950D /* OpenOnWebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenOnWebController.swift; sourceTree = "<group>"; };
 		B52590E51EB32852003A950D /* PurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseManager.h; sourceTree = "<group>"; };
@@ -3408,6 +3417,8 @@
 			children = (
 				B518C1691EA9FF1C0027569D /* TDVideoPlayerViewController.h */,
 				B518C16A1EA9FF1C0027569D /* TDVideoPlayerViewController.m */,
+				B52310EE1ED43AE200D9433C /* TDVideoUrlPlayController.h */,
+				B52310EF1ED43AE200D9433C /* TDVideoUrlPlayController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -3635,6 +3646,8 @@
 				B50DF9901EAAF299001F38BD /* JHAlertView.m */,
 				B50DF9911EAAF299001F38BD /* JHFindPWDView.h */,
 				B50DF9921EAAF299001F38BD /* JHFindPWDView.m */,
+				B5148C111ED2815F00F6DACD /* TDFreeAlertView.h */,
+				B5148C121ED2815F00F6DACD /* TDFreeAlertView.m */,
 			);
 			path = TDAlertView;
 			sourceTree = "<group>";
@@ -3840,6 +3853,8 @@
 			children = (
 				B5A3A0F41EC0764D00C48573 /* TDRequestManager.h */,
 				B5A3A0F51EC0764D00C48573 /* TDRequestManager.m */,
+				B5148C0E1ED279CB00F6DACD /* TDRequestBaseModel.h */,
+				B5148C0F1ED279CB00F6DACD /* TDRequestBaseModel.m */,
 			);
 			path = TDRequestManager;
 			sourceTree = "<group>";
@@ -5198,6 +5213,7 @@
 				77D7FD261B04ED45002ACA8C /* Icon.swift in Sources */,
 				770A27931A69933D00DFC6FF /* NSArray+OEXSafeAccess.m in Sources */,
 				77503E8C1B278B9A00C47229 /* RegistrationFieldSelectView.swift in Sources */,
+				B5148C101ED279CB00F6DACD /* TDRequestBaseModel.m in Sources */,
 				1904A14C1A1386C2006A5524 /* OEXDBManager.m in Sources */,
 				BE54F19C195F080E005D069F /* Reachability.m in Sources */,
 				775434861AD73D1900635A40 /* OEXParseConfig.m in Sources */,
@@ -5248,8 +5264,10 @@
 				B498405A19753C6C00019D1F /* CLVideoPlayerControls.m in Sources */,
 				B518BE901EA9E6AB0027569D /* TDAssistantFootCell.m in Sources */,
 				B5FAF7761EB059DB000C2169 /* TDInformationDetailViewController.m in Sources */,
+				B52310F01ED43AE200D9433C /* TDVideoUrlPlayController.m in Sources */,
 				B4B6D6311A949F71000F44E8 /* OEXRegistrationFieldControllerFactory.m in Sources */,
 				B518C1721EA9FF1C0027569D /* TDCaptionView.m in Sources */,
+				B5148C131ED2815F00F6DACD /* TDFreeAlertView.m in Sources */,
 				B518BE951EA9E6AB0027569D /* TDVideoShareCell.m in Sources */,
 				7773D1A91B1E557D0037214B /* OEXVideoEncoding.m in Sources */,
 				B518BEC91EA9E6F00027569D /* TDTeacherCommentCell.m in Sources */,
