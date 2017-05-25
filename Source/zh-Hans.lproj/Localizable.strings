@@ -405,9 +405,9 @@
 /* Screen title showing a user's courses */
 "MY_COURSES"="我的课程";
 /* Screen title showing a user's settings */
-"MY_SETTINGS"="我的设置";
+"MY_SETTINGS"="设置";
 /* Screen title showing a user's downloaded videos */
-"MY_VIDEOS" = "我的视频";
+"MY_VIDEOS" = "我的下载";
 /* Marked as answer for endorsed responses */
 "MARKED_ANSWER" = "标记为答案";
 /* Overlay error shown when attempting an action without an internet connection */

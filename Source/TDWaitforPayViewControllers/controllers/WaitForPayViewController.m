@@ -268,11 +268,11 @@ static NSString *cellID = @"WaitForPayTableViewCell";
     
     NSLog(@"send %@  ----->order %@",self.sendOrdID,order.order_id);
 
-    if (self.hideShowPurchase) {
-        [self paySheetView:order];
-    } else {
+//    if (self.hideShowPurchase) {
+//        [self paySheetView:order];
+//    } else {
         [self createOrderWithType:3];
-    }
+//    }
 }
 
 #pragma mark - 点击支付

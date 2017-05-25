@@ -38,7 +38,6 @@
 #import "TDBaseToolModel.h"
 #import "TDBaseView.h"
 #import "TDBaseViewController.h"
-//#import "TDCompanyModel.h"
 
 #define TableViewBGColor [UIColor colorWithRed:245/255.0 green:247/255.0 blue:250/255.0 alpha:1.0]
 
@@ -48,9 +47,9 @@
 
 #define ELITEU_URL [OEXConfig sharedConfig].apiHostURL//统一在配置文件拿域名，不用分配在
 
-#define APPID_Weixin @"wx89dc4dc519a2f935"//旧的wx89dc4dc519a2f935
-#define Wexin_Pay_APPSecret @"fa9e442eccb5b78287b9f36a20d376ea"//旧的e80676f525c334b78c22aec043ed1f97
-#define WEIXIN_PARTNER_ID @"wx890dUIWNKMK3o398923ndaADM72Mae"
+#define APPID_Weixin @"wxc16f11824e2c359e" //个人版的wx89dc4dc519a2f935
+#define Wexin_Pay_APPSecret @"4aabdd555cbce117f3ffdb24954571e8" //个人版的fa9e442eccb5b78287b9f36a20d376ea
+#define WEIXIN_PARTNER_ID @"s1dQZ51WTB3v09qYNThd8QI3tLUrkjgq" //个人版的wx890dUIWNKMK3o398923ndaADM72Mae
 
 #define TDWidth [UIScreen mainScreen].bounds.size.width
 #define TDHeight [UIScreen mainScreen].bounds.size.height
