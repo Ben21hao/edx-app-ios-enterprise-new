@@ -46,12 +46,12 @@
     
     package         = @"Sign=WXPay";
     NSMutableDictionary *signParams = [NSMutableDictionary dictionary];
-    [signParams setObject: weChatItem.appid forKey:@"appid"];
-    [signParams setObject: nonce_str forKey:@"noncestr"];
-    [signParams setObject: package forKey:@"package"];
-    [signParams setObject: weChatItem.mch_id forKey:@"partnerid"];
-    [signParams setObject: time_stamp forKey:@"timestamp"];
-    [signParams setObject: weChatItem.prepay_id forKey:@"prepayid"];
+    [signParams setObject: weChatItem.appid forKey:@"appid"];//开发平台上对应运用的appid
+    [signParams setObject: nonce_str forKey:@"noncestr"];//随机串，防重发
+    [signParams setObject: package forKey:@"package"]; //商家根据财付通文档填写的数据和签名
+    [signParams setObject: weChatItem.mch_id forKey:@"partnerid"];//商户号
+    [signParams setObject: time_stamp forKey:@"timestamp"];//时间戳
+    [signParams setObject: weChatItem.prepay_id forKey:@"prepayid"];//预处理订单号
     //生成签名
     NSString *sign  = [self createMd5Sign:signParams];
     

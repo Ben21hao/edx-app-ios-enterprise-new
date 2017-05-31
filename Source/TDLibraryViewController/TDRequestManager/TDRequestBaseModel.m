@@ -160,6 +160,61 @@
     }];
 }
 
+/*
+ 判断是否为待支付课程
+ */
+- (void)judgeCurseIsWaitforPay:(NSString *)username courseId:(NSString *)courseId {
+    
+    TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
+    if (![baseTool networkingState]) {
+        return;
+    }
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/get_wait_order_list/?username=%@",ELITEU_URL,username];
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *responseDic = (NSDictionary *)responseObject;
+        id code = responseDic[@"code"];
+        
+        
+        NSInteger type = 0;
+        if ([code intValue] == 200) {
+            
+            NSArray *dataArray = responseDic[@"data"];
+            if (dataArray.count == 0) {
+                type = 0;
+            }
+            
+            for (NSDictionary *orderDic in dataArray) {
+                NSArray *courseArray = orderDic[@"order_items"];
+                if (courseArray.count == 0) {
+                    type = 0;
+                }
+                
+                for (NSDictionary *courseDic in courseArray) {
+                    if ([courseId isEqualToString:[NSString stringWithFormat:@"%@",courseDic[@"course_id"]]]) {
+                        type += 1;
+                    }
+                }
+            }
+            
+        } else {
+            type = 0;
+        }
+        
+        if (self.waitforPayCourseHandle) {
+            self.waitforPayCourseHandle(type);
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (self.waitforPayCourseHandle) {
+            self.waitforPayCourseHandle(0);
+        }
+        NSLog(@"获取待支付课程失败 %ld",(long)error.code);
+    }];
+}
+
 #pragma mark - 	加入指定课程到试听课
 - (void)getMyFreeCourseDetail:(NSString *)username courseID:(NSString *)courseID onViewController:(UIViewController *)vc {
     
@@ -215,7 +270,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        if (self.isReqeustAgain == YES) {//弹框，提示重新登陆，然后跳转到登陆界面
+        if (self.isReqeustAgain == YES) {//弹框，提示重新登录，然后跳转到登录界面
             if (self.addFreeCourseFailed) {
                 self.addFreeCourseFailed();
             }

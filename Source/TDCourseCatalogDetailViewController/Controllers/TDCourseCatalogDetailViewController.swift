@@ -64,12 +64,6 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         self.loadController.setupInController(self, contentView: courseDetailView)
         
         loadCourseData()
-
-//        if self.username != "" {
-//            self.getData()
-//        }
-//        self.listenData()
-//        self.loadCourseMessage()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(appEnterForeground), name: "App_EnterForeground_Free_Course", object: nil)
     }
@@ -97,7 +91,6 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
             
             self!.courseModel = courseModel
             self!.initialFreeButtonText() //初始化免费试听文本
-            self!.loadController.state = .Loaded
         }
         retquestModel.requestErrorHandle = {[weak self] error in
             self?.loadController.state = LoadState.failed(error)
@@ -152,6 +145,10 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         if indexPath.section == 0 {
             if indexPath.row == 0 {
                 
+                if self.courseModel.moreDescription?.characters.count == 0 && self.courseModel.short_description?.characters.count == 0 {
+                    return 0
+                }
+                
                 var introduceStr = " "
                 if self.showAllText == true {
                     if self.courseModel.moreDescription != nil {
@@ -163,12 +160,12 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
                         introduceStr = self.courseModel.short_description!
                     }
                 }
-                let size = getSizeForString(introduceStr)
+//                let size = getSizeForString(introduceStr)
+//                return size.height + 48
                 
-                if self.courseModel.moreDescription?.characters.count == 0 && self.courseModel.short_description?.characters.count == 0 {
-                    return 0
-                }
-                return size.height + 48
+                let size =  getLabelHeightByWidth(TDScreenWidth - 36, title: introduceStr, font: 14)
+                
+                return size + 48
                 
             } else if indexPath.row == 1 {
                 
@@ -207,6 +204,19 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         return 60
     }
     
+    /* 通过label自适应来计算高度 */
+    func getLabelHeightByWidth(width: CGFloat,title: String, font: NSInteger) -> CGFloat {
+        let label = UILabel.init(frame: CGRectMake(0, 0, width, 0))
+        label.text = title
+        label.font = UIFont.init(name: "OpenSans", size: 14)
+        label.numberOfLines = 0
+        label.sizeToFit()
+        let height = label.frame.size.height
+        return height
+        
+    }
+    
+    /* 通过 字符串 来计算高度 -- 不是很准确*/
     func getSizeForString(str: String) -> CGSize {
         
         let size = str.boundingRectWithSize(CGSizeMake(TDScreenWidth - 58, TDScreenHeight), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName : UIFont.init(name: "OpenSans", size: 14)!], context: nil).size
@@ -346,51 +356,78 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
 
     func initialFreeButtonText() { //初始化试听按钮文本
         
-        let currentUser = self.session.currentUser //登陆状态
+        let seconds = self.courseModel.trial_seconds?.intValue
+        if seconds == 0 || seconds == nil {//试听已结束
+            
+            freeCourseEndedStr()
+            print("试听剩余时间 trial_seconds --->>> 为0 或 空")
+            
+        } else {
+            if seconds == -1 || seconds == -2 {//－2 代表未购买未试听 ;－1 代表已购买
+                self.courseModel.freeStr = Strings.freeTrial//免费试听30分钟
+                
+            } else {//试听中
+                self.setFreeBttuonText("\(self.courseModel.trial_seconds!)")
+            }
+        }
         
+        let currentUser = self.session.currentUser //登录状态
         if  (currentUser != nil){//已登录
-            
-            let seconds = self.courseModel.trial_seconds?.intValue
-            if seconds == 0 || seconds == nil {//试听已结束
-                
-                freeCourseEndedStr()
-                print("试听剩余时间 trial_seconds --->>> 为0 或 空")
-                
-            } else {
-                if seconds == -1 || seconds == -2 {//－2 代表未购买未试听 ;－1 代表已购买
-                    self.courseModel.freeStr = Strings.freeTrial//免费试听30分钟
-                    
-                } else {//试听中
-                    self.setFreeBttuonText("\(self.courseModel.trial_seconds!)")
-                }
-            }
-            print(" 时间 ----> \(self.courseModel.course_status) --> \(self.courseModel.trial_expire_at)")
-            
-            /* ------> 加入课程按钮设置 <------ */
-            if self.courseModel.course_status?.intValue == 4 { //已购买
-                self.courseModel.submitType = 0//查看课程
-                
-            } else {//未购买
-                
-                let now = NSDate()
-                if now.isEarlierThanOrEqualTo(self.courseModel.start_display_info.date) {
-                    
-                    self.courseModel.submitType = 3//即将开课
-                    
-                } else {
-                    self.courseModel.submitType = 1//马上加入
-                    
-                    if username != "" {
-                        self.getData()
-                    }
-                }
-            }
-            
-            self.courseDetailView.applyCourse(self.courseModel)//渲染显示数据
-            
         } else {//未登录
             self.courseModel.freeStr = Strings.freeTrial//免费试听30分钟
         }
+        print(" 时间 ----> \(self.courseModel.course_status) --> \(self.courseModel.trial_expire_at)")
+        
+        
+        /* ------> 加入课程按钮设置 <------ */
+        if self.courseModel.course_status?.intValue == 4 { //已购买
+            self.courseModel.submitType = 0//查看课程
+            reloadCourseDetail()
+            
+        } else {//未购买
+            
+            let now = NSDate()
+            if now.isEarlierThanOrEqualTo(self.courseModel.start_display_info.date) {
+                
+                self.courseModel.submitType = 3//即将开课
+                reloadCourseDetail()
+                
+            } else {
+                
+                self.courseModel.submitType = 1//马上加入
+                if username != "" {
+                    judgeWaitforPayCourse()
+                    
+                } else {
+                    reloadCourseDetail()
+                }
+            }
+        }
+    }
+    
+    func judgeWaitforPayCourse() {
+        
+        let retquestModel = TDRequestBaseModel.init()
+        retquestModel.judgeCurseIsWaitforPay(self.username, courseId: self.courseID)
+        
+        retquestModel.waitforPayCourseHandle = { [weak self] (isWaitPayCourse) in
+            
+            if isWaitPayCourse > 0 {
+                self!.courseModel.submitType = 2//查看待支付
+            }
+            self!.reloadCourseDetail()
+        }
+        
+        retquestModel.courseDetailHandle = { [weak self] (courseModel) in
+            
+            self!.courseModel = courseModel
+            self!.initialFreeButtonText() //初始化免费试听文本
+        }
+    }
+    
+    func reloadCourseDetail() {
+        self.courseDetailView.applyCourse(self.courseModel)//渲染显示数据
+        self.loadController.state = .Loaded
     }
     
     func addAuditionButtonHandle() { // 点击 免费试听按钮
@@ -399,7 +436,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
             addCourseButtonHandle()
             
         } else {
-            let currentUser = session.currentUser //登陆状态
+            let currentUser = session.currentUser //登录状态
             
             if  (currentUser != nil || self.getFree == 1){ //已登录 / 已点击了立即试听
                 if (self.courseModel.course_status?.intValue == 3) { //试听结束 - 功能为加入课程一样
@@ -474,7 +511,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
             self.courseDetailView.activityView.stopAnimating()
         }
         
-        requestModel.addFreeCourseFailed = { () in//加入失败，重新登陆
+        requestModel.addFreeCourseFailed = { () in//加入失败，重新登录
             self.courseDetailView.activityView.stopAnimating()
             
             let alertView = UIAlertView.init(title: Strings.systemWaring, message: Strings.loginOverDue, delegate: self, cancelButtonTitle: Strings.ok)
@@ -630,18 +667,17 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         /* 加入课程按钮 */
         courseDetailView.submitButtonHandle = { () in
             
-            let currentUser = self.session.currentUser //登陆状态
+            let currentUser = self.session.currentUser //登录状态
             if currentUser != nil {
                 self.gotoStudyView = 2
                 self.addCourseButtonHandle()
             } else {
-                self.logoutCurrentUser()//到登陆界面
+                self.logoutCurrentUser()//到登录界面
             }
         }
         
         /* 试听按钮 */
         courseDetailView.auditionButtonHandle = { () in
-            //            self.showCourseScreen()
             
             self.courseDetailView.activityView.stopAnimating()
             self.addAuditionButtonHandle()
@@ -659,57 +695,6 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         }
     }
     
-    //旧代码//
-    private func listenData() { //数据
-        self.courseStream.listen(self, success: {[weak self] (course, enrolled) in
-            
-            self!.courseModel = course
-            print(" 时间 ----> \(self?.courseModel.start_display_info.displayDate) --> \(self?.courseModel.start_display_info.date) -====>>>\((self?.courseModel.is_eliteu_course)!) ---->>>>\(self?.courseModel.trial_seconds) ++ \(self?.courseModel.trial_expire_at)")
-            
-            self!.initialFreeButtonText() //初始化免费试听文本
-            
-            if enrolled { //已报名
-                self?.courseModel.submitType = 0//查看课程
-                
-            } else { //未报名
-                let now = NSDate()
-                if now.isEarlierThanOrEqualTo(self?.courseModel.start_display_info.date) {
-                    self?.courseModel.submitType = 3//即将开课
-                    
-                } else {
-                    if self?.prepareOrder == true {
-                        self?.courseModel.submitType = 2//查看待支付
-                    } else {
-                        self?.courseModel.submitType = 1//立即加入
-                    }
-                }
-            }
-            
-            self?.courseDetailView.applyCourse(course)//渲染显示数据
-            self?.loadController.state = .Loaded
-            
-            }, failure: {[weak self] error in
-                self?.loadController.state = LoadState.failed(error)
-            }
-        )
-        
-        self.courseDetailView.loaded.listen(self) {[weak self] _ in
-            self?.loadController.state = .Loaded
-        }
-    }
-    
-    private func loadCourseMessage() { //获取课程信息
-        
-        let request = CourseCatalogAPI.getCourse(courseID, companyID: self.companyID)
-        let courseStream = environment.networkManager.streamForRequest(request)
-        let enrolledStream = environment.dataManager.enrollmentManager.streamForCourseWithID(courseID).resultMap {
-            return .Success($0.isSuccess)
-        }
-        let stream = joinStreams(courseStream, enrolledStream).map{($0, enrolled: $1) }
-        self.courseStream.backWithStream(stream)
-    }
-    
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

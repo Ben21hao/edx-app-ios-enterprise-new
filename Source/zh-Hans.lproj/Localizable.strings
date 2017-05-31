@@ -598,7 +598,7 @@
 /* Text for a Twitter or Facebook post to a course about page */
 "SHARE_A_COURSE"="我正在{platform_name}上课! 看看这个:";
 /* Sign in screen title and button initiating login process after user enters credentials like username and password */
-"SIGN_IN_TEXT"="登陆";
+"SIGN_IN_TEXT"="登录";
 /* Button initiating login process after user enters credentials like username and password */
 "SIGN_IN_BUTTON_TEXT"="登录";
 /* Message shown while user waits for response to a sign in request */
@@ -925,6 +925,8 @@
 "IS_RECHARGE_NO_LEVE" = "正在充值...请不要离开此界面";
 /*充值成功*/
 "RECHARGE_SUCCESS" = "充值成功";
+/*充值失败*/
+"RECHARGE_FAILE" = "充值失败";
 /*用户不存在*/
 "NO_EXIST_USER" = "用户不存在";
 /*支付结果*/
@@ -1093,6 +1095,8 @@
 "GO_TO_RECHARGE" = "去充值";
 /*购买成功*/
 "BUY_SUCCESS" = "购买成功";
+/*购买失败*/
+"BUY_FAILE" = "购买失败";
 /*输入的宝典数大于可用宝典数*/
 "MORE_COINS_REMAIND" = "输入的宝典数大于可用宝典数";
 /*输入的宝典数大于剩余宝典数*/
@@ -1123,12 +1127,12 @@
 "MORE_PASSWORD" = "密码至少6位字符";
 /*请输入小于30位的密码*/
 "LESS_PASSWORD" = "请输入小于30位的密码";
-/*使用邮箱或手机号码注册*/
-"PHONE_OR_EMAIL_REGISTER" = "请输入邮箱或手机号码。并按操作提示完成密码重置。";
+/*使用手机号码或邮箱注册*/
+"PHONE_OR_EMAIL_REGISTER" = "请输入手机号码或邮箱。并按操作提示完成密码重置。";
 /*服务条款*/
 "SERVICE_ITEM" = "服务条款";
-/*邮箱或手机号码*/
-"PHONE_OR_EMAIL" = "邮箱或手机号码";
+/*手机号码或邮箱*/
+"PHONE_OR_EMAIL" = "手机号码或邮箱";
 /*我们给您发送了一封重置密码邮件，请进入邮箱查收并按提示设置新密码。*/
 "HAD_SEND_EMAIL" = "我们给您发送了一封重置密码邮件，请进入邮箱{count}查收并按提示设置新密码。";
 /*已经激活？马上登录*/

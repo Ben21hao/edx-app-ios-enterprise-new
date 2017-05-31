@@ -16,6 +16,9 @@
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) SuccessRechargeModel *successModel;
 
+@property (nonatomic,strong) NSTimer *timer;
+@property (nonatomic,assign) NSInteger timeNum;
+
 @end
 
 @implementation TDRechargeSuccessViewController
@@ -28,6 +31,47 @@
     
     [self requerestData];
     [self setViewConstraint];
+    
+    self.timeNum = 0;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(repeatAction) userInfo:nil repeats:YES];
+}
+
+- (void)repeatAction {
+    
+    self.timeNum++;
+    
+    [self requerestDataRepeatAction];
+    
+    if (self.timeNum > 5) {
+        [self timerIndivalde];
+    }
+}
+
+- (void)timerIndivalde {
+    [self.loadIngView removeFromSuperview];
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
+- (void)requerestDataRepeatAction {
+    
+    if (self.successModel != nil) {
+        [self timerIndivalde];
+        return;
+    }
+    if (self.timeNum > 5) {
+        [self timerIndivalde];
+        return;
+    }
+    [self requerestData];
+}
+
+- (void)backButtonAction:(UIButton *)sender {
+    if (self.successModel == nil) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - 请求数据

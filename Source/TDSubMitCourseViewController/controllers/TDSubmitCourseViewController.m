@@ -288,6 +288,8 @@
     [dic setValue:self.coupon_id forKey:@"coupon_id"];
     [dic setValue:self.courseIds forKey:@"course_ids"];
     [dic setValue:self.usedcoin forKey:@"used_coin"];
+    [dic setValue:@"enterprise" forKey:@"pay_source"];
+    
     NSString *priceStr = [self.moneyLabel.text substringFromIndex:1];//总金额
     if ([priceStr floatValue] <= 0) {
         [self.view makeToast:NSLocalizedString(@"NO_LESSTHAN_ZERO", nil) duration:1.08 position:CSToastPositionCenter];

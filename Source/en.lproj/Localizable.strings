@@ -922,6 +922,8 @@
 "IS_RECHARGE_NO_LEVE" = "Recharge... Please do not leave this interface!";
 /*充值成功*/
 "RECHARGE_SUCCESS" = "Recharged";
+/*充值失败*/
+"RECHARGE_FAILE" = "Faile to recharge";
 /*用户不存在*/
 "NO_EXIST_USER" = "User does not exist";
 /*支付结果*/
@@ -1048,7 +1050,7 @@
 "AREADY_COMMENT" = "You've already commented";
 /*安全验证*/
 "SECURITY_VALIDATION" = "Security Validation";
-/*请输入登陆密码*/
+/*请输入登录密码*/
 "LOGIN_PASSWORD" = "Enter login password";
 /*教授详情*/
 "PROFESSOR_DETAIL" = "Details";
@@ -1090,6 +1092,8 @@
 "GO_TO_RECHARGE" = "Recharge";
 /*购买成功*/
 "BUY_SUCCESS" = "Purchase success";
+/*购买失败*/
+"BUY_FAILE" = "Faile to urchase";
 /*输入的宝典数大于可用宝典数*/
 "MORE_COINS_REMAIND" = "The number of input is greater than the number of available coins.";
 /*输入的宝典数大于剩余宝典数*/

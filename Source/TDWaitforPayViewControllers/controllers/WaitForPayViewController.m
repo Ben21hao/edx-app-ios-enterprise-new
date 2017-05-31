@@ -294,6 +294,7 @@ static NSString *cellID = @"WaitForPayTableViewCell";
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setValue:self.username forKey:@"username"];
     [dic setValue:self.sendOrdID forKey:@"order_id"];
+    [dic setValue:@"enterprise" forKey:@"pay_source"];
     
     if (type == 1) {
         [dic setValue:@1 forKey:@"pay_method"];
@@ -329,10 +330,11 @@ static NSString *cellID = @"WaitForPayTableViewCell";
             }
         } else {
             NSLog(@"创建订单 === 》  %@",responseDic[@"msg"]);
+            [self.view makeToast:NSLocalizedString(@"PAY_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:@"网络忙，请重试！" duration:1.08 position:CSToastPositionCenter];
+       [self.view makeToast:NSLocalizedString(@"NETWORK_NOT_AVAILABLE_TITLE", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error--%@",error);
     }];
 }

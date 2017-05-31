@@ -277,6 +277,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:self.username forKey:@"username"];
     [params setValue:self.rechargeMoney forKey:@"coin_amount"];
+    [params setValue:@"enterprise" forKey:@"pay_source"];
     
     if (type == 1) {//微信
         params[@"pay_method"] = @1;
@@ -315,12 +316,15 @@
                 [self rqPayByApple];
             }
         } else {
-            
+            [self.view makeToast:[NSString stringWithFormat:@"%@",code] duration:1.08 position:CSToastPositionCenter];
+//            [self.view makeToast:NSLocalizedString(@"RECHARGE_FAILE", nil) duration:1.08 position:CSToastPositionCenter];
         }
+        
         
         [self.rechargeView.activityView stopAnimating];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.rechargeView.activityView stopAnimating];
+        [self.view makeToast:NSLocalizedString(@"NETWORK_NOT_AVAILABLE_TITLE", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error--%@",error);
     }];
 }
