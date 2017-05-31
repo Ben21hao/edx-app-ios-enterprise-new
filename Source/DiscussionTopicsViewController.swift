@@ -72,7 +72,7 @@ public class DiscussionTopicsViewController: OfflineSupportViewController, UITab
         self.titleViewLabel.text = Strings.discussionTopics
    
         view.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
-        searchBarSeparator.backgroundColor = UIColor.init(RGBHex: 0xe6e9ed, alpha: 1)
+        searchBarSeparator.backgroundColor = OEXStyles.sharedStyles().baseColor6()
         
         self.view.addSubview(contentView)
         self.contentView.addSubview(tableView)
@@ -192,7 +192,7 @@ public class DiscussionTopicsViewController: OfflineSupportViewController, UITab
     }
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        tableView.separatorColor = UIColor.init(RGBHex: 0xe6e9ed, alpha: 1)
+        tableView.separatorColor = OEXStyles.sharedStyles().baseColor6()
         
         let cell = tableView.dequeueReusableCellWithIdentifier(DiscussionTopicCell.identifier, forIndexPath: indexPath) as! DiscussionTopicCell
         

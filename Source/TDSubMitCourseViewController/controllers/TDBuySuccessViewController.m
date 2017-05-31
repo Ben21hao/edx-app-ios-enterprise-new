@@ -17,7 +17,9 @@
 
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSDictionary *dataDic;
-@property (nonatomic,assign) NSInteger requestNum;
+
+@property (nonatomic,strong) NSTimer *timer;
+@property (nonatomic,assign) NSInteger timeNum;
 
 @end
 
@@ -38,7 +40,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.requestNum = 0;
     [self setViewConstraint];
     [self requestData];
     
@@ -56,6 +57,12 @@
         [weakSelf gotoStudy];
     };
     [self.leftButton addTarget:self action:@selector(popAction:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self timerIndivalde];
 }
 
 #pragma mark - 去学习
@@ -93,10 +100,7 @@
             [self.tableView reloadData];
             
         } else {
-            if (self.requestNum == 0) {
-                self.requestNum = 1;
-                [self requestData];
-            }
+            
         }
         NSLog(@"----- 支付成功 ----- code %@  -- > msg %@",code,responDic[@"msg"]);
         
@@ -106,6 +110,36 @@
         [self.loadIngView removeFromSuperview];
         NSLog(@" error -------%@",error);
     }];
+}
+
+- (void)repeatAction {
+    
+    self.timeNum++;
+    
+    [self requerestDataRepeatAction];
+    
+    if (self.timeNum > 5) {
+        [self timerIndivalde];
+    }
+}
+
+- (void)requerestDataRepeatAction {
+    
+    if (self.dataDic != nil) {
+        [self timerIndivalde];
+        return;
+    }
+    if (self.timeNum > 5) {
+        [self timerIndivalde];
+        return;
+    }
+    [self requestData];
+}
+
+- (void)timerIndivalde {
+    [self.loadIngView removeFromSuperview];
+    [self.timer invalidate];
+    self.timer = nil;
 }
 
 #pragma mark - tableView Delegate
