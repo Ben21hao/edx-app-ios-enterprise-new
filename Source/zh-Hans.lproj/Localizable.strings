@@ -781,14 +781,14 @@
 "ENTER_CORRECT_NUMBER" = "请输入正确的手机号码";
 /*注册失败*/
 "REGISTRATION_FAILURE" = "注册失败";
-/*手机号码已经注册过，请重新输入*/
-"PHONE_NUMBER_HAS_BEEN_REGISTERED" = "手机号码已经注册过，请重新输入或直接登录。";
+/*手机号码已存在，请登录或重新输入。*/
+"PHONE_NUMBER_HAS_BEEN_REGISTERED" = "手机号码已存在，请登录或重新输入。";
 /*注册成功*/
 "REGISTRATION_SUCCESS" = "注册成功";
 /*请登录*/
 "PLEASE_SIGN_IN" = "请登录";
 /*验证码错误，请重新输入*/
-"VERIFICATION_ERROR" = "验证码错误";
+"VERIFICATION_ERROR" = "请输入手机验证码";
 /*密码长度大于30位数,请重新输入*/
 "PASSWORD_LENGTH_IS_MORE_THAN_30" = "密码不超过30位字符。";
 /*请输入正确的手机号码、验证码和密码*/
@@ -866,7 +866,7 @@
 /*已发送验证邮件，请前往邮箱查看。*/
 "EMAIL_AREADY_SEND" = "已发送验证邮件，请前往邮箱查看。";
 /*未知错误*/
-"UNKNOWN_ERROR" = "未知错误";
+"UNKNOWN_ERROR" = "验证邮件发送失败，请重试";
 /*确定绑定*/
 "SURE_BIND" = "确定绑定";
 /*手机格式错误*/

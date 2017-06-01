@@ -106,6 +106,12 @@ class OEXRearTableViewController : UITableViewController {
         }
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.tableView.userInteractionEnabled = true
+    }
+    
     private func setupProfileLoader() {
         
         guard environment.config.profilesEnabled else { return }
@@ -251,17 +257,22 @@ class OEXRearTableViewController : UITableViewController {
 //                guard let currentUserName = environment.session.currentUser?.username else { return }
 //                environment.router?.showProfileForUsername(username: currentUserName)
             case .MyCourse:
+                tableView.userInteractionEnabled = false
                 environment.router?.showMyCourses()
             case .MyVideos:
+                tableView.userInteractionEnabled = false
                 environment.router?.showMyVideos()
             case .FindCourses:
+                tableView.userInteractionEnabled = false
                 environment.router?.showCourseCatalog(nil)
                 environment.analytics.trackUserFindsCourses()
             case .UserCenter:
                 guard environment.config.profilesEnabled else { break }
                 guard let currentUserName = environment.session.currentUser?.username else { return }
+                tableView.userInteractionEnabled = false
                 environment.router?.showProfileForUsername(username: currentUserName)
             case .MySettings:
+                tableView.userInteractionEnabled = false
                 environment.router?.showMySettings()
             case .SubmitFeedback:
                 launchEmailComposer()

@@ -66,6 +66,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         loadCourseData()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(appEnterForeground), name: "App_EnterForeground_Free_Course", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(courseStatusHandle), name: "Course_Status_Handle", object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -95,6 +96,11 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         retquestModel.requestErrorHandle = {[weak self] error in
             self?.loadController.state = LoadState.failed(error)
         }
+    }
+    
+    
+    func courseStatusHandle() {
+        loadCourseData()
     }
     
     //MARK: tableview Delegate
@@ -251,11 +257,11 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         self.navigationController?.pushViewController(videoVc, animated: true)
     }
     
-    func gotoWaitForPayVc (type: Int) { //待支付
-        let userCouponVC = WaitForPayViewController()
-        userCouponVC.username = self.username //传当前用户名
-        userCouponVC.whereFrom = type
-        self.navigationController?.pushViewController(userCouponVC, animated: true)
+    func gotoWaitForPayVc () { //待支付
+        let waitForPAyVc = WaitForPayViewController()
+        waitForPAyVc.username = self.username //传当前用户名
+        waitForPAyVc.courseId = self.courseID
+        self.navigationController?.pushViewController(waitForPAyVc, animated: true)
     }
     
     func gotoChooseCourseVc() { //选择课表
@@ -304,7 +310,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         case 1:
             self.gotoChooseCourseVc()
         case 2:
-            self.gotoWaitForPayVc(0)
+            self.gotoWaitForPayVc()
         default:
             return
         }
@@ -592,7 +598,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         self.freeView.sureButtonHandle = { (AnyObject) -> () in
             
             if self.courseModel.submitType == 2 {
-                self.gotoWaitForPayVc(1)
+                self.gotoWaitForPayVc()
                 
             } else {
                 self.gotoChooseCourseVC()
