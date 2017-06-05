@@ -1569,3 +1569,18 @@
 "SYSTEM_WARING" = "System Prompt";
 /*您的登录信息已过期，请重新登录。*/
 "LOGIN_OVER_DUE" = "Your login has expired, please login again.";
+
+/*1.00元报课*/
+"COUPON_FOR_COURSE" = "￥{count} For 1 Course";
+/*企业优惠券*/
+"COUPON_ENTERPRISE" = "Enterprise Coupon";
+/*折扣券*/
+"COUPON_DISCOUNT" = "Discount";
+/*满减券*/
+"COUPON_DEDUCTION" = "Deduction";
+/*有效期*/
+"COUPON_PERIOD" = "Period of Validity: {startDate} to {endDate}";
+/*账号不存在*/
+"ACOUNT_NO_EXIST" = "Account does not exis.";
+/*密码错误*/
+"PASSWORD_MISS" = "Password incorrect.";

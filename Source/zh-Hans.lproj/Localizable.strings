@@ -943,7 +943,7 @@
 "PAY_AUTHENRIZATE_FAIL" = "授权失败";
 /*微信不支持*/
 "NO_SUPPORT_WECHAT" = "微信不支持";
-/*用户不存在*/
+/*网络连接出错*/
 "NETWORK_CONNET_FAIL" = "网络连接出错";
 /*正在处理中*/
 "IS_HANDLE" = "正在处理中";
@@ -1569,3 +1569,19 @@
 "SYSTEM_WARING" = "系统提示";
 /*您的登录信息已过期，请重新登录。*/
 "LOGIN_OVER_DUE" = "您的登录信息已过期，请重新登录。";
+
+/*1.00元报课*/
+"COUPON_FOR_COURSE" = "{count}元报课";
+/*企业优惠券*/
+"COUPON_ENTERPRISE" = "企业优惠券";
+/*折扣券*/
+"COUPON_DISCOUNT" = "折扣券";
+/*满减券*/
+"COUPON_DEDUCTION" = "满减券";
+/*有效期*/
+"COUPON_PERIOD" = "有效期:{startDate}至{endDate}";
+/*账号不存在*/
+"ACOUNT_NO_EXIST" = "账号不存在";
+/*密码错误*/
+"PASSWORD_MISS" = "密码错误";
+

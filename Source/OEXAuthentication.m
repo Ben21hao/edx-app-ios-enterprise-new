@@ -74,14 +74,17 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
                 NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                 OEXAccessToken* token = [[OEXAccessToken alloc] initWithTokenDetails:dictionary];
                 
-                NSLog(@"url -- %@ , dictionary--%@",url,dictionary);
-                NSInteger code = [dictionary[@"code"] integerValue];
-                if (code == 402) { //账号未激活
+//                NSLog(@"url -- %@ , dictionary--%@",url,dictionary);
+                id code = dictionary[@"code"];
+                NSLog(@"接口--------->>>%@",code);
+                
+                if ([code intValue] == 402) { //账号未激活
                     dispatch_async(dispatch_get_main_queue(), ^{
                         completionBlock(nil, nil, nil);//暂时这样处理
                     });
                     
                 } else {
+                    [[NSUserDefaults standardUserDefaults] setValue:code forKey:@"User_Login_Failed_Code"];
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [OEXAuthentication handleSuccessfulLoginWithToken:token completionHandler:completionBlock];
@@ -215,7 +218,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
             NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:userdata options:kNilOptions error:nil];
             OEXUserDetails* userDetails = [[OEXUserDetails alloc] initWithUserDictionary:dictionary];
             if(token != nil && userDetails != nil) {
-                [[OEXSession sharedSession] saveAccessToken:token userDetails:userDetails];
+                [[OEXSession sharedSession] saveAccessToken:token userDetails:userDetails];//保存登录信息
             }
             else {
                 // On the off chance that something messed up and we have nil

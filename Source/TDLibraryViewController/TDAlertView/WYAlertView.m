@@ -138,7 +138,7 @@
             [_whiteView addSubview:headImage];
             //添加分割线
             CGFloat x = ([UIScreen mainScreen].bounds.size.width - Alertwidth) * 0.001;
-            UIView *sepV = [[UIView alloc] initWithFrame:CGRectMake(x, headW-2, Alertwidth, 1)];
+            UIView *sepV = [[UIView alloc] initWithFrame:CGRectMake(x, headW-2, Alertwidth, 0.5)];
             sepV.backgroundColor = [UIColor lightGrayColor];
             [_whiteView addSubview:sepV];
         }
@@ -162,7 +162,7 @@
         
         //添加分割线
         CGFloat titleMaxY = CGRectGetMaxY(self.alertTitleLabel.bounds);
-        self.sepV = [[UIView alloc] initWithFrame:CGRectMake(0, titleMaxY + 35, _whiteView.bounds.size.width, 1)];
+        self.sepV = [[UIView alloc] initWithFrame:CGRectMake(0, titleMaxY + 35, _whiteView.bounds.size.width, 0.5)];
         _sepV.backgroundColor = [UIColor getColor:@"000000" alpha:0.1];
         [_whiteView addSubview:_sepV];
 
