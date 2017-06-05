@@ -324,6 +324,7 @@
 //    } else {
 //        self.versionLabel.text = @"";
 //    }
+    
     NSString* appVersion = [NSBundle mainBundle].oex_buildVersionString;
     self.versionLabel.text = [Strings versionDisplayWithNumber:appVersion];
     
@@ -335,6 +336,7 @@
     self.btn_Login.layer.cornerRadius = 4;
     self.btn_Login.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.registerButton.showsTouchWhenHighlighted = YES;
+    [self.registerButton setTitle:NSLocalizedString(@"REGISTER", nil) forState:UIControlStateNormal];
     
     [self textField:self.tf_Password backgroundWithView:self.passwordBgView];
     [self textField:self.tf_EmailID backgroundWithView:self.acountBgView];
@@ -475,6 +477,8 @@
 - (IBAction)loginClicked:(id)sender {
     [self.view setUserInteractionEnabled:NO];
 
+    TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
+    
     if(!self.reachable) {
         [[UIAlertController alloc] showAlertWithTitle:[Strings networkNotAvailableTitle]
                                               message:[Strings networkNotAvailableMessage]
@@ -487,7 +491,7 @@
     }
 
     //Validation
-    if([self.tf_EmailID.text length] == 0) {
+    if([self.tf_EmailID.text length] == 0) {//账号为空
         [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorLoginTitle]
                                                                 message:[Strings enterEmail]
                                                        onViewController:self.navigationController
@@ -495,7 +499,7 @@
 
         [self.view setUserInteractionEnabled:YES];
     }
-    else if([self.tf_Password.text length] == 0) {
+    else if([self.tf_Password.text length] == 0) {//密码为空
         [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorLoginTitle]
                                                                 message:[Strings enterPassword]
                                                        onViewController:self.navigationController
@@ -503,7 +507,35 @@
 
         [self.view setUserInteractionEnabled:YES];
         
-    } else {
+    }
+    else if (![baseTool isValidateMobile:self.tf_EmailID.text] && ![baseTool isValidateEmail:self.tf_EmailID.text]) {
+        [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorLoginTitle]
+                                              message:[Strings enterRightPhoneOrEmail]
+                                     onViewController:self.navigationController
+         ];
+        
+        [self.view setUserInteractionEnabled:YES];
+    }
+    else if([self.tf_Password.text length] < 6) { //密码少于6位
+        [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorLoginTitle]
+                                              message:[Strings morePassword]
+                                     onViewController:self.navigationController
+         ];
+        
+        [self.view setUserInteractionEnabled:YES];
+        
+    }
+    else if([self.tf_Password.text length] > 30) {//密码多于30位
+        [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorLoginTitle]
+                                              message:[Strings lessPassword]
+                                     onViewController:self.navigationController
+         ];
+        
+        [self.view setUserInteractionEnabled:YES];
+        
+    }
+    else {
+        [self.view endEditing:YES];
         [self.view setUserInteractionEnabled:NO];
         [self.activityIndicator startAnimating];
         [self.btn_Login setTitle:[Strings signInButtonTextOnSignIn] forState:UIControlStateNormal];
@@ -513,10 +545,15 @@
 
         [OEXAuthentication requestTokenWithUser:_signInID password:_signInPassword completionHandler:^(NSData* data, NSURLResponse* response, NSError* error) {
             
-            if (data == nil && response == nil && error == nil) {
+            //            NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*) response;
+            //            NSLog(@"------>> %ld",(long)httpResp.statusCode);
+            
+            if (data == nil && response == nil && error == nil) {//未激活
                 [self.view setUserInteractionEnabled:YES];
                 [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                
                 [self.activityIndicator stopAnimating];
+                [self.btn_Login setTitle:[self signInButtonText] forState:UIControlStateNormal];
                 
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"NEED_ACTIVITY", nil)
                                                                     message:NSLocalizedString(@"SEND_EMAIL_ACTIVITY", nil)
@@ -539,6 +576,8 @@
 
     if(!error) {
         NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*) response;
+        NSLog(@"------>> %ld",(long)httpResp.statusCode);
+        
         if(httpResp.statusCode == 200) {
             [self loginSuccessful];
         }
@@ -547,7 +586,7 @@
         }
         else if(httpResp.statusCode >= 400 && httpResp.statusCode <= 500) {
             NSString* errorStr = [Strings invalidUsernamePassword];
-                [self loginFailedWithErrorMessage:errorStr title:nil];
+            [self loginFailedWithErrorMessage:errorStr title:nil];
         }
         else {
             dispatch_async(dispatch_get_main_queue(), ^{
