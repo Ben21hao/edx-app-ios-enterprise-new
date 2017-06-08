@@ -74,22 +74,15 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
                 NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                 OEXAccessToken* token = [[OEXAccessToken alloc] initWithTokenDetails:dictionary];
                 
-//                NSLog(@"url -- %@ , dictionary--%@",url,dictionary);
+                //                NSLog(@"url -- %@ , dictionary--%@",url,dictionary);
                 id code = dictionary[@"code"];
                 NSLog(@"接口--------->>>%@",code);
                 
-                if ([code intValue] == 402) { //账号未激活
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        completionBlock(nil, nil, nil);//暂时这样处理
-                    });
-                    
-                } else {
-                    [[NSUserDefaults standardUserDefaults] setValue:code forKey:@"User_Login_Failed_Code"];
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [OEXAuthentication handleSuccessfulLoginWithToken:token completionHandler:completionBlock];
-                    });
-                }
+                [[NSUserDefaults standardUserDefaults] setValue:code forKey:@"User_Login_Failed_Code"];//400 密码错误， 402 账号未激活， 404 账号不存在
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [OEXAuthentication handleSuccessfulLoginWithToken:token completionHandler:completionBlock];
+                });
             }
             else {
                 dispatch_async(dispatch_get_main_queue(), ^{

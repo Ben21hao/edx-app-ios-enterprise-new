@@ -578,6 +578,10 @@
 		B518C1711EA9FF1C0027569D /* TDVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B518C16A1EA9FF1C0027569D /* TDVideoPlayerViewController.m */; };
 		B518C1721EA9FF1C0027569D /* TDCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B518C16E1EA9FF1C0027569D /* TDCaptionView.m */; };
 		B518C1731EA9FF1C0027569D /* TDVideoBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = B518C1701EA9FF1C0027569D /* TDVideoBarView.m */; };
+		B51E9EA71EE8ED0D0019D764 /* TDCouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B51E9EA41EE8ED0D0019D764 /* TDCouponViewController.m */; };
+		B51E9EA81EE8ED0D0019D764 /* TDSubCouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B51E9EA61EE8ED0D0019D764 /* TDSubCouponViewController.m */; };
+		B51E9EAB1EE8ED2D0019D764 /* TDCouponModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B51E9EAA1EE8ED2D0019D764 /* TDCouponModel.m */; };
+		B51E9EAE1EE8ED890019D764 /* TDCouponCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B51E9EAD1EE8ED890019D764 /* TDCouponCell.m */; };
 		B52310F01ED43AE200D9433C /* TDVideoUrlPlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = B52310EF1ED43AE200D9433C /* TDVideoUrlPlayController.m */; };
 		B52590E01EB2E16B003A950D /* CourseOutlineModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52590DF1EB2E16B003A950D /* CourseOutlineModeController.swift */; };
 		B52590E21EB2E222003A950D /* OpenOnWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52590E11EB2E222003A950D /* OpenOnWebController.swift */; };
@@ -1545,6 +1549,14 @@
 		B518C16E1EA9FF1C0027569D /* TDCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCaptionView.m; sourceTree = "<group>"; };
 		B518C16F1EA9FF1C0027569D /* TDVideoBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDVideoBarView.h; sourceTree = "<group>"; };
 		B518C1701EA9FF1C0027569D /* TDVideoBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDVideoBarView.m; sourceTree = "<group>"; };
+		B51E9EA31EE8ED0D0019D764 /* TDCouponViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCouponViewController.h; sourceTree = "<group>"; };
+		B51E9EA41EE8ED0D0019D764 /* TDCouponViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCouponViewController.m; sourceTree = "<group>"; };
+		B51E9EA51EE8ED0D0019D764 /* TDSubCouponViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSubCouponViewController.h; sourceTree = "<group>"; };
+		B51E9EA61EE8ED0D0019D764 /* TDSubCouponViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSubCouponViewController.m; sourceTree = "<group>"; };
+		B51E9EA91EE8ED2D0019D764 /* TDCouponModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCouponModel.h; sourceTree = "<group>"; };
+		B51E9EAA1EE8ED2D0019D764 /* TDCouponModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCouponModel.m; sourceTree = "<group>"; };
+		B51E9EAC1EE8ED890019D764 /* TDCouponCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCouponCell.h; sourceTree = "<group>"; };
+		B51E9EAD1EE8ED890019D764 /* TDCouponCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCouponCell.m; sourceTree = "<group>"; };
 		B52310EE1ED43AE200D9433C /* TDVideoUrlPlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDVideoUrlPlayController.h; sourceTree = "<group>"; };
 		B52310EF1ED43AE200D9433C /* TDVideoUrlPlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDVideoUrlPlayController.m; sourceTree = "<group>"; };
 		B52590DF1EB2E16B003A950D /* CourseOutlineModeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseOutlineModeController.swift; sourceTree = "<group>"; };
@@ -3169,6 +3181,10 @@
 		B50DF96B1EAAF15B001F38BD /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				B51E9EA31EE8ED0D0019D764 /* TDCouponViewController.h */,
+				B51E9EA41EE8ED0D0019D764 /* TDCouponViewController.m */,
+				B51E9EA51EE8ED0D0019D764 /* TDSubCouponViewController.h */,
+				B51E9EA61EE8ED0D0019D764 /* TDSubCouponViewController.m */,
 				B50DF96C1EAAF15B001F38BD /* UserFirstViewController.h */,
 				B50DF96D1EAAF15B001F38BD /* UserFirstViewController.m */,
 				B50DF96E1EAAF15B001F38BD /* UserFirstViewController.xib */,
@@ -3188,6 +3204,8 @@
 		B50DF9781EAAF15B001F38BD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B51E9EA91EE8ED2D0019D764 /* TDCouponModel.h */,
+				B51E9EAA1EE8ED2D0019D764 /* TDCouponModel.m */,
 				B50DF9791EAAF15B001F38BD /* UserCouponItem.h */,
 				B50DF97A1EAAF15B001F38BD /* UserCouponItem.m */,
 			);
@@ -3197,6 +3215,8 @@
 		B50DF97B1EAAF15B001F38BD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B51E9EAC1EE8ED890019D764 /* TDCouponCell.h */,
+				B51E9EAD1EE8ED890019D764 /* TDCouponCell.m */,
 				B50DF97C1EAAF15B001F38BD /* UserCouponTableViewCell.h */,
 				B50DF97D1EAAF15B001F38BD /* UserCouponTableViewCell.m */,
 				B50DF97E1EAAF15B001F38BD /* UserCouponTableViewCell.xib */,
@@ -5060,6 +5080,7 @@
 				77509D981BE1916600B10CD3 /* UserProfileManager.swift in Sources */,
 				77E209851AF158190071316D /* CourseOutline.swift in Sources */,
 				7772BEA51AFA68330081CA7A /* ConstraintItem.swift in Sources */,
+				B51E9EA81EE8ED0D0019D764 /* TDSubCouponViewController.m in Sources */,
 				1A8172531C3C21DE007262AA /* TwitterConfig.swift in Sources */,
 				B59238F01EADD0BE00C686D8 /* TDChooseCourseView.m in Sources */,
 				B4D5C7ED1A6FBAA300427D1D /* OEXSession.m in Sources */,
@@ -5294,6 +5315,7 @@
 				B50211A31EA852B7001DE1E2 /* TDSettingCell.m in Sources */,
 				7793764D1BED27D000900A8C /* BasicAuthCredential.swift in Sources */,
 				B50DF9AF1EAAF6B9001F38BD /* TDBaseScrollView.m in Sources */,
+				B51E9EA71EE8ED0D0019D764 /* TDCouponViewController.m in Sources */,
 				B52591791EB348C3003A950D /* openssl_wrapper.m in Sources */,
 				B5520A011EB9CC7700EC51C9 /* TDCourseIntroduceCell.swift in Sources */,
 				B4B6D62E1A949F1B000F44E8 /* OEXRegistrationFieldTextAreaController.m in Sources */,
@@ -5321,6 +5343,7 @@
 				B5FAF6DD1EB0319F000C2169 /* SuccessRechargeModel.m in Sources */,
 				5D836DCA1B2FA12E00411CAB /* DiscussionNewCommentViewController.swift in Sources */,
 				B52591761EB348C3003A950D /* DataVerifier.m in Sources */,
+				B51E9EAB1EE8ED2D0019D764 /* TDCouponModel.m in Sources */,
 				1AFEB1B11BBD51EE004C471D /* JSONFormBuilderChooser.swift in Sources */,
 				19321F651961698B00B7D75C /* OEXDownloadTableCell.m in Sources */,
 				E076A5C21C7DB624008A99C6 /* DiscussionResponsesDataController.swift in Sources */,
@@ -5373,6 +5396,7 @@
 				7772BE961AF9587E0081CA7A /* CourseContentPageViewController.swift in Sources */,
 				9EDB10B61B0C742C00C760C6 /* CourseOutlineItemView.swift in Sources */,
 				B4B2F16A1AA4F4E500A66A71 /* OEXRegistrationFieldValidator.m in Sources */,
+				B51E9EAE1EE8ED890019D764 /* TDCouponCell.m in Sources */,
 				1A5501A01BBA316900D5F9DD /* UserProfileEditViewController.swift in Sources */,
 				B50211F81EA856B8001DE1E2 /* UIColor+JHHexColor.m in Sources */,
 				B4B6C80D1A9C7AEA004F0FAF /* OEXPlaceholderTextView.m in Sources */,
