@@ -7,7 +7,7 @@
 //
 
 #import "TDUserInformationViewController.h"
-//#import "TDMessageShowViewController.h"
+#import "TDInformationDetailViewController.h"
 
 #import "TDUserInformationView.h"
 #import "TDUserInformationCell.h"
@@ -85,10 +85,10 @@
         id code = responseDic[@"code"];
         if ([code intValue] == 200 || [code intValue] == 401) { //200 提交成功 ；401 重复提交
             
-//            TDMessageShowViewController *messageVC = [[TDMessageShowViewController alloc] init];
-//            messageVC.username = self.username;
-//            messageVC.whereFrom = TDAuthenMessageFromAuthen;
-//            [self.navigationController pushViewController:messageVC animated:YES];
+            TDInformationDetailViewController *messageVC = [[TDInformationDetailViewController alloc] init];
+            messageVC.username = self.username;
+            messageVC.whereFrom = TDAuthenMessageFromAuthen;
+            [self.navigationController pushViewController:messageVC animated:YES];
             
         } else { // 300 提交失败
             [self.view makeToast:NSLocalizedString(@"FALILED_SUBMIT", nil) duration:1.08 position:CSToastPositionCenter];
@@ -140,7 +140,8 @@
 
 - (NSString *)base64Code:(UIImage *)image {
     
-    NSData *faceData = UIImagePNGRepresentation(image);
+//    NSData *faceData = UIImagePNGRepresentation(image);
+    NSData *faceData = UIImageJPEGRepresentation(image, 1.0);
     NSString *faceStr = [faceData base64EncodedStringWithOptions:0];
     return faceStr;
 }

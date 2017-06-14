@@ -789,8 +789,6 @@
 "REGISTRATION_SUCCESS" = "注册成功";
 /*请登录*/
 "PLEASE_SIGN_IN" = "请登录";
-/*验证码错误，请重新输入*/
-"VERIFICATION_ERROR" = "请输入手机验证码";
 /*密码长度大于30位数,请重新输入*/
 "PASSWORD_LENGTH_IS_MORE_THAN_30" = "密码不超过30位字符。";
 /*请输入正确的手机号码、验证码和密码*/
@@ -825,7 +823,7 @@
 "PLEASE_SET_PASSWORD" = "请输入密码";
 /*秒*/
 "SECOND" = "秒";
-/*手机号码为空*/
+/*请输入手机号码*/
 "PHONE_IS_EMPTY" = "请输入手机号码";
 /*验证码为空*/
 "VERIFICATION_CODE_IS_EMPTY" = "请输入手机验证码";

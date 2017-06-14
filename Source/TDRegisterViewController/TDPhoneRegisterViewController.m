@@ -194,7 +194,7 @@
         return;
     }
     if (self.codeField.text.length == 0) {
-        [self.view makeToast:NSLocalizedString(@"PLEASE_ENTER_VERI", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:NSLocalizedString(@"VERIFICATION_CODE_IS_EMPTY", nil) duration:1.08 position:CSToastPositionCenter];
         
     } else if ([self.codeField.text isEqualToString:self.randomNumber]) {//验证码正确
         
@@ -205,7 +205,7 @@
         [self.activityView startAnimating];
         
     } else {
-        [self.view makeToast:NSLocalizedString(@"VERIFICATION_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:NSLocalizedString(@"VERIFICATION_CODE_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
     }
 }
 

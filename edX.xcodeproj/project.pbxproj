@@ -3322,10 +3322,10 @@
 			children = (
 				B518BE741EA9E6AB0027569D /* TDAssistantServiceViewController.h */,
 				B518BE751EA9E6AB0027569D /* TDAssistantServiceViewController.m */,
-				B518BE761EA9E6AB0027569D /* TDOrderCommentViewController.h */,
-				B518BE771EA9E6AB0027569D /* TDOrderCommentViewController.m */,
 				B518BE781EA9E6AB0027569D /* TDSubServiceViewController.h */,
 				B518BE791EA9E6AB0027569D /* TDSubServiceViewController.m */,
+				B518BE761EA9E6AB0027569D /* TDOrderCommentViewController.h */,
+				B518BE771EA9E6AB0027569D /* TDOrderCommentViewController.m */,
 				B518BE7A1EA9E6AB0027569D /* TDTeachOrderDetailViewController.h */,
 				B518BE7B1EA9E6AB0027569D /* TDTeachOrderDetailViewController.m */,
 			);

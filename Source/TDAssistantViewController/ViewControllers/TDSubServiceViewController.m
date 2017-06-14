@@ -453,9 +453,12 @@
             TDAssistantFootCell *assistantFootCell = [[TDAssistantFootCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"assistantFootCell"];
             assistantFootCell.selectionStyle = UITableViewCellSelectionStyleNone;
             assistantFootCell.whereFrom = self.whereFrom;
-            assistantFootCell.startTime = model.service_begin_at;
-            assistantFootCell.isComment = [model.is_comment intValue];
-            assistantFootCell.score = [model.comment_infomation.score intValue];
+            
+//            assistantFootCell.startTime = model.service_begin_at;
+//            assistantFootCell.isComment = [model.is_comment intValue];
+//            assistantFootCell.score = [model.comment_infomation.score intValue];
+            
+            assistantFootCell.model = model;
             
             WS(weakSelf);
             assistantFootCell.endterButtonHandle = ^(){//进入教室

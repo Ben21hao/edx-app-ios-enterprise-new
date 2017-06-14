@@ -21,7 +21,6 @@
 @property (nonatomic,strong) NSMutableArray *couponArray;
 
 @property (nonatomic,strong) TDBaseToolModel *toolModel;
-@property (nonatomic,assign) NSInteger couponCount;
 
 @property (nonatomic,strong) TDBaseView *loadingView;
 @property (nonatomic,assign) BOOL isForgound;
@@ -124,8 +123,6 @@
         
         if (code == 200) {
             NSDictionary *dataDic = responseDic[@"data"];
-            self.couponCount = [responseDic[@"count"] integerValue];
-            
             NSArray *couponListArray = dataDic[@"coupons_list"];
             if (couponListArray.count > 0) {
                 
@@ -152,6 +149,7 @@
                 }
             }
         } else if (code == 204) { //没有更多数据
+            self.page --;
             [self hideTableFooterView];
             
             [self.view makeToast:NSLocalizedString(@"NO_MORE_DATA", nil) duration:1.08 position:CSToastPositionCenter];
