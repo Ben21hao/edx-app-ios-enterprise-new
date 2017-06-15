@@ -159,7 +159,12 @@
     
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"TD_User_Coupon_Exchange_Sucess" object:nil];
-    
+    [self srollToFirstView];
+}
+
+- (void)srollToFirstView {
+    UIButton *selButton = self.titleButtons[0];
+    [self btnClick:selButton];
 }
 
 //2.您已经领用了优惠券
@@ -332,6 +337,7 @@
     CGFloat x = btn.tag * TDWidth; //滚动到对应位置
     self.contentView.contentOffset = CGPointMake(x, 0);
 }
+
 
 #pragma mark - UIViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {

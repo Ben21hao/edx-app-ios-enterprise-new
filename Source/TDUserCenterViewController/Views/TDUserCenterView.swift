@@ -115,7 +115,7 @@ class TDUserCenterView: UIView,UITableViewDataSource {
                     }
                 }
                 
-                if self.userProfile!.phone != nil {
+                if self.userProfile!.phone != nil && self.userProfile?.phone?.characters.count != 0 {
                     let newStr = baseTool.setPhoneStyle(self.userProfile!.phone)
                     cell.acountLabel.text = newStr
                 } else {

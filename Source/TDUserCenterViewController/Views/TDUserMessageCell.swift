@@ -85,7 +85,7 @@ class TDUserMessageCell: UITableViewCell {
         statusLabel.snp_makeConstraints { (make) in
             make.centerX.equalTo(headerImageView.snp_centerX)
             make.bottom.equalTo(headerImageView.snp_bottom).offset(5)
-            make.size.equalTo(CGSizeMake(58, 20))
+            make.size.equalTo(CGSizeMake(68, 20))
         }
     }
 }

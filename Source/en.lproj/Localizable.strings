@@ -1422,7 +1422,7 @@
 /*助教服务 TA Service */
 "TA_SERVICE" = "Tutor Service";
 /*评价 Rate TA */
-"RETE_TA" = "Rate Tutor";
+"RETE_TA" = "Rate";
 /*进入教室 Enter classroom */
 "ENTER_CLASSROOM" = "Enter classroom";
 /*待服务 Pending*/
@@ -1434,7 +1434,7 @@
 /*即时服务 : Instant service */
 "INSTANT_SERVICE" = "Instant service";
 /*问题描述 Question description */
-"QUETION_DESCRIPTION" = "Question description";
+"QUETION_DESCRIPTION" = "Question description: ";
 /*暂无待服务记录 No pending service yet */
 "NO_PENDING" = "No pending service yet";
 /*暂无已完成记录 No finished service yet */

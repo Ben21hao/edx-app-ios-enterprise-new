@@ -1434,7 +1434,7 @@
 /*即时服务 : Instant service */
 "INSTANT_SERVICE" = "即时服务";
 /*问题描述 Question description */
-"QUETION_DESCRIPTION" = "问题描述";
+"QUETION_DESCRIPTION" = "问题描述：";
 /*暂无待服务记录 No pending service yet */
 "NO_PENDING" = "暂无待服务记录";
 /*暂无已完成记录 No finished service yet */
