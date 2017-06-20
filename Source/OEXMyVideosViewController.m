@@ -75,15 +75,15 @@ typedef  enum OEXAlertType
 @property (nonatomic, assign) BOOL isShifted;
 
 @property (weak, nonatomic) IBOutlet UILabel* lbl_NoVideo;
-@property (weak, nonatomic) IBOutlet UIView* recentVideoView;
+@property (weak, nonatomic) IBOutlet UIView* recentVideoView;//最近下载页
 @property   (weak, nonatomic) IBOutlet UIView* recentVideoPlayBackView;
-@property (weak, nonatomic) IBOutlet OEXCustomLabel* lbl_videoHeader;
+@property (weak, nonatomic) IBOutlet OEXCustomLabel* lbl_videoHeader;//视频标题
 @property (weak, nonatomic) IBOutlet OEXCustomLabel* lbl_videobottom;
 @property (weak, nonatomic)  IBOutlet OEXCustomLabel* lbl_section;
-@property (weak, nonatomic) IBOutlet UIView* video_containerView;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint* videoViewHeight;
-@property   (weak, nonatomic) IBOutlet UIView* videoVideo;
-@property(nonatomic, strong) IBOutlet NSLayoutConstraint* recentEditViewHeight;
+@property (weak, nonatomic) IBOutlet UIView* video_containerView;//视频页面
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint* videoViewHeight;//视频视图的高度
+@property   (weak, nonatomic) IBOutlet UIView* videoVideo;//视频播放页面
+@property(nonatomic, strong) IBOutlet NSLayoutConstraint* recentEditViewHeight;//编辑的高度
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint* TrailingSpaceCustomProgress;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint* ConstraintRecentTop;
 
@@ -186,7 +186,7 @@ typedef  enum OEXAlertType
     
     //While editing goto downloads then comes back Progressview overlaps checkbox.
     // To avoid this check this.
-    if(_isTableEditing) {
+    if(self.isTableEditing) {
         self.TrailingSpaceCustomProgress.constant = ORIGINAL_RIGHT_SPACE_PROGRESSBAR + SHIFT_LEFT;
     }
     else {
@@ -299,7 +299,7 @@ typedef  enum OEXAlertType
     // Initialize array
     self.arr_CourseData = [[NSMutableArray alloc] init];
 
-    NSMutableArray* arrCourseAndVideo = [[NSMutableArray alloc] initWithArray: [_dataInterface coursesAndVideosForDownloadState:OEXDownloadStateComplete] ];
+    NSMutableArray* arrCourseAndVideo = [[NSMutableArray alloc] initWithArray: [self.dataInterface coursesAndVideosForDownloadState:OEXDownloadStateComplete] ];
 
     // Populate both ALL & RECENT Videos Table data
     for(NSDictionary* dict in arrCourseAndVideo) {
@@ -552,13 +552,13 @@ typedef  enum OEXAlertType
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     // To avoid showing selected cell index of old video when new video is played
-    _dataInterface.selectedCCIndex = -1;
-    _dataInterface.selectedVideoSpeedIndex = -1;
+    self.dataInterface.selectedCCIndex = -1;
+    self.dataInterface.selectedVideoSpeedIndex = -1;
 
     clickedIndexpath = indexPath;
 
     if(tableView == self.table_RecentVideos) {
-        if(!_isTableEditing) {
+        if(!self.isTableEditing) {
             // Check for disabling the prev/next videos
             [self CheckIfFirstVideoPlayed:indexPath];
 
@@ -736,7 +736,7 @@ typedef  enum OEXAlertType
     [self activatePlayer];
 
     // Set the path of the downloaded videos
-    [_dataInterface downloadAllTranscriptsForVideo:self.currentTappedVideo];
+    [self.dataInterface downloadAllTranscriptsForVideo:self.currentTappedVideo];
 
     NSFileManager* filemgr = [NSFileManager defaultManager];
     NSString* slink = [self.currentTappedVideo.filePath stringByAppendingPathExtension:@"mp4"];
@@ -762,7 +762,7 @@ typedef  enum OEXAlertType
     [_videoPlayerInterface playVideoFor:self.currentTappedVideo];
 
     // Send Analytics
-    [_dataInterface sendAnalyticsEvents:OEXVideoStatePlay withCurrentTime:self.videoPlayerInterface.moviePlayerController.currentPlaybackTime forVideo:self.currentTappedVideo];
+    [self.dataInterface sendAnalyticsEvents:OEXVideoStatePlay withCurrentTime:self.videoPlayerInterface.moviePlayerController.currentPlaybackTime forVideo:self.currentTappedVideo];
 }
 
 - (void)handleComponentsFrame {
@@ -779,7 +779,7 @@ typedef  enum OEXAlertType
 
 - (void)updateNavigationItemButtons {
     NSMutableArray *barButtons = [[NSMutableArray alloc] init];
-    if(_isTableEditing) {
+    if(self.isTableEditing) {
         [barButtons addObject:[[UIBarButtonItem alloc] initWithCustomView:self.btn_SelectAllEditing]];
     }
     if(![self.progressController progressView].hidden){
@@ -908,7 +908,7 @@ typedef  enum OEXAlertType
                 //Buffering view
                 OEXLogInfo(@"VIDEO", @"Playing unwatched video");
                 if(_currentTappedVideo.watchedState != OEXPlayedStatePartiallyWatched) {
-                    [_dataInterface markVideoState:OEXPlayedStatePartiallyWatched
+                    [self.dataInterface markVideoState:OEXPlayedStatePartiallyWatched
                                           forVideo:_currentTappedVideo];
                 }
                 _currentTappedVideo.watchedState = OEXPlayedStatePartiallyWatched;
@@ -941,13 +941,13 @@ typedef  enum OEXAlertType
         int totalTime = self.videoPlayerInterface.moviePlayerController.duration;
 
         if(currentTime == totalTime && totalTime > 0) {
-            [_dataInterface markLastPlayedInterval:0.0 forVideo:_currentTappedVideo];
+            [self.dataInterface markLastPlayedInterval:0.0 forVideo:_currentTappedVideo];
 
             self.videoPlayerInterface.moviePlayerController.currentPlaybackTime = 0.0;
 
             if(cellSelectedIndex != 0) {
                 _currentTappedVideo.watchedState = OEXPlayedStateWatched;
-                [_dataInterface markVideoState:OEXPlayedStateWatched
+                [self.dataInterface markVideoState:OEXPlayedStateWatched
                                       forVideo:_currentTappedVideo];
             }
             [self.table_RecentVideos reloadData];

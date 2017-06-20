@@ -516,7 +516,7 @@ static NSString *cellID = @"WaitForPayTableViewCell";
     //单号
     UILabel *label = [[UILabel alloc] init];
     label.font = [UIFont systemFontOfSize:14];
-    label.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(@"ORDER_NUMBER", nil),order.order_id];
+    label.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(@"ORDER_NUM", nil),order.order_id];
     label.textColor = [UIColor colorWithHexString:colorHexStr10];
     [orderView addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {

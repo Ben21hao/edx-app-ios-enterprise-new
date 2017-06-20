@@ -26,6 +26,7 @@
 #import "OEXMyVideosViewController.h"
 #import "OEXCourse.h"
 #import "SWRevealViewController.h"
+#import "TDDownloadViewController.h"
 
 static OEXRouter* sSharedRouter;
 
@@ -208,10 +209,14 @@ OEXRegistrationViewControllerDelegate
 }
 
 - (void)showMyVideos {
-    OEXMyVideosViewController* videoController = [[UIStoryboard storyboardWithName:@"OEXMyVideosViewController" bundle:nil]instantiateViewControllerWithIdentifier:@"MyVideos"];
-    NSAssert( self.revealController != nil, @"oops! must have a revealViewController" );
-    videoController.environment = self.environment;
-    [self showContentStackWithRootController:videoController animated:YES];
+//    OEXMyVideosViewController* videoController = [[UIStoryboard storyboardWithName:@"OEXMyVideosViewController" bundle:nil]instantiateViewControllerWithIdentifier:@"MyVideos"];
+//    NSAssert( self.revealController != nil, @"oops! must have a revealViewController" );
+//    videoController.environment = self.environment;
+//    [self showContentStackWithRootController:videoController animated:YES];
+    
+    TDDownloadViewController *downloadVC = [[TDDownloadViewController alloc] init];
+    downloadVC.environment = self.environment;
+    [self showContentStackWithRootController:downloadVC animated:YES];
 }
 
 - (void)showMySettings {

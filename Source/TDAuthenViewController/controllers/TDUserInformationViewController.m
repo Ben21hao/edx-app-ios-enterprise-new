@@ -44,9 +44,17 @@
     self.titleViewLabel.text = NSLocalizedString(@"AUTHENTICATION_MESSAGE", nil);
 }
 
+- (void)backButtonAction:(UIButton *)sender {
+    if (self.isHandin == YES) {
+        [self.view makeToast:NSLocalizedString(@"SUBMIT_ING", nil) duration:0.8 position:CSToastPositionCenter];
+        return;
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - 提交
 - (void)handinButtonAciton:(UIButton *)sender {
-    NSLog(@" == -=-=-==-=-=-= ");
+    NSLog(@"提交 == -=-=-==-=-=-= ");
     
     [self resignFirstResponderAction];
     
@@ -56,7 +64,7 @@
         return;
     }
     if (![self judgeMessageTrue]) {
-        [self.messageView.activityView stopAnimating];
+        [self stopHandingHandle];
         return;
     }
     self.isHandin = YES;
@@ -78,7 +86,7 @@
     
     [manager POST:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        [self.messageView.activityView stopAnimating];
+        [self stopHandingHandle];
         self.isHandin = NO;
         
         NSDictionary *responseDic = (NSDictionary *)responseObject;
@@ -96,10 +104,15 @@
         NSLog(@"msg---- %@ +++ responseDic ==== %@",responseDic[@"msg"],responseDic);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.messageView.activityView stopAnimating];
+        [self stopHandingHandle];
         self.isHandin = NO;
         NSLog(@"认证出错 ---- %ld",(long)error.code);
     }];
+}
+
+- (void)stopHandingHandle {
+    [self.messageView.activityView stopAnimating];
+    [self.messageView.handinButton setTitle:NSLocalizedString(@"SUBMIT", nil) forState:UIControlStateNormal];
 }
 
 - (BOOL)judgeMessageTrue {

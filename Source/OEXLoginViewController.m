@@ -257,7 +257,7 @@
 }
 
 - (NSString*)signInButtonText {
-    return [Strings signInText];
+    return NSLocalizedString(@"SIGN_IN", nil); //[Strings signInText]
 }
 
 - (void)handleActivationDuringLogin {
