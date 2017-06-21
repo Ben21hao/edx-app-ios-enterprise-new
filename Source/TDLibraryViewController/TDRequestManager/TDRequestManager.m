@@ -39,6 +39,8 @@
         int code = [responseDic[@"code"] intValue]; // 300 加入异常，400 课程已经加入
         if (code == 200 || code == 400) {
             
+        } else if (code == 301) { //加入失败，名额不足，无法享受企业免费报课
+            [[[UIApplication sharedApplication] keyWindow].rootViewController.view makeToast:@"课程加入异常" duration:1.08 position:CSToastPositionCenter];
         } else {
            [[[UIApplication sharedApplication] keyWindow].rootViewController.view makeToast:@"课程加入异常" duration:1.08 position:CSToastPositionCenter];
         }

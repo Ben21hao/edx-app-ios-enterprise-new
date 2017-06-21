@@ -105,7 +105,7 @@ class TDUserCenterView: UIView,UITableViewDataSource {
             if self.userProfile != nil {
                 
                 //用户名
-                if self.userProfile!.nickname != nil {
+                if self.userProfile!.nickname != nil && self.userProfile?.nickname?.characters.count != 0  {
                     cell.nameLabel.text = self.userProfile!.nickname
                 } else {
                     if self.userProfile!.name != self.userProfile!.username {
@@ -163,6 +163,10 @@ class TDUserCenterView: UIView,UITableViewDataSource {
                     titleStr = Strings.couponPaper
                     cell.messageLabel.text = Strings.couponNumber(count:String(format: "%.0f",coupons))
                     imageStr = "coupons"
+                    //隐藏优惠券
+                    cell.messageLabel.hidden = true
+                    cell.titleLabel.hidden = true
+                    cell.iconImageView.hidden = true
                 default:
                     titleStr = Strings.courseOrder
                     cell.messageLabel.text = Strings.orderCount(count: String(format: "%.0f",orders))

@@ -144,9 +144,10 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     }
     
     func gotoRechargeCoinVc() { //充值宝典
-        let userCouponVC1 = TDRechargeViewController()
-        userCouponVC1.username = session.currentUser?.username //传当前用户名
-        self.navigationController?.pushViewController(userCouponVC1, animated: true)
+        let rechargeVc = TDRechargeViewController()
+        rechargeVc.username = session.currentUser?.username //传当前用户名
+        rechargeVc.whereFrom = 0
+        self.navigationController?.pushViewController(rechargeVc, animated: true)
     }
     
     func gotoWaiForPayVc() { //待支付订单
@@ -163,11 +164,17 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     
     //MARK: tableview Delegate
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return indexPath.section == 0 ? 98 : 75;
+        if indexPath.section == 0 {
+            return 98
+        }
+        if indexPath.section == 1 && indexPath.row == 1 {
+            return 0
+        }
+        return 75
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 0 : 8;
+        return section == 0 ? 0 : 8
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

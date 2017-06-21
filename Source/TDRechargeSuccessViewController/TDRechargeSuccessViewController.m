@@ -31,6 +31,10 @@
     
     [self requerestData];
     [self setViewConstraint];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     self.timeNum = 0;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(repeatAction) userInfo:nil repeats:YES];
@@ -73,10 +77,16 @@
 }
 
 - (void)backButtonAction:(UIButton *)sender {
+    
     if (self.successModel == nil) {
         [self.navigationController popToRootViewControllerAnimated:YES];
+        
     } else {
-        [self.navigationController popViewControllerAnimated:YES];
+        if (self.whereFrom == 0) {
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
+        }
     }
 }
 
@@ -111,11 +121,12 @@
             }
             [weakSelf.tableView reloadData];
             
+            [self.loadIngView removeFromSuperview];
+            
         } else {
             //            [self.view makeToast:responDic[@"msg"] duration:1.08 position:CSToastPositionCenter];
             NSLog(@"error -- %@",responDic[@"msg"]);
         }
-        [self.loadIngView removeFromSuperview];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
@@ -139,7 +150,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -159,9 +170,17 @@
             break;
         case 1:
             cell.textLabel.text = NSLocalizedString(@"RECHARGE_BAODIAN", nil);
-            cell.detailTextLabel.attributedText = [self setData:[NSString stringWithFormat:@"%.2f%@",[self.successModel.total_coin floatValue],NSLocalizedString(@"COINS_VALUE", nil)]];
+            cell.detailTextLabel.attributedText = [self setData:[NSString stringWithFormat:@"%.2f%@",[self.successModel.suggest_coin floatValue],NSLocalizedString(@"COINS_VALUE", nil)]];
             break;
         case 2:
+            cell.textLabel.text = NSLocalizedString(@"TD_GIVE_Bonus", nil);
+            cell.detailTextLabel.attributedText = [self setData:[NSString stringWithFormat:@"%.2f%@",[self.successModel.give_coin floatValue],NSLocalizedString(@"COINS_VALUE", nil)]];
+            
+            cell.textLabel.hidden = [self.successModel.give_coin floatValue] == 0;
+            cell.detailTextLabel.hidden = [self.successModel.give_coin floatValue] == 0;
+            
+            break;
+        case 3:
             cell.textLabel.text = NSLocalizedString(@"AVALIABLE_BAODIAN", nil);
             cell.detailTextLabel.attributedText = [self setData:[NSString stringWithFormat:@"%.2f%@",[self.successModel.remain_coin floatValue],NSLocalizedString(@"COINS_VALUE", nil)]];
             break;
@@ -173,6 +192,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 2) {
+        return [self.successModel.give_coin floatValue] == 0 ? 0 : 48;
+    }
     return 48;
 }
 

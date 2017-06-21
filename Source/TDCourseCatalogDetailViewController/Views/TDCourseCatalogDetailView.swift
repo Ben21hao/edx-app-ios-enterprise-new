@@ -156,21 +156,23 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
                 switch self.courseModel.submitType {
                 case 0:
                     cell.submitButton.setTitle(Strings.CourseDetail.viewCourse, forState: .Normal)
-                    cell.submitType = self.courseModel.submitType
                 case 1:
-                    if self.courseModel.is_eliteu_course == true {
-                        cell.submitButton.setAttributedTitle(setSubmitTitle(), forState: .Normal)
+                    if self.courseModel.is_eliteu_course == true && self.courseModel.course_price?.floatValue != 0 {
+                        cell.submitButton.setAttributedTitle(setSubmitTitle(Strings.CourseDetail.enrollNow), forState: .Normal)
                         setButtonCellDiscountLabel(cell)
                     } else {
                        cell.submitButton.setTitle(Strings.CourseDetail.enrollNow, forState: .Normal)
                     }
                 case 2:
+                    cell.submitButton.setAttributedTitle(setSubmitTitle(Strings.viewPrepareOrder), forState: .Normal)
                     cell.submitButton.setTitle(Strings.viewPrepareOrder, forState: .Normal)
                     setButtonCellDiscountLabel(cell)
                 default:
                     cell.submitButton.setTitle(Strings.willBeginCourse, forState: .Normal)
-                    cell.submitType = self.courseModel.submitType
                 }
+                
+//                cell.submitType = self.courseModel.submitType
+                cell.courseModel = self.courseModel
                 
                 cell.submitButton.addTarget(self, action: #selector(submitButtonAction), forControlEvents: .TouchUpInside)
                 
@@ -226,10 +228,10 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
         }
     }
     
-    func setSubmitTitle() -> NSAttributedString {
+    func setSubmitTitle(str: String) -> NSAttributedString {
         
         let baseTool = TDBaseToolModel.init()
-        let priceStr = baseTool.setDetailString("\(Strings.CourseDetail.enrollNow)￥\(String(format: "%.2f",(self.courseModel.course_price?.doubleValue)!))", withFont: 16, withColorStr: "#ffffff")
+        let priceStr = baseTool.setDetailString("\(str)￥\(String(format: "%.2f",(self.courseModel.course_price?.doubleValue)!))", withFont: 16, withColorStr: "#ffffff")
          return priceStr //马上加入
     }
     

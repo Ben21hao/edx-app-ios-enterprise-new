@@ -67,8 +67,12 @@ class OEXRearTableViewController : UITableViewController {
         appVersionButton.setTitle(versionStr , forState: .Normal)
         appVersionButton.accessibilityTraits = UIAccessibilityTraitStaticText
         
+        self.view.backgroundColor = OEXStyles.sharedStyles().baseColor7()
+        self.tableView.backgroundColor = OEXStyles.sharedStyles().baseColor7()
         //UI
-        logoutButton.setBackgroundImage(UIImage(named: "bt_logout_active"), forState: .Highlighted)
+//        logoutButton.setBackgroundImage(UIImage(named: "bt_logout_active"), forState: .Highlighted)
+        logoutButton.backgroundColor = OEXStyles.sharedStyles().baseColor7()
+        logoutButton.layer.cornerRadius = 4.0
         
         //Listen to notification
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(OEXRearTableViewController.dataAvailable(_:)), name: NOTIFICATION_URL_RESPONSE, object: nil)

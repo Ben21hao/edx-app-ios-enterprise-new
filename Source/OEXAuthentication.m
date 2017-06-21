@@ -78,7 +78,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
                 id code = dictionary[@"code"];
                 NSLog(@"接口--------->>>%@",code);
                 
-                [[NSUserDefaults standardUserDefaults] setValue:code forKey:@"User_Login_Failed_Code"];//400 密码错误， 402 账号未激活， 404 账号不存在
+                [[NSUserDefaults standardUserDefaults] setValue:code forKey:@"User_Login_Failed_Code"];//400 密码错误， 402 账号未激活， 403 账号未激活 ，404 账号不存在
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [OEXAuthentication handleSuccessfulLoginWithToken:token completionHandler:completionBlock];

@@ -111,10 +111,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     TDBaseToolModel *toolModel = [[TDBaseToolModel alloc] init];
-    CGSize size = [toolModel getSringSize:self.model.question withFont:14];
+    CGFloat height = [toolModel heightForString:self.model.question font:14 width:TDWidth - 22];
     
     if (indexPath.section == 9) {
-        return 55 + size.height;
+        return 55 + height;
     }
     return 53;
 }

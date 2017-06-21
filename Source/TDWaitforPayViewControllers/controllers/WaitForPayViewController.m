@@ -264,9 +264,11 @@ static NSString *cellID = @"WaitForPayTableViewCell";
             
         } else {
             NSLog(@"取消失败 --- %@",responseObject[@"msg"]);
+            [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error--%@",error);
     }];
 }
@@ -281,9 +283,9 @@ static NSString *cellID = @"WaitForPayTableViewCell";
     NSLog(@"send %@  ----->order %@",self.sendOrdID,order.order_id);
 
 //    if (self.hideShowPurchase) {
-//        [self paySheetView:order];
+        [self paySheetView:order];
 //    } else {
-        [self createOrderWithType:3];
+//        [self createOrderWithType:3];
 //    }
 }
 
@@ -300,7 +302,7 @@ static NSString *cellID = @"WaitForPayTableViewCell";
 }
 
 #pragma mark - 创建订单
-- (void)createOrderWithType:(NSInteger)type {//1 微信支付；2 支付宝支付
+- (void)createOrderWithType:(NSInteger)type {//1 微信支付；2 支付宝支付 ;3 内购
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -459,7 +461,7 @@ static NSString *cellID = @"WaitForPayTableViewCell";
     WaitForPayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     OrderItem *order = [OrderItem mj_objectWithKeyValues:self.ordersArr[indexPath.section]];
     
-    NSArray * orderary1 = order.order_items;
+    NSArray *orderary1 = order.order_items;
     SubOrderItem * subord = [SubOrderItem mj_objectWithKeyValues:orderary1[indexPath.row]];
     cell.courseNameL.text = subord.display_name;
     cell.professorL.text = subord.teacher_name;
@@ -548,11 +550,13 @@ static NSString *cellID = @"WaitForPayTableViewCell";
     UIView *view = [[UIView alloc] init];
     view.backgroundColor = [UIColor whiteColor];
     
-    NSMutableAttributedString *str1 = [self.baseTool setString:[NSString stringWithFormat:@"%@:-¥%.2f",NSLocalizedString(@"COUPON_ACTIVITY", nil),[order.activate_price floatValue]] withFont:12 type:1];
-    NSMutableAttributedString *str2 = [self.baseTool setString:[NSString stringWithFormat:@"  %@:-¥%.2f",NSLocalizedString(@"COUPON_PAPER", nil),[order.coupon_amount floatValue]] withFont:12 type:1];
-    NSMutableAttributedString *str3 = [self.baseTool setString:[NSString stringWithFormat:@"  %@:-¥%.2f",NSLocalizedString(@"COINS_VALUE", nil),[order.cost_coin floatValue] / 10.0] withFont:12 type:1];
-    [str1 appendAttributedString:str2];
-    [str1 appendAttributedString:str3];
+//    NSMutableAttributedString *str1 = [self.baseTool setString:[NSString stringWithFormat:@"%@:-¥%.2f",NSLocalizedString(@"COUPON_ACTIVITY", nil),[order.activate_price floatValue]] withFont:12 type:1];
+//    NSMutableAttributedString *str2 = [self.baseTool setString:[NSString stringWithFormat:@"  %@:-¥%.2f",NSLocalizedString(@"COUPON_PAPER", nil),[order.coupon_amount floatValue]] withFont:12 type:1];
+//    NSMutableAttributedString *str3 = [self.baseTool setString:[NSString stringWithFormat:@"  %@:-¥%.2f",NSLocalizedString(@"COINS_VALUE", nil),[order.cost_coin floatValue] / 10.0] withFont:12 type:1];
+//    [str1 appendAttributedString:str2];
+//    [str1 appendAttributedString:str3];
+    
+    NSMutableAttributedString *str1 = [self.baseTool setString:[NSString stringWithFormat:@"%@ : -¥%.2f",NSLocalizedString(@"COINS_VALUE", nil),[order.cost_coin floatValue] / 10.0] withFont:14 type:1];
     
     UILabel *messageLabel = [[UILabel alloc] init];
     messageLabel.textColor = [UIColor colorWithHexString:colorHexStr9];

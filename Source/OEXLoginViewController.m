@@ -576,6 +576,10 @@
                 return;
             }
             
+            if ([code intValue] == 403) { //账号未激活
+                errorStr = [Strings tdAccountNotAssociated];
+            }
+            
             if ([code intValue] == 400) {
                 errorStr = [Strings passwordMiss];
                 

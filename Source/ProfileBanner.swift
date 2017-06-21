@@ -99,7 +99,7 @@ class ProfileBanner: UIView {
         shortProfView.remoteImage = profile.image(networkManager)
 
         let nickname : String?
-        if profile.nickname != nil {
+        if profile.nickname != nil && profile.nickname?.characters.count != 0 {
             nickname = profile.nickname
             
         } else {

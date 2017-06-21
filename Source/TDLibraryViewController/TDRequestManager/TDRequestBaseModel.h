@@ -44,7 +44,7 @@
 /* 
  课程详情
  */
-- (void)getCourseDetail:(NSString *)courseID;
+- (void)getCourseDetail:(NSString *)courseID companyId:(NSString *)companyId ;
 @property (nonatomic,copy) void(^courseDetailHandle)(OEXCourse *courseModel);
 
 /*

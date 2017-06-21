@@ -137,6 +137,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:self.username forKey:@"username"];
+    [dict setValue:self.company_id forKey:@"company_id"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/load_all_valid_courses/",ELITEU_URL];
     
@@ -252,12 +253,13 @@
 - (void)submitCoursesButtonAction {//提交课表
 
     if (![self judgeHasCourseSelect]) {
-        [self.view makeToast:@"请选择课程" duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:NSLocalizedString(@"SELECT_COURSE", nil) duration:1.08 position:CSToastPositionCenter];
         return;
     }
     TDSubmitCourseViewController *submitVC = [[TDSubmitCourseViewController alloc] init];
     submitVC.totalM = [self.totalMoney floatValue];//总价格
     submitVC.username = self.username;
+    submitVC.company_id = self.company_id;
     submitVC.courseId = self.courseID;
     submitVC.activity_id = self.activityItem.activity_id;//活动id
     submitVC.courseArray = self.selectCourseArray;
@@ -551,7 +553,8 @@
     if (section == 0) {
         return self.topCourseArray.count;
     } else if (section == 1) {
-        return self.hideShowPurchase ? 1 : 0;
+//        return self.hideShowPurchase ? 1 : 0;
+        return 0;
     } else {
         return 1;
     }

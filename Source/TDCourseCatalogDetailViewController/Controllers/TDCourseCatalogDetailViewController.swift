@@ -86,7 +86,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
     func loadCourseData() {//数据
         
         let retquestModel = TDRequestBaseModel.init()
-        retquestModel.getCourseDetail(self.courseID)
+        retquestModel.getCourseDetail(self.courseID, companyId: self.companyID)
         
         retquestModel.courseDetailHandle = { [weak self] (courseModel) in
             
@@ -143,26 +143,27 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
                 return size.height + 128
                 
             } else {
-//                if self.courseModel.submitType == 0 || self.courseModel.submitType == 3 {
-//                    return 60
-//                } else {
-//                    if self.courseModel.is_eliteu_course == true {
-//                        return self.courseModel.give_coin?.floatValue > 0 ? 88 : 60
-//                    } else {
-//                        return 60
-//                    }
-//                }
-                
-                switch self.courseModel.submitType { //0 已购买，1 立即加入, 2 查看待支付，3 即将开课
-                case 0:
+                //0 已购买，1 立即加入, 2 查看待支付，3 即将开课
+                if self.courseModel.submitType == 0 || self.courseModel.submitType == 3 {
                     return 60
-                case 1:
-                    return self.courseModel.give_coin?.floatValue > 0 ? 148 : 118
-                case 2:
-                    return self.courseModel.give_coin?.floatValue > 0 ? 148 : 118
-                default:
-                    return 60
+                } else {
+                    if self.courseModel.is_eliteu_course == true && self.courseModel.course_price?.floatValue != 0 {
+                        return self.courseModel.give_coin?.floatValue > 0 ? 148 : 118
+                    } else {
+                        return 60
+                    }
                 }
+                
+//                switch self.courseModel.submitType { //0 已购买，1 立即加入, 2 查看待支付，3 即将开课
+//                case 0:
+//                    return 60
+//                case 1:
+//                    return self.courseModel.give_coin?.floatValue > 0 ? 148 : 118
+//                case 2:
+//                    return self.courseModel.give_coin?.floatValue > 0 ? 148 : 118
+//                default:
+//                    return 60
+//                }
             }
         }
         return 60
@@ -266,11 +267,12 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
     
     func gotoChooseCourseVc() { //选择课表
         
-        if self.courseModel.is_eliteu_course == true {//英荔课程
+        if self.courseModel.is_eliteu_course == true && self.courseModel.course_price?.floatValue != 0 {//英荔课程
             self.courseDetailView.activityView.stopAnimating()
             
             let vc = TDChooseCourseViewController();
             vc.username = self.username
+            vc.company_id = self.companyID
             vc.courseID = self.courseID
             self.navigationController?.pushViewController(vc, animated: true)
 
@@ -300,10 +302,21 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
             if type == 200 || type == 400 {
                 self.environment.router?.showMyCourses()
             }
+            
+            if type == 301 {
+                self.ownCompanyCourseFullHandle()
+            }
         }
     }
     
-    func addCourseButtonHandle() {// 点击 免费试听按钮
+    func ownCompanyCourseFullHandle() {
+        
+        let warmingAlertView = UIAlertView.init(title: Strings.systemWaring, message: Strings.fullFreeEnrollment, delegate: self, cancelButtonTitle: Strings.ok)
+        warmingAlertView.tag = 301
+        warmingAlertView.show()
+    }
+    
+    func addCourseButtonHandle() { // 加入课程
         switch self.courseModel.submitType { //0 已购买，1 立即加入, 2 查看待支付，3 即将开课
         case 0:
             self.showCourseScreen()
@@ -479,12 +492,19 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
             self.courseDetailView.activityView.stopAnimating()
             
             let alertView = UIAlertView.init(title: Strings.systemWaring, message: Strings.loginOverDue, delegate: self, cancelButtonTitle: Strings.ok)
+            alertView.tag = 1011
             alertView.show()
         }
     }
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        self.logoutCurrentUser()
+        
+        if alertView.tag == 1011 {
+            self.logoutCurrentUser()
+            
+        } else if alertView.tag == 301 {
+           self.courseStatusHandle()
+        }
     }
     
     func logoutCurrentUser() {
@@ -612,18 +632,18 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
                 self.gotoWaitForPayVc()
                 
             } else {
-                self.gotoChooseCourseVC()
+                self.freeGotoChooseCourseVC()
             }
             self.freeView.removeFromSuperview()
         }
         UIApplication.sharedApplication().keyWindow?.rootViewController?.view.addSubview(self.freeView)
     }
     
-    
-    func gotoChooseCourseVC() {
+    func freeGotoChooseCourseVC() {
         let courseId = NSUserDefaults.standardUserDefaults().valueForKey("Free_Course_CourseID")
         let chooseCourseVC = TDChooseCourseViewController.init()
         chooseCourseVC.username = self.username
+        chooseCourseVC.company_id = self.companyID
         chooseCourseVC.courseID = "\(courseId!)"
         chooseCourseVC.whereFrom = 1
         self.navigationController?.pushViewController(chooseCourseVC, animated: true)

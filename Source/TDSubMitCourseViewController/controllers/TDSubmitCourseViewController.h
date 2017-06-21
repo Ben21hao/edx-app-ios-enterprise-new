@@ -14,6 +14,7 @@
 
 @property (nonatomic,assign) float totalM; //应该付款金额
 @property (nonatomic,copy) NSString *username;
+@property (nonatomic,strong) NSString *company_id;
 @property (nonatomic,strong) NSString *courseId;
 @property (nonatomic,strong) NSString *activity_id;//活动名称
 @property (nonatomic,strong) NSString *giftCoin; //赠送宝典数目

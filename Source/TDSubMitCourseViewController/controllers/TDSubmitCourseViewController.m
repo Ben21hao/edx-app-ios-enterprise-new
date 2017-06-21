@@ -41,7 +41,7 @@
 
 @property (nonatomic,strong) JHCouponsAlertView *inputAlert;
 
-@property (nonatomic,strong) NSArray *leftTielArray;
+//@property (nonatomic,strong) NSArray *leftTielArray;
 
 @property (nonatomic,strong) NSMutableArray *payArray; //支付方式
 @property (nonatomic,assign) NSInteger payType; // 0 : 微信 , 1 : 支付宝
@@ -265,6 +265,7 @@
     TDRechargeViewController *couViewController = [[TDRechargeViewController alloc] init];
     couViewController.currentCanons = [self.remain_score doubleValue];
     couViewController.username = self.username;
+    couViewController.whereFrom = 1;
     
     WS(weakSelf);
     couViewController.rechargeSuccessHandle = ^(){
@@ -291,6 +292,7 @@
     [dic setValue:self.courseIds forKey:@"course_ids"];
     [dic setValue:self.usedcoin forKey:@"used_coin"];
     [dic setValue:@"enterprise" forKey:@"pay_source"];
+    [dic setValue:self.company_id forKey:@"company_id"];
     
     NSString *priceStr = [self.moneyLabel.text substringFromIndex:1];//总金额
     if ([priceStr floatValue] <= 0) {
@@ -548,7 +550,7 @@
     
     self.couponStr = NSLocalizedString(@"SELECT_COUPON", nil);
     
-    self.leftTielArray = self.hideShowPurchase ? @[NSLocalizedString(@"COUPON_PAPER", nil),NSLocalizedString(@"COINS_VALUE", nil)] : @[];
+//    self.leftTielArray = self.hideShowPurchase ? @[NSLocalizedString(@"COUPON_PAPER", nil),NSLocalizedString(@"COINS_VALUE", nil)] : @[];
     
     
     int selectWX = [WXApi isWXAppInstalled] ? 0 : 1;
@@ -584,7 +586,8 @@
         return self.courseArray.count;
     }
     if (section == 1) {
-        return self.leftTielArray.count;
+//        return self.leftTielArray.count;
+        return 1;
     }
     return self.payArray.count;
 }
@@ -602,7 +605,8 @@
     } else if ([indexPath section] == 1){
         
         SubmiteSecondCell *cell = [[SubmiteSecondCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDSumiteSecondCell"];
-        cell.leftLabel.text = self.leftTielArray[indexPath.row];
+//        cell.leftLabel.text = self.leftTielArray[indexPath.row];
+        cell.leftLabel.text = NSLocalizedString(@"COINS_VALUE", nil);
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -626,16 +630,19 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.section == 1) {
-        if (indexPath.row == 0) {//优惠券
-            self.hideShowPurchase ? [self gotoCoupon:indexPath] : [self inputAlertShow];
-            
-        } else if (indexPath.row == 1) {
-            if (!self.isCampony) {
-                [self inputAlertShow];
-            } else {
-                [self.view makeToast:NSLocalizedString(@"COUPON_NO_COINS", nil) duration:1.08 position:CSToastPositionCenter];
-            }
-        }
+        
+        [self inputAlertShow];
+        
+//        if (indexPath.row == 0) {//优惠券
+//            self.hideShowPurchase ? [self gotoCoupon:indexPath] : [self inputAlertShow];
+//            
+//        } else if (indexPath.row == 1) {
+//            if (!self.isCampony) {
+//                [self inputAlertShow];
+//            } else {
+//                [self.view makeToast:NSLocalizedString(@"COUPON_NO_COINS", nil) duration:1.08 position:CSToastPositionCenter];
+//            }
+//        }
     } else if (indexPath.section == 2) {
         
         TDSelectPayModel *model1 = self.payArray[indexPath.row];

@@ -119,6 +119,7 @@
  获取字符串size
  */
 - (CGSize)getSringSize:(NSString *)str withFont:(NSInteger)font;
+- (CGFloat)heightForString:(NSString *)title font:(NSInteger)font width:(CGFloat)width ; //这个比较准确
 
 /*
  屏幕横竖屏

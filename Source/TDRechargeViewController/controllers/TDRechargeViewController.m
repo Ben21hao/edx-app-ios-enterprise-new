@@ -126,9 +126,10 @@
     
     TDRechargeSuccessViewController *successVC = [[TDRechargeSuccessViewController alloc] init];
     successVC.orderId = self.orderId;
+    successVC.whereFrom = self.whereFrom;
     WS(weakSelf);
     successVC.updateTotalCoinHandle = ^(NSString *totalStr){
-            weakSelf.rechargeView.topLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%@ %.2f)",NSLocalizedString(@"CURRENT_COINS", nil),[totalStr floatValue]] withFont:14 withColorStr:colorHexStr8];
+        weakSelf.rechargeView.topLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%@ %.2f)",NSLocalizedString(@"CURRENT_COINS", nil),[totalStr floatValue]] withFont:14 withColorStr:colorHexStr8];
     };
     
     [self.navigationItem setTitle:@""];

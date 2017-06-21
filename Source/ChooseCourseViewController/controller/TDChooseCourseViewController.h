@@ -17,6 +17,7 @@ typedef NS_ENUM(NSInteger,TDChooseCourseFrom) {
 @interface TDChooseCourseViewController : TDBaseViewController
 
 @property (nonatomic,copy) NSString *username;
+@property (nonatomic,strong) NSString *company_id;
 @property (nonatomic,strong) NSString *courseID;//课程ID
 @property (nonatomic,assign) NSInteger whereFrom;//0 立即加入，1 从试听课程弹框；
 

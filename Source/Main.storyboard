@@ -22,7 +22,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="QZv-Oh-XSY" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="d3D-qd-xvw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="d3D-qd-xvw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -49,7 +49,7 @@
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" id="FsB-sM-xcw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.23529411759999999" green="0.25098039220000001" blue="0.27058823529999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="separatorColor" red="0.1529411765" green="0.1647058824" blue="0.18039215689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <sections>
                             <tableViewSection id="ZbS-zT-9QX">
@@ -76,7 +76,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label hidden="YES" autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="201" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ov6-L3-h2F">
-                                                    <rect key="frame" x="129" y="70" width="111" height="0.0"/>
+                                                    <rect key="frame" x="129" y="69" width="111" height="0.0"/>
                                                     <accessibility key="accessibilityConfiguration" label=""/>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="16"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -99,6 +99,7 @@
                                                     <rect key="frame" x="13" y="11" width="234" height="119"/>
                                                 </imageView>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="pr6-80-4Oz" firstAttribute="centerY" secondItem="rh2-oS-pei" secondAttribute="centerY" id="0hr-om-BOG"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Ov6-L3-h2F" secondAttribute="trailing" constant="72" id="23I-Q4-hmy"/>
@@ -119,7 +120,7 @@
                                                 <constraint firstItem="Ov6-L3-h2F" firstAttribute="leading" secondItem="rh2-oS-pei" secondAttribute="trailing" constant="16" id="zIx-L5-w2x"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.23529411764705882" green="0.25098039215686274" blue="0.27058823529411763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellMyCourse" rowHeight="50" id="YuS-qn-B4x">
                                         <rect key="frame" x="0.0" y="141" width="320" height="50"/>
@@ -128,8 +129,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator1.png" translatesAutoresizingMaskIntoConstraints="NO" id="JBK-jV-hWX">
+                                                <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JBK-jV-hWX">
                                                     <rect key="frame" x="30" y="49" width="210" height="1"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.082753638700000007" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="6pT-Ny-Ygd"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="203" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MY COURSES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lcp-ZJ-taY" customClass="OEXCustomLabel">
                                                     <rect key="frame" x="30" y="0.0" width="210" height="50"/>
@@ -137,7 +142,7 @@
                                                         <accessibilityTraits key="traits" button="YES" staticText="YES"/>
                                                     </accessibility>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -151,7 +156,7 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="Lcp-ZJ-taY" secondAttribute="trailing" constant="72" id="jta-qN-OJh"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.15686274509803921" green="0.16862745098039217" blue="0.18431372549019609" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellVideo" rowHeight="50" id="Onf-SS-P0i">
@@ -167,11 +172,15 @@
                                                         <accessibilityTraits key="traits" button="YES" staticText="YES"/>
                                                     </accessibility>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator1.png" translatesAutoresizingMaskIntoConstraints="NO" id="iME-te-g1A">
+                                                <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iME-te-g1A">
                                                     <rect key="frame" x="30" y="49" width="210" height="1"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.082753638700000007" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="6Bd-Cu-YRf"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -184,7 +193,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="GO9-7U-W3R" secondAttribute="bottom" id="xj6-da-Azg"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.15686274509803921" green="0.16862745098039217" blue="0.18431372549019609" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellFindCourses" rowHeight="50" id="Jkx-wc-oGY">
                                         <rect key="frame" x="0.0" y="241" width="320" height="50"/>
@@ -193,8 +202,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator1.png" translatesAutoresizingMaskIntoConstraints="NO" id="Opq-WJ-Neg">
+                                                <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Opq-WJ-Neg">
                                                     <rect key="frame" x="30" y="49" width="210" height="1"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.082753638700000007" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="eMV-Sa-EwI"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="204" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FIND COURSES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EfY-2m-mAz" customClass="OEXCustomLabel">
                                                     <rect key="frame" x="30" y="0.0" width="210" height="50"/>
@@ -202,7 +215,7 @@
                                                         <accessibilityTraits key="traits" button="YES" staticText="YES"/>
                                                     </accessibility>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -216,7 +229,7 @@
                                                 <constraint firstItem="EfY-2m-mAz" firstAttribute="leading" secondItem="Iht-9i-ycY" secondAttribute="leadingMargin" constant="22" id="xxX-9R-e6L"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.15686274510000001" green="0.16862745100000001" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <accessibility key="accessibilityConfiguration" identifier="find-courses-cell"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellFindCourses" rowHeight="50" id="oKs-qL-9vu">
@@ -226,8 +239,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator1.png" translatesAutoresizingMaskIntoConstraints="NO" id="BFa-aZ-Gnp">
+                                                <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BFa-aZ-Gnp">
                                                     <rect key="frame" x="30" y="49" width="210" height="1"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.082753638700000007" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="uda-ki-4vE"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="204" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USER CENTER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tH6-KR-NN7" customClass="OEXCustomLabel">
                                                     <rect key="frame" x="30" y="0.0" width="210" height="50"/>
@@ -235,7 +252,7 @@
                                                         <accessibilityTraits key="traits" button="YES" staticText="YES"/>
                                                     </accessibility>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -249,7 +266,7 @@
                                                 <constraint firstItem="tH6-KR-NN7" firstAttribute="centerX" secondItem="BFa-aZ-Gnp" secondAttribute="centerX" id="y7F-YA-kp4"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.15686274510000001" green="0.16862745100000001" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <accessibility key="accessibilityConfiguration" identifier="find-courses-cell"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellSetting" rowHeight="50" id="Hmd-TD-4eC">
@@ -259,8 +276,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator1.png" translatesAutoresizingMaskIntoConstraints="NO" id="93k-X3-oKY">
+                                                <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="93k-X3-oKY">
                                                     <rect key="frame" x="30" y="49" width="210" height="1"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.082753638700000007" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="10J-cB-3uG"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="205" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MY SETTINGS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Et-PU-vDe">
                                                     <rect key="frame" x="30" y="0.0" width="210" height="50"/>
@@ -268,7 +289,7 @@
                                                         <accessibilityTraits key="traits" button="YES" staticText="YES"/>
                                                     </accessibility>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -282,7 +303,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="5Et-PU-vDe" secondAttribute="bottom" id="xTf-I5-C3h"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.15686274510000001" green="0.16862745100000001" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellSubmitFeedback" rowHeight="50" id="F82-OQ-3cW">
                                         <rect key="frame" x="0.0" y="391" width="320" height="50"/>
@@ -291,8 +312,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator1.png" translatesAutoresizingMaskIntoConstraints="NO" id="NTL-Rc-x2y">
+                                                <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NTL-Rc-x2y">
                                                     <rect key="frame" x="30" y="49" width="210" height="1"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.082753638700000007" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="LjU-am-L9d"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="204" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SUBMIT FEEDBACK" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="koV-6t-sw8" customClass="OEXCustomLabel">
                                                     <rect key="frame" x="30" y="0.0" width="210" height="50"/>
@@ -300,7 +325,7 @@
                                                         <accessibilityTraits key="traits" button="YES" staticText="YES"/>
                                                     </accessibility>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -314,7 +339,7 @@
                                                 <constraint firstItem="koV-6t-sw8" firstAttribute="top" secondItem="f85-Z4-zfs" secondAttribute="top" id="u4s-wL-FOo"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.15686274510000001" green="0.16862745100000001" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellDebug" rowHeight="50" id="lzd-ss-mgn">
                                         <rect key="frame" x="0.0" y="441" width="320" height="50"/>
@@ -323,8 +348,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator1.png" translatesAutoresizingMaskIntoConstraints="NO" id="QFG-e0-gcE">
+                                                <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QFG-e0-gcE">
                                                     <rect key="frame" x="30" y="49" width="210" height="1"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.082753638700000007" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="9QL-f6-Igc"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="204" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DEBUG MENU" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37K-Bp-8DS" customClass="OEXCustomLabel">
                                                     <rect key="frame" x="30" y="0.0" width="210" height="50"/>
@@ -332,7 +361,7 @@
                                                         <accessibilityTraits key="traits" button="YES" staticText="YES"/>
                                                     </accessibility>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -346,7 +375,7 @@
                                                 <constraint firstItem="37K-Bp-8DS" firstAttribute="top" secondItem="IyX-WK-94J" secondAttribute="top" id="zK5-c8-NPY"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.15686274510000001" green="0.16862745100000001" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellLogout" rowHeight="130" id="eNT-vL-DdU">
                                         <rect key="frame" x="0.0" y="491" width="320" height="130"/>
@@ -355,16 +384,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" tag="207" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jag-qX-pQo">
+                                                <button opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" tag="207" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jag-qX-pQo">
                                                     <rect key="frame" x="37" y="40" width="186" height="40"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.082753638700000007" colorSpace="calibratedRGB"/>
                                                     <accessibility key="accessibilityConfiguration" hint="" label=""/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="YOy-0Q-7B8"/>
                                                         <constraint firstAttribute="width" constant="186" id="bN3-V5-WIl"/>
                                                     </constraints>
-                                                    <state key="normal" title="LOGOUT" backgroundImage="bt_logout_default.png">
-                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" title="LOGOUT">
+                                                        <color key="titleColor" white="0.0" alpha="0.87208369009999998" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <state key="selected" backgroundImage="bt_logout_active.png"/>
                                                     <state key="highlighted" backgroundImage="bt_logout_active.png"/>
@@ -376,7 +405,7 @@
                                                     <rect key="frame" x="112" y="83" width="36" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <state key="normal" title="Version">
-                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="titleColor" white="0.0" alpha="0.87208369009999998" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
                                             </subviews>
@@ -387,7 +416,7 @@
                                                 <constraint firstItem="Q5R-D1-1Ec" firstAttribute="top" secondItem="Jag-qX-pQo" secondAttribute="bottom" constant="3" id="wTq-Tc-DwH"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.15686274510000001" green="0.16862745100000001" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -421,15 +450,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vaP-x7-SEW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3994" y="1249"/>
+            <point key="canvasLocation" x="-4037" y="1244"/>
         </scene>
     </scenes>
     <resources>
         <image name="bt_logout_active.png" width="368" height="80"/>
-        <image name="bt_logout_default.png" width="368" height="80"/>
         <image name="default_big" width="250" height="250"/>
         <image name="logobg" width="248" height="119"/>
-        <image name="separator1.png" width="416" height="1"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

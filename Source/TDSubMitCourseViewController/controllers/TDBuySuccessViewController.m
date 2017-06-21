@@ -183,12 +183,16 @@
             cell.textLabel.text = NSLocalizedString(@"CUT_ACTIVITY", nil);
             float activity = [self.dataDic[@"activate_amount"] floatValue];
             cell.detailTextLabel.attributedText = [baseTool setDetailString:[NSString  stringWithFormat:@"-￥%.2f",activity] withFont:14 withColorStr:colorHexStr8];
+            cell.textLabel.hidden = YES;
+            cell.detailTextLabel.hidden = YES;
         }
             break;
         case 3: {
             cell.textLabel.text = NSLocalizedString(@"CUT_COUPON", nil);
             float coupon = [self.dataDic[@"coupon_amount"] floatValue];
             cell.detailTextLabel.attributedText = [baseTool setDetailString:[NSString  stringWithFormat:@"-￥%.2f",coupon] withFont:14 withColorStr:colorHexStr8];
+            cell.textLabel.hidden = YES;
+            cell.detailTextLabel.hidden = YES;
         }
             break;
         case 4: {
@@ -218,6 +222,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 2 || indexPath.row == 3) {
+        return 0;
+    }
     return 48;
 }
 

@@ -448,6 +448,16 @@
     return size;
 }
 
+- (CGFloat)heightForString:(NSString *)title font:(NSInteger)font width:(CGFloat)width {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 0)];
+    label.font = [UIFont fontWithName:@"OpenSans" size:font];
+    label.numberOfLines = 0;
+    label.text = title;
+    [label sizeToFit];
+    CGSize size = label.frame.size;
+    return size.height;
+}
+
 #pragma mark - 屏幕横竖屏
 - (void)interfaceOrientation:(UIInterfaceOrientation)orientation {
     

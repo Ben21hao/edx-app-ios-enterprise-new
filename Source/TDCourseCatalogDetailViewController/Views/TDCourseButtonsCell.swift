@@ -12,7 +12,7 @@ class TDCourseButtonsCell: UITableViewCell {
     let bgView = UIView()
     let submitButton = UIButton()
     let discountLabel = UILabel()
-    let auditionButton = UIButton()
+    let auditionButton = UIButton() //试听按钮
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,14 +22,29 @@ class TDCourseButtonsCell: UITableViewCell {
         setViewConstraint()
     }
     
-    var submitType : Int = 0 {
+//    var submitType : Int = 0 {
+//        didSet {
+//          remarkAuditionButton()
+//        }
+//    }
+    
+    var courseModel : OEXCourse? {
         didSet {
-            auditionButton.snp_remakeConstraints { (make) in
-                make.left.equalTo(bgView.snp_left).offset(18)
-                make.right.equalTo(bgView.snp_right).offset(-18)
-                make.top.equalTo(bgView.snp_top).offset(0)
-                make.height.equalTo(0)
+            let submitType = courseModel?.submitType
+            if submitType == 0 || submitType == 3 {
+                remarkAuditionButton()
+            } else if submitType == 1 && courseModel?.course_price?.floatValue == 0 {
+                remarkAuditionButton()
             }
+        }
+    }
+    
+    func remarkAuditionButton(){
+        auditionButton.snp_remakeConstraints { (make) in
+        make.left.equalTo(bgView.snp_left).offset(18)
+        make.right.equalTo(bgView.snp_right).offset(-18)
+        make.top.equalTo(bgView.snp_top).offset(0)
+        make.height.equalTo(0)
         }
     }
     
@@ -37,7 +52,7 @@ class TDCourseButtonsCell: UITableViewCell {
         bgView.backgroundColor = UIColor.whiteColor()
         self.contentView.addSubview(bgView)
         
-        setButtonStyle(OEXStyles.sharedStyles().baseColor3(), button: auditionButton)
+        setButtonStyle(OEXStyles.sharedStyles().baseColor4(), button: auditionButton)
         bgView.addSubview(auditionButton)
         
         setButtonStyle(OEXStyles.sharedStyles().baseColor1(), button: submitButton)

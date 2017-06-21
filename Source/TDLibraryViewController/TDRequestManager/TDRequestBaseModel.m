@@ -133,12 +133,16 @@
 }
 
 #pragma mark - 获取课程详情
-- (void)getCourseDetail:(NSString *)courseID {
+- (void)getCourseDetail:(NSString *)courseID companyId:(NSString *)companyId {
     
     AFHTTPSessionManager *manager = [self getUserIdentify];//身份验证
     
-    NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/courses/%@",ELITEU_URL,courseID];
-    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setValue:companyId forKey:@"company_id"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/companycoursesdetail/%@",ELITEU_URL,courseID];  //  /api/courses/v1/courses/
+    
+    [manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *responseDic = (NSDictionary *)responseObject;
         OEXCourse *courseModel = [[OEXCourse alloc] initWithDictionary:responseDic];
