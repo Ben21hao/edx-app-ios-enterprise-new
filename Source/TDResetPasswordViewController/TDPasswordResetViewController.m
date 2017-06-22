@@ -1,17 +1,16 @@
 //
-//  TDPasswordViewController.m
+//  TDPasswordResetViewController.m
 //  edX
 //
-//  Created by Elite Edu on 17/1/3.
+//  Created by Ben on 2017/5/10.
 //  Copyright © 2017年 edX. All rights reserved.
 //
 
-#import "TDPasswordViewController.h"
-#import "TDEmailRegisterViewController.h"
+#import "TDPasswordResetViewController.h"
 #import "TDBaseToolModel.h"
 #import "edX-Swift.h"
 
-@interface TDPasswordViewController ()<UIAlertViewDelegate,UIGestureRecognizerDelegate>
+@interface TDPasswordResetViewController ()<UIAlertViewDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) UILabel *topLabel;
 @property (nonatomic,strong) UITextField *passwordTextField;
@@ -26,7 +25,7 @@
 
 @end
 
-@implementation TDPasswordViewController
+@implementation TDPasswordResetViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,7 +38,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    
     self.navigationItem.title =NSLocalizedString(@"RESET_BY_PHONE", nil);
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
 }
@@ -72,6 +71,7 @@
 #pragma mark - 提交
 - (void)handinButtonAction:(UIButton *)sender {
     [self.passwordTextField resignFirstResponder];
+    [self.activityView stopAnimating];
     
     TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
     if (![baseTool networkingState]) {
@@ -248,11 +248,3 @@
 
 
 @end
-
-
-
-
-
-
-
-

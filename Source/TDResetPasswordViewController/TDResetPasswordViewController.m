@@ -1,23 +1,23 @@
 //
-//  TDRegisterViewController.m
+//  TDResetPasswordViewController.m
 //  edX
 //
-//  Created by Elite Edu on 16/12/30.
-//  Copyright © 2016年 edX. All rights reserved.
+//  Created by Ben on 2017/5/10.
+//  Copyright © 2017年 edX. All rights reserved.
 //
 
-#import "TDRegisterViewController.h"
-#import "TDPhoneRegisterViewController.h"
+#import "TDResetPasswordViewController.h"
+#import "TDPhoneSendNumResetViewController.h"
+#import "TDEmailResetViewController.h"
 #import "OEXFlowErrorViewController.h"
 #import "TDWebViewController.h"
-#import "TDEmailRegisterViewController.h"
 
 #import "TDBaseToolModel.h"
 #import "OEXAuthentication.h"
 #import "edx-Swift.h"
 #import "NSJSONSerialization+OEXSafeAccess.h"
 
-@interface TDRegisterViewController ()<UIAlertViewDelegate>
+@interface TDResetPasswordViewController ()
 
 @property (nonatomic,strong) UILabel *messageLabel;
 @property (nonatomic,strong) UITextField *accountTextField;
@@ -30,20 +30,19 @@
 
 @end
 
-@implementation TDRegisterViewController
+@implementation TDResetPasswordViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self configView];
     [self setViewConstraint];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    NSString *titleStr = self.whereFrom == TDRegisterViewFromRegister ? @"REGISTER_TEXT" : @"RESET_PASSWORD_TITLE";
+    NSString *titleStr = @"RESET_PASSWORD_TITLE";
     self.titleViewLabel.text = NSLocalizedString(titleStr, nil);
     [self.leftButton addTarget:self action:@selector(leftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
@@ -60,7 +59,6 @@
 - (void)nextButtonAction:(UIButton *)sender {
     
     [self.accountTextField resignFirstResponder];
-    [self.activityView startAnimating];
     
     TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
     if (![baseTool networkingState]) {
@@ -79,12 +77,13 @@
                                                              shouldHide:YES];
         
     } else if (self.accountTextField.text.length > 0) {
+        [self.activityView startAnimating];
         
         if ([baseTool isValidateMobile:self.accountTextField.text]) {//手机有效
-            [self phoneForCheckNum];
+            [self sendResetPasswordCheckNum];
             
         } else if ([baseTool isValidateEmail:self.accountTextField.text]) {//邮箱有效
-            [self resetPassword];
+            [self resetPasswordByEmail];
             
         } else {
             [self.activityView stopAnimating];
@@ -97,7 +96,7 @@
 }
 
 #pragma mark  - 手机重置密码--发送验证码请求
-- (void)phoneForCheckNum {
+- (void)sendResetPasswordCheckNum {
     
     int num = (arc4random() % 1000000);
     NSString *randomNumber = [NSString stringWithFormat:@"%.6d", num];
@@ -117,7 +116,7 @@
         id code = dict[@"code"];
         
         if ([code integerValue] == 200) {
-            TDPhoneRegisterViewController *phoneVC = [[TDPhoneRegisterViewController alloc] init];
+            TDPhoneSendNumResetViewController *phoneVC = [[TDPhoneSendNumResetViewController alloc] init];
             phoneVC.phoneStr = self.accountTextField.text;
             phoneVC.randomNumber = randomNumber;
             [self.navigationController pushViewController:phoneVC animated:YES];
@@ -127,7 +126,7 @@
                                                                     message:NSLocalizedString(@"PHONE_NUMBER_NOT_REGISTER", nil)
                                                            onViewController:self.navigationController.view
                                                                  shouldHide:YES];
-
+            
             
         } else {
             [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:NSLocalizedString(@"RESET_FAILED", nil)
@@ -135,14 +134,16 @@
                                                            onViewController:self.navigationController.view
                                                                  shouldHide:YES];
         }
+        [self.activityView stopAnimating];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%ld",(long)error.code);
+        [self.activityView stopAnimating];
     }];
 }
 
 #pragma mark - 重置邮箱账号密码
-- (void)resetPassword {
+- (void)resetPasswordByEmail {
     
     [OEXAuthentication resetPasswordWithEmailId:self.accountTextField.text completionHandler:^(NSData* data, NSURLResponse* response, NSError* error) {
         
@@ -161,11 +162,11 @@
                     if ([dataDic[@"success"] intValue] == 0) {
                         [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings floatingErrorTitle]
                                                                                 message:dataDic[@"value"]
-                                                                       onViewController:self.view
+                                                                       onViewController:self.navigationController.view
                                                                              shouldHide:YES];
                     } else {
                         
-                        TDEmailRegisterViewController *emailRegisterVc = [[TDEmailRegisterViewController alloc] init];
+                        TDEmailResetViewController *emailRegisterVc = [[TDEmailResetViewController alloc] init];
                         emailRegisterVc.acountStr = self.accountTextField.text;
                         [self.navigationController pushViewController:emailRegisterVc animated:YES];
                     }
@@ -177,7 +178,7 @@
                     NSString *responseStr = [[dictionary objectForKey:@"email"] firstObject];
                     [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings floatingErrorTitle]
                                                                             message:responseStr
-                                                                   onViewController:self.view
+                                                                   onViewController:self.navigationController.view
                                                                          shouldHide:YES];
                     
                 } else if(httpResp.statusCode > 500) {
@@ -185,7 +186,7 @@
                     NSString* responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                     [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings floatingErrorTitle]
                                                                             message:responseStr
-                                                                   onViewController:self.view
+                                                                   onViewController:self.navigationController.view
                                                                          shouldHide:YES];
                 }
                 
@@ -193,7 +194,7 @@
                 
                 [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings floatingErrorTitle]
                                                                         message:[error localizedDescription]
-                                                               onViewController:self.view
+                                                               onViewController:self.navigationController.view
                                                                      shouldHide:YES];
             }
             
@@ -239,7 +240,7 @@
     self.messageLabel.numberOfLines = 0;
     self.messageLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     self.messageLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
-    self.messageLabel.text = NSLocalizedString(@"PHONE_OR_EMAIL_REGISTER", nil);
+    self.messageLabel.text = NSLocalizedString(@"PHONE_OR_EMAIL_RESET_PASSWORD", nil);
     [self.view addSubview:self.messageLabel];
     
     self.accountTextField = [[UITextField alloc] init];
@@ -314,6 +315,7 @@
     [str1 appendAttributedString:str2];
     return str1;
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

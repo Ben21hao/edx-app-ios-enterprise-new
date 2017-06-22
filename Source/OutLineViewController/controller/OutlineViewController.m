@@ -13,11 +13,11 @@
 
 #import "OutlineFirstItem.h"
 #import "OutlineSecondItem.h"
-#import "OutlineThirdItem.h"
 #import "TDOutLineCell.h"
 
 #define TDWidth [UIScreen mainScreen].bounds.size.width
 #define TDHeight [UIScreen mainScreen].bounds.size.height
+
 static BOOL isBOOL[100];
 @interface OutlineViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -37,9 +37,8 @@ static NSString *ID = @"outline";
     
     [self getDate];
     
-    //注册cell
     [self addTableView];
-    
+    //注册cell
     [self.tableView registerNib:[UINib nibWithNibName:@"OutLineTableViewCell" bundle:nil] forCellReuseIdentifier:ID];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     
@@ -47,6 +46,8 @@ static NSString *ID = @"outline";
     
     [self setLoadDataView];
 }
+
+#pragma mark - UI
 - (void)addTableView{
     
     self.tableView = [[UITableView alloc] init];
@@ -62,7 +63,7 @@ static NSString *ID = @"outline";
 }
 
 #pragma mark - data
-- (void)getDate{
+- (void)getDate {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/courses_outline/%@",ELITEU_URL,self.courseID];
@@ -203,12 +204,16 @@ static NSString *ID = @"outline";
     NSInteger Int = Sender.tag;
     isBOOL[Int]= !isBOOL[Int];
     
-    NSIndexSet * indeSet = [NSIndexSet indexSetWithIndex:Int];
-    UITableView * table = (UITableView *)[self.view viewWithTag:10];
+    NSIndexSet *indeSet = [NSIndexSet indexSetWithIndex:Int];
+    UITableView *table = (UITableView *)[self.view viewWithTag:10];
     [table reloadSections:indeSet withRowAnimation:UITableViewRowAnimationFade];
 
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:Int];
-    if (isBOOL[Int]) {
+    
+    OutlineFirstItem *item1 = [OutlineFirstItem mj_objectWithKeyValues:_dataArr[Int]];
+    NSArray *subArr = item1.sections;
+    
+    if (isBOOL[Int] && subArr.count > 0) {
         [table scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
 }

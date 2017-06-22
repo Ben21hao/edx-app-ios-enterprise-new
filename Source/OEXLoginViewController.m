@@ -9,7 +9,7 @@
 @import edXCore;
 
 #import "OEXLoginViewController.h"
-#import "TDRegisterViewController.h"
+#import "TDResetPasswordViewController.h"
 
 #import "edX-Swift.h"
 
@@ -467,8 +467,7 @@
 
 - (void)pushRegisterViewController:(NSInteger)type {
     
-    TDRegisterViewController *registerViewController = [[TDRegisterViewController alloc] init];
-    registerViewController.whereFrom = type;
+    TDResetPasswordViewController *registerViewController = [[TDResetPasswordViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:registerViewController];
     [self presentViewController:navController animated:YES completion:nil];
 }

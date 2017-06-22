@@ -335,7 +335,7 @@
 /* Prompt shown to users on the course list encouraging them to find new courses */
 "ENROLLMENT_LIST.FIND_COURSES_PROMPT" = "Looking for a new challenge?";
 /* Button title opening course catalog */
-"ENROLLMENT_LIST.FIND_COURSES" = "Find a course";
+"ENROLLMENT_LIST.FIND_COURSES" = "Find a mobile-friendly course";
 /* Error message when user is not enrolled to any course and course discovery is also disabled.*/
 "ENROLLMENT_LIST.NO_ENROLLMENT" = "It looks like you are not enrolled in any courses yet.";
 /* Prompt indicating user needs to enter an email address */
@@ -505,7 +505,7 @@
 /* Option to allow for nil setting of a particular field */
 "PROFILE.NO_FIELD" = "No {field_name}";
 /* Text in the picture taker alert to delete the existing image */
-"PROFILE.REMOVE_IMAGE" = "Remove";
+"PROFILE.REMOVE_IMAGE" = "Remove photo";
 /* Profile screen text indicating that the user is currently only displaying a limited profile */
 "PROFILE.SHOWING_LIMITED" = "You are currently sharing a limited profile";
 /* Text for take picture for user profile photo alert */
@@ -893,7 +893,7 @@
 /*复制微信号*/
 "COPY_WECHAT_NUMBER" = "Copy Wechat ID";
 /*宝典充值*/
-"RECHARGE_Coins" = "Recharge coins";
+"RECHARGE_Coins" = "Recharge Coins";
 /*微信支付*/
 "WECHAT_PAY" = "Wechat Pay";
 /*支付宝支付*/
@@ -1106,7 +1106,7 @@
 "NEED_ACTIVITY" = "Account is not activated";
 /*确定发送激活邮件到登录邮箱？*/
 "SEND_EMAIL_ACTIVITY" = "Confirm and send activation email?";
-/*昵称不能为空*/
+/*请输入昵称*/
 "NICKNAME_NULL" = "Nickname cannot be empty";
 /*昵称最多填写六个字*/
 "NICKNAME_NUMBER" = "Nickname up to six words";
@@ -1124,6 +1124,8 @@
 "LESS_PASSWORD" = "Password should be no more than 30 characters";
 /*使用邮箱或手机号码注册*/
 "PHONE_OR_EMAIL_REGISTER" = "Sign up with mobile or email";
+/*请输入邮箱或手机号码。并按操作提示完成密码重置。*/
+"PHONE_OR_EMAIL_RESET_PASSWORD" = "Please enter your email address or mobile number, and follow the instruction to reset password.";
 /*服务条款*/
 "SERVICE_ITEM" = "Stipulation";
 /*邮箱或手机号码*/
@@ -1388,7 +1390,7 @@
 /* 超出10分钟按12.50宝典/分钟计费  12.50 coins per minute afterwards.*/
 "PAYMENT_NOTE_LAST" = " 12.50 coins per minute afterwards.";
 /*预约失败 Appointment Status */
-"APPOINTMENT_STATUS" = "Appointment Status";
+"APPOINTMENT_STATUS_FAIL" = "Appointment Status";
 /*预约失败！Unable to make this appointment. */
 "UNABLE_APPOINTMENT" = "Unable to make this appointment.";
 /*重新预约 Reschedule */
@@ -1431,6 +1433,8 @@
 "TA_CANCELLED" = "Cancelled";
 /*即时服务 : Instant service */
 "INSTANT_SERVICE" = "Instant service";
+/*即时服务 : Ask now */
+"INSTANT_SERVICE_BUTTON" = "Ask now";
 /*问题描述 Question description */
 "QUETION_DESCRIPTION" = "Question description: ";
 /*暂无待服务记录 No pending service yet */

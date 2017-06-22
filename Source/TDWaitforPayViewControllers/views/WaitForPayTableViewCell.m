@@ -18,7 +18,6 @@
     
     _imgV.layer.cornerRadius = 5;
     _imgV.layer.masksToBounds=YES;
-    // Initialization code
 }
 
 - (void)setChooseCourseItem:(ChooseCourseItem *)chooseCourseItem{

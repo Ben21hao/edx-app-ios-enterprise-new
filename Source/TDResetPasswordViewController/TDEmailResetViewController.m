@@ -1,16 +1,16 @@
 //
-//  TDEmailRegisterViewController.m
+//  TDEmailResetViewController.m
 //  edX
 //
-//  Created by Elite Edu on 17/1/3.
+//  Created by Ben on 2017/5/10.
 //  Copyright © 2017年 edX. All rights reserved.
 //
 
-#import "TDEmailRegisterViewController.h"
+#import "TDEmailResetViewController.h"
 #import "TDBaseToolModel.h"
 #import "edX-Swift.h"
 
-@interface TDEmailRegisterViewController () <UIGestureRecognizerDelegate>
+@interface TDEmailResetViewController () <UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) UILabel *messageLabel;
 @property (nonatomic,strong) UIButton *loginButton;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation TDEmailRegisterViewController
+@implementation TDEmailResetViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -158,15 +158,10 @@
     return str1;
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-
 @end
-
-
-
-
-

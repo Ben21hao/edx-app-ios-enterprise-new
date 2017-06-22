@@ -1,18 +1,18 @@
 //
-//  TDPhoneRegisterViewController.m
+//  TDPhoneSendNumResetViewController.m
 //  edX
 //
-//  Created by Elite Edu on 16/12/30.
-//  Copyright © 2016年 edX. All rights reserved.
+//  Created by Ben on 2017/5/10.
+//  Copyright © 2017年 edX. All rights reserved.
 //
 
-#import "TDPhoneRegisterViewController.h"
-#import "TDPasswordViewController.h"
+#import "TDPhoneSendNumResetViewController.h"
+#import "TDPasswordResetViewController.h"
 #import "TDBaseToolModel.h"
 #import "OEXFlowErrorViewController.h"
 #import "edx-Swift.h"
 
-@interface TDPhoneRegisterViewController ()<UIAlertViewDelegate,UIGestureRecognizerDelegate>
+@interface TDPhoneSendNumResetViewController () <UIAlertViewDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) UILabel *messageLabel;
 @property (nonatomic,strong) UITextField *codeField;
@@ -31,7 +31,7 @@
 
 @end
 
-@implementation TDPhoneRegisterViewController
+@implementation TDPhoneSendNumResetViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -112,11 +112,6 @@
             
             [self cutDownTime];
             
-            [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:NSLocalizedString(@"SENT", nil)
-                                                                    message:NSLocalizedString(@"PASSWORD_RESET_AUTHENTICATION_SENT", nil)
-                                                           onViewController:self.navigationController.view
-                                                                 shouldHide:YES];
-            
         }else if ([code intValue] == 403){//手机没注册
             [self handleResendButton:YES];
             
@@ -128,7 +123,6 @@
             
         } else {
             [self handleResendButton:YES];
-            
             [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:NSLocalizedString(@"RESET_FAILED", nil)
                                                                     message:NSLocalizedString(@"RESET_FAILED", nil)
                                                            onViewController:self.navigationController.view
@@ -136,6 +130,7 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
         [self handleResendButton:YES];
         [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"-------->>> %ld",(long)error.code);
@@ -147,6 +142,7 @@
     isEnable ? [self.codeActivitView stopAnimating] : [self.codeActivitView startAnimating];
     self.resendButton.userInteractionEnabled = isEnable;
     [self.resendButton setTitle:isEnable ? NSLocalizedString(@"RESEND", nil) : @"" forState:UIControlStateNormal];
+    self.resendButton.alpha = 1;
 }
 
 - (void)appEnterForeground {
@@ -155,6 +151,11 @@
 
 #pragma mark -- 倒计时
 - (void)cutDownTime {
+    
+    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:NSLocalizedString(@"SENT", nil)
+                                                            message:NSLocalizedString(@"PASSWORD_RESET_AUTHENTICATION_SENT", nil)
+                                                   onViewController:self.navigationController.view
+                                                         shouldHide:YES];
     
     self.resendButton.userInteractionEnabled = NO;
     
@@ -169,11 +170,13 @@
 
 - (void)timeChange {
     
-    self.resendButton.userInteractionEnabled = NO;
     self.timeNum -= 1;
     
     [self.codeActivitView stopAnimating];
+    
+    self.resendButton.userInteractionEnabled = NO;
     [self.resendButton setTitle:[NSString stringWithFormat:@"%d%@",self.timeNum,NSLocalizedString(@"SECOND", nil)] forState:UIControlStateNormal];
+    self.resendButton.alpha = 0.8;
     
     if (self.timeNum <= 0) {
         [self.timer invalidate];
@@ -198,14 +201,14 @@
         
     } else if ([self.codeField.text isEqualToString:self.randomNumber]) {//验证码正确
         
-        TDPasswordViewController *passwordVc = [[TDPasswordViewController alloc] init];
+        TDPasswordResetViewController *passwordVc = [[TDPasswordResetViewController alloc] init];
         passwordVc.acountStr = self.phoneStr;
         [self.navigationController pushViewController:passwordVc animated:YES];
         
         [self.activityView startAnimating];
         
     } else {
-        [self.view makeToast:NSLocalizedString(@"VERIFICATION_CODE_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:NSLocalizedString(@"VERIFICATION_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
     }
 }
 
@@ -306,6 +309,7 @@
         make.centerX.mas_equalTo(self.resendButton.mas_centerX);
     }];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

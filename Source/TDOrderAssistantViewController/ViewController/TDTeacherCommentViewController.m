@@ -27,7 +27,6 @@
 @property (nonatomic,strong) NSMutableArray *topArry;//头部标签
 @property (nonatomic,strong) NSMutableArray *commentArray;//评论数组
 @property (nonatomic,assign) NSInteger page;//页码
-@property (nonatomic,assign) int maxPage;//最大页数
 @property (nonatomic,strong) NSString *scoreStr;//评分
 @property (nonatomic,strong) NSString *selectId;//选中的标签
 @property (nonatomic,strong) UIButton *selectedButton;//选中的标签
@@ -242,9 +241,9 @@
                 self.page > 1 ? self.page = 1 : self.page --;
             }
             
-            if ([responseDic objectForKey:@"pages"]) {
-                self.maxPage = [responseDic[@"pages"] intValue];
-            }
+            [self.tableView.mj_footer endRefreshing];
+            
+            [self.tableView reloadData];
            
         } else if ([code intValue] == 201) { //没有更多数据了
             if (type == 2) {
@@ -260,26 +259,9 @@
         }
         
         NSLog(@"评论 --- %@ = %@",code,responseObject[@"msg"]);
-        
-        if (type == 2) {
-            if (self.page >= self.maxPage) {
-                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-                self.tableView.mj_footer.hidden = YES;
-            }else{
-                [self.tableView.mj_footer endRefreshing];
-            }
-        } else {
-            if (self.commentArray.count <= 6) {
-                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-                self.tableView.mj_footer.hidden = YES;
-            } else {
-                [self.tableView.mj_footer resetNoMoreData];
-                self.tableView.mj_footer.hidden = NO;
-            }
-        }
-        [self.tableView reloadData];
-        
+
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
         self.loadingView.hidden = YES;
         [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"获取评论数据 error--%@",error);
@@ -306,6 +288,8 @@
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NoCommentCell"];
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         self.nullLabel = [[UILabel alloc] init];
         self.nullLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
         self.nullLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
@@ -389,6 +373,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
+    self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self.view addSubview:self.tableView];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -195,12 +195,16 @@ class OEXRearTableViewController : UITableViewController {
     
     func setButtonHiddenOrNo(isHidden: Bool) {
         
-        loginButton.hidden = isHidden
         loginButton.layer.cornerRadius = 5.0
         loginButton.backgroundColor = OEXStyles.sharedStyles().baseColor2()
         
-        userNameLabel.hidden = !isHidden
-        userEmailLabel.hidden = !isHidden
+//        loginButton.hidden = isHidden
+//        userNameLabel.hidden = !isHidden
+//        userEmailLabel.hidden = !isHidden
+        loginButton.hidden = true
+        userNameLabel.hidden = true
+        userEmailLabel.hidden = true
+        userProfilePicture.hidden = true
         
         logoutButton.hidden = !isHidden
     }

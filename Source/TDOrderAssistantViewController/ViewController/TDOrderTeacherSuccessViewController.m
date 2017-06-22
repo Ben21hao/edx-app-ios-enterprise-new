@@ -32,7 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    self.title = self.isSuccess ? NSLocalizedString(@"APPOINTMENT_STATUS", nil) : NSLocalizedString(@"APPOINTMENT_STATUS", nil);
+    self.title = self.isSuccess ? NSLocalizedString(@"APPOINTMENT_STATUS", nil) : NSLocalizedString(@"APPOINTMENT_STATUS_FAIL", nil);
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     self.toolModel = [[TDBaseToolModel alloc] init];
     [self setLeftNavigationBar];
@@ -104,7 +104,7 @@
     } else {//充值
         TDRechargeViewController *rechargeVC = [[TDRechargeViewController alloc] init];
         rechargeVC.username = self.username;
-        rechargeVC.whereFrom = 1;
+        rechargeVC.whereFrom = 2;
         [self.navigationController pushViewController:rechargeVC animated:YES];
     }
 }
@@ -245,7 +245,7 @@
     self.imageLabel = [[UILabel alloc] init];
     self.imageLabel.font = [UIFont fontWithName:@"FontAwesome" size:20];
     self.imageLabel.text = self.isSuccess ? @"\U0000f058" : @"\U0000f06a";
-    self.imageLabel.textColor = [UIColor colorWithHexString:colorHexStr1];
+    self.imageLabel.textColor = [UIColor colorWithHexString:colorHexStr4];
     [self.headerView addSubview:self.imageLabel];
     
     self.messageLabel = [[UILabel alloc] init];

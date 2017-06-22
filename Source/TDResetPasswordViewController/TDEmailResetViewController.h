@@ -1,14 +1,14 @@
 //
-//  TDPasswordViewController.h
+//  TDEmailResetViewController.h
 //  edX
 //
-//  Created by Elite Edu on 17/1/3.
+//  Created by Ben on 2017/5/10.
 //  Copyright © 2017年 edX. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface TDPasswordViewController : UIViewController
+@interface TDEmailResetViewController : UIViewController
 
 @property (nonatomic,strong) NSString *acountStr;
 
