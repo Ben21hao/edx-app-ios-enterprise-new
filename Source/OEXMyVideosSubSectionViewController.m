@@ -130,9 +130,10 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     self.videoVideo.exclusiveTouch = YES;
 
     [self setTitle:self.course.name];
+
     self.titleViewLabel.text = self.course.name;
     [self.leftButton addTarget:self action:@selector(navigateBack) forControlEvents:UIControlEventTouchUpInside];
-
+    
     self.dataInterface = self.environment.interface;
     
     //Init video view and video player

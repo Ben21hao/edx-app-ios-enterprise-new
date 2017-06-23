@@ -251,7 +251,7 @@
 /* Text describing the Announcements section within the course dashboard */
 "COURSE_DASHBOARD_ANNOUNCEMENTS_DETAIL"="Keep up with the latest news";
 /* Title text for the Courseware section of the course dashboard */
-"COURSE_DASHBOARD_COURSEWARE"="Course";
+"COURSE_DASHBOARD_COURSEWARE"="Courseware";
 /* Text describing the Courseware section within the course dashboard */
 "COURSE_DASHBOARD_COURSE_DETAIL"="Access videos and assignments";
 /* Title text for the Discussions section of the course dashboard */
@@ -963,7 +963,7 @@
 /*合计*/
 "IN_TOTAL_PRICE" = "Total:";
 /*支付*/
-"PAY_TITLE" = "Pay Now";
+"PAY_TITLE" = "Pay now";
 /*未使用*/
 "NO_USE_COUPON" = "Available";
 /*已使用*/

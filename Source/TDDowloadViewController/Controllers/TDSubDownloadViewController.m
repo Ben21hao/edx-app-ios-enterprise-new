@@ -52,14 +52,14 @@
     
     TDDownloadCell *cell = [[TDDownloadCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDPlayerCell"];
     
+    NSDictionary *dictVideo = [self.arr_CourseData objectAtIndex:indexPath.section];
+    OEXCourse *obj_course = [dictVideo objectForKey:CAV_KEY_COURSE];
+    
     CourseCardView *infoView = cell.infoView;
     __typeof(self) owner = self;
     cell.infoView.tapAction = ^(CourseCardView* card){
-        [owner choseCourse:card.course];
+        [owner choseCourse:obj_course];
     };
-    
-    NSDictionary *dictVideo = [self.arr_CourseData objectAtIndex:indexPath.section];
-    OEXCourse *obj_course = [dictVideo objectForKey:CAV_KEY_COURSE];
     
     NSInteger count = [[dictVideo objectForKey:CAV_KEY_VIDEOS] count];
     NSString *Vcount = nil;

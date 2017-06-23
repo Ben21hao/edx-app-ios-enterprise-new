@@ -31,7 +31,6 @@
 @interface OEXDownloadViewController ()
 
 @property(strong, nonatomic) NSMutableArray* arr_downloadingVideo;
-@property(strong, nonatomic) OEXInterface* edxInterface;
 @property (strong, nonatomic) IBOutlet UITableView* table_Downloads;
 @property (strong, nonatomic) IBOutlet OEXCustomButton *btn_View;
 @property (strong, nonatomic) NSNumberFormatter* percentFormatter;
@@ -79,8 +78,6 @@
     //Initialize Downloading arr
     self.arr_downloadingVideo = [[NSMutableArray alloc] init];
 
-    _edxInterface = [OEXInterface sharedInterface];
-
     [self reloadDownloadingVideos];
 
     self.titleViewLabel.text = [Strings downloads];
@@ -101,7 +98,8 @@
 - (void)reloadDownloadingVideos {
     [self.arr_downloadingVideo removeAllObjects];
 
-    NSArray* array = [_edxInterface coursesAndVideosForDownloadState:OEXDownloadStatePartial];
+    OEXInterface* edxInterface = [OEXInterface sharedInterface];
+    NSArray* array = [edxInterface coursesAndVideosForDownloadState:OEXDownloadStatePartial];
 
     NSMutableDictionary* duplicationAvoidingDict = [[NSMutableDictionary alloc] init];
 
@@ -177,9 +175,10 @@
 
         float result = (([downloadingVideo.summary.size doubleValue] / 1024) / 1024);
         cell.lbl_totalSize.text = [NSString stringWithFormat:@"%.2fMB", result];
+        
         float progress = (float)downloadingVideo.downloadProgress;
         [cell.progressView setProgress:progress];
-        //
+        
         cell.btn_cancel.tag = indexPath.row;
         cell.btn_cancel.accessibilityLabel = [Strings cancel];
 
@@ -195,6 +194,7 @@
     [cell.progressView setProgress:progress];
 }
 
+#pragma mark - notification
 - (void)downloadProgressNotification:(NSNotification*)notification {
     NSDictionary* progress = (NSDictionary*)notification.userInfo;
     NSURLSessionTask* task = [progress objectForKey:DOWNLOAD_PROGRESS_NOTIFICATION_TASK];

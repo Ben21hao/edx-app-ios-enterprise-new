@@ -402,9 +402,6 @@ typedef  enum OEXAlertType
 - (void)editTableClicked:(id)sender { //编辑
     self.arr_SelectedObjects = [[NSMutableArray alloc] init];
 
-    // SHIFT THE PROGRESS TO LEFT
-//    self.TrailingSpaceCustomProgress.constant = ORIGINAL_RIGHT_SPACE_PROGRESSBAR + SHIFT_LEFT;
-
     [self hideComponentsOnEditing:YES];
 
     [self.tableView reloadData];
@@ -427,10 +424,7 @@ typedef  enum OEXAlertType
     [self.arr_SelectedObjects removeAllObjects];
 
     [self disableDeleteButton];
-//
-//    // SHIFT THE PROGRESS TO LEFT
-//    self.TrailingSpaceCustomProgress.constant = ORIGINAL_RIGHT_SPACE_PROGRESSBAR;
-//    
+    
     [self hideComponentsOnEditing:NO];
     [self.tableView reloadData];
 }
