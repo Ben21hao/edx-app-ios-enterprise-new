@@ -216,6 +216,9 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
         self.loadingView.hidden = YES;
         
         if (self.commentArray.count > 0 && self.page == 1) {
@@ -240,8 +243,6 @@
             } else {
                 self.page > 1 ? self.page = 1 : self.page --;
             }
-            
-            [self.tableView.mj_footer endRefreshing];
             
             [self.tableView reloadData];
            

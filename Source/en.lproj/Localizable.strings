@@ -729,7 +729,7 @@
 /*输入错误*/
 "INPUT_ERROR" = "Input Error";
 /*不可用的邮箱地址或手机号码*/
-"UNUSED_EMAIL_OR_PHONE_NUMBER" = "Not available email address or phone number.";
+"UNUSED_EMAIL_OR_PHONE_NUMBER" = "Not available mobile number or email address.";
 /*已发送*/
 "SENT" = "Already sent";
 /*密码重置验证码已发送*/
@@ -784,6 +784,8 @@
 "REGISTRATION_SUCCESS" = "Account created successfully.";
 /*请登录*/
 "PLEASE_SIGN_IN" = "Please sign in";
+/*验证码错误，请重新输入*/
+"VERIFICATION_ERROR" = "Verification code error.";
 /*密码长度大于30位数,请重新输入*/
 "PASSWORD_LENGTH_IS_MORE_THAN_30" = "Password should be no more than 30 characters.";
 /*请输入正确的手机号、验证码和密码*/
@@ -1055,7 +1057,7 @@
 /*暂无学员评价*/
 "NO_STUDENT_COMMENT" = "No comments";
 /*选课表*/
-"COURSE_LIST" = "Course list";
+"COURSE_LIST" = "Course List";
 /*提交课表*/
 "HANDIN_COURSE_LIST" = "Submit";
 /*推荐课程*/
@@ -1125,7 +1127,7 @@
 /*使用邮箱或手机号码注册*/
 "PHONE_OR_EMAIL_REGISTER" = "Sign up with mobile or email";
 /*请输入邮箱或手机号码。并按操作提示完成密码重置。*/
-"PHONE_OR_EMAIL_RESET_PASSWORD" = "Please enter your email address or mobile number, and follow the instruction to reset password.";
+"PHONE_OR_EMAIL_RESET_PASSWORD" = "Please enter your mobile number or email address, and follow the instruction to reset password.";
 /*服务条款*/
 "SERVICE_ITEM" = "Stipulation";
 /*邮箱或手机号码*/
@@ -1508,7 +1510,7 @@
 /*查看服务记录 View TA service record(s)*/
 "VIEW_TA_SERVICE" = "View tutor service record(s)";
 /*%d天%d时%d分%d秒 */
-"TIME_COUNT_NUM" = "{day} d {hour} h {min} m {second} s";
+"TIME_COUNT_NUM" = "{day}d {hour}h {min}m {second}s";
 
 /*服务x单 X Order(s) */
 "SERVICE_ORDER_NUM" = "{count} Order(s)";

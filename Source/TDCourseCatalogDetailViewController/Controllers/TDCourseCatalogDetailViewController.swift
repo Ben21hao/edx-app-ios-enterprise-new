@@ -81,6 +81,8 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         if self.gotoStudyView == 0 {
             setNilTimer()
         }
+        
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("Come_From_Course_Detail")
     }
     
     func loadCourseData() {//数据
