@@ -539,6 +539,8 @@
 		B5168B701EB8274400C80436 /* dataUrlItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B5168B6F1EB8274400C80436 /* dataUrlItem.m */; };
 		B5168B731EB8294800C80436 /* TDSubmitCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5168B721EB8294800C80436 /* TDSubmitCourseViewController.m */; };
 		B5168B761EB832A000C80436 /* TDWaitforPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5168B751EB832A000C80436 /* TDWaitforPayCell.m */; };
+		B5177EBB1F009A1800EF160D /* TDBindEmailNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5177EBA1F009A1800EF160D /* TDBindEmailNewViewController.m */; };
+		B5177EBE1F009A3A00EF160D /* TDBindEmailNewView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5177EBD1F009A3A00EF160D /* TDBindEmailNewView.m */; };
 		B518BE5F1EA9B91B0027569D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B518BE611EA9B91B0027569D /* Localizable.strings */; };
 		B518BE6E1EA9DD950027569D /* TDUserCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518BE681EA9DD950027569D /* TDUserCenterViewController.swift */; };
 		B518BE6F1EA9DD950027569D /* TDUserCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518BE6B1EA9DD950027569D /* TDUserCenterView.swift */; };
@@ -1485,6 +1487,10 @@
 		B5168B721EB8294800C80436 /* TDSubmitCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSubmitCourseViewController.m; sourceTree = "<group>"; };
 		B5168B741EB832A000C80436 /* TDWaitforPayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWaitforPayCell.h; sourceTree = "<group>"; };
 		B5168B751EB832A000C80436 /* TDWaitforPayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWaitforPayCell.m; sourceTree = "<group>"; };
+		B5177EB91F009A1800EF160D /* TDBindEmailNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBindEmailNewViewController.h; sourceTree = "<group>"; };
+		B5177EBA1F009A1800EF160D /* TDBindEmailNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBindEmailNewViewController.m; sourceTree = "<group>"; };
+		B5177EBC1F009A3A00EF160D /* TDBindEmailNewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBindEmailNewView.h; sourceTree = "<group>"; };
+		B5177EBD1F009A3A00EF160D /* TDBindEmailNewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBindEmailNewView.m; sourceTree = "<group>"; };
 		B518BE601EA9B91B0027569D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B518BE621EA9B9CC0027569D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B518BE631EA9B9CC0027569D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "zh-Hans"; path = "zh-Hans.lproj/profiles.json"; sourceTree = "<group>"; };
@@ -3335,6 +3341,33 @@
 			path = Baseview;
 			sourceTree = "<group>";
 		};
+		B5177EB61F009A0000EF160D /* TDBindEmailNewViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B5177EB71F009A0000EF160D /* controller */,
+				B5177EB81F009A0000EF160D /* view */,
+			);
+			path = TDBindEmailNewViewController;
+			sourceTree = "<group>";
+		};
+		B5177EB71F009A0000EF160D /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				B5177EB91F009A1800EF160D /* TDBindEmailNewViewController.h */,
+				B5177EBA1F009A1800EF160D /* TDBindEmailNewViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		B5177EB81F009A0000EF160D /* view */ = {
+			isa = PBXGroup;
+			children = (
+				B5177EBC1F009A3A00EF160D /* TDBindEmailNewView.h */,
+				B5177EBD1F009A3A00EF160D /* TDBindEmailNewView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		B518BE661EA9DD950027569D /* TDUserCenterViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3790,6 +3823,7 @@
 				B58C1F0B1EAB5ACB00AB7B7E /* TDBindPhoneViewController.m */,
 				B58C1F0C1EAB5ACB00AB7B7E /* TDBindSuccessViewController.h */,
 				B58C1F0D1EAB5ACB00AB7B7E /* TDBindSuccessViewController.m */,
+				B5177EB61F009A0000EF160D /* TDBindEmailNewViewController */,
 			);
 			path = TDBindAcountViewController;
 			sourceTree = "<group>";
@@ -5220,6 +5254,7 @@
 				B52591781EB348C3003A950D /* NSDataEx.m in Sources */,
 				B4B6D63F1A952D1C000F44E8 /* OEXRegistrationAgreementView.m in Sources */,
 				77AF07771CB42AC400A42704 /* TabContainerView.swift in Sources */,
+				B5177EBE1F009A3A00EF160D /* TDBindEmailNewView.m in Sources */,
 				199B9B751935E35D00081A09 /* OEXHelperVideoDownload.m in Sources */,
 				B518BEC01EA9E6F00027569D /* TDAssistantCommentTagModel.m in Sources */,
 				BECB7B1F1924C0C3009C77F1 /* OEXAppDelegate.m in Sources */,
@@ -5452,6 +5487,7 @@
 				773B1D421B1F48F100B861DF /* CourseOutlineHeaderView.swift in Sources */,
 				B52591731EB348C3003A950D /* Order.m in Sources */,
 				B5FAF6F61EB03AB1000C2169 /* WaitForPayViewController.m in Sources */,
+				B5177EBB1F009A1800EF160D /* TDBindEmailNewViewController.m in Sources */,
 				778B61061B06BD2100489532 /* NSNotificationCenter+SafeSwift.swift in Sources */,
 				B4B6D6011A949EFC000F44E8 /* OEXRegistrationError.m in Sources */,
 				B5FAF6FC1EB03AB1000C2169 /* TDPayMoneyView.m in Sources */,

@@ -377,6 +377,7 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
         
         let alertView = TDAlertView.init()
         alertView.frame = CGRectMake(0, 0, TDScreenWidth,TDScreenHeight - 60)
+        alertView.textField.becomeFirstResponder()
         
         alertView.sureHandle = { (AnyObject) -> () in
             
@@ -412,6 +413,7 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
         
         if type == 1 {
             let emailVC = TDBindEmailViewController.init()
+//            let emailVC = TDBindEmailNewViewController.init()
             emailVC.username = self.profile.username
             emailVC.bindEmailHandle = {(AnyObject) -> () in
                 print("绑定邮箱 --- \(AnyObject)")

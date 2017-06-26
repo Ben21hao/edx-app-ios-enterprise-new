@@ -167,6 +167,7 @@ class TDUserCenterView: UIView,UITableViewDataSource {
                     cell.messageLabel.hidden = true
                     cell.titleLabel.hidden = true
                     cell.iconImageView.hidden = true
+                    cell.accessoryType = .None
                 default:
                     titleStr = Strings.courseOrder
                     cell.messageLabel.text = Strings.orderCount(count: String(format: "%.0f",orders))

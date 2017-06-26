@@ -330,6 +330,8 @@
 "EMAIL_ACCOUNT_NOT_SET_UP_TITLE"="Cannot send Email";
 /* Placeholder text for email address entry field */
 "EMAIL_ADDRESS_PROMPT"="E-mail address";
+/* 请输入邮箱 */
+"EMAIL_ADDRESS_EMPTY"="Please enter your E-mail address.";
 /* Text displayed when no results are found in the search */
 "EMPTY_RESULTSET" = "No results found for \"{query_string}\". Try another search term or select a discussion category to browse.";
 /* Prompt shown to users on the course list encouraging them to find new courses */
@@ -794,8 +796,10 @@
 "USE_PHONE_REGISTER" = "Sign up with mobile";
 /*请输入手机号*/
 "PLEASE_ENTER_PHONE_NUMBER" = "Mobile";
-/*请输入验证码*/
+/*请输入手机验证码*/
 "PLEASE_ENTER_VERI" = "Verification code";
+/*请输入验证码*/
+"ENTER_VERI_HOLDER" = "Verification code";
 /*请输入密码*/
 "PLEASE_ENTER_PASSWORD" = "Please enter the new password";
 /*获取验证码*/

@@ -16,5 +16,6 @@
 @property (nonatomic,assign) BOOL vertifiFailed;
 
 @property (nonatomic,strong) UILabel *errorLabel;
+@property (nonatomic,strong) UITextField *textField;
 
 @end

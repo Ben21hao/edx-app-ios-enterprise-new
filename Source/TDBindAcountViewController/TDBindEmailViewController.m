@@ -43,7 +43,7 @@
         return;
         
     } else if (self.emailTextField.text.length == 0) {
-        [self.view makeToast:NSLocalizedString(@"EMAIL_ADDRESS_PROMPT", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:NSLocalizedString(@"EMAIL_ADDRESS_EMPTY", nil) duration:1.08 position:CSToastPositionCenter];
         
     } else if ([self.baseTool isValidateEmail:self.emailTextField.text]) {
         [self handinToService];

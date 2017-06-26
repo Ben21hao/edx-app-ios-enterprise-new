@@ -85,6 +85,7 @@
 #import "UserFirstViewController.h"
 #import "TDCouponViewController.h"
 #import "TDBindEmailViewController.h"
+#import "TDBindEmailNewViewController.h"
 #import "TDBindPhoneViewController.h"
 #import "TDAlertView.h"
 #import "TDProfessorViewController.h"

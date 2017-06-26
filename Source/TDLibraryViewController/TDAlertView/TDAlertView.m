@@ -20,7 +20,6 @@
 @property (nonatomic,strong) UILabel *line2;
 @property (nonatomic,strong) UIButton *cancelButton;
 @property (nonatomic,strong) UIButton *sureButton;
-@property (nonatomic,strong) UITextField *textField;
 @property (nonatomic,strong) UIButton *eyeButton;
 
 @end
