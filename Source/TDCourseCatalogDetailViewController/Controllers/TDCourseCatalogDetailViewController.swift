@@ -229,7 +229,8 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         
     }
     internal func gotoCourseOutlineVc() { //课程大纲
-        let vc = OutlineViewController()
+//        let vc = OutlineViewController()
+        let vc = TDCourseOutLineViewController()
         vc.courseID = self.courseID
         self.navigationController?.pushViewController(vc, animated: true)
     }

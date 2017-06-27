@@ -1021,6 +1021,8 @@
 "MAIN_PROFESSOR" = "主讲教授";
 /*课程大纲*/
 "COURSE_OUTLINE" = "课程大纲";
+/*暂时没有课程大纲*/
+"NO_COURSE_OUTLINE" = "暂时没有课程大纲";
 /*学员评价*/
 "STUDENT_COMMENT" = "学员评价";
 /*加入课程班级群*/

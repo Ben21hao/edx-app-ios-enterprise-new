@@ -1018,6 +1018,8 @@
 "MAIN_PROFESSOR" = "Professors";
 /*课程大纲*/
 "COURSE_OUTLINE" = "Syllabus";
+/*暂时没有课程大纲*/
+"NO_COURSE_OUTLINE" = "No syllabus yet";
 /*学员评价*/
 "STUDENT_COMMENT" = "Comments";
 /*加入课程班级群*/

@@ -104,6 +104,11 @@ class CourseVideoTableViewCell: UITableViewCell, CourseBlockContainerCell {
             return
         }
         
+        if self.localState?.summary?.videoID == nil {
+            content.trailingView = nil
+            return
+        }
+        
         content.trailingView = downloadView
         downloadView.state = downloadState
     }

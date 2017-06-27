@@ -15,9 +15,6 @@
 #import "OutlineSecondItem.h"
 #import "TDOutLineCell.h"
 
-#define TDWidth [UIScreen mainScreen].bounds.size.width
-#define TDHeight [UIScreen mainScreen].bounds.size.height
-
 static BOOL isBOOL[100];
 @interface OutlineViewController ()<UITableViewDelegate,UITableViewDataSource>
 

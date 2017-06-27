@@ -31,11 +31,12 @@ class CourseSectionTableViewCell: UITableViewCell, CourseBlockContainerCell {
             make.edges.equalTo(contentView)
         }
         
-        downloadView.downloadAction = {[weak self] _ in
+        downloadView.downloadAction = {[weak self] _ in//点击下载
             if let owner = self, block = owner.block, videos = self?.videosStream.value {
                 owner.delegate?.sectionCellChoseDownload(owner, videos: videos, forBlock: block)
             }
         }
+        
         videosStream.listen(self) {[weak self] downloads in //数据
             if let downloads = downloads.value, state = self?.downloadStateForDownloads(downloads) {
                 self?.downloadView.state = state

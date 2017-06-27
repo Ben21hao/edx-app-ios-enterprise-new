@@ -55,26 +55,24 @@
 
 #pragma mark - 设置数据
 - (void)setDataForOutLine:(NSArray *)dataArray {
+    
     if (dataArray.count > 0) {
-        
-        if (dataArray.count > 0) {
-            for (int i = 0; i < dataArray.count; i ++) {
-                NSDictionary *dataDic = dataArray[i];
-                OutlineThirdItem *thirdItem = [OutlineThirdItem mj_objectWithKeyValues:dataDic];
-                
-                UILabel *subTitleLabel = [[UILabel alloc] init];
-                subTitleLabel.font = [UIFont systemFontOfSize:12];
-                subTitleLabel.textColor = [UIColor colorWithHexString:colorHexStr9];
-                subTitleLabel.text = thirdItem.display_name;
-                [self.bgView addSubview:subTitleLabel];
-                
-                [subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.top.mas_equalTo(self.bgView.mas_top).offset(33 * (i + 1));
-                    make.left.mas_equalTo(self.bgView.mas_left).offset(39);
-                    make.height.mas_equalTo(33);
-                    make.right.mas_equalTo(self.bgView.mas_right).offset(-18);
-                }];
-            }
+        for (int i = 0; i < dataArray.count; i ++) {
+            NSDictionary *dataDic = dataArray[i];
+            OutlineThirdItem *thirdItem = [OutlineThirdItem mj_objectWithKeyValues:dataDic];
+            
+            UILabel *subTitleLabel = [[UILabel alloc] init];
+            subTitleLabel.font = [UIFont systemFontOfSize:12];
+            subTitleLabel.textColor = [UIColor colorWithHexString:colorHexStr9];
+            subTitleLabel.text = thirdItem.display_name;
+            [self.bgView addSubview:subTitleLabel];
+            
+            [subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.bgView.mas_top).offset(33 * (i + 1));
+                make.left.mas_equalTo(self.bgView.mas_left).offset(39);
+                make.height.mas_equalTo(33);
+                make.right.mas_equalTo(self.bgView.mas_right).offset(-18);
+            }];
         }
     }
 }

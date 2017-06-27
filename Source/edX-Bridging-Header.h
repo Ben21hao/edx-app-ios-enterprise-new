@@ -90,6 +90,7 @@
 #import "TDAlertView.h"
 #import "TDProfessorViewController.h"
 #import "OutlineViewController.h"
+#import "TDCourseOutLineViewController.h"
 #import "TDCommentViewController.h"
 #import "QRViewController.h"
 #import "TDVideoPlayerViewController.h"
