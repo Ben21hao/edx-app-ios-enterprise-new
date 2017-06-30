@@ -740,7 +740,7 @@
 "PASSWORD_RESET_AUTHENTICATION_SENT" = "Password reset authentication code has been sent.";
 /*发送失败*/
 "SEND_FAILED" = "Send failed";
-/*该手机未注册*/
+/*该手机号码未注册*/
 "PHONE_NUMBER_NOT_REGISTER" = "The phone number is not yet registered.";
 /*确定*/
 "OK" = "OK";
@@ -790,11 +790,11 @@
 "VERIFICATION_ERROR" = "Verification code error.";
 /*密码长度大于30位数,请重新输入*/
 "PASSWORD_LENGTH_IS_MORE_THAN_30" = "Password should be no more than 30 characters.";
-/*请输入正确的手机号、验证码和密码*/
+/*请输入正确的手机号码、验证码和密码*/
 "PLEASE_ENTER_THE_CORRECT" = "Please enter the correct phone number, password and a verification code.";
-/*使用手机注册*/
+/*使用手机号码注册*/
 "USE_PHONE_REGISTER" = "Sign up with mobile";
-/*请输入手机号*/
+/*请输入手机号码*/
 "PLEASE_ENTER_PHONE_NUMBER" = "Mobile";
 /*请输入手机验证码*/
 "PLEASE_ENTER_VERI" = "Verification code";
@@ -814,9 +814,9 @@
 "AGREEMENT" = "Terms and Conditions";
 /*重置密码*/
 "RESET_PASSWORD" = "Reset Password";
-/*请输入手机号或邮箱,以重置您的密码*/
+/*请输入手机号码或邮箱,以重置您的密码*/
 "PLEASE_ENTER_YOUR_PHONE_OR_EMAIL_TO_RESET_PASSWORD" = "Enter your mobile number or email address, we'll send instructions to reset your password.";
-/*请输入手机号或邮箱*/
+/*请输入手机号码或邮箱*/
 "PLEASE_ENTER_YOUR_PHONE_OR_EMAIL" = "Mobile or email";
 /*仅在wifi下载*/
 "DOWNLOAD_IN_WIFI" = "Only download content when Wi-Fi is turned on.";
@@ -834,15 +834,15 @@
 "REGI_PASSWORD_IS_EMPTY" = "Please enter your password.";
 /*还没获取验证码*/
 "STILL_NO_GET_VERI" = "No acquire verification code yet";
-/*修改了手机号*/
+/*修改了手机号码*/
 "MOBILE_CHANGED" = "Mobile number changed, please verify again.";
 /*字幕*/
 "CLOSED_CAPTIONS" = "Captions";
 /*播放速度*/
 "VIDEO_SPEED" = "Video Speed";
-/*请输入您的手机号或邮箱*/
+/*请输入您的手机号码或邮箱*/
 "ENTER_PHONE_OR_EMAIL" = "Please enter mobile number or email address.";
-/*请输入正确的手机号或邮箱*/
+/*请输入正确的手机号码或邮箱*/
 "ENTER_RIGHT_PHONE_OR_EMAIL" = "Please enter correct mobile number or email address.";
 /*仅Wi-fi下载*/
 "DOWNLOAD_ONLY_WIFI" = "Download Wi-Fi only";
@@ -870,7 +870,7 @@
 "UNKNOWN_ERROR" = "unknown error";
 /*确定绑定*/
 "SURE_BIND" = "Confirm";
-/*手机格式错误*/
+/*手机号码格式错误*/
 "PHONE_FORMAT_ERROR" = "Format error";
 /*手机绑定*/
 "PHONE_DINDING" = "Mobile binding";

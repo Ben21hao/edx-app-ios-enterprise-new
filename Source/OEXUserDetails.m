@@ -20,7 +20,7 @@ static NSString* const OEXUserDetailsNameKey = @"name";
 static NSString* const OEXUserDetailsUserIdKey = @"id";
 static NSString* const OEXUserDetailsUrlKey = @"url";
 
-static NSString* const OEXUserDetailsPhoneNubmerKey = @"mobile";//手机号
+static NSString* const OEXUserDetailsPhoneNubmerKey = @"mobile";//手机号码
 static NSString* const OEXUserDetailsNickNameKey = @"nick_name";//昵称
 static NSString* const OEXUserDetailsCompanyKey = @"company"; //公司key
 static NSString* const OEXUserDetailsCompanyIdKey = @"id";//公司id
@@ -69,7 +69,7 @@ static NSString* const OEXUserDetailsCompanyDomainNameKey = @"domain_name";//公
         _name = [name copy];
         _userId = [userId copy];
         _url = [url copy];
-        //手机号
+        //手机号码
         _mobile = [_mobile copy];
         //昵称
         _nick_name = [_nick_name copy];
@@ -151,7 +151,7 @@ static NSString* const OEXUserDetailsCompanyDomainNameKey = @"domain_name";//公
         if ([_url isEqual:[NSNull null]]) {
             _url = nil;
         }
-        //手机号
+        //手机号码
         _mobile = [userDetailsDictionary objectForKey:OEXUserDetailsPhoneNubmerKey];
         if ([_mobile isEqual:[NSNull null]]) {
             _mobile = nil;
@@ -251,7 +251,7 @@ static NSString* const OEXUserDetailsCompanyDomainNameKey = @"domain_name";//公
         [dict setObjectOrNil:_userId forKey:OEXUserDetailsUserIdKey];
         [dict setObjectOrNil:_url forKey:OEXUserDetailsUrlKey];
         [dict setObjectOrNil:_name forKey:OEXUserDetailsNameKey];
-        //手机号
+        //手机号码
         [dict setObjectOrNil:_mobile forKey:OEXUserDetailsPhoneNubmerKey];
         //昵称
         [dict setObjectOrNil:_nick_name forKey:OEXUserDetailsNickNameKey];

@@ -250,6 +250,7 @@ public class CourseOutlineViewController :
         
         self.blockIDStream.backWithStream(Stream(value: rootID))
         
+        /* 标题 */
         headersLoader.listen(self,
             success: {[weak self] headers in
                 self?.setupNavigationItem(headers.block)
@@ -259,6 +260,7 @@ public class CourseOutlineViewController :
             }
         )
         
+        /* 课表数据 / 视频数据 / 习题数据 */
         rowsLoader.listen(self,
             success : {[weak self] groups in
                 if let owner = self {

@@ -428,7 +428,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
                     self.freeExperienceAction() //加入指定课程到试听课
                 }
                 
-            } else {//未登录，弹框输入手机号
+            } else {//未登录，弹框输入手机号码
                 showInputFreeview()
             }
         }

@@ -152,6 +152,7 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     
     func gotoWaiForPayVc() { //待支付订单
         let userCouponVC1 = WaitForPayViewController()
+//        let userCouponVC1 = TDWaitforPayViewController()
         userCouponVC1.username = session.currentUser?.username  //传当前用户名
         self.navigationController?.pushViewController(userCouponVC1, animated: true)
     }

@@ -101,6 +101,7 @@
 #import "UIImage+Crop.h"
 #import "TDRechargeViewController.h"
 #import "WaitForPayViewController.h"
+#import "TDWaitforPayViewController.h"
 
 #import "TDTakePictureViewController.h"
 #import "TDInformationDetailViewController.h"

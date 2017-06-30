@@ -63,7 +63,7 @@ public class UserProfile {
     var educationCode : String?
     var nickname: String?//昵称
     var remainscore: Double?//宝典
-    var phone : String?//手机号
+    var phone : String?//手机号码
     var email : String?//邮箱
     var coupon :  Double? //优惠券
     var order : Double?//未支付订单
@@ -93,7 +93,7 @@ public class UserProfile {
         let profileStatus = json[ProfileFields.vertify]
         statusCode = profileStatus[ProfileFields.code].int
         
-        phone = json[ProfileFields.phone].string //手机号
+        phone = json[ProfileFields.phone].string //手机号码
         email = json[ProfileFields.email].string//邮箱
         name = json[ProfileFields.Name].string//用户名
         nickname = json[ProfileFields.Nickname].string//昵称

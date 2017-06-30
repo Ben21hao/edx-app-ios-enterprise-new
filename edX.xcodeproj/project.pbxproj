@@ -509,6 +509,9 @@
 		B50211FF1EA85818001DE1E2 /* UIImage+Crop.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211FD1EA85818001DE1E2 /* UIImage+Crop.m */; };
 		B50212041EA85ACD001DE1E2 /* OEXFlowErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50212021EA85ACD001DE1E2 /* OEXFlowErrorViewController.m */; };
 		B50212051EA85ACD001DE1E2 /* OEXFlowErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B50212031EA85ACD001DE1E2 /* OEXFlowErrorViewController.xib */; };
+		B50471671F052523003A7268 /* TDWaitforPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50471661F052523003A7268 /* TDWaitforPayViewController.m */; };
+		B504716A1F0526D6003A7268 /* TDWaitforPayTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B50471691F0526D6003A7268 /* TDWaitforPayTopCell.m */; };
+		B504716D1F0529FE003A7268 /* TDWaitforPayBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B504716C1F0529FE003A7268 /* TDWaitforPayBottomCell.m */; };
 		B50DF9821EAAF15B001F38BD /* UserFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50DF96D1EAAF15B001F38BD /* UserFirstViewController.m */; };
 		B50DF9831EAAF15B001F38BD /* UserFirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B50DF96E1EAAF15B001F38BD /* UserFirstViewController.xib */; };
 		B50DF9841EAAF15B001F38BD /* UserSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50DF9701EAAF15B001F38BD /* UserSecondViewController.m */; };
@@ -617,6 +620,10 @@
 		B525917A1EB348C3003A950D /* RSADataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = B525916B1EB348C2003A950D /* RSADataSigner.m */; };
 		B525917B1EB348C3003A950D /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = B525916D1EB348C2003A950D /* RSADataVerifier.m */; };
 		B53EA90D1EA621BE00CEC936 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53EA90C1EA621BE00CEC936 /* Images.xcassets */; };
+		B53F37811F05E59D00277601 /* TDWaitforPayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B53F37801F05E59D00277601 /* TDWaitforPayModel.m */; };
+		B53F37841F05EEC300277601 /* TDNewWaitfoPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B53F37831F05EEC300277601 /* TDNewWaitfoPayCell.m */; };
+		B53F37871F06068100277601 /* TDPaySheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = B53F37861F06068100277601 /* TDPaySheetView.m */; };
+		B53F378A1F062C0E00277601 /* TDPayTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B53F37891F062C0E00277601 /* TDPayTypeView.m */; };
 		B543473A1F024CBC0074DBDE /* TDCourseOutLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B54347391F024CBC0074DBDE /* TDCourseOutLineViewController.m */; };
 		B543473D1F0252E50074DBDE /* TDCourseOutLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B543473C1F0252E50074DBDE /* TDCourseOutLineCell.m */; };
 		B54347401F02581A0074DBDE /* TDCourseOutLineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B543473F1F02581A0074DBDE /* TDCourseOutLineModel.m */; };
@@ -1437,6 +1444,12 @@
 		B50212011EA85ACD001DE1E2 /* OEXFlowErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXFlowErrorViewController.h; sourceTree = "<group>"; };
 		B50212021EA85ACD001DE1E2 /* OEXFlowErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXFlowErrorViewController.m; sourceTree = "<group>"; };
 		B50212031EA85ACD001DE1E2 /* OEXFlowErrorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OEXFlowErrorViewController.xib; sourceTree = "<group>"; };
+		B50471651F052523003A7268 /* TDWaitforPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWaitforPayViewController.h; sourceTree = "<group>"; };
+		B50471661F052523003A7268 /* TDWaitforPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWaitforPayViewController.m; sourceTree = "<group>"; };
+		B50471681F0526D6003A7268 /* TDWaitforPayTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWaitforPayTopCell.h; sourceTree = "<group>"; };
+		B50471691F0526D6003A7268 /* TDWaitforPayTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWaitforPayTopCell.m; sourceTree = "<group>"; };
+		B504716B1F0529FE003A7268 /* TDWaitforPayBottomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWaitforPayBottomCell.h; sourceTree = "<group>"; };
+		B504716C1F0529FE003A7268 /* TDWaitforPayBottomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWaitforPayBottomCell.m; sourceTree = "<group>"; };
 		B50DF96C1EAAF15B001F38BD /* UserFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserFirstViewController.h; sourceTree = "<group>"; };
 		B50DF96D1EAAF15B001F38BD /* UserFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserFirstViewController.m; sourceTree = "<group>"; };
 		B50DF96E1EAAF15B001F38BD /* UserFirstViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserFirstViewController.xib; sourceTree = "<group>"; };
@@ -1709,6 +1722,14 @@
 		B525916C1EB348C2003A950D /* RSADataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSADataVerifier.h; sourceTree = "<group>"; };
 		B525916D1EB348C2003A950D /* RSADataVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataVerifier.m; sourceTree = "<group>"; };
 		B53EA90C1EA621BE00CEC936 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../edX/Images.xcassets; sourceTree = "<group>"; };
+		B53F377F1F05E59D00277601 /* TDWaitforPayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWaitforPayModel.h; sourceTree = "<group>"; };
+		B53F37801F05E59D00277601 /* TDWaitforPayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWaitforPayModel.m; sourceTree = "<group>"; };
+		B53F37821F05EEC300277601 /* TDNewWaitfoPayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDNewWaitfoPayCell.h; sourceTree = "<group>"; };
+		B53F37831F05EEC300277601 /* TDNewWaitfoPayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDNewWaitfoPayCell.m; sourceTree = "<group>"; };
+		B53F37851F06068100277601 /* TDPaySheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDPaySheetView.h; sourceTree = "<group>"; };
+		B53F37861F06068100277601 /* TDPaySheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDPaySheetView.m; sourceTree = "<group>"; };
+		B53F37881F062C0E00277601 /* TDPayTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDPayTypeView.h; sourceTree = "<group>"; };
+		B53F37891F062C0E00277601 /* TDPayTypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDPayTypeView.m; sourceTree = "<group>"; };
 		B54347381F024CBC0074DBDE /* TDCourseOutLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCourseOutLineViewController.h; sourceTree = "<group>"; };
 		B54347391F024CBC0074DBDE /* TDCourseOutLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCourseOutLineViewController.m; sourceTree = "<group>"; };
 		B543473B1F0252E50074DBDE /* TDCourseOutLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCourseOutLineCell.h; sourceTree = "<group>"; };
@@ -4080,6 +4101,8 @@
 				B5FAF6E21EB03AB1000C2169 /* WaitForPayViewController.h */,
 				B5FAF6E31EB03AB1000C2169 /* WaitForPayViewController.m */,
 				B5FAF6E41EB03AB1000C2169 /* WaitForPayViewController.xib */,
+				B50471651F052523003A7268 /* TDWaitforPayViewController.h */,
+				B50471661F052523003A7268 /* TDWaitforPayViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -4091,6 +4114,8 @@
 				B5FAF6E71EB03AB1000C2169 /* OrderItem.m */,
 				B5FAF6E81EB03AB1000C2169 /* SubOrderItem.h */,
 				B5FAF6E91EB03AB1000C2169 /* SubOrderItem.m */,
+				B53F377F1F05E59D00277601 /* TDWaitforPayModel.h */,
+				B53F37801F05E59D00277601 /* TDWaitforPayModel.m */,
 			);
 			path = modes;
 			sourceTree = "<group>";
@@ -4101,16 +4126,26 @@
 				B5FAF6EB1EB03AB1000C2169 /* AliPayView.h */,
 				B5FAF6EC1EB03AB1000C2169 /* AliPayView.m */,
 				B5FAF6ED1EB03AB1000C2169 /* AliPayView.xib */,
-				B5FAF6EE1EB03AB1000C2169 /* TDPayMoneyView.h */,
-				B5FAF6EF1EB03AB1000C2169 /* TDPayMoneyView.m */,
 				B5FAF6F01EB03AB1000C2169 /* WaitForPayTableViewCell.h */,
 				B5FAF6F11EB03AB1000C2169 /* WaitForPayTableViewCell.m */,
 				B5FAF6F21EB03AB1000C2169 /* WaitForPayTableViewCell.xib */,
 				B5FAF6F31EB03AB1000C2169 /* WechatPayView.h */,
 				B5FAF6F41EB03AB1000C2169 /* WechatPayView.m */,
 				B5FAF6F51EB03AB1000C2169 /* WechatPayView.xib */,
+				B5FAF6EE1EB03AB1000C2169 /* TDPayMoneyView.h */,
+				B5FAF6EF1EB03AB1000C2169 /* TDPayMoneyView.m */,
 				B5168B741EB832A000C80436 /* TDWaitforPayCell.h */,
 				B5168B751EB832A000C80436 /* TDWaitforPayCell.m */,
+				B53F37821F05EEC300277601 /* TDNewWaitfoPayCell.h */,
+				B53F37831F05EEC300277601 /* TDNewWaitfoPayCell.m */,
+				B50471681F0526D6003A7268 /* TDWaitforPayTopCell.h */,
+				B50471691F0526D6003A7268 /* TDWaitforPayTopCell.m */,
+				B504716B1F0529FE003A7268 /* TDWaitforPayBottomCell.h */,
+				B504716C1F0529FE003A7268 /* TDWaitforPayBottomCell.m */,
+				B53F37851F06068100277601 /* TDPaySheetView.h */,
+				B53F37861F06068100277601 /* TDPaySheetView.m */,
+				B53F37881F062C0E00277601 /* TDPayTypeView.h */,
+				B53F37891F062C0E00277601 /* TDPayTypeView.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -5039,6 +5074,7 @@
 				77F9C1741B0D496B004D39E7 /* CourseStructureAPI.swift in Sources */,
 				779376571BF15C1B00900A8C /* FindCoursesWebViewHelper.swift in Sources */,
 				6919F5FF1D65CD27006935C8 /* OEXColors.swift in Sources */,
+				B53F37871F06068100277601 /* TDPaySheetView.m in Sources */,
 				1904A14E1A1386C2006A5524 /* VideoData.m in Sources */,
 				7772BE801AF821540081CA7A /* UIBarButtonItem+OEXBlockActions.m in Sources */,
 				1904A1511A1386C2006A5524 /* OEXStorageFactory.m in Sources */,
@@ -5083,6 +5119,7 @@
 				E00523431CF81D9800B7F5C3 /* DiscussionBlockViewController.swift in Sources */,
 				B59238B31EADB6D100C686D8 /* OutlineSecondItem.m in Sources */,
 				7772BEA61AFA68330081CA7A /* ConstraintMaker.swift in Sources */,
+				B53F37841F05EEC300277601 /* TDNewWaitfoPayCell.m in Sources */,
 				5DD0FFCF1B1D225C00837121 /* DiscussionNewPostViewController.swift in Sources */,
 				B518BEC51EA9E6F00027569D /* TDTimeModel.m in Sources */,
 				B4B285DF1A9A493A00DD603A /* OEXNewRelicConfig.m in Sources */,
@@ -5099,6 +5136,7 @@
 				B52590EA1EB32852003A950D /* PurchaseModel.m in Sources */,
 				B59238C31EADBD4D00C686D8 /* CommentTopItem.m in Sources */,
 				9C9B7F6C1A8CC68400A857B2 /* OEXFindCoursesViewController.m in Sources */,
+				B504716A1F0526D6003A7268 /* TDWaitforPayTopCell.m in Sources */,
 				B518BEC71EA9E6F00027569D /* TDOrderAssitantCell.m in Sources */,
 				B525917B1EB348C3003A950D /* RSADataVerifier.m in Sources */,
 				B59238B51EADB6D100C686D8 /* TDOutLineCell.m in Sources */,
@@ -5108,6 +5146,7 @@
 				774B39391B5DD85A00595D33 /* UIView+LayoutDirection.swift in Sources */,
 				B52590F21EB32CB6003A950D /* aliPayParamsItem.m in Sources */,
 				9EDCC51E1B395BDE00A4F39D /* CourseInfoAPI.swift in Sources */,
+				B53F37811F05E59D00277601 /* TDWaitforPayModel.m in Sources */,
 				B5FAF74B1EB04789000C2169 /* CouponsNameItem.m in Sources */,
 				7758FFDE1C32FD6A0072355B /* EnrollmentShared.swift in Sources */,
 				5D43B1861B0C1F9200448B52 /* PostTableViewCell.swift in Sources */,
@@ -5364,6 +5403,7 @@
 				776459821A09650C008404CC /* NSDictionary+OEXEncoding.m in Sources */,
 				B50DF9861EAAF15B001F38BD /* UserThirdViewController.m in Sources */,
 				9C9B7F731A8CC80E00A857B2 /* OEXURLSessionManager.m in Sources */,
+				B50471671F052523003A7268 /* TDWaitforPayViewController.m in Sources */,
 				B50DF9B21EAAF6B9001F38BD /* TDTextView.m in Sources */,
 				699FF8541E5AE74300AD98A5 /* EmailTemplates.swift in Sources */,
 				199627A71945D95D0022C489 /* OEXFrontTableViewCell.m in Sources */,
@@ -5400,6 +5440,7 @@
 				77AFD10B1C1A04C3001985FD /* UserAgentOverrideOverrideOperation.swift in Sources */,
 				77ADF4AC1AC1F31200AC8955 /* OEXExternalAuthOptionsView.m in Sources */,
 				1A3F456C1BED00FB0077A40C /* IconButton.swift in Sources */,
+				B53F378A1F062C0E00277601 /* TDPayTypeView.m in Sources */,
 				B498405A19753C6C00019D1F /* CLVideoPlayerControls.m in Sources */,
 				B518BE901EA9E6AB0027569D /* TDAssistantFootCell.m in Sources */,
 				B5FAF7761EB059DB000C2169 /* TDInformationDetailViewController.m in Sources */,
@@ -5504,6 +5545,7 @@
 				773B1D421B1F48F100B861DF /* CourseOutlineHeaderView.swift in Sources */,
 				B52591731EB348C3003A950D /* Order.m in Sources */,
 				B5FAF6F61EB03AB1000C2169 /* WaitForPayViewController.m in Sources */,
+				B504716D1F0529FE003A7268 /* TDWaitforPayBottomCell.m in Sources */,
 				B5177EBB1F009A1800EF160D /* TDBindEmailNewViewController.m in Sources */,
 				778B61061B06BD2100489532 /* NSNotificationCenter+SafeSwift.swift in Sources */,
 				B4B6D6011A949EFC000F44E8 /* OEXRegistrationError.m in Sources */,

@@ -588,7 +588,7 @@
         };
         return cell;
         
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == 1) {//优惠活动
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TDActivityCell"];
         if (!cell) {

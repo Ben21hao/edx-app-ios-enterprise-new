@@ -57,6 +57,7 @@ public class CourseHandoutsViewController: OfflineSupportViewController, UIWebVi
     }
     
     private func setViewConstraint() {
+        webView.backgroundColor = OEXStyles.sharedStyles().baseColor5()
         webView.delegate = self
         view.addSubview(webView)
         
@@ -67,7 +68,7 @@ public class CourseHandoutsViewController: OfflineSupportViewController, UIWebVi
 
     private func setNavigationStyles() {
         
-        self.view.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
+        self.view.backgroundColor = OEXStyles.sharedStyles().baseColor5()
         
         self.titleL = UILabel(frame:CGRect(x:0, y:0, width:40, height:40))
         self.titleL?.text = Strings.courseHandouts

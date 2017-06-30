@@ -1,34 +1,32 @@
 //
-//  TDSelectPayCell.m
+//  TDPayTypeView.m
 //  edX
 //
-//  Created by Elite Edu on 16/12/4.
-//  Copyright © 2016年 edX. All rights reserved.
+//  Created by Ben on 2017/6/30.
+//  Copyright © 2017年 edX. All rights reserved.
 //
 
-#import "TDSelectPayCell.h"
+#import "TDPayTypeView.h"
 
-@interface TDSelectPayCell ()
+@interface TDPayTypeView ()
 
 @property (nonatomic,strong) UIView *bgView;
-@property (nonatomic,strong) UIImageView *headerImage;
-@property (nonatomic,strong) UILabel *typeLabel;
-@property (nonatomic,strong) UIButton *selectButton;
 
 @end
 
-@implementation TDSelectPayCell
+@implementation TDPayTypeView
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+- (instancetype)init {
+    self = [super init];
     if (self) {
-        [self config];
-        [self setConstraint];
+        [self configView];
+        [self setViewConstraint];
     }
     return self;
 }
 
-- (void)config {
+#pragma mark - UI
+- (void)configView {
     self.bgView = [[UIView alloc] init];
     self.bgView.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.bgView];
@@ -48,10 +46,9 @@
     [self.selectButton setImage:[UIImage imageNamed:@"selectedNo"] forState:UIControlStateNormal];
     [self.selectButton setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateSelected];
     [self.bgView addSubview:self.selectButton];
-    
 }
 
-- (void)setConstraint {
+- (void)setViewConstraint {
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.mas_equalTo(self);
     }];
@@ -71,28 +68,6 @@
         make.right.mas_equalTo(self.bgView.mas_right).offset(-18);
         make.size.mas_equalTo(CGSizeMake(19, 19));
     }];
-}
-
-#pragma mark - data
-- (void)setPayModel:(TDSelectPayModel *)payModel {
-    _payModel = payModel;
-    
-    if (_payModel) {
-        self.selectButton.selected = _payModel.isSelected;
-        self.headerImage.image = [UIImage imageNamed:_payModel.imageStr];
-        self.typeLabel.text = [NSString stringWithFormat:@"%@",_payModel.payStr];
-    }
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

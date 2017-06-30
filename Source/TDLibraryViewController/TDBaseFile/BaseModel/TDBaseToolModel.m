@@ -60,7 +60,7 @@
     if (mobile.length <= 0) {
         return NO;
     }
-    NSString *phoneRegex = @"^((13[0-9])|(17[0-9])|(14[0-9])|(15[^4,\\D])|(18[0,0-9]))\\d{8}$";//手机号以13、15、18、14、17开头，八个\d数字字符
+    NSString *phoneRegex = @"^((13[0-9])|(17[0-9])|(14[0-9])|(15[^4,\\D])|(18[0,0-9]))\\d{8}$";//手机号码以13、15、18、14、17开头，八个\d数字字符
     NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",phoneRegex];
     return [phoneTest evaluateWithObject:mobile];
 }

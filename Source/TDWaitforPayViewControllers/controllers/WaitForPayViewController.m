@@ -694,8 +694,8 @@ static NSString *cellID = @"WaitForPayTableViewCell";
 #pragma mark - 支付页面
 - (void)paySheetView:(OrderItem *)order {
     
-//    BOOL hasWechat = [WXApi isWXAppInstalled];
-    BOOL hasWechat = YES;
+    BOOL hasWechat = [WXApi isWXAppInstalled];
+//    BOOL hasWechat = YES;
     //布局子控件
     CGFloat alertHeight = 228;
     
@@ -779,6 +779,7 @@ static NSString *cellID = @"WaitForPayTableViewCell";
     aliPayView.backgroundColor = [UIColor colorWithHexString:@"#f5f7fa"];
     aliPayView.titleLabel.text = NSLocalizedString(@"ALI_PAY", nil);
     [bottomV addSubview:aliPayView];
+    
     [aliPayView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(bottomV);
         hasWechat ? make.top.mas_equalTo(wechatView.mas_bottom).offset(0) : make.top.mas_equalTo(bottomV.mas_top).offset(60);
