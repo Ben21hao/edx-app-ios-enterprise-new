@@ -177,7 +177,7 @@ class TDUserCenterView: UIView,UITableViewDataSource {
                 switch indexPath.row {
                 case 0:
                     titleStr = "讲座"
-                    cell.messageLabel.text = "讲座预约报名"
+                    cell.messageLabel.text = "参与讲座直播"
                     imageStr = "lecture_image"
                 default:
                     titleStr = Strings.taService

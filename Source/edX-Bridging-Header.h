@@ -81,6 +81,7 @@
 #import "UIView+Toast.h"
 #import "UIColor+JHHexColor.h"
 #import "TDAssistantServiceViewController.h"
+#import "TDLiveViewController.h"
 #import "UserYouViewController.h"
 #import "UserFirstViewController.h"
 #import "TDCouponViewController.h"

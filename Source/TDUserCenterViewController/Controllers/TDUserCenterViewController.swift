@@ -163,6 +163,12 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
         self.navigationController?.pushViewController(assistantVc, animated: true)
     }
     
+    func gotoLiveView() {
+        let liviewVc = TDLiveViewController()
+        liviewVc.username = session.currentUser?.username
+        self.navigationController?.pushViewController(liviewVc, animated: true)
+    }
+    
     //MARK: tableview Delegate
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
@@ -196,7 +202,7 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
             }
         } else {
             if indexPath.row == 0 {
-                self.view.makeToast("预约讲座", duration: 1.08, position: CSToastPositionCenter)
+                gotoLiveView()
             } else {
                 gotoAssistantServiceVc()
             }

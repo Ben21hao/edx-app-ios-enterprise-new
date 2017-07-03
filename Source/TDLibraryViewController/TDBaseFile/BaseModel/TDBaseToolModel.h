@@ -143,6 +143,10 @@
  */
 - (NSString *)getAppVersionNum:(NSInteger)type;
 
+/*
+ 返回虚线 ------
+ */
+- (UIImage *)drawLineByImageView:(UIImageView *)imageView color:(NSString *)colorStr;
 
 @end
 

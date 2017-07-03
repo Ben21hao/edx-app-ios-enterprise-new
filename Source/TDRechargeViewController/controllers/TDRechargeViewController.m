@@ -47,6 +47,8 @@
 @property (nonatomic,strong) weChatParamsItem *weChatItem;
 @property (nonatomic,strong) TDAliPayModel *aliPayModel;
 
+@property (nonatomic,assign) BOOL isRecharge;
+
 @end
 
 @implementation TDRechargeViewController
@@ -60,13 +62,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.isRecharge = NO;
+    
     [self setLoadDataView];
+    [self getRechargeData];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successPay) name:@"aliPaySuccess" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appEnterForeground:) name:@"App_EnterForeground_Get_Code" object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.titleViewLabel.text = NSLocalizedString(@"RECHARGE_Coins", nil);
+    [self.leftButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
+    
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"aliPaySuccess" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"App_EnterForeground_Get_Code" object:nil];
+}
+
+#pragma mark - 判断是否显示内购 ，然后再请求数据
+- (void)getRechargeData {
     
     WS(weakSelf);
     self.baseTool = [[TDBaseToolModel alloc] init];
     self.baseTool.judHidePurchseHandle = ^(BOOL isHidePurchase){
         weakSelf.isHidePurchase = isHidePurchase;
-//        weakSelf.isHidePurchase = NO;
         [weakSelf requestMoneyData]; //按钮金额
     };
     [self.baseTool showPurchase];
@@ -80,7 +106,7 @@
             
             [weakSelf.purchaseManager verificationAction:1];
             
-        //TODO:保存订单信息和receipt在本地，做丢单处理
+            //TODO:保存订单信息和receipt在本地，做丢单处理
         }else if (state == SKPaymentTransactionStatePurchasing) {
             
         } else if (state == SKPaymentTransactionStateFailed) {
@@ -100,25 +126,22 @@
         weakSelf.isPurchassing = NO;
         [SVProgressHUD dismiss];
     };
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successPay) name:@"aliPaySuccess" object:nil];
+
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    self.titleViewLabel.text = NSLocalizedString(@"RECHARGE_Coins", nil);
-    [self.leftButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
-    
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"aliPaySuccess" object:nil];
+- (void)appEnterForeground:(NSNotification *)info {
+    if (self.isRecharge) {
+        [self gotoSuccessViewController];
+    }
 }
 
 #pragma mark - 充值成功
 - (void)successPay {
+    
+    [self gotoSuccessViewController];
+}
+
+- (void)gotoSuccessViewController {
     
     if (self.rechargeSuccessHandle) {
         self.rechargeSuccessHandle();
@@ -153,6 +176,8 @@
     
     [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
+        [self.loadIngView removeFromSuperview];
+        
         NSDictionary *responDic = (NSDictionary *)responseObject;
         id code = responDic[@"code"];
         if ([code intValue] == 200) {
@@ -167,7 +192,6 @@
         if (self.moneyArray.count > 0) {
             [self setUpView];//页面UI
         }
-        [self.loadIngView removeFromSuperview];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.loadIngView removeFromSuperview];
@@ -194,6 +218,7 @@
 }
 
 - (void)setViewConstraint:(NSInteger)type {
+    
     self.rechargeView = [[TDRechargeView alloc] initWithType:type]; //type: 1 审核通过，2 审核中
     [self.rechargeView setMoneyViewData:self.moneyArray withType:1];
     self.rechargeView.topLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%@ %.2f)",NSLocalizedString(@"CURRENT_COINS", nil),self.currentCanons] withFont:14 withColorStr:colorHexStr8];
@@ -248,6 +273,8 @@
 
 #pragma mark - 确定充值
 - (void)rechargeButtonAction:(UIButton *)sender {
+    
+    self.isRecharge = YES;
     
     if (self.isHidePurchase) { //0 微信; 1支付宝
         self.payType == 0 ? [self createOrderWithType:1] : [self createOrderWithType:2];

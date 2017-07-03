@@ -513,6 +513,25 @@
     return versionStr;
 }
 
+#pragma mark - 返回虚线image的方法
+- (UIImage *)drawLineByImageView:(UIImageView *)imageView color:(NSString *)colorStr {
+    
+    UIGraphicsBeginImageContext(imageView.frame.size); //开始画线 划线的frame
+    [imageView.image drawInRect:CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height)];
+    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);//设置线条终点形状
+    
+    CGFloat lengths[] = {5,1};// 5是每个虚线的长度 1是高度
+    CGContextRef line = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(line, [UIColor colorWithHexString:colorStr].CGColor);// 设置颜色
+    CGContextSetLineDash(line, 0, lengths, 2); //画虚线
+    CGContextMoveToPoint(line, 0.0, 2.0); //开始画线
+    CGContextAddLineToPoint(line, 450, 2.0);
+    CGContextStrokePath(line);
+    
+    return UIGraphicsGetImageFromCurrentImageContext();// UIGraphicsGetImageFromCurrentImageContext()返回的就是image
+}
+
 @end
 
 

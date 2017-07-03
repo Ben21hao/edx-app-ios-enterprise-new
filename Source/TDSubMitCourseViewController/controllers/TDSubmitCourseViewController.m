@@ -649,11 +649,11 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        if (indexPath.row == 0) {
-            cell.rightLabel.text = self.isNoCoupon ? NSLocalizedString(@"NO_CHOOSE_COUPON", nil) : self.couponStr;
-        } else {
+//        if (indexPath.row == 0) {
+//            cell.rightLabel.text = self.isNoCoupon ? NSLocalizedString(@"NO_CHOOSE_COUPON", nil) : self.couponStr;
+//        } else {
             cell.rightLabel.text = self.baodianStr;
-        }
+//        }
         return cell;
         
     } else{
