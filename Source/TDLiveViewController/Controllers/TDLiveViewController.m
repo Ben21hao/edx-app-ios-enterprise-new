@@ -36,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = @"讲座";
+    self.titleViewLabel.text = NSLocalizedString(@"LIVE_TITLE_TEXT", nil);
     
     self.toolModel = [[TDBaseToolModel alloc] init];
     

@@ -12,4 +12,8 @@
 
 @property (nonatomic,assign) NSInteger  whereFrom;
 
+@property (nonatomic,strong) UIButton *enterButton;
+@property (nonatomic,strong) UIButton *playButton;
+@property (nonatomic,strong) UIButton *praticeButton;
+
 @end

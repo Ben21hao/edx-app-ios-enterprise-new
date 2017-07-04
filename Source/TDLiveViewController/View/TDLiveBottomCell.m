@@ -11,9 +11,6 @@
 @interface TDLiveBottomCell ()
 
 @property (nonatomic,strong) UIView *bgView;
-@property (nonatomic,strong) UIButton *enterButton;
-@property (nonatomic,strong) UIButton *playButton;
-@property (nonatomic,strong) UIButton *praticeButton;
 @property (nonatomic,strong) UIImageView *lineImage;
 
 @end
@@ -87,8 +84,8 @@
     [self.bgView addSubview:self.lineImage];
     
     [self.enterButton setTitle:@"01天18时18分18秒" forState:UIControlStateNormal];
-    [self.praticeButton setTitle:@"做习题" forState:UIControlStateNormal];
-    [self.playButton setTitle:@"回放" forState:UIControlStateNormal];
+    [self.praticeButton setTitle:NSLocalizedString(@"EXERCISSES_BUTTON_TEXT", nil) forState:UIControlStateNormal];
+    [self.playButton setTitle:NSLocalizedString(@"PLAY_BACK_BUTTON_TEXT", nil) forState:UIControlStateNormal];
 }
 
 - (UIButton *)setButtonStyle {

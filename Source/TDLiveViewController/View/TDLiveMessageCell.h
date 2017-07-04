@@ -10,4 +10,6 @@
 
 @interface TDLiveMessageCell : UITableViewCell
 
+@property (nonatomic,assign) NSInteger whereFrom;
+
 @end

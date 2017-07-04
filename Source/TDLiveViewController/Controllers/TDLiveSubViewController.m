@@ -10,6 +10,9 @@
 #import "TDLiveMessageCell.h"
 #import "TDLiveBottomCell.h"
 
+#import <MJExtension/MJExtension.h>
+#import <MJRefresh/MJRefresh.h>
+
 @interface TDLiveSubViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -32,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = self.whereFrom == 0 ? @"即将开始" : @"已完成";
+    self.title = self.whereFrom == 0 ? NSLocalizedString(@"UPCOMING_TITLE_TEXT", nil) : NSLocalizedString(@"FINISHED_TITLE_TEXT", nil);
     self.page = 1;
     
     [self setViewConstaint];
@@ -77,6 +80,19 @@
     }];
 }
 
+#pragma mark - button Action
+- (void)enterButtonAction:(UIButton *)sender { //进入讲座
+    
+}
+
+- (void)praticeButtonAction:(UIButton *)sender { //做习题
+    
+}
+
+- (void)playButtonAction:(UIButton *)sender { //观看回放
+    
+}
+
 #pragma mark - tableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 8;
@@ -90,6 +106,7 @@
     if (indexPath.row == 0) {
         TDLiveMessageCell *cell = [[TDLiveMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDLiveMessageCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.whereFrom = self.whereFrom;
         
         return cell;
         
@@ -97,6 +114,9 @@
         TDLiveBottomCell *cell = [[TDLiveBottomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDLiveBottomCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.whereFrom = self.whereFrom;
+        [cell.enterButton addTarget:self action:@selector(enterButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.praticeButton addTarget:self action:@selector(praticeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.playButton addTarget:self action:@selector(playButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         
         return cell;
     }

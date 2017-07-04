@@ -1577,7 +1577,6 @@
 "SYSTEM_WARING" = "System Prompt";
 /*您的登录信息已过期，请重新登录。*/
 "LOGIN_OVER_DUE" = "Your login has expired, please login again.";
-
 /*1.00元报课*/
 "COUPON_FOR_COURSE" = "￥{count} to Enroll";
 /*企业优惠券*/
@@ -1592,11 +1591,30 @@
 "ACOUNT_NO_EXIST" = "Account does not exis.";
 /*密码错误*/
 "PASSWORD_MISS" = "Password incorrect.";
-
 /*企业免费报课名额已满，您可支付学费以加入课程。Free enrollment quota is full. You can enroll in the course by paying tuition.*/
 "FULL_FREE_ENROLLMENT" = "Free enrollment quota is full. You can enroll in the course by paying tuition.";
 /*赠送宝典 Bonus*/
 "TD_GIVE_Bonus" = "Bonus";
-
 /*该账号未关联任何企业 Not associated account.*/
 "TD_ACCOUNT_NOT_ASSOCIATED" = "Not associated account.";
+
+/*讲座直播 Live Lecture*/
+"LIVE_TITLE_TEXT" = "Live Lecture";
+/*即将开始 Upcoming*/
+"UPCOMING_TITLE_TEXT" = "Upcoming";
+/*已完成 Finished*/
+"FINISHED_TITLE_TEXT" = "Finished";
+/*讲师：Lecturer*/
+"LECTURER_TEXT" = "Lecturer: ";
+/*描述：Description*/
+"DISCRITE_TEXT" = "Description: ";
+/*开始时间：Time*/
+"START_TIME_TEXT" = "Time: ";
+/*时长：Duration*/
+"DUIRATION_TEXT" = "Duration:";
+/*进入讲座 Enter*/
+"ENTER_LIVE_BUTTON_TEXT" = "Enter";
+/*视频回放 Playback*/
+"PLAY_BACK_BUTTON_TEXT" = "Playback";
+/*习题 Exercises*/
+"EXERCISSES_BUTTON_TEXT" = "Exercises";

@@ -1577,7 +1577,6 @@
 "SYSTEM_WARING" = "系统提示";
 /*您的登录信息已过期，请重新登录。*/
 "LOGIN_OVER_DUE" = "您的登录信息已过期，请重新登录。";
-
 /*1.00元报课*/
 "COUPON_FOR_COURSE" = "{count}元报课";
 /*企业优惠券*/
@@ -1592,11 +1591,32 @@
 "ACOUNT_NO_EXIST" = "账号不存在";
 /*密码错误*/
 "PASSWORD_MISS" = "密码错误";
-
 /*企业免费报课名额已满，您可支付学费以加入课程。Free enrollment quota is full. You can enroll in the course by paying tuition.*/
 "FULL_FREE_ENROLLMENT" = "企业免费报课名额已满，您可支付学费以加入课程。";
 /*赠送宝典 Bonus*/
 "TD_GIVE_Bonus" = "赠送宝典";
-
 /*该账号未关联任何企业 Not associated account.*/
 "TD_ACCOUNT_NOT_ASSOCIATED" = "该账号未关联任何企业";
+
+/*讲座直播 Live Lecture*/
+"LIVE_TITLE_TEXT" = "讲座直播";
+/*即将开始 Upcoming*/
+"UPCOMING_TITLE_TEXT" = "即将开始";
+/*已完成 Finished*/
+"FINISHED_TITLE_TEXT" = "已完成";
+/*讲师：Lecturer*/
+"LECTURER_TEXT" = "讲师：";
+/*描述：Description*/
+"DISCRITE_TEXT" = "描述：";
+/*开始时间：Time*/
+"START_TIME_TEXT" = "开始时间：";
+/*时长：Duration*/
+"DUIRATION_TEXT" = "时长：";
+/*进入讲座 Enter*/
+"ENTER_LIVE_BUTTON_TEXT" = "进入讲座";
+/*视频回放 Playback*/
+"PLAY_BACK_BUTTON_TEXT" = "视频回放";
+/*习题 Exercises*/
+"EXERCISSES_BUTTON_TEXT" = "习题";
+
+

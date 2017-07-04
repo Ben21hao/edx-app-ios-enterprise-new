@@ -7,6 +7,7 @@
 //
 
 #import "TDLiveMessageCell.h"
+#import <UIImageView+WebCache.h>
 
 @interface TDLiveMessageCell ()
 
@@ -17,6 +18,7 @@
 @property (nonatomic,strong) UILabel *teacherLabel;
 @property (nonatomic,strong) UILabel *introduceLabel;
 @property (nonatomic,strong) UILabel *timeLabel;
+@property (nonatomic,strong) UILabel *durationLabel;
 
 @end
 
@@ -31,8 +33,14 @@
     return self ;
 }
 
+- (void)setWhereFrom:(NSInteger)whereFrom {
+    _whereFrom = whereFrom;
+    self.durationLabel.hidden = self.whereFrom == 0;
+}
+
 #pragma mark - UI
 - (void)configView {
+    
     self.bgView = [[UIView alloc] init];
     self.bgView.backgroundColor = [UIColor colorWithHexString:colorHexStr13];
     [self.contentView addSubview:self.bgView];
@@ -47,6 +55,7 @@
     self.courseImage = [[UIImageView alloc] init];
     self.courseImage.layer.masksToBounds = YES;
     self.courseImage.layer.cornerRadius = 4.0;
+    self.courseImage.image = [UIImage imageNamed:@"Group_Live"];
     [self.messageView addSubview:self.courseImage];
     
     self.teacherLabel = [self setLabelStyle:colorHexStr9 font:14];
@@ -58,11 +67,15 @@
     self.timeLabel = [self setLabelStyle:colorHexStr9 font:14];
     [self.bgView addSubview:self.timeLabel];
     
-    self.courseImage.image = [UIImage imageNamed:@"tdIdentify"];
+    self.durationLabel = [self setLabelStyle:colorHexStr9 font:14];
+    self.durationLabel.textAlignment = NSTextAlignmentRight;
+    [self.bgView addSubview:self.durationLabel];
+    
     self.titleLabel.text = @"大数据时代下的信息技术";
-    self.teacherLabel.text = @"主讲人：Ben哈哈哈";
-    self.timeLabel.text = @"讲座开始时间：2017-07-03 18:18:18";
-    self.introduceLabel.text = @"啊哈哈哈哈哈哈哈哈卡上的咖啡好伐啦好地方拉法基哈伦裤放假阿斯顿啊哈哈哈哈哈哈哈哈卡上的咖啡好伐啦好地方拉法基哈伦裤放假阿斯顿啊哈哈哈哈哈哈哈哈卡上的咖啡好伐啦好地方拉法基哈伦裤放假阿斯顿啊哈哈哈哈哈哈哈哈卡上的咖啡好伐啦好地方拉法基哈伦裤放假阿斯顿啊哈哈哈哈哈哈哈哈卡上的咖啡好伐啦好地方拉法基哈伦裤放假阿斯顿";
+    self.teacherLabel.text = [NSString stringWithFormat:@"%@哈哈哈老师",NSLocalizedString(@"LECTURER_TEXT", nil)];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@2017-07-03 18:18",NSLocalizedString(@"START_TIME_TEXT", nil)];
+    self.durationLabel.text = [NSString stringWithFormat:@"%@02:30:55",NSLocalizedString(@"DUIRATION_TEXT", nil)];
+    self.introduceLabel.text = [NSString stringWithFormat:@"%@啊哈哈哈哈哈哈哈哈卡上的咖啡好伐啦好地方拉法基哈伦裤放假阿斯顿啊哈哈哈哈哈哈哈哈卡上的咖啡好伐啦好地方拉法基哈伦裤放假阿斯顿啊哈哈哈哈哈哈哈哈卡上的咖啡好伐啦好地方拉法基哈伦裤放假阿",NSLocalizedString(@"DISCRITE_TEXT", nil)];
 }
 
 - (void)setViewConstraint {
@@ -105,6 +118,13 @@
         make.left.mas_equalTo(self.bgView.mas_left).offset(13);
         make.top.mas_equalTo(self.messageView.mas_bottom).offset(6);
         make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(-6);
+    }];
+    
+    [self.durationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.bgView.mas_right).offset(-13);
+        make.top.mas_equalTo(self.messageView.mas_bottom).offset(6);
+        make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(-6);
+        make.width.mas_equalTo(103);
     }];
 }
 
