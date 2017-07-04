@@ -1618,3 +1618,7 @@
 "PLAY_BACK_BUTTON_TEXT" = "Playback";
 /*习题 Exercises*/
 "EXERCISSES_BUTTON_TEXT" = "Exercises";
+/*讲座 Lecture*/
+"LIVE_LECTURE_TEXT" = "Lecture";
+/*参与讲座直播 Participate in a live lecture*/
+"PARTICIPATE_LIVE_TEXT" = "Participate in a live lecture.";

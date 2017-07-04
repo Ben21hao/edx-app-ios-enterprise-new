@@ -1618,5 +1618,7 @@
 "PLAY_BACK_BUTTON_TEXT" = "视频回放";
 /*习题 Exercises*/
 "EXERCISSES_BUTTON_TEXT" = "习题";
-
-
+/*讲座 Lecture*/
+"LIVE_LECTURE_TEXT" = "讲座";
+/*参与讲座直播 Participate in a live lecture*/
+"PARTICIPATE_LIVE_TEXT" = "参与讲座直播";
