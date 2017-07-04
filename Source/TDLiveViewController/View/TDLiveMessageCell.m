@@ -79,13 +79,13 @@
     [self.messageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.bgView);
         make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(8);
-        make.height.mas_equalTo(163);
+        make.height.mas_equalTo(TDWidth * 0.33 + 24);
     }];
     
     [self.courseImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.messageView.mas_left).offset(13);
         make.centerY.mas_equalTo(self.messageView.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(139, 139));
+        make.size.mas_equalTo(CGSizeMake(TDWidth * 0.33, TDWidth * 0.33));
     }];
     
     [self.teacherLabel mas_makeConstraints:^(MASConstraintMaker *make) {

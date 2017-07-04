@@ -45,14 +45,12 @@
     [self setUpSubtitle]; //设置标题
     [self setSepView]; //添加分割线
     [self setSliView]; //设置指示view
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
 }
-
 
 #pragma mark - UI
 - (void)setViewConstraint {
