@@ -349,7 +349,7 @@
 /* Message when user attempts to register an account using an external service like Facebook or Google, but they already have an account linked to that service */
 "EXTERNAL_REGISTRATION_BECAME_LOGIN" = "You already set up an {platform_name} account with your {service} account. You have been logged in with that account.";
 /* Endorsed text */
-"ENDORSED" = "Endorsed";
+"ENDORSED" = "Accept";
 /* Facebook login method */
 "FACEBOOK"="Facebook";
 /* Overlay message shown when facebook login fails because the user's account isn't linked */
@@ -599,7 +599,7 @@
 /* Sign in screen title and button initiating login process after user enters credentials like username and password */
 "SIGN_IN_TEXT"="Sign In";
 /* Message shown while user waits for response to a sign in request */
-"SIGN_IN_BUTTON_TEXT_ON_SIGN_IN"="Signing In";
+"SIGN_IN_BUTTON_TEXT_ON_SIGN_IN"="Signing in";
 /*Sign up screen title and button initiating sign up process on the main screen */
 "REGISTER_TEXT"="Register";
 /* Indicates a date in the near future */
@@ -744,6 +744,8 @@
 "PHONE_NUMBER_NOT_REGISTER" = "The phone number is not yet registered.";
 /*确定*/
 "OK" = "OK";
+/*确定*/
+"SUBMIT_BUTTON_TEXT" = "Submit";
 /*重置失败*/
 "RESET_FAILED" = "Reset failed";
 /*重置密码成功*/
@@ -810,6 +812,8 @@
 "CREATE_ACCOUNT" = "Create My Account";
 /*注册英荔教育即表示您同意*/
 "SIGN_UP_AGREE" = "By signing up, I agree to Elite Education's.";
+/*登录即表示我已阅读并同意 Login means I've read and agreed*/
+"SIGN_IP_AGREE_TEXT" = "Login means I've read and agreed.";
 /**/
 "AGREEMENT" = "Terms and Conditions";
 /*重置密码*/
@@ -866,8 +870,8 @@
 "EMAIL_IS_REGISTERED" = "Email had been used";
 /*已发送验证邮件，请前往邮箱查看。*/
 "EMAIL_AREADY_SEND" = "Email send successfully, please check your mailbox.";
-/*未知错误*/
-"UNKNOWN_ERROR" = "unknown error";
+/*验证邮件发送失败，请重试*/
+"EMAIL_SEND_ERROR" = "Email send failed. Please try again";
 /*确定绑定*/
 "SURE_BIND" = "Confirm";
 /*手机号码格式错误*/
@@ -941,7 +945,7 @@
 /*授权失败*/
 "PAY_AUTHENRIZATE_FAIL" = "Authorization fail";
 /*微信不支持*/
-"NO_SUPPORT_WECHAT" = "WeChat does not support.";
+"NO_SUPPORT_WECHAT" = "Request failed. Please log in to Wechat.";
 /*用户不存在*/
 "NETWORK_CONNET_FAIL" = "Network connection error.";
 /*正在处理中*/
@@ -1115,7 +1119,7 @@
 /*确定发送激活邮件到登录邮箱？*/
 "SEND_EMAIL_ACTIVITY" = "Confirm and send activation email?";
 /*请输入昵称*/
-"NICKNAME_NULL" = "Nickname cannot be empty";
+"NICKNAME_NULL" = "Please enter your nickname.";
 /*昵称最多填写六个字*/
 "NICKNAME_NUMBER" = "Nickname up to six words";
 /*下一步*/
@@ -1146,6 +1150,8 @@
 "NO_RECEIVE_EMAIL" = "Not receiving any mails?";
 /*点此重发*/
 "CLICK_RESEND" = "Resend";
+/*重发邮件成功*/
+"CLICK_RESEND_SUCCESS" = "Resend successful.";
 /*您不能使用这个昵称，请重新输入*/
 "CONNOT_USE_NICKNAME" = "Stop words included, please try again.";
 /*我们给您发送了一条验证短信*/
@@ -1225,6 +1231,8 @@
 "TD_WOMEN" = "Female";
 /*姓名  */
 "TRURE_NAME" = "Name";
+/*姓名 Name */
+"TRURE_NAME_TEXT" = "Name:";
 /*身份证号  */
 "CARD_ID" = "ID number";
 /*出生日期  */
@@ -1277,16 +1285,16 @@
 "M_DEGREE" = "Master";
 /*学士*/
 "B_DEGREE" = "Bachelor";
-/*肆业证书*/
-"A_DEGREE" = "Associate Degree";
+/*大专*/
+"A_DEGREE" = "Associate degree";
 /*高中*/
-"HS_DEGREE" = "High School";
+"HS_DEGREE" = "High school";
 /*初中*/
-"JHS_DEGREE" = "Junior High School";
+"JHS_DEGREE" = "Junior high school";
 /*小学*/
 "EL_DEGREE" = "Primary school";
 /*未受正规教育*/
-"NONE_DEGREE" = "Informal Education";
+"NONE_DEGREE" = "Informal education";
 /*其他教育程度*/
 "OTHER_DEGREE" = "Others";
 /*宝典赠送*/
@@ -1368,9 +1376,10 @@
 /*后天 The day after tomorrow*/
 "AFTER_TOMOROW" = "The day after tomorrow";
 
-
 /*预约 Appointment*/
 "APPOINTMENT" = "Appointment";
+/*正在预约... Appointmenting*/
+"APPOINTMENT_ING" = "Appointmenting...";
 /*输入咨询问题 Describe Your Questions*/
 "DESCRIBE_QUESTIONS" = "Describe Your Questions";
 /*输入问题描述 Initiate Instant Service*/
@@ -1516,8 +1525,9 @@
 /*查看服务记录 View TA service record(s)*/
 "VIEW_TA_SERVICE" = "View tutor service record(s)";
 /*%d天%d时%d分%d秒 */
-"TIME_COUNT_NUM" = "{day}d {hour}h {min}m {second}s";
-
+"TIME_COUNT_NUM" = "{day}d{hour}h{min}m{second}s";
+/*%d时%d分%d秒 */
+"SECOND_COUNT_NUM" = "{hour}d{min}m{second}s";
 /*服务x单 X Order(s) */
 "SERVICE_ORDER_NUM" = "{count} Order(s)";
 /*继续预约 Make a new appointment */
@@ -1611,7 +1621,7 @@
 /*开始时间：Time*/
 "START_TIME_TEXT" = "Time: ";
 /*时长：Duration*/
-"DUIRATION_TEXT" = "Duration:";
+"DUIRATION_TEXT" = "Duration: ";
 /*进入讲座 Enter*/
 "ENTER_LIVE_BUTTON_TEXT" = "Enter";
 /*视频回放 Playback*/
@@ -1622,3 +1632,107 @@
 "LIVE_LECTURE_TEXT" = "Lecture";
 /*参与讲座直播 Participate in a live lecture*/
 "PARTICIPATE_LIVE_TEXT" = "Participate in a live lecture.";
+/*暂无讲座 No lecture yet.*/
+"NO_LIVE_LECTURE_TEXT" = "No lecture yet.";
+/*企业暂未发布任何课程  Could not find any available courses*/
+"NO_COURSE_AVAILABLE_TEXT" = "Could not find any available courses.";
+
+/*抽奖中Processing*/
+"PROCESSING_TIP_TEXT" = "Processing";
+/*抽奖结果 Lucky draw result*/
+"LUCKY_DRAW_RESULT" = "Result";
+/*恭喜中奖 Congratulations!*/
+"CONGRATULATIONS" = "Congratulations!";
+/*错误码 Error code*/
+"ERROR_CODE" = "Error code";
+/*签到成功 Signed in*/
+"SINGNED_IN" = "Signed in";
+/*签到结束 Sign in ended*/
+"SINGN_IN_ENDED" = "Sign in ended";
+/*我来说两句 Say something*/
+"SAY_SOMETHING" = "Say something";
+/*卡顿 Buffering*/
+"BUFFERING" = "Buffering: ";
+/*原画 Original quality*/
+"ORIGINAL_QUALITY" = "Original quality";
+/*问答Q&A*/
+"QA_TEXT" = "Q&As";
+/*详情Details*/
+"DETAILS_TEXT" = "Details";
+/*文档Documents*/
+"DOCUMENT_TEXT" = "Documents";
+/*评论Comments*/
+"COMMENT_TEXT" = "Comments";
+/*聊天Chats*/
+"CHAT_TEXT" = "Chats";
+/*发表成功Sent*/
+"SENT_SUCCESS" = "Sent";
+/*文档＋视频 Document and video*/
+"DOCUMENT_AND_VIDEO" = "Document and video";
+/*文档＋语音  Document and voice*/
+"DOCUMENT_AND_VOICE" = "Document and voice";
+/*纯视频Video only*/
+"VIDEO_ONLY" = "Video only";
+/*无内容 No content*/
+"NO_CONTENT" = "No content";
+/*讲座类型 Lecture Type*/
+"LECTURE_TYPE" = "Lecture Type";
+/*直播已结束 Live ended*/
+"LIVE_ENDED" = "Live ended";
+/*已暂停语音直播  Live voice has paused*/
+"LIVE_VOICE_PAUSED" = "Live voice has paused";
+/*语音直播中 Live voice ongoing*/
+"LIVE_VOICE_ONGOING" = "Live voice ongoing";
+/*已暂停语音回放 Voice replay has paused*/
+"VOICE_REPLAY" = "Voice replay has paused";
+/*语音回放中 Voice replaying*/
+"VOICE_REPLAYING" = "Voice replaying";
+/*获取服务器地址报错 Unable to acquire server address*/
+"UNABLE_ACQUIRE_SERVER" = "Unable to acquire server address";
+/*服务器任性...连接失败 Unable to connect to server*/
+"UNABLE_CONNECT_SERVER" = "Unable to connect to server";
+/*对方已经停止直播 Live lecture has ended.*/
+"LIVE_LECTURE_ENDED" = "Live lecture has ended.";
+/*参数错误 Error*/
+"ERROR_PARAMTER" = "Error";
+/*无文档 No document*/
+"NO_DOCUMENT" = "No document";
+
+/*您有 %d 秒的时间进行签到 You have %d seconds to sign in*/
+"SECONDS_SIGN_IN" = "You have {count} seconds to sign in.";
+/*秒 seconds*/
+"SECONDS_TEXT" = "seconds";
+/*公告: Notice*/
+"NOTICE_TEXT" = "Notice: ";
+/*进入Enter*/
+"ENTER_TEXT" = "Enter";
+/*离开Leave*/
+"LEAVE_TEXT" = "Leave";
+/*主持人Host*/
+"HOST_TEXT" = "Host";
+/*嘉宾Guest*/
+"GUEST_TEXT" = "Guest";
+/*助手Assistant*/
+"ASSISTANT_TEXT" = "Assistant";
+/*观众Viewer*/
+"VIEWER_TEXT" = "Viewer";
+/*在线:%@ 总人数:Online: %@ Total:*/
+"ONLINE_COUNT_TEXT" = "Online: {count} Total: {number} {time}";
+/*房间Room*/
+"ROOM_TEXT" = "Room:";
+/*答Answer*/
+"ANSWER_TEXT" = "Answer";
+/*问Ask*/
+"ASK_TEXT" = "Ask";
+/*签 到 Sign in*/
+"SIGN_IN_BUTTON_TEXT" = "Sign in";
+/*主持人发起了签到 The host initiated the sign in.*/
+"INITIATE_SIGN_IN" = "The host initiated the sign in.";
+/*问卷调查Survey*/
+"SURVEY_TEXT" = "Survey";
+/*获取问卷Acquire survey*/
+"ACQUIRE_SURVEY" = "Acquire survey";
+/*暂未有聊天记录 No chatting record*/
+"NO_CHAT_RECORD" = "No chatting record";
+/*进入成功 Entry successful*/
+"ENTER_SUCCESSFUL" = "Entry successful.";

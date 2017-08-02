@@ -56,6 +56,8 @@
     //1.向微信注册
     [WXApi registerApp:APPID_Weixin];
     
+    [VHallApi registerApp:DEMO_AppKey SecretKey:DEMO_AppSecretKey];
+    
 #if DEBUG
     // Skip all this initialization if we're running the unit tests
     // So they can start from a clean state.
@@ -92,9 +94,10 @@
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{
     
-    UIViewController *topController = self.window.rootViewController;
+//    UIViewController *topController = self.window.rootViewController;
+//    return [topController supportedInterfaceOrientations];
     
-    return [topController supportedInterfaceOrientations];
+    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
 }
 
 //2.微信
@@ -137,7 +140,7 @@
     }
 }
 
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
     // NOTE: 9.0以后使用新API接口
     //    NSLog(@"url--%@",url);
     if ([url.host isEqualToString:@"safepay"]) {

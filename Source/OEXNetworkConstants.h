@@ -28,7 +28,7 @@
 #define URL_VIDEO_SUMMARY @"/api/mobile/v0.5/video_outlines/courses/"
 #define URL_COURSE_HANDOUTS @"/handouts"
 #define URL_COURSE_ANNOUNCEMENTS @"/updates"
-#define URL_RESET_PASSWORD  @"/password_reset/"
+#define URL_RESET_PASSWORD  @"/password_reset/" //通过Email找回密码接口
 #define URL_SUBSTRING_VIDEOS @"edx-course-videos"
 #define URL_SUBSTRING_ASSETS @"asset/"
 #define AUTHORIZATION_URL @"/oauth2/access_token"

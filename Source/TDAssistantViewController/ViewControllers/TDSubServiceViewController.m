@@ -80,8 +80,7 @@
     self.isForgound = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downRefreshData) name:@"Cancel_Order_Deal" object:nil];
-//    NSLog(@"屏幕大小 ---%f; %f /n %f ; %f",self.view.bounds.size.width,self.view.bounds.size.height,TDWidth,TDHeight);
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterAppForground) name:@"App_EnterForeground_Get_Code" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -93,20 +92,7 @@
         self.loadingView = [[TDBaseView alloc] initWithLoadingFrame:self.view.bounds];
         [self.view addSubview:self.loadingView];
         
-        switch (self.whereFrom) {
-            case TDAssistantFromOne:
-                [self requestOrderData:0];
-                break;
-            case TDAssistantFromTwo:
-                [self requestFinishOrderData];
-                break;
-            case TDAssistantFromThree:
-                [self requestOrderData:1];
-                break;
-                
-            default:
-                break;
-        }
+        [self dataHadChange];
     }
 }
 
@@ -150,14 +136,20 @@
     [self dataHadChange];
 }
 
+- (void)enterAppForground { //后台进入前台
+    if (self.whereFrom == TDAssistantFromOne) {
+        [self downRefreshData];
+    }
+}
+
 #pragma mark - data 
 /*type 待服务 0; 已取消 1*/
 - (void)requestOrderData:(NSInteger)type {
     
     if (![self.toolModel networkingState]) {
+        
         self.tableView.mj_header.hidden = YES;
         [self showNullData];
-        self.loadingView.hidden = YES;
         return;
     }
     
@@ -220,13 +212,11 @@
             NSLog(@"助教服务数据请求错误 -- %@",code);
         }
         [self showNullData];
-        self.loadingView.hidden = YES;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         
         [self showNullData];
-        self.loadingView.hidden = YES;
         
         NSLog(@"助教服务数据出错 -- %ld",(long)error.code);
     }];
@@ -312,23 +302,26 @@
         }
         
         [self showNullData];
-        self.loadingView.hidden = YES;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
 
         [self showNullData];
-        self.loadingView.hidden = YES;
         
         NSLog(@"已完成的助教服务数据出错 -- %ld",(long)error.code);
     }];
 }
 
 - (void)showNullData {
+    
+    self.loadingView.hidden = YES;
+    
     if (self.dataArray.count == 0) {
         self.nullLabel.hidden = NO;
-        [self.tableView reloadData];
+    } else {
+        self.nullLabel.hidden = YES;
     }
+    [self.tableView reloadData];
 }
 
 - (void)endTableviewRefreshing {
@@ -354,7 +347,9 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(downRefreshData)];
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(downRefreshData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    self.tableView.mj_header = header;
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(upLoadMoreData)];
     self.tableView.mj_footer.automaticallyHidden = YES;
     self.tableView.tableFooterView = [UIView new];
@@ -465,10 +460,6 @@
             assistantFootCell.selectionStyle = UITableViewCellSelectionStyleNone;
             assistantFootCell.whereFrom = self.whereFrom;
             
-//            assistantFootCell.startTime = model.service_begin_at;
-//            assistantFootCell.isComment = [model.is_comment intValue];
-//            assistantFootCell.score = [model.comment_infomation.score intValue];
-            
             assistantFootCell.model = model;
             
             WS(weakSelf);
@@ -496,7 +487,7 @@
 //        if (height > 88) {
 //            return height + 55;
 //        }
-        return 88;
+        return 88; //固定高度就好
     } else if (indexPath.row == 3) {
         return 48;
     }

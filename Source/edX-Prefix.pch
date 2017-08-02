@@ -39,6 +39,12 @@
 #import "TDBaseView.h"
 #import "TDBaseViewController.h"
 
+#import "MBHUDHelper.h"
+#import "VHallApi.h"
+#import "VHStystemSetting.h"
+#import "UIView+ITTAdditions.h"
+#import "UIAlertView+ITTAdditions.h"
+
 #define TableViewBGColor [UIColor colorWithRed:245/255.0 green:247/255.0 blue:250/255.0 alpha:1.0]
 
 //#define ELITEU_URL @"http://192.168.0.101"
@@ -71,5 +77,56 @@
 #define colorHexStr14 @"#EEF8FD" //
 
 
+////* 微吼直播相关 */////
+
+//1、AppDelegate.mm 修改为.mm
+//2、关闭bitcode
+//3、plist中 App Transport Security Settings -> Allow Arbitrary Loads 设置为YES
+//4、设置以下数据 检查 Bundle ID 即可观看直播
+
+//接口文档说明： http://e.vhall.com/home/vhallapi
+#define DEMO_AppKey         @"689ddf2dc6d9ba5ccbdab71500c05353"        //详见：http://e.vhall.com/home/vhallapi/authlist
+#define DEMO_AppSecretKey   @"9ab76c15a7e0d3ce166f421ab720971c"  //AppSecretKey
+#define DEMO_ActivityId     @"" //活动id    详见：http://e.vhall.com/home/vhallapi/active   webinar/create 创建活动
+#define DEMO_AccessToken    @"" //直播Token 详见：http://e.vhall.com/home/vhallapi/audience verify/access-token 获取SDK直播操作token
+
+#define DEMO_account        @"" //账号 详见：http://e.vhall.com/home/vhallapi/user user/register创建用户 对应 third_user_id
+#define DEMO_password       @"" //密码 对应 pass字段
+
+//#if DEBUG  // 调试状态, 打开LOG功能
+#define VHLog(...) NSLog(__VA_ARGS__)
+//#else // 发布状态, 关闭LOG功能
+//#define VHLog(...)
+//#endif
+
+#define kViewFramePath  @"frame"
+
+#pragma mark - iphone detection functions
+
+#define APPDELEGATE [AppDelegate getAppDelegate]
+
+#define IOSVersion  [[UIDevice currentDevice].systemVersion floatValue]
+
+#define KIScreenHeight [[UIScreen mainScreen] bounds].size.height
+
+#define KIScreenWidth [[UIScreen mainScreen] bounds].size.width
+
+#define meetingResourceBundlePath [[NSBundle mainBundle] pathForResource:@"UIModel" ofType:@"bundle"]
+#define meetingResourcesBundle [NSBundle bundleWithPath:meetingResourceBundlePath]
+
+#define MakeUIImage(a) [UIImage imageNamed:[NSString stringWithFormat:@"UIModel.bundle/%@",a]]
+
+//颜色
+#define MakeColor(r,g,b,a) ([UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a])
+#define MakeColorRGB(hex)  ([UIColor colorWithRed:((hex>>16)&0xff)/255.0 green:((hex>>8)&0xff)/255.0 blue:(hex&0xff)/255.0 alpha:1.0])
+#define MakeColorRGBA(hex,a) ([UIColor colorWithRed:((hex>>16)&0xff)/255.0 green:((hex>>8)&0xff)/255.0 blue:(hex&0xff)/255.0 alpha:a])
+#define MakeColorARGB(hex) ([UIColor colorWithRed:((hex>>16)&0xff)/255.0 green:((hex>>8)&0xff)/255.0 blue:(hex&0xff)/255.0 alpha:((hex>>24)&0xff)/255.0])
+
+#define MessageTool_SendBtnColor [UIColor colorWithRed:153.0f/255.0f green:153.0f/255.0f blue:153.0f/255.0f alpha:1.0f]
+#define VH_SH           ((VHScreenWidth<VHScreenHeight)?VHScreenHeight:VHScreenWidth)
+#define VH_SW           ((VHScreenWidth<VHScreenHeight)?VHScreenWidth:VHScreenHeight)
+#define VHScreenHeight  ([UIScreen mainScreen].bounds.size.height)
+#define VHScreenWidth   ([UIScreen mainScreen].bounds.size.width)
+#define VH_Device_OS_ver [[UIDevice currentDevice] systemVersion]
 
 #endif

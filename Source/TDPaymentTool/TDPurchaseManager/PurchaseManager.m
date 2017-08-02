@@ -10,12 +10,12 @@
 #import <AFNetworking.h>
 
 //在内购项目中创的商品单号
-#define ProductID_IAP0p100 @"mobile.eliteu.cn01"//100
-#define ProductID_IAP1p200 @"mobile.eliteu.cn02" //200
-#define ProductID_IAP4p300 @"mobile.eliteu.cn03" //300
-#define ProductID_IAP9p500 @"mobile.eliteu.cn04" //500
-#define ProductID_IAP24p800 @"mobile.eliteu.cn05" //800
-#define ProductID_IAP28p1000 @"mobile.eliteu.cn06" //1000
+#define ProductID_IAP0p100 @"mobile.enrerprise.eliteu.cn01"//100
+#define ProductID_IAP1p200 @"mobile.enrerprise.eliteu.cn02" //200
+#define ProductID_IAP4p300 @"mobile.enrerprise.eliteu.cn03" //300
+#define ProductID_IAP9p500 @"mobile.enrerprise.eliteu.cn04" //500
+#define ProductID_IAP24p800 @"mobile.enrerprise.eliteu.cn05" //800
+#define ProductID_IAP28p1000 @"mobile.enrerprise.eliteu.cn06" //1000
 
 @implementation PurchaseManager
 
@@ -85,7 +85,7 @@
         NSLog(@"允许程序内付费购买");
     } else {
         NSLog(@"不允许程序内付费购买");
-        UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:@"提示"
+        UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"SYSTEM_WARING", nil)
                                                             message:@"您的手机没有打开程序内付费购买"
                                                            delegate:nil cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil];
         
@@ -195,7 +195,7 @@
 //弹出错误信息
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error{
     NSLog(@"-------弹出错误信息----------");
-    UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:@"提示" message:@"网络错误，请稍后再试"
+    UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"SYSTEM_WARING", nil) message:@"网络错误，请稍后再试"
                                                        delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
     [alerView show];
     

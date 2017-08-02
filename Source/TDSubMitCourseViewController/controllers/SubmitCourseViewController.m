@@ -179,9 +179,10 @@ static NSString *payIdentify = @"PayTableViewCell";
 
 #pragma mark - 支付成功
 - (void)paySuccess {
+    
     TDBuySuccessViewController *buySuccessVC = [[TDBuySuccessViewController alloc] init];
     buySuccessVC.orderId = self.orderId;
-    NSLog(@"success %@",buySuccessVC.orderId);
+    NSLog(@"success -- %@",buySuccessVC.orderId);
     
     [self.navigationItem setTitle:@""];
     [self.navigationController pushViewController:buySuccessVC animated:YES];
@@ -508,7 +509,7 @@ static NSString *payIdentify = @"PayTableViewCell";
     
     //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
     //    NSString *appScheme = @"alisdkdemo";
-    NSString *appScheme = @"org.eliteu.mobile";
+    NSString *appScheme = @"org.eliteu.mobile-enterprise";
     //将商品信息拼接成字符串
     NSString *orderSpec = [order description];
     NSLog(@"orderSpec = %@",orderSpec);

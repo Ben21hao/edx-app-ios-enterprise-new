@@ -179,6 +179,7 @@
             NSLog(@" 点赞出错 ==  %@",code);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [[UIApplication sharedApplication].keyWindow.rootViewController.view  makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"errorCode---%ld---",(long)error.code);
     }];
 }

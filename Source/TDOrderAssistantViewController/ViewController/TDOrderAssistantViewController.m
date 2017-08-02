@@ -159,21 +159,6 @@
     [self.tableView.mj_footer endRefreshingWithNoMoreData];
 }
 
-- (void)setNullData {
-    self.nullLabel = [[UILabel alloc] init];
-    self.nullLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
-    self.nullLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
-    self.nullLabel.text = NSLocalizedString(@"CURRENTLY_NO_TA", nil);
-    [self.view addSubview:self.nullLabel];
-    
-    [self.nullLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.centerY.mas_equalTo(self.view.mas_centerY).offset(-30);
-    }];
-    
-    self.nullLabel.hidden = YES;
-}
-
 #pragma mark - tableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -214,7 +199,6 @@
     TDTeacherModel *model = self.teacherArray[indexPath.row];
     [self gotoOrderDetail:model];
 }
-
 
 #pragma mark - 详情
 - (void)gotoOrderDetail:(TDTeacherModel *)model {
@@ -302,20 +286,41 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorInset = UIEdgeInsetsZero;
-    self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(topPullLoading)];
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(pullDownRefresh)];
     self.tableView.mj_footer.automaticallyHidden = YES;
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(pullDownRefresh)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    
     [self.view addSubview:self.tableView];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.mas_equalTo(self.view);
     }];
     
+    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, 1)];
+    footView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
+    self.tableView.tableFooterView = footView;
+    
     self.loadingView = [[TDBaseView alloc] initWithLoadingFrame:self.view.bounds];
     [self.view addSubview:self.loadingView];
     
     [self setNullData];
+}
+
+- (void)setNullData {
+    self.nullLabel = [[UILabel alloc] init];
+    self.nullLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
+    self.nullLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
+    self.nullLabel.text = NSLocalizedString(@"CURRENTLY_NO_TA", nil);
+    [self.view addSubview:self.nullLabel];
+    
+    [self.nullLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.centerY.mas_equalTo(self.view.mas_centerY).offset(-30);
+    }];
+    
+    self.nullLabel.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {

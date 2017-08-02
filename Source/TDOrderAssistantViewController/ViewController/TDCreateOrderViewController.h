@@ -19,4 +19,6 @@
 @property (nonatomic,strong) NSString *endTimeStr;//预约结束时间
 @property (nonatomic,strong) NSString *dateStr;//预约日期
 
+@property (nonatomic,assign) BOOL is_eliteu_course;//是否是付费课程
+
 @end

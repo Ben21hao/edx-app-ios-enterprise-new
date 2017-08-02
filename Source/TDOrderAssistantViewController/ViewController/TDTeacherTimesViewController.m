@@ -59,7 +59,7 @@
     [super viewDidLoad];
     
     self.titleViewLabel.text = NSLocalizedString(@"SELECT_PERIOD", nil);
-    [self.rightButton setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
+    [self.rightButton setTitle:NSLocalizedString(@"SUBMIT_BUTTON_TEXT", nil) forState:UIControlStateNormal];
     
     WS(weakSelf);
     self.rightButtonHandle = ^(){ //确定
@@ -461,14 +461,17 @@
     self.tableView.tableFooterView  = [self settableViewFooterView];
     
     self.nullLabel = [[UILabel alloc] init];
-    self.nullLabel.font = [UIFont fontWithName:@"" size:16];
+    self.nullLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
+    self.nullLabel.numberOfLines = 0;
     self.nullLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
+    self.nullLabel.textAlignment = NSTextAlignmentCenter;
     self.nullLabel.text = NSLocalizedString(@"NO_TA_COURSE_SCHEDULE", nil);
     [self.tableView addSubview:self.nullLabel];
     
     [self.nullLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.tableView.mas_centerX);
-        make.centerY.mas_equalTo(self.tableView.mas_centerY).offset(0);
+        make.centerY.mas_equalTo(self.tableView.mas_centerY);
+        make.width.mas_equalTo(TDWidth - 18);
     }];
     
     self.nullLabel.hidden = YES;
@@ -532,7 +535,8 @@
     [self.footerView addSubview:self.messageLabel];
     
     [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.footerView.mas_centerX);
+        make.left.mas_equalTo(self.footerView.mas_left).offset(8);
+        make.right.mas_equalTo(self.footerView.mas_right).offset(-8);
         make.centerY.mas_equalTo(self.footerView.mas_centerY);
     }];
     return self.footerView;

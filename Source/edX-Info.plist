@@ -45,10 +45,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>org.eliteu.mobile</string>
+			<string>org.eliteu.mobile-enterprise</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>org.eliteu.mobile</string>
+				<string>org.eliteu.mobile-enterprise</string>
 			</array>
 		</dict>
 		<dict>
@@ -79,7 +79,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.0</string>
+	<string>1.0.3</string>
 	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
 	<false/>
 	<key>FacebookDisplayName</key>
@@ -113,6 +113,8 @@
 	<string>for bluetooth</string>
 	<key>NSCameraUsageDescription</key>
 	<string>so you can take a picture for a profile image</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>so you can Microphone</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>so you can select a profile image</string>
 	<key>UIAppFonts</key>

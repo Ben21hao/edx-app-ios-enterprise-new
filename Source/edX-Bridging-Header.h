@@ -107,4 +107,21 @@
 #import "TDTakePictureViewController.h"
 #import "TDInformationDetailViewController.h"
 #import "TDAuthenSuccessViewController.h"
+
+
+#import "TDBaseScrollView.h"
+#import "TDBaseView.h"
+#import "VHStystemSetting.h"
+#import "TDLiveMessageCell.h"
+#import "TDLiveBottomCell.h"
+#import "TDLiveModel.h"
+#import "WatchLiveViewController.h"
+#import "WatchPlayBackViewController.h"
+
+#import "VHallApi.h"
+#import "MBProgressHUD.h"
+#import <AFNetworking.h>
+#import <MJExtension/MJExtension.h>
+#import <MJRefresh/MJRefresh.h>
 #import <UIImageView+WebCache.h>
+

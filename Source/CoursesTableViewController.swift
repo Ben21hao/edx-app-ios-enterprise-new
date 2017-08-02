@@ -54,14 +54,19 @@ class CoursesTableViewController: UITableViewController {
     
     private let environment : Environment
     private let context: Context
+    private let whereFrom: Int
     
     weak var delegate : CoursesTableViewControllerDelegate?
     var courses : [OEXCourse] = []
     let insetsController = ContentInsetsController()
     
-    init(environment : Environment, context: Context) {
+    let noDataLabel = UILabel()
+    
+    init(environment : Environment, context: Context, whereFrom: Int) {
         self.context = context
         self.environment = environment
+        self.whereFrom = whereFrom
+        
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -82,6 +87,19 @@ class CoursesTableViewController: UITableViewController {
             make.edges.equalTo(self.view)
         }
         
+        self.noDataLabel.font = UIFont.init(name: "OpenSans", size: 16)
+        self.noDataLabel.textAlignment = .Center
+        self.noDataLabel.textColor = OEXStyles.sharedStyles().baseColor9()
+        self.noDataLabel.text = Strings.noCourseAvailableText
+        self.tableView.addSubview(self.noDataLabel)
+        
+        self.noDataLabel.snp_makeConstraints { (make) in
+            make.centerX.equalTo(self.tableView)
+            make.top.equalTo(self.tableView.snp_top).offset(TDScreenHeight / 2 - 60)
+        }
+        
+        self.noDataLabel.hidden = true
+        
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.registerClass(CourseCardCell.self, forCellReuseIdentifier: CourseCardCell.cellIdentifier)
@@ -91,7 +109,13 @@ class CoursesTableViewController: UITableViewController {
         )
     }
 
+    //MARK: tableview Delegate
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.whereFrom == 1 {
+        self.noDataLabel.hidden = self.courses.count != 0
+        }
+        
         return self.courses.count ?? 0
     }
 

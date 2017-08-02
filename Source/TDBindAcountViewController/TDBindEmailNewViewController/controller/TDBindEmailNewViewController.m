@@ -161,7 +161,7 @@
 //            [self.navigationController pushViewController:successVC animated:YES];
 //            
 //        }  else if ([code intValue] == 500) {
-//            [self.view makeToast:NSLocalizedString(@"UNKNOWN_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
+//            [self.view makeToast:NSLocalizedString(@"EMAIL_SEND_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
 //            
 //        } else if ([code  intValue] == 403) {
 //            [self.view makeToast:NSLocalizedString(@"EMAIL_IS_REGISTERED", nil) duration:1.08 position:CSToastPositionCenter];

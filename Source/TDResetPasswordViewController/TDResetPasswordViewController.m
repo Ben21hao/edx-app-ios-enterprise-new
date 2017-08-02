@@ -138,6 +138,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%ld",(long)error.code);
+        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         [self.activityView stopAnimating];
     }];
 }
@@ -172,7 +173,7 @@
                     }
                     
                     
-                } else if(httpResp.statusCode <= 400 && httpResp.statusCode < 500) {
+                } else if(httpResp.statusCode >= 400 && httpResp.statusCode < 500) {
                     
                     NSDictionary *dictionary = [NSJSONSerialization oex_JSONObjectWithData:data error:nil];
                     NSString *responseStr = [[dictionary objectForKey:@"email"] firstObject];

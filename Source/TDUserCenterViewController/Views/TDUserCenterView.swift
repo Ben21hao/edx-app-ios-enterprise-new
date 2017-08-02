@@ -46,7 +46,7 @@ class TDUserCenterView: UIView,UITableViewDataSource {
         
         self.backgroundColor = OEXStyles.sharedStyles().baseColor5()
         self.tableView.backgroundColor = OEXStyles.sharedStyles().baseColor6()
-        self.tableView.tableFooterView = UIView.init()
+//        self.tableView.tableFooterView = UIView.init()
         self.tableView.dataSource = self
         self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
 
@@ -54,6 +54,10 @@ class TDUserCenterView: UIView,UITableViewDataSource {
         self.tableView.snp_makeConstraints { (make) in
             make.left.right.top.bottom.equalTo(self)
         }
+        
+        let footView = UIView.init(frame: CGRectMake(0, 0, TDScreenWidth, 1))
+        footView.backgroundColor = OEXStyles.sharedStyles().baseColor5()
+        self.tableView.tableFooterView = footView;
     }
     
     func populateFields(profile: UserProfile, editable : Bool, networkManager : NetworkManager) {
@@ -179,6 +183,11 @@ class TDUserCenterView: UIView,UITableViewDataSource {
                     titleStr = Strings.liveLectureText
                     cell.messageLabel.text = Strings.participateLiveText
                     imageStr = "lecture_image"
+                    
+//                    cell.messageLabel.hidden = true
+//                    cell.titleLabel.hidden = true
+//                    cell.iconImageView.hidden = true
+                    
                 default:
                     titleStr = Strings.taService
                     cell.messageLabel.text = Strings.viewTaService

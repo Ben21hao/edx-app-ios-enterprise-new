@@ -68,7 +68,7 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
                             let video = self?.environment.interface?.stateForVideoWithID(self?.blockID, courseID : self?.courseID)
                             where block.type.asVideo?.preferredEncoding != nil
                         {
-                            self?.showLoadedBlock(block, forVideo: video)
+                            self?.showLoadedBlock(block, forVideo: video) //播放视频
                         }
                         else if let video = block.type.asVideo {
                             self?.isUrlVideo = true

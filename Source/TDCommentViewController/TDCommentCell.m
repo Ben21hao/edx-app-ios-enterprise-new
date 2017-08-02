@@ -301,6 +301,7 @@ const CGFloat contentLabelFontSize = 14;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         self.praiseButton.userInteractionEnabled = YES;
+        [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"errorCode---%ld---",(long)error.code);
     }];
 }

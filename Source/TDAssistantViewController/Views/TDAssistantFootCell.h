@@ -14,7 +14,6 @@
 @property (nonatomic,assign) NSInteger whereFrom;
 @property (nonatomic,assign) BOOL isComment;
 @property (nonatomic,assign) int score;
-@property (nonatomic,strong) NSString *startTime;
 
 @property (nonatomic,strong) TDAssistantServiceModel *model;
 

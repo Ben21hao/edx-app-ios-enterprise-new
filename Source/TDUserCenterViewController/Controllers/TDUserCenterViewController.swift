@@ -14,8 +14,11 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
         OEXConfigProvider,
         NetworkManagerProvider,
         OEXRouterProvider,
-        ReachabilityProvider
+        ReachabilityProvider,
+        DataManagerProvider,
+        OEXInterfaceProvider
     >
+    
     private let environment : Environment
     private let editable: Bool
     let session = OEXRouter.sharedRouter().environment.session
@@ -164,9 +167,13 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     }
     
     func gotoLiveView() {
-        let liviewVc = TDLiveViewController()
-        liviewVc.username = session.currentUser?.username
-        self.navigationController?.pushViewController(liviewVc, animated: true)
+//        let liviewVc = TDLiveViewController()
+//        liviewVc.username = session.currentUser?.username
+//        self.navigationController?.pushViewController(liviewVc, animated: true)
+        
+        let username = session.currentUser?.username
+        let liveView = TDLectureLiveViewController.init(environment: self.environment, username: username!)
+        self.navigationController?.pushViewController(liveView, animated: true)
     }
     
     //MARK: tableview Delegate
@@ -177,6 +184,9 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
         if indexPath.section == 1 && indexPath.row == 1 {
             return 0
         }
+//        else if indexPath.section == 2 && indexPath.row == 0 {
+//            return 0
+//        }
         return 75
     }
     

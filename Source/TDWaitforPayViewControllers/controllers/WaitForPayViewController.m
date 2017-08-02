@@ -224,8 +224,10 @@ static NSString *cellID = @"WaitForPayTableViewCell";
             [self.tableView reloadData];
         }
         [self.loadIngView removeFromSuperview];
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.loadIngView removeFromSuperview];
+        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error--%@",error);
     }];
 }
@@ -403,7 +405,7 @@ static NSString *cellID = @"WaitForPayTableViewCell";
     
     //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
     //    NSString *appScheme = @"alisdkdemo";
-    NSString *appScheme = @"org.eliteu.mobile";
+    NSString *appScheme = @"org.eliteu.mobile-enterprise";
     //将商品信息拼接成字符串
     NSString *orderSpec = [order description];
     NSLog(@"orderSpec = %@",orderSpec);

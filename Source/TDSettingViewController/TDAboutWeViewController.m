@@ -48,7 +48,7 @@
     self.eliteuImage.image = [UIImage imageNamed:@"edx_logo_login"];
     [self.view addSubview:self.eliteuImage];
     
-    NSString *webSiteStr = [NSString stringWithFormat:@"%@：www.eliteu.cn",NSLocalizedString(@"WEBSITE_COMPANY", nil)];
+    NSString *webSiteStr = [NSString stringWithFormat:@"%@：www.e-ducation.cn",NSLocalizedString(@"WEBSITE_COMPANY", nil)];
     self.webTextView = [[UITextView alloc] init];
     self.webTextView.font = [UIFont fontWithName:@"OpenSans" size:12];
     self.webTextView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];

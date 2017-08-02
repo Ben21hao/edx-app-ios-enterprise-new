@@ -55,7 +55,7 @@
         return;
     }
     
-    [SVProgressHUD showWithStatus:@"正在提交..."];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"SUBMIT_ING", nil)];
     SVProgressHUD.defaultMaskType = SVProgressHUDMaskTypeBlack;
     SVProgressHUD.defaultStyle = SVProgressHUDAnimationTypeNative;
     

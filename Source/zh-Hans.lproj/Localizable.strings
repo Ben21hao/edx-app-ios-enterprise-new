@@ -660,7 +660,7 @@
 /* Hint text for login field */
 "USERNAME_PLACEHOLDER" = "用户名或邮箱地址";
 /*Error message when operation failed with unknow error*/
-"UNKNOWN_ERROR" = "您的操作不能完成。";
+"UNKNOWN_ERROR" = "您的操作不能完成";
 /* Text shown to display the current version number. Environment is a server name like "prod", "dev", stage" and may be empty. For example "Version 1.2.3 Prod" */
 "VERSION_DISPLAY" = "版本 {number}";//"版本 {number} {environment}
 /* Error shown when video download fails */
@@ -747,6 +747,8 @@
 "PHONE_NUMBER_NOT_REGISTER" = "手机号码尚未注册";
 /*确定*/
 "OK" = "确定";
+/*确定*/
+"SUBMIT_BUTTON_TEXT" = "确定";
 /*重置失败*/
 "RESET_FAILED" = "重置失败";
 /*重置密码成功*/
@@ -813,6 +815,8 @@
 "CREATE_ACCOUNT" = "创建账号";
 /*注册英荔教育即表示您同意*/
 "SIGN_UP_AGREE" = "注册即表示我同意英荔教育的";
+/*登录即表示我已阅读并同意 Login means I've read and agreed*/
+"SIGN_IP_AGREE_TEXT" = "登录即表示我已阅读并同意";
 /*英荔教育的《用户协议》、《隐私政策》和《免责声明》*/
 "AGREEMENT" = "条款说明";
 /*重置密码*/
@@ -824,7 +828,7 @@
 /*仅在wifi下载*/
 "DOWNLOAD_IN_WIFI" = "仅在Wi-Fi开启时下载内容";
 /*注册时--输入密码*/
-"PLEASE_SET_PASSWORD" = "请输入密码";
+"PLEASE_SET_PASSWORD" = "请设置密码";
 /*秒*/
 "SECOND" = "秒";
 /*请输入手机号码*/
@@ -869,8 +873,8 @@
 "EMAIL_IS_REGISTERED" = "邮箱已存在";
 /*已发送验证邮件，请前往邮箱查看。*/
 "EMAIL_AREADY_SEND" = "已发送验证邮件，请前往邮箱查看。";
-/*未知错误*/
-"UNKNOWN_ERROR" = "验证邮件发送失败，请重试";
+/*验证邮件发送失败，请重试*/
+"EMAIL_SEND_ERROR" = "验证邮件发送失败，请重试";
 /*确定绑定*/
 "SURE_BIND" = "确定绑定";
 /*手机号码格式错误*/
@@ -944,7 +948,7 @@
 /*授权失败*/
 "PAY_AUTHENRIZATE_FAIL" = "授权失败";
 /*微信不支持*/
-"NO_SUPPORT_WECHAT" = "微信不支持";
+"NO_SUPPORT_WECHAT" = "请求失败，请先登录微信 ";
 /*网络连接出错*/
 "NETWORK_CONNET_FAIL" = "网络连接出错";
 /*正在处理中*/
@@ -992,7 +996,7 @@
 /*兑换成功*/
 "EXCHANGE_SUCCESS" = "兑换成功";
 /*请检查网络*/
-"CHECK_NEWWORK" = "网络链接出错";
+"CHECK_NEWWORK" = "网络连接出错";
 /*优惠券兑换成功，请及时使用您的优惠券*/
 "EXCHANGE_AND_USE" = "优惠券兑换成功，请及时使用您的优惠券";
 /*您已经领用过此优惠券*/
@@ -1144,11 +1148,13 @@
 /*我们给您发送了一封重置密码邮件，请进入邮箱查收并按提示设置新密码。*/
 "HAD_SEND_EMAIL" = "我们给您发送了一封重置密码邮件，请进入邮箱{count}查收并按提示设置新密码。";
 /*已经激活？马上登录*/
-"ACTIVITY_LOGIN" = "已经激活？马上登录";
+"ACTIVITY_LOGIN" = "重置成功？马上登录";
 /*没有收到邮件？*/
 "NO_RECEIVE_EMAIL" = "没有收到邮件？";
 /*点此重发*/
 "CLICK_RESEND" = "点此重发";
+/*重发邮件成功*/
+"CLICK_RESEND_SUCCESS" = "重发邮件成功";
 /*您不能使用这个昵称，请重新输入*/
 "CONNOT_USE_NICKNAME" = "该昵称含有禁用词，请重新输入";
 /*我们给您发送了一条验证短信*/
@@ -1226,6 +1232,8 @@
 "TD_WOMEN" = "女";
 /*姓名 Name */
 "TRURE_NAME" = "姓名";
+/*姓名 Name */
+"TRURE_NAME_TEXT" = "姓名：";
 /*身份证号 ID number */
 "CARD_ID" = "身份证号";
 /*出生日期 Birth date */
@@ -1278,8 +1286,8 @@
 "M_DEGREE" = "硕士";
 /*学士*/
 "B_DEGREE" = "学士";
-/*肆业证书*/
-"A_DEGREE" = "肆业证书";
+/*大专*/
+"A_DEGREE" = "大专";
 /*高中*/
 "HS_DEGREE" = "高中";
 /*初中*/
@@ -1311,7 +1319,7 @@
 /*本课程可随时加入，不设有效期限，考核通过后仍保留学习权限You're free to enroll anytime. There's no expiry date for this course, you can still access the course even after completing it.*/
 "ENROLL_MESSAGE" = "本课程可随时加入，不设有效期限，考核通过后仍保留学习权限";
 /*通过手机号码设置密码Set password by phone number*/
-"RESET_BY_PHONE" = "通过手机号码设置密码";
+"RESET_BY_PHONE" = "通过手机号码重置密码";
 /*通过邮箱重置密码Reset password via mailbox*/
 "RESET_BY_EMAIL" = "通过邮箱重置密码";
 
@@ -1371,6 +1379,8 @@
 
 /*预约 Appointment*/
 "APPOINTMENT" = "预约";
+/*正在预约... Appointmenting*/
+"APPOINTMENT_ING" = "正在预约...";
 /*输入咨询问题 Describe Your Questions*/
 "DESCRIBE_QUESTIONS" = "输入咨询问题";
 /*输入问题描述 Initiate Instant Service*/
@@ -1517,7 +1527,8 @@
 "VIEW_TA_SERVICE" = "查看服务记录";
 /*%d天%d时%d分%d秒 */
 "TIME_COUNT_NUM" = "{day}天{hour}时{min}分{second}秒";
-
+/*%d时%d分%d秒 */
+"SECOND_COUNT_NUM" = "{hour}时{min}分{second}秒";
 /*服务x单 X Order(s) */
 "SERVICE_ORDER_NUM" = "服务{count}单";
 /*继续预约 =>Make a new appointment */
@@ -1622,3 +1633,107 @@
 "LIVE_LECTURE_TEXT" = "讲座";
 /*参与讲座直播 Participate in a live lecture*/
 "PARTICIPATE_LIVE_TEXT" = "参与讲座直播";
+/*暂无讲座 No lecture yet.*/
+"NO_LIVE_LECTURE_TEXT" = "暂无讲座";
+/*企业暂未发布任何课程  Could not find any available courses*/
+"NO_COURSE_AVAILABLE_TEXT" = "企业暂未发布任何课程";
+
+/*抽奖中Processing*/
+"PROCESSING_TIP_TEXT" = "抽奖中";
+/*抽奖结果 Lucky draw result*/
+"LUCKY_DRAW_RESULT" = "抽奖结果";
+/*恭喜中奖 Congratulations!*/
+"CONGRATULATIONS" = "恭喜中奖";
+/*错误码 Error code*/
+"ERROR_CODE" = "错误码";
+/*签到成功 Signed in*/
+"SINGNED_IN" = "签到成功";
+/*签到结束 Sign in ended*/
+"SINGN_IN_ENDED" = "签到结束";
+/*我来说两句 Say something*/
+"SAY_SOMETHING" = "我来说两句";
+/*卡顿 Buffering*/
+"BUFFERING" = "卡顿: ";
+/*原画 Original quality*/
+"ORIGINAL_QUALITY" = "原画";
+/*问答Q&A*/
+"QA_TEXT" = "问答";
+/*详情Details*/
+"DETAILS_TEXT" = "详情";
+/*文档Documents*/
+"DOCUMENT_TEXT" = "文档";
+/*评论Comments*/
+"COMMENT_TEXT" = "评论";
+/*聊天Chats*/
+"CHAT_TEXT" = "聊天";
+/*发表成功Sent*/
+"SENT_SUCCESS" = "发表成功";
+/*文档＋视频 Document and video*/
+"DOCUMENT_AND_VIDEO" = "文档＋视频";
+/*文档＋语音  Document and voice*/
+"DOCUMENT_AND_VOICE" = "文档＋语音";
+/*纯视频Video only*/
+"VIDEO_ONLY" = "纯视频";
+/*无内容 No content*/
+"NO_CONTENT" = "无内容";
+/*讲座类型 Lecture Type*/
+"LECTURE_TYPE" = "讲座类型";
+/*直播已结束 Live ended*/
+"LIVE_ENDED" = "直播已结束";
+/*已暂停语音直播  Live voice has paused*/
+"LIVE_VOICE_PAUSED" = "已暂停语音直播";
+/*语音直播中 Live voice ongoing*/
+"LIVE_VOICE_ONGOING" = "语音直播中";
+/*已暂停语音回放 Voice replay has paused*/
+"VOICE_REPLAY" = "已暂停语音回放";
+/*语音回放中 Voice replaying*/
+"VOICE_REPLAYING" = "语音回放中";
+/*获取服务器地址报错 Unable to acquire server address*/
+"UNABLE_ACQUIRE_SERVER" = "获取服务器地址报错";
+/*服务器任性...连接失败 Unable to connect to server*/
+"UNABLE_CONNECT_SERVER" = "服务器任性...连接失败";
+/*对方已经停止直播 Live lecture has ended.*/
+"LIVE_LECTURE_ENDED" = "对方已经停止直播";
+/*参数错误 Error*/
+"ERROR_PARAMTER" = "参数错误";
+/*无文档 No document*/
+"NO_DOCUMENT" = "无文档";
+
+/*您有 %d 秒的时间进行签到 You have %d seconds to sign in*/
+"SECONDS_SIGN_IN" = "您有 {count} 秒的时间进行签到";
+/*秒 seconds*/
+"SECONDS_TEXT" = "秒";
+/*公告: Notice*/
+"NOTICE_TEXT" = "公告:";
+/*进入Enter*/
+"ENTER_TEXT" = "进入";
+/*离开Leave*/
+"LEAVE_TEXT" = "离开";
+/*主持人Host*/
+"HOST_TEXT" = "主持人";
+/*嘉宾Guest*/
+"GUEST_TEXT" = "嘉宾";
+/*助手Assistant*/
+"ASSISTANT_TEXT" = "助手";
+/*观众Viewer*/
+"VIEWER_TEXT" = "观众";
+/*在线:%@ 总人数:Online: %@ Total:*/
+"ONLINE_COUNT_TEXT" = "在线:{count} 总人数:{number} {time}";
+/*房间Room*/
+"ROOM_TEXT" = "房间：";
+/*答Answer*/
+"ANSWER_TEXT" = "答";
+/*问Ask*/
+"ASK_TEXT" = "问";
+/*签 到 Sign in*/
+"SIGN_IN_BUTTON_TEXT" = "签 到";
+/*主持人发起了签到 The host initiated the sign in.*/
+"INITIATE_SIGN_IN" = "主持人发起了签到";
+/*问卷调查Survey*/
+"SURVEY_TEXT" = "问卷调查";
+/*获取问卷Acquire survey*/
+"ACQUIRE_SURVEY" = "获取问卷";
+/*暂未有聊天记录 No chatting record*/
+"NO_CHAT_RECORD" = "暂未有聊天记录";
+/*进入成功 Entry successful*/
+"ENTER_SUCCESSFUL" = "进入成功";

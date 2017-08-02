@@ -114,6 +114,7 @@
         [self.tableView reloadData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"获取个人信息出错 -- %ld, %@",(long)error.code, error.userInfo[@"com.alamofire.serialization.response.error.data"]);
     }];
 }
@@ -125,7 +126,7 @@
         return;
     }
     
-    [SVProgressHUD showWithStatus:@"正在预约..."];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"APPOINTMENT_ING", nil)];
     SVProgressHUD.defaultMaskType = SVProgressHUDMaskTypeBlack;
     SVProgressHUD.defaultStyle = SVProgressHUDAnimationTypeNative;
     
@@ -160,7 +161,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [SVProgressHUD dismiss];
-        [self.view makeToast:@"" duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"预约助教出错 --- %ld",(long)error.code);
     }];
 }
@@ -316,10 +317,13 @@
     self.messageLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     self.messageLabel.textAlignment = NSTextAlignmentCenter;
     self.messageLabel.text = NSLocalizedString(@"NOTE_COINS", nil);
+    self.messageLabel.numberOfLines = 0;
+    self.messageLabel.textAlignment = NSTextAlignmentCenter;
     [self.footerView addSubview:self.messageLabel];
     
     [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.footerView.mas_centerX);
+        make.left.mas_equalTo(self.footerView.mas_left).offset(8);
+        make.right.mas_equalTo(self.footerView.mas_right).offset(-8);
         make.centerY.mas_equalTo(self.footerView.mas_centerY);
     }];
     return self.footerView;

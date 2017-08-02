@@ -34,6 +34,7 @@ class TDCourseIntroduceCell: UITableViewCell {
         moreButton.titleLabel?.font = UIFont.init(name: "OpenSans", size: 14)
         moreButton.setTitleColor(OEXStyles.sharedStyles().baseColor1(), forState: .Normal)
         moreButton.setTitle(Strings.allText, forState: .Normal)
+        moreButton.showsTouchWhenHighlighted = true
         bgView.addSubview(moreButton)
         
     }

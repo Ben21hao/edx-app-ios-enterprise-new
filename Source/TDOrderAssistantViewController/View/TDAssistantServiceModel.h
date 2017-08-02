@@ -43,6 +43,7 @@
 
 @property (nonatomic,strong) NSString *service_begin_at;//服务开始时间
 @property (nonatomic,strong) NSString *service_end_at;//服务结束时间
+@property (nonatomic,strong) NSString *now_time;   //当前时间
 @property (nonatomic,strong) NSString *service_date;//服务日期
 @property (nonatomic,strong) NSString *service_time;//服务日期时间
 @property (nonatomic,strong) NSString *question;//咨询问题

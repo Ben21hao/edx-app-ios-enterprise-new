@@ -109,7 +109,6 @@
         id code = dict[@"code"];
         
         if ([code integerValue] == 200) {
-            
             [self cutDownTime];
             
         }else if ([code intValue] == 403){//手机没注册
@@ -119,7 +118,6 @@
                                                                     message:NSLocalizedString(@"PHONE_NUMBER_NOT_REGISTER", nil)
                                                            onViewController:self.navigationController.view
                                                                  shouldHide:YES];
-            
             
         } else {
             [self handleResendButton:YES];

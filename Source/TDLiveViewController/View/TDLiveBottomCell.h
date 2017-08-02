@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TDLiveModel.h"
 
 @interface TDLiveBottomCell : UITableViewCell
 
 @property (nonatomic,assign) NSInteger  whereFrom;
+@property (nonatomic,strong) TDLiveModel *model;
 
 @property (nonatomic,strong) UIButton *enterButton;
 @property (nonatomic,strong) UIButton *playButton;

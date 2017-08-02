@@ -166,7 +166,7 @@ private class BottomBarView: UIView, NSCopying {
         let line = UIView()
         bottomBar.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.90)
         
-        signInButton.setTitle(Strings.signInText, forState: .Normal)
+        signInButton.setTitle(Strings.signIn, forState: .Normal)
         let signInEvent = OEXAnalytics.loginEvent()
         signInButton.oex_addAction({ [weak self] _ in
             self?.showLogin()

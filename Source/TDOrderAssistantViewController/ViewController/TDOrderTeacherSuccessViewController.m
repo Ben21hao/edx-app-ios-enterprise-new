@@ -245,7 +245,7 @@
     self.imageLabel = [[UILabel alloc] init];
     self.imageLabel.font = [UIFont fontWithName:@"FontAwesome" size:20];
     self.imageLabel.text = self.isSuccess ? @"\U0000f058" : @"\U0000f06a";
-    self.imageLabel.textColor = [UIColor colorWithHexString:colorHexStr4];
+    self.imageLabel.textColor = [UIColor colorWithHexString:self.isSuccess? colorHexStr1 : colorHexStr4];
     [self.headerView addSubview:self.imageLabel];
     
     self.messageLabel = [[UILabel alloc] init];

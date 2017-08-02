@@ -42,6 +42,7 @@
 - (void)setViewConstraint {
     
     self.tableView = [[UITableView alloc] init];
+    self.tableView.scrollEnabled = NO;
     self.tableView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     [self addSubview:self.tableView];
     

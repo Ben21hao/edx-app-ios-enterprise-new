@@ -8,6 +8,7 @@
 
 #import "TDLiveMessageCell.h"
 #import <UIImageView+WebCache.h>
+#import "edX-Swift.h"
 
 @interface TDLiveMessageCell ()
 
@@ -20,6 +21,8 @@
 @property (nonatomic,strong) UILabel *timeLabel;
 @property (nonatomic,strong) UILabel *durationLabel;
 
+@property (nonatomic,strong) TDBaseToolModel *toolModel;
+
 @end
 
 @implementation TDLiveMessageCell
@@ -27,6 +30,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.toolModel = [[TDBaseToolModel alloc] init];
         [self configView];
         [self setViewConstraint];
     }
@@ -35,7 +39,52 @@
 
 - (void)setWhereFrom:(NSInteger)whereFrom {
     _whereFrom = whereFrom;
-    self.durationLabel.hidden = self.whereFrom == 0;
+    self.durationLabel.hidden = whereFrom == 0;
+}
+
+- (void)setModel:(TDLiveModel *)model {
+    _model = model;
+    
+    [self setDataForView:model];
+}
+
+- (void)setDataForView:(TDLiveModel *)model {
+    
+    self.titleLabel.text = model.livename;
+    self.teacherLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(@"LECTURER_TEXT", nil),model.anchor];
+    if (model.live_introduction.length > 0) {
+        self.introduceLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(@"DISCRITE_TEXT", nil),model.live_introduction];
+    }
+    
+    int count = [model.time intValue];
+    
+    int hour = count / (60 * 60);
+    int muniteNum = count % (60 * 60);
+    int munite = muniteNum / 60;
+    int second = count % 60;
+    
+    NSString *hourStr = @"00";
+    if (hour > 0) {
+        hourStr = hour < 10 ? [NSString stringWithFormat:@"0%d",hour]: [NSString stringWithFormat:@"%d",hour];
+    }
+    NSString *muniteStr = @"00";
+    if (munite > 0) {
+        muniteStr = munite< 10 ? [NSString stringWithFormat:@"0%d",munite]: [NSString stringWithFormat:@"%d",munite];
+    }
+    
+    NSString *secondStr = @"00";
+    if (second > 0) {
+        secondStr = second < 10 ? [NSString stringWithFormat:@"0%d",second] :[NSString stringWithFormat:@"%d",second];
+    }
+    
+    self.durationLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(@"DUIRATION_TEXT", nil),[Strings secondCountNumWithHour:hourStr min:muniteStr second:secondStr]];
+    
+    //TODO: 对时间进行处理
+    //2017-07-06T15:00:00Z
+    NSString *timeStr = [self.toolModel changeStypeForTime:model.live_start_at];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(@"START_TIME_TEXT", nil),timeStr];
+    
+    
 }
 
 #pragma mark - UI
@@ -64,21 +113,16 @@
     self.introduceLabel = [self setLabelStyle:colorHexStr8 font:14];
     [self.messageView addSubview:self.introduceLabel];
     
-    self.timeLabel = [self setLabelStyle:colorHexStr9 font:14];
+    self.timeLabel = [self setLabelStyle:colorHexStr9 font:TDWidth == 320 ? 12 : 14];
     [self.bgView addSubview:self.timeLabel];
     
-    self.durationLabel = [self setLabelStyle:colorHexStr9 font:14];
+    self.durationLabel = [self setLabelStyle:colorHexStr9 font:TDWidth == 320 ? 12 : 14];
     self.durationLabel.textAlignment = NSTextAlignmentRight;
     [self.bgView addSubview:self.durationLabel];
-    
-    self.titleLabel.text = @"大数据时代下的信息技术";
-    self.teacherLabel.text = [NSString stringWithFormat:@"%@哈哈哈老师",NSLocalizedString(@"LECTURER_TEXT", nil)];
-    self.timeLabel.text = [NSString stringWithFormat:@"%@2017-07-03 18:18",NSLocalizedString(@"START_TIME_TEXT", nil)];
-    self.durationLabel.text = [NSString stringWithFormat:@"%@02:30:55",NSLocalizedString(@"DUIRATION_TEXT", nil)];
-    self.introduceLabel.text = [NSString stringWithFormat:@"%@啊哈哈哈哈哈哈哈哈卡上的咖啡好伐啦好地方拉法基哈伦裤放假阿斯顿啊哈哈哈哈哈哈哈哈卡上的咖啡好伐啦好地方拉法基哈伦裤放假阿斯顿啊哈哈哈哈哈哈哈哈卡上的咖啡好伐啦好地方拉法基哈伦裤放假阿",NSLocalizedString(@"DISCRITE_TEXT", nil)];
 }
 
 - (void)setViewConstraint {
+    
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.mas_equalTo(self.contentView);
     }];
@@ -86,6 +130,7 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.bgView.mas_left).offset(8);
         make.top.mas_equalTo(self.bgView.mas_top).offset(8);
+        make.right.mas_equalTo(self.bgView.mas_right).offset(-3);
         make.height.mas_equalTo(22);
     }];
     
@@ -124,7 +169,7 @@
         make.right.mas_equalTo(self.bgView.mas_right).offset(-13);
         make.top.mas_equalTo(self.messageView.mas_bottom).offset(6);
         make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(-6);
-        make.width.mas_equalTo(103);
+        make.width.mas_equalTo(143);
     }];
 }
 

@@ -65,10 +65,10 @@
     
     self.isRecharge = NO;
     
-    [self setLoadDataView];
     [self getRechargeData];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successPay) name:@"aliPaySuccess" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failedPay) name:@"aliPayFail" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appEnterForeground:) name:@"App_EnterForeground_Get_Code" object:nil];
 }
 
@@ -83,6 +83,7 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"aliPaySuccess" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"aliPayFail" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"App_EnterForeground_Get_Code" object:nil];
 }
 
@@ -130,15 +131,20 @@
 }
 
 - (void)appEnterForeground:(NSNotification *)info {
-    if (self.isRecharge) {
-        [self gotoSuccessViewController];
-    }
+    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        if (self.isRecharge) {
+//            [self gotoSuccessViewController];
+//        }
+//    });
 }
 
 #pragma mark - 充值成功
 - (void)successPay {
-    
     [self gotoSuccessViewController];
+}
+
+- (void)failedPay {
 }
 
 - (void)gotoSuccessViewController {
@@ -169,6 +175,8 @@
         return;
     }
     
+    [self setLoadDataView];
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"username"] = self.username;
@@ -194,6 +202,7 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         [self.loadIngView removeFromSuperview];
         NSLog(@"error -- %@",error);
     }];

@@ -46,6 +46,7 @@ class OEXRearTableViewController : UITableViewController {
     @IBOutlet weak var companyImage: UIImageView!
     @IBOutlet var userProfilePicture: UIImageView!
     @IBOutlet weak var appVersionButton: UIButton!
+    @IBOutlet var userContentView: UIView!
     
     lazy var environment = Environment()
     var profileFeed: Feed<UserProfile>?
@@ -126,8 +127,14 @@ class OEXRearTableViewController : UITableViewController {
             
             self.companyImage.contentMode = .ScaleAspectFit
             if profile.logoUrl != nil {
-                let companyImageStr = ELITEU_URL +  profile.logoUrl!
-                self.companyImage.sd_setImageWithURL(NSURL.init(string:companyImageStr), placeholderImage: UIImage.init(named: "logobg"))
+                
+                SDImageCache.sharedImageCache().cleanDisk()
+                
+                var companyImageStr = ELITEU_URL +  profile.logoUrl!
+                companyImageStr = companyImageStr.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.init(charactersInString: "`#%^{}\"[]|\\<> ").invertedSet)! //空格或中文
+                
+                let url = NSURL.init(string: companyImageStr)
+                self.companyImage.sd_setImageWithURL(url, placeholderImage: UIImage.init(named: "logobg"))
             } else {
                 self.companyImage.image = UIImage.init(named: "logobg")
             }
@@ -237,6 +244,7 @@ class OEXRearTableViewController : UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
+        
         let cell = self.tableView(tableView, cellForRowAtIndexPath: indexPath)
         if let separatorImage = cell.contentView.viewWithTag(10) {
             separatorImage.hidden = true
@@ -244,6 +252,7 @@ class OEXRearTableViewController : UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+        
         let cell = self.tableView(tableView, cellForRowAtIndexPath: indexPath)
         if let separatorImage = cell.contentView.viewWithTag(10) {
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
@@ -251,7 +260,6 @@ class OEXRearTableViewController : UITableViewController {
                 separatorImage.hidden = false
             }
         }
-        
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -259,7 +267,6 @@ class OEXRearTableViewController : UITableViewController {
         if let option = OEXRearViewOptions(rawValue: indexPath.row) {
             
             switch option {
-                
 //            case .UserProfile:
 //                guard environment.config.profilesEnabled else { break }
 //                guard let currentUserName = environment.session.currentUser?.username else { return }
@@ -296,6 +303,7 @@ class OEXRearTableViewController : UITableViewController {
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
         if indexPath.row == OEXRearViewOptions.Debug.rawValue && !environment.config.shouldShowDebug() {
             return 0
         }
@@ -308,12 +316,40 @@ class OEXRearTableViewController : UITableViewController {
         else if indexPath.row == OEXRearViewOptions.Logout.rawValue {
             let screenHeight = UIScreen.mainScreen().bounds.height
 //            let tableviewHeight = tableView.contentSize.height
-            let tableviewHeight : CGFloat = 518
+            let tableviewHeight : CGFloat = 518 + (TDScreenWidth - 320) * 5/6 * 0.53
             return max((screenHeight - tableviewHeight) + LogoutCellDefaultHeight, LogoutCellDefaultHeight)
+        }
+        else if indexPath.row == OEXRearViewOptions.UserProfile.rawValue {
+            remarkCompayConstraint()
+            return TDScreenWidth * 5/6 * 0.53
         }
         
         return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
     }
+    
+    func remarkCompayConstraint() {
+        self.tableView.backgroundColor = OEXStyles.sharedStyles().baseColor6()
+        self.userContentView.backgroundColor = OEXStyles.sharedStyles().baseColor6()
+//        self.companyImage.backgroundColor = OEXStyles.sharedStyles().baseColor3()
+        
+        self.companyImage.snp_remakeConstraints { (make) in
+            make.left.greaterThanOrEqualTo(self.userContentView.snp_left).offset(39)
+            make.right.lessThanOrEqualTo(self.userContentView.snp_right).offset(-39)
+            make.top.greaterThanOrEqualTo(self.userContentView.snp_top).offset(39)
+            make.bottom.lessThanOrEqualTo(self.userContentView.snp_bottom).offset(-39)
+            
+            make.left.lessThanOrEqualTo(self.userContentView.snp_left).offset(48)
+            make.right.greaterThanOrEqualTo(self.userContentView.snp_right).offset(-48)
+            make.top.lessThanOrEqualTo(self.userContentView.snp_top).offset(48)
+            make.bottom.greaterThanOrEqualTo(self.userContentView.snp_bottom).offset(-48)
+            
+//            make.left.equalTo(self.userContentView.snp_left).offset(39)
+//            make.right.equalTo(self.userContentView.snp_right).offset(-39)
+//            make.top.equalTo(self.userContentView.snp_top).offset(39)
+//            make.bottom.equalTo(self.userContentView.snp_bottom).offset(-39)
+        }
+    }
+    
     
     @IBAction func loginButtonClicked(sender: UIButton) {
         logoutAction()

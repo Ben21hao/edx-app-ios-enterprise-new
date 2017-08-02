@@ -148,16 +148,19 @@
         make.left.right.bottom.top.mas_equalTo(self);
     }];
     
+    CGFloat width = [self sizeForButtonTitle:self.orderButton.titleLabel.text];
+    
     [self.orderButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.bgView.mas_right).offset(-8);
         make.top.mas_equalTo(self.bgView.mas_top).offset(11);
-        make.size.mas_equalTo(CGSizeMake(83, 26));
+        make.height.mas_equalTo(26);
+        make.width.mas_equalTo(width > 68 ? width : 68);
     }];
     
     [self.talkButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.orderButton.mas_left).offset(-8);
         make.top.mas_equalTo(self.bgView.mas_top).offset(11);
-        make.size.mas_equalTo(CGSizeMake(68, 26));
+        make.height.mas_equalTo(CGSizeMake(68, 26));
     }];
     
     [self.headerImage mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -185,7 +188,11 @@
         make.bottom.mas_equalTo(self.headerImage.mas_bottom);
         make.size.mas_equalTo(CGSizeMake(16, 16));
     }];
+}
 
+- (CGFloat)sizeForButtonTitle:(NSString *)title {
+    TDBaseToolModel *model = [[TDBaseToolModel alloc] init];
+    return [model widthForString:title font:14];
 }
 
 @end

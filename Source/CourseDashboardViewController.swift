@@ -49,7 +49,7 @@ struct CertificateDashboardItem: CourseDashboardItem {
 
 public class CourseDashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate {
     
-    public typealias Environment = protocol<OEXAnalyticsProvider, OEXConfigProvider, DataManagerProvider, NetworkManagerProvider, OEXRouterProvider, OEXInterfaceProvider, OEXRouterProvider>
+    public typealias Environment = protocol<OEXAnalyticsProvider, OEXConfigProvider, DataManagerProvider, NetworkManagerProvider, OEXRouterProvider, OEXInterfaceProvider>
     
     private let spacerHeight: CGFloat = OEXStyles.dividerSize()
 
@@ -97,12 +97,13 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         self.setViewConstraint()
         
         /* 数据 */
-        if self.whereFrom == 1 {
+        if self.whereFrom == 1 { //试听课程
             self.loadedCourseWithEnrollment(self.enrollment!)
             loadController.state = .Loaded
             
         } else {
             NSUserDefaults.standardUserDefaults().removeObjectForKey("Come_From_Course_Detail")
+            
             courseStream.backWithStream(environment.dataManager.enrollmentManager.streamForCourseWithID(courseID)) //couseID获取数据
             courseStream.listen(self) {[weak self] in
                 self?.resultLoaded($0)

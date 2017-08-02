@@ -38,6 +38,7 @@
 #import "OEXUserLicenseAgreementViewController.h"
 #import "Reachability.h"
 #import "OEXStyles.h"
+#import "TDWebViewController.h"
 
 #define USER_LOGIN_NAME @"User_Login_Name_Enterprise"
 #define USER_LOGIN_PASSWORD @"User_Login_Password_Enterprise"
@@ -93,6 +94,8 @@
 @property (weak, nonatomic, nullable) IBOutlet UIActivityIndicatorView* activityIndicator;
 @property (strong, nonatomic) IBOutlet UILabel *versionLabel;
 
+@property (nonatomic,strong) UIButton *bottomButton;
+
 @property (nonatomic, assign) id <OEXExternalAuthProvider> authProvider;
 
 @end
@@ -102,8 +105,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavigationBarStye];
-    [self setViewConstrainStye];
+    [self setNavigationBarStye];  //导航栏样式
+    [self setViewConstrainStye]; //页面样式
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -256,8 +259,8 @@
     self.img_SeparatorEULA.hidden = hide;
 }
 
-- (NSString*)signInButtonText {
-    return NSLocalizedString(@"SIGN_IN", nil); //[Strings signInText]
+- (NSString *)signInButtonText {
+    return NSLocalizedString(@"SIGN_IN", nil);
 }
 
 - (void)handleActivationDuringLogin {
@@ -346,6 +349,56 @@
     self.seperatorLeft.hidden = YES;
     self.seperatorRight.hidden = YES;
     self.lbl_OrSignIn.hidden = YES;
+    
+    [self setBottomButton];
+}
+
+- (void)setBottomButton {
+    
+    self.bottomButton = [[UIButton alloc] init];
+    self.bottomButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.bottomButton.titleLabel.numberOfLines = 0;
+    self.bottomButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
+    [self.bottomButton addTarget:self action:@selector(bottomButtonAtion:) forControlEvents:UIControlEventTouchUpInside];
+    [self.bottomButton setAttributedTitle:[self setAttribute] forState:UIControlStateNormal];
+    [self.view addSubview:self.bottomButton];
+    
+    [self.bottomButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view.mas_centerX).offset(0);
+        make.bottom.mas_equalTo(self.view.mas_bottom).offset(-18);
+        make.right.mas_equalTo(self.view.mas_right).offset(-8);
+        make.height.mas_equalTo(39);
+    }];
+}
+
+- (NSMutableAttributedString *)setAttribute {
+    NSString *str = [NSString stringWithFormat:@"%@\n",NSLocalizedString(@"SIGN_IP_AGREE_TEXT", nil)];
+    NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:str attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr8]}];
+    
+    NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"AGREEMENT", nil) attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr1]}];
+    [str1 appendAttributedString:str2];
+    return str1;
+}
+
+#pragma mark - 服务条款
+- (void)bottomButtonAtion:(UIButton *)sender {
+    TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
+    if (![baseTool networkingState]) {
+        
+        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings networkNotAvailableTitle]
+                                                                message:[Strings networkNotAvailableMessageTrouble]
+                                                       onViewController:self.navigationController.view
+                                                             shouldHide:YES];
+        
+        return;
+        
+    }
+    
+    TDWebViewController *webViewcontroller = [[TDWebViewController alloc] init];
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"stipulation" withExtension:@"htm"];
+    webViewcontroller.url = url;
+    webViewcontroller.titleStr = NSLocalizedString(@"SERVICE_ITEM", nil);
+    [self.navigationController pushViewController:webViewcontroller animated:YES];
 }
 
 - (void)textField:(UITextField *)textField backgroundWithView:(UIImageView *)image  {
@@ -797,6 +850,7 @@
         [self.view makeToast:NSLocalizedString(@"SEND_EMAIL_SUCCESS", nil) duration:1.08 position:CSToastPositionTop];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"重发邮件 -- %ld",(long)error.code);
     }];
 }
@@ -817,7 +871,7 @@
                                           cancelButtonTitle:nil
                                           otherButtonTitles:[Strings ok], nil] show];
                     }
-                    else if(httpResp.statusCode <= 400 && httpResp.statusCode < 500) {
+                    else if(httpResp.statusCode >= 400 && httpResp.statusCode < 500) {
                         NSDictionary* dictionary = [NSJSONSerialization oex_JSONObjectWithData:data error:nil];
                         NSString* responseStr = [[dictionary objectForKey:@"email"] firstObject];
                         [[UIAlertController alloc]

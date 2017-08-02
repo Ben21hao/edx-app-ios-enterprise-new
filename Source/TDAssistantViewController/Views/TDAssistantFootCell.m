@@ -61,8 +61,7 @@
     if (self.whereFrom == 0) {//待完成
         
         if ([self.model.order_type intValue] == 1) {
-            self.startTime = self.model.service_begin_at;
-            [self dealWithTimeStr];
+            [self dealWithTimeStr:self.model.service_begin_at nowTime:self.model.now_time];
             
         } else {
             self.enterButton.hidden = NO;
@@ -85,55 +84,31 @@
     }
 }
 
-//- (void)setStartTime:(NSString *)startTime {
-//    _startTime = startTime;
-//    [self dealWithTimeStr];
-//}
-
 /*
  时间处理规则
 -- (取消) ---- 24小时前 ---- (倒计时) ---- 预约时间 ----- (进入教室) ------
  */
-- (void)dealWithTimeStr {
-    
-    NSString *str1 = [self.startTime substringToIndex:19];
-    NSString *timeStr = [str1 stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+- (void)dealWithTimeStr:(NSString *)startTime nowTime:(NSString *)nowTime {
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    NSString *str1 = [startTime substringToIndex:19];
+    NSString *timeStr = [str1 stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+
     NSDate *startDate = [formatter dateFromString:timeStr];//预约开始时间
     
-    NSDate *nowDate = [NSDate date];//当前时间
+    NSDate *nowDate = [formatter dateFromString:nowTime];;//当前时间
     
-    //统一用东八区时间
-    NSDate *now = [self getChinaTime:nowDate];
-    
-    NSTimeInterval nowInterval = [now timeIntervalSince1970]*1;//手机系统时间
+    NSTimeInterval nowInterval = [nowDate timeIntervalSince1970]*1;//手机系统时间
     NSTimeInterval startInterval = [startDate timeIntervalSince1970]*1;//课程结束时间
     
-//    NSTimeInterval interval = [nowDate timeIntervalSinceDate:startDate];//时间间隔
-//    self.timeNum = -interval;
     self.timeNum = startInterval - nowInterval;
     
     NSDate *date = [nowDate earlierDate:startDate];//较早的时间
 
     if ([date isEqualToDate:nowDate]) {//当前时间为较早时间
-        
-//        if (self.timeNum > 24 * 60 *60) {
-//            //TODO: 删除cancel按钮，已移到右上角了
-//            self.cancelButton.hidden = NO;
-//            
-//        } else {
-//            
-//            self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(waitForTime) userInfo:nil repeats:YES];
-//            [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-//            
-//            self.enterButton.hidden = NO;
-//            self.isCanClick = NO;
-//            
-//            [self timeResultShow];
-//        }
-        
+
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(waitForTime) userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
         
@@ -183,33 +158,25 @@
     int second = self.timeNum % 60;
     
     NSString *dayStr = day == 0 ? @"00" : [NSString stringWithFormat:@"%d",day];
-    NSString *hourStr = hour == 0?  @"00": [NSString stringWithFormat:@"%d",hour];
-    NSString *muniteStr = munite == 0?  @"00": [NSString stringWithFormat:@"%d",munite];
     
-    NSString *str = [Strings timeCountNumWithDay:dayStr hour:hourStr min:muniteStr second:[NSString stringWithFormat:@"%d",second]];
+    NSString *hourStr = @"00";
+    if (hour > 0) {
+        hourStr = hour < 10 ?  [NSString stringWithFormat:@"0%d",hour] : [NSString stringWithFormat:@"%d",hour];
+    }
+    
+    NSString *muniteStr = @"00";
+    if (munite > 0) {
+        muniteStr = munite < 10 ?  [NSString stringWithFormat:@"0%d",munite] : [NSString stringWithFormat:@"%d",munite];
+    }
+    
+    NSString *secondStr = @"00";
+    if (second > 0) {
+        secondStr = second < 10 ? [NSString stringWithFormat:@"0%d",second] :[NSString stringWithFormat:@"%d",second];
+    }
+    
+    NSString *str = [Strings timeCountNumWithDay:dayStr hour:hourStr min:muniteStr second:secondStr];
     [self.enterButton setTitle:str forState:UIControlStateNormal];
 }
-
-/* 是否已有评论 */
-//- (void)setIsComment:(BOOL)isComment {
-//    _isComment = isComment;
-//    
-//    if (self.whereFrom == 1) {//已完成
-//        if (isComment) {
-//            self.startView.hidden = NO;
-//            self.commentButton.hidden = YES;
-//        } else {
-//            self.startView.hidden = YES;
-//            self.commentButton.hidden = NO;
-//        }
-//    }
-//}
-
-/* 评分 */
-//- (void)setScore:(int)score {
-//    _score = score;
-//    [self setStarView:score];
-//}
 
 #pragma mark - 设置星星
 - (void)setStarView:(int)fen {
@@ -304,7 +271,7 @@
     [self.commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.bgView.mas_centerY);
         make.right.mas_equalTo(self.bgView.mas_right).offset(-8);
-        make.size.mas_equalTo(CGSizeMake(68, 33));
+        make.size.mas_equalTo(CGSizeMake(88, 33));
     }];
     
     [self.startView mas_makeConstraints:^(MASConstraintMaker *make) {

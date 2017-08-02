@@ -12,8 +12,8 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     
-//    NSLog(@" ---->>> 横向滑动 %f",self.contentOffset.x);
-    if (otherGestureRecognizer.state == UIGestureRecognizerStateBegan && self.contentOffset.x < 0) {
+    //    NSLog(@" ---->>> 横向滑动 %f",self.contentOffset.x);
+    if (otherGestureRecognizer.state == UIGestureRecognizerStateBegan && self.contentOffset.x == 0) {
         return YES;
     }
     return NO;

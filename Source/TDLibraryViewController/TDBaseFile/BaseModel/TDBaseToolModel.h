@@ -83,7 +83,7 @@
 - (BOOL)judgeDateOverDue:(NSString *)dateStr;
 
 /*
- 截取时间前面10位
+ 截取时间前面10位 2013-11-17T11:59:22+08:00 ->> 2013-11-17
  */
 - (NSString *)interceptStr:(NSString *)dateStr;
 
@@ -98,9 +98,10 @@
 - (NSTimeInterval)intervalForTimeStr:(NSString *)timeStr;
 
 /*
- 计算东八区的时间
+ 计算时区的时间
  */
-- (NSDate *)getChinaTime:(NSDate *)date;
+- (NSDate *)getChinaTime:(NSDate *)date; //0 区
+- (NSDate *)getChinaEastEightTime:(NSDate *)date; //东八区
 
 /*
  将世界时间串换成东八区时间串
@@ -119,7 +120,8 @@
  获取字符串size
  */
 - (CGSize)getSringSize:(NSString *)str withFont:(NSInteger)font;
-- (CGFloat)heightForString:(NSString *)title font:(NSInteger)font width:(CGFloat)width ; //这个比较准确
+- (CGFloat)heightForString:(NSString *)title font:(NSInteger)font width:(CGFloat)width; //这个比较准确
+- (CGFloat)widthForString:(NSString *)title font:(NSInteger)font; //字符串的宽度
 
 /*
  屏幕横竖屏

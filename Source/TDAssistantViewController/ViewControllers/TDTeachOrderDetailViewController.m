@@ -34,6 +34,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     if (section == 4) {
         return self.model.order_time_grap.length == 0 ? 0 : 1;
     } else if (section == 7) {
@@ -44,6 +45,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (indexPath.section == 9) {
 
         TDSuTitleCell *cell = [[TDSuTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDSubtitleCell"];
@@ -110,6 +112,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     TDBaseToolModel *toolModel = [[TDBaseToolModel alloc] init];
     CGFloat height = [toolModel heightForString:self.model.question font:14 width:TDWidth - 22];
     
@@ -119,25 +122,28 @@
     return 53;
 }
 
-
 #pragma mark - UI
 - (void)setViewConstraint {
+    
     self.tableView = [[UITableView alloc] init];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorInset = UIEdgeInsetsZero;
-    self.tableView.tableFooterView = [UIView new];
     self.tableView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     [self.view addSubview:self.tableView];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.mas_equalTo(self.view);
     }];
+    
+    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, 1)];
+    footView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
+    self.tableView.tableFooterView = footView;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
 

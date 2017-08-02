@@ -61,10 +61,10 @@
     [self.view addSubview:self.titleView];
 
     self.contentView = [[TDBaseScrollView alloc] init];
-    self.contentView.pagingEnabled = YES;
-    self.contentView.bounces = NO;
     self.contentView.frame = CGRectMake(0, TITLEVIEW_HEIGHT, TDWidth, TDHeight - TITLEVIEW_HEIGHT - 60);
+    self.contentView.pagingEnabled = YES;
     self.contentView.delegate = self;
+    self.contentView.bounces = NO;
     self.contentView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     [self.view addSubview:self.contentView];
 }

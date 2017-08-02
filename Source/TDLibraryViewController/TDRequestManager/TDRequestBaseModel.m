@@ -149,7 +149,7 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setValue:companyId forKey:@"company_id"];
     
-    NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/companycoursesdetail/%@",ELITEU_URL,courseID];  //  /api/courses/v1/courses/
+    NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/companycoursesdetail/%@",ELITEU_URL,courseID];
     
     [manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         

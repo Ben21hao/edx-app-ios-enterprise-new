@@ -24,7 +24,7 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
 
     init(environment: Environment) {
         
-        self.tableController = CoursesTableViewController(environment: environment, context: .EnrollmentList)
+        self.tableController = CoursesTableViewController(environment: environment, context: .EnrollmentList, whereFrom: 0)
         self.enrollmentFeed = environment.dataManager.enrollmentManager.feed
         self.userPreferencesFeed = environment.dataManager.userPreferenceManager.feed
         self.environment = environment

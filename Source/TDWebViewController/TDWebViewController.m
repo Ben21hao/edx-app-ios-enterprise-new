@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     [self configView];
     [self setViewConstraint];
 }
@@ -40,12 +40,11 @@
     [self.webview loadRequest:[NSURLRequest requestWithURL:self.url]];
 }
 
-#pragma mark - delegate 
-// 页面加载完成之后调用
+#pragma mark - delegate
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     [self.loadIngView removeFromSuperview];
 }
-// 页面加载失败时调用
+
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation {
     
     [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:@"加载出错"

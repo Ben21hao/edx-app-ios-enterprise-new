@@ -397,7 +397,7 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
                         self.jumpToController(type)
                         
                     } else {
-                        alertView.errorLabel.text = Strings.passwordError
+                        alertView.errorLabel.text = code == 1011 ? Strings.networkConnetFail : Strings.passwordError
                         alertView.vertifiFailed = true
                     }
                 }

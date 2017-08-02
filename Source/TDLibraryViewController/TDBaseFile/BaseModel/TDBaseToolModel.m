@@ -18,7 +18,7 @@
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:@"iOS" forKey:@"platform"];
+    [params setValue:@"iOS_enterprise" forKey:@"platform"];
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/get_last_version/",ELITEU_URL];
     
     [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -45,9 +45,12 @@
             if (self.judHidePurchseHandle) {
                 self.judHidePurchseHandle(hideShowPurchase);
             }
+        } else {
+//          [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error--%@",error);
     }];
 }
@@ -126,7 +129,9 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        if (self.vertifitePasswordHandle) {
+            self.vertifitePasswordHandle(1011);
+        }
         NSLog(@"验证登录密码 -- %ld",(long)error.code);
     }];
 }
@@ -292,6 +297,7 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"%ld",(long)error.code);
     }];
 }
@@ -355,7 +361,7 @@
     }
 }
 
-#pragma mark - 截取时间前面的10位 2013-11-17T11:59:22+08:00
+#pragma mark - 截取时间前面的10位 2013-11-17T11:59:22+08:00 ->> 2013-11-17
 - (NSString *)interceptStr:(NSString *)dateStr {
     if (dateStr.length <= 10) {
         return dateStr;
@@ -377,7 +383,7 @@
 }
 
 #pragma mark - 两个时间差
-- (NSTimeInterval)intervalForTimeStr:(NSString *)timeStr { //timeStr 为东八区时间串
+- (NSTimeInterval)intervalForTimeStr:(NSString *)timeStr { //timeStr 为0区时间串
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -392,15 +398,22 @@
     return endInterval - nowInterval;
 }
 
-- (NSDate *)getChinaTime:(NSDate *)date {//计算东八区的时间
+- (NSDate *)getChinaTime:(NSDate *)date {//在date上不加时间 -- 计算0区的时间
     NSTimeZone* localTimeZone = [NSTimeZone localTimeZone];//获取0时区
     NSInteger offset = [localTimeZone secondsFromGMTForDate:date];//计算世界时间与本地时区的时间偏差值
     NSDate *localDate = [date dateByAddingTimeInterval:offset];//世界时间＋偏差值 得出中国区时间
     return localDate;
 }
 
-//将世界时间串换成东八区时间串
-- (NSString *)changeToEight:(NSString *)timeStr { //timeStr 为世界时间串，少于东八区8个小时
+- (NSDate *)getChinaEastEightTime:(NSDate *)date {//在date上加8小时 -- 东八区的时间
+    NSTimeZone* localTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0800"];//获取本地时区(中国时区)
+    NSInteger offset = [localTimeZone secondsFromGMTForDate:date];//计算世界时间与本地时区的时间偏差值
+    NSDate *localDate = [date dateByAddingTimeInterval:offset];//世界时间＋偏差值 得出中国区时间
+    return localDate;
+}
+
+//将世界时间串换成东0区时间串
+- (NSString *)changeToEight:(NSString *)timeStr { //timeStr 为世界时间串
     NSString *dateStr = [self changeStypeForTime:timeStr];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
@@ -449,6 +462,7 @@
 }
 
 - (CGFloat)heightForString:(NSString *)title font:(NSInteger)font width:(CGFloat)width {
+    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 0)];
     label.font = [UIFont fontWithName:@"OpenSans" size:font];
     label.numberOfLines = 0;
@@ -456,6 +470,17 @@
     [label sizeToFit];
     CGSize size = label.frame.size;
     return size.height;
+}
+
+- (CGFloat)widthForString:(NSString *)title font:(NSInteger)font {
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 28)];
+    label.font = [UIFont fontWithName:@"OpenSans" size:font];
+    label.numberOfLines = 0;
+    label.text = title;
+    [label sizeToFit];
+    CGSize size = label.frame.size;
+    return size.width;
 }
 
 #pragma mark - 屏幕横竖屏

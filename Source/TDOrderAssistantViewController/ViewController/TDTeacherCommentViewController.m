@@ -204,7 +204,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:self.userName forKey:@"username"];
     [params setValue:self.studentName forKey:@"student_username"];
-    [params setValue:@"6" forKey:@"pagesize"];
+    [params setValue:@"20" forKey:@"pagesize"];
     [params setValue:@(self.page) forKey:@"pageindex"];
     
     if (self.selectId.length > 0 ) {

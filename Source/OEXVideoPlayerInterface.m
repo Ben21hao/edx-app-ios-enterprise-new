@@ -103,8 +103,8 @@
         return;
     }
 
-    float timeinterval = [[OEXInterface sharedInterface] lastPlayedIntervalForVideo:video];
-    [self updateLastPlayedVideoWith:video];
+    float timeinterval = [[OEXInterface sharedInterface] lastPlayedIntervalForVideo:video];//
+    [self updateLastPlayedVideoWith:video]; //
     [self playVideoFromURL:url withTitle:video.summary.name timeInterval:timeinterval];
 }
 

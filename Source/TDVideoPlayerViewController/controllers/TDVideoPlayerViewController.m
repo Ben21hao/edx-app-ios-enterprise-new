@@ -236,6 +236,7 @@ static const NSTimeInterval RewindTimeInterval = 30;
         self.isHalfScreen = YES;
 //        [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight];
         [self orientationChange:YES type:orientation];
+        
     } else if (orientation == UIDeviceOrientationLandscapeRight) {//右4
         self.isHalfScreen = YES;
         [self orientationChange:YES type:orientation];
@@ -246,24 +247,24 @@ static const NSTimeInterval RewindTimeInterval = 30;
     return self.isHalfScreen;
 }
 
-- (BOOL)shouldAutorotate {
-    return YES;
-}
+//- (BOOL)shouldAutorotate {
+//    return YES;
+//}
 
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait;
-}
+//- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+//    return UIInterfaceOrientationMaskPortrait;
+//}
 
-- (void)orientationChange:(BOOL)landscapeRight type:(NSInteger)type {
+- (void)orientationChange:(BOOL)hiddenBar type:(NSInteger)type {
     
     if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
         [self prefersStatusBarHidden];//隐藏电池条
         [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
     }
     
-    [self.navigationController setNavigationBarHidden:landscapeRight animated:YES];//隐藏导航栏
+    [self.navigationController setNavigationBarHidden:hiddenBar animated:YES];//隐藏导航栏
     
-    if (landscapeRight) {
+    if (hiddenBar) {
         self.barView.fullScreenButton.selected = YES;
         
         [UIView animateWithDuration:0.3f animations:^{

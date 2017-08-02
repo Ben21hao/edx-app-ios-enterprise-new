@@ -19,7 +19,7 @@ class CourseCatalogViewController: UIViewController, CoursesTableViewControllerD
     
     init(environment : Environment) {
         self.environment = environment
-        self.tableController = CoursesTableViewController(environment: environment, context: .CourseCatalog)
+        self.tableController = CoursesTableViewController(environment: environment, context: .CourseCatalog, whereFrom: 1)
         super.init(nibName: nil, bundle: nil)
         
 //        self.navigationItem.title = Strings.findCourses

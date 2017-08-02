@@ -16,6 +16,8 @@
 @property (nonatomic,strong) UIButton *handinButton;
 @property (nonatomic,strong) TDBaseToolModel *baseTool;
 
+@property (nonatomic,strong) UIActivityIndicatorView *activityView;
+
 @end
 
 @implementation TDBindEmailViewController
@@ -55,6 +57,8 @@
 
 - (void)handinToService { 
     
+    [self.activityView startAnimating];
+    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:self.username forKey:@"username"];
     [params setValue:self.emailTextField.text forKey:@"email"];
@@ -62,6 +66,9 @@
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [self.activityView stopAnimating];
+        
         NSDictionary *respondDic = (NSDictionary *)responseObject;
         id code = respondDic[@"code"];
         
@@ -69,24 +76,31 @@
             if (self.bindEmailHandle) {
                 self.bindEmailHandle(self.emailTextField.text);
             }
-            TDBindSuccessViewController *successVC = [[TDBindSuccessViewController alloc] init];
-            [self.navigationController pushViewController:successVC animated:YES];
+            [self gotoSuccessVc];
             
-//        } else if ([code intValue] == 402) {
-//            [self.view makeToast:NSLocalizedString(@"EMAIL_AREADY_SEND", nil) duration:1.08 position:CSToastPositionCenter];
+        } else if ([code intValue] == 402) {
+            [self gotoSuccessVc];
             
-        }  else if ([code intValue] == 500) {
-            [self.view makeToast:NSLocalizedString(@"UNKNOWN_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:NSLocalizedString(@"EMAIL_AREADY_SEND", nil) duration:1.08 position:CSToastPositionCenter];
             
         } else if ([code  intValue] == 403) {
             [self.view makeToast:NSLocalizedString(@"EMAIL_IS_REGISTERED", nil) duration:1.08 position:CSToastPositionCenter];
             
         }  else {
+            [self.view makeToast:NSLocalizedString(@"EMAIL_SEND_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
+            
             NSLog(@"验证登录密码 -- %@",respondDic[@"msg"]);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.activityView stopAnimating];
+        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"验证登录密码 -- %ld",(long)error.code);
     }];
+}
+
+- (void)gotoSuccessVc {
+    TDBindSuccessViewController *successVC = [[TDBindSuccessViewController alloc] init];
+    [self.navigationController pushViewController:successVC animated:YES];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -108,6 +122,10 @@
     [self.handinButton setTitle:NSLocalizedString(@"SUBMIT", nil) forState:UIControlStateNormal];
     [self.handinButton addTarget:self action:@selector(handinButtonAcion:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.handinButton];
+    
+    self.activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [self.activityView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhite];
+    [self.view addSubview:self.activityView];
 }
 
 - (void)setViewConstraint {
@@ -123,6 +141,11 @@
         make.left.mas_equalTo(self.view.mas_left).offset(18);
         make.right.mas_equalTo(self.view.mas_right).offset(-18);
         make.height.mas_equalTo(39);
+    }];
+    
+    [self.activityView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.handinButton.mas_centerY);
+        make.right.mas_equalTo(self.handinButton.mas_right).offset(-8);
     }];
 }
 

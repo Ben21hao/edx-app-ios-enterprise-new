@@ -51,9 +51,9 @@
 - (UIButton *)setButtonConstraint:(NSString *)title backGroundColor:(NSString *)color1 titleColor:(NSString *)color2 {
     
     UIButton *button   = [[UIButton alloc] init];
-    button.backgroundColor = [UIColor colorWithHexString:color1];
+//    button.backgroundColor = [UIColor colorWithHexString:color1];
     [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor colorWithHexString:color2] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithHexString:color1] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     button.layer.cornerRadius = 4.0;
     button.showsTouchWhenHighlighted = YES;
