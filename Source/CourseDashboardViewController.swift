@@ -142,7 +142,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
             make.edges.equalTo(view)
         }
         
-        addShareButton(courseCard)
+//        addShareButton(courseCard)
         
         stackView.axis = .Vertical
         

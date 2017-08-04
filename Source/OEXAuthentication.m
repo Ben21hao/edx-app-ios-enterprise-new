@@ -76,7 +76,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
                 
                 //                NSLog(@"url -- %@ , dictionary--%@",url,dictionary);
                 id code = dictionary[@"code"];
-                NSLog(@"接口--------->>>%@",code);
+                NSLog(@"接口--------->>>%@ ------>> %@",code,dictionary);
                 
                 [[NSUserDefaults standardUserDefaults] setValue:code forKey:@"User_Login_Failed_Code"];//400 密码错误， 402 账号未激活， 403 账号未激活 ，404 账号不存在
                 
@@ -204,8 +204,10 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
 
 
 + (void)handleSuccessfulLoginWithToken:(OEXAccessToken*)token completionHandler:(OEXURLRequestHandler)completionHandler {
+    
     OEXAuthentication* auth = [[OEXAuthentication alloc] init];
     [auth getUserDetailsWith:token completionHandler:^(NSData* userdata, NSURLResponse* userresponse, NSError* usererror) {
+        
         NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*) userresponse;
         if(httpResp.statusCode == 200) {
             NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:userdata options:kNilOptions error:nil];

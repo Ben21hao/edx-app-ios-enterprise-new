@@ -140,6 +140,9 @@
         case 1:
             cell.textLabel.text = NSLocalizedString(@"PREPAID_COIS", nil);
             cell.detailTextLabel.attributedText = [self.toolModel setDetailString:[NSString stringWithFormat:@"%@%@",self.iconStr,NSLocalizedString(@"COINS_VALUE", nil)] withFont:14 withColorStr:colorHexStr9];
+            
+            cell.textLabel.hidden = !self.is_eliteu_course;
+            cell.detailTextLabel.hidden = !self.is_eliteu_course;
             break;
         case 2:
         {
@@ -157,9 +160,14 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+
     if (indexPath.row == 2) {
         CGSize size = [self.toolModel getSringSize:self.quetionStr withFont:14];
         return 58 + size.height;
+        
+    } else if (indexPath.row == 1) {
+        return self.is_eliteu_course ? 48 : 0;
+        
     } else {
         return 48;
     }
@@ -336,7 +344,7 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
 

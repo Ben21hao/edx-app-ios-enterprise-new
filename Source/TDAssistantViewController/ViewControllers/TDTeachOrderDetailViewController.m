@@ -84,7 +84,7 @@
                 cell.detailTextLabel.text = [self.model.order_type intValue] == 1 ? NSLocalizedString(@"APPOINTMEN_SERVICE", nil) : NSLocalizedString(@"INSTANT_SERVICE", nil);
                 break;
             case 4:
-                cell.textLabel.text = NSLocalizedString(@"RESERCED_PERIOD", nil);
+                cell.textLabel.text = NSLocalizedString(@"RESERCED_PERIOD", nil); //预约时间
                 cell.detailTextLabel.text = self.model.order_time_grap;
                 break;
             case 5:
@@ -96,7 +96,7 @@
                 cell.detailTextLabel.attributedText = [toolModel setDetailString:[NSString stringWithFormat:@"%.2f%@",[self.model.cost_coin floatValue],NSLocalizedString(@"COINS_VALUE", nil)] withFont:14 withColorStr:colorHexStr9];
                 break;
             case 7:
-                cell.textLabel.text = NSLocalizedString(@"COINS_PAID", nil);
+                cell.textLabel.text = NSLocalizedString(@"COINS_PAID", nil); //实付宝典
                 cell.detailTextLabel.attributedText = [toolModel setDetailString:[NSString stringWithFormat:@"%.2f%@",[self.model.real_cost_coin floatValue],NSLocalizedString(@"COINS_VALUE", nil)]withFont:14 withColorStr:colorHexStr9];
                 break;
             case 8:

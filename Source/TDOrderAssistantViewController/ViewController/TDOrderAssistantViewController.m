@@ -30,6 +30,8 @@
 @property (nonatomic,strong) UILabel *nullLabel;
 @property (nonatomic,strong) TDBaseView *loadingView;
 
+@property (nonatomic,assign) BOOL is_eliteu_course;//是否是付费课程
+
 @end
 
 @implementation TDOrderAssistantViewController
@@ -49,6 +51,7 @@
     [self setViewConstraint];
     
     self.baseTool = [[TDBaseToolModel alloc] init];
+    self.is_eliteu_course = YES; //默认是付费的
     
     self.page = 1;
     [self requestData:1];
@@ -115,6 +118,7 @@
         id code = responseDic[@"code"];
         if ([code intValue] == 200) {
             
+//            self.is_eliteu_course = [responseDic[@"is_eliteu_course"] boolValue];
             NSArray *dataArray = responseDic[@"data"];
             if (dataArray.count > 0) {
                 for (int i = 0; i < dataArray.count; i ++) {
@@ -217,6 +221,7 @@
     timesVc.assistantName = username;
     timesVc.username = self.myName;
     timesVc.courseId = self.courseId;
+    timesVc.is_eliteu_course = self.is_eliteu_course;
     [self.navigationController pushViewController:timesVc animated:YES];
 }
 

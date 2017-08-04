@@ -826,6 +826,7 @@
 		B54C8AC81EA8BF670002FCED /* WYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8AC71EA8BF670002FCED /* WYAlertView.m */; };
 		B54C8ACB1EA8BF8A0002FCED /* UIColor+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8ACA1EA8BF8A0002FCED /* UIColor+extend.m */; };
 		B54C8ACF1EA8BF950002FCED /* JHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B54C8ACE1EA8BF950002FCED /* JHTextField.m */; };
+		B5500A8C1F316B450030B837 /* libVhallLiveApi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5500A8B1F316B450030B837 /* libVhallLiveApi.a */; };
 		B55209F81EB9AD8500EC51C9 /* TDRechargeSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B55209F71EB9AD8500EC51C9 /* TDRechargeSuccessViewController.m */; };
 		B55209FD1EB9C96300EC51C9 /* TDCourseCatalogDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55209FC1EB9C96300EC51C9 /* TDCourseCatalogDetailViewController.swift */; };
 		B55209FF1EB9C98100EC51C9 /* TDCourseCatalogDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55209FE1EB9C98100EC51C9 /* TDCourseCatalogDetailView.swift */; };
@@ -2210,6 +2211,7 @@
 		B54C8ACA1EA8BF8A0002FCED /* UIColor+extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+extend.m"; sourceTree = "<group>"; };
 		B54C8ACD1EA8BF950002FCED /* JHTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHTextField.h; sourceTree = "<group>"; };
 		B54C8ACE1EA8BF950002FCED /* JHTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHTextField.m; sourceTree = "<group>"; };
+		B5500A8B1F316B450030B837 /* libVhallLiveApi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libVhallLiveApi.a; sourceTree = "<group>"; };
 		B55209F61EB9AD8500EC51C9 /* TDRechargeSuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDRechargeSuccessViewController.h; sourceTree = "<group>"; };
 		B55209F71EB9AD8500EC51C9 /* TDRechargeSuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRechargeSuccessViewController.m; sourceTree = "<group>"; };
 		B55209FC1EB9C96300EC51C9 /* TDCourseCatalogDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDCourseCatalogDetailViewController.swift; sourceTree = "<group>"; };
@@ -2443,6 +2445,7 @@
 			files = (
 				B52E8C221F0B7F0600F3170D /* libbz2.1.0.tbd in Frameworks */,
 				B52E8C201F0B7DCE00F3170D /* JavaScriptCore.framework in Frameworks */,
+				B5500A8C1F316B450030B837 /* libVhallLiveApi.a in Frameworks */,
 				B518BF8C1EA9ECCA0027569D /* Security.framework in Frameworks */,
 				B4A24D0D19EE8A6600CE5010 /* CoreMedia.framework in Frameworks */,
 				805329121B0EA2DC0093B177 /* QuartzCore.framework in Frameworks */,
@@ -4298,6 +4301,7 @@
 			isa = PBXGroup;
 			children = (
 				B52E8BF61F0B7B1000F3170D /* CameraEngineRtmp.h */,
+				B5500A8B1F316B450030B837 /* libVhallLiveApi.a */,
 				B52E8BF71F0B7B1000F3170D /* kodak.inf */,
 				B52E8BF91F0B7B1000F3170D /* libVHallSDK.a */,
 				B52E8BFA1F0B7B1000F3170D /* libVHLivePlay.a */,

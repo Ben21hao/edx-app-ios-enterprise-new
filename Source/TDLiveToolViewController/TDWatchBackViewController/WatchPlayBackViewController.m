@@ -173,7 +173,7 @@ static AnnouncementView* announcementView = nil;
     [self.docBtn setTitle:NSLocalizedString(@"DOCUMENT_TEXT", nil) forState:UIControlStateNormal];
     [self.detalBtn setTitle:NSLocalizedString(@"DETAILS_TEXT", nil) forState:UIControlStateNormal];
     
-    _moviePlayer = [[VHallMoviePlayer alloc]initWithDelegate:self];
+    _moviePlayer = [[VHallMoviePlayer alloc] initWithDelegate:self];
     
     self.hlsMoviePlayer = [[MPMoviePlayerController alloc] init];
     self.hlsMoviePlayer.controlStyle = MPMovieControlStyleDefault;
@@ -519,7 +519,7 @@ static AnnouncementView* announcementView = nil;
         }
         VHLog(@"开始加载加载");
         
-    } else if(self.hlsMoviePlayer.loadState == (MPMovieLoadStatePlaythroughOK|MPMovieLoadStatePlayable)) {
+    } else if(self.hlsMoviePlayer.loadState == (MPMovieLoadStatePlaythroughOK | MPMovieLoadStatePlayable)) {
         if (self.hlsMoviePlayer.view) {
             [MBProgressHUD hideAllHUDsForView:self.hlsMoviePlayer.view animated:YES];
         }

@@ -29,7 +29,6 @@
 @property (nonatomic,strong) NSString *timeStr;
 @property (nonatomic,strong) NSString *iconStr;
 @property (nonatomic,assign) float effectiveIcon;//可用宝典
-@property (nonatomic,assign) BOOL isSuccess;
 @property (nonatomic,assign) NSInteger failType;
 
 @end
@@ -49,7 +48,6 @@
     
     [self setviewConstraint];
     self.baseTool = [[TDBaseToolModel alloc] init];
-    self.isSuccess = NO;
     
     [self getUserDetailMessage];
   
@@ -73,16 +71,17 @@
 }
 
 #pragma mark - 预约结果
-- (void)gotoResultView {
+- (void)gotoResultView:(BOOL)isSuccess {
     
     TDOrderTeacherSuccessViewController *successVC = [[TDOrderTeacherSuccessViewController alloc] init];
     successVC.whereFrom = self.whereFrom;
-    successVC.isSuccess = self.isSuccess;
+    successVC.isSuccess = isSuccess;
     successVC.quetionStr = self.inputView.text;
     successVC.iconStr = self.iconStr;
     successVC.timeStr = self.timeStr;
     successVC.failType = self.failType;
     successVC.username = self.username;
+    successVC.is_eliteu_course = self.is_eliteu_course;
     [self.navigationController pushViewController:successVC animated:YES];
 
 }
@@ -150,13 +149,13 @@
         id code = responseDic[@"code"];
         NSInteger codeType = [code integerValue];
         if (codeType == 200) {
-            self.isSuccess = YES;
+            [self gotoResultView:YES];
             
         } else {
-            self.isSuccess = NO;
+            [self gotoResultView:NO];
             self.failType = codeType;
         }
-        [self gotoResultView];
+        
         NSLog(@"预约信息 -- %@ ----- %@",code,responseDic[@"msg"]);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -188,6 +187,9 @@
     cell.detailTextLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     cell.detailTextLabel.textColor = [UIColor colorWithHexString:colorHexStr9];
     
+    cell.textLabel.hidden = !self.is_eliteu_course;
+    cell.detailTextLabel.hidden = !self.is_eliteu_course;
+    
     switch (indexPath.row) {
         case 0:
             cell.textLabel.text = NSLocalizedString(@"PAYMENT_STANDARD", nil);
@@ -196,6 +198,10 @@
         case 1:
             cell.textLabel.text = NSLocalizedString(@"RESERCED_PERIOD", nil);
             cell.detailTextLabel.text = self.timeStr;
+            
+            cell.textLabel.hidden = NO;
+            cell.detailTextLabel.hidden = NO;
+            
             break;
         case 2:
             cell.textLabel.text = NSLocalizedString(@"PREPAID_COIS", nil);
@@ -209,6 +215,15 @@
             break;
     }
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row == 1) {
+        return 48;
+    } else {
+        return self.is_eliteu_course ? 48 : 0;
+    }
 }
 
 #pragma mark - textViewDelegate
@@ -292,7 +307,7 @@
     }];
     
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.headerView.mas_left).offset(15);
+        make.left.mas_equalTo(self.headerView.mas_left).offset(0);
         make.bottom.mas_equalTo(self.headerView.mas_bottom).offset(0);
         make.right.mas_equalTo(self.headerView.mas_right).offset(0);
         make.height.mas_equalTo(0.5);
@@ -326,6 +341,9 @@
         make.right.mas_equalTo(self.footerView.mas_right).offset(-8);
         make.centerY.mas_equalTo(self.footerView.mas_centerY);
     }];
+    
+    self.messageLabel.hidden = !self.is_eliteu_course;
+    
     return self.footerView;
 }
 
