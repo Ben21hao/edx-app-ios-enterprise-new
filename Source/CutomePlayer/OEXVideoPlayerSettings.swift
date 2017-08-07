@@ -39,19 +39,21 @@ private func setupTable(table: UITableView) {
 @objc class OEXVideoPlayerSettings : NSObject {
     
     let optionsTable: UITableView = UITableView(frame: CGRectZero, style: .Plain)
+    
     private lazy var settings: [OEXVideoPlayerSetting] = {
+        
         self.updateMargins() //needs to be done here because the table loads the data too soon otherwise and it's nil
         
         let rows:[RowType] = [("0.5x",  OEXVideoSpeed.Slow), ("1.0x", OEXVideoSpeed.Default), ("1.5x", OEXVideoSpeed.Fast), ("2.0x", OEXVideoSpeed.XFast)]
+        
         let speeds = OEXVideoPlayerSetting(title: Strings.videoSpeed, rows:rows , isSelected: { (row) -> Bool in
             var selected = false
             let savedSpeed = OEXInterface.getCCSelectedPlaybackSpeed()
             
             let speed = rows[row].value as! OEXVideoSpeed
-            
             selected = savedSpeed == speed
-            
             return selected
+            
             }) {[weak self] value in
                 let speed = value as! OEXVideoSpeed
                 self?.delegate?.setPlaybackSpeed(speed)

@@ -127,7 +127,7 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
     var disabledFields = [String]()
     var imagePicker: ProfilePictureTaker?
     var banner: ProfileBanner!
-    let footer = UIView()
+    let footer = UIView() //表尾
     var titleLabel : UILabel?
     
     init(profile: UserProfile, environment: Environment) {
@@ -146,7 +146,8 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
     private let headerHeight: CGFloat = 72
     private let spinner = SpinnerView(size: SpinnerView.Size.Large, color: SpinnerView.Color.Primary)
     
-    private func makeHeader() -> UIView {
+    private func makeHeader() -> UIView { //表头
+        
         banner = ProfileBanner(editable: true) { [weak self] in
             self?.imagePicker = ProfilePictureTaker(delegate: self!)
             self?.imagePicker?.start(self!.profile.hasProfileImage)
@@ -178,12 +179,12 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
         }
         
         let bottomLine = UIView()
-        bottomLine.backgroundColor = OEXStyles.sharedStyles().baseColor6()
+        bottomLine.backgroundColor = OEXStyles.sharedStyles().baseColor7()
         bannerWrapper.addSubview(bottomLine)
         bottomLine.snp_makeConstraints { (make) -> Void in
             make.left.equalTo(bannerWrapper)
             make.right.equalTo(bannerWrapper)
-            make.height.equalTo(1)
+            make.height.equalTo(0.5)
             make.bottom.equalTo(bannerWrapper)
         }
         
@@ -196,14 +197,15 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
         setNaviewgatinBar()
         
         tableView.tableHeaderView = makeHeader()
-        tableView.tableFooterView = footer //get rid of extra lines when the content is shorter than a screen
+        tableView.tableFooterView = footer
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.separatorColor = OEXStyles.sharedStyles().baseColor7()
         tableView.estimatedRowHeight = 48
         if #available(iOS 9.0, *) {
             tableView.cellLayoutMarginsFollowReadableWidth = false
         }
         
-        if let form = JSONFormBuilder(jsonFile: "profiles") {
+        if let form = JSONFormBuilder(jsonFile: "profiles") { //profiles.json
             JSONFormBuilder.registerCells(tableView)
             fields = form.fields!
         }
@@ -304,9 +306,9 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let field = fields[indexPath.section]
         let cell = tableView.dequeueReusableCellWithIdentifier(field.cellIdentifier, forIndexPath: indexPath)
-//        cell.selectionStyle = UITableViewCellSelectionStyle.None
         cell.applyStandardSeparatorInsets()
         
         guard let formCell = cell as? FormCell else { return cell }

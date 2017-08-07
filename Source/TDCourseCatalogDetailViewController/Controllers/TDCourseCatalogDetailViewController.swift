@@ -250,6 +250,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         vc.whereFrom = 2
         vc.courseId = self.courseID
         vc.myName = self.username
+        vc.company_id = self.companyID
         self.navigationController?.pushViewController(vc, animated: true)
     }
 

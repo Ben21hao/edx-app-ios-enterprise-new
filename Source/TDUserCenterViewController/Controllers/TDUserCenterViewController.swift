@@ -163,6 +163,7 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     func gotoAssistantServiceVc() {
         let assistantVc = TDAssistantServiceViewController()
         assistantVc.username = session.currentUser?.username
+        assistantVc.company_id = session.currentUser?.company_id
         self.navigationController?.pushViewController(assistantVc, animated: true)
     }
     

@@ -19,8 +19,8 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
     let courseQuerier : CourseOutlineQuerier
     let loader = BackedStream<CourseBlock>()
     
-        let loadController : LoadStateViewController
-    let videoController : OEXVideoPlayerInterface
+    let loadController : LoadStateViewController
+    let videoController : OEXVideoPlayerInterface //播放章节的视频
     let videoPlayerVC : TDVideoUrlPlayController//用来播放url的
     var isUrlVideo = false
     

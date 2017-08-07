@@ -100,6 +100,7 @@
     [dic setValue:self.courseId forKey:@"course_id"];
     [dic setValue:@(self.page) forKey:@"pageindex"];
     [dic setValue:@"8" forKey:@"pagesize"];
+    [dic setValue:self.company_id forKey:@"company_id"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/assistants/",ELITEU_URL];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];

@@ -487,7 +487,7 @@ static const NSTimeInterval RewindTimeInterval = 30;
     self.playButton.hidden = YES;
     self.captionView.hidden = YES;
     self.captionView.alpha = 0.0;
-    self.captionView.titleArray = @[@"字幕"];
+    self.captionView.titleArray = @[NSLocalizedString(@"CLOSED_CAPTIONS", nil)];
 }
 
 - (void)didReceiveMemoryWarning {

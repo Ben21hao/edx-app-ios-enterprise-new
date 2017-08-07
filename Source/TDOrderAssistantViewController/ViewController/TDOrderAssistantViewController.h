@@ -14,5 +14,6 @@
 @property (nonatomic,strong) NSString *courseId;//课程id
 @property (nonatomic,strong) NSString *myName;//学生用户名
 @property (nonatomic,strong) NSString *effectIcon;//可用宝典
+@property (nonatomic,strong) NSString *company_id;
 
 @end

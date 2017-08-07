@@ -76,6 +76,7 @@
         TDSubServiceViewController *subViewController = [[TDSubServiceViewController alloc] init];
         subViewController.whereFrom = i;
         subViewController.username = self.username;
+        subViewController.company_id = self.company_id;
         subViewController.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
         [self addChildViewController:subViewController];
     }

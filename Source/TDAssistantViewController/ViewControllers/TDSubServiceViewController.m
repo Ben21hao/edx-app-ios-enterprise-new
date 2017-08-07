@@ -162,6 +162,7 @@
     [dic setValue:type == 0 ? @"1" : @"-1" forKey:@"status"];/* status 待服务 1; 已取消 -1*/
     [dic setValue:@"10" forKey:@"pagesize"];
     [dic setValue:@(self.page) forKey:@"pageindex"];
+    [dic setValue:self.company_id forKey:@"company_id"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/assistantserver/%@",ELITEU_URL,self.username];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -241,6 +242,7 @@
     [dic setValue:@"2" forKey:@"status"];/*已服务 2 */
     [dic setValue:@"10" forKey:@"pagesize"];
     [dic setValue:@(self.page) forKey:@"pageindex"];
+    [dic setValue:self.company_id forKey:@"company_id"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/assistantserverfinshed/%@",ELITEU_URL,self.username];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];

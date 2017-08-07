@@ -12,5 +12,6 @@
 @interface TDAssistantServiceViewController : TDBaseViewController
 
 @property (nonatomic,strong) NSString *username;
+@property (nonatomic,strong) NSString *company_id;
 
 @end

@@ -159,6 +159,7 @@ public class CourseOutlineViewController :
         vc.whereFrom = 1
         vc.courseId = self.courseID
         vc.myName = session.currentUser?.username
+        vc.company_id = session.currentUser?.company_id
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

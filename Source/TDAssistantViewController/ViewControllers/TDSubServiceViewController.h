@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger,TDAssistantFrom) {
 
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSString *username;
+@property (nonatomic,strong) NSString *company_id;
 @property (nonatomic,assign) NSInteger whereFrom;
 
 

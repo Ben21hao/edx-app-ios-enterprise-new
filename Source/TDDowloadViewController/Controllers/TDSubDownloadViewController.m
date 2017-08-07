@@ -104,7 +104,7 @@
     }];
     
     self.noDataLabel = [[UILabel alloc] init];
-    self.noDataLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
+    self.noDataLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     self.noDataLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     self.noDataLabel.text = [Strings noVideosDownloaded];
     self.noDataLabel.hidden = YES;
