@@ -627,7 +627,7 @@ static OEXInterface* _sharedInterface = nil;
 
     [self.progressViews makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:!self.reachable]];
     
-    [self updateTotalProgress];
+    [self updateTotalProgress]; //网络发生变化，就立即处理
 }
 
 #pragma mark NetworkInterface Delegate
@@ -1457,7 +1457,7 @@ static OEXInterface* _sharedInterface = nil;
     if([_timer isValid]) {
         [_timer invalidate];
     }
-    _timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(updateTotalProgress) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(updateTotalProgress) userInfo:nil repeats:YES]; //2秒更新一次
     [_timer fire];
     [self startAllBackgroundDownloads];
 }

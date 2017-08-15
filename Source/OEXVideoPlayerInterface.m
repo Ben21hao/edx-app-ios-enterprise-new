@@ -30,6 +30,7 @@
 @property(nonatomic, strong) OEXHelperVideoDownload* currentVideo;
 @property(nonatomic, strong) OEXHelperVideoDownload* lastPlayedVideo;
 @property(nonatomic, strong) NSURL* currentUrl;
+@property (nonatomic,assign) BOOL isLand;
 
 @end
 
@@ -50,20 +51,11 @@
     [super viewDidLoad];
     _videoPlayerVideoView = self.view;
     self.fadeInOnLoad = YES;
+    self.isLand = NO;
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     //Add observer
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exitFullScreenMode:) name:MPMoviePlayerDidExitFullscreenNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterFullScreenMode:) name:MPMoviePlayerDidEnterFullscreenNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(playbackStateChanged:)
-                                                 name:MPMoviePlayerPlaybackStateDidChangeNotification object:_moviePlayerController];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(playbackEnded:)
-                                                 name:MPMoviePlayerPlaybackDidFinishNotification object:_moviePlayerController];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+    [self addNotification];
     
     //create a player
     self.moviePlayerController = [[CLVideoPlayer alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
@@ -81,6 +73,17 @@
     if(!success) {
         OEXLogInfo(@"VIDEO", @"error: could not set audio session category => AVAudioSessionCategoryPlayback");
     }
+}
+
+- (void)addNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exitFullScreenMode:) name:MPMoviePlayerDidExitFullscreenNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterFullScreenMode:) name:MPMoviePlayerDidEnterFullscreenNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackStateChanged:) name:MPMoviePlayerPlaybackStateDidChangeNotification object:_moviePlayerController];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackEnded:) name:MPMoviePlayerPlaybackDidFinishNotification object:_moviePlayerController];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(potraitAction) name:@"VideoView_InterFace_Orientation_Potraint" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(landsAction) name:@"VideoView_InterFace_Orientation_Lands" object:nil];
 }
 
 - (void) enableFullscreenAutorotation {
@@ -309,6 +312,15 @@
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
+//影响到试听课程的横竖屏
+- (void)potraitAction {
+    self.isLand = NO;
+}
+
+- (void)landsAction {
+    self.isLand = YES;
+}
+
 - (void)viewDidLayoutSubviews {
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         _width = 700.f;
@@ -394,6 +406,9 @@
 }
 
 - (BOOL)prefersStatusBarHidden {
+    if (self.isLand) {
+        return YES;
+    }
     return [self.moviePlayerController isFullscreen];
 }
 

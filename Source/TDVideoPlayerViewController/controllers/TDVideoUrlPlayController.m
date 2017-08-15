@@ -80,7 +80,7 @@ static const NSTimeInterval RewindTimeInterval = 30;
 }
 
 - (BOOL)prefersStatusBarHidden {
-    return YES;
+    return self.hideStatusBar;
 }
 
 /*

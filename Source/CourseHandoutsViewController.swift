@@ -72,9 +72,9 @@ public class CourseHandoutsViewController: OfflineSupportViewController, UIWebVi
         
         self.titleL = UILabel(frame:CGRect(x:0, y:0, width:40, height:40))
         self.titleL?.text = Strings.courseHandouts
-        self.navigationItem.titleView = self.titleL
         self.titleL?.font = UIFont(name:"OpenSans",size:18.0)
         self.titleL?.textColor = UIColor.whiteColor()
+        self.navigationItem.titleView = self.titleL
         
         let leftButton = UIButton.init(frame: CGRectMake(0, 0, 48, 48))
         leftButton.setImage(UIImage.init(named: "backImagee"), forState: .Normal)
@@ -143,7 +143,7 @@ public class CourseHandoutsViewController: OfflineSupportViewController, UIWebVi
             } else {
                 let displayHTML = OEXStyles.sharedStyles().styleHTMLContent(htmlStr, stylesheet: "handouts-announcements")
                 let apiHostUrl = OEXConfig.sharedConfig().apiHostURL()
-                self.webView.loadHTMLString(displayHTML!, baseURL: apiHostUrl)
+                self.webView.loadHTMLString(displayHTML!, baseURL: apiHostUrl)//显示的url
             }
         }
     }
@@ -157,7 +157,8 @@ public class CourseHandoutsViewController: OfflineSupportViewController, UIWebVi
     public func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         if (navigationType != UIWebViewNavigationType.Other) {
             if let URL = request.URL {
-                 UIApplication.sharedApplication().openURL(URL)
+//                 UIApplication.sharedApplication().openURL(URL)
+                gotoWebView(URL)
                 return false
             }
         }
@@ -170,5 +171,12 @@ public class CourseHandoutsViewController: OfflineSupportViewController, UIWebVi
     
     public func webViewDidFinishLoad(webView: UIWebView) {
         self.loadController.state = .Loaded
+    }
+    
+    func gotoWebView(url: NSURL) {
+        let webViewController = TDWebUrlViewController()
+        webViewController.url = url
+        webViewController.titleStr = Strings.courseHandouts
+        self.navigationController?.pushViewController(webViewController, animated: true)
     }
 }

@@ -946,7 +946,7 @@
 "PAY_AUTHENRIZATE_FAIL" = "Authorization fail";
 /*请求失败*/
 "NO_SUPPORT_WECHAT" = "Request failed.";
-/*用户不存在*/
+/*网络连接出错*/
 "NETWORK_CONNET_FAIL" = "Network connection error.";
 /*正在处理中*/
 "IS_HANDLE" = "Being processed";
@@ -992,8 +992,6 @@
 "EXCHANGE_FAIL" = "Fail to redeem.";
 /*兑换成功*/
 "EXCHANGE_SUCCESS" = "Redeemed successfully";
-/*请检查网络*/
-"CHECK_NEWWORK" = "Connection Error";
 /*优惠券兑换成功，请及时使用您的优惠券*/
 "EXCHANGE_AND_USE" = "Your coupon is available now. Please use it in time.";
 /*您已经领用过此优惠券*/

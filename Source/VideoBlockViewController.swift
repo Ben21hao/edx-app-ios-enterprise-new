@@ -230,7 +230,7 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
             setRotateViewCostraint(videoController)
             
         } else {
-            //            NSNotificationCenter.defaultCenter().postNotificationName("VideoView_InterFace_Orientation_Potraint", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("VideoView_InterFace_Orientation_Potraint", object: nil)
             self.navigationController?.setToolbarHidden(false, animated: true)
             self.navigationController?.setNavigationBarHidden(false, animated: true)
             
@@ -307,7 +307,7 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
             setPotraitViewCostraint(videoController)
             
         } else {
-            //            NSNotificationCenter.defaultCenter().postNotificationName("VideoView_InterFace_Orientation_Lands", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("VideoView_InterFace_Orientation_Lands", object: nil)
             self.navigationController?.setToolbarHidden(true, animated: true)
             self.navigationController?.setNavigationBarHidden(true, animated: true)
             
@@ -422,18 +422,14 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
             }
             else if videoController.shouldRotate && newCollection.verticalSizeClass == .Compact {
                 videoPlayer.setFullscreen(true, withOrientation: self.currentOrientation())
-                print("ppppppppppppppp")
+                print("视频播放 --->>>>  ppppppppppppppp")
             }
         }
     }
     
-    func validateSubtitleTimer() {
+    func validateSubtitleTimer() { //字幕高亮
         if !subtitleTimer.valid && videoController.moviePlayerController?.controls != nil {
-            subtitleTimer = NSTimer.scheduledTimerWithTimeInterval(1.0,
-                                                                   target: self,
-                                                                   selector: #selector(highlightSubtitle),
-                                                                   userInfo: nil,
-                                                                   repeats: true)
+            subtitleTimer = NSTimer.scheduledTimerWithTimeInterval(0.8, target: self, selector: #selector(highlightSubtitle), userInfo: nil, repeats: true)
         }
     }
     

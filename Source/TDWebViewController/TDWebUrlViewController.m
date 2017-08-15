@@ -1,30 +1,27 @@
 //
-//  TDWebViewController.m
+//  TDWebUrlViewController.m
 //  edX
 //
-//  Created by Elite Edu on 17/1/10.
+//  Created by Elite Edu on 2017/8/15.
 //  Copyright © 2017年 edX. All rights reserved.
 //
 
-#import "TDWebViewController.h"
+#import "TDWebUrlViewController.h"
 #import "edx-Swift.h"
-#import "TDBaseToolModel.h"
 
-@interface TDWebViewController () <WKUIDelegate,WKNavigationDelegate>
+@interface TDWebUrlViewController ()<WKUIDelegate,WKNavigationDelegate>
 
 @property (nonatomic,strong) WKWebView *webview;
-@property (nonatomic,strong) UIButton *agreeButton;
 
 @end
 
-@implementation TDWebViewController
+@implementation TDWebUrlViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     [self configView];
-    [self setViewConstraint];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -42,6 +39,7 @@
 
 #pragma mark - delegate
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    
     [self.loadIngView removeFromSuperview];
 }
 
@@ -59,42 +57,20 @@
 #pragma mark - UI
 - (void)configView {
     
-    self.agreeButton = [[UIButton alloc] init];
-    self.agreeButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
-    self.agreeButton.layer.cornerRadius = 4.0;
-    [self.agreeButton setTitle:NSLocalizedString(@"ENDORSED", nil) forState:UIControlStateNormal];
-    [self.agreeButton addTarget:self action:@selector(agreeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.agreeButton];
-    
     self.webview = [[WKWebView alloc] init];
     self.webview.navigationDelegate = self;
     self.webview.UIDelegate = self;
     self.webview.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.webview];
-}
-
-- (void)setViewConstraint {
-    
-    [self.agreeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view.mas_left).offset(18);
-        make.right.mas_equalTo(self.view.mas_right).offset(-18);
-        make.bottom.mas_equalTo(self.view.mas_bottom).offset(-13);
-        make.height.mas_equalTo(39);
-    }];
     
     [self.webview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.mas_equalTo(self.view);
-        make.bottom.mas_equalTo(self.agreeButton.mas_top).offset(-8);
+        make.left.right.top.bottom.mas_equalTo(self.view);
     }];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
 @end
-
-
