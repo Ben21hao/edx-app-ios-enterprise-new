@@ -172,23 +172,6 @@
     self.holderLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     [self.view addSubview:self.holderLabel];
     
-    self.messageLabel = [[UILabel alloc] init];
-    self.messageLabel.textAlignment = NSTextAlignmentCenter;
-    NSMutableAttributedString *str1 = [self.toolModel setDetailString:NSLocalizedString(@"PAYMENT_NOTE", nil) withFont:14 withColorStr:colorHexStr9];
-    NSMutableAttributedString *str2 = [self.toolModel setDetailString:NSLocalizedString(@"PAYMENT_NOTE_LAST", nil) withFont:14 withColorStr:colorHexStr9];
-    [str1 appendAttributedString:str2];
-    self.messageLabel.attributedText = str1;
-    self.messageLabel.numberOfLines = 0;
-    [self.view addSubview:self.messageLabel];
-    
-    UIView *line = [[UIView alloc] init];
-    line.backgroundColor = [UIColor colorWithHexString:colorHexStr7];
-    [self.view addSubview:line];
-    
-    UIView *line1 = [[UIView alloc] init];
-    line1.backgroundColor = [UIColor colorWithHexString:colorHexStr7];
-    [self.view addSubview:line1];
-    
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view.mas_left).offset(15);
         make.top.mas_equalTo(self.view.mas_top).offset(15);
@@ -211,25 +194,47 @@
         make.top.mas_equalTo(self.inputView.mas_top).offset(8);
     }];
     
-    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view.mas_left).offset(15);
-        make.right.mas_equalTo(self.view.mas_right).offset(-15);
-        make.top.mas_equalTo(self.inputView.mas_bottom).offset(15);
-        make.height.mas_equalTo(0.5);
-    }];
-
-    [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(line.mas_bottom).offset(15);
-        make.left.mas_equalTo(self.view.mas_left).offset(15);
-        make.right.mas_equalTo(self.view.mas_right).offset(-15);
-    }];
     
-    [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view.mas_left).offset(15);
-        make.right.mas_equalTo(self.view.mas_right).offset(-15);
-        make.top.mas_equalTo(self.messageLabel.mas_bottom).offset(15);
-        make.height.mas_equalTo(0.5);
-    }];
+    if (self.is_public_course) {//付费课程才显示
+        
+        self.messageLabel = [[UILabel alloc] init];
+        self.messageLabel.textAlignment = NSTextAlignmentCenter;
+        NSMutableAttributedString *str1 = [self.toolModel setDetailString:NSLocalizedString(@"PAYMENT_NOTE", nil) withFont:14 withColorStr:colorHexStr9];
+        NSMutableAttributedString *str2 = [self.toolModel setDetailString:NSLocalizedString(@"PAYMENT_NOTE_LAST", nil) withFont:14 withColorStr:colorHexStr9];
+        [str1 appendAttributedString:str2];
+        self.messageLabel.attributedText = str1;
+        self.messageLabel.numberOfLines = 0;
+        [self.view addSubview:self.messageLabel];
+        
+        UIView *line = [[UIView alloc] init];
+        line.backgroundColor = [UIColor colorWithHexString:colorHexStr7];
+        [self.view addSubview:line];
+        
+        UIView *line1 = [[UIView alloc] init];
+        line1.backgroundColor = [UIColor colorWithHexString:colorHexStr7];
+        [self.view addSubview:line1];
+        
+        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.view.mas_left).offset(15);
+            make.right.mas_equalTo(self.view.mas_right).offset(-15);
+            make.top.mas_equalTo(self.inputView.mas_bottom).offset(15);
+            make.height.mas_equalTo(0.5);
+        }];
+        
+        [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(line.mas_bottom).offset(15);
+            make.left.mas_equalTo(self.view.mas_left).offset(15);
+            make.right.mas_equalTo(self.view.mas_right).offset(-15);
+        }];
+        
+        [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.view.mas_left).offset(15);
+            make.right.mas_equalTo(self.view.mas_right).offset(-15);
+            make.top.mas_equalTo(self.messageLabel.mas_bottom).offset(15);
+            make.height.mas_equalTo(0.5);
+        }];
+    }
+    
 }
 
 - (UILabel *)setLabelConstraint:(NSString *)title {

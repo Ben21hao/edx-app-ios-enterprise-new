@@ -16,6 +16,6 @@
 @property (nonatomic,strong) NSString *assistantName;//助教username
 @property (nonatomic,copy) void(^appointmentSuccessHandle)();
 
-@property (nonatomic,assign) BOOL is_eliteu_course;//是否是付费课程
+@property (nonatomic,assign) BOOL is_public_course;//是否是付费课程
 
 @end

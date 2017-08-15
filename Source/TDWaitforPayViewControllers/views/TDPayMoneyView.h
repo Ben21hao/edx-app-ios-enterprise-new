@@ -10,7 +10,8 @@
 
 @interface TDPayMoneyView : UIView
 
-@property (nonatomic,strong) UIButton *payButton;
+@property (nonatomic,strong) UIButton *createOrderButton;
 @property (nonatomic,strong) UILabel *moneyLabel;
+@property (nonatomic,strong) UIActivityIndicatorView *activityView;
 
 @end

@@ -48,7 +48,7 @@ public struct CourseCatalogAPI {
         
         return NetworkRequest(
             method: .GET,
-            path : "/api/mobile/enterprise/v0.5/companyfindcourses/", //api/courses/v1/
+            path : "/api/mobile/enterprise/v0.5/companyfindcourses/", //api/courses/v1/courses
             query : query,
             requiresAuth : true,
             deserializer: .JSONResponse(coursesDeserializer)

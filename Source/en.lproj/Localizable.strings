@@ -945,7 +945,7 @@
 /*授权失败*/
 "PAY_AUTHENRIZATE_FAIL" = "Authorization fail";
 /*微信不支持*/
-"NO_SUPPORT_WECHAT" = "Request failed. Please log in to Wechat.";
+"NO_SUPPORT_WECHAT" = "Request failed.";
 /*用户不存在*/
 "NETWORK_CONNET_FAIL" = "Network connection error.";
 /*正在处理中*/
@@ -1432,6 +1432,8 @@
 "APPOINTMENT_STATUS" = "Appointment Status";
 /*预约成功！You’ve made the appointment! */
 "APPOINTMENT_HAVE" = "You’ve made the appointment!";
+/*每门试听课程仅能免费体验一次助教服务。*/
+"APPOINTMENT_ONCE" = "TA service is only available for free once in each trial period.";
 /*请留意服务进行前的邮件或短信提醒 Please pay attention to the reminder email or text message before service. */
 "ATTENTION_MESSAGE" = "Please pay attention to the reminder email or text message before service.";
 /*预约信息 Details */

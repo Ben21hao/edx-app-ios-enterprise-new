@@ -10,6 +10,7 @@
 
 @interface TDPayTypeView : UIView
 
+@property (nonatomic,strong) UIButton *bgButton;
 @property (nonatomic,strong) UIImageView *headerImage;
 @property (nonatomic,strong) UILabel *typeLabel;
 @property (nonatomic,strong) UIButton *selectButton;

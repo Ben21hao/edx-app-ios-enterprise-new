@@ -948,7 +948,7 @@
 /*授权失败*/
 "PAY_AUTHENRIZATE_FAIL" = "授权失败";
 /*微信不支持*/
-"NO_SUPPORT_WECHAT" = "请求失败，请先登录微信 ";
+"NO_SUPPORT_WECHAT" = "请求失败";
 /*网络连接出错*/
 "NETWORK_CONNET_FAIL" = "网络连接出错";
 /*正在处理中*/
@@ -1433,6 +1433,8 @@
 "APPOINTMENT_STATUS" = "预约成功";
 /*预约成功！You’ve made the appointment! */
 "APPOINTMENT_HAVE" = "预约成功！";
+/*每门试听课程仅能免费体验一次助教服务。*/
+"APPOINTMENT_ONCE" = "每门试听课程仅能免费体验一次助教服务。";
 /*请留意服务进行前的邮件或短信提醒 Please pay attention to the reminder email or text message before service. */
 "ATTENTION_MESSAGE" = "请留意服务进行前的邮件或短信提醒";
 /*预约信息 Details */

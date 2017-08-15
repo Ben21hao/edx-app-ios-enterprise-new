@@ -23,28 +23,37 @@
 }
 
 - (void)setViewConstraint {
-    self.payButton = [[UIButton alloc] init];
-    self.payButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.payButton.titleLabel.numberOfLines = 0;
-    self.payButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
-    self.payButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
-    [self.payButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.payButton setTitle:NSLocalizedString(@"PAY_TITLE", nil) forState:UIControlStateNormal];
-    [self addSubview:self.payButton];
-    
-    [self.payButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.mas_right).offset(0);
-        make.centerY.mas_equalTo(self.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(88, 44));
-    }];
+    self.createOrderButton = [[UIButton alloc] init];
+    self.createOrderButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.createOrderButton.titleLabel.numberOfLines = 0;
+    self.createOrderButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
+    self.createOrderButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
+    [self.createOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.createOrderButton setTitle:NSLocalizedString(@"PAY_TITLE", nil) forState:UIControlStateNormal];
+    [self addSubview:self.createOrderButton];
     
     self.moneyLabel = [[UILabel alloc] init];
     self.moneyLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     [self addSubview:self.moneyLabel];
     
+    self.activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 23, 23)];
+    [self.activityView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhite];
+    [self addSubview:self.activityView];
+    
+    [self.createOrderButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.mas_right).offset(0);
+        make.centerY.mas_equalTo(self.mas_centerY);
+        make.size.mas_equalTo(CGSizeMake(88, 44));
+    }];
+    
     [self.moneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.mas_centerY);
-        make.right.mas_equalTo(self.payButton.mas_left).offset(-8);
+        make.right.mas_equalTo(self.createOrderButton.mas_left).offset(-8);
+    }];
+    
+    [self.activityView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.createOrderButton.mas_centerY);
+        make.right.mas_equalTo(self.createOrderButton.mas_right).offset(-5);
     }];
 }
 

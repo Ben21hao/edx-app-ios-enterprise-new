@@ -133,7 +133,7 @@ static NSString *cellID = @"WaitForPayTableViewCell";
     [self.returnButton setImage:[UIImage imageNamed:@"backImagee"] forState:UIControlStateNormal];
     self.returnButton.imageEdgeInsets = UIEdgeInsetsMake(0, -23, 0, 23);
     self.returnButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:18.0];
-    [self.returnButton addTarget:self action:@selector(backButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.returnButton addTarget:self action:@selector(returnButtonAction:) forControlEvents:UIControlEventTouchUpInside];
 //    if (self.whereFrom == 1) {
 //        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 //    } else {
@@ -478,9 +478,8 @@ static NSString *cellID = @"WaitForPayTableViewCell";
     _payWay = 1;
 }
 - (void)canclePayView{//点击取消
-    [UIView animateWithDuration:2.0 animations:^{
-        [self.payView removeFromSuperview];
-    }];
+    
+    [self.payView removeFromSuperview];
 }
 #pragma mark - tableview Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -790,7 +789,7 @@ static NSString *cellID = @"WaitForPayTableViewCell";
     
     TDPayMoneyView *payMoneyView = [[TDPayMoneyView alloc] init];
     payMoneyView.moneyLabel.attributedText = [self setRealMoney:[NSString stringWithFormat:@"¥%.2f",[self.orderMoney floatValue]]];//订单价格
-    [payMoneyView.payButton addTarget:self action:@selector(orderPayBtn) forControlEvents:UIControlEventTouchUpInside];//支付按钮
+    [payMoneyView.createOrderButton addTarget:self action:@selector(orderPayBtn) forControlEvents:UIControlEventTouchUpInside];//支付按钮
     [bottomV addSubview:payMoneyView];
     
     [payMoneyView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -823,7 +822,7 @@ static NSString *cellID = @"WaitForPayTableViewCell";
         NSMutableAttributedString *str4 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",NSLocalizedString(@"PAY_TITLE", nil)] attributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:14],NSForegroundColorAttributeName : [UIColor whiteColor]}];
         NSMutableAttributedString *str5 = [self.baseTool setDetailString:coinStr withFont:11 withColorStr:colorHexStr3];
         [str4 appendAttributedString:str5];
-        [payMoneyView.payButton setAttributedTitle:str4 forState:UIControlStateNormal];
+        [payMoneyView.createOrderButton setAttributedTitle:str4 forState:UIControlStateNormal];
     }
 }
 

@@ -35,11 +35,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (section == 4) {
-        return self.model.order_time_grap.length == 0 ? 0 : 1;
-    } else if (section == 7) {
-        return self.model.real_cost_coin.length == 0 ? 0 : 1;
+    if ([self.model.is_public_course boolValue] == YES) {
+        if (section == 4) {
+            return self.model.order_time_grap.length == 0 ? 0 : 1;
+        } else if (section == 7) {
+            return self.model.real_cost_coin.length == 0 ? 0 : 1;
+        } else {
+            return 1;
+        }
     } else {
+        if (section == 4 || section == 7 || section == 6) {
+            return 0;
+        }
         return 1;
     }
 }
@@ -92,7 +99,7 @@
                 cell.detailTextLabel.text = self.model.service_time;
                 break;
             case 6:
-                cell.textLabel.text = NSLocalizedString(@"PREPAID_COIS", nil);
+                cell.textLabel.text = NSLocalizedString(@"PREPAID_COIS", nil); //预付宝典
                 cell.detailTextLabel.attributedText = [toolModel setDetailString:[NSString stringWithFormat:@"%.2f%@",[self.model.cost_coin floatValue],NSLocalizedString(@"COINS_VALUE", nil)] withFont:14 withColorStr:colorHexStr9];
                 break;
             case 7:

@@ -81,7 +81,7 @@
     successVC.timeStr = self.timeStr;
     successVC.failType = self.failType;
     successVC.username = self.username;
-    successVC.is_eliteu_course = self.is_eliteu_course;
+    successVC.is_public_course = self.is_public_course;
     [self.navigationController pushViewController:successVC animated:YES];
 
 }
@@ -152,8 +152,8 @@
             [self gotoResultView:YES];
             
         } else {
-            [self gotoResultView:NO];
             self.failType = codeType;
+            [self gotoResultView:NO];
         }
         
         NSLog(@"预约信息 -- %@ ----- %@",code,responseDic[@"msg"]);
@@ -167,11 +167,14 @@
 
 #pragma mark - tableview delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    if (section == 1) {
+        return 1;
+    }
+    return self.is_public_course ? 1 : 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -187,9 +190,6 @@
     cell.detailTextLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     cell.detailTextLabel.textColor = [UIColor colorWithHexString:colorHexStr9];
     
-    cell.textLabel.hidden = !self.is_eliteu_course;
-    cell.detailTextLabel.hidden = !self.is_eliteu_course;
-    
     switch (indexPath.row) {
         case 0:
             cell.textLabel.text = NSLocalizedString(@"PAYMENT_STANDARD", nil);
@@ -198,10 +198,6 @@
         case 1:
             cell.textLabel.text = NSLocalizedString(@"RESERCED_PERIOD", nil);
             cell.detailTextLabel.text = self.timeStr;
-            
-            cell.textLabel.hidden = NO;
-            cell.detailTextLabel.hidden = NO;
-            
             break;
         case 2:
             cell.textLabel.text = NSLocalizedString(@"PREPAID_COIS", nil);
@@ -215,15 +211,6 @@
             break;
     }
     return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.row == 1) {
-        return 48;
-    } else {
-        return self.is_eliteu_course ? 48 : 0;
-    }
 }
 
 #pragma mark - textViewDelegate
@@ -342,7 +329,7 @@
         make.centerY.mas_equalTo(self.footerView.mas_centerY);
     }];
     
-    self.messageLabel.hidden = !self.is_eliteu_course;
+    self.messageLabel.hidden = !self.is_public_course;
     
     return self.footerView;
 }

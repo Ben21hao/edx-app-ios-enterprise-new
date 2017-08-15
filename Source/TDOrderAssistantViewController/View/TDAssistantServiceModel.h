@@ -54,6 +54,7 @@
 
 @property (nonatomic,strong) NSString *assistant_name;//助教名称
 @property (nonatomic,strong) TDAvatarModel *avatar_url;//头像
+@property (nonatomic,strong) NSString *is_public_course;//是否付费课程
 
 /*已服务*/
 @property (nonatomic,strong) NSString *order_time_grap;//预约时间

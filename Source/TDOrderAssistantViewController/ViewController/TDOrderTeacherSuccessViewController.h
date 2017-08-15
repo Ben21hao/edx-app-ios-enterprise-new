@@ -18,6 +18,6 @@
 @property (nonatomic,strong) NSString *quetionStr;//预约问题
 @property (nonatomic,assign) NSInteger failType;//失败原因
 
-@property (nonatomic,assign) BOOL is_eliteu_course;//是否是付费课程
+@property (nonatomic,assign) BOOL is_public_course;//是否是付费课程
 
 @end

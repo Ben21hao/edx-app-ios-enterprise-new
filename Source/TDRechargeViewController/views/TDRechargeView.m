@@ -133,7 +133,7 @@
 #pragma mark - 表头
 - (UIView *)setTableviewHeaderView {
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, self.type == 1 ? 279 : 258)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, self.type == 1 ? 279 : 228)];
     headerView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestrure)];
     [headerView addGestureRecognizer:gesture];
@@ -162,7 +162,7 @@
     [headerView addSubview:self.exchangeLabel];
     
     self.exchangeLabel.hidden = self.type == 1 ? NO : YES;
-    
+    self.inputField.hidden = self.type == 1 ? NO : YES;
     
     [self.topLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(headerView.mas_left).offset(18);

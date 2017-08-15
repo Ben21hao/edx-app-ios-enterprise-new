@@ -177,6 +177,7 @@
         id code = responseDic[@"code"];
         
         if ([code intValue] == 200) {
+            
             NSArray *dataArray = responseDic[@"data"];
             
             if (dataArray.count > 0) {
@@ -258,6 +259,7 @@
         id code = responseDic[@"code"];
         
         if ([code intValue] == 200) {
+            
             NSArray *dataArray = responseDic[@"data"];
             if (dataArray.count > 0) {
                 for (int i = 0; i < dataArray.count; i ++) {

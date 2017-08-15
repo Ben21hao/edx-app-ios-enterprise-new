@@ -49,7 +49,8 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [UIView new];
-    self.tableView.scrollEnabled = NO; 
+    self.tableView.scrollEnabled = NO;
+    self.tableView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     [self.view addSubview:self.tableView];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -69,7 +70,7 @@
 
 -  (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    tableView.separatorColor = [UIColor colorWithHexString:colorHexStr6];
+    tableView.separatorColor = [UIColor colorWithHexString:colorHexStr7];
     tableView.separatorInset = UIEdgeInsetsZero;
     
     if (indexPath.row == 0) {
@@ -82,6 +83,7 @@
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"settingCell"];
         }
+        cell.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.font = [UIFont fontWithName:@"OpenSans" size:16];

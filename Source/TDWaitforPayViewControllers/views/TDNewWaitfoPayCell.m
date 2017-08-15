@@ -74,7 +74,7 @@
     }];
     
     [self.courseImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.bgView.mas_left).offset(18);
+        make.left.mas_equalTo(self.bgView.mas_left).offset(13);
         make.centerY.mas_equalTo(self.bgView);
         make.size.mas_equalTo(CGSizeMake(140, 78));
     }];
@@ -82,7 +82,7 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.courseImage.mas_right).offset(8);
         make.top.mas_equalTo(self.courseImage.mas_top).offset(3);
-        make.right.mas_equalTo(self.bgView.mas_right).offset(-3);
+        make.right.mas_equalTo(self.bgView.mas_right).offset(-8);
     }];
     
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {

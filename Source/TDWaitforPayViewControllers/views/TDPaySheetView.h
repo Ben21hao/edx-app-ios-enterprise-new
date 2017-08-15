@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TDPayMoneyView.h"
+#import "TDPayTypeView.h"
 
 @interface TDPaySheetView : UIView
+
+@property (nonatomic,strong) UIView *tapView;
+@property (nonatomic,strong) TDPayMoneyView *payMoneyView;
+@property (nonatomic,strong) TDPayTypeView *wechatView;
+@property (nonatomic,strong) TDPayTypeView *alipayView;
 
 @end

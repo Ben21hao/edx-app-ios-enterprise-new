@@ -85,13 +85,13 @@ const CGFloat contentLabelFontSize = 14;
     [self.bgView addSubview:self.tagView];
     
     self.timeLabel = [[UILabel alloc] init];
-    self.timeLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
-    self.timeLabel.textColor = [UIColor colorWithHexString:colorHexStr7];
+    self.timeLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
+    self.timeLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     [self.bgView addSubview:self.timeLabel];
     
     self.numLabel = [[UILabel alloc] init];
     self.numLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
-    self.numLabel.textColor = [UIColor colorWithHexString:colorHexStr7];
+    self.numLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     [self.bgView addSubview:self.numLabel];
     
     self.praiseButton = [[UIButton alloc] init];
@@ -150,7 +150,7 @@ const CGFloat contentLabelFontSize = 14;
     
     [self.praiseButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.numLabel.mas_left).offset(-3);
-        make.centerY.mas_equalTo(self.timeLabel.mas_centerY);
+        make.centerY.mas_equalTo(self.timeLabel.mas_centerY).offset(-3);
         make.size.mas_equalTo(CGSizeMake(35, 25));
     }];
     

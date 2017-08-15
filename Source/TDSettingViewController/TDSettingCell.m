@@ -39,7 +39,7 @@ typedef NS_ENUM(NSUInteger, OEXMySettingsAlertTag) {
 
 - (void)config {
     self.bgView = [[UIView alloc] init];
-    self.bgView.backgroundColor = [UIColor whiteColor];
+    self.bgView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     [self addSubview:self.bgView];
     
     self.titleLabel = [[UILabel alloc] init];
@@ -112,15 +112,5 @@ typedef NS_ENUM(NSUInteger, OEXMySettingsAlertTag) {
     [OEXInterface setDownloadOnlyOnWifiPref:self.wifiSwicth.isOn];
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 @end

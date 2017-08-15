@@ -76,7 +76,7 @@
             createOrderVc.assistantName = weakSelf.assistantName;
             createOrderVc.username = weakSelf.username;
             createOrderVc.courseId = weakSelf.courseId;
-            createOrderVc.is_eliteu_course = weakSelf.is_eliteu_course;
+            createOrderVc.is_public_course = weakSelf.is_public_course;
             [weakSelf.navigationController pushViewController:createOrderVc animated:YES];
             
         } else {

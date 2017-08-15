@@ -30,39 +30,20 @@
 
 @interface OEXDownloadViewController ()
 
-@property(strong, nonatomic) NSMutableArray* arr_downloadingVideo;
+@property(strong, nonatomic) NSMutableArray *arr_downloadingVideo;
+@property (strong, nonatomic) NSNumberFormatter *percentFormatter;
+
 @property (strong, nonatomic) IBOutlet UITableView* table_Downloads;
-@property (strong, nonatomic) IBOutlet OEXCustomButton *btn_View;
-@property (strong, nonatomic) NSNumberFormatter* percentFormatter;
+
 @end
 
 @implementation OEXDownloadViewController
 
-- (IBAction)navigateToDownloadedVideos {
-    [[OEXRouter sharedRouter] showMyVideos];
-}
-
-#pragma mark - REACHABILITY
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
-    [[OEXAnalytics sharedAnalytics] trackScreenWithName:OEXAnalyticsScreenDownloads];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:DOWNLOAD_PROGRESS_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:OEXDownloadEndedNotification object:nil];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self downloadCompleteNotification:nil];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.arr_downloadingVideo = [[NSMutableArray alloc] init];
     
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     
@@ -72,40 +53,52 @@
         [self.table_Downloads setLayoutMargins:UIEdgeInsetsZero];
     }
 #endif
-
     self.table_Downloads.tableFooterView = [UIView new];
-    
-    //Initialize Downloading arr
-    self.arr_downloadingVideo = [[NSMutableArray alloc] init];
 
     [self reloadDownloadingVideos];
-
+    
     self.titleViewLabel.text = [Strings downloads];
-
+    
     //Listen to notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadProgressNotification:) name:DOWNLOAD_PROGRESS_NOTIFICATION object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(downloadCompleteNotification:)
-                                                 name:OEXDownloadEndedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadCompleteNotification:) name:OEXDownloadEndedNotification object:nil];
     
-    [self.btn_View setClipsToBounds:true];
     self.percentFormatter = [[NSNumberFormatter alloc] init];
     self.percentFormatter.numberStyle = NSNumberFormatterPercentStyle;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [[OEXAnalytics sharedAnalytics] trackScreenWithName:OEXAnalyticsScreenDownloads];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:DOWNLOAD_PROGRESS_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:OEXDownloadEndedNotification object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self downloadCompleteNotification:nil];
 }
 
 - (void)reloadDownloadingVideos {
+    
     [self.arr_downloadingVideo removeAllObjects];
-
+    
     OEXInterface* edxInterface = [OEXInterface sharedInterface];
     NSArray* array = [edxInterface coursesAndVideosForDownloadState:OEXDownloadStatePartial];
-
+    
     NSMutableDictionary* duplicationAvoidingDict = [[NSMutableDictionary alloc] init];
-
+    
     for(NSDictionary* dict in array) {
         NSArray* array = [dict objectForKey:CAV_KEY_VIDEOS];
-
+        
         for(OEXHelperVideoDownload* video in array) {
             if(video.downloadProgress < OEXMaxDownloadProgress) {
                 [self.arr_downloadingVideo addObject:video];
@@ -118,19 +111,17 @@
             }
         }
     }
-
+    
     [self.table_Downloads reloadData];
 }
 
-#pragma mark - Table view data source
+#pragma mark - Tableview data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
     return [self.arr_downloadingVideo count];
 }
 
@@ -189,6 +180,7 @@
 }
 
 - (void)tableView:(UITableView*)tableView willDisplayCell:(OEXDownloadTableCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath {
+    
     OEXHelperVideoDownload* downloadingVideo = [self.arr_downloadingVideo objectAtIndex:indexPath.row];
     float progress = (float)downloadingVideo.downloadProgress / OEXMaxDownloadProgress;
     [cell.progressView setProgress:progress];
@@ -219,10 +211,10 @@
 
 /// Update progress for visible rows
 
-- (NSString*)downloadStatusAccessibilityLabelForVideoName:(NSString*)video percentComplete:(double)percentage {
-    NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
+- (NSString *)downloadStatusAccessibilityLabelForVideoName:(NSString *)video percentComplete:(double)percentage {
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterPercentStyle;
-    NSString* formatted = [formatter stringFromNumber:@(percentage)];
+    NSString *formatted = [formatter stringFromNumber:@(percentage)];
     return [Strings accessibilityDownloadViewCell:video percentComplete:formatted](percentage);
 }
 
@@ -251,7 +243,8 @@
     }
 }
 
-- (IBAction)btnCancelPressed:(UIButton*)button {
+- (void)btnCancelPressed:(UIButton *)button { //取消按钮
+    
     NSIndexPath* indexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
 
     OEXInterface* edxInterface = [OEXInterface sharedInterface];
@@ -275,5 +268,6 @@
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return [OEXStyles sharedStyles].standardStatusBarStyle;
 }
+
 
 @end

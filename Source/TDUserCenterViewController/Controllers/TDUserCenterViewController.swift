@@ -154,8 +154,8 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     }
     
     func gotoWaiForPayVc() { //待支付订单
-        let userCouponVC1 = WaitForPayViewController()
-//        let userCouponVC1 = TDWaitforPayViewController()
+//        let userCouponVC1 = WaitForPayViewController()
+        let userCouponVC1 = TDWaitforPayViewController()
         userCouponVC1.username = session.currentUser?.username  //传当前用户名
         self.navigationController?.pushViewController(userCouponVC1, animated: true)
     }
@@ -168,12 +168,12 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     }
     
     func gotoLiveView() {
-//        let liviewVc = TDLiveViewController()
+//        let liviewVc = TDLiveViewController() //oc写的
 //        liviewVc.username = session.currentUser?.username
 //        self.navigationController?.pushViewController(liviewVc, animated: true)
         
         let username = session.currentUser?.username
-        let liveView = TDLectureLiveViewController.init(environment: self.environment, username: username!)
+        let liveView = TDLectureLiveViewController.init(environment: self.environment, username: username!) //swift写的控制器
         self.navigationController?.pushViewController(liveView, animated: true)
     }
     

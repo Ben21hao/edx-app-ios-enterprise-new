@@ -59,7 +59,10 @@
     }  else if (self.failType == 408) {
         self.failStr = NSLocalizedString(@"SELECT_OTHER_PERIOD", nil);
         
-    }  else {
+    }  else if (self.failType == 409) {
+        self.failStr = NSLocalizedString(@"APPOINTMENT_ONCE", nil);
+        
+    } else {
         self.failStr = NSLocalizedString(@"UNABLE_APPOINTMENT", nil);
         NSLog(@"预约失败 -- %ld",(long)self.failType);
     }
@@ -141,8 +144,8 @@
             cell.textLabel.text = NSLocalizedString(@"PREPAID_COIS", nil);
             cell.detailTextLabel.attributedText = [self.toolModel setDetailString:[NSString stringWithFormat:@"%@%@",self.iconStr,NSLocalizedString(@"COINS_VALUE", nil)] withFont:14 withColorStr:colorHexStr9];
             
-            cell.textLabel.hidden = !self.is_eliteu_course;
-            cell.detailTextLabel.hidden = !self.is_eliteu_course;
+            cell.textLabel.hidden = !self.is_public_course;
+            cell.detailTextLabel.hidden = !self.is_public_course;
             break;
         case 2:
         {
@@ -166,7 +169,7 @@
         return 58 + size.height;
         
     } else if (indexPath.row == 1) {
-        return self.is_eliteu_course ? 48 : 0;
+        return self.is_public_course ? 48 : 0;
         
     } else {
         return 48;
