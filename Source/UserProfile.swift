@@ -102,7 +102,7 @@ public class UserProfile {
         remainscore = json[ProfileFields.Remainscore].double
         educationCode = json[ProfileFields.Education].string
         
-        print("json-----\(json)")
+//        print("json-----\(json)")
     }
     
     internal init(user_id : Int, username : String, bio : String? = nil, parentalConsent : Bool? = false, countryCode : String? = nil, accountPrivacy : ProfilePrivacy? = nil,name : String, education : String? = nil,nickname : String,remainscore : Double,phone : String,email : String,coupon : Double,order : Double) {

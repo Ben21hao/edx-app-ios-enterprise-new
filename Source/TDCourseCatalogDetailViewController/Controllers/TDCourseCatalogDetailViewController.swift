@@ -149,23 +149,12 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
                 if self.courseModel.submitType == 0 || self.courseModel.submitType == 3 {
                     return 60
                 } else {
-                    if self.courseModel.is_eliteu_course == true && self.courseModel.course_price?.floatValue != 0 {
+                    if self.courseModel.is_public_course == true && self.courseModel.course_price?.floatValue != 0 {
                         return self.courseModel.give_coin?.floatValue > 0 ? 148 : 118
                     } else {
                         return 60
                     }
                 }
-                
-//                switch self.courseModel.submitType { //0 已购买，1 立即加入, 2 查看待支付，3 即将开课
-//                case 0:
-//                    return 60
-//                case 1:
-//                    return self.courseModel.give_coin?.floatValue > 0 ? 148 : 118
-//                case 2:
-//                    return self.courseModel.give_coin?.floatValue > 0 ? 148 : 118
-//                default:
-//                    return 60
-//                }
             }
         }
         return 60
@@ -263,6 +252,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
     }
     
     func gotoWaitForPayVc () { //待支付
+        
 //        let waitForPAyVc = WaitForPayViewController()
         let waitForPAyVc = TDWaitforPayViewController()
         waitForPAyVc.username = self.username //传当前用户名
@@ -272,7 +262,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
     
     func gotoChooseCourseVc() { //选择课表
         
-        if self.courseModel.is_eliteu_course == true && self.courseModel.course_price?.floatValue != 0 {//英荔课程
+        if self.courseModel.is_public_course == true && self.courseModel.course_price?.floatValue != 0 {//英荔课程
             self.courseDetailView.activityView.stopAnimating()
             
             let vc = TDChooseCourseViewController();

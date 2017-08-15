@@ -44,7 +44,7 @@ public class ProgressController: NSObject {
         downloadButton.accessibilityTraits = UIAccessibilityTraitButton | UIAccessibilityTraitUpdatesFrequently
         downloadButton.frame = ProgressViewFrame
         
-        
+
         circularProgressView.addSubview(downloadButton)
         super.init()
     
@@ -57,7 +57,7 @@ public class ProgressController: NSObject {
         
         downloadButton.oex_addAction({ [weak self](_) -> Void in
             if let owner = self?.owner {
-                self?.router?.showDownloadsFromViewController(owner)
+                self?.router?.showDownloadsFromViewController(owner) //到下载进度页
             }
             }, forEvents: .TouchUpInside)
         
@@ -93,3 +93,5 @@ public class ProgressController: NSObject {
         downloadButton.hidden = false
     }
 }
+
+

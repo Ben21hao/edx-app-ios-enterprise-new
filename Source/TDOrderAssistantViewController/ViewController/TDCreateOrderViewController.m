@@ -190,7 +190,7 @@
     cell.detailTextLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     cell.detailTextLabel.textColor = [UIColor colorWithHexString:colorHexStr9];
     
-    switch (indexPath.row) {
+    switch (indexPath.section) {
         case 0:
             cell.textLabel.text = NSLocalizedString(@"PAYMENT_STANDARD", nil);
             cell.detailTextLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%.2f%@",unitPrice,NSLocalizedString(@"COINTS_MIN", nil)] withFont:14 withColorStr:colorHexStr9];

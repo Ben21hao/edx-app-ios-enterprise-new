@@ -397,7 +397,7 @@
     TDWebViewController *webViewcontroller = [[TDWebViewController alloc] init];
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"stipulation" withExtension:@"htm"];
     webViewcontroller.url = url;
-    webViewcontroller.titleStr = NSLocalizedString(@"SERVICE_ITEM", nil);
+    webViewcontroller.titleStr = NSLocalizedString(@"AGREEMENT", nil);
     [self.navigationController pushViewController:webViewcontroller animated:YES];
 }
 

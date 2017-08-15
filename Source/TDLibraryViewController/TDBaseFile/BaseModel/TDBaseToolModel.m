@@ -36,10 +36,10 @@
                 
                 hideShowPurchase = YES;//历史版本都是隐藏内购，使用支付宝和微信
                 
-                NSLog(@"后台版本 > app版本 --> service:%@ --- app:%@",serviceVersion,appVersion);
+//                NSLog(@"后台版本 > app版本 --> service:%@ --- app:%@",serviceVersion,appVersion);
                 
             } else {
-                NSLog(@"app版本 >= 后台版本 --> service:%@ --- app:%@ == %d",serviceVersion,appVersion,hideShowPurchase); //版本相同的时候，就是用后台是否审核通过的返回值
+//                NSLog(@"app版本 >= 后台版本 --> service:%@ --- app:%@ == %d",serviceVersion,appVersion,hideShowPurchase); //版本相同的时候，就是用后台是否审核通过的返回值
             }
             
             if (self.judHidePurchseHandle) {
@@ -378,7 +378,7 @@
     NSMutableString *str = [[NSMutableString alloc] initWithString:timeStr];
     NSString *str1 = [str stringByReplacingOccurrencesOfString:@"T" withString:@" "];
     NSString *str2 = [str1 substringToIndex:19];
-    NSLog(@"时间格式----------->> %@",str2);
+//    NSLog(@"时间格式----------->> %@",str2);
     return str2;
 }
 

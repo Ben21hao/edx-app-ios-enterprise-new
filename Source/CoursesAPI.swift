@@ -18,7 +18,7 @@ struct CoursesAPI {
     //我的课程
     static func getUserEnrollments(username: String, organizationCode: String? ,companyId: String) -> NetworkRequest<[UserCourseEnrollment]> {
         
-        print("username --->> \(username), == companyId -->> \(companyId)")
+//        print("username --->> \(username), == companyId -->> \(companyId)")
         
         var path = "api/mobile/enterprise/v0.5/{username}/course_enrollments/".oex_formatWithParameters(["username": username])
         

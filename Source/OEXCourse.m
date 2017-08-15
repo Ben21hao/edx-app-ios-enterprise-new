@@ -95,7 +95,7 @@ NSString* NSStringForOEXStartType(OEXStartType type) {
 @property (nonatomic,copy) NSNumber *give_coin; //购买课程赠送宝典
 @property (nonatomic,copy) NSString *begin_at; //购买课程赠送宝典开始时间
 @property (nonatomic,copy) NSString *end_at; //购买课程赠送宝典结束时间
-@property (nonatomic,copy) NSNumber *is_eliteu_course;//是否付费的课程
+@property (nonatomic,copy) NSNumber *is_public_course;//是否付费的课程
 
 @property (nonatomic,copy) NSNumber *course_status; //课程状态 1.未购买未试听 2.试听 3.试听已结束 4.已购买
 @property (nonatomic,copy) NSString *trial_expire_at; //试听课程失效时间
@@ -142,7 +142,7 @@ NSString* NSStringForOEXStartType(OEXStartType type) {
         self.give_coin = [info objectForKey:@"give_coin"];
         self.begin_at = [info objectForKey:@"begin_at"];
         self.end_at = [info objectForKey:@"end_at"];
-        self.is_eliteu_course = [info objectForKey:@"is_eliteu_course"];
+        self.is_public_course = [info objectForKey:@"is_public_course"];
         
         self.course_status = [info objectForKey:@"course_status"];
         self.trial_expire_at = [info objectForKey:@"trial_expire_at"];

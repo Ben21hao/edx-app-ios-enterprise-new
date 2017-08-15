@@ -20,6 +20,6 @@
 @property (nonatomic,strong) NSString *vhall_user_id; //用户微吼用户ID
 @property (nonatomic,strong) NSString *third_user_id;//第3方用户ID
 @property (nonatomic,strong) NSDictionary *enroll; //关联课程
-@property (nonatomic,strong) NSString *imageStr; //图片 ??
+@property (nonatomic,strong) NSString *cover_url; //图片 ??
 
 @end

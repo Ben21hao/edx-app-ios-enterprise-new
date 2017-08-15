@@ -814,7 +814,7 @@
 "SIGN_UP_AGREE" = "By signing up, I agree to Elite Education's.";
 /*登录即表示我已阅读并同意 Login means I've read and agreed*/
 "SIGN_IP_AGREE_TEXT" = "Login means I've read and agreed.";
-/**/
+/*条款说明*/
 "AGREEMENT" = "Terms and Conditions";
 /*重置密码*/
 "RESET_PASSWORD" = "Reset Password";
@@ -944,7 +944,7 @@
 "PAY_FAIL" = "Payment fail";
 /*授权失败*/
 "PAY_AUTHENRIZATE_FAIL" = "Authorization fail";
-/*微信不支持*/
+/*请求失败*/
 "NO_SUPPORT_WECHAT" = "Request failed.";
 /*用户不存在*/
 "NETWORK_CONNET_FAIL" = "Network connection error.";
@@ -1138,8 +1138,6 @@
 "PHONE_OR_EMAIL_REGISTER" = "Sign up with mobile or email";
 /*请输入邮箱或手机号码。并按操作提示完成密码重置。*/
 "PHONE_OR_EMAIL_RESET_PASSWORD" = "Please enter your mobile number or email address, and follow the instruction to reset password.";
-/*服务条款*/
-"SERVICE_ITEM" = "Stipulation";
 /*邮箱或手机号码*/
 "PHONE_OR_EMAIL" = "Mobile or email";
 /*我们给您发送了一封重置密码邮件，请进入邮箱查收并按提示设置新密码。*/
@@ -1432,8 +1430,8 @@
 "APPOINTMENT_STATUS" = "Appointment Status";
 /*预约成功！You’ve made the appointment! */
 "APPOINTMENT_HAVE" = "You’ve made the appointment!";
-/*每门试听课程仅能免费体验一次助教服务。*/
-"APPOINTMENT_ONCE" = "TA service is only available for free once in each trial period.";
+/*每门试听课程仅能免费预约一次助教服务。*/
+"APPOINTMENT_ONCE" = "TA appointment service is only available for free once in each trial period.";
 /*请留意服务进行前的邮件或短信提醒 Please pay attention to the reminder email or text message before service. */
 "ATTENTION_MESSAGE" = "Please pay attention to the reminder email or text message before service.";
 /*预约信息 Details */

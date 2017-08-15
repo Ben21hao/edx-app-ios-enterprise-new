@@ -268,7 +268,7 @@ static AnnouncementView *announcementView = nil;
     _moviePlayer.reConnectTimes = 2;
     _moviePlayer.liveFormat = kLiveFormatRtmp;
     
-    //    _moviePlayer.defaultDefinition = VHallMovieDefinitionHD;
+    _moviePlayer.defaultDefinition = VHallMovieDefinitionSD; //默认播放标清
     // [_moviePlayer setRenderViewModel:kVHallRenderModelDewarpVR];
     
     _logView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"UIModel.bundle/vhallLogo.tiff"]];

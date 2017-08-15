@@ -157,7 +157,7 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
                 case 0:
                     cell.submitButton.setTitle(Strings.CourseDetail.viewCourse, forState: .Normal)
                 case 1:
-                    if self.courseModel.is_eliteu_course == true && self.courseModel.course_price?.floatValue != 0 {
+                    if self.courseModel.is_public_course == true && self.courseModel.course_price?.floatValue != 0 {
                         cell.submitButton.setAttributedTitle(setSubmitTitle(Strings.CourseDetail.enrollNow), forState: .Normal)
                         setButtonCellDiscountLabel(cell)
                     } else {

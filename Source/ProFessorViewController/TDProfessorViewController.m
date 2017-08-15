@@ -48,7 +48,7 @@
 }
 
 #pragma mark - UI
-- (void)setView {
+- (void)setUpView {
     
     self.tableView = [[UITableView alloc] init];
     self.tableView.delegate = self;
@@ -80,48 +80,40 @@
         
         NSDictionary *responDic = (NSDictionary *)responseObject;
         id code = responDic[@"code"];
+        
         if ([code intValue] == 200) {
             self.imageUrl = responseObject[@"data"][@"avatar_url"];//头像
-            //        [self setSepIconV:avatar_url];
-            
             self.name = responseObject[@"data"][@"professor_name"];//姓名
-            //        self.labelOne.text = professor_name;
-            
             self.college = responseObject[@"data"][@"college"];//毕业院校
             self.major = responseObject[@"data"][@"specialty"];//专业
             self.degrees = responseObject[@"data"][@"degrees"];//学位
-            //        self.labelTwo.text = [NSString stringWithFormat:@"%@ %@ %@",college,specialty,degrees];
-            
-            
             self.motto = [responseObject[@"data"][@"slogan"] stringByReplacingOccurrencesOfString:@"</br>" withString:@"\n"];//个性语句
             
-            self.introduce = [[responseObject[@"data"][@"introduction"]stringByReplacingOccurrencesOfString:@"<i>" withString:@""]stringByReplacingOccurrencesOfString:@"</i>" withString:@""];//1 教授简介
-            self.achievement = [responseObject[@"data"][@"main_achievements"]stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];//2 主要成就
-            self.education = [responseObject[@"data"][@"education_experience"]stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];//3 教育背景
-            
+            self.introduce = [[responseObject[@"data"][@"introduction"] stringByReplacingOccurrencesOfString:@"<i>" withString:@""]stringByReplacingOccurrencesOfString:@"</i>" withString:@""];//1 教授简介
+            self.achievement = [responseObject[@"data"][@"main_achievements"] stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];//2 主要成就
+            self.education = [responseObject[@"data"][@"education_experience"] stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];//3 教育背景
             self.otherAchievement = [responseObject[@"data"][@"other_achievements"] stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];//4 其他成就
-            
-            self.research = responseObject[@"data"][@"research_fields"];//5 研究领域
+            self.research = [responseObject[@"data"][@"research_fields"] stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];//5 研究领域
             self.learning = [[responseObject[@"data"][@"research_papers"] stringByReplacingOccurrencesOfString:@"<i>" withString:@""]stringByReplacingOccurrencesOfString:@"</i>" withString:@""];//6 学术刊物文章
-            
             self.project = responseObject[@"data"][@"project_experience"];//7 管理咨询项目
             
-            [self setView];
-            
+            [self setUpView];
             [self.tableView reloadData];
             
         } else {
             NSLog(@"请求错误 ==== %@",responDic[@"msg"]);
+            [self.view makeToast:NSLocalizedString(@"NO_SUPPORT_WECHAT", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
         [self.loadIngView removeFromSuperview];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
         [self.loadIngView removeFromSuperview];
         [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
-        NSLog(@"error --%@",error);
+        NSLog(@"error ---- %@",error);
+        
     }];
-    
 }
 
 

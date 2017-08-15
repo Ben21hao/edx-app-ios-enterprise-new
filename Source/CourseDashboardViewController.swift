@@ -116,7 +116,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
             }
         }
     }
-    
+
     func setViewConstraint() {
         
         self.view.addSubview(containerView)
@@ -142,7 +142,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
             make.edges.equalTo(view)
         }
         
-//        addShareButton(courseCard)
+//        addShareButton(courseCard) //隐藏分享按钮
         
         stackView.axis = .Vertical
         
@@ -157,8 +157,6 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         }
         
         loadController.setupInController(self, contentView: containerView)
-        
-        self.progressController.hideProgessView()
     }
     
     func setLeftButtonStyle() {
@@ -179,6 +177,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         let leftBarItem = UIBarButtonItem.init(customView: leftButton)
         self.navigationItem.leftBarButtonItem = leftBarItem
         
+        self.progressController.hideProgessView()
         self.navigationItem.rightBarButtonItem = self.progressController.navigationItem()
     }
     

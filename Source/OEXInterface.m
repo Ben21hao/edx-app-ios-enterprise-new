@@ -538,9 +538,10 @@ static OEXInterface* _sharedInterface = nil;
     [_storage updateData:data ForURLString:URLString];
 }
 
-#pragma mark EdxNetworkInterface Delegate
+#pragma mark - EdxNetworkInterface Delegate
 
 - (void)updateTotalProgress {
+    
     NSArray* array = [self allVideosForState:OEXDownloadStatePartial];
     float total = 0;
     float done = 0;
@@ -556,10 +557,9 @@ static OEXInterface* _sharedInterface = nil;
         if([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
             [[NSNotificationCenter defaultCenter] postNotificationName:OEXDownloadProgressChangedNotification object:nil];
         }
-        //show circular views
-        viewHidden = NO;
-    }
-    else {
+        viewHidden = NO;//show circular views
+        
+    } else {
         viewHidden = YES;
         if([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive && self.totalProgress != 0) {
             self.totalProgress = 0;
@@ -626,6 +626,8 @@ static OEXInterface* _sharedInterface = nil;
     }
 
     [self.progressViews makeObjectsPerformSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:!self.reachable]];
+    
+    [self updateTotalProgress];
 }
 
 #pragma mark NetworkInterface Delegate
@@ -1426,7 +1428,7 @@ static OEXInterface* _sharedInterface = nil;
     }];
 }
 
-# pragma  mark activate interface for user
+# pragma  mark - activate interface for user
 
 - (void)activateInterfaceForUser:(OEXUserDetails*)user {
     // Reset Default Settings
@@ -1455,11 +1457,7 @@ static OEXInterface* _sharedInterface = nil;
     if([_timer isValid]) {
         [_timer invalidate];
     }
-    _timer = [NSTimer scheduledTimerWithTimeInterval:2.0
-                                              target:self
-                                            selector:@selector(updateTotalProgress)
-                                            userInfo:nil
-                                             repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(updateTotalProgress) userInfo:nil repeats:YES];
     [_timer fire];
     [self startAllBackgroundDownloads];
 }

@@ -47,7 +47,7 @@ static OEXNetworkManager* _sharedManager = nil;
         if([OEXAuthentication authHeaderForApiAccess]) {
             NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:[OEXAuthentication authHeaderForApiAccess], @"Authorization", nil ];
             [backgroundConfiguration setHTTPAdditionalHeaders:headers];
-            NSLog(@" 身份token ---------->>> %@",headers);
+//            NSLog(@" 身份token ---------->>> %@",headers);
         }
         //Session
         self.backgroundSession = [NSURLSession sessionWithConfiguration:backgroundConfiguration

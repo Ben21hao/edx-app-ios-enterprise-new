@@ -46,7 +46,7 @@ static const NSTimeInterval RewindTimeInterval = 30;
     if (!_moviePlayer) {
         _moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL URLWithString:self.url]];
         _moviePlayer.scalingMode = MPMovieScalingModeAspectFit; //固定缩放比例并且尽量全部
-        _moviePlayer.controlStyle = MPMovieControlStyleNone;
+        _moviePlayer.controlStyle = MPMovieControlStyleNone; //不显示默认的进度条和时间
     }
     return _moviePlayer;
 }

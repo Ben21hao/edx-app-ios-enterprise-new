@@ -817,7 +817,7 @@
 "SIGN_UP_AGREE" = "注册即表示我同意英荔教育的";
 /*登录即表示我已阅读并同意 Login means I've read and agreed*/
 "SIGN_IP_AGREE_TEXT" = "登录即表示我已阅读并同意";
-/*英荔教育的《用户协议》、《隐私政策》和《免责声明》*/
+/*条款说明*/
 "AGREEMENT" = "条款说明";
 /*重置密码*/
 "RESET_PASSWORD" = "重置密码";
@@ -947,7 +947,7 @@
 "PAY_FAIL" = "支付失败";
 /*授权失败*/
 "PAY_AUTHENRIZATE_FAIL" = "授权失败";
-/*微信不支持*/
+/*请求失败*/
 "NO_SUPPORT_WECHAT" = "请求失败";
 /*网络连接出错*/
 "NETWORK_CONNET_FAIL" = "网络连接出错";
@@ -1141,8 +1141,6 @@
 "PHONE_OR_EMAIL_REGISTER" = "请输入手机号码或邮箱。并按操作提示完成密码设置。";
 /*请输入手机号码或邮箱。并按操作提示完成密码重置。*/
 "PHONE_OR_EMAIL_RESET_PASSWORD" = "请输入手机号码或邮箱。并按操作提示完成密码重置。";
-/*服务条款*/
-"SERVICE_ITEM" = "服务条款";
 /*手机号码或邮箱*/
 "PHONE_OR_EMAIL" = "手机号码或邮箱";
 /*我们给您发送了一封重置密码邮件，请进入邮箱查收并按提示设置新密码。*/
@@ -1433,8 +1431,8 @@
 "APPOINTMENT_STATUS" = "预约成功";
 /*预约成功！You’ve made the appointment! */
 "APPOINTMENT_HAVE" = "预约成功！";
-/*每门试听课程仅能免费体验一次助教服务。*/
-"APPOINTMENT_ONCE" = "每门试听课程仅能免费体验一次助教服务。";
+/*每门试听课程仅能免费预约一次助教服务。*/
+"APPOINTMENT_ONCE" = "每门试听课程仅能免费预约一次助教服务。";
 /*请留意服务进行前的邮件或短信提醒 Please pay attention to the reminder email or text message before service. */
 "ATTENTION_MESSAGE" = "请留意服务进行前的邮件或短信提醒";
 /*预约信息 Details */

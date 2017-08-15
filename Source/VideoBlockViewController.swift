@@ -25,7 +25,7 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
     var isUrlVideo = false
     
     var rotateDeviceMessageView : IconMessageView?
-    var videoTranscriptView : VideoTranscript?
+    var videoTranscriptView : VideoTranscript? //字幕tableView
     var subtitleTimer = NSTimer()
     var contentView : UIView?
 
@@ -34,8 +34,8 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
         self.environment = environment
         courseQuerier = environment.dataManager.courseDataManager.querierForCourseWithID(courseID)
         videoController = OEXVideoPlayerInterface()
-        loadController = LoadStateViewController()
         videoPlayerVC = TDVideoUrlPlayController()
+        loadController = LoadStateViewController()
         
         super.init(nibName: nil, bundle: nil)
         
@@ -125,8 +125,8 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
             // If Timely App Reviews popup is showing then set popup elements as accessibilityElements
             view.accessibilityElements = [ratingController.ratingContainerView.subviews]
             setParentAccessibility(ratingController)
-        }
-        else {
+            
+        } else {
             view.accessibilityElements = [view.subviews]
             setParentAccessibility()
         }
@@ -442,7 +442,7 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
     }
     
     //MARK: - OEXVideoPlayerInterfaceDelegate methods
-    func videoPlayerTapped(sender: UIGestureRecognizer) {
+    func videoPlayerTapped(sender: UIGestureRecognizer) { //点击视频
         guard let videoPlayer = videoController.moviePlayerController else { return }
         
         if self.isVerticallyCompact() && !videoPlayer.fullscreen{
@@ -450,22 +450,22 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
         }
     }
     
-    func transcriptLoaded(transcript: [AnyObject]) {
-        videoTranscriptView?.updateTranscript(transcript)
+    func transcriptLoaded(transcript: [AnyObject]) { //字幕
+        videoTranscriptView?.updateTranscript(transcript) //字幕tableView的数据
         validateSubtitleTimer()
     }
     
-    func didFinishVideoPlaying() {
+    func didFinishVideoPlaying() { //视频结束
         environment.router?.showAppReviewIfNeeded(self)
     }
     
     //MARK: - VideoTranscriptDelegate methods
-    func didSelectSubtitleAtInterval(time: NSTimeInterval) {
+    func didSelectSubtitleAtInterval(time: NSTimeInterval) {//点击字幕行
         videoController.moviePlayerController?.controls?.setCurrentPlaybackTimeFromTranscript(time)
     }
     
     //MARK: - RatingDelegate
-    func didDismissRatingViewController() {
+    func didDismissRatingViewController() { //横竖屏
         UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.navigationItem.backBarButtonItem)
     }
 }

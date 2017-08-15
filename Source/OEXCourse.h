@@ -76,7 +76,7 @@ OEXStartType OEXStartTypeForString(NSString* type);
 @property (readonly, nonatomic, copy, nullable) NSNumber *give_coin; //购买课程赠送宝典
 @property (readonly, nonatomic, copy, nullable) NSString *begin_at; //购买课程赠送宝典开始时间
 @property (readonly, nonatomic, copy, nullable) NSString *end_at; //购买课程赠送宝典结束时间
-@property (readonly, nonatomic, copy, nullable) NSNumber *is_eliteu_course;//是否为付费课程
+@property (readonly, nonatomic, copy, nullable) NSNumber *is_public_course;//是否为付费课程
 
 @property (readonly, nonatomic, copy, nullable) NSNumber *course_status; //课程状态 1.未购买未试听 2.试听 3.试听已结束 4.已购买
 @property (readonly, nonatomic, copy, nullable) NSString *trial_expire_at; //试听课程失效时间
