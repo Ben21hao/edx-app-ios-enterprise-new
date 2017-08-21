@@ -208,18 +208,18 @@ OEXRegistrationViewControllerDelegate
     [controller.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)showMyVideos {
-//    OEXMyVideosViewController* videoController = [[UIStoryboard storyboardWithName:@"OEXMyVideosViewController" bundle:nil]instantiateViewControllerWithIdentifier:@"MyVideos"];
-//    NSAssert( self.revealController != nil, @"oops! must have a revealViewController" );
-//    videoController.environment = self.environment;
-//    [self showContentStackWithRootController:videoController animated:YES];
+- (void)showMyVideos { //我的下载
+    OEXMyVideosViewController* videoController = [[UIStoryboard storyboardWithName:@"OEXMyVideosViewController" bundle:nil]instantiateViewControllerWithIdentifier:@"MyVideos"];
+    NSAssert( self.revealController != nil, @"oops! must have a revealViewController" );
+    videoController.environment = self.environment;
+    [self showContentStackWithRootController:videoController animated:YES];
     
-    TDDownloadViewController *downloadVC = [[TDDownloadViewController alloc] init];
-    downloadVC.environment = self.environment;
-    [self showContentStackWithRootController:downloadVC animated:YES];
+//    TDDownloadViewController *downloadVC = [[TDDownloadViewController alloc] init];
+//    downloadVC.environment = self.environment;
+//    [self showContentStackWithRootController:downloadVC animated:YES];
 }
 
-- (void)showMySettings {
+- (void)showMySettings { //设置
 //    OEXMySettingsViewController* controller = [[OEXMySettingsViewController alloc] initWithNibName:nil bundle:nil];
     TDSettingViewController *controller = [[TDSettingViewController alloc] init];
     [self showContentStackWithRootController:controller animated:YES];

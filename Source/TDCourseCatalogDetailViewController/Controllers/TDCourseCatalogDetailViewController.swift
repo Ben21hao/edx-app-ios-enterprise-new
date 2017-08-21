@@ -126,14 +126,16 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
                         introduceStr = self.courseModel.short_description!
                     }
                 }
-//                let size = getSizeForString(introduceStr)
-//                return size.height + 48
                 
                 let size =  getLabelHeightByWidth(TDScreenWidth - 36, title: introduceStr, font: 14)
                 
                 return size + 48
                 
             } else if indexPath.row == 1 {
+                
+                if self.courseModel.is_public_course == false {
+                   return 103
+                }
                 
                 let paragraph = NSMutableParagraphStyle.init()
                 paragraph.lineSpacing = 2
@@ -170,13 +172,6 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         let height = label.frame.size.height
         return height
         
-    }
-    
-    /* 通过 字符串 来计算高度 -- 不是很准确*/
-    func getSizeForString(str: String) -> CGSize {
-        
-        let size = str.boundingRectWithSize(CGSizeMake(TDScreenWidth - 58, TDScreenHeight), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName : UIFont.init(name: "OpenSans", size: 14)!], context: nil).size
-        return size
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

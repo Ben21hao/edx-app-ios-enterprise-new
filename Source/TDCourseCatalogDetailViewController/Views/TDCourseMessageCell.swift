@@ -35,6 +35,35 @@ class TDCourseMessageCell: UITableViewCell {
         setViewConstraint()
     }
     
+    var courseModel : OEXCourse? {
+        didSet {
+            
+            timeLabel.text = courseModel!.effort?.stringByAppendingString(Strings.studyHour)
+            if ((courseModel!.effort?.containsString("约")) != nil) {
+                let timeStr = NSMutableString.init(string: courseModel!.effort!)
+                let time = timeStr.stringByReplacingOccurrencesOfString("约", withString:"\(Strings.aboutTime) ")
+                timeLabel.text = String(time.stringByAppendingString(" \(Strings.studyHour)"))
+            }
+            
+            if courseModel!.listen_count != nil {
+                let timeStr : String = courseModel!.listen_count!.stringValue
+                numberLabel.text = "\(timeStr) \(Strings.numberStudent)"
+            } else {
+                numberLabel.text = "0\(Strings.numberStudent)"
+            }
+            
+            dealWithCourse(courseModel?.is_public_course == false)
+        }
+    }
+    
+    func dealWithCourse(isHide: Bool) {
+        
+        line2.hidden = isHide
+        dateLabel.hidden = isHide
+        limitLabel.hidden = isHide
+        limitMessageLabel.hidden = isHide
+    }
+    
     func configView() {
         
         bgView.layer.cornerRadius = 4.0

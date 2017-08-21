@@ -133,19 +133,7 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
                 let cell = TDCourseMessageCell.init(style: .Default, reuseIdentifier: "TDCourseMessageCell")
                 cell.selectionStyle = .None
                 
-                cell.timeLabel.text = self.courseModel.effort?.stringByAppendingString(Strings.studyHour)
-                if ((self.courseModel.effort?.containsString("约")) != nil) {
-                    let timeStr = NSMutableString.init(string: self.courseModel.effort!)
-                    let time = timeStr.stringByReplacingOccurrencesOfString("约", withString:"\(Strings.aboutTime) ")
-                    cell.timeLabel.text = String(time.stringByAppendingString(" \(Strings.studyHour)"))
-                }
-                
-                if self.courseModel.listen_count != nil {
-                    let timeStr : String = self.courseModel.listen_count!.stringValue
-                    cell.numberLabel.text = "\(timeStr) \(Strings.numberStudent)"
-                } else {
-                    cell.numberLabel.text = "0\(Strings.numberStudent)"
-                }
+                cell.courseModel = self.courseModel
                 
                 return cell
                 
