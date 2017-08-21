@@ -41,6 +41,7 @@ public class UserProfile {
         case code = "code"//认证
         case companyDic = "company"//公司dic
         case logoUrl = "logo"//公司logo
+        case company_id = "id" //公司id
     }
     
     let hasProfileImage: Bool
@@ -68,6 +69,7 @@ public class UserProfile {
     var coupon :  Double? //优惠券
     var order : Double?//未支付订单
     let logoUrl: String?//公司logo
+    let company_id: Int?
     
     public init?(json: JSON) {
         let profileImage = json[ProfileFields.Image]
@@ -89,6 +91,7 @@ public class UserProfile {
         
         let companyDic = json[ProfileFields.companyDic]
         logoUrl = companyDic[ProfileFields.logoUrl].string
+        company_id = companyDic[ProfileFields.company_id].int
         
         let profileStatus = json[ProfileFields.vertify]
         statusCode = profileStatus[ProfileFields.code].int
@@ -105,7 +108,7 @@ public class UserProfile {
 //        print("json-----\(json)")
     }
     
-    internal init(user_id : Int, username : String, bio : String? = nil, parentalConsent : Bool? = false, countryCode : String? = nil, accountPrivacy : ProfilePrivacy? = nil,name : String, education : String? = nil,nickname : String,remainscore : Double,phone : String,email : String,coupon : Double,order : Double) {
+    internal init(user_id : Int,company_id : Int, username : String, bio : String? = nil, parentalConsent : Bool? = false, countryCode : String? = nil, accountPrivacy : ProfilePrivacy? = nil,name : String, education : String? = nil,nickname : String,remainscore : Double,phone : String,email : String,coupon : Double,order : Double) {
         
         self.accountPrivacy = accountPrivacy
         self.username = username
@@ -126,6 +129,7 @@ public class UserProfile {
         self.coupon = coupon
         self.order = order
         self.logoUrl = nil
+        self.company_id = company_id
     }
     
     var languageCode: String? {

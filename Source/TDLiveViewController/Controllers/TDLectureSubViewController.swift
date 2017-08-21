@@ -253,7 +253,7 @@ class TDLectureSubViewController: UIViewController,UITableViewDelegate,UITableVi
     func gotoWatchLiveVC(detailStr: String) { //直播
         
         let watchVc = WatchLiveViewController()
-        watchVc.roomId = "537048494"//settingModel.activityID //活动id
+        watchVc.roomId = settingModel.activityID //活动id
         watchVc.kValue = settingModel.kValue
         watchVc.bufferTimes = settingModel.bufferTimes
         watchVc.detailStr = detailStr

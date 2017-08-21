@@ -38,6 +38,7 @@
 
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "OpenCONSTS.h"
 
 @interface OEXAppDelegate () <UIApplicationDelegate>
 
@@ -82,6 +83,7 @@
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+//    EnableVHallDebugModel(YES);//微吼打印debug信息的方法
     [self.window makeKeyAndVisible];
 
     [self setupGlobalEnvironment];

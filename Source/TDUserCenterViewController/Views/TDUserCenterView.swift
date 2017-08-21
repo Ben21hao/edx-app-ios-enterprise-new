@@ -111,7 +111,7 @@ class TDUserCenterView: UIView,UITableViewDataSource {
                 if self.userProfile!.nickname != nil && self.userProfile?.nickname?.characters.count != 0  {
                     cell.nameLabel.text = self.userProfile!.nickname
                 } else {
-                    if self.userProfile!.name != self.userProfile!.username {
+                    if self.userProfile!.name != self.userProfile!.username && self.userProfile?.name?.characters.count != 0 {
                         cell.nameLabel.text = self.userProfile!.name
                     } else {
                         cell.nameLabel.text = Strings.noName

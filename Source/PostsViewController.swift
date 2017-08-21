@@ -497,7 +497,7 @@ class PostsViewController: TDSwiftBaseViewController, UITableViewDataSource, UIT
         }
         
         let paginator = WrappedPaginator(networkManager: self.environment.networkManager) { page in
-            return DiscussionAPI.getThreads(courseID: self.courseID, topicIDs: topicIDApiRepresentation, filter: filter, orderBy: orderBy, pageNumber: page)
+            return DiscussionAPI.getThreads(courseID: self.courseID, topicIDs: topicIDApiRepresentation, filter: filter, orderBy: orderBy, pageNumber: page) //接口
         }
         
         paginationController = PaginationController (paginator: paginator, tableView: self.tableView)
@@ -506,7 +506,7 @@ class PostsViewController: TDSwiftBaseViewController, UITableViewDataSource, UIT
     }
     
     
-    private func loadThreads() {
+    private func loadThreads() { //加载数据
         paginationController?.stream.listen(self, success:
             { [weak self] threads in
                 self?.posts.removeAll()
@@ -522,7 +522,7 @@ class PostsViewController: TDSwiftBaseViewController, UITableViewDataSource, UIT
     private func updatePostsFromThreads(threads : [DiscussionThread]) {
         
         for thread in threads {
-            self.posts.append(thread)
+            self.posts.append(thread)//数据
         }
         self.tableView.reloadData()
         let emptyState = LoadState.empty(icon : nil , message: errorMessage())
@@ -629,7 +629,7 @@ class PostsViewController: TDSwiftBaseViewController, UITableViewDataSource, UIT
         loadContent()
     }
     
-    // MARK - Table View Delegate
+    // MARK - TableView Delegate
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -664,7 +664,7 @@ class PostsViewController: TDSwiftBaseViewController, UITableViewDataSource, UIT
         
         let cell = tableView.dequeueReusableCellWithIdentifier(PostTableViewCell.identifier, forIndexPath: indexPath) as! PostTableViewCell
         cell.useThread(posts[indexPath.row], selectedOrderBy : selectedOrderBy)
-        cell.applyStandardSeparatorInsets()
+        cell.applyStandardSeparatorInsets() //
             return cell
     }
     

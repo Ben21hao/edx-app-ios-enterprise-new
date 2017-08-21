@@ -183,7 +183,7 @@
     }];
     
     [self.resendButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.view.mas_bottom).offset(-18);
+        make.bottom.mas_equalTo(self.view.mas_bottom).offset(-8);
         make.left.mas_equalTo(self.view.mas_left).offset(18);
         make.right.mas_equalTo(self.view.mas_right).offset(-18);
         make.height.mas_equalTo(41);
@@ -206,7 +206,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

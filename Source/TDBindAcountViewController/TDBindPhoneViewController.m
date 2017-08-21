@@ -75,7 +75,7 @@
 
 - (void)getCodeFromService {
     
-        int num = (arc4random() % 1000000);
+    int num = (arc4random() % 1000000);
     NSString *randomNumber = [NSString stringWithFormat:@"%.6d", num];//六位数验证码
     self.randomNumber = randomNumber;
     NSString *message = [NSString stringWithFormat:@"您正在绑定英荔账号，验证码为%@，5分钟内有效。",randomNumber];
@@ -83,6 +83,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:self.phoneTextField.text forKey:@"mobile"];
     [params setValue:message forKey:@"msg"];
+    [params setValue:@"1" forKey:@"is_company"];
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/account/check_mobile_is_bind/",ELITEU_URL];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];

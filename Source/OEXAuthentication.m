@@ -141,6 +141,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
 + (void)resetPasswordWithEmailId:(NSString*)email completionHandler:(OEXURLRequestHandler)completionBlock {
     NSMutableDictionary* parameters = [[NSMutableDictionary alloc] init];
     [parameters safeSetObject:email forKey:@"email"];
+    [parameters safeSetObject:@"1" forKey:@"is_company"]; //标明是企业版
     [self executePOSTRequestWithPath:URL_RESET_PASSWORD parameters:parameters completion:completionBlock];
 }
 

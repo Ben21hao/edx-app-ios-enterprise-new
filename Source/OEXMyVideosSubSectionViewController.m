@@ -49,87 +49,44 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     NSIndexPath* clickedIndexpath;
 }
 
-@property(strong, nonatomic) OEXVideoPlayerInterface* videoPlayerInterface;
-@property(strong, nonatomic) OEXHelperVideoDownload* currentTappedVideo;
-@property(strong, nonatomic) NSURL* currentVideoURL;
-@property(strong, nonatomic) NSIndexPath* selectedIndexPath;
-@property(nonatomic, assign) BOOL isTableEditing;
-@property(nonatomic, assign) BOOL selectAll;
-@property (nonatomic, strong) NSMutableArray* arr_SelectedObjects;
-@property (nonatomic, strong) OEXInterface* dataInterface;
-@property (nonatomic, strong) NSMutableArray* arr_SubsectionData;
-@property(nonatomic) NSInteger alertCount;
+@property (strong,nonatomic) OEXVideoPlayerInterface* videoPlayerInterface;
+@property (strong,nonatomic) OEXHelperVideoDownload* currentTappedVideo;
+@property (strong,nonatomic) NSURL* currentVideoURL;
+@property (strong,nonatomic) NSIndexPath* selectedIndexPath;
 
-@property (weak, nonatomic) IBOutlet OEXCustomLabel* lbl_videoHeader;
-@property (weak, nonatomic) IBOutlet OEXCustomLabel* lbl_videobottom;
-@property (weak, nonatomic)  IBOutlet OEXCustomLabel* lbl_section;
-@property (weak, nonatomic) IBOutlet UIView* video_containerView;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint* videoViewHeight;
-@property   (weak, nonatomic) IBOutlet UIView* videoVideo;
+@property (nonatomic,assign) BOOL isTableEditing;
+@property (nonatomic,assign) BOOL selectAll;
+@property (nonatomic,strong) NSMutableArray* arr_SelectedObjects;
+@property (nonatomic,strong) OEXInterface* dataInterface;
+@property (nonatomic,strong) NSMutableArray* arr_SubsectionData;
+@property (nonatomic,assign) NSInteger alertCount;
 
-@property (weak, nonatomic) IBOutlet UITableView* table_SubSectionVideos;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint* contraintEditingView;
-@property (weak, nonatomic) IBOutlet OEXCustomEditingView* customEditing;
+@property (weak,nonatomic) IBOutlet OEXCustomLabel* lbl_videoHeader;
+@property (weak,nonatomic) IBOutlet OEXCustomLabel* lbl_videobottom;
+@property (weak,nonatomic) IBOutlet OEXCustomLabel* lbl_section;
+@property (weak,nonatomic) IBOutlet UIView* video_containerView;
+@property (strong,nonatomic) IBOutlet NSLayoutConstraint* videoViewHeight;
+@property (weak,nonatomic) IBOutlet UIView* videoVideo;
 
-@property (strong, nonatomic) OEXCheckBox* selectAllButton;
-@property (strong, nonatomic) ProgressController *progressController;
+@property (weak,nonatomic) IBOutlet UITableView* table_SubSectionVideos;
+@property (weak,nonatomic) IBOutlet NSLayoutConstraint* contraintEditingView;
+@property (weak,nonatomic) IBOutlet OEXCustomEditingView* customEditing;
+
+@property (strong,nonatomic) OEXCheckBox* selectAllButton;
+@property (strong,nonatomic) ProgressController *progressController;
 
 @end
 
 @implementation OEXMyVideosSubSectionViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
-    //Add oserver
-    [self addObservers];
-
-    if(_videoPlayerInterface) {
-        [self.videoPlayerInterface videoPlayerShouldRotate];
-    }
-
-    // To clear already selected items when traverese back from Download screen.
-    [self cancelTableClicked:nil];
-
-    self.table_SubSectionVideos.separatorInset = UIEdgeInsetsZero;
-#ifdef __IPHONE_8_0
-    if(IS_IOS8) {
-        [self.table_SubSectionVideos setLayoutMargins:UIEdgeInsetsZero];
-    }
-#endif
-    
-    [[OEXAnalytics sharedAnalytics] trackScreenWithName:OEXAnalyticsScreenMyVideosCourseVideos courseID:self.course.course_id value:nil];
-}
-
-- (void)navigateBack {
-    [self cancelTableClicked:nil];
-    [self removePlayerObserver];
-    [self.videoPlayerInterface.moviePlayerController pause];
-    [self.videoPlayerInterface.moviePlayerController setFullscreen:NO];
-    [self.videoPlayerInterface resetPlayer];
-    self.videoPlayerInterface.videoPlayerVideoView = nil;
-    [self.videoPlayerInterface willMoveToParentViewController:nil];
-    [self.videoPlayerInterface removeFromParentViewController];
-    self.videoPlayerInterface = nil;
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)removePlayerObserver {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_VIDEO_PLAYER_NEXT object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_VIDEO_PLAYER_PREVIOUS object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackStateDidChangeNotification object:_videoPlayerInterface.moviePlayerController];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:_videoPlayerInterface.moviePlayerController];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 
     //set exclusive touch for all btns
     self.view.exclusiveTouch = YES;
     self.videoVideo.exclusiveTouch = YES;
 
-    [self setTitle:self.course.name];
+//    [self setTitle:self.course.name];
 
     self.titleViewLabel.text = self.course.name;
     [self.leftButton addTarget:self action:@selector(navigateBack) forControlEvents:UIControlEventTouchUpInside];
@@ -141,7 +98,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     [self.videoPlayerInterface enableFullscreenAutorotation];
     [self addChildViewController:self.videoPlayerInterface];
     [self.videoPlayerInterface didMoveToParentViewController:self];
-    _videoPlayerInterface.videoPlayerVideoView = self.videoVideo;
+    self.videoPlayerInterface.videoPlayerVideoView = self.videoVideo;
     self.videoPlayerInterface.moviePlayerController.controls.isShownOnMyVideos = YES;
     self.videoViewHeight.constant = 0;
     self.videoVideo.exclusiveTouch = YES;
@@ -177,6 +134,42 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //Add oserver
+    [self addObservers];
+    
+    if(self.videoPlayerInterface) {
+        [self.videoPlayerInterface videoPlayerShouldRotate];
+    }
+    
+    // To clear already selected items when traverese back from Download screen.
+    [self cancelTableClicked:nil];
+    
+    self.table_SubSectionVideos.separatorInset = UIEdgeInsetsZero;
+#ifdef __IPHONE_8_0
+    if(IS_IOS8) {
+        [self.table_SubSectionVideos setLayoutMargins:UIEdgeInsetsZero];
+    }
+#endif
+    
+    [[OEXAnalytics sharedAnalytics] trackScreenWithName:OEXAnalyticsScreenMyVideosCourseVideos courseID:self.course.course_id value:nil];
+}
+
+- (void)navigateBack {
+    [self cancelTableClicked:nil];
+    [self removePlayerObserver];
+    [self.videoPlayerInterface.moviePlayerController pause];
+    [self.videoPlayerInterface.moviePlayerController setFullscreen:NO];
+    [self.videoPlayerInterface resetPlayer];
+    self.videoPlayerInterface.videoPlayerVideoView = nil;
+    [self.videoPlayerInterface willMoveToParentViewController:nil];
+    [self.videoPlayerInterface removeFromParentViewController];
+    self.videoPlayerInterface = nil;
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)addObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playNextVideo) name:NOTIFICATION_VIDEO_PLAYER_NEXT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playPreviousVideo) name:NOTIFICATION_VIDEO_PLAYER_PREVIOUS object:nil];
@@ -185,18 +178,26 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(playbackStateChanged:)
-                                                 name:MPMoviePlayerPlaybackStateDidChangeNotification object:_videoPlayerInterface.moviePlayerController];
+                                                 name:MPMoviePlayerPlaybackStateDidChangeNotification object:self.videoPlayerInterface.moviePlayerController];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(playbackEnded:)
-                                                 name:MPMoviePlayerPlaybackDidFinishNotification object:_videoPlayerInterface.moviePlayerController];
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification object:self.videoPlayerInterface.moviePlayerController];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(downloadCompleteNotification:)
                                                  name:OEXDownloadEndedNotification object:nil];
 }
 
-#pragma update total download progress
+- (void)removePlayerObserver {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_VIDEO_PLAYER_NEXT object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_VIDEO_PLAYER_PREVIOUS object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackStateDidChangeNotification object:self.videoPlayerInterface.moviePlayerController];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:self.videoPlayerInterface.moviePlayerController];
+}
 
+
+
+#pragma update total download progress
 - (void)downloadCompleteNotification:(NSNotification*)notification {
     NSDictionary* dict = notification.userInfo;
 
@@ -295,7 +296,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     return ChapnameExists;
 }
 
-#pragma mark TableViewDataSourceDelegate
+#pragma mark - TableViewDataSourceDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
     _selectedIndexPath = nil;
@@ -304,84 +305,6 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
     return [[self.arr_SubsectionData objectAtIndex:section] count];
-}
-
-- (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
-    if([[self.arr_SubsectionData objectAtIndex:section] count] == 0) {
-        return nil;
-    }
-
-    OEXHelperVideoDownload* video = [[self.arr_SubsectionData objectAtIndex:section] objectAtIndex:0];
-
-    BOOL ChapnameExists = [self ChapterNameAlreadyDisplayed:section];
-
-    UIView* viewMain;
-    UIView* viewTop;
-    UIView* viewBottom;
-    UILabel* chapTitle;
-    UILabel* sectionTitle;
-
-    NSString *headerTitle = video.summary.sectionPathEntry.name;
-    if (!headerTitle.length) {
-        headerTitle = [Strings untitled];
-    }
-    
-    float mainViewWidth = SCREEN_WIDTH;
-    
-    if(ChapnameExists) {
-        
-        viewMain = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mainViewWidth, 30 )];
-        viewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mainViewWidth, 30 )];
-        viewBottom.backgroundColor = GREY_COLOR;
-        [viewMain addSubview:viewBottom];
-
-        sectionTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, mainViewWidth - 20, 30)];
-        sectionTitle.text = headerTitle;
-        sectionTitle.font = [[OEXStyles sharedStyles] semiBoldSansSerifOfSize:14.0f];
-        sectionTitle.textColor = [UIColor blackColor];
-        [viewMain addSubview:sectionTitle];
-    }
-    else {
-        viewMain = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mainViewWidth, HEADER_HEIGHT )];
-
-        viewTop = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mainViewWidth, 50 )];
-        viewTop.backgroundColor = [UIColor colorWithRed:62.0 / 255.0 green:66.0 / 255.0 blue:71.0 / 255.0 alpha:1.0];
-        [viewMain addSubview:viewTop];
-
-        viewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 50, mainViewWidth, 30 )];
-        viewBottom.backgroundColor = GREY_COLOR;
-        [viewMain addSubview:viewBottom];
-
-        NSString *chapterName = video.summary.chapterPathEntry.name;
-        if (!chapterName.length) {
-            chapterName = [Strings untitled];
-        }
-        
-        chapTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, mainViewWidth - 20, 50)];
-        chapTitle.text = chapterName;
-        chapTitle.font = [[OEXStyles sharedStyles] semiBoldSansSerifOfSize:14.0f];
-        chapTitle.textColor = [UIColor whiteColor];
-        [viewMain addSubview:chapTitle];
-
-        sectionTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, mainViewWidth - 20, 30)];
-        sectionTitle.text = headerTitle;
-        sectionTitle.font = [[OEXStyles sharedStyles] semiBoldSansSerifOfSize:14.0f];
-        sectionTitle.textColor = [UIColor blackColor];
-        [viewMain addSubview:sectionTitle];
-    }
-
-    return viewMain;
-}
-
-- (CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section {
-    BOOL ChapnameExists = [self ChapterNameAlreadyDisplayed:section];
-
-    if(ChapnameExists) {
-        return 30;
-    }
-    else {
-        return HEADER_HEIGHT;
-    }
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
@@ -461,6 +384,84 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     }
 }
 
+- (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
+    if([[self.arr_SubsectionData objectAtIndex:section] count] == 0) {
+        return nil;
+    }
+    
+    OEXHelperVideoDownload* video = [[self.arr_SubsectionData objectAtIndex:section] objectAtIndex:0];
+    
+    BOOL ChapnameExists = [self ChapterNameAlreadyDisplayed:section];
+    
+    UIView* viewMain;
+    UIView* viewTop;
+    UIView* viewBottom;
+    UILabel* chapTitle;
+    UILabel* sectionTitle;
+    
+    NSString *headerTitle = video.summary.sectionPathEntry.name;
+    if (!headerTitle.length) {
+        headerTitle = [Strings untitled];
+    }
+    
+    float mainViewWidth = SCREEN_WIDTH;
+    
+    if(ChapnameExists) {
+        
+        viewMain = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mainViewWidth, 30 )];
+        viewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mainViewWidth, 30 )];
+        viewBottom.backgroundColor = GREY_COLOR;
+        [viewMain addSubview:viewBottom];
+        
+        sectionTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, mainViewWidth - 20, 30)];
+        sectionTitle.text = headerTitle;
+        sectionTitle.font = [[OEXStyles sharedStyles] semiBoldSansSerifOfSize:14.0f];
+        sectionTitle.textColor = [UIColor blackColor];
+        [viewMain addSubview:sectionTitle];
+    }
+    else {
+        viewMain = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mainViewWidth, HEADER_HEIGHT )];
+        
+        viewTop = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mainViewWidth, 50 )];
+        viewTop.backgroundColor = [UIColor colorWithRed:62.0 / 255.0 green:66.0 / 255.0 blue:71.0 / 255.0 alpha:1.0];
+        [viewMain addSubview:viewTop];
+        
+        viewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, 50, mainViewWidth, 30 )];
+        viewBottom.backgroundColor = GREY_COLOR;
+        [viewMain addSubview:viewBottom];
+        
+        NSString *chapterName = video.summary.chapterPathEntry.name;
+        if (!chapterName.length) {
+            chapterName = [Strings untitled];
+        }
+        
+        chapTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, mainViewWidth - 20, 50)];
+        chapTitle.text = chapterName;
+        chapTitle.font = [[OEXStyles sharedStyles] semiBoldSansSerifOfSize:14.0f];
+        chapTitle.textColor = [UIColor whiteColor];
+        [viewMain addSubview:chapTitle];
+        
+        sectionTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, mainViewWidth - 20, 30)];
+        sectionTitle.text = headerTitle;
+        sectionTitle.font = [[OEXStyles sharedStyles] semiBoldSansSerifOfSize:14.0f];
+        sectionTitle.textColor = [UIColor blackColor];
+        [viewMain addSubview:sectionTitle];
+    }
+    
+    return viewMain;
+}
+
+- (CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section {
+    BOOL ChapnameExists = [self ChapterNameAlreadyDisplayed:section];
+    
+    if(ChapnameExists) {
+        return 30;
+    }
+    else {
+        return HEADER_HEIGHT;
+    }
+}
+
 - (void)setSelectedCellAtIndexPath:(NSIndexPath*)indexPath tableView:(UITableView*)tableView {
     UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:YES animated:YES];
@@ -498,7 +499,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     [_dataInterface downloadAllTranscriptsForVideo:obj];
 
     //stop current video
-    [_videoPlayerInterface.moviePlayerController stop];
+    [self.videoPlayerInterface.moviePlayerController stop];
 
     self.currentTappedVideo = obj;
     self.currentVideoURL = [NSURL fileURLWithPath:self.currentTappedVideo.filePath];
@@ -508,7 +509,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     [self.table_SubSectionVideos deselectRowAtIndexPath:indexPath animated:NO];
     self.contraintEditingView.constant = 0;
     [self handleComponentsFrame];
-    [_videoPlayerInterface playVideoFor:obj];
+    [self.videoPlayerInterface playVideoFor:obj];
 
     // Send Analytics
     [_dataInterface sendAnalyticsEvents:OEXVideoStatePlay withCurrentTime:self.videoPlayerInterface.moviePlayerController.currentPlaybackTime forVideo:self.currentTappedVideo];
@@ -526,7 +527,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 }
 
 - (void)playbackStateChanged:(NSNotification*)notification {
-    switch([_videoPlayerInterface.moviePlayerController playbackState])
+    switch([self.videoPlayerInterface.moviePlayerController playbackState])
     {
         case MPMoviePlaybackStateStopped:
             break;
@@ -589,7 +590,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     }
 }
 
-#pragma mark play previous video from the list
+#pragma mark - play previous video from the list
 
 - (void)CheckIfFirstVideoPlayed:(NSIndexPath*)indexPath {
     if(indexPath.section == 0 && indexPath.row == 0) {
@@ -915,9 +916,9 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 #pragma mark videoPlayer Delegate
 
 - (void)movieTimedOut {
-    if(!_videoPlayerInterface.moviePlayerController.isFullscreen) {
+    if(!self.videoPlayerInterface.moviePlayerController.isFullscreen) {
         [self showOverlayMessage:[Strings timeoutCheckInternetConnection]];
-        [_videoPlayerInterface.moviePlayerController stop];
+        [self.videoPlayerInterface.moviePlayerController stop];
     }
     else {
         [self showAlert:OEXAlertTypeVideoTimeOutAlert];
@@ -985,8 +986,8 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     }
     if(self.alertCount == 0) {
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-        [_videoPlayerInterface setShouldRotate:YES];
-        [_videoPlayerInterface orientationChanged:nil];
+        [self.videoPlayerInterface setShouldRotate:YES];
+        [self.videoPlayerInterface orientationChanged:nil];
     }
 }
 
@@ -995,7 +996,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 
     if(self.alertCount >= 1) {
         [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
-        [_videoPlayerInterface setShouldRotate:NO];
+        [self.videoPlayerInterface setShouldRotate:NO];
     }
 
     switch(OEXAlertType) {

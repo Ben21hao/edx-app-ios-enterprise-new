@@ -189,7 +189,6 @@
         int num = (arc4random() % 1000000);
         NSString *randomNumber = [NSString stringWithFormat:@"%.6d", num];//六位数验证码
         self.randomNumber = randomNumber;
-//        self.randomNumber = @"111111";
         NSString *msgStr = [NSString stringWithFormat:@"验证码：%@，5分钟内有效。您将获取每门课程30分钟的免费试听资格。充分体验课程，注意避免同时试听。",self.randomNumber];
         
         TDRequestBaseModel *requestModel = [[TDRequestBaseModel alloc] init];

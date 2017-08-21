@@ -429,7 +429,7 @@
             
             assistantTopCell.cancelButton.hidden = YES;
             if (self.whereFrom == TDAssistantFromOne && [model.order_type intValue] == 1) {
-                assistantTopCell.cancelButton.hidden = [self dealWithTimeStr:model.service_begin_at];
+                assistantTopCell.cancelButton.hidden = [self dealWithTimeStr:model.service_begin_at nowTime:model.now_time];
             }
             
             assistantTopCell.titleLabel.text = [NSString stringWithFormat:@"%@",model.course_display_name];
@@ -439,10 +439,14 @@
         case 1: {
             TDAssistantCell *assistantCell = [[TDAssistantCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"assistantCell"];
             assistantCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
             assistantCell.nameLabel.text = model.assistant_name;
-            assistantCell.quetionLabel.text = [NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"QUETION_DESCRIPTION", nil),model.question];
-            assistantCell.whereFrom = self.whereFrom;
             [assistantCell.headerImage sd_setImageWithURL:[NSURL URLWithString:model.avatar_url.large] placeholderImage:[UIImage imageNamed:@"people"]];
+            assistantCell.whereFrom = self.whereFrom;
+            
+            if (model.question.length > 0) {
+                assistantCell.quetionLabel.text = [NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"QUETION_DESCRIPTION", nil),model.question];
+            }
             return assistantCell;
         }
             break;
@@ -580,7 +584,7 @@
     }];
 }
 
-- (BOOL)dealWithTimeStr:(NSString *)startTime { //startTime 为东八区时间
+- (BOOL)dealWithTimeStr:(NSString *)startTime nowTime:(NSString *)nowTime { //startTime 为东八区时间
     
     NSString *str1 = [startTime substringToIndex:19];
     NSString *timeStr = [str1 stringByReplacingOccurrencesOfString:@"T" withString:@" "];
@@ -589,7 +593,7 @@
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *startDate = [formatter dateFromString:timeStr];//预约开始时间
     
-    NSDate *nowDate = [NSDate date];//当前时间
+     NSDate *nowDate = [formatter dateFromString:nowTime];;//当前时间
     
     //统一用东八区时间
     NSDate *now = [self getChinaTime:nowDate];

@@ -637,6 +637,8 @@
                 
             } else if ([code intValue] == 404){
                 errorStr = [Strings acountNoExist];
+            } else if ([code intValue] == 405) {
+                 errorStr = [Strings accountDisable];
             }
             
             [self loginFailedWithErrorMessage:errorStr title:nil];

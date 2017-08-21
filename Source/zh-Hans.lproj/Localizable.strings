@@ -1735,3 +1735,5 @@
 "NO_CHAT_RECORD" = "暂未有聊天记录";
 /*进入成功 Entry successful*/
 "ENTER_SUCCESSFUL" = "进入成功";
+/*您的账号已被停用，请联系企业管理员 Your account has been disabled. Please contact the administrator.*/
+"ACCOUNT_DISABLE" = "您的账号已被停用，请联系企业管理员";

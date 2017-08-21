@@ -234,6 +234,7 @@ public class DiscussionAPI {
         ).paginated(page: pageNumber)
     }
     
+    //我关注的讨论帖
     static func getFollowedThreads(courseID courseID : String, filter: DiscussionPostsFilter, orderBy: DiscussionPostsSort, pageNumber : Int = 1) -> NetworkRequest<Paginated<[DiscussionThread]>> {
         var query = ["course_id" : JSON(courseID), "following" : JSON(true)]
         if let view = filter.apiRepresentation {

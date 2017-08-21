@@ -1734,3 +1734,5 @@
 "NO_CHAT_RECORD" = "No chatting record";
 /*进入成功 Entry successful*/
 "ENTER_SUCCESSFUL" = "Entry successful.";
+/*您的账号已被停用，请联系企业管理员 Your account has been disabled. Please contact the administrator.*/
+"ACCOUNT_DISABLE" = "Your account has been disabled. Please contact the administrator.";

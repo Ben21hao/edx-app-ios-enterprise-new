@@ -148,6 +148,8 @@
     
     [OEXAuthentication resetPasswordWithEmailId:self.accountTextField.text completionHandler:^(NSData* data, NSURLResponse* response, NSError* error) {
         
+        [self.activityView stopAnimating];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.view setUserInteractionEnabled:YES];
             

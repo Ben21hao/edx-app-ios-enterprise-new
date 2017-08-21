@@ -264,7 +264,7 @@ static AnnouncementView *announcementView = nil;
     
     _moviePlayer = [[VHallMoviePlayer alloc]initWithDelegate:self];
     _moviePlayer.movieScalingMode = kRTMPMovieScalingModeAspectFit;
-    _moviePlayer.bufferTime = (int)_bufferTimes;
+    _moviePlayer.bufferTime = 6;
     _moviePlayer.reConnectTimes = 2;
     _moviePlayer.liveFormat = kLiveFormatRtmp;
     

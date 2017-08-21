@@ -43,10 +43,10 @@
     [self.cancelButton setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
     [self.cancelButton setTitle:NSLocalizedString(@"CANCEL", nil) forState:UIControlStateNormal];
     [self.bgView addSubview:self.cancelButton];
-    
 }
 
 - (void)setViewConstraint {
+    
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.mas_equalTo(self.contentView);
     }];

@@ -412,6 +412,7 @@
 
 #pragma mark - tableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
     self.nullLabel.hidden = self.ordersArray.count != 0;
     return self.ordersArray.count;
 }
