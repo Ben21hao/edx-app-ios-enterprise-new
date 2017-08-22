@@ -183,11 +183,12 @@
     
     // Populate both ALL & RECENT Videos Table data
     for(NSDictionary *dict in arrCourseAndVideo) {
-        NSMutableDictionary* mutableDict = [dict mutableCopy];
         
-        NSString *strSize = [[NSString alloc] initWithString: [self calculateVideosSizeInCourse:[mutableDict objectForKey:CAV_KEY_VIDEOS]] ];
-        NSMutableArray* sortedArray = [mutableDict objectForKey:CAV_KEY_VIDEOS];
-        NSSortDescriptor* sortDesc = [[NSSortDescriptor alloc] initWithKey:@"completedDate" ascending:NO selector:@selector(compare:)];
+        NSMutableDictionary *mutableDict = [dict mutableCopy];
+        NSString *strSize = [[NSString alloc] initWithString: [self calculateVideosSizeInCourse:[mutableDict objectForKey:CAV_KEY_VIDEOS]]];
+        
+        NSMutableArray *sortedArray = [mutableDict objectForKey:CAV_KEY_VIDEOS];
+        NSSortDescriptor *sortDesc = [[NSSortDescriptor alloc] initWithKey:@"completedDate" ascending:NO selector:@selector(compare:)];
         [sortedArray sortUsingDescriptors:[NSArray arrayWithObject:sortDesc]];
         NSMutableArray* arr_SortedArray = [sortedArray mutableCopy];
         NSDictionary* videos = @{CAV_KEY_COURSE: [mutableDict objectForKey:CAV_KEY_COURSE],

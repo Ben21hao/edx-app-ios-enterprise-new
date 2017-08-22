@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,20 +17,22 @@
                         <viewControllerLayoutGuide type="top" id="rHB-QQ-N5l"/>
                         <viewControllerLayoutGuide type="bottom" id="13t-1C-Pk9"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="L2G-qJ-vah">
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="L2G-qJ-vah">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="50" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="hps-DD-rdY" userLabel="Table View - RECENT">
+                                <rect key="frame" x="0.0" y="225" width="375" height="328"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellCourseVideo" rowHeight="60" id="c58-e8-zWO" customClass="OEXCourseVideosTableViewCell">
                                         <rect key="frame" x="0.0" y="50" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c58-e8-zWO" id="bft-WS-fKi">
-                                            <frame key="frameInset" width="375" height="59"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="501" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Introduction to giving with purpose" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7JB-ne-5ZF" customClass="OEXCustomLabel">
+                                                    <rect key="frame" x="51" y="15" width="264" height="20"/>
                                                     <accessibility key="accessibilityConfiguration" label=""/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="kuP-U7-7o3"/>
@@ -43,6 +48,7 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="502" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3:45" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3b-WD-MrL" customClass="OEXCustomLabel">
+                                                    <rect key="frame" x="51" y="39" width="47" height="10"/>
                                                     <accessibility key="accessibilityConfiguration" label=""/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="47" id="nnn-Cz-yHI"/>
@@ -53,6 +59,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="503" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200MB" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5d-3s-i8e" customClass="OEXCustomLabel">
+                                                    <rect key="frame" x="99" y="39" width="47" height="10"/>
                                                     <accessibility key="accessibilityConfiguration" label=""/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="47" id="8jQ-Bg-NEo"/>
@@ -63,12 +70,14 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_partiallywatched.png" translatesAutoresizingMaskIntoConstraints="NO" id="ozZ-9A-6HT">
+                                                    <rect key="frame" x="16" y="22" width="15" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="15" id="BbK-0m-mhb"/>
                                                         <constraint firstAttribute="height" constant="15" id="LQ2-4y-8Nc"/>
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q9K-bH-sw7" userLabel="Check Box" customClass="OEXCheckBox" customModule="edX" customModuleProvider="target">
+                                                    <rect key="frame" x="325" y="10" width="40" height="40"/>
                                                     <accessibility key="accessibilityConfiguration" label=""/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="fiA-p7-ibD"/>
@@ -120,14 +129,17 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dpj-Iu-Y6r" customClass="OEXCustomEditingView">
+                                <rect key="frame" x="0.0" y="553" width="375" height="50"/>
                                 <color key="backgroundColor" red="0.24313725489999999" green="0.25882352939999997" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="bI2-oc-5yT"/>
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3i1-PG-mvc" userLabel="playback view">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6Y-u1-2mf" userLabel="videoview">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <accessibility key="accessibilityConfiguration" label="">
                                             <bool key="isElement" value="NO"/>
@@ -137,8 +149,10 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z1d-oK-mYR" userLabel="titleview">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                         <subviews>
                                             <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" tag="701" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="294" translatesAutoresizingMaskIntoConstraints="NO" id="1jC-Zi-BOc" customClass="OEXCustomLabel">
+                                                <rect key="frame" x="16" y="18" width="349" height="17"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <accessibility key="accessibilityConfiguration" label=""/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>

@@ -62,14 +62,9 @@
     OEXCourse *obj_course = [dictVideo objectForKey:CAV_KEY_COURSE];
     
     NSInteger count = [[dictVideo objectForKey:CAV_KEY_VIDEOS] count];
-    NSString *Vcount = nil;
-    if(count == 1) {
-        Vcount = [NSString stringWithFormat:@"%ld Video", (long)count];
-    } else {
-        Vcount = [NSString stringWithFormat:@"%ld Videos", (long)count];
-    }
     
-    NSString* videoDetails = [NSString stringWithFormat:@"%@, %@", Vcount, [dictVideo objectForKey:CAV_KEY_VIDEOS_SIZE]];
+    NSString *Vcount = [NSString stringWithFormat:@"%ld %@", (long)count,count == 1 ? @"Video" : @"Videos"];
+    NSString *videoDetails = [NSString stringWithFormat:@"%@, %@", Vcount, [dictVideo objectForKey:CAV_KEY_VIDEOS_SIZE]];
     
     [[CourseCardViewModel onMyVideos:obj_course collectionInfo:videoDetails] apply:infoView networkManager:self.environment.networkManager type: 5];
     

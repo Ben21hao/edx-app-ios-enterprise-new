@@ -42,7 +42,7 @@ public class CourseOutlineViewController :
     private let modeController : CourseOutlineModeController
     private var lastAccessedController : CourseLastAccessedController
     
-    /// Strictly a test variable used as a trigger flag. Not to be used out of the test scope
+    // Strictly a test variable used as a trigger flag. Not to be used out of the test scope
     private var t_hasTriggeredSetLastAccessed = false
     
     public var blockID : CourseBlockID? {

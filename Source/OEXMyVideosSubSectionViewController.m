@@ -13,7 +13,7 @@
 #import "NSArray+OEXSafeAccess.h"
 #import "NSString+OEXFormatting.h"
 
-#import "OEXAppDelegate.h"
+//#import "OEXAppDelegate.h"
 #import "OEXCourse.h"
 #import "OEXCourseVideosTableViewCell.h"
 #import "OEXCustomLabel.h"
@@ -49,31 +49,26 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     NSIndexPath* clickedIndexpath;
 }
 
-@property (strong,nonatomic) OEXVideoPlayerInterface* videoPlayerInterface;
-@property (strong,nonatomic) OEXHelperVideoDownload* currentTappedVideo;
-@property (strong,nonatomic) NSURL* currentVideoURL;
-@property (strong,nonatomic) NSIndexPath* selectedIndexPath;
+@property (strong,nonatomic) OEXVideoPlayerInterface* videoPlayerInterface; //视频播放器
+@property (strong,nonatomic) OEXHelperVideoDownload* currentTappedVideo;//当前点击的视频
+@property (strong,nonatomic) NSIndexPath* selectedIndexPath; //选择的行
 
-@property (nonatomic,assign) BOOL isTableEditing;
-@property (nonatomic,assign) BOOL selectAll;
-@property (nonatomic,strong) NSMutableArray* arr_SelectedObjects;
-@property (nonatomic,strong) OEXInterface* dataInterface;
-@property (nonatomic,strong) NSMutableArray* arr_SubsectionData;
+@property (nonatomic,assign) BOOL isTableEditing; //编辑
+@property (nonatomic,assign) BOOL selectAll; //选择全部
+@property (nonatomic,strong) NSMutableArray* arr_SelectedObjects;//选择的视频数组
+@property (nonatomic,strong) OEXInterface* dataInterface; //数据
+@property (nonatomic,strong) NSMutableArray* arr_SubsectionData; //数据数组
+@property (strong,nonatomic) OEXCheckBox* selectAllButton; //选择全部
+@property (strong,nonatomic) ProgressController *progressController;//下载进度
+
 @property (nonatomic,assign) NSInteger alertCount;
 
 @property (weak,nonatomic) IBOutlet OEXCustomLabel* lbl_videoHeader;
-@property (weak,nonatomic) IBOutlet OEXCustomLabel* lbl_videobottom;
-@property (weak,nonatomic) IBOutlet OEXCustomLabel* lbl_section;
-@property (weak,nonatomic) IBOutlet UIView* video_containerView;
 @property (strong,nonatomic) IBOutlet NSLayoutConstraint* videoViewHeight;
 @property (weak,nonatomic) IBOutlet UIView* videoVideo;
-
 @property (weak,nonatomic) IBOutlet UITableView* table_SubSectionVideos;
 @property (weak,nonatomic) IBOutlet NSLayoutConstraint* contraintEditingView;
-@property (weak,nonatomic) IBOutlet OEXCustomEditingView* customEditing;
-
-@property (strong,nonatomic) OEXCheckBox* selectAllButton;
-@property (strong,nonatomic) ProgressController *progressController;
+@property (weak,nonatomic) IBOutlet OEXCustomEditingView* customEditing; //编辑。删除，取消
 
 @end
 
@@ -82,12 +77,10 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    //set exclusive touch for all btns
-    self.view.exclusiveTouch = YES;
+    self.view.exclusiveTouch = YES; //set exclusive touch for all btns
     self.videoVideo.exclusiveTouch = YES;
 
 //    [self setTitle:self.course.name];
-
     self.titleViewLabel.text = self.course.name;
     [self.leftButton addTarget:self action:@selector(navigateBack) forControlEvents:UIControlEventTouchUpInside];
     
@@ -95,57 +88,52 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     
     //Init video view and video player
     self.videoPlayerInterface = [[OEXVideoPlayerInterface alloc] init];
-    [self.videoPlayerInterface enableFullscreenAutorotation];
-    [self addChildViewController:self.videoPlayerInterface];
-    [self.videoPlayerInterface didMoveToParentViewController:self];
     self.videoPlayerInterface.videoPlayerVideoView = self.videoVideo;
     self.videoPlayerInterface.moviePlayerController.controls.isShownOnMyVideos = YES;
+    [self.videoPlayerInterface enableFullscreenAutorotation];
+    [self.videoPlayerInterface didMoveToParentViewController:self];
+    [self addChildViewController:self.videoPlayerInterface];
+    
     self.videoViewHeight.constant = 0;
     self.videoVideo.exclusiveTouch = YES;
     
     //Set Navigation Buttons
     self.selectAllButton = [[OEXCheckBox alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     [self.selectAllButton addTarget:self action:@selector(selectAllChanged:) forControlEvents:UIControlEventTouchUpInside];
+    
     self.progressController = [[ProgressController alloc] initWithOwner:self router:self.environment.router dataInterface:self.environment.interface];
-    self.navigationItem.rightBarButtonItem = [self.progressController navigationItem];
     [self.progressController hideProgessView];
+    self.navigationItem.rightBarButtonItem = [self.progressController navigationItem];
+    
+    self.automaticallyAdjustsScrollViewInsets = NO; //Fix for 20px issue for the table view
+    
+    [self getSubsectionVideoDataFromArray]; // 数据 Call to populate data
 
-    //Fix for 20px issue for the table view
-    self.automaticallyAdjustsScrollViewInsets = NO;
-
-    // Call to populate data
-    [self getSubsectionVideoDataFromArray];
-
-    // Used for autorotation
-    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications]; // 用于自转 Used for autorotation
 
     // Show Custom editing View
     [self.customEditing.btn_Edit addTarget:self action:@selector(editTableClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.customEditing.btn_Delete addTarget:self action:@selector(deleteTableClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.customEditing.btn_Cancel addTarget:self action:@selector(cancelTableClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
     self.selectAllButton.hidden = YES;
     self.selectAllButton.accessibilityLabel = [Strings accessibilitySelectAll];
-
-    // set select all button color to white so it look prominent on blue navigation bar
     self.selectAllButton.tintColor = [[OEXStyles sharedStyles] navigationItemTintColor];
     
-    self.isTableEditing = NO;           // Check Edit button is clicked
-    self.selectAll = NO;        // Check if all are selected
-    
+    self.isTableEditing = NO;           // 点击编辑按钮  Check Edit button is clicked
+    self.selectAll = NO;        // 是否全选  Check if all are selected
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //Add oserver
-    [self addObservers];
+    [self addObservers];//Add oserver
     
     if(self.videoPlayerInterface) {
-        [self.videoPlayerInterface videoPlayerShouldRotate];
+        [self.videoPlayerInterface videoPlayerShouldRotate]; //视频旋转
     }
     
-    // To clear already selected items when traverese back from Download screen.
-    [self cancelTableClicked:nil];
+    [self cancelTableClicked:nil]; // To clear already selected items when traverese back from Download screen.
     
     self.table_SubSectionVideos.separatorInset = UIEdgeInsetsZero;
 #ifdef __IPHONE_8_0
@@ -157,70 +145,81 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     [[OEXAnalytics sharedAnalytics] trackScreenWithName:OEXAnalyticsScreenMyVideosCourseVideos courseID:self.course.course_id value:nil];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    if(self.navigationController.topViewController != self) {
+        [self.videoPlayerInterface.moviePlayerController pause];
+    }
+    
+    [self removePlayerObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:OEXDownloadEndedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:OEXDownloadProgressChangedNotification object:nil];
+}
+
 - (void)navigateBack {
+    
     [self cancelTableClicked:nil];
     [self removePlayerObserver];
+    
+    self.videoPlayerInterface.videoPlayerVideoView = nil;
+    self.videoPlayerInterface = nil;
     [self.videoPlayerInterface.moviePlayerController pause];
     [self.videoPlayerInterface.moviePlayerController setFullscreen:NO];
     [self.videoPlayerInterface resetPlayer];
-    self.videoPlayerInterface.videoPlayerVideoView = nil;
     [self.videoPlayerInterface willMoveToParentViewController:nil];
     [self.videoPlayerInterface removeFromParentViewController];
-    self.videoPlayerInterface = nil;
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - 通知
 - (void)addObservers {
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playNextVideo) name:NOTIFICATION_VIDEO_PLAYER_NEXT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playPreviousVideo) name:NOTIFICATION_VIDEO_PLAYER_PREVIOUS object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTotalDownloadProgress:) name:OEXDownloadProgressChangedNotification object:nil];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(playbackStateChanged:)
-                                                 name:MPMoviePlayerPlaybackStateDidChangeNotification object:self.videoPlayerInterface.moviePlayerController];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(playbackEnded:)
-                                                 name:MPMoviePlayerPlaybackDidFinishNotification object:self.videoPlayerInterface.moviePlayerController];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackStateChanged:) name:MPMoviePlayerPlaybackStateDidChangeNotification object:self.videoPlayerInterface.moviePlayerController];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackEnded:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.videoPlayerInterface.moviePlayerController];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(downloadCompleteNotification:)
-                                                 name:OEXDownloadEndedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadCompleteNotification:) name:OEXDownloadEndedNotification object:nil];
 }
 
 - (void)removePlayerObserver {
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_VIDEO_PLAYER_NEXT object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_VIDEO_PLAYER_PREVIOUS object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackStateDidChangeNotification object:self.videoPlayerInterface.moviePlayerController];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:self.videoPlayerInterface.moviePlayerController];
 }
 
+#pragma mark - 更新下载进度 update total download progress
+- (void)downloadCompleteNotification:(NSNotification *)notification {
+    
+    NSDictionary *dict = notification.userInfo;
 
-
-#pragma update total download progress
-- (void)downloadCompleteNotification:(NSNotification*)notification {
-    NSDictionary* dict = notification.userInfo;
-
-    NSURLSessionTask* task = [dict objectForKey:VIDEO_DL_COMPLETE_N_TASK];
-    NSURL* url = task.originalRequest.URL;
+    NSURLSessionTask *task = [dict objectForKey:VIDEO_DL_COMPLETE_N_TASK];
+    NSURL *url = task.originalRequest.URL;
 
     if([OEXInterface isURLForVideo:url.absoluteString]) {
         [self getSubsectionVideoDataFromArray];
     }
 }
 
-- (void)updateTotalDownloadProgress:(NSNotification* )notification {
+- (void)updateTotalDownloadProgress:(NSNotification *)notification {
     [self updateNavigationItemButtons];
 }
 
+#pragma mark - 数据
 - (void)getSubsectionVideoDataFromArray {
-    // Initialize array
-    self.arr_CourseData = [[NSMutableArray alloc] init];
+    
+    self.arr_CourseData = [[NSMutableArray alloc] init]; //课程数据
+    self.arr_SubsectionData = [[NSMutableArray alloc] init]; //显示的数据 Initialize array of data to show on table
 
-    // Initialize array of data to show on table
-    self.arr_SubsectionData = [[NSMutableArray alloc] init];
-
-    NSMutableArray* arrCourseAndVideo = [[NSMutableArray alloc] initWithArray: [_dataInterface coursesAndVideosForDownloadState:OEXDownloadStateComplete] ];
+    NSMutableArray* arrCourseAndVideo = [[NSMutableArray alloc] initWithArray: [self.dataInterface coursesAndVideosForDownloadState:OEXDownloadStateComplete] ];
 
     /*
     <__NSArrayM 0x10c7a3e40>(
@@ -238,7 +237,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     for(NSDictionary* dict in arrCourseAndVideo) {
         OEXCourse* course = [dict objectForKey:CAV_KEY_COURSE];
 
-        if([course.name isEqualToString:self.title]) {
+        if([course.name isEqualToString:self.course.name]) {
             self.arr_CourseData = [dict objectForKey:CAV_KEY_VIDEOS];
         }
     }
@@ -248,9 +247,8 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     for(OEXHelperVideoDownload* video in self.arr_CourseData) {
         NSMutableArray* arr_section = [[NSMutableArray alloc] init];
 
-        // Sorting the data with chapter name and section name
-        for(OEXHelperVideoDownload* objvideo in self.arr_CourseData) {
-            // Compare both chapter and section
+        for(OEXHelperVideoDownload* objvideo in self.arr_CourseData) { // 章名、节名排序 Sorting the data with chapter name and section name
+            // 比较两个章节 Compare both chapter and section
             if([video.summary.chapterPathEntry isEqual:objvideo.summary.chapterPathEntry] && [video.summary.sectionPathEntry isEqual:objvideo.summary.sectionPathEntry]) {
                 [arr_section addObject:objvideo];
             }
@@ -261,9 +259,13 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
         NSMutableArray* arr_CheckDup = [arr_section mutableCopy];
 
         for(OEXHelperVideoDownload* objvideoCheck in arr_CheckDup) {
+            
             for(NSMutableArray* check in self.arr_SubsectionData) {
+                
                 for(OEXHelperVideoDownload* objV in check) {
+                    
                     if([objvideoCheck.summary.chapterPathEntry isEqual:objV.summary.chapterPathEntry] && [objvideoCheck.summary.sectionPathEntry isEqual:objV.summary.sectionPathEntry]) {
+                        
                         [arr_section removeObject:objvideoCheck];
                     }
                 }
@@ -296,7 +298,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     return ChapnameExists;
 }
 
-#pragma mark - TableViewDataSourceDelegate
+#pragma mark - TableView DataSourceDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
     _selectedIndexPath = nil;
@@ -469,8 +471,8 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     // To avoid showing selected cell index of old video when new video is played
-    _dataInterface.selectedCCIndex = -1;
-    _dataInterface.selectedVideoSpeedIndex = -1;
+    self.dataInterface.selectedCCIndex = -1;
+    self.dataInterface.selectedVideoSpeedIndex = -1;
 
     clickedIndexpath = indexPath;
 
@@ -496,23 +498,20 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     OEXHelperVideoDownload* obj = [videos objectAtIndex:indexPath.row];
 
     // Set the path of the downloaded videos
-    [_dataInterface downloadAllTranscriptsForVideo:obj];
+    [self.dataInterface downloadAllTranscriptsForVideo:obj];
 
     //stop current video
     [self.videoPlayerInterface.moviePlayerController stop];
 
     self.currentTappedVideo = obj;
-    self.currentVideoURL = [NSURL fileURLWithPath:self.currentTappedVideo.filePath];
     self.lbl_videoHeader.text = [NSString stringWithFormat:@"%@ ", self.currentTappedVideo.summary.name];
-    self.lbl_videobottom.text = [NSString stringWithFormat:@"%@ ", obj.summary.name];
-    self.lbl_section.text = [NSString stringWithFormat:@"%@\n%@", self.currentTappedVideo.summary.sectionPathEntry.name, self.currentTappedVideo.summary.chapterPathEntry.name];
     [self.table_SubSectionVideos deselectRowAtIndexPath:indexPath animated:NO];
     self.contraintEditingView.constant = 0;
     [self handleComponentsFrame];
     [self.videoPlayerInterface playVideoFor:obj];
 
     // Send Analytics
-    [_dataInterface sendAnalyticsEvents:OEXVideoStatePlay withCurrentTime:self.videoPlayerInterface.moviePlayerController.currentPlaybackTime forVideo:self.currentTappedVideo];
+    [self.dataInterface sendAnalyticsEvents:OEXVideoStatePlay withCurrentTime:self.videoPlayerInterface.moviePlayerController.currentPlaybackTime forVideo:self.currentTappedVideo];
 }
 
 - (void)handleComponentsFrame {
@@ -526,21 +525,18 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     }];
 }
 
-- (void)playbackStateChanged:(NSNotification*)notification {
-    switch([self.videoPlayerInterface.moviePlayerController playbackState])
-    {
+- (void)playbackStateChanged:(NSNotification* )notification {
+    
+    switch([self.videoPlayerInterface.moviePlayerController playbackState]) {
         case MPMoviePlaybackStateStopped:
             break;
         case MPMoviePlaybackStatePlaying:
 
             if(_currentTappedVideo.watchedState == OEXPlayedStateWatched) {
-            }
-            else {
+            }else {
                 //Buffering view
-
                 if(_currentTappedVideo.watchedState != OEXPlayedStatePartiallyWatched) {
-                    [_dataInterface markVideoState:OEXPlayedStatePartiallyWatched
-                                          forVideo:_currentTappedVideo];
+                    [self.dataInterface markVideoState:OEXPlayedStatePartiallyWatched forVideo:_currentTappedVideo];
                 }
                 _currentTappedVideo.watchedState = OEXPlayedStatePartiallyWatched;
             }
@@ -569,21 +565,21 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
         self.videoPlayerInterface.moviePlayerController.currentPlaybackTime = 0.0;
 
         _currentTappedVideo.watchedState = OEXPlayedStateWatched;
-        [_dataInterface markVideoState:OEXPlayedStateWatched
-                              forVideo:_currentTappedVideo];
-
+        [self.dataInterface markVideoState:OEXPlayedStateWatched forVideo:_currentTappedVideo];
+        
         [self.table_SubSectionVideos reloadData];
     }
 }
 
-- (void)playbackEnded:(NSNotification*)notification {
+- (void)playbackEnded:(NSNotification *)notification {
+    
     int reason = [[[notification userInfo] valueForKey:MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] intValue];
     if(reason == MPMovieFinishReasonPlaybackEnded) {
         [self markPlayedStateOnVideoStopped];
-    }
-    else if(reason == MPMovieFinishReasonUserExited) {
-    }
-    else if(reason == MPMovieFinishReasonPlaybackError) {
+        
+    } else if(reason == MPMovieFinishReasonUserExited) {
+        
+    } else if(reason == MPMovieFinishReasonPlaybackError) {
         if([_currentTappedVideo.summary.videoURL isEqualToString:@""]) {
             [self showAlert:OEXAlertTypePlayBackContentUnAvailable];
         }
@@ -592,14 +588,13 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 
 #pragma mark - play previous video from the list
 
-- (void)CheckIfFirstVideoPlayed:(NSIndexPath*)indexPath {
+- (void)CheckIfFirstVideoPlayed:(NSIndexPath *)indexPath {
     if(indexPath.section == 0 && indexPath.row == 0) {
         // Post notification to hide the next button
         // We are playing the last video
 
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HIDE_PREV_NEXT object:self userInfo:@{KEY_DISABLE_PREVIOUS: @"YES"}];
-    }
-    else {
+    } else {
         // Not the last video id playing.
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HIDE_PREV_NEXT object:self userInfo:@{KEY_DISABLE_PREVIOUS: @"NO"}];
     }
@@ -619,20 +614,16 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     NSInteger row = currentIndexPath.row;
     NSInteger section = currentIndexPath.section;
 
-    // Check for the last video in the list
-    if(currentIndexPath.section == 0) {
+    if(currentIndexPath.section == 0) {// Check for the last video in the list
         if(currentIndexPath.row == 0) {
             return nil;
-        }
-        else {
+        } else {
             indexPath = [NSIndexPath indexPathForRow:row - 1 inSection:section];
         }
-    }
-    else {
+    } else {
         if(row > 0) {
             indexPath = [NSIndexPath indexPathForRow:row - 1 inSection:section];
-        }
-        else {
+        } else {
             NSInteger rowcount = [self.table_SubSectionVideos numberOfRowsInSection:section - 1];
             indexPath = [NSIndexPath indexPathForRow:rowcount - 1 inSection:section - 1];
         }
@@ -742,23 +733,11 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     return YES;
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    if(self.navigationController.topViewController != self) {
-        [self.videoPlayerInterface.moviePlayerController pause];
-    }
-
-    [self removePlayerObserver];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:OEXDownloadEndedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:OEXDownloadProgressChangedNotification object:nil];
-}
 
 #pragma mark - USED WHILE EDITING
-
-- (void)cancelTableClicked:(id)sender {
-    // set isSelected to NO for all the objects
-    for(NSArray* arr in self.arr_SubsectionData) {
+- (void)cancelTableClicked:(id)sender { //取消
+    
+    for(NSArray* arr in self.arr_SubsectionData) { // set isSelected to NO for all the objects
         for(OEXHelperVideoDownload* videos in arr) {
             videos.isSelected = NO;
         }
@@ -773,6 +752,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 }
 
 - (void)hideComponentsOnEditing:(BOOL)hide {
+    
     self.isTableEditing = hide;
     self.selectAllButton.hidden = !hide;
 
@@ -789,8 +769,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 - (void)deleteTableClicked:(id)sender {
     if(_arr_SelectedObjects.count > 0) {
         [self showAlert:OEXAlertTypeDeleteConfirmationAlert];
-    }
-    else {
+    } else {
     }
 }
 
@@ -798,31 +777,29 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)editTableClicked:(id)sender {
+- (void)editTableClicked:(id)sender { //编辑
+    
     self.arr_SelectedObjects = [[NSMutableArray alloc] init];
 
     [self hideComponentsOnEditing:YES];
-
     [self.table_SubSectionVideos reloadData];
 }
 
-- (void)selectCheckbox:(id)sender {
+- (void)selectCheckbox:(id)sender { //选择
+    
     NSInteger section = ([sender tag]) / 100;
     NSInteger row = ([sender tag]) % 100;
-
-    NSArray* videos = [self.arr_SubsectionData objectAtIndex:section];
+    NSArray *videos = [self.arr_SubsectionData objectAtIndex:section];
 
     OEXHelperVideoDownload* obj_video = [videos objectAtIndex:row];
 
-    // change status of the object and reload table
-
-    if(obj_video.isSelected) {
+    
+    if(obj_video.isSelected) { // change status of the object and reload table
         obj_video.isSelected = NO;
         [self.arr_SelectedObjects removeObject:obj_video];
-    }
-    else {
+        
+    } else {
         obj_video.isSelected = YES;
-
         [self.arr_SelectedObjects addObject:obj_video];
     }
 
@@ -833,17 +810,18 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 }
 
 - (void)disableDeleteButton {
+    
     if([self.arr_SelectedObjects count] == 0) {
         self.customEditing.btn_Delete.enabled = NO;
         [self.customEditing.btn_Delete setBackgroundColor:[UIColor darkGrayColor]];
-    }
-    else {
+        
+    } else {
         [self.customEditing.btn_Delete setBackgroundColor:[UIColor clearColor]];
         self.customEditing.btn_Delete.enabled = YES;
     }
 }
 
-- (void)checkIfAllSelected {
+- (void)checkIfAllSelected { //判断是否是全部
     // check if all the boxes checked on table then show SelectAll checkbox checked
     BOOL flagBreaked = NO;
 
@@ -853,8 +831,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
                 self.selectAll = NO;
                 flagBreaked = YES;
                 break;
-            }
-            else {
+            } else {
                 self.selectAll = YES;
             }
         }
@@ -866,10 +843,9 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     self.selectAllButton.checked = self.selectAll;
 }
 
-- (IBAction)selectAllChanged:(id)sender {
+- (IBAction)selectAllChanged:(id)sender { //全选
     if(self.selectAll) {
         // de-select all the videos to delete
-
         self.selectAll = NO;
 
         for(NSArray* arr in self.arr_SubsectionData) {
@@ -878,13 +854,11 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
                 [self.arr_SelectedObjects removeObject:videos];
             }
         }
-    }
-    else {
+    } else {
         // remove all objects to avoids number problem
         [self.arr_SelectedObjects removeAllObjects];
 
         // select all the videos to delete
-
         self.selectAll = YES;
 
         for(NSArray* arr in self.arr_SubsectionData) {
@@ -900,7 +874,8 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     [self disableDeleteButton];
 }
 
-- (void)updateNavigationItemButtons {
+- (void)updateNavigationItemButtons { //右上角下载按钮状态
+    
     NSMutableArray *barButtons = [[NSMutableArray alloc] init];
     if(_isTableEditing) {
         [barButtons addObject:[[UIBarButtonItem alloc] initWithCustomView:self.selectAllButton]];
@@ -913,25 +888,26 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     }
 }
 
-#pragma mark videoPlayer Delegate
-
+#pragma mark - videoPlayer Delegate
 - (void)movieTimedOut {
+    
     if(!self.videoPlayerInterface.moviePlayerController.isFullscreen) {
         [self showOverlayMessage:[Strings timeoutCheckInternetConnection]];
         [self.videoPlayerInterface.moviePlayerController stop];
-    }
-    else {
+        
+    } else {
         [self showAlert:OEXAlertTypeVideoTimeOutAlert];
     }
 }
 
-- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+#pragma mark - alertView Delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
     if(alertView.tag == 1001) {
         if(buttonIndex == 1) {
             [self playNextVideo];
         }
-    }
-    else if(alertView.tag == 1002) {
+    } else if(alertView.tag == 1002) {
         if(buttonIndex == 1) {
             NSInteger deleteCount = 0;
             for(OEXHelperVideoDownload* selectedVideo in self.arr_SelectedObjects) {
@@ -965,8 +941,8 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
             if([self.arr_SubsectionData count] == 0) {
                 self.selectAllButton.hidden = YES;
                 [self performSelector:@selector(pop) withObject:nil afterDelay:1.0];
-            }
-            else {
+                
+            } else {
                 // clear all objects form array after deletion.
                 // To obtain correct count on next deletion process.
 
@@ -974,11 +950,9 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 
                 [self.table_SubSectionVideos reloadData];
             }
-
             [self cancelTableClicked:nil];
         }
-    }
-    else if(alertView.tag == 1005 || alertView.tag == 1006) {
+    } else if(alertView.tag == 1005 || alertView.tag == 1006) {
     }
 
     if(self.alertCount > 0) {
@@ -1062,12 +1036,11 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     }
 }
 
-- (BOOL) isRTL {
+- (BOOL)isRTL {
     return [UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft;
 }
 
 #pragma mark - Actions
-
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return [OEXStyles sharedStyles].standardStatusBarStyle;
 }
