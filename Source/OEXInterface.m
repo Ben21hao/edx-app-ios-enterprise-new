@@ -808,34 +808,42 @@ static OEXInterface* _sharedInterface = nil;
 
 }
 
-- (void)addVideos:(NSArray*)videos forCourseWithID:(NSString*)courseID {
-    OEXCourse* course = [self courseWithID:courseID];
-    NSMutableArray* videoDatas = [[_courseVideos objectForKey:course.video_outline] mutableCopy];
+- (void)addVideos:(NSArray *)videos forCourseWithID:(NSString *)courseID {
+    
+//    for (OEXVideoSummary* summary in videos) {
+//        NSLog(@"课程id ---->> %@ 视频大小  %@ --->>时长 %@",courseID,summary.size,summary.duration);
+//    }
     NSMutableSet* knownVideoIDs = [[NSMutableSet alloc] init];
     NSMutableDictionary* videosMap = [[NSMutableDictionary alloc] init];
-    if(videoDatas == nil) {
-        // we don't have any videos for this course yet
-        // so set it up
+    
+    OEXCourse* course = [self courseWithID:courseID];
+    NSMutableArray* videoDatas = [[_courseVideos objectForKey:course.video_outline] mutableCopy];
+    
+    if(videoDatas == nil) { //数组为空 // we don't have any videos for this course yet ；so set it up
+        
         videoDatas = [[NSMutableArray alloc] init];
         [self.courseVideos safeSetObject:videoDatas forKey:course.video_outline];
-    }
-    else {
-        // we do have videos, so collect their IDs so we only add new ones
+        
+    } else { // we do have videos, so collect their IDs so we only add new ones
+        
         for(OEXHelperVideoDownload* download in videoDatas) {
+            
             [knownVideoIDs addObject:download.summary.videoID];
             [videosMap safeSetObject:download forKey:download.summary.videoID];
         }
     }
     
     NSArray* videoHelpers = [videos oex_map:^id(OEXVideoSummary* summary) {
+        
         if(![knownVideoIDs containsObject:summary.videoID]) {
+            
             OEXHelperVideoDownload* helper = [[OEXHelperVideoDownload alloc] init];
             helper.summary = summary;
             helper.filePath = [OEXFileUtility filePathForRequestKey:summary.videoURL];
             [videoDatas addObject:helper];
             return helper;
-        }
-        else {
+            
+        } else {
             OEXHelperVideoDownload* helper = [videosMap objectForKey:summary.videoID];
             // Hack
             // Duration doesn't always come through the old API for some reason, so make here we make sure
@@ -899,16 +907,15 @@ static OEXInterface* _sharedInterface = nil;
         NSMutableArray* videosArray = [[NSMutableArray alloc] init];
 
         for(OEXHelperVideoDownload* video in [_courseVideos objectForKey : course.video_outline]) {
-            //Complete
-            if(video.downloadState == OEXDownloadStateComplete && state == OEXDownloadStateComplete) {
+            
+            if(video.downloadState == OEXDownloadStateComplete && state == OEXDownloadStateComplete) {//Complete
                 [videosArray addObject:video];
-            }
-            //Partial
-            else if(video.downloadState == OEXDownloadStatePartial && video.downloadProgress < OEXMaxDownloadProgress && state == OEXDownloadStatePartial) {
+                
+            } else if(video.downloadState == OEXDownloadStatePartial && video.downloadProgress < OEXMaxDownloadProgress && state == OEXDownloadStatePartial) {//Partial
                 [videosArray addObject:video];
-            }
-            else if(video.downloadState == OEXDownloadStateNew && OEXDownloadStateNew) {
-//                [videosArray addObjectr:video];
+                
+            } else if(video.downloadState == OEXDownloadStateNew && OEXDownloadStateNew) {
+//                [videosArray addObject:video];
             }
         }
 

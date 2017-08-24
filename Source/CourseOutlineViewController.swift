@@ -77,7 +77,6 @@ public class CourseOutlineViewController :
         addChildViewController(tableController)
         tableController.didMoveToParentViewController(self)
         tableController.delegate = self
-
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -109,6 +108,7 @@ public class CourseOutlineViewController :
         
         lastAccessedController.loadLastAccessed(forMode: modeController.currentMode)
         lastAccessedController.saveLastAccessed()
+        
         let stream = joinStreams(courseQuerier.rootID, courseQuerier.blockWithID(blockID))
         stream.extendLifetimeUntilFirstResult (success :
             { (rootID, block) in
@@ -140,7 +140,7 @@ public class CourseOutlineViewController :
         
 //        let fixedSpace = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
 //        fixedSpace.width = barButtonFixedSpaceWidth
-//        navigationItem.rightBarButtonItems = [webController.barButtonItem,fixedSpace,modeController.barItem]//视频
+//        navigationItem.rightBarButtonItems = [webController.barButtonItem,fixedSpace,modeController.barItem] //视频
         
         let rightButton = UIButton.init(frame: CGRectMake(0, 0, 48, 48));
         rightButton.setTitle(Strings.teachAssistant, forState: .Normal)

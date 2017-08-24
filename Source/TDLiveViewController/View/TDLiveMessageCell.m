@@ -84,7 +84,8 @@
     NSString *timeStr = [self.toolModel changeStypeForTime:model.live_start_at];
     self.timeLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(@"START_TIME_TEXT", nil),timeStr];
     
-    NSString *imageStr = [NSString stringWithFormat:@"%@%@",ELITEU_URL,model.cover_url];
+    //处理图片链接中的中文和空格
+    NSString *imageStr = [self.toolModel dealwithImageStr:[NSString stringWithFormat:@"%@%@",ELITEU_URL,model.cover_url]];
     [self.courseImage sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:@"Group_Live"]];
 }
 

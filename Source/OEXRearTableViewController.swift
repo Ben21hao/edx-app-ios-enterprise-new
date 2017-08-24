@@ -131,7 +131,7 @@ class OEXRearTableViewController : UITableViewController {
                 SDImageCache.sharedImageCache().cleanDisk()
                 
                 var companyImageStr = ELITEU_URL +  profile.logoUrl!
-                companyImageStr = companyImageStr.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.init(charactersInString: "`#%^{}\"[]|\\<> ").invertedSet)! //空格或中文
+                companyImageStr = companyImageStr.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.init(charactersInString: "`#%^{}\"[]|\\<> ").invertedSet)! //处理图片链接中的中文和空格
                 
                 let url = NSURL.init(string: companyImageStr)
                 self.companyImage.sd_setImageWithURL(url, placeholderImage: UIImage.init(named: "logobg"))

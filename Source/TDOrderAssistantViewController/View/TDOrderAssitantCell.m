@@ -19,6 +19,8 @@
 @property (nonatomic,strong) UIButton *orderButton;
 @property (nonatomic,strong) UIButton *talkButton;
 
+@property (nonatomic,strong) TDBaseToolModel *toolModel;
+
 @end
 
 @implementation TDOrderAssitantCell
@@ -26,6 +28,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.toolModel = [[TDBaseToolModel alloc] init];
         [self configView];
         [self setViewConstraint];
     }
@@ -36,7 +39,8 @@
     _model = model;
     
     //设置头像
-    [self.headerImage sd_setImageWithURL:model.avatar_url[@"large"] placeholderImage:[UIImage imageNamed:@"default_big"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    NSString *url = [self.toolModel dealwithImageStr:model.avatar_url[@"large"]];
+    [self.headerImage sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"default_big"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     }];
 
     self.nameLabel.text = model.name;
@@ -191,8 +195,7 @@
 }
 
 - (CGFloat)sizeForButtonTitle:(NSString *)title {
-    TDBaseToolModel *model = [[TDBaseToolModel alloc] init];
-    return [model widthForString:title font:14];
+    return [self.toolModel widthForString:title font:14];
 }
 
 @end

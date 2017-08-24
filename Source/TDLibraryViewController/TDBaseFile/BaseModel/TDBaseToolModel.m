@@ -557,6 +557,15 @@
     return UIGraphicsGetImageFromCurrentImageContext();// UIGraphicsGetImageFromCurrentImageContext()返回的就是image
 }
 
+
+/* 对图片链接中的 中文 和 空格进行处理，要不就显示不出来 */
+- (NSString *)dealwithImageStr:(NSString *)imageStr{
+    
+//    NSString *str = [imageStr stringByAddingPercentEncodingWithAllowedCharacters:[[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "] invertedSet]]; //
+    NSString *str = [imageStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]; //直接编码
+    return str;
+}
+
 @end
 
 

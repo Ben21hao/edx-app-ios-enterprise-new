@@ -62,6 +62,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 @property (strong,nonatomic) ProgressController *progressController;//下载进度
 
 @property (nonatomic,assign) NSInteger alertCount;
+@property (nonatomic,assign) NSInteger requestCount;
 
 @property (weak,nonatomic) IBOutlet OEXCustomLabel* lbl_videoHeader;
 @property (strong,nonatomic) IBOutlet NSLayoutConstraint* videoViewHeight;
@@ -276,6 +277,12 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
             [self.arr_SubsectionData addObject:arr_section];
         }
     }
+    
+    if (self.arr_SubsectionData.count == 0 && self.requestCount == 0) {
+        self.requestCount += 1;
+        [self getSubsectionVideoDataFromArray];
+    }
+    
     [self.table_SubSectionVideos reloadData];
 }
 
@@ -299,7 +306,6 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 }
 
 #pragma mark - TableView DataSourceDelegate
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
     _selectedIndexPath = nil;
     return [self.arr_SubsectionData count];

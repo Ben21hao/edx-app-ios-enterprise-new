@@ -81,7 +81,7 @@ extern NSString* const OEXDownloadEndedNotification;
 
 #pragma mark Video Management
 /// videos is an array of OEXVideoSummary
-- (void)addVideos:(NSArray*)videos forCourseWithID:(NSString*)courseID;
+- (void)addVideos:(NSArray *)videos forCourseWithID:(NSString *)courseID;
 /// videos is an array of OEXHelperVideoDownload
 /// This should really take a courseID not the outline URL, but that will require more serious refactoring
 - (void)setVideos:(NSArray*)videos forURL:(NSString*)URLString;

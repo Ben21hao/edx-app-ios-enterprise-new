@@ -110,12 +110,12 @@
 
 - (void)showData {
     
-    NSString *string1 = [NSString stringWithFormat:@"%@%@",ELITEU_URL,self.model.image];
-    NSString* string2 = [string1 stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [self.courseImage sd_setImageWithURL:[NSURL URLWithString:string2] placeholderImage:[UIImage imageNamed:@"course_backGroud"]];
-    
     TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
     
+    NSString *string1 = [NSString stringWithFormat:@"%@%@",ELITEU_URL,self.model.image];
+    NSString* string2 = [baseTool dealwithImageStr:string1];
+    [self.courseImage sd_setImageWithURL:[NSURL URLWithString:string2] placeholderImage:[UIImage imageNamed:@"course_backGroud"]];
+
     self.titleLabel.text = self.model.display_name;
     self.userNameLabel.text = self.model.teacher_name;
     self.moneyLabel.attributedText = [baseTool setString:[NSString stringWithFormat:@"￥%.2f",[self.model.min_price floatValue]] withFont:16  type:1];

@@ -12,8 +12,8 @@ import UIKit
 //let ELITEU_URL = OEXConfig.sharedConfig().apiHostURL //swift不能从文件中读取域名
 
 //let ELITEU_URL = "http://192.168.0.182:8000"
-//let ELITEU_URL = "http://demo.e-ducation.cn" //f版 - 测试
-let ELITEU_URL = "http://enterprise.e-ducation.cn" //企业生产
+let ELITEU_URL = "http://demo.e-ducation.cn" //f版 - 测试
+//let ELITEU_URL = "http://enterprise.e-ducation.cn" //企业生产
 
 
 let TDScreenWidth = UIScreen.mainScreen().bounds.size.width

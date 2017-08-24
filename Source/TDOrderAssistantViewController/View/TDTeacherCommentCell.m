@@ -48,8 +48,9 @@
 - (void)setDetailItem:(TDTeacherCommentModel *)detailItem {
     _detailItem = detailItem;
     
+    TDBaseToolModel *toolModel = [[TDBaseToolModel alloc] init];
     NSDictionary *dic = _detailItem.avatar_url;
-    NSURL *url = [NSURL URLWithString:dic[@"full"]];
+    NSURL *url = [NSURL URLWithString:[toolModel dealwithImageStr:dic[@"full"]]];
     [self.headerImage sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_big"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     }];
     

@@ -85,8 +85,11 @@
 
         self.transcripts = [summary objectForKey:@"transcripts"];
         
-        if (_encodings.count <=0)
+        if (_encodings.count <= 0) {
             _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
+        }
+        
+        NSLog(@"视频时长 %@ --- >>大小  %@ ---->> %@",self.duration,[summary objectForKey:@"size"],_defaultEncoding.size);
     }
 
     return self;

@@ -41,6 +41,7 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
     var highlightedBlockID : CourseBlockID? = nil
     
     override func viewDidLoad() {
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView(frame: CGRectZero)

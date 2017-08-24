@@ -441,7 +441,9 @@
             assistantCell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             assistantCell.nameLabel.text = model.assistant_name;
-            [assistantCell.headerImage sd_setImageWithURL:[NSURL URLWithString:model.avatar_url.large] placeholderImage:[UIImage imageNamed:@"people"]];
+            
+            NSString *imageStr = [self.toolModel dealwithImageStr:model.avatar_url.large];
+            [assistantCell.headerImage sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:@"people"]];
             assistantCell.whereFrom = self.whereFrom;
             
             if (model.question.length > 0) {

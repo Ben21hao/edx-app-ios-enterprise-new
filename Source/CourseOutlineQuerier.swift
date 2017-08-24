@@ -80,13 +80,14 @@ public class CourseOutlineQuerier : NSObject {
         for (_, block) in blocks {
             switch block.type {
             case let .Video(video):
+//                print("视频大小  \(video.size) ---->> 时长 \(video.duration))")
                 videos.append(video)
             default:
                 break
             }
         }
         
-        self.interface?.addVideos(videos, forCourseWithID: courseID)
+//        self.interface?.addVideos(videos, forCourseWithID: courseID) //会导致视频大小和时间为0
     }
     
     private func loadOutlineIfNecessary() {

@@ -114,7 +114,7 @@
             continue;
         }
         NSDictionary* dictResponse = [dict oex_replaceNullsWithEmptyStrings];
-        OEXVideoSummary* summaryList = [[OEXVideoSummary alloc] initWithDictionary:dictResponse];
+        OEXVideoSummary* summaryList = [[OEXVideoSummary alloc] initWithDictionary:dictResponse]; //课程summarry
         if(summaryList.chapterPathEntry.entryID != nil && summaryList.sectionPathEntry.entryID != nil) {
             [arrSummary addObject:summaryList];
         }
