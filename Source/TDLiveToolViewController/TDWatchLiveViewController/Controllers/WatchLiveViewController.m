@@ -8,10 +8,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "WatchLiveViewController.h"
 #import <MediaPlayer/MPMoviePlayerController.h>
-#import "WatchLiveOnlineTableViewCell.h"
-#import "WatchLiveChatTableViewCell.h"
 #import "WatchLiveQATableViewCell.h"
-#import "WatchLiveSurveyTableViewCell.h"
 #import "WatchLiveLotteryViewController.h"
 #import "VHMessageToolView.h"
 #import "VHallApi.h"
@@ -560,76 +557,6 @@ static AnnouncementView *announcementView = nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-//    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//
-//    UITableViewCell *cell = nil;
-//    __weak typeof(self) weakSelf = self;
-//    
-//    if (self.chatBtn.selected) { //选择聊天
-//        id model = [_chatDataArray objectAtIndex:indexPath.row];
-//        
-//        if ([model isKindOfClass:[VHallOnlineStateModel class]]) { //上下线消息
-//            static NSString *indetify = @"WatchLiveOnlineCell";
-//            cell = [tableView dequeueReusableCellWithIdentifier:indetify];
-//            if (!cell) {
-//                cell = [[WatchLiveOnlineTableViewCell alloc]init];
-//            }
-//            ((WatchLiveOnlineTableViewCell *)cell).model = model;
-//            
-//        } else if([model isKindOfClass:[VHallSurveyModel class]]) { //问卷
-//            
-//            static NSString *indetify = @"WatchLiveSurveyTableViewCell";
-//            cell = [tableView dequeueReusableCellWithIdentifier:indetify];
-//            if (!cell) {
-//                cell = [[WatchLiveSurveyTableViewCell alloc] init];
-//            }
-//            
-//            ((WatchLiveSurveyTableViewCell *)cell).surveyLabel.text = NSLocalizedString(@"SURVEY_TEXT", nil);
-//            [((WatchLiveSurveyTableViewCell *)cell).surveyButton setTitle:NSLocalizedString(@"ACQUIRE_SURVEY", nil) forState:UIControlStateNormal];
-//            
-//            ((WatchLiveSurveyTableViewCell *)cell).model = model;
-//            ((WatchLiveSurveyTableViewCell *)cell).clickSurveyItem = ^(VHallSurveyModel *model) {
-//                [weakSelf performSelector:@selector(clickSurvey:) withObject:model];
-//            };
-//            
-//        } else { //聊天消息
-//            static NSString *indetify = @"WatchLiveChatCell";
-//            cell = [tableView dequeueReusableCellWithIdentifier:indetify];
-//            if (!cell) {
-//                cell = [[WatchLiveChatTableViewCell alloc]init];
-//            }
-//            ((WatchLiveChatTableViewCell *)cell).model = model;
-//        }
-//        
-//    } else if (_QABtn.selected) { //问答
-//        static NSString * qaIndetify = @"WatchLiveQACell";
-//        cell = [tableView dequeueReusableCellWithIdentifier:qaIndetify];
-//        if (!cell) {
-//            cell = [[WatchLiveQATableViewCell alloc]init];
-//        }
-//        ((WatchLiveQATableViewCell *)cell).model = [_QADataArray objectAtIndex:indexPath.row];
-//        
-//    }
-//    else { //
-//        static NSString *qaIndetify = @"identifiCell";
-//        cell = [tableView dequeueReusableCellWithIdentifier:qaIndetify];
-//        if (!cell) {
-//            cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:qaIndetify];
-//        }
-//    }
-//    cell.width = self.view.bounds.size.width;
-//    
-//    UILabel *line = [[UILabel alloc] init];
-//    line.backgroundColor = [UIColor colorWithHexString:colorHexStr6];
-//    [cell addSubview:line];
-//    
-//    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.bottom.mas_equalTo(cell);
-//        make.height.mas_equalTo(0.5);
-//    }];
-//
-//    return cell;
     
     tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     

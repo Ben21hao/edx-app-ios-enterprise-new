@@ -196,7 +196,7 @@
 }
 
 - (void)gotoWaitForPayView { //待支付
-//    WaitForPayViewController *waitForPayVC = [[WaitForPayViewController alloc] init];
+    
     TDWaitforPayViewController *waitForPayVC = [[TDWaitforPayViewController alloc] init];
     waitForPayVC.username = self.username;
     waitForPayVC.courseId = self.courseId;

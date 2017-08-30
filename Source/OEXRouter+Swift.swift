@@ -261,7 +261,7 @@ extension OEXRouter {
     }
 
     func showCourseCatalogDetail(courseModel: OEXCourse, fromController: UIViewController) {
-//        let detailController = CourseCatalogDetailViewController(environment: environment, courseModel: courseModel)
+        
         let detailController = TDCourseCatalogDetailViewController(environment: environment, courseModel: courseModel)
         fromController.navigationController?.pushViewController(detailController, animated: true)
     }

@@ -11,7 +11,6 @@
 #import <MediaPlayer/MPMoviePlayerController.h>
 #import <AVFoundation/AVFoundation.h>
 
-#import "WatchLiveChatTableViewCell.h"
 #import "VHallApi.h"
 #import "VHMessageToolView.h"
 #import "VHPullingRefreshTableView.h"
@@ -714,36 +713,6 @@ static AnnouncementView* announcementView = nil;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-//    UITableViewCell *cell =nil;
-//    if (_commentsArray.count != 0) {
-//        id model = [_commentsArray objectAtIndex:indexPath.row];
-//        static NSString *indetify = @"WatchLiveChatCell";
-//        cell = [tableView dequeueReusableCellWithIdentifier:indetify];
-//        
-//        if (!cell) {
-//            cell = [[WatchLiveChatTableViewCell alloc] init];
-//        }
-//        ((WatchLiveChatTableViewCell *)cell).model = model;
-//        
-//        UILabel *line = [[UILabel alloc] init];
-//        line.backgroundColor = [UIColor colorWithHexString:colorHexStr6];
-//        [cell addSubview:line];
-//        
-//        [line mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.right.bottom.mas_equalTo(cell);
-//            make.height.mas_equalTo(0.5);
-//        }];
-//        
-//    } else {
-//        static  NSString *indetify = @"identifyCell";
-//        cell = [tableView dequeueReusableCellWithIdentifier:indetify];
-//        if (!cell) {
-//            cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indetify];
-//        }
-//    }
-//    return cell;
-
     id model = [_commentsArray objectAtIndex:indexPath.row];
     
     WatchLiveChatCell *cell = [[WatchLiveChatCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"WatchLiveChatCell"];

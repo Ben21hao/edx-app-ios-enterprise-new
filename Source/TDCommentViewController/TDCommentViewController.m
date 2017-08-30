@@ -16,7 +16,6 @@
 
 #import <MJRefresh/MJRefresh.h>
 #import <MJExtension/MJExtension.h>
-//#import "SDAutoLayout.h"
 
 @interface TDCommentViewController () <UITableViewDelegate,UITableViewDataSource>
 

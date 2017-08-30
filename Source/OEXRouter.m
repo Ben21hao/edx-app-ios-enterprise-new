@@ -220,7 +220,7 @@ OEXRegistrationViewControllerDelegate
 }
 
 - (void)showMySettings { //设置
-//    OEXMySettingsViewController* controller = [[OEXMySettingsViewController alloc] initWithNibName:nil bundle:nil];
+    
     TDSettingViewController *controller = [[TDSettingViewController alloc] init];
     [self showContentStackWithRootController:controller animated:YES];
 }

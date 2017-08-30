@@ -41,7 +41,6 @@
 		19A1339519CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19A1339319CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.xib */; };
 		19A1339719CAE108003ADD24 /* EULA.htm in Resources */ = {isa = PBXBuildFile; fileRef = 19A1339619CAE108003ADD24 /* EULA.htm */; };
 		19BB622A1A9B28F1007DBF47 /* OEXRegistrationFieldWrapperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BB62291A9B28F1007DBF47 /* OEXRegistrationFieldWrapperView.m */; };
-		19BB62311A9C656B007DBF47 /* OEXMySettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19BB622F1A9C656B007DBF47 /* OEXMySettingsViewController.xib */; };
 		19E1F02B1A272DDC00C2E1BE /* LastAccessed.m in Sources */ = {isa = PBXBuildFile; fileRef = 19E1F02A1A272DDC00C2E1BE /* LastAccessed.m */; };
 		19EA0F5D1965CB3700B684B0 /* OEXCustomEditingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19EA0F5C1965CB3700B684B0 /* OEXCustomEditingView.m */; };
 		1A03DEA31BBC72BA006783FB /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 1A03DEA51BBC72BA006783FB /* countries.json */; };
@@ -295,7 +294,6 @@
 		7773D1A91B1E557D0037214B /* OEXVideoEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 7773D1A81B1E557D0037214B /* OEXVideoEncoding.m */; };
 		7778F0981ABB1A6C00B4CDA0 /* NSError+OEXKnownErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 7778F0971ABB1A6C00B4CDA0 /* NSError+OEXKnownErrors.m */; };
 		777DE7141C1630110068E280 /* CourseMediaInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777DE7131C1630110068E280 /* CourseMediaInfo.swift */; };
-		777DE71A1C1656ED0068E280 /* CourseCatalogDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777DE7191C1656ED0068E280 /* CourseCatalogDetailView.swift */; };
 		777EFEFD1A7AFF0E00F8BF06 /* OEXRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 777EFEFC1A7AFF0E00F8BF06 /* OEXRouter.m */; };
 		7784C68B1B03BA1E00529C7C /* LoadStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7784C68A1B03BA1E00529C7C /* LoadStateViewController.swift */; };
 		778B40D91C2F62520009F33E /* EnrollmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778B40D81C2F62300009F33E /* EnrollmentManager.swift */; };
@@ -307,7 +305,6 @@
 		778F17781C0D123F0099BF93 /* CourseCatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F17771C0D123F0099BF93 /* CourseCatalogViewController.swift */; };
 		778F177A1C0D125A0099BF93 /* CoursesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F17791C0D125A0099BF93 /* CoursesTableViewController.swift */; };
 		778F177C1C0D12780099BF93 /* CourseCatalogAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F177B1C0D12780099BF93 /* CourseCatalogAPI.swift */; };
-		778F17851C10A1B50099BF93 /* CourseCatalogDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778F17841C10A1B50099BF93 /* CourseCatalogDetailViewController.swift */; };
 		7793764D1BED27D000900A8C /* BasicAuthCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7793764C1BED27D000900A8C /* BasicAuthCredential.swift */; };
 		7793764F1BED404C00900A8C /* OEXConfig+URLCredentialProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7793764E1BED404C00900A8C /* OEXConfig+URLCredentialProvider.swift */; };
 		779376571BF15C1B00900A8C /* FindCoursesWebViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779376561BF15C1B00900A8C /* FindCoursesWebViewHelper.swift */; };
@@ -496,7 +493,6 @@
 		B50211A21EA852B7001DE1E2 /* TDAboutWeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B502119D1EA852B7001DE1E2 /* TDAboutWeViewController.m */; };
 		B50211A31EA852B7001DE1E2 /* TDSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B502119F1EA852B7001DE1E2 /* TDSettingCell.m */; };
 		B50211A41EA852B7001DE1E2 /* TDSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211A11EA852B7001DE1E2 /* TDSettingViewController.m */; };
-		B50211A71EA8530E001DE1E2 /* OEXMySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211A61EA8530E001DE1E2 /* OEXMySettingsViewController.m */; };
 		B50211F21EA85490001DE1E2 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211E71EA85490001DE1E2 /* UIView+Toast.m */; };
 		B50211F41EA8558D001DE1E2 /* swiftPch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50211F31EA8558D001DE1E2 /* swiftPch.swift */; };
 		B50211F81EA856B8001DE1E2 /* UIColor+JHHexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B50211F71EA856B8001DE1E2 /* UIColor+JHHexColor.m */; };
@@ -538,8 +534,6 @@
 		B5168B701EB8274400C80436 /* dataUrlItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B5168B6F1EB8274400C80436 /* dataUrlItem.m */; };
 		B5168B731EB8294800C80436 /* TDSubmitCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5168B721EB8294800C80436 /* TDSubmitCourseViewController.m */; };
 		B5168B761EB832A000C80436 /* TDWaitforPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5168B751EB832A000C80436 /* TDWaitforPayCell.m */; };
-		B5177EBB1F009A1800EF160D /* TDBindEmailNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5177EBA1F009A1800EF160D /* TDBindEmailNewViewController.m */; };
-		B5177EBE1F009A3A00EF160D /* TDBindEmailNewView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5177EBD1F009A3A00EF160D /* TDBindEmailNewView.m */; };
 		B518BE5F1EA9B91B0027569D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B518BE611EA9B91B0027569D /* Localizable.strings */; };
 		B518BE6E1EA9DD950027569D /* TDUserCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518BE681EA9DD950027569D /* TDUserCenterViewController.swift */; };
 		B518BE6F1EA9DD950027569D /* TDUserCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518BE6B1EA9DD950027569D /* TDUserCenterView.swift */; };
@@ -666,16 +660,10 @@
 		B52E8CA01F0B8CB500F3170D /* VHDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = B52E8C8B1F0B8CB500F3170D /* VHDrawView.m */; };
 		B52E8CA11F0B8CB500F3170D /* VHMessageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B52E8C8D1F0B8CB500F3170D /* VHMessageTextView.m */; };
 		B52E8CA21F0B8CB500F3170D /* VHMessageToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = B52E8C8F1F0B8CB500F3170D /* VHMessageToolView.m */; };
-		B52E8CCD1F0B8D6300F3170D /* WatchLiveChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B52E8CA61F0B8D6300F3170D /* WatchLiveChatTableViewCell.m */; };
-		B52E8CCE1F0B8D6300F3170D /* WatchLiveChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B52E8CA71F0B8D6300F3170D /* WatchLiveChatTableViewCell.xib */; };
 		B52E8CCF1F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B52E8CA91F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.m */; };
 		B52E8CD01F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B52E8CAA1F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.xib */; };
-		B52E8CD11F0B8D6300F3170D /* WatchLiveOnlineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B52E8CAC1F0B8D6300F3170D /* WatchLiveOnlineTableViewCell.m */; };
-		B52E8CD21F0B8D6300F3170D /* WatchLiveOnlineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B52E8CAD1F0B8D6300F3170D /* WatchLiveOnlineTableViewCell.xib */; };
 		B52E8CD31F0B8D6300F3170D /* WatchLiveQATableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B52E8CAF1F0B8D6300F3170D /* WatchLiveQATableViewCell.m */; };
 		B52E8CD41F0B8D6300F3170D /* WatchLiveQATableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B52E8CB01F0B8D6300F3170D /* WatchLiveQATableViewCell.xib */; };
-		B52E8CD51F0B8D6300F3170D /* WatchLiveSurveyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B52E8CB21F0B8D6300F3170D /* WatchLiveSurveyTableViewCell.m */; };
-		B52E8CD61F0B8D6300F3170D /* WatchLiveSurveyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B52E8CB31F0B8D6300F3170D /* WatchLiveSurveyTableViewCell.xib */; };
 		B52E8CD71F0B8D6300F3170D /* WatchLiveLotteryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B52E8CB61F0B8D6300F3170D /* WatchLiveLotteryViewController.m */; };
 		B52E8CD81F0B8D6300F3170D /* WatchLiveLotteryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B52E8CB71F0B8D6300F3170D /* WatchLiveLotteryViewController.xib */; };
 		B52E8CD91F0B8D6300F3170D /* WatchLiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B52E8CB91F0B8D6300F3170D /* WatchLiveViewController.m */; };
@@ -842,12 +830,6 @@
 		B58C1F101EAB5ACB00AB7B7E /* TDBindSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B58C1F0D1EAB5ACB00AB7B7E /* TDBindSuccessViewController.m */; };
 		B592389F1EADB59A00C686D8 /* TDProfessorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B592389C1EADB59A00C686D8 /* TDProfessorCell.m */; };
 		B59238A01EADB59A00C686D8 /* TDProfessorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B592389E1EADB59A00C686D8 /* TDProfessorViewController.m */; };
-		B59238B01EADB6D100C686D8 /* OutlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238A41EADB6D100C686D8 /* OutlineViewController.m */; };
-		B59238B11EADB6D100C686D8 /* OutlineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B59238A51EADB6D100C686D8 /* OutlineViewController.xib */; };
-		B59238B21EADB6D100C686D8 /* OutlineFirstItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238A81EADB6D100C686D8 /* OutlineFirstItem.m */; };
-		B59238B31EADB6D100C686D8 /* OutlineSecondItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238AA1EADB6D100C686D8 /* OutlineSecondItem.m */; };
-		B59238B41EADB6D100C686D8 /* OutlineThirdItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238AC1EADB6D100C686D8 /* OutlineThirdItem.m */; };
-		B59238B51EADB6D100C686D8 /* TDOutLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238AF1EADB6D100C686D8 /* TDOutLineCell.m */; };
 		B59238BB1EADB70C00C686D8 /* TDCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238B81EADB70C00C686D8 /* TDCommentCell.m */; };
 		B59238BC1EADB70C00C686D8 /* TDCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238BA1EADB70C00C686D8 /* TDCommentViewController.m */; };
 		B59238C21EADBD4D00C686D8 /* CommentDetailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B59238BF1EADBD4D00C686D8 /* CommentDetailItem.m */; };
@@ -876,19 +858,7 @@
 		B5FAF6D51EB02CC2000C2169 /* TDRechargeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6CF1EB02CC2000C2169 /* TDRechargeView.m */; };
 		B5FAF6D61EB02CC2000C2169 /* TDSelectPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6D11EB02CC2000C2169 /* TDSelectPayCell.m */; };
 		B5FAF6DD1EB0319F000C2169 /* SuccessRechargeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6D91EB0319F000C2169 /* SuccessRechargeModel.m */; };
-		B5FAF6F61EB03AB1000C2169 /* WaitForPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6E31EB03AB1000C2169 /* WaitForPayViewController.m */; };
-		B5FAF6F71EB03AB1000C2169 /* WaitForPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FAF6E41EB03AB1000C2169 /* WaitForPayViewController.xib */; };
-		B5FAF6F81EB03AB1000C2169 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6E71EB03AB1000C2169 /* OrderItem.m */; };
-		B5FAF6F91EB03AB1000C2169 /* SubOrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6E91EB03AB1000C2169 /* SubOrderItem.m */; };
-		B5FAF6FA1EB03AB1000C2169 /* AliPayView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6EC1EB03AB1000C2169 /* AliPayView.m */; };
-		B5FAF6FB1EB03AB1000C2169 /* AliPayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FAF6ED1EB03AB1000C2169 /* AliPayView.xib */; };
 		B5FAF6FC1EB03AB1000C2169 /* TDPayMoneyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6EF1EB03AB1000C2169 /* TDPayMoneyView.m */; };
-		B5FAF6FD1EB03AB1000C2169 /* WaitForPayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6F11EB03AB1000C2169 /* WaitForPayTableViewCell.m */; };
-		B5FAF6FE1EB03AB1000C2169 /* WaitForPayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FAF6F21EB03AB1000C2169 /* WaitForPayTableViewCell.xib */; };
-		B5FAF6FF1EB03AB1000C2169 /* WechatPayView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF6F41EB03AB1000C2169 /* WechatPayView.m */; };
-		B5FAF7001EB03AB1000C2169 /* WechatPayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FAF6F51EB03AB1000C2169 /* WechatPayView.xib */; };
-		B5FAF7421EB045C8000C2169 /* SubmitCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF73D1EB045C8000C2169 /* SubmitCourseViewController.m */; };
-		B5FAF7431EB045C8000C2169 /* SubmitCourseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FAF73E1EB045C8000C2169 /* SubmitCourseViewController.xib */; };
 		B5FAF7441EB045C8000C2169 /* SubmiteSecondCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF7411EB045C8000C2169 /* SubmiteSecondCell.m */; };
 		B5FAF7471EB04697000C2169 /* JHCouponsAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF7461EB04697000C2169 /* JHCouponsAlertView.m */; };
 		B5FAF74B1EB04789000C2169 /* CouponsNameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FAF74A1EB04789000C2169 /* CouponsNameItem.m */; };
@@ -1047,7 +1017,6 @@
 		19A1339619CAE108003ADD24 /* EULA.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = EULA.htm; sourceTree = "<group>"; };
 		19BB62281A9B28F1007DBF47 /* OEXRegistrationFieldWrapperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXRegistrationFieldWrapperView.h; sourceTree = "<group>"; };
 		19BB62291A9B28F1007DBF47 /* OEXRegistrationFieldWrapperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXRegistrationFieldWrapperView.m; sourceTree = "<group>"; };
-		19BB622F1A9C656B007DBF47 /* OEXMySettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OEXMySettingsViewController.xib; sourceTree = "<group>"; };
 		19DC02011A1E13AA00A874D3 /* OEXAnalyticsData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OEXAnalyticsData.h; sourceTree = "<group>"; };
 		19E1F0291A272DDC00C2E1BE /* LastAccessed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastAccessed.h; sourceTree = "<group>"; };
 		19E1F02A1A272DDC00C2E1BE /* LastAccessed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastAccessed.m; sourceTree = "<group>"; };
@@ -1336,7 +1305,6 @@
 		7778F0961ABB1A6C00B4CDA0 /* NSError+OEXKnownErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+OEXKnownErrors.h"; sourceTree = "<group>"; };
 		7778F0971ABB1A6C00B4CDA0 /* NSError+OEXKnownErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+OEXKnownErrors.m"; sourceTree = "<group>"; };
 		777DE7131C1630110068E280 /* CourseMediaInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseMediaInfo.swift; sourceTree = "<group>"; };
-		777DE7191C1656ED0068E280 /* CourseCatalogDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCatalogDetailView.swift; sourceTree = "<group>"; };
 		777EFEFB1A7AFF0E00F8BF06 /* OEXRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXRouter.h; sourceTree = "<group>"; };
 		777EFEFC1A7AFF0E00F8BF06 /* OEXRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXRouter.m; sourceTree = "<group>"; };
 		7784C68A1B03BA1E00529C7C /* LoadStateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadStateViewController.swift; sourceTree = "<group>"; };
@@ -1350,7 +1318,6 @@
 		778F17771C0D123F0099BF93 /* CourseCatalogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCatalogViewController.swift; sourceTree = "<group>"; };
 		778F17791C0D125A0099BF93 /* CoursesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoursesTableViewController.swift; sourceTree = "<group>"; };
 		778F177B1C0D12780099BF93 /* CourseCatalogAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCatalogAPI.swift; sourceTree = "<group>"; };
-		778F17841C10A1B50099BF93 /* CourseCatalogDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCatalogDetailViewController.swift; sourceTree = "<group>"; };
 		7793764C1BED27D000900A8C /* BasicAuthCredential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAuthCredential.swift; sourceTree = "<group>"; };
 		7793764E1BED404C00900A8C /* OEXConfig+URLCredentialProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OEXConfig+URLCredentialProvider.swift"; sourceTree = "<group>"; };
 		779376561BF15C1B00900A8C /* FindCoursesWebViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindCoursesWebViewHelper.swift; sourceTree = "<group>"; };
@@ -1624,8 +1591,6 @@
 		B502119F1EA852B7001DE1E2 /* TDSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSettingCell.m; sourceTree = "<group>"; };
 		B50211A01EA852B7001DE1E2 /* TDSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSettingViewController.h; sourceTree = "<group>"; };
 		B50211A11EA852B7001DE1E2 /* TDSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSettingViewController.m; sourceTree = "<group>"; };
-		B50211A51EA8530E001DE1E2 /* OEXMySettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXMySettingsViewController.h; sourceTree = "<group>"; };
-		B50211A61EA8530E001DE1E2 /* OEXMySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXMySettingsViewController.m; sourceTree = "<group>"; };
 		B50211E61EA85490001DE1E2 /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
 		B50211E71EA85490001DE1E2 /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		B50211F31EA8558D001DE1E2 /* swiftPch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = swiftPch.swift; sourceTree = "<group>"; };
@@ -1698,10 +1663,6 @@
 		B5168B721EB8294800C80436 /* TDSubmitCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSubmitCourseViewController.m; sourceTree = "<group>"; };
 		B5168B741EB832A000C80436 /* TDWaitforPayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWaitforPayCell.h; sourceTree = "<group>"; };
 		B5168B751EB832A000C80436 /* TDWaitforPayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWaitforPayCell.m; sourceTree = "<group>"; };
-		B5177EB91F009A1800EF160D /* TDBindEmailNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBindEmailNewViewController.h; sourceTree = "<group>"; };
-		B5177EBA1F009A1800EF160D /* TDBindEmailNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBindEmailNewViewController.m; sourceTree = "<group>"; };
-		B5177EBC1F009A3A00EF160D /* TDBindEmailNewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBindEmailNewView.h; sourceTree = "<group>"; };
-		B5177EBD1F009A3A00EF160D /* TDBindEmailNewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBindEmailNewView.m; sourceTree = "<group>"; };
 		B518BE601EA9B91B0027569D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B518BE621EA9B9CC0027569D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B518BE631EA9B9CC0027569D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "zh-Hans"; path = "zh-Hans.lproj/profiles.json"; sourceTree = "<group>"; };
@@ -1995,21 +1956,12 @@
 		B52E8C8D1F0B8CB500F3170D /* VHMessageTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VHMessageTextView.m; sourceTree = "<group>"; };
 		B52E8C8E1F0B8CB500F3170D /* VHMessageToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VHMessageToolView.h; sourceTree = "<group>"; };
 		B52E8C8F1F0B8CB500F3170D /* VHMessageToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VHMessageToolView.m; sourceTree = "<group>"; };
-		B52E8CA51F0B8D6300F3170D /* WatchLiveChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchLiveChatTableViewCell.h; sourceTree = "<group>"; };
-		B52E8CA61F0B8D6300F3170D /* WatchLiveChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchLiveChatTableViewCell.m; sourceTree = "<group>"; };
-		B52E8CA71F0B8D6300F3170D /* WatchLiveChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatchLiveChatTableViewCell.xib; sourceTree = "<group>"; };
 		B52E8CA81F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchLiveLotteryTableViewCell.h; sourceTree = "<group>"; };
 		B52E8CA91F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchLiveLotteryTableViewCell.m; sourceTree = "<group>"; };
 		B52E8CAA1F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatchLiveLotteryTableViewCell.xib; sourceTree = "<group>"; };
-		B52E8CAB1F0B8D6300F3170D /* WatchLiveOnlineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchLiveOnlineTableViewCell.h; sourceTree = "<group>"; };
-		B52E8CAC1F0B8D6300F3170D /* WatchLiveOnlineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchLiveOnlineTableViewCell.m; sourceTree = "<group>"; };
-		B52E8CAD1F0B8D6300F3170D /* WatchLiveOnlineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatchLiveOnlineTableViewCell.xib; sourceTree = "<group>"; };
 		B52E8CAE1F0B8D6300F3170D /* WatchLiveQATableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchLiveQATableViewCell.h; sourceTree = "<group>"; };
 		B52E8CAF1F0B8D6300F3170D /* WatchLiveQATableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchLiveQATableViewCell.m; sourceTree = "<group>"; };
 		B52E8CB01F0B8D6300F3170D /* WatchLiveQATableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatchLiveQATableViewCell.xib; sourceTree = "<group>"; };
-		B52E8CB11F0B8D6300F3170D /* WatchLiveSurveyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchLiveSurveyTableViewCell.h; sourceTree = "<group>"; };
-		B52E8CB21F0B8D6300F3170D /* WatchLiveSurveyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchLiveSurveyTableViewCell.m; sourceTree = "<group>"; };
-		B52E8CB31F0B8D6300F3170D /* WatchLiveSurveyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatchLiveSurveyTableViewCell.xib; sourceTree = "<group>"; };
 		B52E8CB51F0B8D6300F3170D /* WatchLiveLotteryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchLiveLotteryViewController.h; sourceTree = "<group>"; };
 		B52E8CB61F0B8D6300F3170D /* WatchLiveLotteryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchLiveLotteryViewController.m; sourceTree = "<group>"; };
 		B52E8CB71F0B8D6300F3170D /* WatchLiveLotteryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatchLiveLotteryViewController.xib; sourceTree = "<group>"; };
@@ -2237,17 +2189,6 @@
 		B592389C1EADB59A00C686D8 /* TDProfessorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDProfessorCell.m; sourceTree = "<group>"; };
 		B592389D1EADB59A00C686D8 /* TDProfessorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDProfessorViewController.h; sourceTree = "<group>"; };
 		B592389E1EADB59A00C686D8 /* TDProfessorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDProfessorViewController.m; sourceTree = "<group>"; };
-		B59238A31EADB6D100C686D8 /* OutlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutlineViewController.h; sourceTree = "<group>"; };
-		B59238A41EADB6D100C686D8 /* OutlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutlineViewController.m; sourceTree = "<group>"; };
-		B59238A51EADB6D100C686D8 /* OutlineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutlineViewController.xib; sourceTree = "<group>"; };
-		B59238A71EADB6D100C686D8 /* OutlineFirstItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutlineFirstItem.h; sourceTree = "<group>"; };
-		B59238A81EADB6D100C686D8 /* OutlineFirstItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutlineFirstItem.m; sourceTree = "<group>"; };
-		B59238A91EADB6D100C686D8 /* OutlineSecondItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutlineSecondItem.h; sourceTree = "<group>"; };
-		B59238AA1EADB6D100C686D8 /* OutlineSecondItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutlineSecondItem.m; sourceTree = "<group>"; };
-		B59238AB1EADB6D100C686D8 /* OutlineThirdItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutlineThirdItem.h; sourceTree = "<group>"; };
-		B59238AC1EADB6D100C686D8 /* OutlineThirdItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutlineThirdItem.m; sourceTree = "<group>"; };
-		B59238AE1EADB6D100C686D8 /* TDOutLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDOutLineCell.h; sourceTree = "<group>"; };
-		B59238AF1EADB6D100C686D8 /* TDOutLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDOutLineCell.m; sourceTree = "<group>"; };
 		B59238B71EADB70C00C686D8 /* TDCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCommentCell.h; sourceTree = "<group>"; };
 		B59238B81EADB70C00C686D8 /* TDCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCommentCell.m; sourceTree = "<group>"; };
 		B59238B91EADB70C00C686D8 /* TDCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCommentViewController.h; sourceTree = "<group>"; };
@@ -2303,27 +2244,8 @@
 		B5FAF6D11EB02CC2000C2169 /* TDSelectPayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSelectPayCell.m; sourceTree = "<group>"; };
 		B5FAF6D81EB0319F000C2169 /* SuccessRechargeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuccessRechargeModel.h; sourceTree = "<group>"; };
 		B5FAF6D91EB0319F000C2169 /* SuccessRechargeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuccessRechargeModel.m; sourceTree = "<group>"; };
-		B5FAF6E21EB03AB1000C2169 /* WaitForPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitForPayViewController.h; sourceTree = "<group>"; };
-		B5FAF6E31EB03AB1000C2169 /* WaitForPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitForPayViewController.m; sourceTree = "<group>"; };
-		B5FAF6E41EB03AB1000C2169 /* WaitForPayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaitForPayViewController.xib; sourceTree = "<group>"; };
-		B5FAF6E61EB03AB1000C2169 /* OrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderItem.h; sourceTree = "<group>"; };
-		B5FAF6E71EB03AB1000C2169 /* OrderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderItem.m; sourceTree = "<group>"; };
-		B5FAF6E81EB03AB1000C2169 /* SubOrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubOrderItem.h; sourceTree = "<group>"; };
-		B5FAF6E91EB03AB1000C2169 /* SubOrderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubOrderItem.m; sourceTree = "<group>"; };
-		B5FAF6EB1EB03AB1000C2169 /* AliPayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliPayView.h; sourceTree = "<group>"; };
-		B5FAF6EC1EB03AB1000C2169 /* AliPayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AliPayView.m; sourceTree = "<group>"; };
-		B5FAF6ED1EB03AB1000C2169 /* AliPayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AliPayView.xib; sourceTree = "<group>"; };
 		B5FAF6EE1EB03AB1000C2169 /* TDPayMoneyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDPayMoneyView.h; sourceTree = "<group>"; };
 		B5FAF6EF1EB03AB1000C2169 /* TDPayMoneyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDPayMoneyView.m; sourceTree = "<group>"; };
-		B5FAF6F01EB03AB1000C2169 /* WaitForPayTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitForPayTableViewCell.h; sourceTree = "<group>"; };
-		B5FAF6F11EB03AB1000C2169 /* WaitForPayTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitForPayTableViewCell.m; sourceTree = "<group>"; };
-		B5FAF6F21EB03AB1000C2169 /* WaitForPayTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaitForPayTableViewCell.xib; sourceTree = "<group>"; };
-		B5FAF6F31EB03AB1000C2169 /* WechatPayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatPayView.h; sourceTree = "<group>"; };
-		B5FAF6F41EB03AB1000C2169 /* WechatPayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WechatPayView.m; sourceTree = "<group>"; };
-		B5FAF6F51EB03AB1000C2169 /* WechatPayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WechatPayView.xib; sourceTree = "<group>"; };
-		B5FAF73C1EB045C8000C2169 /* SubmitCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitCourseViewController.h; sourceTree = "<group>"; };
-		B5FAF73D1EB045C8000C2169 /* SubmitCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitCourseViewController.m; sourceTree = "<group>"; };
-		B5FAF73E1EB045C8000C2169 /* SubmitCourseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubmitCourseViewController.xib; sourceTree = "<group>"; };
 		B5FAF7401EB045C8000C2169 /* SubmiteSecondCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmiteSecondCell.h; sourceTree = "<group>"; };
 		B5FAF7411EB045C8000C2169 /* SubmiteSecondCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmiteSecondCell.m; sourceTree = "<group>"; };
 		B5FAF7451EB04697000C2169 /* JHCouponsAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHCouponsAlertView.h; sourceTree = "<group>"; };
@@ -3174,7 +3096,6 @@
 			children = (
 				19A1339319CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.xib */,
 				77DC295F1ABCA0F200FAD22C /* OEXLoginSplashViewController.xib */,
-				19BB622F1A9C656B007DBF47 /* OEXMySettingsViewController.xib */,
 				198826E71952FE39005D4D8A /* OEXOpenInBrowserViewController.xib */,
 				B4B6D5E81A9490FC000F44E8 /* OEXRegistrationViewController.xib */,
 				B4B6D6471A95CF33000F44E8 /* OEXUserLicenseAgreementViewController.xib */,
@@ -3427,8 +3348,6 @@
 				B592389A1EADB59A00C686D8 /* ProFessorViewController */,
 				7758FFDD1C32FD6A0072355B /* EnrollmentShared.swift */,
 				77D6A9A31C28F32900E67CCF /* CoursesAPI.swift */,
-				777DE7191C1656ED0068E280 /* CourseCatalogDetailView.swift */,
-				778F17841C10A1B50099BF93 /* CourseCatalogDetailViewController.swift */,
 				778F177B1C0D12780099BF93 /* CourseCatalogAPI.swift */,
 				778F17771C0D123F0099BF93 /* CourseCatalogViewController.swift */,
 				779376561BF15C1B00900A8C /* FindCoursesWebViewHelper.swift */,
@@ -3671,8 +3590,6 @@
 		B502119B1EA852B7001DE1E2 /* TDSettingViewController */ = {
 			isa = PBXGroup;
 			children = (
-				B50211A51EA8530E001DE1E2 /* OEXMySettingsViewController.h */,
-				B50211A61EA8530E001DE1E2 /* OEXMySettingsViewController.m */,
 				B502119C1EA852B7001DE1E2 /* TDAboutWeViewController.h */,
 				B502119D1EA852B7001DE1E2 /* TDAboutWeViewController.m */,
 				B502119E1EA852B7001DE1E2 /* TDSettingCell.h */,
@@ -3845,33 +3762,6 @@
 				A420E2501F3C55A200340683 /* TDBaseButton.m */,
 			);
 			path = Baseview;
-			sourceTree = "<group>";
-		};
-		B5177EB61F009A0000EF160D /* TDBindEmailNewViewController */ = {
-			isa = PBXGroup;
-			children = (
-				B5177EB71F009A0000EF160D /* controller */,
-				B5177EB81F009A0000EF160D /* view */,
-			);
-			path = TDBindEmailNewViewController;
-			sourceTree = "<group>";
-		};
-		B5177EB71F009A0000EF160D /* controller */ = {
-			isa = PBXGroup;
-			children = (
-				B5177EB91F009A1800EF160D /* TDBindEmailNewViewController.h */,
-				B5177EBA1F009A1800EF160D /* TDBindEmailNewViewController.m */,
-			);
-			path = controller;
-			sourceTree = "<group>";
-		};
-		B5177EB81F009A0000EF160D /* view */ = {
-			isa = PBXGroup;
-			children = (
-				B5177EBC1F009A3A00EF160D /* TDBindEmailNewView.h */,
-				B5177EBD1F009A3A00EF160D /* TDBindEmailNewView.m */,
-			);
-			path = view;
 			sourceTree = "<group>";
 		};
 		B518BE661EA9DD950027569D /* TDUserCenterViewController */ = {
@@ -4431,21 +4321,12 @@
 		B52E8CA41F0B8D6300F3170D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				B52E8CA51F0B8D6300F3170D /* WatchLiveChatTableViewCell.h */,
-				B52E8CA61F0B8D6300F3170D /* WatchLiveChatTableViewCell.m */,
-				B52E8CA71F0B8D6300F3170D /* WatchLiveChatTableViewCell.xib */,
 				B52E8CA81F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.h */,
 				B52E8CA91F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.m */,
 				B52E8CAA1F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.xib */,
-				B52E8CAB1F0B8D6300F3170D /* WatchLiveOnlineTableViewCell.h */,
-				B52E8CAC1F0B8D6300F3170D /* WatchLiveOnlineTableViewCell.m */,
-				B52E8CAD1F0B8D6300F3170D /* WatchLiveOnlineTableViewCell.xib */,
 				B52E8CAE1F0B8D6300F3170D /* WatchLiveQATableViewCell.h */,
 				B52E8CAF1F0B8D6300F3170D /* WatchLiveQATableViewCell.m */,
 				B52E8CB01F0B8D6300F3170D /* WatchLiveQATableViewCell.xib */,
-				B52E8CB11F0B8D6300F3170D /* WatchLiveSurveyTableViewCell.h */,
-				B52E8CB21F0B8D6300F3170D /* WatchLiveSurveyTableViewCell.m */,
-				B52E8CB31F0B8D6300F3170D /* WatchLiveSurveyTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -4855,7 +4736,6 @@
 				B58C1F0B1EAB5ACB00AB7B7E /* TDBindPhoneViewController.m */,
 				B58C1F0C1EAB5ACB00AB7B7E /* TDBindSuccessViewController.h */,
 				B58C1F0D1EAB5ACB00AB7B7E /* TDBindSuccessViewController.m */,
-				B5177EB61F009A0000EF160D /* TDBindEmailNewViewController */,
 			);
 			path = TDBindAcountViewController;
 			sourceTree = "<group>";
@@ -4884,9 +4764,6 @@
 		B59238A21EADB6D100C686D8 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				B59238A31EADB6D100C686D8 /* OutlineViewController.h */,
-				B59238A41EADB6D100C686D8 /* OutlineViewController.m */,
-				B59238A51EADB6D100C686D8 /* OutlineViewController.xib */,
 				B54347381F024CBC0074DBDE /* TDCourseOutLineViewController.h */,
 				B54347391F024CBC0074DBDE /* TDCourseOutLineViewController.m */,
 			);
@@ -4896,12 +4773,6 @@
 		B59238A61EADB6D100C686D8 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				B59238A71EADB6D100C686D8 /* OutlineFirstItem.h */,
-				B59238A81EADB6D100C686D8 /* OutlineFirstItem.m */,
-				B59238A91EADB6D100C686D8 /* OutlineSecondItem.h */,
-				B59238AA1EADB6D100C686D8 /* OutlineSecondItem.m */,
-				B59238AB1EADB6D100C686D8 /* OutlineThirdItem.h */,
-				B59238AC1EADB6D100C686D8 /* OutlineThirdItem.m */,
 				B543473E1F02581A0074DBDE /* TDCourseOutLineModel.h */,
 				B543473F1F02581A0074DBDE /* TDCourseOutLineModel.m */,
 			);
@@ -4911,8 +4782,6 @@
 		B59238AD1EADB6D100C686D8 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				B59238AE1EADB6D100C686D8 /* TDOutLineCell.h */,
-				B59238AF1EADB6D100C686D8 /* TDOutLineCell.m */,
 				B543473B1F0252E50074DBDE /* TDCourseOutLineCell.h */,
 				B543473C1F0252E50074DBDE /* TDCourseOutLineCell.m */,
 			);
@@ -5102,9 +4971,6 @@
 		B5FAF6E11EB03AB1000C2169 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B5FAF6E21EB03AB1000C2169 /* WaitForPayViewController.h */,
-				B5FAF6E31EB03AB1000C2169 /* WaitForPayViewController.m */,
-				B5FAF6E41EB03AB1000C2169 /* WaitForPayViewController.xib */,
 				B50471651F052523003A7268 /* TDWaitforPayViewController.h */,
 				B50471661F052523003A7268 /* TDWaitforPayViewController.m */,
 			);
@@ -5114,10 +4980,6 @@
 		B5FAF6E51EB03AB1000C2169 /* modes */ = {
 			isa = PBXGroup;
 			children = (
-				B5FAF6E61EB03AB1000C2169 /* OrderItem.h */,
-				B5FAF6E71EB03AB1000C2169 /* OrderItem.m */,
-				B5FAF6E81EB03AB1000C2169 /* SubOrderItem.h */,
-				B5FAF6E91EB03AB1000C2169 /* SubOrderItem.m */,
 				B53F377F1F05E59D00277601 /* TDWaitforPayModel.h */,
 				B53F37801F05E59D00277601 /* TDWaitforPayModel.m */,
 			);
@@ -5127,15 +4989,6 @@
 		B5FAF6EA1EB03AB1000C2169 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				B5FAF6EB1EB03AB1000C2169 /* AliPayView.h */,
-				B5FAF6EC1EB03AB1000C2169 /* AliPayView.m */,
-				B5FAF6ED1EB03AB1000C2169 /* AliPayView.xib */,
-				B5FAF6F01EB03AB1000C2169 /* WaitForPayTableViewCell.h */,
-				B5FAF6F11EB03AB1000C2169 /* WaitForPayTableViewCell.m */,
-				B5FAF6F21EB03AB1000C2169 /* WaitForPayTableViewCell.xib */,
-				B5FAF6F31EB03AB1000C2169 /* WechatPayView.h */,
-				B5FAF6F41EB03AB1000C2169 /* WechatPayView.m */,
-				B5FAF6F51EB03AB1000C2169 /* WechatPayView.xib */,
 				B5FAF6EE1EB03AB1000C2169 /* TDPayMoneyView.h */,
 				B5FAF6EF1EB03AB1000C2169 /* TDPayMoneyView.m */,
 				B5168B741EB832A000C80436 /* TDWaitforPayCell.h */,
@@ -5157,8 +5010,8 @@
 		B5FAF73A1EB045C8000C2169 /* TDSubMitCourseViewController */ = {
 			isa = PBXGroup;
 			children = (
-				B5FAF7481EB04789000C2169 /* models */,
 				B5FAF73B1EB045C8000C2169 /* controllers */,
+				B5FAF7481EB04789000C2169 /* models */,
 				B5FAF73F1EB045C8000C2169 /* views */,
 			);
 			path = TDSubMitCourseViewController;
@@ -5169,9 +5022,6 @@
 			children = (
 				B5168B711EB8294800C80436 /* TDSubmitCourseViewController.h */,
 				B5168B721EB8294800C80436 /* TDSubmitCourseViewController.m */,
-				B5FAF73C1EB045C8000C2169 /* SubmitCourseViewController.h */,
-				B5FAF73D1EB045C8000C2169 /* SubmitCourseViewController.m */,
-				B5FAF73E1EB045C8000C2169 /* SubmitCourseViewController.xib */,
 				B5FAF7511EB049B5000C2169 /* TDBuySuccessViewController.h */,
 				B5FAF7521EB049B5000C2169 /* TDBuySuccessViewController.m */,
 				B5FAF7541EB04A69000C2169 /* CouponsViewController.h */,
@@ -5763,7 +5613,6 @@
 			files = (
 				69ECC6151D50D1170030CF87 /* bt_facebook.png in Resources */,
 				B52E8DDF1F0B951700F3170D /* Expression_67@2x.png in Resources */,
-				B5FAF7001EB03AB1000C2169 /* WechatPayView.xib in Resources */,
 				B52E8DF61F0B951700F3170D /* Expression_88@2x.png in Resources */,
 				69ECC6171D50D1170030CF87 /* bt_google.png in Resources */,
 				9ED269CA1AF0D62B00328A34 /* OEXMyVideosSubSectionViewController.storyboard in Resources */,
@@ -5805,7 +5654,6 @@
 				B52E8DF41F0B951700F3170D /* Expression_86@2x.png in Resources */,
 				B52E8C951F0B8CB500F3170D /* message_emoji@3x.png in Resources */,
 				6960892C1D53935500EE66DD /* courseCertificate@2x.png in Resources */,
-				B5FAF6FE1EB03AB1000C2169 /* WaitForPayTableViewCell.xib in Resources */,
 				B52E8DBD1F0B951700F3170D /* Expression_36@2x.png in Resources */,
 				B52E8DD41F0B951700F3170D /* Expression_57@2x.png in Resources */,
 				69ECC61D1D50D1170030CF87 /* bt_logout_default.png in Resources */,
@@ -5837,18 +5685,14 @@
 				B52E8DB41F0B951700F3170D /* Expression_28@2x.png in Resources */,
 				B525916E1EB348C2003A950D /* AlipaySDK.bundle in Resources */,
 				B52E8DFA1F0B951700F3170D /* Expression_9@2x.png in Resources */,
-				B5FAF7431EB045C8000C2169 /* SubmitCourseViewController.xib in Resources */,
 				B52E8DC91F0B951700F3170D /* Expression_47@2x.png in Resources */,
 				B52E8DCE1F0B951700F3170D /* Expression_51@2x.png in Resources */,
 				B52E8C921F0B8CB500F3170D /* live_keyboard@2x.png in Resources */,
 				B52E8C9A1F0B8CB500F3170D /* loadingout@3x.png in Resources */,
 				B52E8DB21F0B951700F3170D /* Expression_26@2x.png in Resources */,
-				B52E8CD61F0B8D6300F3170D /* WatchLiveSurveyTableViewCell.xib in Resources */,
 				B50DF98E1EAAF15B001F38BD /* UserDiscountTableViewCell.xib in Resources */,
 				6926CDAC1D59BE3600A16E22 /* ic_next.png in Resources */,
 				B52E8DD21F0B951700F3170D /* Expression_55@2x.png in Resources */,
-				B59238B11EADB6D100C686D8 /* OutlineViewController.xib in Resources */,
-				19BB62311A9C656B007DBF47 /* OEXMySettingsViewController.xib in Resources */,
 				B52E8DDC1F0B951700F3170D /* Expression_64@2x.png in Resources */,
 				B52E8C981F0B8CB500F3170D /* loadingin@3x.png in Resources */,
 				B57A0E931EAEECBB00323A47 /* educations.json in Resources */,
@@ -5862,7 +5706,6 @@
 				69ECC62C1D50D1170030CF87 /* ic_back.png in Resources */,
 				B52E8DA71F0B951600F3170D /* Expression_16@2x.png in Resources */,
 				B51B77E71F27410500AECD99 /* Icon-40@3x.png in Resources */,
-				B5FAF6FB1EB03AB1000C2169 /* AliPayView.xib in Resources */,
 				B52E8DA21F0B951600F3170D /* Expression_11@2x.png in Resources */,
 				B5FAF7501EB047D2000C2169 /* PayTableViewCell.xib in Resources */,
 				B52E8C301F0B8C0400F3170D /* WatchPlayBackViewController.xib in Resources */,
@@ -5895,10 +5738,8 @@
 				69ECC6381D50D1170030CF87 /* ic_unwatched@2x.png in Resources */,
 				B52E8DEA1F0B951700F3170D /* Expression_77@2x.png in Resources */,
 				69ECC6281D50D1170030CF87 /* check.png in Resources */,
-				B5FAF6F71EB03AB1000C2169 /* WaitForPayViewController.xib in Resources */,
 				5DD0FFD21B1D23DA00837121 /* DiscussionNewPostViewController.xib in Resources */,
 				B52E8DE11F0B951700F3170D /* Expression_69@2x.png in Resources */,
-				B52E8CD21F0B8D6300F3170D /* WatchLiveOnlineTableViewCell.xib in Resources */,
 				69ECC6521D50D1170030CF87 /* inline-content.css in Resources */,
 				69ECC64C1D50D1170030CF87 /* Default-568h@2x.png in Resources */,
 				9ED269CC1AF0E67200328A34 /* OEXMyVideosViewController.storyboard in Resources */,
@@ -6005,7 +5846,6 @@
 				B52E8DB81F0B951700F3170D /* Expression_31@2x.png in Resources */,
 				69ECC6001D50D1170030CF87 /* OpenSans-ExtraBold.ttf in Resources */,
 				B52E8DCA1F0B951700F3170D /* Expression_48@2x.png in Resources */,
-				B52E8CCE1F0B8D6300F3170D /* WatchLiveChatTableViewCell.xib in Resources */,
 				B52E8DF21F0B951700F3170D /* Expression_84@2x.png in Resources */,
 				B52E8DB71F0B951700F3170D /* Expression_30@2x.png in Resources */,
 			);
@@ -6209,7 +6049,6 @@
 				7772BE801AF821540081CA7A /* UIBarButtonItem+OEXBlockActions.m in Sources */,
 				1904A1511A1386C2006A5524 /* OEXStorageFactory.m in Sources */,
 				B50DF9931EAAF299001F38BD /* JHAlertView.m in Sources */,
-				778F17851C10A1B50099BF93 /* CourseCatalogDetailViewController.swift in Sources */,
 				B52591751EB348C3003A950D /* DataSigner.m in Sources */,
 				770A3D451AF0167A008F09D9 /* UIControl+OEXBlockActions.m in Sources */,
 				B50DF9B11EAAF6B9001F38BD /* TDBaseView.m in Sources */,
@@ -6251,7 +6090,6 @@
 				E0AF4E8E1BFB19CC0083753C /* PassthroughView.swift in Sources */,
 				BD7C6C3E1DCA32370004D135 /* OEXFonts.swift in Sources */,
 				E00523431CF81D9800B7F5C3 /* DiscussionBlockViewController.swift in Sources */,
-				B59238B31EADB6D100C686D8 /* OutlineSecondItem.m in Sources */,
 				7772BEA61AFA68330081CA7A /* ConstraintMaker.swift in Sources */,
 				B53F37841F05EEC300277601 /* TDNewWaitfoPayCell.m in Sources */,
 				5DD0FFCF1B1D225C00837121 /* DiscussionNewPostViewController.swift in Sources */,
@@ -6274,7 +6112,6 @@
 				B504716A1F0526D6003A7268 /* TDWaitforPayTopCell.m in Sources */,
 				B518BEC71EA9E6F00027569D /* TDOrderAssitantCell.m in Sources */,
 				B525917B1EB348C3003A950D /* RSADataVerifier.m in Sources */,
-				B59238B51EADB6D100C686D8 /* TDOutLineCell.m in Sources */,
 				B518BE911EA9E6AB0027569D /* TDAssistantTopCell.m in Sources */,
 				B52590FF1EB32DE5003A950D /* Encryption.m in Sources */,
 				191A00201940560D004F7902 /* OEXDataParser.m in Sources */,
@@ -6305,7 +6142,6 @@
 				778F177A1C0D125A0099BF93 /* CoursesTableViewController.swift in Sources */,
 				77ADF4AF1AC1F80E00AC8955 /* OEXGoogleAuthProvider.m in Sources */,
 				B59238EE1EADD0BE00C686D8 /* TDBottomCouseView.m in Sources */,
-				B5FAF6FA1EB03AB1000C2169 /* AliPayView.m in Sources */,
 				1A7CEA331BABA8C70043A58C /* ProfileImageView.swift in Sources */,
 				B52E8CF81F0B8DB500F3170D /* ITTXibViewUtils.m in Sources */,
 				77236EED1C21C376006AC1A4 /* Paginator.swift in Sources */,
@@ -6327,7 +6163,6 @@
 				191A002E19405E97004F7902 /* OEXLatestUpdates.m in Sources */,
 				B52590FB1EB32D86003A950D /* WeChatPay.m in Sources */,
 				1AFEB1B61BBD5B95004C471D /* ProfilePictureTaker.swift in Sources */,
-				B5FAF6F81EB03AB1000C2169 /* OrderItem.m in Sources */,
 				198826F1195D6979005D4D8A /* OEXMyVideosViewController.m in Sources */,
 				77E647CE1C90CAB800B6740D /* NSAttributedString+OEXFormatting.m in Sources */,
 				B5FAF77C1EB06FDB000C2169 /* TDAuthenSuccessViewController.m in Sources */,
@@ -6338,7 +6173,6 @@
 				B5D289BD1EFB71CB003581DC /* TDPasswordResetViewController.m in Sources */,
 				B546EDA21EB09167007F21A9 /* StartupViewController.swift in Sources */,
 				B4B285ED1A9B429200DD603A /* OEXNetworkUtility.m in Sources */,
-				B5FAF6FD1EB03AB1000C2169 /* WaitForPayTableViewCell.m in Sources */,
 				BE0D454A192DD4F800D720D6 /* OEXNetworkInterface.m in Sources */,
 				B419295E1A8A3F1900448AD5 /* OEXNetworkManager.m in Sources */,
 				B50211A21EA852B7001DE1E2 /* TDAboutWeViewController.m in Sources */,
@@ -6385,7 +6219,6 @@
 				B59238F01EADD0BE00C686D8 /* TDChooseCourseView.m in Sources */,
 				B52E8CFF1F0B8E3C00F3170D /* MBProgressHUD.m in Sources */,
 				B52E8D371F0B94E900F3170D /* BarrageWalkTextSprite.m in Sources */,
-				B52E8CD11F0B8D6300F3170D /* WatchLiveOnlineTableViewCell.m in Sources */,
 				B4D5C7ED1A6FBAA300427D1D /* OEXSession.m in Sources */,
 				B4B6D6181A949F0F000F44E8 /* OEXRegistrationFieldPasswordView.m in Sources */,
 				B52E8CA11F0B8CB500F3170D /* VHMessageTextView.m in Sources */,
@@ -6410,7 +6243,6 @@
 				B52591771EB348C3003A950D /* MD5DataSigner.m in Sources */,
 				77503E8A1B275F4500C47229 /* UIDevice+OSVersion.swift in Sources */,
 				B50DF98A1EAAF15B001F38BD /* UserCouponItem.m in Sources */,
-				B59238B41EADB6D100C686D8 /* OutlineThirdItem.m in Sources */,
 				B41F22BB1A113D3D0022E01F /* OEXDownloadManager.m in Sources */,
 				B4B6D61B1A949F0F000F44E8 /* OEXRegistrationFieldCheckBoxView.m in Sources */,
 				B52E8D301F0B94E900F3170D /* BarrageFloatSprite.m in Sources */,
@@ -6420,7 +6252,6 @@
 				B55209FD1EB9C96300EC51C9 /* TDCourseCatalogDetailViewController.swift in Sources */,
 				B5FAF7531EB049B5000C2169 /* TDBuySuccessViewController.m in Sources */,
 				1918AFB11948359300F40345 /* OEXCourseDetailTableViewCell.m in Sources */,
-				B50211A71EA8530E001DE1E2 /* OEXMySettingsViewController.m in Sources */,
 				77AFD11C1C1B76D0001985FD /* NSObject+SafeKVO.swift in Sources */,
 				9EE684CB1B3D5FAB00C7B157 /* CourseHandoutsViewController.swift in Sources */,
 				7C2DD5511D4A790F006148E0 /* UserPreferenceAPI.swift in Sources */,
@@ -6445,7 +6276,6 @@
 				B4D5C7EB1A6FBAA300427D1D /* OEXAccessToken.m in Sources */,
 				7C2DD5531D4A8669006148E0 /* UserPreferenceManager.swift in Sources */,
 				BE45DA8F192623F4003BD39B /* OEXTabBarItemsCell.m in Sources */,
-				777DE71A1C1656ED0068E280 /* CourseCatalogDetailView.swift in Sources */,
 				B50DF98D1EAAF15B001F38BD /* UserDiscountTableViewCell.m in Sources */,
 				775EB3AC1B1FC37C009526A8 /* SpinnerView.swift in Sources */,
 				8FE04B4D1A1E2637007F88B8 /* OEXFBSocial.m in Sources */,
@@ -6466,7 +6296,6 @@
 				B52591781EB348C3003A950D /* NSDataEx.m in Sources */,
 				B4B6D63F1A952D1C000F44E8 /* OEXRegistrationAgreementView.m in Sources */,
 				77AF07771CB42AC400A42704 /* TabContainerView.swift in Sources */,
-				B5177EBE1F009A3A00EF160D /* TDBindEmailNewView.m in Sources */,
 				199B9B751935E35D00081A09 /* OEXHelperVideoDownload.m in Sources */,
 				B518BEC01EA9E6F00027569D /* TDAssistantCommentTagModel.m in Sources */,
 				BECB7B1F1924C0C3009C77F1 /* OEXAppDelegate.m in Sources */,
@@ -6479,9 +6308,7 @@
 				B52E8D321F0B94E900F3170D /* BarrageSprite.m in Sources */,
 				1AC147371BCEB14900E0A230 /* CGRect+OEXHelpers.swift in Sources */,
 				B52E8E021F0B951700F3170D /* TTTAttributedLabel.m in Sources */,
-				B5FAF7421EB045C8000C2169 /* SubmitCourseViewController.m in Sources */,
 				B518BECE1EA9E6F00027569D /* TDTalkOrderViewController.m in Sources */,
-				B59238B01EADB6D100C686D8 /* OutlineViewController.m in Sources */,
 				B54347401F02581A0074DBDE /* TDCourseOutLineModel.m in Sources */,
 				B50211F21EA85490001DE1E2 /* UIView+Toast.m in Sources */,
 				B518BED01EA9E6F00027569D /* TDTeacherDetailViewController.m in Sources */,
@@ -6540,7 +6367,6 @@
 				1AC147391BCEC09F00E0A230 /* UIImage+OEXHelpers.swift in Sources */,
 				775DF4181AFAAC8C00F96B2F /* DataManager.swift in Sources */,
 				B5FAF7671EB05207000C2169 /* TDTakePitureView.m in Sources */,
-				B59238B21EADB6D100C686D8 /* OutlineFirstItem.m in Sources */,
 				77C182AC1CD2E60E00AE1474 /* StackPaginationManipulator.swift in Sources */,
 				5D7EACC81B3E202C000A6C36 /* DiscussionAPI.swift in Sources */,
 				77EA92261BB4590A00EC625A /* DownloadsAccessoryView.swift in Sources */,
@@ -6638,7 +6464,6 @@
 				77D470571C11EB4D00C6F0C9 /* ChoiceLabel.swift in Sources */,
 				77FDF4191B02910D00E8C639 /* IconMessageView.swift in Sources */,
 				19321F6219615E3300B7D75C /* OEXMyVideosSubSectionViewController.m in Sources */,
-				B5FAF6F91EB03AB1000C2169 /* SubOrderItem.m in Sources */,
 				77DCD23B1C2B14BA00CAEBB5 /* UITableView+Layout.swift in Sources */,
 				77509D941BE1710200B10CD3 /* TZStackView.swift in Sources */,
 				B52E8C911F0B8CB500F3170D /* FacialView.m in Sources */,
@@ -6723,7 +6548,6 @@
 				B518BEC81EA9E6F00027569D /* TDOrderCommentCell.m in Sources */,
 				E03E6A151D38C91F00944AAA /* OfflineSupportViewController.swift in Sources */,
 				B5FAF7791EB06EA9000C2169 /* TDInformationDetailView.m in Sources */,
-				B5FAF6FF1EB03AB1000C2169 /* WechatPayView.m in Sources */,
 				B52E8C9B1F0B8CB500F3170D /* VHPullingRefreshTableView.m in Sources */,
 				B518BE8D1EA9E6AB0027569D /* TDSubServiceViewController.m in Sources */,
 				B4B6D6291A949F1B000F44E8 /* OEXRegistrationFieldEmailController.m in Sources */,
@@ -6731,9 +6555,7 @@
 				B518BE941EA9E6AB0027569D /* TDSuTitleCell.m in Sources */,
 				773B1D421B1F48F100B861DF /* CourseOutlineHeaderView.swift in Sources */,
 				B52591731EB348C3003A950D /* Order.m in Sources */,
-				B5FAF6F61EB03AB1000C2169 /* WaitForPayViewController.m in Sources */,
 				B504716D1F0529FE003A7268 /* TDWaitforPayBottomCell.m in Sources */,
-				B5177EBB1F009A1800EF160D /* TDBindEmailNewViewController.m in Sources */,
 				778B61061B06BD2100489532 /* NSNotificationCenter+SafeSwift.swift in Sources */,
 				B4B6D6011A949EFC000F44E8 /* OEXRegistrationError.m in Sources */,
 				B5FAF6FC1EB03AB1000C2169 /* TDPayMoneyView.m in Sources */,
@@ -6744,7 +6566,6 @@
 				77EC889E1AB787630050F9CF /* OEXAnalyticsData.m in Sources */,
 				7772BE961AF9587E0081CA7A /* CourseContentPageViewController.swift in Sources */,
 				B52E8CD71F0B8D6300F3170D /* WatchLiveLotteryViewController.m in Sources */,
-				B52E8CD51F0B8D6300F3170D /* WatchLiveSurveyTableViewCell.m in Sources */,
 				9EDB10B61B0C742C00C760C6 /* CourseOutlineItemView.swift in Sources */,
 				B4B2F16A1AA4F4E500A66A71 /* OEXRegistrationFieldValidator.m in Sources */,
 				B51E9EAE1EE8ED890019D764 /* TDCouponCell.m in Sources */,
@@ -6753,7 +6574,6 @@
 				B4B6C80D1A9C7AEA004F0FAF /* OEXPlaceholderTextView.m in Sources */,
 				77E648781C91330D00B6740D /* Result+Conveniences.swift in Sources */,
 				B5018BFD1EF8D02100D9F9F0 /* TDEditeBottomView.m in Sources */,
-				B52E8CCD1F0B8D6300F3170D /* WatchLiveChatTableViewCell.m in Sources */,
 				9EF21A9E1B4697CA000048F8 /* CourseLastAccessedController.swift in Sources */,
 				B5168B731EB8294800C80436 /* TDSubmitCourseViewController.m in Sources */,
 				698EE6E91E38A53600DF4FEA /* RatingView.swift in Sources */,

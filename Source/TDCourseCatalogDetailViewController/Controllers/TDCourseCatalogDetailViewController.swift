@@ -213,7 +213,6 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         
     }
     internal func gotoCourseOutlineVc() { //课程大纲
-//        let vc = OutlineViewController()
         let vc = TDCourseOutLineViewController()
         vc.courseID = self.courseID
         self.navigationController?.pushViewController(vc, animated: true)
@@ -248,7 +247,6 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
     
     func gotoWaitForPayVc () { //待支付
         
-//        let waitForPAyVc = WaitForPayViewController()
         let waitForPAyVc = TDWaitforPayViewController()
         waitForPAyVc.username = self.username //传当前用户名
         waitForPAyVc.courseId = self.courseID

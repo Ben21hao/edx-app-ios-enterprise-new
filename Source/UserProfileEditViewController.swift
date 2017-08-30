@@ -415,7 +415,6 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
         
         if type == 1 {
             let emailVC = TDBindEmailViewController.init()
-//            let emailVC = TDBindEmailNewViewController.init()
             emailVC.username = self.profile.username
             emailVC.bindEmailHandle = {(AnyObject) -> () in
                 print("绑定邮箱 --- \(AnyObject)")
