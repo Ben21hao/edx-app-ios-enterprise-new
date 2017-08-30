@@ -299,6 +299,7 @@ static AnnouncementView *announcementView = nil;
     
     self.detailTextView = [[UITextView alloc] init];
     self.detailTextView.font = [UIFont fontWithName:@"OpenSans" size:16];
+    self.detailTextView.editable = NO;
     self.detailTextView.textColor = [UIColor colorWithHexString:colorHexStr10];
     self.detailTextView.backgroundColor = [UIColor colorWithHexString:colorHexStr13];
     self.detailTextView.text = [NSString stringWithFormat:@"   %@", self.detailStr];
@@ -537,6 +538,7 @@ static AnnouncementView *announcementView = nil;
 }
 
 -(UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    [self.messageToolView endEditing:YES];
     return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
 }
 
@@ -1461,7 +1463,7 @@ static AnnouncementView *announcementView = nil;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self.view endEditing:YES];
+    [self.messageToolView endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {

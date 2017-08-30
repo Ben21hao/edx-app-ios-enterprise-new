@@ -42,7 +42,7 @@ public class UserProfileManager : NSObject {
     }
     
     private func sessionChanged() {
-        if let username = self.session.currentUser?.username {
+        if let username = self.session.currentUser?.username { //判断是否已登录
             self.currentUserFeed.backWithFeed(self.feedForUser(username))
         }
         else {

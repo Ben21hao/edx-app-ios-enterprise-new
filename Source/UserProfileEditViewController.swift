@@ -436,7 +436,6 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
                 //                    } else {
                 //                        self.showToast("成功绑定")
                 //                    }
-                //
                 //                }
                 print("绑定手机号 --- \(AnyObject) \(self.profile.phone)")
             }

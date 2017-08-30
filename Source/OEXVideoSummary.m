@@ -89,7 +89,7 @@
             _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
         }
         
-        NSLog(@"视频时长 %@ --- >>大小  %@ ---->> %@",self.duration,[summary objectForKey:@"size"],_defaultEncoding.size);
+//        NSLog(@"视频时长 %@ --- >>大小  %@ ---->> %@",self.duration,[summary objectForKey:@"size"],_defaultEncoding.size);
     }
 
     return self;

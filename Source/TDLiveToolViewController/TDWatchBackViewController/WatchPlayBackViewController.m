@@ -204,6 +204,7 @@ static AnnouncementView* announcementView = nil;
     [self.showView addSubview:self.detailView];
     
     self.detailTextView = [[UITextView alloc] init];
+    self.detailTextView.editable = NO;
     self.detailTextView.font = [UIFont fontWithName:@"OpenSans" size:16];
     self.detailTextView.textColor = [UIColor colorWithHexString:colorHexStr10];
     self.detailTextView.backgroundColor = [UIColor colorWithHexString:colorHexStr13];
@@ -321,6 +322,8 @@ static AnnouncementView* announcementView = nil;
 }
 
 -(UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    
+    [self.messageToolView endEditing:YES];
     return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
 }
 

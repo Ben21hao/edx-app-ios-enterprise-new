@@ -49,9 +49,7 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUpViewConstraint()
-//        tsetRightNavigationBar()
-        
+        setUpViewConstraint()        
         addProfileListener()//数据请求
     }
     
@@ -94,25 +92,6 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
         
         self.contentView.snp_makeConstraints {make in
             make.left.right.bottom.top.equalTo(self.view)
-        }
-    }
-    
-    func tsetRightNavigationBar() {
-        
-        let rightButton = UIButton.init(frame: CGRectMake(0, 0, 68, 48))
-        rightButton.contentEdgeInsets = UIEdgeInsetsMake(0, 16, 0, -16)
-        rightButton.titleLabel?.font = UIFont.init(name: "OpenSans", size: 16.0)
-        rightButton.titleLabel?.textAlignment = .Right
-        rightButton.showsTouchWhenHighlighted = true
-        rightButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        rightButton.setTitle(Strings.edit, forState: .Normal)
-        rightButton.addTarget(self, action: #selector(rightButtonAciton), forControlEvents: .TouchUpInside)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightButton)
-    }
-    
-    func rightButtonAciton() {//编辑
-        if editable {
-            self.environment.router?.showProfileEditorFromController(self)
         }
     }
     

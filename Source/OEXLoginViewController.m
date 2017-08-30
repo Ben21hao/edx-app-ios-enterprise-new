@@ -209,6 +209,7 @@
                                                                     };
     self.navigationItem.title = [Strings signInText];
     
+    //隐藏跳过按钮
 //    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 68, 48)];
 //    rightButton.contentEdgeInsets = UIEdgeInsetsMake(0, 16, 0, -16);
 //    rightButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:16.0];
@@ -359,6 +360,7 @@
     self.bottomButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.bottomButton.titleLabel.numberOfLines = 0;
     self.bottomButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
+    self.bottomButton.showsTouchWhenHighlighted = YES;
     [self.bottomButton addTarget:self action:@selector(bottomButtonAtion:) forControlEvents:UIControlEventTouchUpInside];
     [self.bottomButton setAttributedTitle:[self setAttribute] forState:UIControlStateNormal];
     [self.view addSubview:self.bottomButton];

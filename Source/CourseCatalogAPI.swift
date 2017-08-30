@@ -34,6 +34,7 @@ public struct CourseCatalogAPI {
         case CompanyId = "company_id"
     }
     
+    //发现课程
         public static func getCourseCatalog(userID: String, company_id: String, page : Int) -> NetworkRequest<Paginated<[OEXCourse]>> {
 //    public static func getCourseCatalog(userID: String, page : Int, organizationCode: String?) -> NetworkRequest<Paginated<[OEXCourse]>> {
     
@@ -55,6 +56,7 @@ public struct CourseCatalogAPI {
         ).paginated(page: page)
     }
     
+    //课程详情
     public static func getCourse(courseID: String, companyID : String) -> NetworkRequest<OEXCourse> {
         return NetworkRequest(
         

@@ -26,13 +26,13 @@
 #define URL_USER_DETAILS @"/api/mobile/v0.5/users"
 #define URL_COURSE_ENROLLMENTS @"/course_enrollments/"
 #define URL_VIDEO_SUMMARY @"/api/mobile/v0.5/video_outlines/courses/"
-#define URL_COURSE_HANDOUTS @"/handouts"
-#define URL_COURSE_ANNOUNCEMENTS @"/updates"
+#define URL_COURSE_HANDOUTS @"/handouts" //资料
+#define URL_COURSE_ANNOUNCEMENTS @"/updates" //公告
 #define URL_RESET_PASSWORD  @"/password_reset/" //通过Email找回密码接口
 #define URL_SUBSTRING_VIDEOS @"edx-course-videos"
 #define URL_SUBSTRING_ASSETS @"asset/"
-#define AUTHORIZATION_URL @"/oauth2/access_token"
-#define URL_GET_USER_INFO @"/api/mobile/v0.5/my_user_info"
+#define AUTHORIZATION_URL @"/oauth2/access_token" //登录
+#define URL_GET_USER_INFO @"/api/mobile/v0.5/my_user_info" //个人信息
 // For Closed Captioning
 #define URL_VIDEO_SRT_FILE @"/api/mobile/v0.5/video_outlines/transcript/"
 #define URL_COURSE_ENROLLMENT @"/api/enrollment/v1/enrollment"

@@ -320,11 +320,13 @@
     WS(weakSelf);
     NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/generate_prepaid_order_and_pay_for_course/",ELITEU_URL];
     [manager POST:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"创建订单成功--payParams%@",responseObject);
         
         NSDictionary *responDic = (NSDictionary *)responseObject;
         id code = responDic[@"code"];
         if ([code intValue] == 200) {
+            
+            NSLog(@"创建订单成功--payParams%@",responseObject);
+            
             weakSelf.orderId = responseObject[@"data"][@"order_id"];
             weakSelf.hadCreateOrder = YES;
             

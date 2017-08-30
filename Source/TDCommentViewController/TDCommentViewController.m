@@ -175,14 +175,16 @@
     [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [self.loadIngView removeFromSuperview];
-        if (self.commentArray.count > 0 && self.page == 1) {
-            [self.commentArray removeAllObjects];
-        }
         
         NSDictionary *responseDic = (NSDictionary *)responseObject;
         id code = responseDic[@"code"];
         
         if ([code intValue] == 200) {
+            
+            if (self.commentArray.count > 0 && self.page == 1) {
+                [self.commentArray removeAllObjects];
+            }
+            
             NSDictionary *dataDic = responseObject[@"data"];
             NSArray *listArray = (NSArray *)dataDic[@"comment_list"];
             
@@ -204,6 +206,7 @@
             }
             
         } else {
+            [self.view makeToast:NSLocalizedString(@"SYSTEM_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
             NSLog(@"评论 --- %@",responseObject[@"msg"]);
         }
         
@@ -320,10 +323,11 @@
     }];
     
     self.tableView.tableHeaderView = [self headerView];
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(topPullLoading)];
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(pullDownRefresh)];
     header.lastUpdatedTimeLabel.hidden = YES;
     self.tableView.mj_header = header;
+    
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(topPullLoading)];
     self.tableView.mj_footer.automaticallyHidden = YES;
 }
 
