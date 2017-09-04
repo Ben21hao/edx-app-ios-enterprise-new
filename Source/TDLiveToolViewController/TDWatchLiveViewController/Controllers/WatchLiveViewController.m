@@ -6,24 +6,28 @@
 //  Copyright © 2016年 vhall. All rights reserved.
 //
 #import <AVFoundation/AVFoundation.h>
-#import "WatchLiveViewController.h"
+
 #import <MediaPlayer/MPMoviePlayerController.h>
-#import "WatchLiveQATableViewCell.h"
-#import "WatchLiveLotteryViewController.h"
 #import "VHMessageToolView.h"
 #import "VHallApi.h"
-#import "MBProgressHUD.h"
+#import "VHQuestionCheckBox.h"
+#import "VHDocumentView.h"
 #import "AnnouncementView.h"
 #import "SignView.h"
+
+#import "WatchLiveViewController.h"
+#import "WatchLiveLotteryViewController.h"
+
+#import "MBProgressHUD.h"
 #import "BarrageRenderer.h"
 #import "NSSafeObject.h"
 #import "SZQuestionItem.h"
-#import "VHQuestionCheckBox.h"
-#import "VHDocumentView.h"
+#import "VHallMsgModels.h"
 
 #import "WatchLiveChatCell.h"
 #import "TDOnlineCell.h"
 #import "TDLiveSurverCell.h"
+#import "TDLiveQACell.h"
 
 # define DebugLog(fmt, ...) NSLog((@"\n[文件名:%s]\n""[函数名:%s]\n""[行号:%d] \n" fmt), __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
 
@@ -466,6 +470,7 @@ static AnnouncementView *announcementView = nil;
         _moviePlayer.movieScalingMode = kRTMPMovieScalingModeAspectFit;
     }
 }
+
 #pragma mark - 发送聊天按钮
 - (IBAction)sendChatBtnClick:(id)sender {
     
@@ -473,11 +478,16 @@ static AnnouncementView *announcementView = nil;
     _toolViewBackView.backgroundColor=[UIColor clearColor];
     [_toolViewBackView addTarget:self action:@selector(toolViewBackViewClick) forControlEvents:UIControlEventTouchUpInside];
     
-    _messageToolView=[[VHMessageToolView alloc] initWithFrame:CGRectMake(0, _toolViewBackView.height-[VHMessageToolView  defaultHeight], VHScreenWidth, [VHMessageToolView defaultHeight]) type:3];
+    _messageToolView = [[VHMessageToolView alloc] initWithFrame:CGRectMake(0, _toolViewBackView.height-[VHMessageToolView  defaultHeight], VHScreenWidth, [VHMessageToolView defaultHeight]) type:3];
     _messageToolView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
-    _messageToolView.delegate=self;
-    _messageToolView.hidden=NO;
-    _messageToolView.maxLength=140;
+    _messageToolView.delegate = self;
+    _messageToolView.hidden = NO;
+    _messageToolView.maxLength = 140;
+    
+    WS(weakSelf);
+    self.messageToolView.handleNoText = ^(){
+        [weakSelf.view makeToast:NSLocalizedString(@"ENTER_SEND_MESSAGE", nil) duration:1.08 position:CSToastPositionCenter];
+    };
     [_toolViewBackView addSubview:_messageToolView];
     [self.view addSubview:_toolViewBackView];
     
@@ -590,14 +600,10 @@ static AnnouncementView *announcementView = nil;
         
     } else if (_QABtn.selected) { //问答
         
-        UITableViewCell *cell = nil;
+        TDLiveQACell *cell = [[TDLiveQACell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDLiveQACell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.model = [_QADataArray objectAtIndex:indexPath.row];
         
-        static NSString *qaIndetify = @"WatchLiveQACell";
-        cell = [tableView dequeueReusableCellWithIdentifier:qaIndetify];
-        if (!cell) {
-            cell = [[WatchLiveQATableViewCell alloc]init];
-        }
-        ((WatchLiveQATableViewCell *)cell).model = [_QADataArray objectAtIndex:indexPath.row];
         return cell;
         
     } else {
@@ -612,6 +618,7 @@ static AnnouncementView *announcementView = nil;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     CGFloat height = 0;
+    TDBaseToolModel *toolModel = [[TDBaseToolModel alloc] init];
     
     if (self.chatBtn.selected) {
         
@@ -627,15 +634,14 @@ static AnnouncementView *announcementView = nil;
             
             VHallChatModel *chatModel = model;
             
-            TDBaseToolModel *toolModel = [[TDBaseToolModel alloc] init];
             CGFloat rowHeight = [toolModel heightForString:chatModel.text font:14 width:TDWidth - 75];
             height = rowHeight + 55;
         }
 
-    }
-    
-    if (_QABtn.selected) {
-        height = 120;
+    } else if (_QABtn.selected) {
+        VHallQuestionModel *model = [_QADataArray objectAtIndex:indexPath.row];
+        CGFloat rowHeight = [toolModel heightForString:model.content font:14 width:TDWidth - 66];
+        height = rowHeight + 61;
     }
     return height;
 }
@@ -968,8 +974,9 @@ static AnnouncementView *announcementView = nil;
     [self stopWatchBtnClick:nil];
     [self.view makeToast:NSLocalizedString(@"LIVE_ENDED", nil) duration:1.08 position:CSToastPositionCenter];
     
-//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"SYSTEM_WARING", nil) message:NSLocalizedString(@"LIVE_ENDED", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
-//    [alert show];
+    if (self.liveEndHandle) {
+        self.liveEndHandle();
+    }
 }
 
 #pragma mark - Announcement

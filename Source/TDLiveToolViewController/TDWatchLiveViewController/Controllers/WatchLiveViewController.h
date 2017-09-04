@@ -14,5 +14,6 @@
 @property (nonatomic,copy) NSString *kValue;
 @property (nonatomic,assign) NSInteger bufferTimes;
 @property (nonatomic,strong) NSString *detailStr; //详情
+@property (nonatomic,copy) void(^liveEndHandle)();
 
 @end

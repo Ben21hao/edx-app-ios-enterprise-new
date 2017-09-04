@@ -159,7 +159,7 @@ NSString* NSStringForOEXStartType(OEXStartType type) {
         }];
         self.mediaInfo = parsedMediaInfo;
         
-        NSLog(@"课程详情 ---- %@",info);
+        NSLog(@"OEXCourse -- 课程详情 ---->>> %@",info);
 
     }
     return self;

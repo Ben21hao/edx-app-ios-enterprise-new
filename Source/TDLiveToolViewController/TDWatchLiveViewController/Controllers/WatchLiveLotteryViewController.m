@@ -39,17 +39,23 @@
     return self;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
 
 - (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
     
     lotteryTip.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
-     lotteryTip.text = NSLocalizedString(@"PROCESSING_TIP_TEXT", nil);
+    lotteryTip.text = NSLocalizedString(@"PROCESSING_TIP_TEXT", nil);
+    
     lblName.text = NSLocalizedString(@"TRURE_NAME_TEXT", nil);
-    lblPhone.text = NSLocalizedString(@"PHONE_NUMBER", nil);
+    lblName.font = [UIFont fontWithName:@"OpenSans" size:13];
+    lblPhone.text = [NSString stringWithFormat:@"%@",NSLocalizedString(@"PHONE_NUMBER", nil)];
+    lblPhone.font = [UIFont fontWithName:@"OpenSans" size:13];
     [btnSubmit setTitle:NSLocalizedString(@"SUBMIT", nil) forState:UIControlStateNormal];
+    btnSubmit.titleLabel.font =[UIFont fontWithName:@"OpenSans" size:13];
     
     if (_lotteryOver) {
         [lotteryTip removeFromSuperview];
@@ -76,6 +82,17 @@
     }
 }
 
+
+-(void)changeText {
+    
+    if ([lotteryTip.text isEqualToString:[NSString stringWithFormat:@"%@...",NSLocalizedString(@"PROCESSING_TIP_TEXT", nil)]]) {
+        lotteryTip.text = NSLocalizedString(@"PROCESSING_TIP_TEXT", nil);
+    } else{
+        lotteryTip.text = [lotteryTip.text stringByAppendingString:@"."];
+    }
+}
+
+
 -(void)setLotteryOver:(BOOL)lotteryOver {
     
     _lotteryOver = lotteryOver;
@@ -94,34 +111,29 @@
 }
 
 - (void)destory {
+    
     self.lotteryOver = YES;
     self.view.hidden = YES;
 }
 
-- (IBAction)submitBtnClick:(id)sender {
+- (IBAction)submitBtnClick:(id)sender { //提交
     
     NSString *name = tfName.text;
     NSString *phone = tfPhone.text;
     
     NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:name, @"name", phone, @"phone", nil];
+    
     [_lottery submitLotteryInfo:dict success:^{
+        
         [self closeBtnClick:nil];
-        [UIAlertView popupAlertByDelegate:nil title:NSLocalizedString(@"HANDIN_SUCCESS", nil) message:nil];
+        [self.view makeToast:NSLocalizedString(@"HANDIN_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
         
     } failed:^(NSDictionary *failedData) {
         
-        NSString* code = [NSString stringWithFormat:@"%@", failedData[@"code"]];
-        [UIAlertView popupAlertByDelegate:nil title:failedData[@"content"] message:code];
+//        NSString* code = [NSString stringWithFormat:@"%@", failedData[@"code"]];
+//        [UIAlertView popupAlertByDelegate:nil title:failedData[@"content"] message:code];
+        [self.view makeToast:failedData[@"content"] duration:1.08 position:CSToastPositionCenter];
     }];
-}
-
--(void)changeText {
-    
-    if ([lotteryTip.text isEqualToString:[NSString stringWithFormat:@"%@...",NSLocalizedString(@"PROCESSING_TIP_TEXT", nil)]]) {
-        lotteryTip.text = NSLocalizedString(@"PROCESSING_TIP_TEXT", nil);
-    } else{
-        lotteryTip.text = [lotteryTip.text stringByAppendingString:@"."];
-    }
 }
 
 #pragma mark - tableView Delegate
@@ -130,22 +142,41 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *qaIndetify = @"WatchLiveLotteryCell";
     WatchLiveLotteryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:qaIndetify];
     if (!cell) {
-        cell = [[WatchLiveLotteryTableViewCell alloc]init];
+        cell = [[WatchLiveLotteryTableViewCell alloc] init];
     }
     cell.model = [_endLotteryModel.resultModels objectAtIndex:indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [self.view endEditing:YES];
+    [self resignFirstResonder];
 }
 
 #pragma mark - textField Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
-    [tfName resignFirstResponder];
-    [tfPhone resignFirstResponder];
+    [self resignFirstResonder];
     
     return YES;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    [self resignFirstResonder];
+}
+
+- (void)resignFirstResonder {
+    [tfName resignFirstResponder];
+    [tfPhone resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -37,7 +37,7 @@ NSString* const OEXVideoEncodingFallback = @"fallback";
             self.size = size;
         }
         
-        NSLog(@" 视频的file_size  %@------>>>  %@",self.size,size);
+        NSLog(@" OEXVideoEncoding -- 视频的file_size  %@------>>>  %@",self.size,size);
     }
     
     return self;
@@ -52,7 +52,7 @@ NSString* const OEXVideoEncodingFallback = @"fallback";
         if (size > 0) {
             self.size = size;
         }
-        NSLog(@" 视频的size %@------>>>  %@",self.size,size);
+        NSLog(@"OEXVideoEncoding -- 视频的size %@------>>>  %@",self.size,size);
     }
     return self;
 }

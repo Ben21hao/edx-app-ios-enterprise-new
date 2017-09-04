@@ -612,7 +612,7 @@
 
     if(!error) {
         NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*) response;
-        NSLog(@"处理------>> %ld",(long)httpResp.statusCode);
+//        NSLog(@"处理------>> %ld",(long)httpResp.statusCode);
         
         if(httpResp.statusCode == 200) {
             [self loginSuccessful];

@@ -62,7 +62,7 @@
     [self.surveyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.bgView.mas_left).offset(13);
         make.centerY.mas_equalTo(self.bgView.mas_centerY);
-        make.width.mas_equalTo(118);
+        make.width.mas_equalTo(158);
     }];
     
     [self.surveyButton mas_makeConstraints:^(MASConstraintMaker *make) {

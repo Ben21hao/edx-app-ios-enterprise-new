@@ -258,6 +258,10 @@ class TDLectureSubViewController: UIViewController,UITableViewDelegate,UITableVi
         watchVc.bufferTimes = settingModel.bufferTimes
         watchVc.detailStr = detailStr
         
+        watchVc.liveEndHandle = { () in
+            self.refreshData()
+        }
+        
         self.presentViewController(watchVc, animated: true, completion: nil)
     }
     

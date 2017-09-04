@@ -283,7 +283,7 @@
             self.messageView.isDate = YES;
         } else {
             self.messageView.isDate = NO;
-            height = 198;
+            height = 208;
         }
         [UIView animateWithDuration:0.5 animations:^{
             self.messageView.dateView.frame = CGRectMake(0, TDHeight - height, TDWidth, height);

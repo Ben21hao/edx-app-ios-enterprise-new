@@ -19,12 +19,10 @@
     
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-        
         _type = type;
         [self setupConfigure];
     }
-    _maxLength = 70;
+    self.maxLength = 70;
     return self;
 }
 
@@ -34,7 +32,7 @@
     }
     [super setFrame:frame];
     self.toolBackGroundView.width = self.width;
-    _cancelButton.left = CGRectGetWidth(self.bounds) - 55;
+    self.sendMsgButton.left = CGRectGetWidth(self.bounds) - 55;
 }
 
 - (void)setupConfigure {
@@ -43,9 +41,8 @@
     self.isShowButtomView = NO;
     
     self.toolBackGroundView = [[UIView alloc] init];
-    self.toolBackGroundView.frame = CGRectMake(0, 0,
-                                               self.frame.size.width,
-                                               kVerticalPadding*2+kInputTextViewMinHeight);
+    self.toolBackGroundView.frame = CGRectMake(0, 0, self.frame.size.width, kVerticalPadding*2+kInputTextViewMinHeight);
+    
     if (_type == 1) {
         self.toolBackGroundView.backgroundColor = CellColor;
     } else if(_type == 2) {
@@ -58,18 +55,19 @@
     
     //初始化输入框
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    if(/*[VH_Device_OS_ver floatValue] < 8.0 && */orientation != UIInterfaceOrientationPortrait) {
+    
+    if(orientation != UIInterfaceOrientationPortrait) { /*[VH_Device_OS_ver floatValue] < 8.0 && */
         _msgTextView = nil;
         CGFloat textViewWidth= VH_SH - 100;
         _msgTextView = [[VHMessageTextView alloc] initWithFrame:CGRectMake(kHorizontalPadding, kVerticalPadding, textViewWidth, kInputTextViewMinHeight)];
-        //        NSLog(@"sfsdfsd +++%f",VHScreenHeight- 100);
         self.maxTextInputViewHeight = 5 * 4 + 16 * 3;
+        //        NSLog(@"sfsdfsd +++%f",VHScreenHeight- 100);
         
     } else {
         _msgTextView = [[VHMessageTextView alloc] initWithFrame:CGRectMake(kHorizontalPadding, kVerticalPadding, self.width - 100, kInputTextViewMinHeight)];
         self.maxTextInputViewHeight = 5 * 4 + 16 * 3;
-        
     }
+    
     //    _msgTextView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     //    self.inputTextView.contentMode = UIViewContentModeCenter;
     _msgTextView.scrollEnabled = YES;
@@ -84,25 +82,22 @@
     
     _previousTextViewContentHeight = [self getTextViewContentH:_msgTextView];
     
-    _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_cancelButton setTitle:@"发送" forState:UIControlStateNormal];
-    _cancelButton.titleLabel.font = [UIFont systemFontOfSize:16];
-     [_cancelButton setUserInteractionEnabled:NO];
+    self.sendMsgButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    self.sendMsgButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.sendMsgButton setTitle:NSLocalizedString(@"SEND_MESSAGE_BUTTON", nil) forState:UIControlStateNormal];
+    [self.sendMsgButton setUserInteractionEnabled:NO];
     
     if (_type ==3) {
-        [_cancelButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
-          [_cancelButton setUserInteractionEnabled:YES];
+        [self.sendMsgButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
+        [self.sendMsgButton setUserInteractionEnabled:YES];
     } else {
-        [_cancelButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
+        [self.sendMsgButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
     }
     
-    _cancelButton.frame = CGRectMake(CGRectGetWidth(self.bounds) - 55 ,
-                                     kVerticalPadding,
-                                     50,
-                                     kInputTextViewMinHeight);
-    [_cancelButton addTarget:self action:@selector(sendButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-    [self.toolBackGroundView addSubview:_cancelButton];
-
+    self.sendMsgButton.frame = CGRectMake(CGRectGetWidth(self.bounds) - 55 ,kVerticalPadding, 50, kInputTextViewMinHeight);
+    [self.sendMsgButton addTarget:self action:@selector(sendMsgButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.toolBackGroundView addSubview:self.sendMsgButton];
+    
     _smallButton = [UIButton buttonWithType:UIButtonTypeCustom];
     if (_type ==3) {
         [_smallButton setBackgroundImage: [UIImage imageNamed:@"UIModel.bundle/message_emoji.tiff"] forState:UIControlStateNormal];
@@ -117,10 +112,7 @@
     [self.toolBackGroundView addSubview:_smallButton];
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillChangeFrame:)
-                                                 name:UIKeyboardWillChangeFrameNotification
-                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
 - (UIView *)faceView {
@@ -275,20 +267,23 @@
     }
 }
 
-- (void)sendButtonTouchUpInside:(id)sender {
-    //    if (_delegate && [_delegate respondsToSelector:@selector(cancelTextView)])
-    //    {
-    //        [_delegate cancelTextView];
-    //    }
+- (void)sendMsgButtonAction:(id)sender {
     
     if ([self.delegate respondsToSelector:@selector(didSendText:)]) {
+        if (self.msgTextView.text.length == 0 && self.handleNoText) {
+            self.handleNoText();
+            return;
+        }
+        
         [self.delegate didSendText:_msgTextView.text];
         self.msgTextView.text = @"";
         [self endEditing:NO];
-        [_cancelButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
-        [_cancelButton setUserInteractionEnabled:NO];
+        
+        [self.sendMsgButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
+        [self.sendMsgButton setUserInteractionEnabled:NO];
+        
         if (_type == 3) {
-             [_cancelButton setUserInteractionEnabled:YES];
+             [self.sendMsgButton setUserInteractionEnabled:YES];
         }
         
         [self willShowInputTextViewToHeight:[self getTextViewContentH:self.msgTextView]];;
@@ -421,23 +416,23 @@
         }
         
         if (_type == 1) {
-            [_cancelButton setTitleColor:MessageTool_SendBtnColor
+            [self.sendMsgButton setTitleColor:MessageTool_SendBtnColor
                                 forState:UIControlStateNormal];
         } else if(_type == 2) {
-            [_cancelButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
+            [self.sendMsgButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
         } else if (_type ==3) {
-            [_cancelButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
+            [self.sendMsgButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
         }
  
-        [_cancelButton setUserInteractionEnabled:YES];
+        [self.sendMsgButton setUserInteractionEnabled:YES];
     } else {
-        [_cancelButton setTitleColor: MessageTool_SendBtnColor forState:UIControlStateNormal];
-         [_cancelButton setUserInteractionEnabled:NO];
+        [self.sendMsgButton setTitleColor: MessageTool_SendBtnColor forState:UIControlStateNormal];
+         [self.sendMsgButton setUserInteractionEnabled:NO];
         
         if (_type ==3) {//私信输入框 无内容时可以点击
             
-            [_cancelButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
-            [_cancelButton setUserInteractionEnabled:YES];
+            [self.sendMsgButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
+            [self.sendMsgButton setUserInteractionEnabled:YES];
         }
     }
     

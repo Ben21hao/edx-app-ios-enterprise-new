@@ -64,6 +64,7 @@
         
         NSDictionary* rawEncodings = OEXSafeCastAsClass(summary[@"encoded_videos"], NSDictionary);
         NSMutableDictionary* encodings = [[NSMutableDictionary alloc] init];
+        
         [rawEncodings enumerateKeysAndObjectsUsingBlock:^(NSString* name, NSDictionary* encodingInfo, BOOL *stop) {
             OEXVideoEncoding* encoding = [[OEXVideoEncoding alloc] initWithDictionary:encodingInfo name:name];
             [encodings safeSetObject:encoding forKey:name];
@@ -89,7 +90,7 @@
             _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
         }
         
-//        NSLog(@"视频时长 %@ --- >>大小  %@ ---->> %@",self.duration,[summary objectForKey:@"size"],_defaultEncoding.size);
+        NSLog(@"OEXVideoSummary 视频时长 %@ --- >>大小  %@ ---->> %@",self.duration,[summary objectForKey:@"size"],_defaultEncoding.size);
     }
 
     return self;

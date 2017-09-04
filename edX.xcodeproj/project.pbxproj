@@ -432,8 +432,11 @@
 		9EEB85A71BD6564E000F3E9E /* PressableCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB85A61BD6564E000F3E9E /* PressableCustomButton.swift */; };
 		9EEFFD651B300E87002A88B0 /* OEXInterface+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEFFD641B300E87002A88B0 /* OEXInterface+Swift.swift */; };
 		9EF21A9E1B4697CA000048F8 /* CourseLastAccessedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF21A9D1B4697CA000048F8 /* CourseLastAccessedController.swift */; };
+		A413A4AC1F580BEA008556C2 /* TDLiveQACell.m in Sources */ = {isa = PBXBuildFile; fileRef = A413A4AB1F580BEA008556C2 /* TDLiveQACell.m */; };
 		A420E2511F3C55A200340683 /* TDBaseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A420E2501F3C55A200340683 /* TDBaseButton.m */; };
 		A4F456771F42DF1600C3F5B5 /* TDWebUrlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F456761F42DF1600C3F5B5 /* TDWebUrlViewController.m */; };
+		A4FB47D01F59442E00A680F8 /* WatchLiveLotteryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FB47CE1F59442E00A680F8 /* WatchLiveLotteryTableViewCell.m */; };
+		A4FB47D11F59442E00A680F8 /* WatchLiveLotteryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4FB47CF1F59442E00A680F8 /* WatchLiveLotteryTableViewCell.xib */; };
 		B4132C10195AAFBE00F50B46 /* OEXAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = B4132C0F195AAFBE00F50B46 /* OEXAuthentication.m */; };
 		B419295E1A8A3F1900448AD5 /* OEXNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B419295D1A8A3F1900448AD5 /* OEXNetworkManager.m */; };
 		B41F22BB1A113D3D0022E01F /* OEXDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B41F22BA1A113D3D0022E01F /* OEXDownloadManager.m */; };
@@ -660,10 +663,6 @@
 		B52E8CA01F0B8CB500F3170D /* VHDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = B52E8C8B1F0B8CB500F3170D /* VHDrawView.m */; };
 		B52E8CA11F0B8CB500F3170D /* VHMessageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B52E8C8D1F0B8CB500F3170D /* VHMessageTextView.m */; };
 		B52E8CA21F0B8CB500F3170D /* VHMessageToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = B52E8C8F1F0B8CB500F3170D /* VHMessageToolView.m */; };
-		B52E8CCF1F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B52E8CA91F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.m */; };
-		B52E8CD01F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B52E8CAA1F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.xib */; };
-		B52E8CD31F0B8D6300F3170D /* WatchLiveQATableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B52E8CAF1F0B8D6300F3170D /* WatchLiveQATableViewCell.m */; };
-		B52E8CD41F0B8D6300F3170D /* WatchLiveQATableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B52E8CB01F0B8D6300F3170D /* WatchLiveQATableViewCell.xib */; };
 		B52E8CD71F0B8D6300F3170D /* WatchLiveLotteryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B52E8CB61F0B8D6300F3170D /* WatchLiveLotteryViewController.m */; };
 		B52E8CD81F0B8D6300F3170D /* WatchLiveLotteryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B52E8CB71F0B8D6300F3170D /* WatchLiveLotteryViewController.xib */; };
 		B52E8CD91F0B8D6300F3170D /* WatchLiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B52E8CB91F0B8D6300F3170D /* WatchLiveViewController.m */; };
@@ -1469,10 +1468,15 @@
 		9EEB85A61BD6564E000F3E9E /* PressableCustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PressableCustomButton.swift; sourceTree = "<group>"; };
 		9EEFFD641B300E87002A88B0 /* OEXInterface+Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OEXInterface+Swift.swift"; sourceTree = "<group>"; };
 		9EF21A9D1B4697CA000048F8 /* CourseLastAccessedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseLastAccessedController.swift; sourceTree = "<group>"; };
+		A413A4AA1F580BEA008556C2 /* TDLiveQACell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDLiveQACell.h; sourceTree = "<group>"; };
+		A413A4AB1F580BEA008556C2 /* TDLiveQACell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDLiveQACell.m; sourceTree = "<group>"; };
 		A420E24F1F3C55A200340683 /* TDBaseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBaseButton.h; sourceTree = "<group>"; };
 		A420E2501F3C55A200340683 /* TDBaseButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBaseButton.m; sourceTree = "<group>"; };
 		A4F456751F42DF1600C3F5B5 /* TDWebUrlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWebUrlViewController.h; sourceTree = "<group>"; };
 		A4F456761F42DF1600C3F5B5 /* TDWebUrlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWebUrlViewController.m; sourceTree = "<group>"; };
+		A4FB47CD1F59442E00A680F8 /* WatchLiveLotteryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchLiveLotteryTableViewCell.h; sourceTree = "<group>"; };
+		A4FB47CE1F59442E00A680F8 /* WatchLiveLotteryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchLiveLotteryTableViewCell.m; sourceTree = "<group>"; };
+		A4FB47CF1F59442E00A680F8 /* WatchLiveLotteryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatchLiveLotteryTableViewCell.xib; sourceTree = "<group>"; };
 		B1AF3BB032520841A93A174B /* Pods-edX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-edX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-edX/Pods-edX.debug.xcconfig"; sourceTree = "<group>"; };
 		B4132C0E195AAFBE00F50B46 /* OEXAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXAuthentication.h; sourceTree = "<group>"; };
 		B4132C0F195AAFBE00F50B46 /* OEXAuthentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXAuthentication.m; sourceTree = "<group>"; };
@@ -1956,12 +1960,6 @@
 		B52E8C8D1F0B8CB500F3170D /* VHMessageTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VHMessageTextView.m; sourceTree = "<group>"; };
 		B52E8C8E1F0B8CB500F3170D /* VHMessageToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VHMessageToolView.h; sourceTree = "<group>"; };
 		B52E8C8F1F0B8CB500F3170D /* VHMessageToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VHMessageToolView.m; sourceTree = "<group>"; };
-		B52E8CA81F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchLiveLotteryTableViewCell.h; sourceTree = "<group>"; };
-		B52E8CA91F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchLiveLotteryTableViewCell.m; sourceTree = "<group>"; };
-		B52E8CAA1F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatchLiveLotteryTableViewCell.xib; sourceTree = "<group>"; };
-		B52E8CAE1F0B8D6300F3170D /* WatchLiveQATableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchLiveQATableViewCell.h; sourceTree = "<group>"; };
-		B52E8CAF1F0B8D6300F3170D /* WatchLiveQATableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchLiveQATableViewCell.m; sourceTree = "<group>"; };
-		B52E8CB01F0B8D6300F3170D /* WatchLiveQATableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatchLiveQATableViewCell.xib; sourceTree = "<group>"; };
 		B52E8CB51F0B8D6300F3170D /* WatchLiveLotteryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchLiveLotteryViewController.h; sourceTree = "<group>"; };
 		B52E8CB61F0B8D6300F3170D /* WatchLiveLotteryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchLiveLotteryViewController.m; sourceTree = "<group>"; };
 		B52E8CB71F0B8D6300F3170D /* WatchLiveLotteryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatchLiveLotteryViewController.xib; sourceTree = "<group>"; };
@@ -4309,26 +4307,12 @@
 		B52E8CA31F0B8D6300F3170D /* TDWatchLiveViewController */ = {
 			isa = PBXGroup;
 			children = (
-				B55636FE1F2B19B40079D298 /* TDNewCells */,
 				B52E8CB41F0B8D6300F3170D /* Controllers */,
-				B52E8CA41F0B8D6300F3170D /* Cells */,
+				B55636FE1F2B19B40079D298 /* TDNewCells */,
 				B52E8CBB1F0B8D6300F3170D /* Survey */,
 				B52E8CC81F0B8D6300F3170D /* View */,
 			);
 			path = TDWatchLiveViewController;
-			sourceTree = "<group>";
-		};
-		B52E8CA41F0B8D6300F3170D /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				B52E8CA81F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.h */,
-				B52E8CA91F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.m */,
-				B52E8CAA1F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.xib */,
-				B52E8CAE1F0B8D6300F3170D /* WatchLiveQATableViewCell.h */,
-				B52E8CAF1F0B8D6300F3170D /* WatchLiveQATableViewCell.m */,
-				B52E8CB01F0B8D6300F3170D /* WatchLiveQATableViewCell.xib */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		B52E8CB41F0B8D6300F3170D /* Controllers */ = {
@@ -4723,6 +4707,11 @@
 				B55637031F2B19F90079D298 /* TDOnlineCell.m */,
 				B55637051F2B1A240079D298 /* TDLiveSurverCell.h */,
 				B55637061F2B1A240079D298 /* TDLiveSurverCell.m */,
+				A413A4AA1F580BEA008556C2 /* TDLiveQACell.h */,
+				A413A4AB1F580BEA008556C2 /* TDLiveQACell.m */,
+				A4FB47CD1F59442E00A680F8 /* WatchLiveLotteryTableViewCell.h */,
+				A4FB47CE1F59442E00A680F8 /* WatchLiveLotteryTableViewCell.m */,
+				A4FB47CF1F59442E00A680F8 /* WatchLiveLotteryTableViewCell.xib */,
 			);
 			path = TDNewCells;
 			sourceTree = "<group>";
@@ -5646,7 +5635,6 @@
 				69ECC64D1D50D1170030CF87 /* Default-375w-667h@2x.png in Resources */,
 				6926CDAF1D59BE3600A16E22 /* ic_progressbar.png in Resources */,
 				6987A86D1D6C67DB00E9D183 /* colors.json in Resources */,
-				B52E8CD01F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.xib in Resources */,
 				6926CDAD1D59BE3600A16E22 /* ic_previous_press.png in Resources */,
 				69ECC6401D50D1170030CF87 /* iTunesArtwork in Resources */,
 				69ECC6441D50D1170030CF87 /* loginScreenImage@2x.png in Resources */,
@@ -5705,6 +5693,7 @@
 				B52E8DF11F0B951700F3170D /* Expression_83@2x.png in Resources */,
 				69ECC62C1D50D1170030CF87 /* ic_back.png in Resources */,
 				B52E8DA71F0B951600F3170D /* Expression_16@2x.png in Resources */,
+				A4FB47D11F59442E00A680F8 /* WatchLiveLotteryTableViewCell.xib in Resources */,
 				B51B77E71F27410500AECD99 /* Icon-40@3x.png in Resources */,
 				B52E8DA21F0B951600F3170D /* Expression_11@2x.png in Resources */,
 				B5FAF7501EB047D2000C2169 /* PayTableViewCell.xib in Resources */,
@@ -5730,7 +5719,6 @@
 				B52E8DE41F0B951700F3170D /* Expression_71@2x.png in Resources */,
 				B52E8DD61F0B951700F3170D /* Expression_59@2x.png in Resources */,
 				198826E91952FE39005D4D8A /* OEXOpenInBrowserViewController.xib in Resources */,
-				B52E8CD41F0B8D6300F3170D /* WatchLiveQATableViewCell.xib in Resources */,
 				B52E8DC31F0B951700F3170D /* Expression_41@2x.png in Resources */,
 				69ECC63C1D50D1170030CF87 /* icon_facebook_white.png in Resources */,
 				B52E8DD71F0B951700F3170D /* Expression_5@2x.png in Resources */,
@@ -6287,6 +6275,7 @@
 				77056C3E1B3F320800D9DB4A /* DetailToolbarButton.swift in Sources */,
 				B52E8D331F0B94E900F3170D /* BarrageSpriteUtility.m in Sources */,
 				77691F9C1B3A0774003922F2 /* Result+JSON.swift in Sources */,
+				A413A4AC1F580BEA008556C2 /* TDLiveQACell.m in Sources */,
 				B543473D1F0252E50074DBDE /* TDCourseOutLineCell.m in Sources */,
 				199B9B721935C8AC00081A09 /* OEXCourseVideosTableViewCell.m in Sources */,
 				772619B71ADDA8ED005BD7E4 /* OEXPushSettingsManager.m in Sources */,
@@ -6315,7 +6304,6 @@
 				7714A2601AB37CF7004C2254 /* OEXRegistrationFieldError.m in Sources */,
 				77E6486C1C912BD600B6740D /* Logger+OEXObjC.m in Sources */,
 				B54C8ACF1EA8BF950002FCED /* JHTextField.m in Sources */,
-				B52E8CCF1F0B8D6300F3170D /* WatchLiveLotteryTableViewCell.m in Sources */,
 				B50DF9941EAAF299001F38BD /* JHFindPWDView.m in Sources */,
 				77000A4A1A7757E0007D306C /* NSDate+OEXComparisons.m in Sources */,
 				B5FAF7571EB04A69000C2169 /* CouponsViewController.m in Sources */,
@@ -6448,6 +6436,7 @@
 				B52310F01ED43AE200D9433C /* TDVideoUrlPlayController.m in Sources */,
 				B4B6D6311A949F71000F44E8 /* OEXRegistrationFieldControllerFactory.m in Sources */,
 				B52E8CE11F0B8D6300F3170D /* AnnouncementView.m in Sources */,
+				A4FB47D01F59442E00A680F8 /* WatchLiveLotteryTableViewCell.m in Sources */,
 				B518C1721EA9FF1C0027569D /* TDCaptionView.m in Sources */,
 				B5148C131ED2815F00F6DACD /* TDFreeAlertView.m in Sources */,
 				B518BE951EA9E6AB0027569D /* TDVideoShareCell.m in Sources */,
@@ -6495,7 +6484,6 @@
 				B5018BFA1EF8D02100D9F9F0 /* TDVidoDownloadViewController.m in Sources */,
 				77AF07751CB311B200A42704 /* UserProfileView.swift in Sources */,
 				77236EEB1C21C32E006AC1A4 /* PaginationController.swift in Sources */,
-				B52E8CD31F0B8D6300F3170D /* WatchLiveQATableViewCell.m in Sources */,
 				1AFEB1B31BBD52C7004C471D /* JSONFormBuilderTextEditor.swift in Sources */,
 				B5CF30631EB1A79E00F1BF6A /* TDWebViewController.m in Sources */,
 				B52E8CF61F0B8DB500F3170D /* VHStatisticsStystem.m in Sources */,

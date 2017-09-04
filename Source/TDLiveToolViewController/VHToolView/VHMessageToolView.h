@@ -18,9 +18,10 @@
 @protocol VHMessageToolBarDelegate <NSObject>
 
 - (void)didSendText:(NSString *)text;
-@optional
-- (void)didChangeFrameToHeight:(CGFloat)toHeight;
 
+@optional
+
+- (void)didChangeFrameToHeight:(CGFloat)toHeight;
 - (void)cancelTextView;
 
 @end
@@ -32,19 +33,16 @@
 }
 
 @property (strong, nonatomic) UIView *toolBackGroundView;
-
 @property (strong, nonatomic) VHMessageTextView *msgTextView;
-
-@property (strong, nonatomic) UIButton *cancelButton;
+@property (strong, nonatomic) UIButton *sendMsgButton;
 
 @property (nonatomic) CGFloat maxTextInputViewHeight;
-
-@property (weak, nonatomic) id<VHMessageToolBarDelegate> delegate;
-
 @property (strong, nonatomic) UIButton *smallButton;
-
 @property (nonatomic) CGRect faceRect;
 @property(nonatomic,assign) int  maxLength;//最大字符个数
+
+@property (weak, nonatomic) id<VHMessageToolBarDelegate> delegate;
+@property (nonatomic,copy) void(^handleNoText)();
 
 /**
  *  表情的附加页面
@@ -56,7 +54,6 @@
  */
 @property (nonatomic) BOOL isShowButtomView;
 @property (strong, nonatomic) UIView *activityButtomView;//当前活跃的底部扩展页面
-
 @property (nonatomic) NSInteger type;
 
 +(CGFloat)defaultHeight;
@@ -66,11 +63,10 @@
 -(void)beginFaceViewInView;
 -(void)beginTextViewInView;
 
-//type 1详情页  2聊天
-- (id)initWithFrame:(CGRect)frame type:(NSInteger)type;
-
+- (id)initWithFrame:(CGRect)frame type:(NSInteger)type;//type 1详情页  2聊天
 - (void)addKeyBoardNoti;
 - (void)removeKeyBoardNoti;
-//重置聊天框高度
-- (void)resetMessageTextHeight;
+
+- (void)resetMessageTextHeight; //重置聊天框高度
+
 @end

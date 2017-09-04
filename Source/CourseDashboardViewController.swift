@@ -273,14 +273,14 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     public func prepareTableViewData(enrollment: UserCourseEnrollment) {
         cellItems = []
         
-        /*证书*/
-        //        if let certificateUrl = getCertificateUrl(enrollment) {
-        //            let item = CertificateDashboardItem(certificateImage: UIImage(named: "courseCertificate")!, certificateUrl: certificateUrl, action: {
-        //                let url = NSURL(string: certificateUrl)!
-        //                self.environment.router?.showCertificate(url, title: enrollment.course.name, fromController: self)
-        //            })
-        //            cellItems.append(item)
-        //        }
+        /* 证书 */
+//        if let certificateUrl = getCertificateUrl(enrollment) {
+//            let item = CertificateDashboardItem(certificateImage: UIImage(named: "courseCertificate")!, certificateUrl: certificateUrl, action: {
+//                let url = NSURL(string: certificateUrl)!
+//                self.environment.router?.showCertificate(url, title: enrollment.course.name, fromController: self)
+//            })
+//            cellItems.append(item)
+//        }
         
         /*课件*/
         var item = StandardCourseDashboardItem(title: Strings.courseDashboardCourseware, detail: Strings.courseDashboardCourseDetail, icon : .Courseware) {[weak self] () -> Void in
@@ -353,6 +353,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         dashboardItem.action()
     }
     
+    //MARK: 跳转
     private func showCourseware() { //课件
         self.environment.router?.showCoursewareForCourseWithID(courseID, fromController: self)
     }

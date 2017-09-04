@@ -105,15 +105,17 @@
     return arr_CourseEnrollmentObjetcs;
 }
 
-- (NSArray*)videoSummaryListWithData:(NSData*)receivedData {
+- (NSArray *)videoSummaryListWithData:(NSData *)receivedData {
+    
     NSMutableArray* arrSummary = [[NSMutableArray alloc] init];
     NSError* error;
     NSArray* arrResponse = [NSJSONSerialization oex_JSONObjectWithData:receivedData error:&error];
+    
     for(NSDictionary* dict in arrResponse) {
         if(![dict isKindOfClass:[NSDictionary class]]) {
             continue;
         }
-        NSDictionary* dictResponse = [dict oex_replaceNullsWithEmptyStrings];
+        NSDictionary* dictResponse = [dict oex_replaceNullsWithEmptyStrings]; //剔除空的字典
         OEXVideoSummary* summaryList = [[OEXVideoSummary alloc] initWithDictionary:dictResponse]; //课程summarry
         if(summaryList.chapterPathEntry.entryID != nil && summaryList.sectionPathEntry.entryID != nil) {
             [arrSummary addObject:summaryList];

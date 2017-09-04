@@ -1727,12 +1727,16 @@
 /*主持人发起了签到 The host initiated the sign in.*/
 "INITIATE_SIGN_IN" = "The host initiated the sign in.";
 /*问卷调查Survey*/
-"SURVEY_TEXT" = "Survey";
-/*获取问卷Acquire survey*/
-"ACQUIRE_SURVEY" = "Acquire survey";
+"SURVEY_TEXT" = "Organizers released survey survey";
+/*点击参与Join survey*/
+"ACQUIRE_SURVEY" = "Join survey";
 /*暂未有聊天记录 No chatting record*/
 "NO_CHAT_RECORD" = "No chatting record";
 /*进入成功 Entry successful*/
 "ENTER_SUCCESSFUL" = "Entry successful.";
 /*您的账号已被停用，请联系企业管理员 Your account has been disabled. Please contact the administrator.*/
 "ACCOUNT_DISABLE" = "Your account has been disabled. Please contact the administrator.";
+/*发送 Send*/
+"SEND_MESSAGE_BUTTON" = "Send";
+/*聊天内容不能为空 Message cannot be empty.*/
+"ENTER_SEND_MESSAGE" = "Message cannot be empty.";

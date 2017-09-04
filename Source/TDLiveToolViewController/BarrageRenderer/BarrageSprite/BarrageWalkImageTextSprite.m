@@ -33,7 +33,7 @@
     label.customEmojiBundleName = @"UIModel.bundle";
     label.backgroundColor = [UIColor clearColor];
     label.lineBreakMode = NSLineBreakByCharWrapping;
-    label.isNeedAtAndPoundSign = YES;
+//    label.isNeedAtAndPoundSign = YES; //是否需要话题和@功能，默认为不需要
     return label;
 }
 

@@ -811,8 +811,9 @@ static OEXInterface* _sharedInterface = nil;
 - (void)addVideos:(NSArray *)videos forCourseWithID:(NSString *)courseID {
     
 //    for (OEXVideoSummary* summary in videos) {
-//        NSLog(@"课程id ---->> %@ 视频大小  %@ --->>时长 %@",courseID,summary.size,summary.duration);
+//        NSLog(@"OEXInterface -- 课程id ---->> %@ 视频大小  %@ --->>时长 %@",courseID,summary.size,summary.duration);
 //    }
+    
     NSMutableSet* knownVideoIDs = [[NSMutableSet alloc] init];
     NSMutableDictionary* videosMap = [[NSMutableDictionary alloc] init];
     
@@ -996,9 +997,10 @@ static OEXInterface* _sharedInterface = nil;
     return sectionEntries;
 }
 
-- (NSDictionary*)processVideoSummaryList:(NSData*)data URLString:(NSString*)URLString {
+- (NSDictionary *)processVideoSummaryList:(NSData *)data URLString:(NSString *)URLString {
+    
     [self.videoSummaries removeObjectForKey:URLString];
-    NSArray* summaries = [self.parser videoSummaryListWithData:data];
+    NSArray* summaries = [self.parser videoSummaryListWithData:data]; //讲data转换为数组
     [self.videoSummaries setObject:summaries forKey:URLString];
     return self.videoSummaries;
 }

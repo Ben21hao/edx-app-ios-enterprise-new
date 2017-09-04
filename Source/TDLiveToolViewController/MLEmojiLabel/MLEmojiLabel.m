@@ -117,7 +117,7 @@ NSString * const kURLActions[] = {@"url->",@"email->",@"phoneNumber->",@"at->",@
 
 - (NSRegularExpression *)regularExpressionForRegex:(NSString*)regex
 {
-    NSAssert(regex&&regex.length>0, @"regularExpressionForKey:参数不得为空");
+    NSAssert(regex && regex.length > 0, @"regularExpressionForKey:参数不得为空");
     
     if (self.emojiRegularExpressions[regex]) {
         return self.emojiRegularExpressions[regex];
@@ -585,8 +585,8 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 {
     _customEmojiRegex = [customEmojiRegex copy];
     
-    if (customEmojiRegex&&customEmojiRegex.length>0) {
-        self.customEmojiRegularExpression = [[MLEmojiLabelRegexPlistManager sharedInstance]regularExpressionForRegex:customEmojiRegex];
+    if (customEmojiRegex && customEmojiRegex.length > 0) {
+        self.customEmojiRegularExpression = [[MLEmojiLabelRegexPlistManager sharedInstance] regularExpressionForRegex:customEmojiRegex];
     }else{
         self.customEmojiRegularExpression = nil;
     }

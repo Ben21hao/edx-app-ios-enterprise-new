@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CertificateViewController: UIViewController, UIWebViewDelegate, InterfaceOrientationOverriding {
+class CertificateViewController: TDBaseViewController, UIWebViewDelegate, InterfaceOrientationOverriding {
 
     typealias Environment = protocol<OEXAnalyticsProvider, OEXConfigProvider>
     private let environment: Environment
@@ -43,15 +43,16 @@ class CertificateViewController: UIViewController, UIWebViewDelegate, InterfaceO
         loadController.setupInController(self, contentView: webView)
         webView.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
 
-        title = Strings.Certificates.viewCertTitle
+        titleViewLabel.text = Strings.Certificates.viewCertTitle
         loadController.state = .Initial
 
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         environment.analytics.trackScreenWithName(OEXAnalyticsScreenCertificate)
-        addShareButton()
+//        addShareButton()
         if let request = self.request {
             webView.loadRequest(request)
         }
@@ -62,6 +63,7 @@ class CertificateViewController: UIViewController, UIWebViewDelegate, InterfaceO
         webView.stopLoading()
     }
 
+    //MARK: 分享按钮
     func addShareButton() {
         let shareButton = UIBarButtonItem(barButtonSystemItem: .Action, target: nil, action: nil)
         shareButton.oex_setAction { [weak self] in
@@ -80,7 +82,6 @@ class CertificateViewController: UIViewController, UIWebViewDelegate, InterfaceO
     }
 
     // MARK: - Request Loading
-
     func loadRequest(request : NSURLRequest) {
 
         let mutableRequest: NSMutableURLRequest = request.mutableCopy() as! NSMutableURLRequest
@@ -88,9 +89,7 @@ class CertificateViewController: UIViewController, UIWebViewDelegate, InterfaceO
         self.request = mutableRequest
     }
 
-
     // MARK: - Web view delegate
-
     func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
         loadController.state = LoadState.failed(error)
     }

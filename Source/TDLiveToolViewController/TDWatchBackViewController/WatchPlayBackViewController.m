@@ -631,21 +631,28 @@ static AnnouncementView* announcementView = nil;
 #pragma mark - 点击聊天输入框蒙版
 - (IBAction)sendCommentBtnClick:(id)sender {
     
+    self.messageToolView = [[VHMessageToolView alloc] initWithFrame:CGRectMake(0, _toolViewBackView.height - [VHMessageToolView  defaultHeight], VHScreenWidth, [VHMessageToolView defaultHeight]) type:3];
+    self.messageToolView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
+    self.messageToolView.delegate = self;
+    self.messageToolView.hidden = NO;
+    self.messageToolView.maxLength = 140;
+    WS(weakSelf);
+    self.messageToolView.handleNoText = ^(){
+        [weakSelf.view makeToast:NSLocalizedString(@"ENTER_SEND_MESSAGE", nil) duration:1.08 position:CSToastPositionCenter];
+    };
+
     _toolViewBackView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, VH_SW, VH_SH)];
     [_toolViewBackView addTarget:self action:@selector(toolViewBackViewClick) forControlEvents:UIControlEventTouchUpInside];
-    _messageToolView = [[VHMessageToolView alloc] initWithFrame:CGRectMake(0, _toolViewBackView.height - [VHMessageToolView  defaultHeight], VHScreenWidth, [VHMessageToolView defaultHeight]) type:3];
-    _messageToolView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
-    _messageToolView.delegate = self;
-    _messageToolView.hidden = NO;
-    _messageToolView.maxLength = 140;
-    [_toolViewBackView addSubview:_messageToolView];
+    
+    [_toolViewBackView addSubview:self.messageToolView];
     [self.view addSubview:_toolViewBackView];
-    [_messageToolView beginTextViewInView];
+    
+    [self.messageToolView beginTextViewInView];
 }
 
 -(void)toolViewBackViewClick {
     
-    [_messageToolView endEditing:YES];
+    [self.messageToolView endEditing:YES];
     [_toolViewBackView removeFromSuperview];
 }
 
@@ -659,7 +666,6 @@ static AnnouncementView* announcementView = nil;
         [_comment sendComment:text success:^{
             
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//            [UIAlertView popupAlertByDelegate:nil title:NSLocalizedString(@"SENT_SUCCESS", nil) message:nil];
             [self.view makeToast:NSLocalizedString(@"SENT_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
             
             [weakSelf getHistoryComment];
@@ -668,7 +674,6 @@ static AnnouncementView* announcementView = nil;
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             
             NSString* code = [NSString stringWithFormat:@"%@", failedData[@"code"]];
-//            [UIAlertView popupAlertByDelegate:nil title:failedData[@"content"] message:code];
             NSString *msg = [code isEqualToString:@"10407"] ? NSLocalizedString(@"NO_CHAT_RECORD", nil) : failedData[@"content"];
             [self.view makeToast:msg duration:1.08 position:CSToastPositionCenter];
         }];

@@ -143,13 +143,14 @@
 }
 
 - (void)addDatePicker { //日期选择器
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-mm-dd";
     
     NSDate *minDate = [dateFormatter dateFromString:@"1900-01-01"];
     NSDate *maxDate = [NSDate date];
     
-    self.datePicker = [[UIDatePicker alloc] init];
+    self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 0, TDWidth, 228)]; //设置frame，确保时间选择器居中显示
     self.datePicker.datePickerMode = UIDatePickerModeDate;
     self.datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh_CN"];
     
@@ -235,10 +236,10 @@
     if (self.isDate) {
         NSDate *sendDate = self.datePicker.date;
         
-        NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
+        NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
         [dateformatter setDateStyle:NSDateFormatterMediumStyle];
         [dateformatter setDateFormat:@"YYYY-MM-dd"];
-        NSString *locationString=[dateformatter stringFromDate:sendDate];
+        NSString *locationString = [dateformatter stringFromDate:sendDate];
         
         if (self.selectDateHandle) {
             self.selectDateHandle(locationString);
