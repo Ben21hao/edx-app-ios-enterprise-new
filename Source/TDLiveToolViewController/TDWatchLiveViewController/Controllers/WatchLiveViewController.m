@@ -14,9 +14,9 @@
 #import "VHDocumentView.h"
 #import "AnnouncementView.h"
 #import "SignView.h"
+#import "TDLiveLotteryView.h"
 
 #import "WatchLiveViewController.h"
-#import "WatchLiveLotteryViewController.h"
 
 #import "MBProgressHUD.h"
 #import "BarrageRenderer.h"
@@ -45,7 +45,6 @@ static AnnouncementView *announcementView = nil;
     BarrageRenderer *_renderer; //弹幕
     
     UIImageView *_logView; //当播放音频时显示的图片
-    WatchLiveLotteryViewController *_lotteryVC; //抽奖VC
     BOOL _isStart;
     BOOL _isMute;
     BOOL _isAllScreen;
@@ -69,7 +68,7 @@ static AnnouncementView *announcementView = nil;
 @property (weak, nonatomic) IBOutlet UIButton *muteBtn;
 @property (weak, nonatomic) IBOutlet UIButton *allScreenBtn;
 @property (weak, nonatomic) IBOutlet UILabel *bitRateLabel;
-@property (weak, nonatomic) IBOutlet UIButton *startAndStopBtn;
+@property (weak, nonatomic) IBOutlet UIButton *startAndStopBtn;//播放按钮
 @property (weak, nonatomic) IBOutlet UIView *backView;
 @property (weak, nonatomic) IBOutlet UIImageView *textImageView;
 @property (weak, nonatomic) IBOutlet UILabel *liveTypeLabel;
@@ -103,6 +102,7 @@ static AnnouncementView *announcementView = nil;
 
 @property (nonatomic,strong) UIView *detailView;
 @property (nonatomic,strong) UITextView *detailTextView;
+@property (nonatomic,strong) TDLiveLotteryView *liveLotteryView;
 
 @end
 
@@ -151,6 +151,7 @@ static AnnouncementView *announcementView = nil;
 }
 
 -(void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
     
     if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationPortrait) {
         _topConstraint.constant = 20;
@@ -183,10 +184,11 @@ static AnnouncementView *announcementView = nil;
 }
 
 - (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
     
     _moviePlayer.moviePlayerView.frame = self.backView.bounds;
     _logView.frame = _moviePlayer.moviePlayerView.bounds;
-    _lotteryVC.view.frame = _showView.bounds;
+    self.liveLotteryView.frame = _showView.bounds;
     
     if (_documentView) {
         _documentView.frame = self.textImageView.bounds;
@@ -208,11 +210,8 @@ static AnnouncementView *announcementView = nil;
         _lottery = nil;
     }
     
-    if (_lotteryVC) {
-        [_lotteryVC.view removeFromSuperview];
-        [_lotteryVC removeFromParentViewController];
-        [_lotteryVC destory];
-        _lotteryVC = nil;
+    if (self.liveLotteryView) {
+        [self.liveLotteryView removeFromSuperview];
     }
     
     if (_sign) {
@@ -314,6 +313,21 @@ static AnnouncementView *announcementView = nil;
     }];
     
     self.detailView.hidden = YES;
+    
+    self.liveLotteryView = [[TDLiveLotteryView alloc] init];
+    self.liveLotteryView.lottery = _lottery;
+    WS(weakSelf);
+    self.liveLotteryView.closeButtonHandle = ^(){
+        [weakSelf.liveLotteryView removeFromSuperview];
+    };
+    [_showView addSubview:self.liveLotteryView];
+    
+    [self.liveLotteryView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.top.mas_equalTo(_showView);
+    }];
+    
+    self.liveLotteryView.hidden = YES;
+    
 }
 
 - (void)initBarrageRenderer {
@@ -336,6 +350,8 @@ static AnnouncementView *announcementView = nil;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive)name:UIApplicationDidBecomeActiveNotification object:nil];
     //监听耳机的插拔
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outputDeviceChanged:)name:AVAudioSessionRouteChangeNotification object:[AVAudioSession sharedInstance]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationAction:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
     
 }
 
@@ -378,6 +394,20 @@ static AnnouncementView *announcementView = nil;
         default:
             break;
     }
+}
+
+- (void)orientationAction:(NSNotification *)noti {
+    
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (orientation == UIInterfaceOrientationLandscapeRight || orientation ==UIInterfaceOrientationLandscapeLeft) { // home键靠左右
+        
+        [self resignLotteryViewFirstResponder];
+    }
+}
+
+- (void)resignLotteryViewFirstResponder {
+    [self.liveLotteryView.tfPhone resignFirstResponder];
+    [self.liveLotteryView.tfName resignFirstResponder];
 }
 
 #pragma mark - UIButton Event
@@ -433,9 +463,8 @@ static AnnouncementView *announcementView = nil;
         self.textLabel = nil;
     }
     _isStart = !_isStart;
+
 }
-
-
 
 #pragma mark - 返回上层界面按钮
 - (IBAction)closeBtnClick:(id)sender {
@@ -540,11 +569,12 @@ static AnnouncementView *announcementView = nil;
         }
         _moviePlayer.moviePlayerView.frame = frame;
         _logView.frame = _moviePlayer.moviePlayerView.bounds;
-        _lotteryVC.view.frame = _showView.bounds;
+        self.liveLotteryView.frame = _showView.bounds;
     }
 }
 
--(UIInterfaceOrientationMask)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    
     [self.messageToolView endEditing:YES];
     return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
 }
@@ -1062,28 +1092,13 @@ static AnnouncementView *announcementView = nil;
 #pragma mark - VHallLotteryDelegate
 - (void)startLottery:(VHallStartLotteryModel *)msg { //开始抽奖
     
-    if (_lotteryVC) {
-        [_lotteryVC.view removeFromSuperview];
-        [_lotteryVC removeFromParentViewController];
-        _lotteryVC = nil;
-    }
-    
-    _lotteryVC = [[WatchLiveLotteryViewController alloc] init];
-    _lotteryVC.lottery = _lottery;
-    _lotteryVC.view.frame = _showView.bounds;
-    [_showView addSubview:_lotteryVC.view];
+    self.liveLotteryView.lottery = _lottery;
+    self.liveLotteryView.hidden = NO;
 }
 
 - (void)endLottery:(VHallEndLotteryModel *)msg { //抽奖结束
     
-    if (!_lotteryVC) {
-        _lotteryVC = [[WatchLiveLotteryViewController alloc] init];
-        _lotteryVC.lottery = _lottery;
-        _lotteryVC.view.frame = _showView.bounds;
-        [_showView addSubview:_lotteryVC.view];
-    }
-    _lotteryVC.lotteryOver = YES;
-    _lotteryVC.endLotteryModel = msg;
+    self.liveLotteryView.endLotteryModel = msg;
 }
 
 #pragma mark - VHallSignDelegate
@@ -1142,7 +1157,7 @@ static AnnouncementView *announcementView = nil;
         
         _moviePlayer.moviePlayerView.frame = self.backView.bounds;
         _logView.frame = _moviePlayer.moviePlayerView.bounds;
-        _lotteryVC.view.frame = _showView.bounds;
+        self.liveLotteryView.frame = _showView.bounds;
         [SignView layoutView:self.view.bounds];
     }
 }
@@ -1151,12 +1166,16 @@ static AnnouncementView *announcementView = nil;
 - (IBAction)detailsButtonClick:(UIButton *)sender {
     
     [self dealwithButtonText:3 hidChatView:YES hidTextView:YES];
+    
+    [self resignLotteryViewFirstResponder];
 }
 
 #pragma mark - 文档
 - (IBAction)textButtonClick:(UIButton *)sender {
     
     [self dealwithButtonText:1 hidChatView:YES hidTextView:NO];
+    
+    [self resignLotteryViewFirstResponder];
 }
 
 #pragma mark - 聊天
@@ -1190,6 +1209,8 @@ static AnnouncementView *announcementView = nil;
         }];
         _isReciveHistory = YES;
     }
+    
+    [self resignLotteryViewFirstResponder];
 }
 
 #pragma mark - 问答
@@ -1198,6 +1219,8 @@ static AnnouncementView *announcementView = nil;
     [self dealwithButtonText:2 hidChatView:NO hidTextView:YES];
     
     [_chatView reloadData];
+    
+    [self resignLotteryViewFirstResponder];
 }
 
 - (void)dealwithButtonText:(NSInteger)type hidChatView:(BOOL)hidChatView hidTextView:(BOOL)hidTextView { //判断显示哪个界面
@@ -1268,6 +1291,7 @@ static AnnouncementView *announcementView = nil;
     _playModeBtn0.selected = NO;
     [_definitionBtn0 setImage:[UIImage imageNamed:_videoLevePicArray[_moviePlayer.curDefinition]] forState:UIControlStateNormal];
     
+    [self resignLotteryViewFirstResponder];
 }
 
 - (IBAction)playModeBtnCLicked:(UIButton *)sender {
@@ -1301,6 +1325,8 @@ static AnnouncementView *announcementView = nil;
     }
     
     [_definitionBtn0 setImage:[UIImage imageNamed:_videoLevePicArray[_moviePlayer.curDefinition]] forState:UIControlStateNormal];
+    
+    [self resignLotteryViewFirstResponder];
 }
 
 #pragma mark-  弹幕开关
@@ -1315,6 +1341,8 @@ static AnnouncementView *announcementView = nil;
     } else {
         [_renderer stop];
     }
+    
+    [self resignLotteryViewFirstResponder];
 }
 
 #pragma mark - 陀螺开关
@@ -1328,6 +1356,8 @@ static AnnouncementView *announcementView = nil;
     } else {
         [_moviePlayer setUsingGyro:NO];
     }
+    
+    [self resignLotteryViewFirstResponder];
 }
 
 #pragma mark - messageToolViewDelegate
@@ -1397,8 +1427,11 @@ static AnnouncementView *announcementView = nil;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
     [self.messageToolView endEditing:YES];
+    [self resignLotteryViewFirstResponder];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
