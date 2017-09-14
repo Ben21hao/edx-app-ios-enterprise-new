@@ -59,7 +59,7 @@
 
         self.name = [summary objectForKey:@"name"];
         if([self.name length] == 0 || self.name == nil) {
-            self.name = [Strings untitled];
+            self.name = TDLocalizeSelect(@"UNTITLED", nil);
         }
         
         NSDictionary* rawEncodings = OEXSafeCastAsClass(summary[@"encoded_videos"], NSDictionary);

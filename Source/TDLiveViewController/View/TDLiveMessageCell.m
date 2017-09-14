@@ -51,9 +51,9 @@
 - (void)setDataForView:(TDLiveModel *)model {
     
     self.titleLabel.text = model.livename;
-    self.teacherLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(@"LECTURER_TEXT", nil),model.anchor];
+    self.teacherLabel.text = [NSString stringWithFormat:@"%@%@",TDLocalizeSelect(@"LECTURER_TEXT", nil),model.anchor];
     if (model.live_introduction.length > 0) {
-        self.introduceLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(@"DISCRITE_TEXT", nil),model.live_introduction];
+        self.introduceLabel.text = [NSString stringWithFormat:@"%@%@",TDLocalizeSelect(@"DISCRITE_TEXT", nil),model.live_introduction];
     }
     
     int count = [model.time intValue];
@@ -77,12 +77,12 @@
         secondStr = second < 10 ? [NSString stringWithFormat:@"0%d",second] :[NSString stringWithFormat:@"%d",second];
     }
     
-    self.durationLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(@"DUIRATION_TEXT", nil),[Strings secondCountNumWithHour:hourStr min:muniteStr second:secondStr]];
+    self.durationLabel.text = [NSString stringWithFormat:@"%@%@",TDLocalizeSelect(@"DUIRATION_TEXT", nil),[TDLocalizeSelect(@"SECOND_COUNT_NUM", nil) oex_formatWithParameters:@{@"hour" : hourStr, @"min" : muniteStr, @"second" : secondStr}]];
     
     //TODO: 对时间进行处理
     //2017-07-06T15:00:00Z
     NSString *timeStr = [self.toolModel changeStypeForTime:model.live_start_at];
-    self.timeLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(@"START_TIME_TEXT", nil),timeStr];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@%@",TDLocalizeSelect(@"START_TIME_TEXT", nil),timeStr];
     
     //处理图片链接中的中文和空格
     NSString *imageStr = [self.toolModel dealwithImageStr:[NSString stringWithFormat:@"%@%@",ELITEU_URL,model.cover_url]];
@@ -168,10 +168,11 @@
     }];
     
     [self.durationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.bgView.mas_right).offset(-13);
+        make.right.mas_equalTo(self.bgView.mas_right).offset(-8);
         make.top.mas_equalTo(self.messageView.mas_bottom).offset(6);
         make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(-6);
-        make.width.mas_equalTo(143);
+//        make.width.mas_equalTo((TDWidth - 28) / 2);
+        make.left.mas_equalTo(self.timeLabel.mas_right).offset(3);
     }];
 }
 

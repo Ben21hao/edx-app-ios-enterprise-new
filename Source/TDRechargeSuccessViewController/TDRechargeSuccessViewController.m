@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = NSLocalizedString(@"RECHARGE_SUCCESS", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"RECHARGE_SUCCESS", nil);
     [self setLoadDataView];
     
     [self requerestData];
@@ -135,7 +135,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         [self.loadIngView removeFromSuperview];
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         
         NSLog(@"error -- %@",error);
     }];
@@ -169,24 +169,24 @@
     
     switch (indexPath.row) {
         case 0:
-            cell.textLabel.text = NSLocalizedString(@"RECHARGE_MONEY", nil);
+            cell.textLabel.text = TDLocalizeSelect(@"RECHARGE_MONEY", nil);
             cell.detailTextLabel.attributedText = [self setData:[NSString stringWithFormat:@"￥%.2f",[self.successModel.amount floatValue]]];
             break;
         case 1:
-            cell.textLabel.text = NSLocalizedString(@"RECHARGE_BAODIAN", nil);
-            cell.detailTextLabel.attributedText = [self setData:[NSString stringWithFormat:@"%.2f%@",[self.successModel.suggest_coin floatValue],NSLocalizedString(@"COINS_VALUE", nil)]];
+            cell.textLabel.text = TDLocalizeSelect(@"RECHARGE_BAODIAN", nil);
+            cell.detailTextLabel.attributedText = [self setData:[NSString stringWithFormat:@"%.2f%@",[self.successModel.suggest_coin floatValue],TDLocalizeSelect(@"COINS_VALUE", nil)]];
             break;
         case 2:
-            cell.textLabel.text = NSLocalizedString(@"TD_GIVE_Bonus", nil);
-            cell.detailTextLabel.attributedText = [self setData:[NSString stringWithFormat:@"%.2f%@",[self.successModel.give_coin floatValue],NSLocalizedString(@"COINS_VALUE", nil)]];
+            cell.textLabel.text = TDLocalizeSelect(@"TD_GIVE_Bonus", nil);
+            cell.detailTextLabel.attributedText = [self setData:[NSString stringWithFormat:@"%.2f%@",[self.successModel.give_coin floatValue],TDLocalizeSelect(@"COINS_VALUE", nil)]];
             
             cell.textLabel.hidden = [self.successModel.give_coin floatValue] == 0;
             cell.detailTextLabel.hidden = [self.successModel.give_coin floatValue] == 0;
             
             break;
         case 3:
-            cell.textLabel.text = NSLocalizedString(@"AVALIABLE_BAODIAN", nil);
-            cell.detailTextLabel.attributedText = [self setData:[NSString stringWithFormat:@"%.2f%@",[self.successModel.remain_coin floatValue],NSLocalizedString(@"COINS_VALUE", nil)]];
+            cell.textLabel.text = TDLocalizeSelect(@"AVALIABLE_BAODIAN", nil);
+            cell.detailTextLabel.attributedText = [self setData:[NSString stringWithFormat:@"%.2f%@",[self.successModel.remain_coin floatValue],TDLocalizeSelect(@"COINS_VALUE", nil)]];
             break;
         default:
             break;
@@ -210,7 +210,7 @@
     
     UIButton *successButton = [[UIButton alloc] init];
     [successButton setImage:[UIImage imageNamed:@"success"] forState:UIControlStateNormal];
-    [successButton setTitle:NSLocalizedString(@"RECHARGE_SUCCESS", nil) forState:UIControlStateNormal];
+    [successButton setTitle:TDLocalizeSelect(@"RECHARGE_SUCCESS", nil) forState:UIControlStateNormal];
     [successButton setTitleColor:[UIColor colorWithHexString:colorHexStr9] forState:UIControlStateNormal];
     successButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     successButton.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, -8);
@@ -222,7 +222,7 @@
         make.size.mas_equalTo(CGSizeMake(228, 80));
     }];
     
-    UIView *titleView = [[TDBaseView alloc] initWithTitle:NSLocalizedString(@"RECHARGE_MESSAGE", nil)];
+    UIView *titleView = [[TDBaseView alloc] initWithTitle:TDLocalizeSelect(@"RECHARGE_MESSAGE", nil)];
     titleView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     [headerView addSubview:titleView];
     

@@ -144,7 +144,7 @@
     [footView addSubview:self.waringLabel];
     
     UIButton *upload= [[UIButton alloc] initWithFrame:CGRectMake(0, self.waringLabel.bottom+5, [UIScreen mainScreen].bounds.size.width, footView.height-self.waringLabel.height-5)];
-    [upload setTitle:NSLocalizedString(@"SUBMIT", nil) forState:UIControlStateNormal];
+    [upload setTitle:TDLocalizeSelect(@"SUBMIT", nil) forState:UIControlStateNormal];
     [upload addTarget:self action:@selector(uploadContent) forControlEvents:UIControlEventTouchUpInside];
     upload.titleLabel.textAlignment = NSTextAlignmentCenter;
     [upload setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
@@ -502,7 +502,7 @@
     __weak typeof(self) weakSelf = self;
     
     [_survey sendMsg:dataArray success:^{
-         [weakSelf showMsg:NSLocalizedString(@"HANDIN_SUCCESS", nil) afterDelay:2];
+         [weakSelf showMsg:TDLocalizeSelect(@"HANDIN_SUCCESS", nil) afterDelay:2];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
              [weakSelf closeVC];
         });

@@ -143,7 +143,7 @@ public class CourseOutlineViewController :
 //        navigationItem.rightBarButtonItems = [webController.barButtonItem,fixedSpace,modeController.barItem] //视频
         
         let rightButton = UIButton.init(frame: CGRectMake(0, 0, 48, 48));
-        rightButton.setTitle(Strings.teachAssistant, forState: .Normal)
+        rightButton.setTitle( TDLocalizeSelectSwift("TEACH_ASSISTANT"), forState: .Normal)
         rightButton.addTarget(self, action: #selector(rightButtonAction), forControlEvents: .TouchUpInside)
         rightButton.titleLabel?.font = UIFont.init(name: "OpenSans", size: 16)
         let ringhtBarItem = UIBarButtonItem.init(customView: rightButton);
@@ -211,7 +211,7 @@ public class CourseOutlineViewController :
     private func emptyState() -> LoadState {
         switch modeController.currentMode {
         case .Full:
-            return LoadState.empty(icon: .UnknownError, message : Strings.coursewareUnavailable)
+            return LoadState.empty(icon: .UnknownError, message : TDLocalizeSelectSwift("COURSEWARE_UNAVAILABLE"))
         case .Video:
             let style = loadController.messageStyle
             let message = style.apply(Strings.noVideosTryModeSwitcher)
@@ -294,7 +294,7 @@ public class CourseOutlineViewController :
     
     func outlineTableControllerChooseDownloadVideo(controller: CourseOutlineTableController, choseDownloadVideos videos: [OEXHelperVideoDownload], rootedAtBlock block:CourseBlock) {
         guard canDownloadVideo() else {
-            self.showOverlayMessage(Strings.noWifiMessage)
+            self.showOverlayMessage(TDLocalizeSelectSwift("NO_WIFI_MESSAGE"))
             return
         }
         
@@ -316,7 +316,7 @@ public class CourseOutlineViewController :
     func outlineTableControllerChoseDownloadVideoForBlock(controller: CourseOutlineTableController, choseDownloadVideoForBlock block: CourseBlock) {
         
         guard canDownloadVideo() else {
-            self.showOverlayMessage(Strings.noWifiMessage)
+            self.showOverlayMessage(TDLocalizeSelectSwift("NO_WIFI_MESSAGE"))
             return
         }
         

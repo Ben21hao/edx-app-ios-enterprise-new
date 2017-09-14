@@ -31,9 +31,28 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.titleViewLabel.text = NSLocalizedString(@"ABOUT_APP", nil);
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     
+    [self languageChangeAction];
+}
+
+- (void)languageChangeAction {
+    
+    self.titleViewLabel.text = TDLocalizeSelect(@"ABOUT_APP", nil);
+    NSString *webSiteStr = [NSString stringWithFormat:@"%@：www.e-ducation.cn",TDLocalizeSelect(@"WEBSITE_COMPANY", nil)];
+    self.webTextView.text = webSiteStr;
+    
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger uniFlags = NSCalendarUnitYear;
+    NSDateComponents *dateComponent = [calendar components:uniFlags fromDate:now];
+    NSInteger year = [dateComponent year];
+    NSString *yearStr = [NSString stringWithFormat:@"©%ld %@",(long)year,TDLocalizeSelect(@"COMPANY_NAME", nil)];
+    self.companyLabel.text = yearStr;
+    
+    TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
+    NSString *versionStr = [baseTool getAppVersionNum:0];
+    self.verctionLabel.text = versionStr;
 }
 
 #pragma mark - UI
@@ -48,7 +67,6 @@
     self.eliteuImage.image = [UIImage imageNamed:@"edx_logo_login"];
     [self.view addSubview:self.eliteuImage];
     
-    NSString *webSiteStr = [NSString stringWithFormat:@"%@：www.e-ducation.cn",NSLocalizedString(@"WEBSITE_COMPANY", nil)];
     self.webTextView = [[UITextView alloc] init];
     self.webTextView.font = [UIFont fontWithName:@"OpenSans" size:12];
     self.webTextView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
@@ -56,31 +74,21 @@
     self.webTextView.editable = NO;
     self.webTextView.showsVerticalScrollIndicator = NO;
     self.webTextView.scrollEnabled = NO;
-    self.webTextView.text = webSiteStr;
     [self.view addSubview:self.webTextView];
     
-    TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
-    NSString *versionStr = [baseTool getAppVersionNum:0];
-    self.verctionLabel = [self setLabelConstraint:versionStr];
+    self.verctionLabel = [self setLabelConstraint];
     
-    NSDate *now = [NSDate date];
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSUInteger uniFlags = NSCalendarUnitYear;
-    NSDateComponents *dateComponent = [calendar components:uniFlags fromDate:now];
-    NSInteger year = [dateComponent year];
-    NSString *yearStr = [NSString stringWithFormat:@"©%ld %@",(long)year,NSLocalizedString(@"COMPANY_NAME", nil)];
-    
-    self.companyLabel = [self setLabelConstraint:yearStr];
+    self.companyLabel = [self setLabelConstraint];
     self.companyLabel.numberOfLines = 0;
+    
 }
 
-- (UILabel *)setLabelConstraint:(NSString *)title {
+- (UILabel *)setLabelConstraint {
     
     UILabel *label = [[UILabel alloc] init];
     label.font = [UIFont fontWithName:@"OpenSans" size:12];
     label.textColor = [UIColor colorWithHexString:colorHexStr9];
     label.textAlignment = NSTextAlignmentCenter;
-    label.text = title;
     [self.view addSubview:label];
     return label;
 }

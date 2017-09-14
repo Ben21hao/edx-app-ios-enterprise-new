@@ -41,12 +41,12 @@
     [super viewWillAppear:animated];
     
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
-    self.titleViewLabel.text = NSLocalizedString(@"AUTHENTICATION_MESSAGE", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"AUTHENTICATION_MESSAGE", nil);
 }
 
 - (void)backButtonAction:(UIButton *)sender {
     if (self.isHandin == YES) {
-        [self.view makeToast:NSLocalizedString(@"SUBMIT_ING", nil) duration:0.8 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"SUBMIT_ING", nil) duration:0.8 position:CSToastPositionCenter];
         return;
     }
     [self.navigationController popViewControllerAnimated:YES];
@@ -79,7 +79,7 @@
     [dic setValue:self.name forKey:@"name"];
     [dic setValue:self.identifyID forKey:@"identityid"];
     [dic setValue:self.birthDate forKey:@"birthdate"];
-    [dic setValue:[self.sexStr isEqualToString:NSLocalizedString(@"TD_MAN", nil)] ? @"m" : @"f" forKey:@"gender"];
+    [dic setValue:[self.sexStr isEqualToString:TDLocalizeSelect(@"TD_MAN", nil)] ? @"m" : @"f" forKey:@"gender"];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/users/authentication/handin_message/",ELITEU_URL];
@@ -99,54 +99,54 @@
             [self.navigationController pushViewController:messageVC animated:YES];
             
         } else { // 300 提交失败
-            [self.view makeToast:NSLocalizedString(@"FALILED_SUBMIT", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"FALILED_SUBMIT", nil) duration:1.08 position:CSToastPositionCenter];
         }
         NSLog(@"msg---- %@ +++ responseDic ==== %@",responseDic[@"msg"],responseDic);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self stopHandingHandle];
         self.isHandin = NO;
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"认证出错 ---- %ld",(long)error.code);
     }];
 }
 
 - (void)stopHandingHandle {
     [self.messageView.activityView stopAnimating];
-    [self.messageView.handinButton setTitle:NSLocalizedString(@"SUBMIT", nil) forState:UIControlStateNormal];
+    [self.messageView.handinButton setTitle:TDLocalizeSelect(@"SUBMIT", nil) forState:UIControlStateNormal];
 }
 
 - (BOOL)judgeMessageTrue {
     if (![self.baseTool networkingState]) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_NOT_AVAILABLE_TITLE", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil) duration:1.08 position:CSToastPositionCenter];
         return NO;
         
     } else if (self.name.length == 0) {
-        [self.view makeToast:NSLocalizedString(@"ENTE_REAL_NAME", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"ENTE_REAL_NAME", nil) duration:1.08 position:CSToastPositionCenter];
         return NO;
         
     } else if (![self.baseTool isValidateUserName:self.name]) {
-        [self.view makeToast:NSLocalizedString(@"CHINESE_NAME", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"CHINESE_NAME", nil) duration:1.08 position:CSToastPositionCenter];
         return NO;
         
     } else if ( self.name.length == 1) {
-        [self.view makeToast:NSLocalizedString(@"ENTER_ALL_NAME", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"ENTER_ALL_NAME", nil) duration:1.08 position:CSToastPositionCenter];
         return NO;
         
     } else if (self.identifyID.length == 0) {
-        [self.view makeToast:NSLocalizedString(@"ENTER_CARD_ID", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"ENTER_CARD_ID", nil) duration:1.08 position:CSToastPositionCenter];
         return NO;
         
     } else if (![self.baseTool isValidateIdentify:self.identifyID]) {
-        [self.view makeToast:NSLocalizedString(@"CARD_ID_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"CARD_ID_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
         return NO;
         
     } else if (self.birthDate.length == 0) {
-        [self.view makeToast:NSLocalizedString(@"ENTET_BIRTH_DATE", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"ENTET_BIRTH_DATE", nil) duration:1.08 position:CSToastPositionCenter];
         return NO;
         
     } else if (self.sexStr.length == 0) {
-        [self.view makeToast:NSLocalizedString(@"SELECT_SEX", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"SELECT_SEX", nil) duration:1.08 position:CSToastPositionCenter];
         return NO;
     }
     return YES;
@@ -230,30 +230,30 @@
     
     switch (indexPath.row) {
         case 0:
-            cell.titleLabel.text = NSLocalizedString(@"TRURE_NAME", nil);
-            cell.detailTextField.placeholder = NSLocalizedString(@"ENTE_REAL_NAME", nil);
+            cell.titleLabel.text = TDLocalizeSelect(@"TRURE_NAME", nil);
+            cell.detailTextField.placeholder = TDLocalizeSelect(@"ENTE_REAL_NAME", nil);
             cell.detailTextField.text = self.name;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.detailTextField.userInteractionEnabled = YES;
             cell.isDisclosure = NO;
             break;
         case 1:
-            cell.titleLabel.text = NSLocalizedString(@"CARD_ID", nil);
-            cell.detailTextField.placeholder = NSLocalizedString(@"ENTER_CARD_ID", nil);
+            cell.titleLabel.text = TDLocalizeSelect(@"CARD_ID", nil);
+            cell.detailTextField.placeholder = TDLocalizeSelect(@"ENTER_CARD_ID", nil);
             cell.detailTextField.text = self.identifyID;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.detailTextField.userInteractionEnabled = YES;
             cell.isDisclosure = NO;
             break;
         case 2:
-            cell.titleLabel.text = NSLocalizedString(@"USER_BIRTHDATE", nil);
-            //            cell.detailTextField.placeholder = NSLocalizedString(@"ENTET_BIRTH_DATE", nil);
+            cell.titleLabel.text = TDLocalizeSelect(@"USER_BIRTHDATE", nil);
+            //            cell.detailTextField.placeholder = TDLocalizeSelect(@"ENTET_BIRTH_DATE", nil);
             cell.detailTextField.text = self.birthDate;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
         case 3: {
-            cell.titleLabel.text = NSLocalizedString(@"USER_SEX", nil);
-            //            cell.detailTextField.placeholder = NSLocalizedString(@"SELECT_SEX", nil);
+            cell.titleLabel.text = TDLocalizeSelect(@"USER_SEX", nil);
+            //            cell.detailTextField.placeholder = TDLocalizeSelect(@"SELECT_SEX", nil);
             cell.detailTextField.text = self.sexStr;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
@@ -302,14 +302,14 @@
         self.name = textField.text;
         
         if (![self.baseTool isValidateUserName:self.name] && textField.text.length != 0) {
-            [self.view makeToast:NSLocalizedString(@"CHINESE_NAME", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"CHINESE_NAME", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
     } else if (textField.tag == 1) {
         self.identifyID = textField.text;
         
         if (![self.baseTool isValidateIdentify:self.identifyID] && textField.text.length != 0) {
-            [self.view makeToast:NSLocalizedString(@"CARD_ID_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"CARD_ID_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
             return;
         }
     }

@@ -43,7 +43,7 @@
     [super viewWillAppear:animated];
     
     NSString *titleStr = @"RESET_PASSWORD_TITLE";
-    self.titleViewLabel.text = NSLocalizedString(titleStr, nil);
+    self.titleViewLabel.text = TDLocalizeSelect(titleStr, nil);
     [self.leftButton addTarget:self action:@selector(leftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
 }
@@ -63,16 +63,16 @@
     TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
     if (![baseTool networkingState]) {
         
-        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings networkNotAvailableTitle]
-                                                                message:[Strings networkNotAvailableMessageTrouble]
+        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil)
+                                                                message:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_MESSAGE_TROUBLE", nil)
                                                        onViewController:self.navigationController.view
                                                              shouldHide:YES];
         
         return;
         
     } else if (self.accountTextField.text.length == 0) {//为空
-        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:NSLocalizedString(@"INPUT_ERROR", nil)
-                                                                message:NSLocalizedString(@"ENTER_PHONE_OR_EMAIL", nil)
+        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"INPUT_ERROR", nil)
+                                                                message:TDLocalizeSelect(@"ENTER_PHONE_OR_EMAIL", nil)
                                                        onViewController:self.navigationController.view
                                                              shouldHide:YES];
         
@@ -87,8 +87,8 @@
             
         } else {
             [self.activityView stopAnimating];
-            [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:NSLocalizedString(@"INPUT_ERROR", nil)
-                                                                    message:NSLocalizedString(@"ENTER_RIGHT_PHONE_OR_EMAIL", nil)
+            [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"INPUT_ERROR", nil)
+                                                                    message:TDLocalizeSelect(@"ENTER_RIGHT_PHONE_OR_EMAIL", nil)
                                                            onViewController:self.navigationController.view
                                                                  shouldHide:YES];
         }
@@ -123,14 +123,14 @@
             
         }else if ([code intValue] == 403){//手机没注册
             [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:@""
-                                                                    message:NSLocalizedString(@"PHONE_NUMBER_NOT_REGISTER", nil)
+                                                                    message:TDLocalizeSelect(@"PHONE_NUMBER_NOT_REGISTER", nil)
                                                            onViewController:self.navigationController.view
                                                                  shouldHide:YES];
             
             
         } else {
-            [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:NSLocalizedString(@"RESET_FAILED", nil)
-                                                                    message:NSLocalizedString(@"RESET_FAILED", nil)
+            [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"RESET_FAILED", nil)
+                                                                    message:TDLocalizeSelect(@"RESET_FAILED", nil)
                                                            onViewController:self.navigationController.view
                                                                  shouldHide:YES];
         }
@@ -138,7 +138,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%ld",(long)error.code);
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         [self.activityView stopAnimating];
     }];
 }
@@ -163,7 +163,7 @@
                     NSLog(@"重置密码 ++++++++ %@",dataDic);
                     
                     if ([dataDic[@"success"] intValue] == 0) {
-                        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings floatingErrorTitle]
+                        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_TITLE", nil)
                                                                                 message:dataDic[@"value"]
                                                                        onViewController:self.navigationController.view
                                                                              shouldHide:YES];
@@ -179,7 +179,7 @@
                     
                     NSDictionary *dictionary = [NSJSONSerialization oex_JSONObjectWithData:data error:nil];
                     NSString *responseStr = [[dictionary objectForKey:@"email"] firstObject];
-                    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings floatingErrorTitle]
+                    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_TITLE", nil)
                                                                             message:responseStr
                                                                    onViewController:self.navigationController.view
                                                                          shouldHide:YES];
@@ -187,7 +187,7 @@
                 } else if(httpResp.statusCode > 500) {
                     
                     NSString* responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings floatingErrorTitle]
+                    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_TITLE", nil)
                                                                             message:responseStr
                                                                    onViewController:self.navigationController.view
                                                                          shouldHide:YES];
@@ -195,7 +195,7 @@
                 
             } else {
                 
-                [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings floatingErrorTitle]
+                [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_TITLE", nil)
                                                                         message:[error localizedDescription]
                                                                onViewController:self.navigationController.view
                                                                      shouldHide:YES];
@@ -216,8 +216,8 @@
     TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
     if (![baseTool networkingState]) {
         
-        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings networkNotAvailableTitle]
-                                                                message:[Strings networkNotAvailableMessageTrouble]
+        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil)
+                                                                message:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_MESSAGE_TROUBLE", nil)
                                                        onViewController:self.navigationController.view
                                                              shouldHide:YES];
         
@@ -228,7 +228,7 @@
     TDWebViewController *webViewcontroller = [[TDWebViewController alloc] init];
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"stipulation" withExtension:@"htm"];
     webViewcontroller.url = url;
-    webViewcontroller.titleStr = NSLocalizedString(@"AGREEMENT", nil);
+    webViewcontroller.titleStr = TDLocalizeSelect(@"AGREEMENT", nil);
     [self.navigationController pushViewController:webViewcontroller animated:YES];
 }
 
@@ -243,11 +243,11 @@
     self.messageLabel.numberOfLines = 0;
     self.messageLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     self.messageLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
-    self.messageLabel.text = NSLocalizedString(@"PHONE_OR_EMAIL_RESET_PASSWORD", nil);
+    self.messageLabel.text = TDLocalizeSelect(@"PHONE_OR_EMAIL_RESET_PASSWORD", nil);
     [self.view addSubview:self.messageLabel];
     
     self.accountTextField = [[UITextField alloc] init];
-    self.accountTextField.placeholder = NSLocalizedString(@"PHONE_OR_EMAIL", nil);
+    self.accountTextField.placeholder = TDLocalizeSelect(@"PHONE_OR_EMAIL", nil);
     self.accountTextField.textColor = [UIColor colorWithHexString:colorHexStr10];
     self.accountTextField.font = [UIFont fontWithName:@"OpenSans" size:15];
     self.accountTextField.borderStyle = UITextBorderStyleRoundedRect;
@@ -257,7 +257,7 @@
     self.nextButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.nextButton.layer.cornerRadius = 4.0;
     [self.nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.nextButton setTitle:NSLocalizedString(@"NEXT_TEST", nil) forState:UIControlStateNormal];
+    [self.nextButton setTitle:TDLocalizeSelect(@"NEXT_TEST", nil) forState:UIControlStateNormal];
     [self.nextButton addTarget:self action:@selector(nextButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.nextButton];
     
@@ -311,10 +311,10 @@
 
 #pragma mark - attribute
 - (NSMutableAttributedString *)setAttribute {
-    NSString *str = [NSString stringWithFormat:@"%@\n",NSLocalizedString(@"SIGN_UP_AGREE", nil)];
+    NSString *str = [NSString stringWithFormat:@"%@\n",TDLocalizeSelect(@"SIGN_UP_AGREE", nil)];
     NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:str attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr8]}];
     
-    NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"AGREEMENT", nil) attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr1]}];
+    NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:TDLocalizeSelect(@"AGREEMENT", nil) attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr1]}];
     [str1 appendAttributedString:str2];
     return str1;
 }

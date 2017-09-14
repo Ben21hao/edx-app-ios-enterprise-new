@@ -69,7 +69,7 @@
     self.title.font = [UIFont fontWithName:@"OpenSans" size:16];
     self.title.textColor = [UIColor colorWithHexString:colorHexStr9];
     self.title.textAlignment = NSTextAlignmentCenter;
-    self.title.text = NSLocalizedString(@"SECURITY_VALIDATION", nil);
+    self.title.text = TDLocalizeSelect(@"SECURITY_VALIDATION", nil);
     [self.alertView addSubview:self.title];
     
     self.inputView = [[UIView alloc] init];
@@ -91,7 +91,7 @@
     self.cancelButton = [[UIButton alloc] init];
     self.cancelButton.titleLabel.font = [UIFont fontWithName:@"16" size:16];
     self.cancelButton.layer.cornerRadius = CORNER_RADIUS;
-    [self.cancelButton setTitle:NSLocalizedString(@"CANCEL", nil) forState:UIControlStateNormal];
+    [self.cancelButton setTitle:TDLocalizeSelect(@"CANCEL", nil) forState:UIControlStateNormal];
     [self.cancelButton setTitleColor:[UIColor colorWithHexString:colorHexStr8] forState:UIControlStateNormal];
     [self.cancelButton addTarget:self action:@selector(cancelButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView addSubview:self.cancelButton];
@@ -99,7 +99,7 @@
     self.sureButton = [[UIButton alloc] init];
     self.sureButton.titleLabel.font = [UIFont fontWithName:@"16" size:16];
     self.sureButton.layer.cornerRadius = CORNER_RADIUS;
-    [self.sureButton setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
+    [self.sureButton setTitle:TDLocalizeSelect(@"OK", nil) forState:UIControlStateNormal];
     [self.sureButton setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
     [self.sureButton addTarget:self action:@selector(sureButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView addSubview:self.sureButton];
@@ -109,7 +109,7 @@
     self.textField.secureTextEntry = YES;
     self.textField.font = [UIFont fontWithName:@"OpenSans" size:14];
     self.textField.textColor = [UIColor colorWithHexString:colorHexStr9];
-    self.textField.placeholder = NSLocalizedString(@"LOGIN_PASSWORD", nil);
+    self.textField.placeholder = TDLocalizeSelect(@"LOGIN_PASSWORD", nil);
     [self.inputView addSubview:self.textField];
     
     self.eyeButton = [[UIButton alloc] init];

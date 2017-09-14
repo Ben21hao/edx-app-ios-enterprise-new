@@ -58,13 +58,13 @@ public class DiscussionNewPostViewController: TDSwiftBaseViewController, UITextV
         didSet {
             switch selectedThreadType {
             case .Discussion:
-                self.contentTitleLabel.attributedText = NSAttributedString.joinInNaturalLayout([titleTextStyle.attributedStringWithText(Strings.courseDashboardDiscussion), titleTextStyle.attributedStringWithText(Strings.asteric)])
-                postButton.applyButtonStyle(OEXStyles.sharedStyles().filledPrimaryButtonStyle,withTitle: Strings.postDiscussion)
-                contentTextView.accessibilityLabel = Strings.courseDashboardDiscussion
+                self.contentTitleLabel.attributedText = NSAttributedString.joinInNaturalLayout([titleTextStyle.attributedStringWithText(TDLocalizeSelectSwift("COURSE_DASHBOARD_DISCUSSION")), titleTextStyle.attributedStringWithText(TDLocalizeSelectSwift("ASTERIC"))])
+                postButton.applyButtonStyle(OEXStyles.sharedStyles().filledPrimaryButtonStyle,withTitle: TDLocalizeSelectSwift("POST_DISCUSSION"))
+                contentTextView.accessibilityLabel = TDLocalizeSelectSwift("COURSE_DASHBOARD_DISCUSSION")
             case .Question:
-                self.contentTitleLabel.attributedText = NSAttributedString.joinInNaturalLayout([titleTextStyle.attributedStringWithText(Strings.question), titleTextStyle.attributedStringWithText(Strings.asteric)])
-                postButton.applyButtonStyle(OEXStyles.sharedStyles().filledPrimaryButtonStyle, withTitle: Strings.postQuestion)
-                contentTextView.accessibilityLabel = Strings.question
+                self.contentTitleLabel.attributedText = NSAttributedString.joinInNaturalLayout([titleTextStyle.attributedStringWithText(TDLocalizeSelectSwift("QUESTION")), titleTextStyle.attributedStringWithText(TDLocalizeSelectSwift("ASTERIC"))])
+                postButton.applyButtonStyle(OEXStyles.sharedStyles().filledPrimaryButtonStyle, withTitle: TDLocalizeSelectSwift("POST_QUESTION"))
+                contentTextView.accessibilityLabel = TDLocalizeSelectSwift("QUESTION")
             }
         }
     }
@@ -128,7 +128,7 @@ public class DiscussionNewPostViewController: TDSwiftBaseViewController, UITextV
         super.viewDidLoad()
         self.view.backgroundColor = OEXStyles.sharedStyles().baseColor5()
         
-        self.titleViewLabel.text = Strings.post
+        self.titleViewLabel.text = TDLocalizeSelectSwift("POST")
         
 //        let cancelItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: nil, action: nil)
 //        cancelItem.oex_setAction { [weak self]() -> Void in
@@ -138,7 +138,7 @@ public class DiscussionNewPostViewController: TDSwiftBaseViewController, UITextV
         
         contentTitleLabel.isAccessibilityElement = false
         titleLabel.isAccessibilityElement = false
-        titleLabel.attributedText = NSAttributedString.joinInNaturalLayout([titleTextStyle.attributedStringWithText(Strings.title), titleTextStyle.attributedStringWithText(Strings.asteric)])
+        titleLabel.attributedText = NSAttributedString.joinInNaturalLayout([titleTextStyle.attributedStringWithText(TDLocalizeSelectSwift("TITLE")), titleTextStyle.attributedStringWithText(TDLocalizeSelectSwift("ASTERIC"))])
         contentTextView.textContainer.lineFragmentPadding = 0
         contentTextView.textContainerInset = OEXStyles.sharedStyles().standardTextViewInsets
         contentTextView.typingAttributes = OEXStyles.sharedStyles().textAreaBodyStyle.attributes
@@ -147,14 +147,14 @@ public class DiscussionNewPostViewController: TDSwiftBaseViewController, UITextV
         contentTextView.delegate = self
         configureSegmentControl()
         
-        titleTextField.accessibilityLabel = Strings.title
+        titleTextField.accessibilityLabel = TDLocalizeSelectSwift("TITLE")
         titleTextField.defaultTextAttributes = OEXStyles.sharedStyles().textAreaBodyStyle.attributes
         titleTextField.applyBorderStyle(OEXStyles.sharedStyles().entryFieldBorderStyle)
         
         setTopicsButtonTitle()
         let insets = OEXStyles.sharedStyles().standardTextViewInsets
         topicButton.titleEdgeInsets = UIEdgeInsetsMake(0, insets.left, 0, insets.right)
-        topicButton.accessibilityHint = Strings.accessibilityShowsDropdownHint
+        topicButton.accessibilityHint = TDLocalizeSelectSwift("ACCESSIBILITY_SHOWS_DROPDOWN_HINT")
         
         topicButton.applyBorderStyle(OEXStyles.sharedStyles().entryFieldBorderStyle)
         topicButton.localizedHorizontalContentAlignment = .Leading
@@ -196,7 +196,7 @@ public class DiscussionNewPostViewController: TDSwiftBaseViewController, UITextV
         tapButton.backgroundColor = UIColor.clearColor()
         tapButton.frame = CGRectMake(0, 0, backgroundView.frame.size.width, backgroundView.frame.size.height)
         tapButton.isAccessibilityElement = false
-        tapButton.accessibilityLabel = Strings.accessibilityHideKeyboard
+        tapButton.accessibilityLabel = TDLocalizeSelectSwift("ACCESSIBILITY_HIDE_KEYBOARD")
         tapButton.oex_addAction({[weak self] (sender) in
             self?.view.endEditing(true)
             }, forEvents: .TouchUpInside)
@@ -206,11 +206,11 @@ public class DiscussionNewPostViewController: TDSwiftBaseViewController, UITextV
         discussionQuestionSegmentedControl.removeAllSegments()
         let questionIcon = Icon.Question.attributedTextWithStyle(titleTextStyle)
         let questionTitle = NSAttributedString.joinInNaturalLayout([questionIcon,
-            titleTextStyle.attributedStringWithText(Strings.question)])
+            titleTextStyle.attributedStringWithText(TDLocalizeSelectSwift("QUESTION"))])
         
         let discussionIcon = Icon.Comments.attributedTextWithStyle(titleTextStyle)
         let discussionTitle = NSAttributedString.joinInNaturalLayout([discussionIcon,
-            titleTextStyle.attributedStringWithText(Strings.discussion)])
+            titleTextStyle.attributedStringWithText(TDLocalizeSelectSwift("DISCUSSION"))])
         
         let segmentOptions : [(title : NSAttributedString, value : DiscussionThreadType)] = [
             (title : questionTitle, value : .Question),
@@ -269,7 +269,7 @@ public class DiscussionNewPostViewController: TDSwiftBaseViewController, UITextV
     }
     
     private func loadedData() {
-        loadController.state = topics.value?.count == 0 ? LoadState.empty(icon: .NoTopics, message : Strings.unableToLoadCourseContent) : .Loaded
+        loadController.state = topics.value?.count == 0 ? LoadState.empty(icon: .NoTopics, message : TDLocalizeSelectSwift("UNABLE_TO_LOAD_COURSE_CONTENT")) : .Loaded
         
         if selectedTopic == nil {
             selectedTopic = firstSelectableTopic
@@ -280,7 +280,7 @@ public class DiscussionNewPostViewController: TDSwiftBaseViewController, UITextV
     
     private func setTopicsButtonTitle() {
         if let topic = selectedTopic, name = topic.name {
-            let title = Strings.topic(topic: name)
+            let title = TDLocalizeSelectSwift("TOPIC").oex_formatWithParameters(["topic" : name])
             topicButton.setAttributedTitle(OEXTextStyle(weight : .Normal, size: .Small, color: OEXStyles.sharedStyles().baseColor8()).attributedStringWithText(title), forState: .Normal)
         }
     }

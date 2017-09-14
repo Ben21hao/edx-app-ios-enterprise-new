@@ -42,13 +42,13 @@
     self.surveyLabel = [[UILabel alloc] init];
     self.surveyLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
     self.surveyLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
-    self.surveyLabel.text = NSLocalizedString(@"SURVEY_TEXT", nil);
+    self.surveyLabel.text = TDLocalizeSelect(@"SURVEY_TEXT", nil);
     [self.bgView addSubview:self.surveyLabel];
     
     self.surveyButton = [[UIButton alloc] init];
     self.surveyButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     [self.surveyButton setTitleColor:[UIColor colorWithHexString:@"#FF7F00"] forState:UIControlStateNormal];
-    [self.surveyButton setTitle:NSLocalizedString(@"ACQUIRE_SURVEY", nil) forState:UIControlStateNormal];
+    [self.surveyButton setTitle:TDLocalizeSelect(@"ACQUIRE_SURVEY", nil) forState:UIControlStateNormal];
     [self.surveyButton addTarget:self action:@selector(surveyButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.bgView addSubview:self.surveyButton];
 }

@@ -76,9 +76,9 @@ class CourseCertificateCell: UITableViewCell {
         let titleStyle = OEXTextStyle(weight: .Normal, size: .Large, color: OEXStyles.sharedStyles().primaryXDarkColor())
         let subtitleStyle = OEXTextStyle(weight: .Normal, size: .Base, color: OEXStyles.sharedStyles().neutralDark())
 
-        titleLabel.attributedText = titleStyle.attributedStringWithText(Strings.Certificates.courseCompletionTitle)
-        subtitleLabel.attributedText = subtitleStyle.attributedStringWithText(Strings.Certificates.courseCompletionSubtitle)
-        getButton.applyButtonStyle(OEXStyles.sharedStyles().filledPrimaryButtonStyle, withTitle: Strings.Certificates.getCertificate)
+        titleLabel.attributedText = titleStyle.attributedStringWithText(TDLocalizeSelectSwift("CERTIFICATES.GET_CERTIFICATE"))
+        subtitleLabel.attributedText = subtitleStyle.attributedStringWithText(TDLocalizeSelectSwift("CERTIFICATES.COURSE_COMPLETION_SUBTITLE"))
+        getButton.applyButtonStyle(OEXStyles.sharedStyles().filledPrimaryButtonStyle, withTitle: TDLocalizeSelectSwift("CERTIFICATES.GET_CERTIFICATE"))
 
         getButton.oex_addAction({ _ in
             item.action()

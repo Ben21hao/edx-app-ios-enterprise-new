@@ -54,7 +54,7 @@ static const UIEdgeInsets OEXUsingExternalAuthMessageInsets = {.top = 10, .left 
         [self.checkmarkView setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
         
         self.completionLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.completionLabel.attributedText = [self.styles.headingMessagePromptStyle attributedStringWithText:[Strings completeRegistrationPrompt]];
+        self.completionLabel.attributedText = [self.styles.headingMessagePromptStyle attributedStringWithText:TDLocalizeSelect(@"COMPLETE_REGISTRATION_PROMPT", nil)];
         [self addSubview:self.completionLabel];
         
 
@@ -104,7 +104,7 @@ static const UIEdgeInsets OEXUsingExternalAuthMessageInsets = {.top = 10, .left 
     OEXTextStyle* style = self.styles.headingMessageProviderStyle;
     NSString* platform = [[OEXConfig sharedConfig] platformName];
     NSAttributedString*(^template)(NSAttributedString*) = [style apply:^(NSString* service) {
-        return [Strings completeRegistrationInfoWithService:service platformName:platform];
+        return [TDLocalizeSelect(@"COMPLETE_REGISTRATION_INFO", nil) oex_formatWithParameters:@{@"service" : service, @"platform_name" : platform}];
     }];
     NSAttributedString* serviceString = [self.styles.headingMessageProviderStyle attributedStringWithText:provider];
     return template(serviceString);

@@ -58,7 +58,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"COMMENTS", nil);
+    self.title = TDLocalizeSelect(@"COMMENTS", nil);
     
     self.baseTool = [[TDBaseToolModel alloc] init];
     self.page = 1;
@@ -251,12 +251,12 @@
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
                 self.tableView.mj_footer.hidden = YES;
             }
-            [self.view makeToast:NSLocalizedString(@"NO_MORE_DATA", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"NO_MORE_DATA", nil) duration:1.08 position:CSToastPositionCenter];
             
         } else if ([code intValue] == 404) { //该课程暂无此助教助教评论
-            [self.view makeToast:NSLocalizedString(@"NO_COMMENTS_YET", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"NO_COMMENTS_YET", nil) duration:1.08 position:CSToastPositionCenter];
         } else {
-            [self.view makeToast:NSLocalizedString(@"NO_COMMENTS_YET", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"NO_COMMENTS_YET", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
         NSLog(@"评论 --- %@ = %@",code,responseObject[@"msg"]);
@@ -264,7 +264,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         self.loadingView.hidden = YES;
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"获取评论数据 error--%@",error);
     }];
 }
@@ -294,7 +294,7 @@
         self.nullLabel = [[UILabel alloc] init];
         self.nullLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
         self.nullLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
-        self.nullLabel.text = NSLocalizedString(@"NO_COMMENTS_YET", nil);
+        self.nullLabel.text = TDLocalizeSelect(@"NO_COMMENTS_YET", nil);
         [cell addSubview:self.nullLabel];
         
         [self.nullLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -394,7 +394,7 @@
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, (self.topArry.count / 3 + 1) * 28 + 118)];
     headerView.backgroundColor = [UIColor whiteColor];
     
-    UIView *topView = [[TDBaseView alloc] initWithTitle:NSLocalizedString(@"GENERAL_IMPRESSION", nil)];
+    UIView *topView = [[TDBaseView alloc] initWithTitle:TDLocalizeSelect(@"GENERAL_IMPRESSION", nil)];
     [headerView addSubview:topView];
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(headerView);

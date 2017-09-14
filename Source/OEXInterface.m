@@ -381,11 +381,11 @@ static OEXInterface* _sharedInterface = nil;
         
         // As suggested by Lou
         UIAlertView* alertView =
-            [[UIAlertView alloc] initWithTitle:[Strings largeDownloadTitle]
-                                       message:[Strings largeDownloadMessage]
+            [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"LARGE_DOWNLOAD_TITLE", nil)
+                                       message:TDLocalizeSelect(@"LARGE_DOWNLOAD_MESSAGE", nil)
                                       delegate:self
-                             cancelButtonTitle:[Strings cancel]
-                             otherButtonTitles:[Strings acceptLargeVideoDownload], nil];
+                             cancelButtonTitle:TDLocalizeSelect(@"CANCEL", nil)
+                             otherButtonTitles:TDLocalizeSelect(@"ACCEPT_LARGE_VIDEO_DOWNLOAD", nil), nil];
         
         [alertView show];
         return NO;

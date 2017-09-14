@@ -197,7 +197,7 @@ class LoadStateViewController : UIViewController {
                 self.messageView.buttonInfo = info.buttonInfo
                 UIView.performWithoutAnimation {
                     if let error = info.error where error.oex_isNoInternetConnectionError {
-                        self.messageView.showError(Strings.networkNotAvailableMessageTrouble, icon: .InternetError)
+                        self.messageView.showError(TDLocalizeSelectSwift("NETWORK_NOT_AVAILABLE_MESSAGE_TROUBLE"), icon: .InternetError)
                     }
                     else if let error = info.error as? OEXAttributedErrorMessageCarrying {
                         self.messageView.showError(error.attributedDescriptionWithBaseStyle(self.messageStyle), icon: info.icon)
@@ -209,7 +209,7 @@ class LoadStateViewController : UIViewController {
                         self.messageView.showError(message, icon: info.icon)
                     }
                     else if let error = info.error where error.errorIsThisType(NSError.oex_unknownNetworkError()) {
-                        self.messageView.showError(Strings.unknownError, icon: info.icon)
+                        self.messageView.showError(TDLocalizeSelectSwift("UNKNOWN_ERROR"), icon: info.icon)
                     }
                     else if let error = info.error where error.errorIsThisType(NSError.oex_outdatedVersionError()) {
                         self.messageView.setupForOutdatedVersionError()

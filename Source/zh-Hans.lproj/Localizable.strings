@@ -82,8 +82,6 @@
 "ACCESSIBILITY_SELECT" = "选择";
 /* Accessibility label for Select All Button on My Videos List Screen */
 "ACCESSIBILITY_SELECT_ALL" = "全选";
-/* Accessibility label for Settings Button in the Video Player */
-"ACCESSIBILITY_SETTINGS" = "设置";
 /* Accessibility label for Unknown Icon in the Courseware screens */
 "ACCESSIBILITY_UNKNOWN" = "位置";
 /* Accessibility label for Video Icon in the Courseware screens */
@@ -208,10 +206,12 @@
 "COMPLETE_REGISTRATION_PROMPT" = "完成您的注册";
 /* Title of alert when confirming deletion of a video */
 "CONFIRM_DELETE_TITLE"="确认删除";
+///* Text of alert when confirming video deletion */
+//"CONFIRM_DELETE_MESSAGE##{one}"="确定要删除这些视频";
+///* Text of alert when confirming video deletion */
+//"CONFIRM_DELETE_MESSAGE##{other}"="确定要删除这些视频";
 /* Text of alert when confirming video deletion */
-"CONFIRM_DELETE_MESSAGE##{one}"="确定要删除这些视频";
-/* Text of alert when confirming video deletion */
-"CONFIRM_DELETE_MESSAGE##{other}"="确定要删除这些视频";
+"CONFIRM_DELETE_MESSAGE_TEXT"="确定要删除这些视频";
 /* Text of push notification announcing a new course announcement */
 "COURSE_ANNOUNCEMENT_NOTIFICATION_BODY"="新的公告: {course_name}";
 /* Alert dialog button text */
@@ -406,8 +406,6 @@
 "MOST_VOTES"="最多票数";
 /* Screen title showing a user's courses */
 "MY_COURSES"="我的课程";
-/* Screen title showing a user's settings */
-"MY_SETTINGS"="设置";
 /* Screen title showing a user's downloaded videos */
 "MY_VIDEOS" = "我的下载";
 /* Marked as answer for endorsed responses */
@@ -448,8 +446,6 @@
 "ANONYMOUS" = "匿名";
 /* Label indicating user has on internet connection and is in offline mode */
 "OFFLINE" = "离线";
-/* Alert dialog okay button */
-"OK"="OK";
 /* Button title allowing user to open current page in their web browser */
 "OPEN_IN_BROWSER"="在Safari浏览器观看";
 /* Button title allowing user to open current page in their web browser */
@@ -595,8 +591,12 @@
 "REMOVE_FILTER" = "尝试移除帖子筛选。";
 /* Label shown when user attempts to view a course section that hasn't been synced  */
 "SECTION_UNAVAILABLE_OFFLINE"="这部分在离线模式下不可用。\n如果您已经下载了一个其他部分的内容，转至该部分查看内容。";
+/* Accessibility label for Settings Button in the Video Player */
+"ACCESSIBILITY_SETTINGS" = "设置";
 /* Screen title showing a user's settings */
 "SETTINGS"="设置";
+/* Screen title showing a user's settings */
+"MY_SETTINGS"="设置";
 /* Text for a Twitter or Facebook post to a course about page */
 "SHARE_A_COURSE"="我正在{platform_name}上课! 看看这个:";
 /* Sign in screen title and button initiating login process after user enters credentials like username and password */
@@ -769,16 +769,12 @@
 "REGISTER" = "注册";
 /*版本*/
 "APPVERSION" = "版本";
-/*我的课程*/
-"MY_COURSE" = "我的课程";
 /*我的下载*/
 "MY_VIDEO" = "我的下载";
 /*发现课程*/
 "FIND_COURSE" = "发现课程";
 /*个人中心*/
 "USER_CENTER" = "个人中心";
-/*设置*/
-"MY_SETTING" = "设置";
 /*获取验证码失败*/
 "FAILED_GET_VERIFICATION" = "获取验证码失败";
 /*请输入正确的手机号码*/
@@ -1741,3 +1737,13 @@
 "SEND_MESSAGE_BUTTON" = "发送";
 /*聊天内容不能为空*/
 "ENTER_SEND_MESSAGE" = "聊天内容不能为空";
+
+/*多语言*/
+"LANGUAGE_TEXT" = "多语言";
+/*跟随手机系统 Follow the phone system*/
+"FOLLOW_SYSTEM_LANGUAGE" = "默认";
+/*设置语言Language Setting*/
+"LANGUAGE_SETTING_TEXT" = "设置语言";
+/*暂无资料 No data yes.*/
+"NO_DATA_TEXT" = "暂无资料";
+

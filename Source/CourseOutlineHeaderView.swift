@@ -61,7 +61,7 @@ public class CourseOutlineHeaderView: UIView {
         addSubview(bottomDivider)
         addSubview(subtitleLabel)
         
-        viewButton.applyButtonStyle(viewButtonStyle, withTitle : Strings.view)
+        viewButton.applyButtonStyle(viewButtonStyle, withTitle : TDLocalizeSelectSwift("VIEW"))
         
         messageView.attributedText = labelStyle.attributedStringWithText(titleText)
         subtitleLabel.attributedText = subtitleLabelStyle.attributedStringWithText(subtitleText)

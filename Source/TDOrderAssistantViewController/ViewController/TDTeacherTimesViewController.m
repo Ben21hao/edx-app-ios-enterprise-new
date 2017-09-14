@@ -58,8 +58,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = NSLocalizedString(@"SELECT_PERIOD", nil);
-    [self.rightButton setTitle:NSLocalizedString(@"SUBMIT_BUTTON_TEXT", nil) forState:UIControlStateNormal];
+    self.titleViewLabel.text = TDLocalizeSelect(@"SELECT_PERIOD", nil);
+    [self.rightButton setTitle:TDLocalizeSelect(@"SUBMIT_BUTTON_TEXT", nil) forState:UIControlStateNormal];
     
     WS(weakSelf);
     self.rightButtonHandle = ^(){ //确定
@@ -80,7 +80,7 @@
             [weakSelf.navigationController pushViewController:createOrderVc animated:YES];
             
         } else {
-            [weakSelf.view makeToast:NSLocalizedString(@"PLEASE_SELECT_PERIOD", nil) duration:1.08 position:CSToastPositionCenter];
+            [weakSelf.view makeToast:TDLocalizeSelect(@"PLEASE_SELECT_PERIOD", nil) duration:1.08 position:CSToastPositionCenter];
         }
     };
     
@@ -183,13 +183,13 @@
             
             self.messageLabel.hidden = YES;
             [self.tableView reloadData];
-            [self.view makeToast:NSLocalizedString(@"NO_TA_COURSE_SCHEDULE", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"NO_TA_COURSE_SCHEDULE", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         self.nullLabel.hidden = NO;
         self.loadingView.hidden = YES;
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"时间列表出错 -- %ld",(long)error.code);
     }];
 }
@@ -409,11 +409,11 @@
     
     if (type == 1) {
         if (self.addDay == 0) {
-            dateStr = NSLocalizedString(@"TODAY", nil);
+            dateStr = TDLocalizeSelect(@"TODAY", nil);
         } else if (self.addDay == 1) {
-            dateStr = NSLocalizedString(@"TOMORROW", nil);
+            dateStr = TDLocalizeSelect(@"TOMORROW", nil);
         } else if (self.addDay == 2) {
-            dateStr = NSLocalizedString(@"AFTER_TOMOROW", nil);
+            dateStr = TDLocalizeSelect(@"AFTER_TOMOROW", nil);
         }
     }
 
@@ -466,7 +466,7 @@
     self.nullLabel.numberOfLines = 0;
     self.nullLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     self.nullLabel.textAlignment = NSTextAlignmentCenter;
-    self.nullLabel.text = NSLocalizedString(@"NO_TA_COURSE_SCHEDULE", nil);
+    self.nullLabel.text = TDLocalizeSelect(@"NO_TA_COURSE_SCHEDULE", nil);
     [self.tableView addSubview:self.nullLabel];
     
     [self.nullLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -531,7 +531,7 @@
     self.messageLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
     self.messageLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     self.messageLabel.textAlignment = NSTextAlignmentCenter;
-    self.messageLabel.text = NSLocalizedString(@"NOTE_COINS", nil);
+    self.messageLabel.text = TDLocalizeSelect(@"NOTE_COINS", nil);
     self.messageLabel.numberOfLines = 0;
     [self.footerView addSubview:self.messageLabel];
     

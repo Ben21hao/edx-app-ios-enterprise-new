@@ -36,7 +36,7 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
         configureViews()
         
         accessibilityTraits = UIAccessibilityTraitStaticText
-        accessibilityHint = Strings.accessibilityShowsCourseContent
+        accessibilityHint = TDLocalizeSelectSwift("ACCESSIBILITY_SHOWS_COURSE_CONTENT")
     }
     
     override init(frame : CGRect) {
@@ -228,7 +228,7 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
         
         if let text = detailText {
          let formatedDetailText = text.stringByReplacingOccurrencesOfString("|", withString: "")
-            accessibilityString = "\(accessibilityString),\(Strings.accessibilityBy) \(formatedDetailText)"
+            accessibilityString = "\(accessibilityString),\(TDLocalizeSelectSwift("ACCESSIBILITY_BY")) \(formatedDetailText)"
         }
         
         if let bottomText = bottomTrailingText {

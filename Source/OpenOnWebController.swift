@@ -44,7 +44,7 @@ public class OpenOnWebController {
         self.barButtonItem = UIBarButtonItem(customView: button)
 //        barButtonItem.enabled = false
         barButtonItem.enabled = true
-//        barButtonItem.accessibilityLabel = Strings.openInBrowser
+//        barButtonItem.accessibilityLabel = TDLocalizeSelectSwift("OPEN_IN_BROWSER")
         
 //        self.delegate = delegate
 //        button.oex_addAction({[weak self] _ in
@@ -68,12 +68,12 @@ public class OpenOnWebController {
     private func confirmOpenURL() {
         if info?.URL != nil {
             let controller = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            controller.addAction(UIAlertAction(title: Strings.openInBrowser, style: .Default)
+            controller.addAction(UIAlertAction(title: TDLocalizeSelectSwift("OPEN_IN_BROWSER"), style: .Default)
                 { _ in
                     self.openUrlInBrowser()
                 }
             )
-            controller.addAction(UIAlertAction(title: Strings.cancel, style: .Cancel)
+            controller.addAction(UIAlertAction(title: TDLocalizeSelectSwift("CANCEL"), style: .Cancel)
                 {_ in
                 }
             )
@@ -82,6 +82,6 @@ public class OpenOnWebController {
         }
 
     }
-
-    
 }
+
+

@@ -46,11 +46,11 @@
                 self.judHidePurchseHandle(hideShowPurchase);
             }
         } else {
-//          [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+//          [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error--%@",error);
     }];
 }
@@ -143,8 +143,8 @@
     OEXAppDelegate* appD = (OEXAppDelegate *)[[UIApplication sharedApplication] delegate];
     BOOL reachable = [appD.reachability isReachable];
     if (!reachable) {
-        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings networkNotAvailableTitle]
-                                                                message:[Strings networkNotAvailableMessageTrouble]
+        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil)
+                                                                message:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_MESSAGE_TROUBLE", nil)
                                                        onViewController:[UIApplication sharedApplication].keyWindow.rootViewController.view
                                                              shouldHide:YES];
     }
@@ -290,14 +290,14 @@
             }
         } else {
             
-             [view makeToast:NSLocalizedString(@"CONNOT_USE_NICKNAME", nil) duration:1.08 position:CSToastPositionCenter];
+             [view makeToast:TDLocalizeSelect(@"CONNOT_USE_NICKNAME", nil) duration:1.08 position:CSToastPositionCenter];
             if (self.checkNickNameHandle) {
                 self.checkNickNameHandle(NO);
             }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"%ld",(long)error.code);
     }];
 }
@@ -531,9 +531,9 @@
 - (NSString *)getAppVersionNum:(NSInteger)type {
     NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
     NSString *version = infoDic[@"CFBundleShortVersionString"];
-    NSString *versionStr = [NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"VERSION_APP", nil),version];
+    NSString *versionStr = [NSString stringWithFormat:@"%@ %@",TDLocalizeSelect(@"VERSION_APP", nil),version];
     if (type == 1) {
-        versionStr = [Strings versionDisplayWithNumber:version];
+        versionStr = [TDLocalizeSelect(@"VERSION_DISPLAY", nil) oex_formatWithParameters:@{@"number" : version}];
     }
     return versionStr;
 }

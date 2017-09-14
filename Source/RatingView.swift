@@ -27,8 +27,8 @@ class RatingView: UIControl {
     init() {
         super.init(frame: CGRectZero)
         isAccessibilityElement = true
-        accessibilityLabel = Strings.AppReview.ratingControlAccessibilityLabel
-        accessibilityHint = Strings.AppReview.ratingControlAccessibilityHint
+        accessibilityLabel = TDLocalizeSelectSwift("APP_REVIEW.RATING_CONTROL_ACCESSIBILITY_LABEL")
+        accessibilityHint = TDLocalizeSelectSwift("APP_REVIEW.RATING_CONTROL_ACCESSIBILITY_HINT")
     }
     
     required init?(coder aDecoder: NSCoder) {

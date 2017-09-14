@@ -65,13 +65,13 @@
     if ([model.coupon_type isEqualToString:@"满减券"]) {
         float money = [model.cutdown_price floatValue];
         titleStr = [NSString stringWithFormat:@"￥%.2f",money];
-        subTitleStr = [Strings couponDeduction];
+        subTitleStr = TDLocalizeSelect(@"COUPON_DEDUCTION", nil);
         
         colorStr1 = @"#F6BB42";
         colorStr2 = @"#FFFAED";
         
     } else if ([model.coupon_type isEqualToString:@"折扣券"]) {
-        subTitleStr = [Strings couponDiscount];
+        subTitleStr = TDLocalizeSelect(@"COUPON_DISCOUNT", nil);
         
         float rate = [model.discount_rate floatValue] * 10.0;
         titleStr = [NSString stringWithFormat:@"%.2lf折",rate];
@@ -85,8 +85,8 @@
         
     } else {
         float money = [model.cutdown_price floatValue];
-        titleStr = [Strings couponForCourseWithCount:[NSString stringWithFormat:@"%.2lf",money]];
-        subTitleStr = [Strings couponEnterprise];
+        titleStr = [TDLocalizeSelect(@"COUPON_FOR_COURSE", nil) oex_formatWithParameters:@{@"count" : [NSString stringWithFormat:@"%.2lf",money]}];
+        subTitleStr = TDLocalizeSelect(@"COUPON_ENTERPRISE", nil);
         
         colorStr1 = @"#95CD5B";
         colorStr2 = @"#EBF6DF";
@@ -107,7 +107,7 @@
     self.detailView.backgroundColor = [UIColor colorWithHexString:colorStr2];
     
     NSRange range = [model.coupon_begin_at rangeOfString:@"T"];
-    self.timeLabel.text = [Strings couponPeriodWithStartdate:[model.coupon_begin_at substringToIndex:range.location] enddate:[model.coupon_end_at substringToIndex:range.location]];
+    self.timeLabel.text = [TDLocalizeSelect(@"COUPON_PERIOD", nil) oex_formatWithParameters:@{@"startDate" : [model.coupon_begin_at substringToIndex:range.location], @"endDate" : [model.coupon_end_at substringToIndex:range.location]}];
     
     
     if (model.remark.length > 0) {

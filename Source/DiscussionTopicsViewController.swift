@@ -69,7 +69,7 @@ public class DiscussionTopicsViewController: OfflineSupportViewController, UITab
         let leftBarItem = UIBarButtonItem.init(customView: leftButton)
         self.navigationItem.leftBarButtonItem = leftBarItem
 
-        self.titleViewLabel.text = Strings.discussionTopics
+        self.titleViewLabel.text = TDLocalizeSelectSwift("DISCUSSION_TOPICS")
    
         view.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
         searchBarSeparator.backgroundColor = OEXStyles.sharedStyles().baseColor6()
@@ -86,7 +86,7 @@ public class DiscussionTopicsViewController: OfflineSupportViewController, UITab
             tableView.cellLayoutMarginsFollowReadableWidth = false
         }
         
-        searchBar.applyStandardStyles(withPlaceholder: Strings.searchAllPosts)
+        searchBar.applyStandardStyles(withPlaceholder: TDLocalizeSelectSwift("SEARCH_ALL_POSTS"))
         
         searchBarDelegate = DiscussionSearchBarDelegate() { [weak self] text in
             if let owner = self {
@@ -151,7 +151,7 @@ public class DiscussionTopicsViewController: OfflineSupportViewController, UITab
     }
     
     func loadedData() {
-        self.loadController.state = topics.value?.count == 0 ? LoadState.empty(icon: .NoTopics, message : Strings.unableToLoadCourseContent) : .Loaded
+        self.loadController.state = topics.value?.count == 0 ? LoadState.empty(icon: .NoTopics, message : TDLocalizeSelectSwift("UNABLE_TO_LOAD_COURSE_CONTENT")) : .Loaded
         self.tableView.reloadData()
     }
     
@@ -200,9 +200,9 @@ public class DiscussionTopicsViewController: OfflineSupportViewController, UITab
         
         switch (indexPath.section) {
         case TableSection.AllPosts.rawValue:
-            topic = DiscussionTopic(id: nil, name: Strings.allPosts, children: [DiscussionTopic](), depth: 0, icon:nil)
+            topic = DiscussionTopic(id: nil, name: TDLocalizeSelectSwift("ALL_POSTS"), children: [DiscussionTopic](), depth: 0, icon:nil)
         case TableSection.Following.rawValue:
-            topic = DiscussionTopic(id: nil, name: Strings.postsImFollowing, children: [DiscussionTopic](), depth: 0, icon: Icon.FollowStar)
+            topic = DiscussionTopic(id: nil, name: TDLocalizeSelectSwift("POSTS_IM_FOLLOWING"), children: [DiscussionTopic](), depth: 0, icon: Icon.FollowStar)
         case TableSection.CourseTopics.rawValue:
             if let discussionTopic = self.topics.value?[indexPath.row] {
                 topic = discussionTopic

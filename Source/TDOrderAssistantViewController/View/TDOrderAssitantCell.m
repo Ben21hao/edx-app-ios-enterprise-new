@@ -122,11 +122,11 @@
     self.quetionLabel.numberOfLines = 0;
     [self.bgView addSubview:self.quetionLabel];
 
-    self.orderButton = [self setButtonWithTitle:NSLocalizedString(@"APPOINTMENT", nil) withColor:colorHexStr4];
+    self.orderButton = [self setButtonWithTitle:TDLocalizeSelect(@"APPOINTMENT", nil) withColor:colorHexStr4];
     [self.orderButton addTarget:self action:@selector(orderButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.bgView addSubview:self.orderButton];
     
-    self.talkButton = [self setButtonWithTitle:NSLocalizedString(@"INSTANT_SERVICE_BUTTON", nil) withColor:colorHexStr1];
+    self.talkButton = [self setButtonWithTitle:TDLocalizeSelect(@"INSTANT_SERVICE_BUTTON", nil) withColor:colorHexStr1];
     [self.talkButton addTarget:self action:@selector(talkButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.bgView addSubview:self.talkButton];
     

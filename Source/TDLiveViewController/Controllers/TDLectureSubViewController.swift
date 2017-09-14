@@ -50,7 +50,7 @@ class TDLectureSubViewController: UIViewController,UITableViewDelegate,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = self.whereFrom == 0 ? Strings.upcomingTitleText : Strings.finishedTitleText
+        self.title = self.whereFrom == 0 ? TDLocalizeSelectSwift("UPCOMING_TITLE_TEXT") : TDLocalizeSelectSwift("FINISHED_TITLE_TEXT")
         setViewConstaint()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(enterAppForground), name: "App_EnterForeground_Get_Code", object: nil)
@@ -130,7 +130,7 @@ class TDLectureSubViewController: UIViewController,UITableViewDelegate,UITableVi
             
             }) { (task, error) in
                 self.loadingView.hidden = true
-                self.view.makeToast(Strings.networkConnetFail, duration: 1.08, position: CSToastPositionCenter)
+                self.view.makeToast(TDLocalizeSelectSwift("NETWORK_CONNET_FAIL"), duration: 1.08, position: CSToastPositionCenter)
         }
     }
     
@@ -230,7 +230,7 @@ class TDLectureSubViewController: UIViewController,UITableViewDelegate,UITableVi
             
             MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
             index == 0 ? self.gotoWatchLiveVC(detailStr) : self.gotoWatchPlayBackVideo(detailStr)
-            self.showMsg(Strings.enterSuccessful, delay: 1.08)
+            self.showMsg(TDLocalizeSelectSwift("ENTER_SUCCESSFUL"), delay: 1.08)
             
         }) { (error) in
             
@@ -298,7 +298,7 @@ class TDLectureSubViewController: UIViewController,UITableViewDelegate,UITableVi
         self.nonDataLabel.font = UIFont.init(name: "OpenSans", size: 16)
         self.nonDataLabel.textColor = OEXStyles.sharedStyles().baseColor8()
         self.nonDataLabel.textAlignment = .Center
-        self.nonDataLabel.text = Strings.noLiveLectureText
+        self.nonDataLabel.text = TDLocalizeSelectSwift("NO_LIVE_LECTURE_TEXT")
         self.tableView.addSubview(self.nonDataLabel)
         
         self.nonDataLabel.snp_makeConstraints { (make) in

@@ -11,7 +11,7 @@
 
 + (void) popupAlertByDelegate:(id)delegate title:(NSString *)title message:(NSString *)msg {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:msg
-                                                   delegate:delegate cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                                                   delegate:delegate cancelButtonTitle:TDLocalizeSelect(@"OK", nil) otherButtonTitles: nil];
     [alert show];	
 }
 
@@ -24,7 +24,7 @@
 
 + (void) popupAlertByDelegate:(id)delegate title:(NSString *)title message:(NSString *)msg Tag:(NSInteger)tag{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:msg
-                                                   delegate:delegate cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                                                   delegate:delegate cancelButtonTitle:TDLocalizeSelect(@"OK", nil) otherButtonTitles: nil];
     alert.tag = tag;
     [alert show];
 }

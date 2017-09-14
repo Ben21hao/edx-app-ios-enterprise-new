@@ -120,3 +120,5 @@
 #import <MJRefresh/MJRefresh.h>
 #import <UIImageView+WebCache.h>
 
+#import "LanguageChangeTool.h"
+

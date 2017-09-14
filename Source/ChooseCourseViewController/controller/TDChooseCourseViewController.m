@@ -111,7 +111,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.titleViewLabel.text = NSLocalizedString(@"COURSE_LIST", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"COURSE_LIST", nil);
     
     if (self.whereFrom == TDChooseCourseFromFree) {
         if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
@@ -196,7 +196,7 @@
         [self.loadIngView removeFromSuperview];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.loadIngView removeFromSuperview];
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error--%@",error);
     }];
 
@@ -253,7 +253,7 @@
 - (void)submitCoursesButtonAction {//提交课表
 
     if (![self judgeHasCourseSelect]) {
-        [self.view makeToast:NSLocalizedString(@"SELECT_COURSE", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"SELECT_COURSE", nil) duration:1.08 position:CSToastPositionCenter];
         return;
     }
     TDSubmitCourseViewController *submitVC = [[TDSubmitCourseViewController alloc] init];
@@ -311,14 +311,14 @@
 
     if (giftMoney > 0) { //有赠送宝典的时候再显示
         self.giftCoin = [NSString stringWithFormat:@"%.2f",giftMoney];
-        NSString *coinNumStr = [Strings giveCoinsNumberWithCount:self.giftCoin];
-        NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",NSLocalizedString(@"HANDIN_COURSE_LIST", nil)] attributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:14]}];
+        NSString *coinNumStr = [TDLocalizeSelect(@"GIVE_COINS_NUMBER", nil) oex_formatWithParameters:@{@"count" : self.giftCoin}];
+        NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",TDLocalizeSelect(@"HANDIN_COURSE_LIST", nil)] attributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:14]}];
         NSMutableAttributedString *str2 = [self.baseTool setDetailString:coinNumStr withFont:11 withColorStr:colorHexStr3];
         [str1 appendAttributedString:str2];
         [self.chooseView.summitButton setAttributedTitle:str1 forState:UIControlStateNormal];
         
     } else {
-        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"HANDIN_COURSE_LIST", nil) attributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:14]}];
+        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:TDLocalizeSelect(@"HANDIN_COURSE_LIST", nil) attributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:14]}];
         [self.chooseView.summitButton setAttributedTitle:str forState:UIControlStateNormal];
     }
 }
@@ -433,7 +433,7 @@
     float totalMoney = [self.totalMoney floatValue];
     float reduceMoney = totalMoney;
     
-    if ([self.activityItem.activity_name isEqualToString:NSLocalizedString(@"SELECT_ACTIVITY_ITEM", nil)]) {
+    if ([self.activityItem.activity_name isEqualToString:TDLocalizeSelect(@"SELECT_ACTIVITY_ITEM", nil)]) {
         
         self.totalMoney = [NSString stringWithFormat:@"%.2lf",reduceMoney];
         self.chooseView.totalMoney.attributedText = [self.baseTool setString:[NSString stringWithFormat:@"￥%@",self.totalMoney] withFont:14 type:1];
@@ -602,11 +602,11 @@
         cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
         cell.detailTextLabel.textColor = [UIColor colorWithHexString:colorHexStr9];
         
-        cell.textLabel.text = NSLocalizedString(@"CHOOSE_ACTIVITY", nil);
+        cell.textLabel.text = TDLocalizeSelect(@"CHOOSE_ACTIVITY", nil);
         if (self.canUseArray.count > 0) {
-            cell.detailTextLabel.text = self.activityItem.activity_name.length > 0 ? self.activityItem.activity_name : NSLocalizedString(@"SELECT_ACTIVITY_ITEM", nil);
+            cell.detailTextLabel.text = self.activityItem.activity_name.length > 0 ? self.activityItem.activity_name : TDLocalizeSelect(@"SELECT_ACTIVITY_ITEM", nil);
         } else {
-            cell.detailTextLabel.text = NSLocalizedString(@"NO_ACTIVITY", nil);
+            cell.detailTextLabel.text = TDLocalizeSelect(@"NO_ACTIVITY", nil);
         }
         
         return cell;
@@ -675,7 +675,7 @@
         view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
         
         UILabel *title = [[UILabel alloc] init];
-        title.text = NSLocalizedString(@"RECOMMEND_COURSE", nil);
+        title.text = TDLocalizeSelect(@"RECOMMEND_COURSE", nil);
         title.font = [UIFont fontWithName:@"OpenSans" size:14];
         title.textAlignment = NSTextAlignmentCenter;
         title.textColor = [UIColor colorWithHexString:colorHexStr8];

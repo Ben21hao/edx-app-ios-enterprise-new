@@ -32,7 +32,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.titleViewLabel.text = NSLocalizedString(@"BIND_EMAIL", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"BIND_EMAIL", nil);
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     self.baseTool = [[TDBaseToolModel alloc] init];
 }
@@ -45,13 +45,13 @@
         return;
         
     } else if (self.emailTextField.text.length == 0) {
-        [self.view makeToast:NSLocalizedString(@"EMAIL_ADDRESS_EMPTY", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"EMAIL_ADDRESS_EMPTY", nil) duration:1.08 position:CSToastPositionCenter];
         
     } else if ([self.baseTool isValidateEmail:self.emailTextField.text]) {
         [self handinToService];
         
     } else {
-        [self.view makeToast:NSLocalizedString(@"EMAIL_FORMAT_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"EMAIL_FORMAT_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
     }
 }
 
@@ -81,19 +81,19 @@
         } else if ([code intValue] == 402) {
             [self gotoSuccessVc];
             
-            [self.view makeToast:NSLocalizedString(@"EMAIL_AREADY_SEND", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"EMAIL_AREADY_SEND", nil) duration:1.08 position:CSToastPositionCenter];
             
         } else if ([code  intValue] == 403) {
-            [self.view makeToast:NSLocalizedString(@"EMAIL_IS_REGISTERED", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"EMAIL_IS_REGISTERED", nil) duration:1.08 position:CSToastPositionCenter];
             
         }  else {
-            [self.view makeToast:NSLocalizedString(@"EMAIL_SEND_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"EMAIL_SEND_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
             
             NSLog(@"验证登录密码 -- %@",respondDic[@"msg"]);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.activityView stopAnimating];
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"验证登录密码 -- %ld",(long)error.code);
     }];
 }
@@ -110,7 +110,7 @@
 #pragma mark - UI
 - (void)configView {
     self.emailTextField = [[UITextField alloc] init];
-    self.emailTextField.placeholder = NSLocalizedString(@"EMAIL_ADDRESS_PROMPT", nil);
+    self.emailTextField.placeholder = TDLocalizeSelect(@"EMAIL_ADDRESS_PROMPT", nil);
     self.emailTextField.font = [UIFont fontWithName:@"OpenSans" size:14];
     self.emailTextField.textColor = [UIColor colorWithHexString:colorHexStr9];
     self.emailTextField.borderStyle = UITextBorderStyleRoundedRect;
@@ -119,7 +119,7 @@
     self.handinButton = [[UIButton alloc] init];
     self.handinButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.handinButton.layer.cornerRadius = 4.0;
-    [self.handinButton setTitle:NSLocalizedString(@"SUBMIT", nil) forState:UIControlStateNormal];
+    [self.handinButton setTitle:TDLocalizeSelect(@"SUBMIT", nil) forState:UIControlStateNormal];
     [self.handinButton addTarget:self action:@selector(handinButtonAcion:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.handinButton];
     

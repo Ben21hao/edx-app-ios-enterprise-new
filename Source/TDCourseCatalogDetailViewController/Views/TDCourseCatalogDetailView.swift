@@ -115,10 +115,10 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
                 cell.moreButton.tag = 8
                 if self.showAllText == true {
                     cell.introduceLabel.text = "\(self.courseModel.short_description!)\n\(self.courseModel.moreDescription!)"
-                    cell.moreButton.setTitle(Strings.stopUp, forState: .Normal)
+                    cell.moreButton.setTitle(TDLocalizeSelectSwift("STOP_UP"), forState: .Normal)
                 } else {
                     cell.introduceLabel.text = self.courseModel.short_description
-                    cell.moreButton.setTitle(Strings.allText, forState: .Normal)
+                    cell.moreButton.setTitle(TDLocalizeSelectSwift("ALL_TEXT"), forState: .Normal)
                 }
                 
                 cell.moreButton.addTarget(self, action: #selector(moreButtonAction(_:)), forControlEvents: .TouchUpInside)
@@ -143,20 +143,20 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
                 
                 switch self.courseModel.submitType {
                 case 0:
-                    cell.submitButton.setTitle(Strings.CourseDetail.viewCourse, forState: .Normal)
+                    cell.submitButton.setTitle(TDLocalizeSelectSwift("COURSE_DETAIL.VIEW_COURSE"), forState: .Normal)
                 case 1:
                     if self.courseModel.is_public_course == true && self.courseModel.course_price?.floatValue != 0 {
-                        cell.submitButton.setAttributedTitle(setSubmitTitle(Strings.CourseDetail.enrollNow), forState: .Normal)
+                        cell.submitButton.setAttributedTitle(setSubmitTitle(TDLocalizeSelectSwift("COURSE_DETAIL.ENROLL_NOW")), forState: .Normal)
                         setButtonCellDiscountLabel(cell)
                     } else {
-                       cell.submitButton.setTitle(Strings.CourseDetail.enrollNow, forState: .Normal)
+                       cell.submitButton.setTitle(TDLocalizeSelectSwift("COURSE_DETAIL.ENROLL_NOW"), forState: .Normal)
                     }
                 case 2:
-                    cell.submitButton.setAttributedTitle(setSubmitTitle(Strings.viewPrepareOrder), forState: .Normal)
-                    cell.submitButton.setTitle(Strings.viewPrepareOrder, forState: .Normal)
+                    cell.submitButton.setAttributedTitle(setSubmitTitle(TDLocalizeSelectSwift("VIEW_PREPARE_ORDER")), forState: .Normal)
+                    cell.submitButton.setTitle(TDLocalizeSelectSwift("VIEW_PREPARE_ORDER"), forState: .Normal)
                     setButtonCellDiscountLabel(cell)
                 default:
-                    cell.submitButton.setTitle(Strings.willBeginCourse, forState: .Normal)
+                    cell.submitButton.setTitle(TDLocalizeSelectSwift("WILL_BEGIN_COURSE"), forState: .Normal)
                 }
                 
 //                cell.submitType = self.courseModel.submitType
@@ -186,19 +186,19 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
             switch indexPath.row {
             case 0:
                 cell.leftLabel.text = "\u{f19c}"
-                cell.titleLabel.text = Strings.mainProfessor
+                cell.titleLabel.text = TDLocalizeSelectSwift("MAIN_PROFESSOR")
             case 1:
                 cell.leftLabel.text = "\u{f0ca}"
-                cell.titleLabel.text = Strings.courseOutline
+                cell.titleLabel.text = TDLocalizeSelectSwift("COURSE_OUTLINE")
             case 2:
                 cell.leftLabel.text = "\u{f040}"
-                cell.titleLabel.text = Strings.studentComment
+                cell.titleLabel.text = TDLocalizeSelectSwift("STUDENT_COMMENT")
             case 3:
                 cell.leftLabel.text = "\u{f0c0}"
-                cell.titleLabel.text = Strings.classTitle
+                cell.titleLabel.text = TDLocalizeSelectSwift("CLASS_TITLE")
             default:
                 cell.leftLabel.text = "\u{f19d}"
-                cell.titleLabel.text = Strings.teachAssistant
+                cell.titleLabel.text = TDLocalizeSelectSwift("TEACH_ASSISTANT")
             }
             return cell
         }
@@ -211,7 +211,7 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
             let baseTool = TDBaseToolModel.init()
             let startStr = baseTool.interceptStr(self.courseModel.begin_at!)
             let endStr = baseTool.interceptStr(self.courseModel.end_at!)
-            let giveStr = baseTool.setDetailString(Strings.receiveMind(startdate: startStr, enddate: endStr, number: coinStr as String), withFont: 12, withColorStr: "#fa7f2b")
+            let giveStr = baseTool.setDetailString(TDLocalizeSelectSwift("PAY_RECEIVE_MIND").oex_formatWithParameters(["startDate" : startStr, "endDate" : endStr, "number" : coinStr as String]), withFont: 12, withColorStr: "#fa7f2b")
             cell.discountLabel.attributedText = giveStr;
         }
     }

@@ -52,7 +52,7 @@
     self.sheetView.frame = CGRectMake(0, TDHeight, TDWidth, self.payHeight);
     [self addSubview:self.sheetView];
     
-    self.topView = [[TDBaseView alloc] initWithTitle:NSLocalizedString(@"SELECT_PAYWAY", nil)];
+    self.topView = [[TDBaseView alloc] initWithTitle:TDLocalizeSelect(@"SELECT_PAYWAY", nil)];
     [self.sheetView addSubview:self.topView];
     
     self.payTypeBgView = [[UIView alloc] init];
@@ -63,12 +63,12 @@
     [self.sheetView addSubview:self.payMoneyView];
     
     self.wechatView = [[TDPayTypeView alloc] init];
-    self.wechatView.typeLabel.text = NSLocalizedString(@"WECHAT_PAY", nil);
+    self.wechatView.typeLabel.text = TDLocalizeSelect(@"WECHAT_PAY", nil);
     self.wechatView.headerImage.image = [UIImage imageNamed:@"weChat"];
     [self.payTypeBgView addSubview:self.wechatView];
     
     self.alipayView = [[TDPayTypeView alloc] init];
-    self.alipayView.typeLabel.text = NSLocalizedString(@"ALI_PAY", nil);
+    self.alipayView.typeLabel.text = TDLocalizeSelect(@"ALI_PAY", nil);
     self.alipayView.headerImage.image = [UIImage imageNamed:@"zhifu"];
     [self.payTypeBgView addSubview:self.alipayView];
     

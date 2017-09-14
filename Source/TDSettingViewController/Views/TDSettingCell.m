@@ -45,13 +45,13 @@ typedef NS_ENUM(NSUInteger, OEXMySettingsAlertTag) {
     self.titleLabel = [[UILabel alloc] init];
     self.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     self.titleLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
-    [self.titleLabel setText:NSLocalizedString(@"DOWNLOAD_ONLY_WIFI", nil)];
+    [self.titleLabel setText:TDLocalizeSelect(@"DOWNLOAD_ONLY_WIFI", nil)];
     [self.bgView addSubview:self.titleLabel];
     
     self.messageLabel = [[UILabel alloc] init];
     self.messageLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
     self.messageLabel.textColor = [UIColor colorWithHexString:colorHexStr9];
-    [self.messageLabel setText:NSLocalizedString(@"DOWNLOAD_IN_WIFI", nil)];
+    [self.messageLabel setText:TDLocalizeSelect(@"DOWNLOAD_IN_WIFI", nil)];
     self.messageLabel.numberOfLines = 0;
     [self.bgView addSubview:self.messageLabel];
     
@@ -94,11 +94,11 @@ typedef NS_ENUM(NSUInteger, OEXMySettingsAlertTag) {
         [OEXInterface setDownloadOnlyOnWifiPref:self.wifiSwicth.isOn];
         
     } else {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings cellularDownloadEnabledTitle]
-                                                        message:[Strings cellularDownloadEnabledMessage]
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"CELLULAR_DOWNLOAD_ENABLED_TITLE", nil)
+                                                        message:TDLocalizeSelect(@"CELLULAR_DOWNLOAD_ENABLED_MESSAGE", nil)
                                                        delegate:self
-                                              cancelButtonTitle:[Strings allow]
-                                              otherButtonTitles:[Strings doNotAllow], nil];
+                                              cancelButtonTitle:TDLocalizeSelect(@"ALLOW", nil)
+                                              otherButtonTitles:TDLocalizeSelect(@"DO_NOT_ALLOW", nil), nil];
         [alert show];
     }
 }

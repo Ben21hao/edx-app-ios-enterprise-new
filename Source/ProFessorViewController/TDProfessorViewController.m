@@ -38,7 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = NSLocalizedString(@"PROFESSOR_DETAIL", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"PROFESSOR_DETAIL", nil);
     self.baseTool = [[TDBaseToolModel alloc] init];
     [self setLoadDataView];
     
@@ -102,7 +102,7 @@
             
         } else {
             NSLog(@"请求错误 ==== %@",responDic[@"msg"]);
-            [self.view makeToast:NSLocalizedString(@"NO_SUPPORT_WECHAT", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"NO_SUPPORT_WECHAT", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
         [self.loadIngView removeFromSuperview];
@@ -110,7 +110,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         [self.loadIngView removeFromSuperview];
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error ---- %@",error);
         
     }];
@@ -166,25 +166,25 @@
     
     switch (indexPath.section) {
         case 0:
-            cell.textLabel.attributedText = [self setDetailTextAttribute:[NSString stringWithFormat:@"%@\n",NSLocalizedString(@"PROFESSOR_INTRODUCE", nil)] withDetail:[NSString stringWithFormat:@"%@", self.introduce]];
+            cell.textLabel.attributedText = [self setDetailTextAttribute:[NSString stringWithFormat:@"%@\n",TDLocalizeSelect(@"PROFESSOR_INTRODUCE", nil)] withDetail:[NSString stringWithFormat:@"%@", self.introduce]];
             break;
         case 1:
-            cell.textLabel.attributedText = [self setDetailTextAttribute:[NSString stringWithFormat:@"%@\n",NSLocalizedString(@"MAIN_ACHIECEMENT", nil)] withDetail:[NSString stringWithFormat:@"%@", self.achievement]];
+            cell.textLabel.attributedText = [self setDetailTextAttribute:[NSString stringWithFormat:@"%@\n",TDLocalizeSelect(@"MAIN_ACHIECEMENT", nil)] withDetail:[NSString stringWithFormat:@"%@", self.achievement]];
             break;
         case 2:
-            cell.textLabel.attributedText = [self setDetailTextAttribute:[NSString stringWithFormat:@"%@\n",NSLocalizedString(@"EDUCATIONNAL_BACKGROUND", nil)] withDetail:[NSString stringWithFormat:@"%@", self.education]];
+            cell.textLabel.attributedText = [self setDetailTextAttribute:[NSString stringWithFormat:@"%@\n",TDLocalizeSelect(@"EDUCATIONNAL_BACKGROUND", nil)] withDetail:[NSString stringWithFormat:@"%@", self.education]];
             break;
         case 3:
-            cell.textLabel.attributedText = [self setDetailTextAttribute:[NSString stringWithFormat:@"%@\n",NSLocalizedString(@"OTHERS_ACHIEVEMENT", nil)] withDetail:[NSString stringWithFormat:@"%@", self.otherAchievement]];
+            cell.textLabel.attributedText = [self setDetailTextAttribute:[NSString stringWithFormat:@"%@\n",TDLocalizeSelect(@"OTHERS_ACHIEVEMENT", nil)] withDetail:[NSString stringWithFormat:@"%@", self.otherAchievement]];
             break;
         case 4:
-            cell.textLabel.attributedText = [self setDetailTextAttribute:[NSString stringWithFormat:@"%@\n",NSLocalizedString(@"RESEARCH_FIELD", nil)] withDetail:[NSString stringWithFormat:@"%@", self.research]];
+            cell.textLabel.attributedText = [self setDetailTextAttribute:[NSString stringWithFormat:@"%@\n",TDLocalizeSelect(@"RESEARCH_FIELD", nil)] withDetail:[NSString stringWithFormat:@"%@", self.research]];
             break;
         case 5:
-            cell.textLabel.attributedText = [self setDetailTextAttribute:[NSString stringWithFormat:@"%@\n",NSLocalizedString(@"ACADEMIC_ESSAYS", nil)] withDetail:[NSString stringWithFormat:@"%@", self.learning]];
+            cell.textLabel.attributedText = [self setDetailTextAttribute:[NSString stringWithFormat:@"%@\n",TDLocalizeSelect(@"ACADEMIC_ESSAYS", nil)] withDetail:[NSString stringWithFormat:@"%@", self.learning]];
             break;
         case 6:
-            cell.textLabel.attributedText = [self setDetailTextAttribute:[NSString stringWithFormat:@"%@\n",NSLocalizedString(@"MANAGEREMENT_CONSULTING", nil)] withDetail:[NSString stringWithFormat:@"%@", self.project]];
+            cell.textLabel.attributedText = [self setDetailTextAttribute:[NSString stringWithFormat:@"%@\n",TDLocalizeSelect(@"MANAGEREMENT_CONSULTING", nil)] withDetail:[NSString stringWithFormat:@"%@", self.project]];
             break;
             
         default:

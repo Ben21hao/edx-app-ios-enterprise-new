@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = NSLocalizedString(@"COUPON_ACTIVITY", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"COUPON_ACTIVITY", nil);
     
     if (self.dataArray.count > 0) {
         [self setTableviewConstraint];
@@ -100,7 +100,7 @@
     }
     
     ActivityListItem *model = [[ActivityListItem alloc] init];
-    model.activity_name = NSLocalizedString(@"SELECT_ACTIVITY_ITEM", nil);
+    model.activity_name = TDLocalizeSelect(@"SELECT_ACTIVITY_ITEM", nil);
     model.canUse = YES;
     NSMutableArray *arr = [NSMutableArray arrayWithArray:self.dataArray];
     [arr insertObject:model atIndex:0];
@@ -119,7 +119,7 @@
 
 - (void)setNoneDataView {
     UILabel  *noneLabel = [[UILabel alloc] init];
-    noneLabel.text = NSLocalizedString(@"NO_ACTIVITY", nil);
+    noneLabel.text = TDLocalizeSelect(@"NO_ACTIVITY", nil);
     noneLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     noneLabel.font = [UIFont systemFontOfSize:16];
     [self.view addSubview:noneLabel];

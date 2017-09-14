@@ -84,7 +84,7 @@
     
     self.sendMsgButton.titleLabel.font = [UIFont systemFontOfSize:16];
     self.sendMsgButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.sendMsgButton setTitle:NSLocalizedString(@"SEND_MESSAGE_BUTTON", nil) forState:UIControlStateNormal];
+    [self.sendMsgButton setTitle:TDLocalizeSelect(@"SEND_MESSAGE_BUTTON", nil) forState:UIControlStateNormal];
     [self.sendMsgButton setUserInteractionEnabled:NO];
     
     if (_type ==3) {

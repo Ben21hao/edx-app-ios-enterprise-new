@@ -58,7 +58,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = NSLocalizedString(@"TA_DETAILS", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"TA_DETAILS", nil);
     
     [self setViewConstraint];
     
@@ -320,10 +320,10 @@
     UILabel *mottoLabel = [self setLabel];
     [headerView addSubview:mottoLabel];
     
-    UIButton *authenButton = [self setButtonWithTitle:NSLocalizedString(@"VERIFIED_TA", nil) withColor:colorHexStr3];
+    UIButton *authenButton = [self setButtonWithTitle:TDLocalizeSelect(@"VERIFIED_TA", nil) withColor:colorHexStr3];
     [headerView addSubview:authenButton];
     
-    UIButton *orderButton = [self setButtonWithTitle:[Strings serviceOrderNumWithCount:[NSString stringWithFormat:@"%@",self.model.service_times]] withColor:colorHexStr3];
+    UIButton *orderButton = [self setButtonWithTitle: [TDLocalizeSelect(@"SERVICE_ORDER_NUM", nil) oex_formatWithParameters:@{@"count" : [NSString stringWithFormat:@"%@",self.model.service_times]}]  withColor:colorHexStr3];
     [headerView addSubview:orderButton];
     
     if ([self.model.service_times intValue] == 0) {

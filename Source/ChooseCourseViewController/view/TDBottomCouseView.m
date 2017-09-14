@@ -47,7 +47,7 @@
     self.titelLabel = [[UILabel alloc] init];
     self.titelLabel.textColor = [UIColor colorWithHexString:colorHexStr9];
     self.titelLabel.font = [UIFont systemFontOfSize:14];
-    self.titelLabel.text = NSLocalizedString(@"COURSE_TITLE", nil);
+    self.titelLabel.text = TDLocalizeSelect(@"COURSE_TITLE", nil);
     [self.bgView addSubview:self.titelLabel];
     
     self.moneyLabel = [[UILabel alloc] init];

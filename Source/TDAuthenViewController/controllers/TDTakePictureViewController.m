@@ -27,7 +27,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
-    self.titleViewLabel.text = NSLocalizedString(@"AUTHENTICATION_MESSAGE", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"AUTHENTICATION_MESSAGE", nil);
     
     [self setViewConstraint];
 

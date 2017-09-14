@@ -79,7 +79,7 @@ class CropViewController: UIViewController {
         view.addSubview(toolbar)
         
         let titleStyle = OEXStyles.sharedStyles().navigationTitleTextStyle
-        titleLabel.attributedText = titleStyle.attributedStringWithText(Strings.Profile.cropAndResizePicture)
+        titleLabel.attributedText = titleStyle.attributedStringWithText(TDLocalizeSelectSwift("PROFILE.CROP_AND_RESIZE_PICTURE"))
         view.addSubview(titleLabel)
         
         titleLabel.snp_makeConstraints { (make) -> Void in
@@ -119,7 +119,7 @@ class CropViewController: UIViewController {
        
         let cancelButton = UIButton(type:.System)
         cancelButton.frame = CGRect(x: 0,y: 0, width: 100, height: 44)
-        cancelButton.setTitle(Strings.cancel, forState: .Normal)
+        cancelButton.setTitle(TDLocalizeSelectSwift("CANCEL"), forState: .Normal)
         cancelButton.setTitleColor(OEXStyles.sharedStyles().neutralWhiteT(), forState: .Normal)
         cancelButton.sizeToFit()
 
@@ -130,7 +130,7 @@ class CropViewController: UIViewController {
 
         let chooseButton = UIButton(type:.System)
         chooseButton.frame = CGRect(x: 0,y: 0, width: 100, height: 44)
-        chooseButton.setTitle(Strings.choose, forState: .Normal)
+        chooseButton.setTitle(TDLocalizeSelectSwift("CHOOSE"), forState: .Normal)
         chooseButton.setTitleColor(OEXStyles.sharedStyles().neutralWhiteT(), forState: .Normal)
         chooseButton.sizeToFit()
 

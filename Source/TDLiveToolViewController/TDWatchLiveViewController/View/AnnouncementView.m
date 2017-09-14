@@ -25,7 +25,7 @@
         
         _content = content;
         _contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
-        _contentLabel.text = [NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"NOTICE_TEXT", nil),content];
+        _contentLabel.text = [NSString stringWithFormat:@"%@ %@",TDLocalizeSelect(@"NOTICE_TEXT", nil),content];
         _contentLabel.centerY = self.height / 2;
         _contentLabel.left = VH_SW - self.height;
         _contentLabel.textColor = MakeColorRGB(0x909090);
@@ -90,7 +90,7 @@
     
     if(content) {
         [self endAnimation];
-        _contentLabel.text = [NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"NOTICE_TEXT", nil),_content];
+        _contentLabel.text = [NSString stringWithFormat:@"%@ %@",TDLocalizeSelect(@"NOTICE_TEXT", nil),_content];
         [_contentLabel sizeToFit];
         _contentLabel.transform = CGAffineTransformMakeTranslation(0,0);
         _contentLabel.left =  VH_SW-self.height;

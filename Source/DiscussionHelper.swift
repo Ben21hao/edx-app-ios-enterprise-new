@@ -16,10 +16,10 @@ class DiscussionHelper: NSObject {
         
         switch thread.type {
         case .Question:
-            let endorsedText = textStyle.attributedStringWithText(Strings.answer)
+            let endorsedText = textStyle.attributedStringWithText(TDLocalizeSelectSwift("ANSWER"))
             label.attributedText = NSAttributedString.joinInNaturalLayout([endorsedIcon,endorsedText])
         case .Discussion:
-            let endorsedText = textStyle.attributedStringWithText(Strings.endorsed)
+            let endorsedText = textStyle.attributedStringWithText(TDLocalizeSelectSwift("ENDORSED"))
             label.attributedText = NSAttributedString.joinInNaturalLayout([endorsedIcon,endorsedText])
         }
     }
@@ -27,10 +27,10 @@ class DiscussionHelper: NSObject {
     class func messageForError(error: NSError?) -> String {
         
         if let error = error where error.oex_isNoInternetConnectionError {
-            return Strings.networkNotAvailableMessageTrouble
+            return TDLocalizeSelectSwift("NETWORK_NOT_AVAILABLE_MESSAGE_TROUBLE")
         }
         else {
-            return Strings.unknownError
+            return TDLocalizeSelectSwift("UNKNOWN_ERROR")
         }
     }
     
@@ -39,10 +39,10 @@ class DiscussionHelper: NSObject {
         let controller = controller ?? UIApplication.sharedApplication().keyWindow?.rootViewController
         
         if let error = error where error.oex_isNoInternetConnectionError {
-            UIAlertController().showAlertWithTitle(Strings.networkNotAvailableTitle, message: Strings.networkNotAvailableMessageTrouble, onViewController: controller ?? UIViewController())
+            UIAlertController().showAlertWithTitle(TDLocalizeSelectSwift("NETWORK_NOT_AVAILABLE_TITLE") , message: TDLocalizeSelectSwift("NETWORK_NOT_AVAILABLE_MESSAGE_TROUBLE"), onViewController: controller ?? UIViewController())
         }
         else {
-            controller?.showOverlayMessage(Strings.unknownError)
+            controller?.showOverlayMessage(TDLocalizeSelectSwift("UNKNOWN_ERROR"))
         }
         
     }
@@ -79,11 +79,11 @@ class DiscussionHelper: NSObject {
             highlightStyle.color = OEXStyles.sharedStyles().neutralXDark()
             highlightStyle.weight = textStyle.weight
         }
-        let authorName = highlightStyle.attributedStringWithText(author ?? Strings.anonymous.oex_lowercaseStringInCurrentLocale())
+        let authorName = highlightStyle.attributedStringWithText(author ?? TDLocalizeSelectSwift("ANONYMOUS").oex_lowercaseStringInCurrentLocale())
         var attributedStrings = [NSAttributedString]()
         attributedStrings.append(authorName)
         if let authorLabel = authorLabel {
-            attributedStrings.append(textStyle.attributedStringWithText(Strings.parenthesis(text: authorLabel)))
+            attributedStrings.append(textStyle.attributedStringWithText(TDLocalizeSelectSwift("PARENTHESIS").oex_formatWithParameters(["text" : authorLabel])))
         }
         
         let formattedAuthorName = NSAttributedString.joinInNaturalLayout(attributedStrings)
@@ -99,7 +99,7 @@ class DiscussionHelper: NSObject {
             authorButton.oex_removeAllActions()
             authorButton.oex_addAction({ [weak viewController] _ in
                 
-                router?.showProfileForUsername(viewController, username: author ?? Strings.anonymous, editable: false)
+                router?.showProfileForUsername(viewController, username: author ?? TDLocalizeSelectSwift("ANONYMOUS"), editable: false)
                 
                 }, forEvents: .TouchUpInside)
         }

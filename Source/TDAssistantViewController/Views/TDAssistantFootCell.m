@@ -65,7 +65,7 @@
             
         } else {
             self.enterButton.hidden = NO;
-            [self.enterButton setTitle:NSLocalizedString(@"ENTER_CLASSROOM", nil) forState:UIControlStateNormal];
+            [self.enterButton setTitle:TDLocalizeSelect(@"ENTER_CLASSROOM", nil) forState:UIControlStateNormal];
         }
         
     } else if (self.whereFrom == 1) {//已完成
@@ -119,7 +119,7 @@
         
     } else {//当前时间已过开始时间
         self.enterButton.hidden = NO;
-        [self.enterButton setTitle:NSLocalizedString(@"ENTER_CLASSROOM", nil) forState:UIControlStateNormal];
+        [self.enterButton setTitle:TDLocalizeSelect(@"ENTER_CLASSROOM", nil) forState:UIControlStateNormal];
     }
     
 //    NSLog(@"---==== >>>> %@ == %@ --> %f",startDate,now,interval);
@@ -140,7 +140,7 @@
     if (self.timeNum <= 0) {
         [self.timer invalidate];
         self.isCanClick = YES;
-        [self.enterButton setTitle:NSLocalizedString(@"ENTER_CLASSROOM", nil) forState:UIControlStateNormal];
+        [self.enterButton setTitle:TDLocalizeSelect(@"ENTER_CLASSROOM", nil) forState:UIControlStateNormal];
     }
 }
 
@@ -174,7 +174,7 @@
         secondStr = second < 10 ? [NSString stringWithFormat:@"0%d",second] :[NSString stringWithFormat:@"%d",second];
     }
     
-    NSString *str = [Strings timeCountNumWithDay:dayStr hour:hourStr min:muniteStr second:secondStr];
+    NSString *str = [TDLocalizeSelect(@"TIME_COUNT_NUM", nil) oex_formatWithParameters:@{@"day" : dayStr, @"hour" : hourStr, @"min" : muniteStr, @"second" : secondStr}];
     [self.enterButton setTitle:str forState:UIControlStateNormal];
 }
 
@@ -219,15 +219,15 @@
     self.bgView = [[UIView alloc] init];
     [self addSubview:self.bgView];
     
-    self.enterButton = [self setButtonConstraint:NSLocalizedString(@"ENTER_CLASSROOM", nil) backGroundColor:colorHexStr1 titleColor:colorHexStr13];
+    self.enterButton = [self setButtonConstraint:TDLocalizeSelect(@"ENTER_CLASSROOM", nil) backGroundColor:colorHexStr1 titleColor:colorHexStr13];
     [self.enterButton addTarget:self action:@selector(enterButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.bgView addSubview:self.enterButton];
     
-    self.cancelButton = [self setButtonConstraint:NSLocalizedString(@"CANCEL", nil) backGroundColor:colorHexStr6 titleColor:colorHexStr9];
+    self.cancelButton = [self setButtonConstraint:TDLocalizeSelect(@"CANCEL", nil) backGroundColor:colorHexStr6 titleColor:colorHexStr9];
     [self.cancelButton addTarget:self action:@selector(cancelButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.bgView addSubview:self.cancelButton];
     
-    self.commentButton = [self setButtonConstraint:NSLocalizedString(@"RETE_TA", nil) backGroundColor:colorHexStr4 titleColor:colorHexStr13];
+    self.commentButton = [self setButtonConstraint:TDLocalizeSelect(@"RETE_TA", nil) backGroundColor:colorHexStr4 titleColor:colorHexStr13];
     [self.commentButton addTarget:self action:@selector(commentButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.bgView addSubview:self.commentButton];
     

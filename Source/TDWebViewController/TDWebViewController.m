@@ -47,7 +47,7 @@
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation {
     
-    [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+    [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
     [self.loadIngView removeFromSuperview];
 }
 
@@ -62,7 +62,7 @@
     self.agreeButton = [[UIButton alloc] init];
     self.agreeButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.agreeButton.layer.cornerRadius = 4.0;
-    [self.agreeButton setTitle:NSLocalizedString(@"ENDORSED", nil) forState:UIControlStateNormal];
+    [self.agreeButton setTitle:TDLocalizeSelect(@"ENDORSED", nil) forState:UIControlStateNormal];
     [self.agreeButton addTarget:self action:@selector(agreeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.agreeButton];
     

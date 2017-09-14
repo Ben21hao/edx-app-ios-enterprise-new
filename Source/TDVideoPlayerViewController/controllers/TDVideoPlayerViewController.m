@@ -535,7 +535,7 @@ static const NSTimeInterval RewindTimeInterval = 30;
     self.messageLabel = [[UILabel alloc] init];
     self.messageLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     self.messageLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
-    self.messageLabel.text = NSLocalizedString(@"ROTATE_DEVICE", nil);
+    self.messageLabel.text = TDLocalizeSelect(@"ROTATE_DEVICE", nil);
     self.messageLabel.numberOfLines = 0;
     self.messageLabel.textAlignment = NSTextAlignmentCenter;
     [self.bottomView addSubview:self.messageLabel];
@@ -595,7 +595,7 @@ static const NSTimeInterval RewindTimeInterval = 30;
     self.playButton.hidden = YES;
     self.captionView.hidden = YES;
     self.captionView.alpha = 0.0;
-    self.captionView.titleArray = @[NSLocalizedString(@"CLOSED_CAPTIONS", nil)];
+    self.captionView.titleArray = @[TDLocalizeSelect(@"CLOSED_CAPTIONS", nil)];
 }
 
 - (void)didReceiveMemoryWarning {

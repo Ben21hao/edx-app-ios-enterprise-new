@@ -90,7 +90,7 @@ class CoursesTableViewController: UITableViewController {
         self.noDataLabel.font = UIFont.init(name: "OpenSans", size: 16)
         self.noDataLabel.textAlignment = .Center
         self.noDataLabel.textColor = OEXStyles.sharedStyles().baseColor9()
-        self.noDataLabel.text = Strings.noCourseAvailableText
+        self.noDataLabel.text = TDLocalizeSelectSwift("NO_COURSE_AVAILABLE_TEXT")
         self.tableView.addSubview(self.noDataLabel)
         
         self.noDataLabel.snp_makeConstraints { (make) in
@@ -124,7 +124,7 @@ class CoursesTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(CourseCardCell.cellIdentifier, forIndexPath: indexPath) as! CourseCardCell
         cell.accessibilityLabel = cell.courseView.updateAcessibilityLabel()
-        cell.accessibilityHint = Strings.accessibilityShowsCourseContent
+        cell.accessibilityHint = TDLocalizeSelectSwift("ACCESSIBILITY_SHOWS_COURSE_CONTENT")
         
         cell.courseView.tapAction = {[weak self] card in
             self?.delegate?.coursesTableChoseCourse(course)

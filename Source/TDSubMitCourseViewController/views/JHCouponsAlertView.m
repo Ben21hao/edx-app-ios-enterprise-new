@@ -40,7 +40,7 @@
         
         //弹窗标题
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 6, Width, 40)];
-        label.text = NSLocalizedString(@"ENTER_COINS_AMOUNT", nil);
+        label.text = TDLocalizeSelect(@"ENTER_COINS_AMOUNT", nil);
         label.textColor = [UIColor colorWithHexString:colorHexStr9];
         label.textAlignment = NSTextAlignmentCenter;
         [imageView addSubview:label];
@@ -65,12 +65,12 @@
         textF2.clearButtonMode = UITextFieldViewModeAlways;
         textF2.keyboardType = UIKeyboardTypeEmailAddress;
         textF2.background = [UIImage imageNamed:@"bt_grey_default.png"];
-        textF2.placeholder = NSLocalizedString(@"COINS_AMOUNT", nil);
+        textF2.placeholder = TDLocalizeSelect(@"COINS_AMOUNT", nil);
         self.textF2 = textF2;
         [imageView addSubview:textF2];
         //
         UILabel *textF3 = [[UILabel alloc] initWithFrame:CGRectMake(10, 123, 260, 30)];
-        textF3.text = NSLocalizedString(@"RMB_TO_COINS", nil);
+        textF3.text = TDLocalizeSelect(@"RMB_TO_COINS", nil);
         textF3.textColor = [UIColor  colorWithHexString:colorHexStr9];
         textF3.textAlignment = NSTextAlignmentCenter;
         textF3.font = [UIFont systemFontOfSize:13];
@@ -87,14 +87,14 @@
         
         //添加取消和确定按钮
         UIButton *cancleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 155, Width * 0.5, 50)];
-        [cancleBtn setTitle:NSLocalizedString(@"CANCEL", nil) forState:UIControlStateNormal];
+        [cancleBtn setTitle:TDLocalizeSelect(@"CANCEL", nil) forState:UIControlStateNormal];
         [cancleBtn setTitleColor:[UIColor colorWithHexString:colorHexStr9] forState:UIControlStateNormal];
         cancleBtn.tag = 0;
         [cancleBtn addTarget:self action:@selector(btnOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [imageView addSubview:cancleBtn];
         
         UIButton *quedingBtn = [[UIButton alloc] initWithFrame:CGRectMake(Width * 0.5, 155, Width * 0.5, 50)];
-        [quedingBtn setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
+        [quedingBtn setTitle:TDLocalizeSelect(@"OK", nil) forState:UIControlStateNormal];
         [quedingBtn setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
         quedingBtn.tag = 1;
         [quedingBtn addTarget:self action:@selector(btnOnClick:) forControlEvents:UIControlEventTouchUpInside];

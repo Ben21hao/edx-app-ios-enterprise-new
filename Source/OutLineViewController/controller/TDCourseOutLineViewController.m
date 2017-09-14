@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = NSLocalizedString(@"COURSE_OUTLINE", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"COURSE_OUTLINE", nil);
     
     [self setViewConstraint];
     [self setLoadDataView];
@@ -107,7 +107,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.loadIngView removeFromSuperview];
-                [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+                [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error --%@",error);
     }];
 }
@@ -236,7 +236,7 @@
     self.nonDataLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     self.nonDataLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     self.nonDataLabel.hidden = YES;
-    self.nonDataLabel.text = NSLocalizedString(@"NO_COURSE_OUTLINE", nil);
+    self.nonDataLabel.text = TDLocalizeSelect(@"NO_COURSE_OUTLINE", nil);
     [self.tableView addSubview:self.nonDataLabel];
     
     [self.nonDataLabel mas_makeConstraints:^(MASConstraintMaker *make) {

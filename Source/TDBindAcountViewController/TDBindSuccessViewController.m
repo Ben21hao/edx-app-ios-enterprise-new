@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = NSLocalizedString(@"SURE_BIND", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"SURE_BIND", nil);
     [self configView];
     [self setViewConstraint];
     
@@ -56,7 +56,7 @@
 #pragma mark - UI
 - (void)configView {
     self.topLabel = [[UILabel alloc] init];
-    self.topLabel.text = NSLocalizedString(@"EMAIL_AREADY_SEND", nil);
+    self.topLabel.text = TDLocalizeSelect(@"EMAIL_AREADY_SEND", nil);
     self.topLabel.textColor = [UIColor colorWithHexString:colorHexStr9];
     self.topLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     self.topLabel.textAlignment = NSTextAlignmentCenter;
@@ -66,7 +66,7 @@
     self.sureButton = [[UIButton alloc] init];
     self.sureButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.sureButton.layer.cornerRadius = 4.0;
-    [self.sureButton setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
+    [self.sureButton setTitle:TDLocalizeSelect(@"OK", nil) forState:UIControlStateNormal];
     [self.sureButton addTarget:self action:@selector(sureButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.sureButton];
 }

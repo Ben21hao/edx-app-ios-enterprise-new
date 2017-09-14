@@ -71,7 +71,7 @@ public class CourseHandoutsViewController: OfflineSupportViewController, UIWebVi
         self.view.backgroundColor = OEXStyles.sharedStyles().baseColor5()
         
         self.titleL = UILabel(frame:CGRect(x:0, y:0, width:40, height:40))
-        self.titleL?.text = Strings.courseHandouts
+        self.titleL?.text = TDLocalizeSelectSwift("COURSE_HANDOUTS")
         self.titleL?.font = UIFont(name:"OpenSans",size:18.0)
         self.titleL?.textColor = UIColor.whiteColor()
         self.navigationItem.titleView = self.titleL
@@ -176,7 +176,7 @@ public class CourseHandoutsViewController: OfflineSupportViewController, UIWebVi
     func gotoWebView(url: NSURL) {
         let webViewController = TDWebUrlViewController()
         webViewController.url = url
-        webViewController.titleStr = Strings.courseHandouts
+        webViewController.titleStr = TDLocalizeSelectSwift("COURSE_HANDOUTS")
         self.navigationController?.pushViewController(webViewController, animated: true)
     }
 }

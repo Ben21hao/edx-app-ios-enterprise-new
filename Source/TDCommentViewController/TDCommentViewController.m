@@ -65,13 +65,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.titleViewLabel.text = NSLocalizedString(@"STUDENT_COMMENT", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"STUDENT_COMMENT", nil);
 }
 
 #pragma mark - 获取头部数据
 - (void)requestTopData {
     if (![self.baseTool networkingState]) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         return;
     }
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -205,13 +205,13 @@
             }
             
         } else {
-            [self.view makeToast:NSLocalizedString(@"SYSTEM_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"SYSTEM_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
             NSLog(@"评论 --- %@",responseObject[@"msg"]);
         }
         
         if (!self.tableView) {
             if (self.topArry.count == 0 && self.commentArray.count == 0) {
-                [self setNullDataView:NSLocalizedString(@"NO_STUDENT_COMMENT", nil)];
+                [self setNullDataView:TDLocalizeSelect(@"NO_STUDENT_COMMENT", nil)];
                 return;
             } else {
                 [self setviewConstraint];
@@ -236,7 +236,7 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         [self.loadIngView removeFromSuperview];
         NSLog(@"获取评论数据 error--%@",error);
     }];

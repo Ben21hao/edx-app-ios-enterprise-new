@@ -26,8 +26,8 @@ public class VersionUpgradeView: UIView {
         self.backgroundColor = OEXStyles.sharedStyles().warningBase()
         messageLabel.numberOfLines = 0
         messageLabel.attributedText = messageLabelStyle.attributedStringWithText(message)
-        upgradeButton.setAttributedTitle(buttonLabelStyle.attributedStringWithText(Strings.VersionUpgrade.update), forState: .Normal)
-        dismissButton.setAttributedTitle(buttonLabelStyle.attributedStringWithText(Strings.VersionUpgrade.dismiss), forState: .Normal)
+        upgradeButton.setAttributedTitle(buttonLabelStyle.attributedStringWithText(TDLocalizeSelectSwift("VERSION_UPGRADE.UPDATE")), forState: .Normal)
+        dismissButton.setAttributedTitle(buttonLabelStyle.attributedStringWithText(TDLocalizeSelectSwift("VERSION_UPGRADE.DISMISS")), forState: .Normal)
         
         addSubview(messageLabel)
         addSubview(dismissButton)
@@ -111,8 +111,8 @@ public class OfflineView: UIView {
         self.backgroundColor = OEXStyles.sharedStyles().warningBase()
         messageLabel.numberOfLines = 0
         messageLabel.attributedText = messageLabelStyle.attributedStringWithText(message)
-        reloadButton.setAttributedTitle(buttonLabelStyle.attributedStringWithText(Strings.reload), forState: .Normal)
-        dismissButton.setAttributedTitle(buttonLabelStyle.attributedStringWithText(Strings.VersionUpgrade.dismiss), forState: .Normal)
+        reloadButton.setAttributedTitle(buttonLabelStyle.attributedStringWithText(TDLocalizeSelectSwift("RELOAD")), forState: .Normal)
+        dismissButton.setAttributedTitle(buttonLabelStyle.attributedStringWithText(TDLocalizeSelectSwift("VERSION_UPGRADE.DISMISS")), forState: .Normal)
         addSubview(messageLabel)
         addSubview(dismissButton)
         addSubview(reloadButton)

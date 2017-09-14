@@ -54,7 +54,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"NO_USE_COUPON", nil);
+    self.title = TDLocalizeSelect(@"NO_USE_COUPON", nil);
     
     [self.couponTableView registerNib:[UINib nibWithNibName:@"UserCouponTableViewCell" bundle:nil] forCellReuseIdentifier:@"couponCell"];
     [self.couponTableView registerNib:[UINib nibWithNibName:@"UserDiscountTableViewCell" bundle:nil] forCellReuseIdentifier:@"discountCell"];
@@ -117,7 +117,7 @@
             [self.couponTableView.mj_footer endRefreshing];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error--%@",error);
     }];
 }
@@ -155,14 +155,14 @@
         self.page++;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error--%@",error);
     }];
 }
 
 - (void)hasNoCouponView {
     self.noDataLabel = [[UILabel alloc] init];
-    self.noDataLabel.text = NSLocalizedString(@"NO_AVALIDE_COUPON", nil);
+    self.noDataLabel.text = TDLocalizeSelect(@"NO_AVALIDE_COUPON", nil);
     self.noDataLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     self.noDataLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     [self.couponTableView  addSubview:self.noDataLabel];

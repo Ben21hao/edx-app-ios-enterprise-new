@@ -39,24 +39,24 @@
 
     NSString *event = @"";
     if([_model.event isEqualToString:@"online"]) {
-        event = NSLocalizedString(@"ENTER_TEXT", nil);
+        event = TDLocalizeSelect(@"ENTER_TEXT", nil);
     }else if([_model.event isEqualToString:@"offline"]){
-        event = NSLocalizedString(@"LEAVE_TEXT", nil);
+        event = TDLocalizeSelect(@"LEAVE_TEXT", nil);
     }
     
     NSString *role = @"";
     if([_model.role isEqualToString:@"host"]) {
-        role = NSLocalizedString(@"HOST_TEXT", nil);
+        role = TDLocalizeSelect(@"HOST_TEXT", nil);
     }else if([_model.role isEqualToString:@"guest"]) {
-        role = NSLocalizedString(@"GUEST_TEXT", nil);
+        role = TDLocalizeSelect(@"GUEST_TEXT", nil);
     }else if([_model.role isEqualToString:@"assistant"]) {
-        role = NSLocalizedString(@"ASSISTANT_TEXT", nil);
+        role = TDLocalizeSelect(@"ASSISTANT_TEXT", nil);
     }else if([_model.role isEqualToString:@"user"]) {
-        role = NSLocalizedString(@"VIEWER_TEXT", nil);
+        role = TDLocalizeSelect(@"VIEWER_TEXT", nil);
     }
     
-    self.lblShow.text = [NSString stringWithFormat:@"%@[%@] %@%@%@", model.user_name, role, event, NSLocalizedString(@"ROOM_TEXT", nil),model.room];
-    self.lblState.text = [Strings onlineCountTextWithCount:model.concurrent_user number:model.attend_count time:model.time];
+    self.lblShow.text = [NSString stringWithFormat:@"%@[%@] %@%@%@", model.user_name, role, event, TDLocalizeSelect(@"ROOM_TEXT", nil),model.room];
+    self.lblState.text = [TDLocalizeSelect(@"ONLINE_COUNT_TEXT", nil) oex_formatWithParameters:@{@"count" : model.concurrent_user, @"number" : model.attend_count, @"time" : model.time}];
 
 }
 

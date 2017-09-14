@@ -144,7 +144,7 @@
 #pragma mark - 点赞praise或取消点赞cancel_praise
 - (void)praiseButtonAction:(UIButton *)sender {
     if (self.username.length == 0) {
-        [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:NSLocalizedString(@"LOGIN_AND_COMMENT", nil) duration:1.08 position:CSToastPositionCenter];
+        [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:TDLocalizeSelect(@"LOGIN_AND_COMMENT", nil) duration:1.08 position:CSToastPositionCenter];
         return;
     }
     
@@ -177,12 +177,12 @@
             }
             
         }else if ([code intValue] == 312){
-            [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:NSLocalizedString(@"AREADY_COMMENT", nil) duration:1.08 position:CSToastPositionCenter];
+            [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:TDLocalizeSelect(@"AREADY_COMMENT", nil) duration:1.08 position:CSToastPositionCenter];
         } else {
             NSLog(@" 点赞出错 ==  %@",code);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"errorCode---%ld---",(long)error.code);
     }];
 }
@@ -219,8 +219,8 @@
     
     self.moreButton = [[UIButton alloc] init];
     self.moreButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
-    [self.moreButton setTitle:NSLocalizedString(@"SHOW_MORE", nil) forState:UIControlStateNormal];
-    [self.moreButton setTitle:NSLocalizedString(@"PACK_UP", nil) forState:UIControlStateSelected];
+    [self.moreButton setTitle:TDLocalizeSelect(@"SHOW_MORE", nil) forState:UIControlStateNormal];
+    [self.moreButton setTitle:TDLocalizeSelect(@"PACK_UP", nil) forState:UIControlStateSelected];
     [self.moreButton setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
     [self.moreButton addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.bgView addSubview:self.moreButton];

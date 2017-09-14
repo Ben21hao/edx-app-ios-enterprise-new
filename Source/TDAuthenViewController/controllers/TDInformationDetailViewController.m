@@ -47,7 +47,7 @@ typedef NS_ENUM(NSInteger,TDMessageShow) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"AUTHENTICATION_MESSAGE", nil);
+    self.title = TDLocalizeSelect(@"AUTHENTICATION_MESSAGE", nil);
     [self requestData];
     
     self.loadIngView = [[TDBaseView alloc] initWithLoadingFrame:self.view.bounds];
@@ -82,7 +82,7 @@ typedef NS_ENUM(NSInteger,TDMessageShow) {
     
     TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
     if (![baseTool networkingState]) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_NOT_AVAILABLE_TITLE", nil) duration:0.8 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil) duration:0.8 position:CSToastPositionCenter];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.navigationController popToRootViewControllerAnimated:YES];
         });
@@ -109,7 +109,7 @@ typedef NS_ENUM(NSInteger,TDMessageShow) {
             self.messageView.name = [NSString stringWithFormat:@"%@",dataDic[@"name"]];
             self.messageView.identifyID = [NSString stringWithFormat:@"%@",dataDic[@"identityid"]];
             self.messageView.birthDate = [NSString stringWithFormat:@"%@",dataDic[@"birthdate"]];
-            self.messageView.sexStr = [dataDic[@"gender"] isEqualToString:@"m"] ? NSLocalizedString(@"TD_MAN", nil) : NSLocalizedString(@"TD_WOMEN", nil);
+            self.messageView.sexStr = [dataDic[@"gender"] isEqualToString:@"m"] ? TDLocalizeSelect(@"TD_MAN", nil) : TDLocalizeSelect(@"TD_WOMEN", nil);
             
             NSString *faceStr = [NSString stringWithFormat:@"%@%@",ELITEU_URL,dataDic[@"face_image"]];
             NSString *identifyStr = [NSString stringWithFormat:@"%@%@",ELITEU_URL,dataDic[@"identity_image"]];
@@ -121,7 +121,7 @@ typedef NS_ENUM(NSInteger,TDMessageShow) {
             [self.messageView.tableView reloadData];
             
         } else {
-            [self.view makeToast:NSLocalizedString(@"FAILED_QUESTE", nil) duration:0.8 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"FAILED_QUESTE", nil) duration:0.8 position:CSToastPositionCenter];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             });
@@ -131,7 +131,7 @@ typedef NS_ENUM(NSInteger,TDMessageShow) {
         NSLog(@"msg ---- %@ \n responseDic ==== %@",responseDic[@"msg"],responseDic);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+                [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         [self.loadIngView removeFromSuperview];
         NSLog(@"%ld",(long)error.code);
     }];
@@ -228,7 +228,7 @@ typedef NS_ENUM(NSInteger,TDMessageShow) {
     self.topLabel.font = [UIFont fontWithName:@"OpenSans" size:18];
     self.topLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
     self.topLabel.textAlignment = NSTextAlignmentCenter;
-    self.topLabel.text = type == TDMessageShowProgress ? NSLocalizedString(@"HANDIN_SUCCESS", nil) : NSLocalizedString(@"AUTHEN_NO_PASS", nil);
+    self.topLabel.text = type == TDMessageShowProgress ? TDLocalizeSelect(@"HANDIN_SUCCESS", nil) : TDLocalizeSelect(@"AUTHEN_NO_PASS", nil);
     [self.headerView addSubview:self.topLabel];
     
     self.messageLabel = [[UILabel alloc] init];
@@ -236,12 +236,12 @@ typedef NS_ENUM(NSInteger,TDMessageShow) {
     self.messageLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
     self.messageLabel.textAlignment = NSTextAlignmentCenter;
     self.messageLabel.numberOfLines = 0;
-    self.messageLabel.text = type == TDMessageShowProgress ? NSLocalizedString(@"WAIT_FOR_RESULT", nil) : self.messageStr;;
+    self.messageLabel.text = type == TDMessageShowProgress ? TDLocalizeSelect(@"WAIT_FOR_RESULT", nil) : self.messageStr;;
     [self.headerView addSubview:self.messageLabel];
     
     self.resetButton = [[UIButton alloc] init];
     self.resetButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
-    [self.resetButton setTitle: NSLocalizedString(@"AUTHENT_AGAIN", nil) forState:UIControlStateNormal];
+    [self.resetButton setTitle: TDLocalizeSelect(@"AUTHENT_AGAIN", nil) forState:UIControlStateNormal];
     [self.resetButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.resetButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.resetButton.layer.cornerRadius = 4.0;

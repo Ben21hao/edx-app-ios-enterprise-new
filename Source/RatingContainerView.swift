@@ -56,7 +56,7 @@ class RatingContainerView: UIView {
         
         //Setup label properties
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.attributedText = standardTextStyle.attributedStringWithText(Strings.AppReview.rateTheAppQuestion)
+        descriptionLabel.attributedText = standardTextStyle.attributedStringWithText(TDLocalizeSelectSwift("APP_REVIEW.RATE_THE_APP_QUESTION"))
         
         //Setup Submit button
         toggleSubmitButton(false)
@@ -71,8 +71,8 @@ class RatingContainerView: UIView {
         closeButton.layer.masksToBounds = true
         closeButton.setAttributedTitle(Icon.Close.attributedTextWithStyle(closeButtonTextStyle), forState: UIControlState.Normal)
         closeButton.backgroundColor = UIColor.whiteColor()
-        closeButton.accessibilityLabel = Strings.close
-        closeButton.accessibilityHint = Strings.Accessibility.closeHint
+        closeButton.accessibilityLabel = TDLocalizeSelectSwift("CLOSE")
+        closeButton.accessibilityHint = TDLocalizeSelectSwift("ACCESSIBILITY.CLOSE_HINT")
         closeButton.oex_addAction({[weak self] (action) in
             self?.delegate?.closeButtonPressed()
             }, forEvents: UIControlEvents.TouchUpInside)
@@ -135,7 +135,7 @@ class RatingContainerView: UIView {
     
     private func toggleSubmitButton(enabled: Bool) {
         let style = enabled ? enabledButtonStyle : disabledButtonStyle
-        submitButton.applyButtonStyle(style, withTitle: Strings.AppReview.submit)
+        submitButton.applyButtonStyle(style, withTitle: TDLocalizeSelectSwift("APP_REVIEW.SUBMIT"))
         submitButton.userInteractionEnabled = enabled
     }
     

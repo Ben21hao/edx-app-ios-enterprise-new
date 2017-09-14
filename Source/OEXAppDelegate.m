@@ -35,6 +35,7 @@
 #import "OEXRouter.h"
 #import "OEXSession.h"
 #import "OEXSegmentConfig.h"
+#import "LanguageChangeTool.h"
 
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
@@ -54,6 +55,7 @@
 
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
     
+    [LanguageChangeTool initUserLanguage];
     //1.向微信注册
     [WXApi registerApp:APPID_Weixin];
     
@@ -118,24 +120,24 @@
             NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
             switch (resp.errCode) {
                 case WXSuccess:
-                    strMsg = NSLocalizedString(@"PAY_SUCCESS", nil);
+                    strMsg = TDLocalizeSelect(@"PAY_SUCCESS", nil);
                     break;
                 case WXErrCodeUserCancel:
-                    strMsg = NSLocalizedString(@"PAY_CANCEL", nil);
+                    strMsg = TDLocalizeSelect(@"PAY_CANCEL", nil);
                     break;
                 case WXErrCodeSentFail:
-                    strMsg = NSLocalizedString(@"PAY_FAIL", nil);
+                    strMsg = TDLocalizeSelect(@"PAY_FAIL", nil);
                     break;
                 case WXErrCodeAuthDeny:
-                    strMsg = NSLocalizedString(@"PAY_AUTHENRIZATE_FAIL", nil);
+                    strMsg = TDLocalizeSelect(@"PAY_AUTHENRIZATE_FAIL", nil);
                     break;
                 default:
-                    strMsg = NSLocalizedString(@"NO_SUPPORT_WECHAT", nil);
+                    strMsg = TDLocalizeSelect(@"NO_SUPPORT_WECHAT", nil);
                     break;
             }
             
-            NSString *strTitle = NSLocalizedString(@"PAY_RESULT", nil);
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
+            NSString *strTitle = TDLocalizeSelect(@"PAY_RESULT", nil);
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:TDLocalizeSelect(@"OK", nil) otherButtonTitles:nil, nil];
             alert.delegate = self;
             [alert show];
         }
@@ -150,23 +152,23 @@
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
             NSString *resultStatus = resultDic[@"resultStatus"];
             
-            NSString *strTitle = NSLocalizedString(@"PAY_RESULT", nil);
+            NSString *strTitle = TDLocalizeSelect(@"PAY_RESULT", nil);
             NSString *str;
             switch ([resultStatus integerValue]) {
                 case 6001:
-                    str = NSLocalizedString(@"PAY_CANCEL", nil);
+                    str = TDLocalizeSelect(@"PAY_CANCEL", nil);
                     break;
                 case 9000:
-                    str = NSLocalizedString(@"PAY_SUCCESS", nil);
+                    str = TDLocalizeSelect(@"PAY_SUCCESS", nil);
                     break;
                 case 8000:
-                    str = NSLocalizedString(@"IS_HANDLE", nil);
+                    str = TDLocalizeSelect(@"IS_HANDLE", nil);
                     break;
                 case 4000:
-                    str = NSLocalizedString(@"PAY_FAIL", nil);
+                    str = TDLocalizeSelect(@"PAY_FAIL", nil);
                     break;
                 case 6002:
-                    str = NSLocalizedString(@"NETWORK_CONNET_FAIL", nil);
+                    str = TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil);
                     break;
                     
                 default:
@@ -176,7 +178,7 @@
                 [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"aliPaySuccess" object:nil]];
                 
             } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:str delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:str delegate:self cancelButtonTitle:TDLocalizeSelect(@"OK", nil) otherButtonTitles:nil, nil];
                 alert.delegate = self;
                 [alert show];
             }

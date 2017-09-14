@@ -38,6 +38,7 @@
 #import "TDBaseToolModel.h"
 #import "TDBaseView.h"
 #import "TDBaseViewController.h"
+#import "LanguageChangeTool.h"
 
 #import "MBHUDHelper.h"
 #import "VHallApi.h"
@@ -46,10 +47,6 @@
 #import "UIAlertView+ITTAdditions.h"
 
 #define TableViewBGColor [UIColor colorWithRed:245/255.0 green:247/255.0 blue:250/255.0 alpha:1.0]
-
-//#define ELITEU_URL @"http://192.168.0.101"
-//#define ELITEU_URL @"http://www.eliteu.cn"
-//#define ELITEU_URL @"http://beta.eliteu.cn"
 
 #define ELITEU_URL [OEXConfig sharedConfig].apiHostURL//统一在配置文件拿域名，不用分配在
 
@@ -76,6 +73,8 @@
 #define colorHexStr13 @"#ffffff" //白色
 #define colorHexStr14 @"#EEF8FD" //
 
+#define TDLocalizeSelect(key, comment) [[LanguageChangeTool bundle] localizedStringForKey:key value:nil table:@"Localizable"] //手动选择APP显示语言
+#define TDNotificationCenter [NSNotificationCenter defaultCenter]   //通知中心
 
 ////* 微吼直播相关 */////
 

@@ -169,7 +169,7 @@ OEXRegistrationViewControllerDelegate
 
 - (UIBarButtonItem*)showNavigationBarItem {
 //    UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithImage:[UIImage MenuIcon] style:UIBarButtonItemStylePlain target:self action:@selector(showSidebar:)];
-//    item.accessibilityLabel = [Strings accessibilityMenu];
+//    item.accessibilityLabel = TDLocalizeSelect(@"ACCESSIBILITY_MENU", nil);
 //    item.accessibilityIdentifier = @"navigation-bar-button";
     
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 48, 48)];

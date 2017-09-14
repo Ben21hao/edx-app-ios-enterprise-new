@@ -13,7 +13,7 @@ import edXCore
 public struct CourseInfoAPI {
     
     static func handoutsDeserializer(response : NSHTTPURLResponse, json : JSON) -> Result<String> {
-        return json["handouts_html"].string.toResult(NSError.oex_errorWithCode(.HandoutsEmpty, message: Strings.handoutsUnavailable))
+        return json["handouts_html"].string.toResult(NSError.oex_errorWithCode(.HandoutsEmpty, message: TDLocalizeSelectSwift("HANDOUTS_UNAVAILABLE")))
     }
     
     public static func getHandoutsForCourseWithID(courseID : String, overrideURL: String? = nil) -> NetworkRequest<String> {

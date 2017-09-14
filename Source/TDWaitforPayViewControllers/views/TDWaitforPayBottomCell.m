@@ -43,7 +43,7 @@
     self.payButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.payButton.showsTouchWhenHighlighted = YES;
     [self.payButton setTitleColor:[UIColor colorWithHexString:colorHexStr13] forState:UIControlStateNormal];
-    [self.payButton setTitle:NSLocalizedString(@"PAY_TITLE", nil) forState:UIControlStateNormal];
+    [self.payButton setTitle:TDLocalizeSelect(@"PAY_TITLE", nil) forState:UIControlStateNormal];
     [self.bgView addSubview:self.payButton];
     
 }

@@ -47,7 +47,7 @@ private func setupTable(table: UITableView) {
         let rows:[RowType] = [("0.5x",  OEXVideoSpeed.Slow), ("1.0x", OEXVideoSpeed.Default), ("1.5x", OEXVideoSpeed.Fast), ("2.0x", OEXVideoSpeed.XFast)]
         
         //播放速度
-        let speeds = OEXVideoPlayerSetting(title: Strings.videoSpeed, rows:rows , isSelected: { (row) -> Bool in
+        let speeds = OEXVideoPlayerSetting(title: TDLocalizeSelectSwift("VIDEO_SPEED"), rows:rows , isSelected: { (row) -> Bool in
             var selected = false
             let savedSpeed = OEXInterface.getCCSelectedPlaybackSpeed()
             
@@ -70,7 +70,7 @@ private func setupTable(table: UITableView) {
             }
             
             //字幕
-            let cc = OEXVideoPlayerSetting(title: Strings.closedCaptions, rows: rows, isSelected: { (row) -> Bool in
+            let cc = OEXVideoPlayerSetting(title: TDLocalizeSelectSwift("CLOSED_CAPTIONS"), rows: rows, isSelected: { (row) -> Bool in
                 var selected = false
                 if let selectedLanguage:String = OEXInterface.getCCSelectedLanguage() {
                     let lang = rows[row].value as! String
@@ -139,7 +139,7 @@ extension OEXVideoPlayerSettings: UITableViewDataSource, UITableViewDelegate {
             var title = row.title
             if selectedSetting.isSelected(row: i) {
                 //Can't use font awesome here
-                title = NSString(format: Strings.videoSettingSelected, row.title) as String //选中
+                title = NSString(format: TDLocalizeSelectSwift("VIDEO_SETTING_SELECTED"), row.title) as String //选中
 
             }
 

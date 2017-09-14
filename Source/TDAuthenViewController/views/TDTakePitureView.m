@@ -21,8 +21,8 @@
 
 - (void)setType:(NSInteger)type {
     _type = type;
-    self.titleLabel.text = _type == TDPhotoTypeFace ? NSLocalizedString(@"FIRST_FACE", nil): NSLocalizedString(@"SECOND_IDENTIFY", nil);
-    self.topLabel.text = _type == TDPhotoTypeFace ? NSLocalizedString(@"AIM_CAMERA", nil) : NSLocalizedString(@"SHOW_CARD", nil);
+    self.titleLabel.text = _type == TDPhotoTypeFace ? TDLocalizeSelect(@"FIRST_FACE", nil): TDLocalizeSelect(@"SECOND_IDENTIFY", nil);
+    self.topLabel.text = _type == TDPhotoTypeFace ? TDLocalizeSelect(@"AIM_CAMERA", nil) : TDLocalizeSelect(@"SHOW_CARD", nil);
     self.imageView.image = [UIImage imageNamed:_type == TDPhotoTypeFace ? @"tdFaceImage" : @"tdIdentify"];
     [self setStrAttibute];
     
@@ -38,8 +38,8 @@
 
 - (void)setStrAttibute {
     
-    NSArray *array1 = [NSArray arrayWithObjects:NSLocalizedString(@"FACE_NOTES", nil),NSLocalizedString(@"FACE_USE_FOR", nil),NSLocalizedString(@"IMAGE_USE_CAMERA", nil), nil];
-    NSArray *array2 = [NSArray arrayWithObjects:NSLocalizedString(@"IDENTIFY_AUTHENTICATION", nil),NSLocalizedString(@"IDENTIFY_USE_FOR", nil), nil];
+    NSArray *array1 = [NSArray arrayWithObjects:TDLocalizeSelect(@"FACE_NOTES", nil),TDLocalizeSelect(@"FACE_USE_FOR", nil),TDLocalizeSelect(@"IMAGE_USE_CAMERA", nil), nil];
+    NSArray *array2 = [NSArray arrayWithObjects:TDLocalizeSelect(@"IDENTIFY_AUTHENTICATION", nil),TDLocalizeSelect(@"IDENTIFY_USE_FOR", nil), nil];
     
     NSArray *array = [[NSArray alloc] initWithArray:_type == TDPhotoTypeFace ? array1 : array2];
     NSMutableAttributedString *attibuteStr = [[NSMutableAttributedString alloc] init];
@@ -90,7 +90,7 @@
     self.imageView.layer.borderWidth = 0.5;
     [self.scrollview addSubview:self.imageView];
     
-    self.imageButton = [self setButtonConfig:NSLocalizedString(@"CLICK_PHOTO", nil)];
+    self.imageButton = [self setButtonConfig:TDLocalizeSelect(@"CLICK_PHOTO", nil)];
     self.imageButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
     [self.imageButton setImage:[UIImage imageNamed:@"photo"] forState:UIControlStateNormal];
     self.imageButton.contentEdgeInsets = UIEdgeInsetsMake(18, -18, -18, 18);
@@ -103,11 +103,11 @@
     self.buttonView.userInteractionEnabled = NO;
     [self.scrollview addSubview:self.buttonView];
     
-    self.resetButton = [self setButtonConfig:NSLocalizedString(@"TD_RETAKE", nil)];
+    self.resetButton = [self setButtonConfig:TDLocalizeSelect(@"TD_RETAKE", nil)];
     self.resetButton.alpha = 0.6;
     [self.buttonView addSubview:self.resetButton];
     
-    self.nextButton = [self setButtonConfig:NSLocalizedString(@"NEXT_TEST", nil)];
+    self.nextButton = [self setButtonConfig:TDLocalizeSelect(@"NEXT_TEST", nil)];
     self.nextButton.alpha = 0.6;
     [self.buttonView addSubview:self.nextButton];
     

@@ -82,8 +82,6 @@
 "ACCESSIBILITY_SELECT" = "Select";
 /* Accessibility label for Select All Button on My Videos List Screen */
 "ACCESSIBILITY_SELECT_ALL" = "Select All";
-/* Accessibility label for Settings Button in the Video Player */
-"ACCESSIBILITY_SETTINGS" = "Settings";
 /* Call to action for Selecting Option */
 "ACCESSIBILITY_SELECT_VALUE_HINT" = "Double tap to select.";
 /* Accessibility label for Unknown Icon in the Courseware screens */
@@ -212,10 +210,12 @@
 "COMPLETE_REGISTRATION_PROMPT" = "Complete your registration";
 /* Title of alert when confirming deletion of a video */
 "CONFIRM_DELETE_TITLE"="Confirm Delete";
+///* Text of alert when confirming video deletion */
+//"CONFIRM_DELETE_MESSAGE##{one}"="Are you sure you want to delete this video?";
+///* Text of alert when confirming video deletion */
+//"CONFIRM_DELETE_MESSAGE##{other}"="Are you sure you want to delete these videos?";
 /* Text of alert when confirming video deletion */
-"CONFIRM_DELETE_MESSAGE##{one}"="Are you sure you want to delete this video?";
-/* Text of alert when confirming video deletion */
-"CONFIRM_DELETE_MESSAGE##{other}"="Are you sure you want to delete these videos?";
+"CONFIRM_DELETE_MESSAGE_TEXT"="Are you sure you want to delete these videos?";
 /* Text of push notification announcing a new course announcement */
 "COURSE_ANNOUNCEMENT_NOTIFICATION_BODY"="New Announcement: {course_name}";
 /* Alert dialog button text */
@@ -406,8 +406,6 @@
 "MOST_VOTES"="Most Votes";
 /* Screen title showing a user's courses */
 "MY_COURSES"="My Courses";
-/* Screen title showing a user's settings */
-"MY_SETTINGS"="My Settings";
 /* Screen title showing a user's downloaded videos */
 "MY_VIDEOS" = "My Videos";
 /* Marked as answer for endorsed responses */
@@ -448,8 +446,6 @@
 "ANONYMOUS" = "Anonymous";
 /* Label indicating user has on internet connection and is in offline mode */
 "OFFLINE" = "Offline";
-/* Alert dialog okay button */
-"OK"="OK";
 /* Button title allowing user to open current page in their web browser */
 "OPEN_IN_BROWSER"="View in Safari";
 /* Button title allowing user to open current page in their web browser */
@@ -592,8 +588,12 @@
 "REMOVE_FILTER" = "Try removing your post filter.";
 /* Label shown when user attempts to view a course section that hasn't been synced  */
 "SECTION_UNAVAILABLE_OFFLINE"="This section is not available in offline mode.\nIf you've downloaded content for a different section, go to that section to view the content.";
+/* Accessibility label for Settings Button in the Video Player */
+"ACCESSIBILITY_SETTINGS" = "Settings";
 /* Screen title showing a user's settings */
 "SETTINGS"="Settings";
+/* Screen title showing a user's settings */
+"MY_SETTINGS"="My Settings";
 /* Text for a Twitter or Facebook post to a course about page */
 "SHARE_A_COURSE"="I'm taking a course on {platform_name}! Check it out:";
 /* Sign in screen title and button initiating login process after user enters credentials like username and password */
@@ -766,16 +766,13 @@
 "REGISTER" = "Sign Up";
 /*版本*/
 "APPVERSION" = "Version";
-/*我的课程*/
-"MY_COURSE" = "My Courses";
 /*我的下载*/
 "MY_VIDEO" = "My Videos";
 /*发现课程*/
 "FIND_COURSE" = "Find Courses";
 /*个人中心*/
 "USER_CENTER" = "User Center";
-/*设置*/
-"MY_SETTING" = "My Settings";
+
 /*获取验证码失败*/
 "FAILED_GET_VERIFICATION" = "Failed to get verification code.";
 /*请输入正确的手机号码*/
@@ -1740,3 +1737,12 @@
 "SEND_MESSAGE_BUTTON" = "Send";
 /*聊天内容不能为空 Message cannot be empty.*/
 "ENTER_SEND_MESSAGE" = "Message cannot be empty.";
+
+/*多语言*/
+"LANGUAGE_TEXT" = "Language";
+/*跟随手机系统 Follow the phone system*/
+"FOLLOW_SYSTEM_LANGUAGE" = "Default";
+/*设置语言Language Setting*/
+"LANGUAGE_SETTING_TEXT" = "Language Setting";
+/*暂无资料 No data yes.*/
+"NO_DATA_TEXT" = "No data yes.";

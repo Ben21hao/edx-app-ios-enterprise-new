@@ -32,7 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    self.title = self.isSuccess ? NSLocalizedString(@"APPOINTMENT_STATUS", nil) : NSLocalizedString(@"APPOINTMENT_STATUS_FAIL", nil);
+    self.title = self.isSuccess ? TDLocalizeSelect(@"APPOINTMENT_STATUS", nil) : TDLocalizeSelect(@"APPOINTMENT_STATUS_FAIL", nil);
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     self.toolModel = [[TDBaseToolModel alloc] init];
     [self setLeftNavigationBar];
@@ -42,28 +42,28 @@
     [super viewWillAppear:animated];
     
     if (self.failType == 401) {
-        self.failStr = NSLocalizedString(@"APPOINTMENT_SELF", nil);
+        self.failStr = TDLocalizeSelect(@"APPOINTMENT_SELF", nil);
         
     }  else if (self.failType == 402) {
-        self.failStr = NSLocalizedString(@"ENROLL_COURSE_FIRST", nil);
+        self.failStr = TDLocalizeSelect(@"ENROLL_COURSE_FIRST", nil);
         
     }  else if (self.failType == 403) {
-        self.failStr = NSLocalizedString(@"CURRENT_TIME_EARILER", nil);
+        self.failStr = TDLocalizeSelect(@"CURRENT_TIME_EARILER", nil);
         
     }  else if (self.failType == 406) {
-        self.failStr = NSLocalizedString(@"NO_ENOUGH_COINS", nil);
+        self.failStr = TDLocalizeSelect(@"NO_ENOUGH_COINS", nil);
         
     }  else if (self.failType == 407) {
-        self.failStr = NSLocalizedString(@"NO_SCHEDULE", nil);
+        self.failStr = TDLocalizeSelect(@"NO_SCHEDULE", nil);
         
     }  else if (self.failType == 408) {
-        self.failStr = NSLocalizedString(@"SELECT_OTHER_PERIOD", nil);
+        self.failStr = TDLocalizeSelect(@"SELECT_OTHER_PERIOD", nil);
         
     }  else if (self.failType == 409) {
-        self.failStr = NSLocalizedString(@"APPOINTMENT_ONCE", nil);
+        self.failStr = TDLocalizeSelect(@"APPOINTMENT_ONCE", nil);
         
     } else {
-        self.failStr = NSLocalizedString(@"UNABLE_APPOINTMENT", nil);
+        self.failStr = TDLocalizeSelect(@"UNABLE_APPOINTMENT", nil);
         NSLog(@"预约失败 -- %ld",(long)self.failType);
     }
     
@@ -136,20 +136,20 @@
     
     switch (indexPath.row) {
         case 0:
-            cell.textLabel.text = NSLocalizedString(@"RESERCED_PERIOD", nil);
+            cell.textLabel.text = TDLocalizeSelect(@"RESERCED_PERIOD", nil);
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",self.timeStr];
 
             break;
         case 1:
-            cell.textLabel.text = NSLocalizedString(@"PREPAID_COIS", nil);
-            cell.detailTextLabel.attributedText = [self.toolModel setDetailString:[NSString stringWithFormat:@"%@%@",self.iconStr,NSLocalizedString(@"COINS_VALUE", nil)] withFont:14 withColorStr:colorHexStr9];
+            cell.textLabel.text = TDLocalizeSelect(@"PREPAID_COIS", nil);
+            cell.detailTextLabel.attributedText = [self.toolModel setDetailString:[NSString stringWithFormat:@"%@%@",self.iconStr,TDLocalizeSelect(@"COINS_VALUE", nil)] withFont:14 withColorStr:colorHexStr9];
             
             cell.textLabel.hidden = !self.is_public_course;
             cell.detailTextLabel.hidden = !self.is_public_course;
             break;
         case 2:
         {
-            NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",NSLocalizedString(@"QUETIONS_DESCRIPTION", nil)] attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr10]}];
+            NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",TDLocalizeSelect(@"QUETIONS_DESCRIPTION", nil)] attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr10]}];
             NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:self.quetionStr attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr9]}];
             [str1 appendAttributedString:str2];
             cell.textLabel.attributedText = str1;
@@ -192,7 +192,7 @@
         UILabel *titleLabel = [[UILabel alloc] init];
         titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
         titleLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
-        titleLabel.text = NSLocalizedString(@"APPOINTMENT_DETAILS", nil);
+        titleLabel.text = TDLocalizeSelect(@"APPOINTMENT_DETAILS", nil);
         [view addSubview:titleLabel];
         
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -250,7 +250,7 @@
     self.topButton = [[UIButton alloc] init];
     self.topButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     [self.topButton setTitleColor:[UIColor colorWithHexString:colorHexStr10] forState:UIControlStateNormal];
-    [self.topButton setTitle:self.isSuccess? NSLocalizedString(@"APPOINTMENT_HAVE", nil) : NSLocalizedString(@"UNABLE_APPOINTMENT", nil) forState:UIControlStateNormal];
+    [self.topButton setTitle:self.isSuccess? TDLocalizeSelect(@"APPOINTMENT_HAVE", nil) : TDLocalizeSelect(@"UNABLE_APPOINTMENT", nil) forState:UIControlStateNormal];
     [self.headerView addSubview:self.topButton];
     
     self.imageLabel = [[UILabel alloc] init];
@@ -264,7 +264,7 @@
     self.messageLabel.textAlignment = NSTextAlignmentCenter;
     self.messageLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     self.messageLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
-    self.messageLabel.text = self.isSuccess ? NSLocalizedString(@"ATTENTION_MESSAGE", nil) : self.failStr;
+    self.messageLabel.text = self.isSuccess ? TDLocalizeSelect(@"ATTENTION_MESSAGE", nil) : self.failStr;
     [self.headerView addSubview:self.messageLabel];
     
     [self.topButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -298,7 +298,7 @@
     self.footerView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     
     if (self.isSuccess) {
-        self.moreOrderButton = [self setButton:NSLocalizedString(@"NEW_APPOINTMENT", nil)];
+        self.moreOrderButton = [self setButton:TDLocalizeSelect(@"NEW_APPOINTMENT", nil)];
         [self.moreOrderButton addTarget:self action:@selector(moreOrderButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.footerView addSubview:self.moreOrderButton];
         
@@ -310,7 +310,7 @@
         }];
         
     } else {
-        self.moreOrderButton = [self setButton:NSLocalizedString(@"RESCHEDULE_APPOINTMENT", nil)];
+        self.moreOrderButton = [self setButton:TDLocalizeSelect(@"RESCHEDULE_APPOINTMENT", nil)];
         [self.moreOrderButton addTarget:self action:@selector(moreOrderButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.footerView addSubview:self.moreOrderButton];
         
@@ -320,7 +320,7 @@
             make.size.mas_equalTo(CGSizeMake((TDWidth - 58) / 2, 39));
         }];
 
-        self.rechargeButton = [self setButton:self.failType == 402 ? NSLocalizedString(@"ENROLL_COURSE", nil) : NSLocalizedString(@"TOP_UP_MONEY", nil)];
+        self.rechargeButton = [self setButton:self.failType == 402 ? TDLocalizeSelect(@"ENROLL_COURSE", nil) : TDLocalizeSelect(@"TOP_UP_MONEY", nil)];
         [self.rechargeButton addTarget:self action:@selector(rechargeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.footerView addSubview:self.rechargeButton];
         

@@ -35,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = NSLocalizedString(@"PHONE_DINDING", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"PHONE_DINDING", nil);
     
     [self configView];
     [self setViewConstraint];
@@ -62,14 +62,14 @@
         return;
         
     } else if (self.phoneTextField.text.length == 0) {
-        [self.view makeToast:NSLocalizedString(@"PHONE_IS_EMPTY", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"PHONE_IS_EMPTY", nil) duration:1.08 position:CSToastPositionCenter];
         
     } else if ([self.baseTool isValidateMobile:self.phoneTextField.text]) {
         [self cutDownTime];
         [self getCodeFromService];
         
     } else {
-        [self.view makeToast:NSLocalizedString(@"PHONE_FORMAT_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"PHONE_FORMAT_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
     }
 }
 
@@ -93,12 +93,12 @@
         
         if ([code intValue] == 200) {
             self.phoneStr = self.phoneTextField.text;
-            [self.view makeToast:NSLocalizedString(@"MESSAGE_AREADY_SEND", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"MESSAGE_AREADY_SEND", nil) duration:1.08 position:CSToastPositionCenter];
             
         } else if ([code intValue] == 403) {
             [self.timer invalidate];
             self.codeButton.userInteractionEnabled = YES;
-            [self.view makeToast:NSLocalizedString(@"PHONE_IS_REGISTERED", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"PHONE_IS_REGISTERED", nil) duration:1.08 position:CSToastPositionCenter];
             
         } else {
             [self.timer invalidate];
@@ -108,7 +108,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.timer invalidate];
         self.codeButton.userInteractionEnabled = YES;
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"验证登录密码 -- %ld",(long)error.code);
     }];
     
@@ -125,11 +125,11 @@
 - (void)timeChange {
     self.codeButton.userInteractionEnabled = NO;
     self.timeNum -= 1;
-    [self.codeButton setTitle:[NSString stringWithFormat:@"%d%@",self.timeNum,NSLocalizedString(@"SECOND", nil)] forState:UIControlStateNormal];
+    [self.codeButton setTitle:[NSString stringWithFormat:@"%d%@",self.timeNum,TDLocalizeSelect(@"SECOND", nil)] forState:UIControlStateNormal];
     if (self.timeNum <= 0) {
         [self.timer invalidate];
         self.codeButton.userInteractionEnabled = YES;
-        [self.codeButton setTitle:NSLocalizedString(@"RESEND", nil) forState:UIControlStateNormal];
+        [self.codeButton setTitle:TDLocalizeSelect(@"RESEND", nil) forState:UIControlStateNormal];
     }
 }
 
@@ -144,25 +144,25 @@
         return;
         
     } else if (![baseTool isValidateMobile:self.phoneTextField.text]) {
-        [self.view makeToast:NSLocalizedString(@"ENTER_CORRECT_NUMBER", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"ENTER_CORRECT_NUMBER", nil) duration:1.08 position:CSToastPositionCenter];
         
     } else if (self.phoneTextField.text.length == 0) {
-        [self.view makeToast:NSLocalizedString(@"PHONE_IS_EMPTY", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"PHONE_IS_EMPTY", nil) duration:1.08 position:CSToastPositionCenter];
         
     } else if (self.codeTextField.text.length == 0) {
-        [self.view makeToast:NSLocalizedString(@"VERIFICATION_CODE_IS_EMPTY", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"VERIFICATION_CODE_IS_EMPTY", nil) duration:1.08 position:CSToastPositionCenter];
         
     } else if (![self.codeTextField.text isEqualToString:self.randomNumber]) {
-        [self.view makeToast:NSLocalizedString(@"VERIFICATION_CODE_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"VERIFICATION_CODE_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
         
     } else if (![self.phoneTextField.text isEqualToString:self.phoneStr] && [baseTool isValidateMobile:self.phoneTextField.text]) {//已获取验证码，然后再修改了手机
-        [self.view makeToast:NSLocalizedString(@"STILL_NO_GET_VERI", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"STILL_NO_GET_VERI", nil) duration:1.08 position:CSToastPositionCenter];
         
     } else if ([self.phoneTextField.text isEqualToString:self.phoneStr] && [baseTool isValidateMobile:self.phoneTextField.text]) {
         [self handinToService];
         
     } else {
-        [self.view makeToast:NSLocalizedString(@"ENTER_CORRECT_NUMBER", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"ENTER_CORRECT_NUMBER", nil) duration:1.08 position:CSToastPositionCenter];
     }
 }
 
@@ -189,17 +189,17 @@
             if (self.bindPhoneHandle) {
                 self.bindPhoneHandle(self.phoneTextField.text);
             }
-            [self.view makeToast:NSLocalizedString(@"PHONE_BIND_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"PHONE_BIND_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
             });
         } else {
-            [self.view makeToast:NSLocalizedString(@"PHONE_BIND_FAIL", nilh) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"PHONE_BIND_FAIL", nilh) duration:1.08 position:CSToastPositionCenter];
             NSLog(@"更新失败 -- %ld",(long)respondDic[@"msg"]);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"绑定出错 -- %ld, %@",(long)error.code, error.userInfo[@"com.alamofire.serialization.response.error.data"]);
     }];
 }
@@ -216,17 +216,17 @@
 #pragma mark - UI
 - (void)configView {
     
-    self.phoneTextField = [self setTextFieldWithTitle:NSLocalizedString(@"PLEASE_ENTER_PHONE_NUMBER", nil)];
+    self.phoneTextField = [self setTextFieldWithTitle:TDLocalizeSelect(@"PLEASE_ENTER_PHONE_NUMBER", nil)];
     [self.view addSubview:self.phoneTextField];
     
-    self.codeTextField = [self setTextFieldWithTitle:NSLocalizedString(@"PLEASE_ENTER_VERI", nil)];
+    self.codeTextField = [self setTextFieldWithTitle:TDLocalizeSelect(@"PLEASE_ENTER_VERI", nil)];
     [self.view addSubview:self.codeTextField];
 
-    self.codeButton = [self setButtonWithTitle:NSLocalizedString(@"GET_VERIFICATION", nil) font:13];
+    self.codeButton = [self setButtonWithTitle:TDLocalizeSelect(@"GET_VERIFICATION", nil) font:13];
     [self.codeButton addTarget:self action:@selector(codeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.codeButton];
     
-    self.handinButton = [self setButtonWithTitle:NSLocalizedString(@"SUBMIT", nil) font:16];
+    self.handinButton = [self setButtonWithTitle:TDLocalizeSelect(@"SUBMIT", nil) font:16];
     [self.handinButton addTarget:self action:@selector(handinButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.handinButton];
     

@@ -276,13 +276,13 @@ public enum Icon {
     public var accessibilityText : String? {
         switch self {
         case .CourseVideoContent:
-            return Strings.accessibilityVideo
+            return TDLocalizeSelectSwift("ACCESSIBILITY_VIDEO")
         case .CourseHTMLContent:
-            return Strings.accessibilityHtml
+            return TDLocalizeSelectSwift("ACCESSIBILITY_HTML")
         case .CourseProblemContent:
-            return Strings.accessibilityProblem
+            return TDLocalizeSelectSwift("ACCESSIBILITY_PROBLEM")
         case .CourseUnknownContent:
-            return Strings.accessibilityUnknown
+            return TDLocalizeSelectSwift("ACCESSIBILITY_UNKNOWN")
         default:
             return nil
         }

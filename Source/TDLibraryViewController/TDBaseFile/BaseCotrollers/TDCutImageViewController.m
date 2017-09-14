@@ -113,12 +113,12 @@
     view.backgroundColor = [UIColor colorWithRed:30 / 255.0 green:30 / 255.0 blue:30 / 255.0 alpha:0.7];
     [self.view addSubview:view];
     
-    UIButton * canncelBtn = [self setButtonConstrant:NSLocalizedString(@"CANCEL", nil)];
+    UIButton * canncelBtn = [self setButtonConstrant:TDLocalizeSelect(@"CANCEL", nil)];
     canncelBtn.frame = CGRectMake(0, 0, 60, 44);
     [canncelBtn addTarget:self action:@selector(cancelBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:canncelBtn];
     
-    UIButton *doneBtn = [self setButtonConstrant:NSLocalizedString(@"DONE", nil)];
+    UIButton *doneBtn = [self setButtonConstrant:TDLocalizeSelect(@"DONE", nil)];
     doneBtn.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 60, 0, 60, 44);
     [doneBtn addTarget:self action:@selector(doneBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:doneBtn];

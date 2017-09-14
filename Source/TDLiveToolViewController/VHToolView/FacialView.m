@@ -86,7 +86,7 @@
     
     
     UIButton *sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [sendButton setTitle:NSLocalizedString(@"SEND_MESSAGE_BUTTON", nil) forState:UIControlStateNormal];
+    [sendButton setTitle:TDLocalizeSelect(@"SEND_MESSAGE_BUTTON", nil) forState:UIControlStateNormal];
     [sendButton setFrame:CGRectMake((maxCol - 2) * itemWidth - 10, (maxRow - 1) * itemHeight + 5, itemWidth + 10, itemHeight - 10)];
     [sendButton addTarget:self action:@selector(sendAction:) forControlEvents:UIControlEventTouchUpInside];
     [sendButton setBackgroundColor:[UIColor colorWithRed:10 / 255.0 green:82 / 255.0 blue:104 / 255.0 alpha:1.0]];

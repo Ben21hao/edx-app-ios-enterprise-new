@@ -61,6 +61,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [LanguageChangeTool initUserLanguage];
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     
     [self setTitleLabel];
@@ -304,10 +305,10 @@
         [self.lineArray addObject:sliView];
         
         if (i == 0) {
-            [titleButton setTitle:NSLocalizedString(@"ALL_VIDEOS", nil) forState:UIControlStateNormal];
+            [titleButton setTitle:TDLocalizeSelect(@"ALL_VIDEOS", nil) forState:UIControlStateNormal];
             [self titleButtonAction:titleButton];
         } else {
-            [titleButton setTitle:NSLocalizedString(@"RECENT_VIDEOS", nil) forState:UIControlStateNormal];
+            [titleButton setTitle:TDLocalizeSelect(@"RECENT_VIDEOS", nil) forState:UIControlStateNormal];
         }
     }
     self.contentView.contentSize = CGSizeMake(count * TDWidth, 0);
@@ -376,7 +377,7 @@
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:18.0];
     self.titleLabel.textColor = [UIColor whiteColor];
-    self.titleLabel.text = [Strings myVideos];
+    self.titleLabel.text = TDLocalizeSelect(@"MY_VIDEOS", nil);
     self.navigationItem.titleView = self.titleLabel;
 }
 

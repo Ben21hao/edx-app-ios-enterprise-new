@@ -62,6 +62,7 @@ class CourseCatalogViewController: UIViewController, CoursesTableViewControllerD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        LanguageChangeTool.initUserLanguage()
         self.view.accessibilityIdentifier = "course-catalog-screen";
         self.view.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
         
@@ -113,7 +114,7 @@ class CourseCatalogViewController: UIViewController, CoursesTableViewControllerD
         self.titleViewLabel.textAlignment = .Center
         self.titleViewLabel.font = UIFont.init(name: "OpenSans", size: 18.0)
         self.titleViewLabel.textColor = UIColor.whiteColor()
-        self.titleViewLabel.text = Strings.findCourses
+        self.titleViewLabel.text = TDLocalizeSelectSwift("FIND_COURSES")
         self.navigationItem.titleView = self.titleViewLabel
     }
     

@@ -222,8 +222,8 @@ public class DiscussionNewCommentViewController: TDSwiftBaseViewController, UITe
     
     private func setAuthorAccessibility(author: String?, date: NSDate?) {
         if let author = author, date = date {
-            authorButton.accessibilityLabel = "\(Strings.byAuthor(authorName: author)), \(date.displayDate)"
-            authorButton.accessibilityHint = Strings.accessibilityShowUserProfileHint
+            authorButton.accessibilityLabel = "\(TDLocalizeSelectSwift("BY_AUTHOR").oex_formatWithParameters(["author_name" : author])), \(date.displayDate)"
+            authorButton.accessibilityHint = TDLocalizeSelectSwift("ACCESSIBILITY_SHOW_USER_PROFILE_HINT")
         }
         
         dateLabel.isAccessibilityElement = false
@@ -254,17 +254,17 @@ public class DiscussionNewCommentViewController: TDSwiftBaseViewController, UITe
         
         switch context {
         case let .Thread(thread):
-            buttonTitle = Strings.addResponse
-            titleText = Strings.addAResponse
-            navigationItemTitle = Strings.addResponse
+            buttonTitle = TDLocalizeSelectSwift("ADD_RESPONSE")
+            titleText = TDLocalizeSelectSwift("ADD_A_RESPONSE")
+            navigationItemTitle = TDLocalizeSelectSwift("ADD_RESPONSE")
             responseTitle.attributedText = responseTitleStyle.attributedStringWithText(thread.title)
-            contentTextView.accessibilityLabel = Strings.addAResponse
+            contentTextView.accessibilityLabel = TDLocalizeSelectSwift("ADD_A_RESPONSE")
             self.isEndorsed = false
         case let .Comment(comment):
-            buttonTitle = Strings.addComment
-            titleText = Strings.addAComment
-            navigationItemTitle = Strings.addComment
-            contentTextView.accessibilityLabel = Strings.addAComment
+            buttonTitle = TDLocalizeSelectSwift("ADD_COMMENT")
+            titleText = TDLocalizeSelectSwift("ADD_A_COMMENT")
+            navigationItemTitle = TDLocalizeSelectSwift("ADD_COMMENT")
+            contentTextView.accessibilityLabel = TDLocalizeSelectSwift("ADD_A_COMMENT")
             responseTitle.snp_makeConstraints{ (make) -> Void in
                 make.height.equalTo(0)
             }
@@ -275,7 +275,7 @@ public class DiscussionNewCommentViewController: TDSwiftBaseViewController, UITe
         responseTextView.attributedText = responseTextViewStyle.markdownStringWithText(context.renderedBody ?? "")
         
         addCommentButton.applyButtonStyle(environment.styles.filledPrimaryButtonStyle, withTitle: buttonTitle)
-        self.contentTitleLabel.attributedText = NSAttributedString.joinInNaturalLayout([responseTextViewStyle.attributedStringWithText(titleText), responseTextViewStyle.attributedStringWithText(Strings.asteric)])
+        self.contentTitleLabel.attributedText = NSAttributedString.joinInNaturalLayout([responseTextViewStyle.attributedStringWithText(titleText), responseTextViewStyle.attributedStringWithText(TDLocalizeSelectSwift("ASTERIC"))])
         self.contentTitleLabel.isAccessibilityElement = false
         
         self.titleViewLabel.text = navigationItemTitle

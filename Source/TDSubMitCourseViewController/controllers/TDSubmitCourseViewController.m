@@ -33,6 +33,8 @@
 #import <MJExtension/MJExtension.h>
 #import "edX-Swift.h"
 
+@import edXCore;
+
 @interface TDSubmitCourseViewController () <UITableViewDelegate,UITableViewDataSource,JHCouponsAlertViewDelegate,UIAlertViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -99,7 +101,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.titleViewLabel.text = NSLocalizedString(@"BALANCE_BUY", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"BALANCE_BUY", nil);
     self.leftButton.hidden = YES;
     self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 48, 48)];
     [self.backButton setImage:[UIImage imageNamed:@"backImagee"] forState:UIControlStateNormal];
@@ -159,7 +161,7 @@
         [self.tableView reloadData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         [self.loadIngView removeFromSuperview];
         NSLog(@"error--%@",error);
     }];
@@ -206,15 +208,15 @@
 
 - (void)payByBaodian { //未审核完成，用宝典支付
     
-    NSString *messageStr = [Strings needCoinsWithCount:[NSString stringWithFormat:@"%.2f",[self.remain_score floatValue]] number:[NSString stringWithFormat:@"%.2f",self.payMoney * 10.0]];
+    NSString *messageStr = [TDLocalizeSelect(@"NEED_COINS", nil) oex_formatWithParameters:@{@"count" : [NSString stringWithFormat:@"%.2f",[self.remain_score floatValue]], @"number" : [NSString stringWithFormat:@"%.2f",self.payMoney * 10.0]}];
     
     if ([self.remain_score floatValue] > self.payMoney * 10.0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"SURE_TO_BUY", nil) message:messageStr delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL", nil) otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"SURE_TO_BUY", nil) message:messageStr delegate:self cancelButtonTitle:TDLocalizeSelect(@"CANCEL", nil) otherButtonTitles:TDLocalizeSelect(@"OK", nil), nil];
         alert.tag = 1;
         [alert show];
         
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"NO_ENOUGH_COINS", nil) message:messageStr delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL", nil) otherButtonTitles:NSLocalizedString(@"GO_TO_RECHARGE", nil), nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"NO_ENOUGH_COINS", nil) message:messageStr delegate:self cancelButtonTitle:TDLocalizeSelect(@"CANCEL", nil) otherButtonTitles:TDLocalizeSelect(@"GO_TO_RECHARGE", nil), nil];
         alert.tag = 2;
         [alert show];
     }
@@ -253,7 +255,7 @@
         NSDictionary *responDic = (NSDictionary *)responseObject;
         id code = responDic[@"code"];
         if ([code intValue] == 200) {
-            [self.view makeToast:NSLocalizedString(@"BUY_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"BUY_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
                 [[OEXRouter sharedRouter] showMyCoursesAnimated:YES pushingCourseWithID:nil];//跳去我的课程页面
@@ -264,7 +266,7 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error--%@",error);
     }];
 }
@@ -288,7 +290,7 @@
 #pragma mark - 创建订单
 - (void)createOrderWitType:(NSInteger)type {
     
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"SUBMIT_ING", nil)];
+    [SVProgressHUD showWithStatus:TDLocalizeSelect(@"SUBMIT_ING", nil)];
     SVProgressHUD.defaultMaskType = SVProgressHUDMaskTypeBlack;
     SVProgressHUD.defaultStyle = SVProgressHUDAnimationTypeNative;
     
@@ -305,7 +307,7 @@
     
     NSString *priceStr = [self.moneyLabel.text substringFromIndex:1];//总金额
     if ([priceStr floatValue] <= 0) {
-        [self.view makeToast:NSLocalizedString(@"NO_LESSTHAN_ZERO", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NO_LESSTHAN_ZERO", nil) duration:1.08 position:CSToastPositionCenter];
         return;
     }
     [dic setValue:priceStr forKey:@"apply_amount"];
@@ -340,14 +342,14 @@
              [[NSNotificationCenter defaultCenter] postNotificationName:@"Course_Status_Handle" object:nil];
             
         } else {
-            [self.view makeToast:NSLocalizedString(@"PAY_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"PAY_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
             NSLog(@"--%@",responDic[@"msg"]);
         }
         [SVProgressHUD dismiss];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [SVProgressHUD dismiss];
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error--%@",error);
     }];
 }
@@ -398,23 +400,23 @@
             
             NSString *resultStatus = resultDic[@"resultStatus"];
             
-            NSString *strTitle = NSLocalizedString(@"PAY_RESULT", nil);
+            NSString *strTitle = TDLocalizeSelect(@"PAY_RESULT", nil);
             NSString *str;
             switch ([resultStatus integerValue]) {
                 case 6001:
-                    str = NSLocalizedString(@"PAY_CANCEL", nil);
+                    str = TDLocalizeSelect(@"PAY_CANCEL", nil);
                     break;
                 case 9000:
-                    str = NSLocalizedString(@"PAY_SUCCESS", nil);
+                    str = TDLocalizeSelect(@"PAY_SUCCESS", nil);
                     break;
                 case 8000:
-                    str = NSLocalizedString(@"IS_HANDLE", nil);
+                    str = TDLocalizeSelect(@"IS_HANDLE", nil);
                     break;
                 case 4000:
-                    str = NSLocalizedString(@"PAY_FAIL", nil);
+                    str = TDLocalizeSelect(@"PAY_FAIL", nil);
                     break;
                 case 6002:
-                    str = NSLocalizedString(@"NETWORK_CONNET_FAIL", nil);
+                    str = TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil);
                     break;
                     
                 default:
@@ -424,7 +426,7 @@
                 [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"aliPaySuccess" object:nil]];
                 
             } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:str delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:str delegate:self cancelButtonTitle:TDLocalizeSelect(@"OK", nil) otherButtonTitles:nil, nil];
                 alert.tag = 9000;
                 [alert show];
             }
@@ -477,7 +479,7 @@
     self.coupon_id = model.coupon_issue_id;
     self.isCampony = NO;
     
-    if ([model.coupon_name isEqualToString:NSLocalizedString(@"SELECT_COUPON", nil)]) {//选择第一行
+    if ([model.coupon_name isEqualToString:TDLocalizeSelect(@"SELECT_COUPON", nil)]) {//选择第一行
         self.payMoney = self.totalM;
         
     } else if ([model.coupon_type intValue] == 1) {//满减
@@ -520,14 +522,14 @@
     int usedM = currentM * 10 * rate;
     
     if (score > usedM) {
-        self.inputAlert.textF1.text = [Strings hadCoinsNumberWithCount:[NSString stringWithFormat:@"%.2f",score] number:[NSString stringWithFormat:@"%d.00",usedM]];
+        self.inputAlert.textF1.text = [TDLocalizeSelect(@"HAD_COINS_NUMBER", nil) oex_formatWithParameters:@{@"count" : [NSString stringWithFormat:@"%.2f",score], @"number" : [NSString stringWithFormat:@"%d.00",usedM]}];
         self.maxCoin = usedM;
-        self.warmingStr = NSLocalizedString(@"MORE_COINS_REMAIND", nil);
+        self.warmingStr = TDLocalizeSelect(@"MORE_COINS_REMAIND", nil);
         
     }  else{
-        self.inputAlert.textF1.text = [Strings hadCoinsNumberWithCount:[NSString stringWithFormat:@"%.2f",score] number:[NSString stringWithFormat:@"%.2f",score]];
+        self.inputAlert.textF1.text = [TDLocalizeSelect(@"HAD_COINS_NUMBER", nil) oex_formatWithParameters:@{@"count" : [NSString stringWithFormat:@"%.2f",score], @"number" : [NSString stringWithFormat:@"%.2f",score]}];
         self.maxCoin = score;
-        self.warmingStr = NSLocalizedString(@"MORE_COINS_AVALIDE", nil);
+        self.warmingStr = TDLocalizeSelect(@"MORE_COINS_AVALIDE", nil);
     }
 }
 
@@ -592,14 +594,14 @@
     self.payMoney = self.totalM;
     self.cutBaodian = self.totalM;
     
-    self.couponStr = NSLocalizedString(@"SELECT_COUPON", nil);
+    self.couponStr = TDLocalizeSelect(@"SELECT_COUPON", nil);
     
-//    self.leftTielArray = self.hideShowPurchase ? @[NSLocalizedString(@"COUPON_PAPER", nil),NSLocalizedString(@"COINS_VALUE", nil)] : @[];
+//    self.leftTielArray = self.hideShowPurchase ? @[TDLocalizeSelect(@"COUPON_PAPER", nil),TDLocalizeSelect(@"COINS_VALUE", nil)] : @[];
     
     
     int selectWX = [WXApi isWXAppInstalled] ? 0 : 1;
-    NSDictionary *dic1 = [NSDictionary dictionaryWithObjectsAndKeys:@"weChat",@"imageStr",NSLocalizedString(@"WECHAT_PAY", nil),@"payStr", @(1),@"isSelected",@"0",@"payType",nil];
-    NSDictionary *dic2 = [NSDictionary dictionaryWithObjectsAndKeys:@"zhifu",@"imageStr",NSLocalizedString(@"ALI_PAY", nil),@"payStr", @(selectWX),@"isSelected",@"1",@"payType",nil];
+    NSDictionary *dic1 = [NSDictionary dictionaryWithObjectsAndKeys:@"weChat",@"imageStr",TDLocalizeSelect(@"WECHAT_PAY", nil),@"payStr", @(1),@"isSelected",@"0",@"payType",nil];
+    NSDictionary *dic2 = [NSDictionary dictionaryWithObjectsAndKeys:@"zhifu",@"imageStr",TDLocalizeSelect(@"ALI_PAY", nil),@"payStr", @(selectWX),@"isSelected",@"1",@"payType",nil];
     
     if ([WXApi isWXAppInstalled]) {
         self.payType = 0;
@@ -650,12 +652,12 @@
         
         SubmiteSecondCell *cell = [[SubmiteSecondCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDSumiteSecondCell"];
 //        cell.leftLabel.text = self.leftTielArray[indexPath.row];
-        cell.leftLabel.text = NSLocalizedString(@"COINS_VALUE", nil);
+        cell.leftLabel.text = TDLocalizeSelect(@"COINS_VALUE", nil);
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
 //        if (indexPath.row == 0) {
-//            cell.rightLabel.text = self.isNoCoupon ? NSLocalizedString(@"NO_CHOOSE_COUPON", nil) : self.couponStr;
+//            cell.rightLabel.text = self.isNoCoupon ? TDLocalizeSelect(@"NO_CHOOSE_COUPON", nil) : self.couponStr;
 //        } else {
             cell.rightLabel.text = self.baodianStr;
 //        }
@@ -684,7 +686,7 @@
 //            if (!self.isCampony) {
 //                [self inputAlertShow];
 //            } else {
-//                [self.view makeToast:NSLocalizedString(@"COUPON_NO_COINS", nil) duration:1.08 position:CSToastPositionCenter];
+//                [self.view makeToast:TDLocalizeSelect(@"COUPON_NO_COINS", nil) duration:1.08 position:CSToastPositionCenter];
 //            }
 //        }
     } else if (indexPath.section == 2) {
@@ -716,7 +718,7 @@
         if (self.hideShowPurchase) {
             
             UILabel *title = [[UILabel alloc] init];
-            title.text = NSLocalizedString(@"SELECT_PAYWAY", nil);
+            title.text = TDLocalizeSelect(@"SELECT_PAYWAY", nil);
             title.font = [UIFont fontWithName:@"OpenSans" size:14];
             title.textAlignment = NSTextAlignmentCenter;
             title.textColor = [UIColor colorWithHexString:colorHexStr8];
@@ -806,12 +808,13 @@
     submitButton.titleLabel.numberOfLines = 0;
     [submitButton addTarget:self action:@selector(submitButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [submitButton setTitle:NSLocalizedString(@"HAND_MONEY", nil) forState:UIControlStateNormal];
+    [submitButton setTitle:TDLocalizeSelect(@"HAND_MONEY", nil) forState:UIControlStateNormal];
     [bottomView addSubview:submitButton];
     
     if ([self.giftCoin floatValue] > 0) {
-        NSString *coinNumStr = [Strings giveCoinsNumberWithCount:self.giftCoin];
-        NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",NSLocalizedString(@"HAND_MONEY", nil)] attributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:14],NSForegroundColorAttributeName : [UIColor whiteColor]}];
+        
+        NSString *coinNumStr = [TDLocalizeSelect(@"GIVE_COINS_NUMBER", nil) oex_formatWithParameters:@{@"count" : self.giftCoin}];
+        NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",TDLocalizeSelect(@"HAND_MONEY", nil)] attributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:14],NSForegroundColorAttributeName : [UIColor whiteColor]}];
         NSMutableAttributedString *str2 = [self.baseTool setDetailString:coinNumStr withFont:11 withColorStr:colorHexStr3];
         [str1 appendAttributedString:str2];
         [submitButton setAttributedTitle:str1 forState:UIControlStateNormal];
@@ -836,7 +839,7 @@
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     titleLabel.textColor = [UIColor colorWithHexString:colorHexStr9];
-    titleLabel.text = NSLocalizedString(@"IN_TOTAL_PRICE", nil);
+    titleLabel.text = TDLocalizeSelect(@"IN_TOTAL_PRICE", nil);
     [bottomView  addSubview:titleLabel];
     
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {

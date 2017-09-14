@@ -118,7 +118,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     [self.customEditing.btn_Cancel addTarget:self action:@selector(cancelTableClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     self.selectAllButton.hidden = YES;
-    self.selectAllButton.accessibilityLabel = [Strings accessibilitySelectAll];
+    self.selectAllButton.accessibilityLabel = TDLocalizeSelect(@"ACCESSIBILITY_SELECT_ALL", nil);
     self.selectAllButton.tintColor = [[OEXStyles sharedStyles] navigationItemTintColor];
     
     self.isTableEditing = NO;           // 点击编辑按钮  Check Edit button is clicked
@@ -409,7 +409,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     
     NSString *headerTitle = video.summary.sectionPathEntry.name;
     if (!headerTitle.length) {
-        headerTitle = [Strings untitled];
+        headerTitle = TDLocalizeSelect(@"UNTITLED", nil);
     }
     
     float mainViewWidth = SCREEN_WIDTH;
@@ -440,7 +440,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
         
         NSString *chapterName = video.summary.chapterPathEntry.name;
         if (!chapterName.length) {
-            chapterName = [Strings untitled];
+            chapterName = TDLocalizeSelect(@"UNTITLED", nil);
         }
         
         chapTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, mainViewWidth - 20, 50)];
@@ -898,7 +898,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 - (void)movieTimedOut {
     
     if(!self.videoPlayerInterface.moviePlayerController.isFullscreen) {
-        [self showOverlayMessage:[Strings timeoutCheckInternetConnection]];
+        [self showOverlayMessage:TDLocalizeSelect(@"TIMEOUT_CHECK_INTERNET_CONNECTION", nil)];
         [self.videoPlayerInterface.moviePlayerController stop];
         
     } else {
@@ -981,11 +981,11 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 
     switch(OEXAlertType) {
         case OEXAlertTypeNextVideoAlert: {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings playbackCompleteTitle]
-                                                            message:[Strings playbackCompleteMessage]
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"PLAYBACK_COMPLETE_TITLE", nil)
+                                                            message:TDLocalizeSelect(@"PLAYBACK_COMPLETE_MESSAGE", nil)
                                                            delegate:self
-                                                  cancelButtonTitle:[Strings playbackCompleteContinueCancel]
-                                                  otherButtonTitles:[Strings playbackCompleteContinue], nil];
+                                                  cancelButtonTitle:TDLocalizeSelect(@"PLAYBACK_COMPLETE_CONTINUE_CANCEL", nil)
+                                                  otherButtonTitles:TDLocalizeSelect(@"PLAYBACK_COMPLETE_CONTINUE", nil), nil];
             alert.tag = 1001;
             alert.delegate = self;
             [alert show];
@@ -993,22 +993,22 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
         break;
 
         case OEXAlertTypeDeleteConfirmationAlert: {
-            NSString* message = [Strings confirmDeleteMessage:_arr_SelectedObjects.count];
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings confirmDeleteTitle]
+            NSString* message = TDLocalizeSelect(@"CONFIRM_DELETE_MESSAGE_TEXT", nil);
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"CONFIRM_DELETE_TITLE", nil)
                                                             message:message
                                                            delegate:self
-                                                  cancelButtonTitle:[Strings cancel]
-                                                  otherButtonTitles:[Strings delete], nil];
+                                                  cancelButtonTitle:TDLocalizeSelect(@"CANCEL", nil)
+                                                  otherButtonTitles:TDLocalizeSelect(@"DELETE", nil), nil];
             alert.tag = 1002;
             [alert show];
         }
         break;
 
         case OEXAlertTypePlayBackErrorAlert: {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings videoContentNotAvailable]
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"VIDEO_CONTENT_NOT_AVAILABLE", nil)
                                                             message:nil
                                                            delegate:self
-                                                  cancelButtonTitle:[Strings close]
+                                                  cancelButtonTitle:TDLocalizeSelect(@"CLOSE", nil)
                                                   otherButtonTitles:nil];
 
             alert.tag = 1003;
@@ -1017,10 +1017,10 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
         break;
 
         case OEXAlertTypeVideoTimeOutAlert: {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings timeoutAlertTitle]
-                                                            message:[Strings timeoutCheckInternetConnection]
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"TIMEOUT_ALERT_TITLE", nil)
+                                                            message:TDLocalizeSelect(@"TIMEOUT_CHECK_INTERNET_CONNECTION", nil)
                                                            delegate:self
-                                                  cancelButtonTitle:[Strings ok]
+                                                  cancelButtonTitle:TDLocalizeSelect(@"OK", nil)
                                                   otherButtonTitles:nil];
             alert.tag = 1004;
             [alert show];
@@ -1028,10 +1028,10 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
         break;
 
         case OEXAlertTypePlayBackContentUnAvailable: {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings videoContentNotAvailable]
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"VIDEO_CONTENT_NOT_AVAILABLE", nil)
                                                             message:nil
                                                            delegate:self
-                                                  cancelButtonTitle:[Strings close]
+                                                  cancelButtonTitle:TDLocalizeSelect(@"CLOSE", nil)
                                                   otherButtonTitles:nil];
             alert.tag = 1005;
             [alert show];

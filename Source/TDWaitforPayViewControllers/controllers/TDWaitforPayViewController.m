@@ -60,7 +60,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = NSLocalizedString(@"PREPARE_PAY", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"PREPARE_PAY", nil);
     
     self.baseTool = [[TDBaseToolModel alloc] init];
     self.returnWay = 0;
@@ -151,7 +151,7 @@
         [self.loadIngView removeFromSuperview];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         [self.loadIngView removeFromSuperview];
         NSLog(@"error--%@",error);
     }];
@@ -193,11 +193,11 @@
 
         } else {
             NSLog(@"取消失败 --- %@",responseObject[@"msg"]);
-            [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error--%@",error);
     }];
 
@@ -224,8 +224,10 @@
     self.sheetView.payMoneyView.moneyLabel.attributedText = [self setRealMoney:[NSString stringWithFormat:@"¥%.2f",[model.real_amount floatValue]]];//订单价格
     
     if ([model.give_coin floatValue] > 0) {
-        NSString *coinStr = [Strings giveCoinsNumberWithCount:[NSString stringWithFormat:@"%.2f",[model.give_coin floatValue]]];
-        NSMutableAttributedString *str4 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",NSLocalizedString(@"PAY_TITLE", nil)] attributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:14],NSForegroundColorAttributeName : [UIColor whiteColor]}];
+        
+        NSString *coinStr = [TDLocalizeSelect(@"GIVE_COINS_NUMBER", nil) oex_formatWithParameters:@{@"count" : [NSString stringWithFormat:@"%.2f",[model.give_coin floatValue]]}];
+        
+        NSMutableAttributedString *str4 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",TDLocalizeSelect(@"PAY_TITLE", nil)] attributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:14],NSForegroundColorAttributeName : [UIColor whiteColor]}];
         NSMutableAttributedString *str5 = [self.baseTool setDetailString:coinStr withFont:11 withColorStr:colorHexStr3];
         [str4 appendAttributedString:str5];
         [self.sheetView.payMoneyView.createOrderButton setAttributedTitle:str4 forState:UIControlStateNormal];
@@ -292,7 +294,7 @@
             }
         } else {
             NSLog(@"创建订单 === 》  %@",responseDic[@"msg"]);
-            [self.view makeToast:NSLocalizedString(@"PAY_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"PAY_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
         [self requestStopHandle];
@@ -300,7 +302,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         [self requestStopHandle];
-        [self.view makeToast:NSLocalizedString(@"NETWORK_NOT_AVAILABLE_TITLE", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error--%@",error);
     }];
 }
@@ -361,23 +363,23 @@
             
             NSString *resultStatus = resultDic[@"resultStatus"];
             
-            NSString *strTitle = NSLocalizedString(@"PAY_RESULT", nil);
+            NSString *strTitle = TDLocalizeSelect(@"PAY_RESULT", nil);
             NSString *str;
             switch ([resultStatus integerValue]) {
                 case 6001:
-                    str = NSLocalizedString(@"PAY_CANCEL", nil);
+                    str = TDLocalizeSelect(@"PAY_CANCEL", nil);
                     break;
                 case 9000:
-                    str = NSLocalizedString(@"PAY_SUCCESS", nil);
+                    str = TDLocalizeSelect(@"PAY_SUCCESS", nil);
                     break;
                 case 8000:
-                    str = NSLocalizedString(@"IS_HANDLE", nil);
+                    str = TDLocalizeSelect(@"IS_HANDLE", nil);
                     break;
                 case 4000:
-                    str = NSLocalizedString(@"PAY_FAIL", nil);
+                    str = TDLocalizeSelect(@"PAY_FAIL", nil);
                     break;
                 case 6002:
-                    str = NSLocalizedString(@"NETWORK_CONNET_FAIL", nil);
+                    str = TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil);
                     break;
                     
                 default:
@@ -387,7 +389,7 @@
                 [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"aliPaySuccess" object:nil]];
                 
             } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:str delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:str delegate:self cancelButtonTitle:TDLocalizeSelect(@"OK", nil) otherButtonTitles:nil, nil];
                 alert.tag = 9000;
                 [alert show];
             }
@@ -428,7 +430,7 @@
     if (indexPath.row == 0) { //单号
         TDWaitforPayTopCell *cell = [[TDWaitforPayTopCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDWaitforPayTopCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.orderLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(@"ORDER_NUM", nil),model.order_id];
+        cell.orderLabel.text = [NSString stringWithFormat:@"%@%@",TDLocalizeSelect(@"ORDER_NUM", nil),model.order_id];
         cell.cancelButton.tag = indexPath.section;
         [cell.cancelButton addTarget:self action:@selector(cancelButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
@@ -494,19 +496,19 @@
 }
 
 - (NSMutableAttributedString *)setMessageStr:(NSString *)cost_coin {
-    //    NSMutableAttributedString *str1 = [self.baseTool setString:[NSString stringWithFormat:@"%@:-¥%.2f",NSLocalizedString(@"COUPON_ACTIVITY", nil),[order.activate_price floatValue]] withFont:12 type:1];
-    //    NSMutableAttributedString *str2 = [self.baseTool setString:[NSString stringWithFormat:@"  %@:-¥%.2f",NSLocalizedString(@"COUPON_PAPER", nil),[order.coupon_amount floatValue]] withFont:12 type:1];
-    //    NSMutableAttributedString *str3 = [self.baseTool setString:[NSString stringWithFormat:@"  %@:-¥%.2f",NSLocalizedString(@"COINS_VALUE", nil),[order.cost_coin floatValue] / 10.0] withFont:12 type:1];
+    //    NSMutableAttributedString *str1 = [self.baseTool setString:[NSString stringWithFormat:@"%@:-¥%.2f",TDLocalizeSelect(@"COUPON_ACTIVITY", nil),[order.activate_price floatValue]] withFont:12 type:1];
+    //    NSMutableAttributedString *str2 = [self.baseTool setString:[NSString stringWithFormat:@"  %@:-¥%.2f",TDLocalizeSelect(@"COUPON_PAPER", nil),[order.coupon_amount floatValue]] withFont:12 type:1];
+    //    NSMutableAttributedString *str3 = [self.baseTool setString:[NSString stringWithFormat:@"  %@:-¥%.2f",TDLocalizeSelect(@"COINS_VALUE", nil),[order.cost_coin floatValue] / 10.0] withFont:12 type:1];
     //    [str1 appendAttributedString:str2];
     //    [str1 appendAttributedString:str3];
     
-    NSMutableAttributedString *str = [self.baseTool setString:[NSString stringWithFormat:@"%@ : -¥%.2f",NSLocalizedString(@"COINS_VALUE", nil),[cost_coin floatValue] / 10.0] withFont:14 type:1];
+    NSMutableAttributedString *str = [self.baseTool setString:[NSString stringWithFormat:@"%@ : -¥%.2f",TDLocalizeSelect(@"COINS_VALUE", nil),[cost_coin floatValue] / 10.0] withFont:14 type:1];
     return str;
 }
 
 - (NSMutableAttributedString *)setRealMoney:(NSString *)moneyStr {
     
-    NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"IN_TOTAL_PRICE", nil) attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr9]}];
+    NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:TDLocalizeSelect(@"IN_TOTAL_PRICE", nil) attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr9]}];
     NSMutableAttributedString *str2 = [self.baseTool setDetailString:moneyStr withFont:14 withColorStr:@"#fa7f2b"];
     [str1 appendAttributedString:str2];
     return str1;
@@ -531,7 +533,7 @@
     
     
     self.nullLabel = [[UILabel alloc] init];
-    self.nullLabel.text = NSLocalizedString(@"NO_COURSE_ORDER", nil);
+    self.nullLabel.text = TDLocalizeSelect(@"NO_COURSE_ORDER", nil);
     self.nullLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     self.nullLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     [self.tableView addSubview:self.nullLabel];

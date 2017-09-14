@@ -53,7 +53,7 @@ public class OfflineSupportViewController: UIViewController {
     
     private func showOfflineSnackBarIfNecessary() {
         if !environment.reachability.isReachable() {
-            showOfflineSnackBar(Strings.offline, selector: #selector(reloadViewData))
+            showOfflineSnackBar(TDLocalizeSelectSwift("OFFLINE"), selector: #selector(reloadViewData))
         }
     }
     

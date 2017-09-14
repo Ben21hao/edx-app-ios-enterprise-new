@@ -56,7 +56,7 @@ class RegistrationFieldSelectView: OEXRegistrationFormTextField, UIPickerViewDel
     override func layoutSubviews() {
         super.layoutSubviews()
         tapButton.accessibilityLabel = self.placeholder
-        tapButton.accessibilityHint = Strings.accessibilityShowsDropdownHint
+        tapButton.accessibilityHint = TDLocalizeSelectSwift("ACCESSIBILITY_SHOWS_DROPDOWN_HINT")
     }
     
     override func canBecomeFirstResponder() -> Bool {

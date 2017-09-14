@@ -67,7 +67,7 @@ typedef  enum OEXAlertType
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = NSLocalizedString(@"RECENT_VIDEOS", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"RECENT_VIDEOS", nil);
     self.isTableEditing = NO;
     self.selectAll = NO;
     
@@ -284,7 +284,7 @@ typedef  enum OEXAlertType
 
 - (void)movieTimedOut {
     if(!_videoPlayerInterface.moviePlayerController.isFullscreen) {
-        [self showOverlayMessage:[Strings timeoutCheckInternetConnection]];
+        [self showOverlayMessage:TDLocalizeSelect(@"TIMEOUT_CHECK_INTERNET_CONNECTION", nil)];
         [_videoPlayerInterface.moviePlayerController stop];
     }
     else {
@@ -912,12 +912,12 @@ typedef  enum OEXAlertType
     
     switch(OEXAlertType) {
         case OEXAlertTypeDeleteConfirmationAlert: {
-            NSString* message = [Strings confirmDeleteMessage:_arr_SelectedObjects.count];
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings confirmDeleteTitle]
+            NSString* message = TDLocalizeSelect(@"CONFIRM_DELETE_MESSAGE_TEXT", nil);//[Strings confirmDeleteMessage:_arr_SelectedObjects.count];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"CONFIRM_DELETE_TITLE", nil)
                                                             message:[NSString stringWithFormat:message, _arr_SelectedObjects.count]
                                                            delegate:self
-                                                  cancelButtonTitle:[Strings cancel]
-                                                  otherButtonTitles:[Strings delete], nil];
+                                                  cancelButtonTitle:TDLocalizeSelect(@"CANCEL", nil)
+                                                  otherButtonTitles:TDLocalizeSelect(@"DELETE", nil), nil];
             alert.tag = 1002;
             [alert show];
         }
@@ -925,11 +925,11 @@ typedef  enum OEXAlertType
             break;
             
         case OEXAlertTypeNextVideoAlert: {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings playbackCompleteTitle]
-                                                            message:[Strings playbackCompleteMessage]
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"PLAYBACK_COMPLETE_TITLE", nil)
+                                                            message:TDLocalizeSelect(@"PLAYBACK_COMPLETE_MESSAGE", nil)
                                                            delegate:self
-                                                  cancelButtonTitle:[Strings playbackCompleteContinueCancel]
-                                                  otherButtonTitles:[Strings playbackCompleteContinue], nil];
+                                                  cancelButtonTitle:TDLocalizeSelect(@"PLAYBACK_COMPLETE_CONTINUE_CANCEL", nil)
+                                                  otherButtonTitles:TDLocalizeSelect(@"PLAYBACK_COMPLETE_CONTINUE", nil), nil];
             alert.tag = 1001;
             alert.delegate = self;
             [alert show];
@@ -937,10 +937,10 @@ typedef  enum OEXAlertType
             break;
             
         case OEXAlertTypePlayBackErrorAlert: {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings videoContentNotAvailable]
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"VIDEO_CONTENT_NOT_AVAILABLE", nil)
                                                             message:nil
                                                            delegate:self
-                                                  cancelButtonTitle:[Strings close]
+                                                  cancelButtonTitle:TDLocalizeSelect(@"CLOSE", nil)
                                                   otherButtonTitles:nil, nil];
             
             alert.tag = 1003;
@@ -950,10 +950,10 @@ typedef  enum OEXAlertType
             break;
             
         case OEXAlertTypeVideoTimeOutAlert: {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings timeoutAlertTitle]
-                                                            message:[Strings timeoutCheckInternetConnection]
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"TIMEOUT_ALERT_TITLE", nil)
+                                                            message:TDLocalizeSelect(@"TIMEOUT_CHECK_INTERNET_CONNECTION", nil)
                                                            delegate:self
-                                                  cancelButtonTitle:[Strings ok]
+                                                  cancelButtonTitle:TDLocalizeSelect(@"OK", nil)
                                                   otherButtonTitles:nil];
             alert.tag = 1004;
             [alert show];
@@ -961,10 +961,10 @@ typedef  enum OEXAlertType
             break;
             
         case OEXAlertTypePlayBackContentUnAvailable: {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings videoContentNotAvailable]
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"VIDEO_CONTENT_NOT_AVAILABLE", nil)
                                                             message:nil
                                                            delegate:self
-                                                  cancelButtonTitle:[Strings close]
+                                                  cancelButtonTitle:TDLocalizeSelect(@"CLOSE", nil)
                                                   otherButtonTitles:nil];
             alert.tag = 1005;
             [alert show];
@@ -1020,7 +1020,7 @@ typedef  enum OEXAlertType
     self.noDataLabel = [[UILabel alloc] init];
     self.noDataLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     self.noDataLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
-    self.noDataLabel.text = [Strings noVideosDownloaded];
+    self.noDataLabel.text = TDLocalizeSelect(@"NO_VIDEOS_DOWNLOADED", nil);
     self.noDataLabel.hidden = YES;
     self.noDataLabel.numberOfLines = 0;
     self.noDataLabel.textAlignment = NSTextAlignmentCenter;

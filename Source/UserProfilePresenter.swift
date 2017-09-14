@@ -105,7 +105,7 @@ class UserProfileNetworkPresenter : NSObject, UserProfilePresenter {
                 }
                 let view = AccomplishmentsView(paginator: paginator, containingScrollView: scrollView, shareAction: self.canShareAccomplishments ? shareAction: nil)
                 return TabItem(
-                    name: Strings.Accomplishments.title,
+                    name: TDLocalizeSelectSwift("ACCOMPLISHMENTS.TITLE"),
                     view: view,
                     identifier: UserProfileNetworkPresenter.AccomplishmentsTabIdentifier
                 )

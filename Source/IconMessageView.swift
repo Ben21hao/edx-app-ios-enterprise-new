@@ -162,10 +162,10 @@ class IconMessageView : UIView {
     }
     
     func setupForOutdatedVersionError() {
-        message = Strings.VersionUpgrade.outDatedMessage
+        message = TDLocalizeSelectSwift("VERSION_UPGRADE.OUT_DATED_MESSAGE")
         icon = .Warning
         
-        buttonInfo = MessageButtonInfo(title : Strings.VersionUpgrade.update)
+        buttonInfo = MessageButtonInfo(title : TDLocalizeSelectSwift("VERSION_UPGRADE.UPDATE"))
         {
             if let URL = OEXConfig.sharedConfig().appUpgradeConfig.iOSAppStoreURL() {
                 UIApplication.sharedApplication().openURL(URL)
@@ -178,7 +178,7 @@ class IconMessageView : UIView {
         self.icon = icon ?? .UnknownError
         
         if let controller = self.container.firstAvailableUIViewController() as? LoadStateViewController where controller.isSupportingReload() {
-            buttonInfo = MessageButtonInfo(title : Strings.reload)
+            buttonInfo = MessageButtonInfo(title : TDLocalizeSelectSwift("RELOAD"))
             {
                 controller.loadStateViewReload()
             }

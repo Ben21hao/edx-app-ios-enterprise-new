@@ -75,8 +75,8 @@ const CGFloat contentLabelFontSize = 14;
     
     self.moreButton = [[UIButton alloc] init];
     self.moreButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
-    [self.moreButton setTitle:NSLocalizedString(@"SHOW_MORE", nil) forState:UIControlStateNormal];
-    [self.moreButton setTitle:NSLocalizedString(@"PACK_UP", nil) forState:UIControlStateSelected];
+    [self.moreButton setTitle:TDLocalizeSelect(@"SHOW_MORE", nil) forState:UIControlStateNormal];
+    [self.moreButton setTitle:TDLocalizeSelect(@"PACK_UP", nil) forState:UIControlStateSelected];
     [self.moreButton setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
     [self.moreButton addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.bgView addSubview:self.moreButton];
@@ -304,7 +304,7 @@ const CGFloat contentLabelFontSize = 14;
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         self.praiseButton.userInteractionEnabled = YES;
-        [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"errorCode---%ld---",(long)error.code);
     }];
 }

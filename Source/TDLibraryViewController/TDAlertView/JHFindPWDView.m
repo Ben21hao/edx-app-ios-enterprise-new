@@ -40,7 +40,7 @@
         
         //弹窗标题
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 280, 40)];
-        label.text = NSLocalizedString(@"RESET_PASSWORD", nil);
+        label.text = TDLocalizeSelect(@"RESET_PASSWORD", nil);
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = [UIColor colorWithHexString:colorHexStr10];
         [imageView addSubview:label];
@@ -52,7 +52,7 @@
         
         //添加提示信息
         UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 55, 250, 60)];
-        messageLabel.text = NSLocalizedString(@"PLEASE_ENTER_YOUR_PHONE_OR_EMAIL_TO_RESET_PASSWORD", nil);
+        messageLabel.text = TDLocalizeSelect(@"PLEASE_ENTER_YOUR_PHONE_OR_EMAIL_TO_RESET_PASSWORD", nil);
         messageLabel.numberOfLines = 0;
         messageLabel.textAlignment = NSTextAlignmentCenter;
         messageLabel.font = [UIFont systemFontOfSize:12];
@@ -70,7 +70,7 @@
         //占位文本属性
         NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
         attributes[NSFontAttributeName] = [UIFont systemFontOfSize:14];
-        textF2.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"PLEASE_ENTER_YOUR_PHONE_OR_EMAIL", nil) attributes:attributes];
+        textF2.attributedPlaceholder = [[NSAttributedString alloc] initWithString:TDLocalizeSelect(@"PLEASE_ENTER_YOUR_PHONE_OR_EMAIL", nil) attributes:attributes];
         self.textF2 = textF2;
         [imageView addSubview:textF2];
         
@@ -86,7 +86,7 @@
         
         //添加取消
         UIButton *cancleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 170, bgViewWidth * 0.5, 50)];
-        [cancleBtn setTitle:NSLocalizedString(@"CANCEL", nil) forState:UIControlStateNormal];
+        [cancleBtn setTitle:TDLocalizeSelect(@"CANCEL", nil) forState:UIControlStateNormal];
         [cancleBtn setTitleColor:[UIColor colorWithHexString:colorHexStr9] forState:UIControlStateNormal];
         cancleBtn.tag = 0;
         [cancleBtn addTarget:self action:@selector(btnOnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -94,7 +94,7 @@
         
         //确定按钮
         UIButton *quedingBtn = [[UIButton alloc] initWithFrame:CGRectMake(bgViewWidth * 0.5, 170, bgViewWidth * 0.5, 50)];
-        [quedingBtn setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
+        [quedingBtn setTitle:TDLocalizeSelect(@"OK", nil) forState:UIControlStateNormal];
         [quedingBtn setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
         quedingBtn.tag = 1;
         [quedingBtn addTarget:self action:@selector(btnOnClick:) forControlEvents:UIControlEventTouchUpInside];

@@ -45,7 +45,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.navigationItem.title = NSLocalizedString(@"RESET_BY_EMAIL", nil);
+    self.navigationItem.title = TDLocalizeSelect(@"RESET_BY_EMAIL", nil);
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
 }
 
@@ -62,8 +62,8 @@
     
     TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
     if (![baseTool networkingState]) {
-        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings networkNotAvailableTitle]
-                                                                message:[Strings networkNotAvailableMessageTrouble]
+        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil)
+                                                                message:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_MESSAGE_TROUBLE", nil)
                                                        onViewController:self.navigationController.view
                                                              shouldHide:YES];
         return;
@@ -91,13 +91,13 @@
                     NSLog(@"重置密码 ++++++++ %@",dataDic);
                     
                     if ([dataDic[@"success"] intValue] == 0) {
-                        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings floatingErrorTitle]
+                        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_TITLE", nil)
                                                                                 message:dataDic[@"value"]
                                                                        onViewController:self.navigationController.view
                                                                              shouldHide:YES];
                     } else {
                         
-                        [self.view makeToast:NSLocalizedString(@"CLICK_RESEND_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
+                        [self.view makeToast:TDLocalizeSelect(@"CLICK_RESEND_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
                     }
                     
                     
@@ -105,7 +105,7 @@
                     
                     NSDictionary *dictionary = [NSJSONSerialization oex_JSONObjectWithData:data error:nil];
                     NSString *responseStr = [[dictionary objectForKey:@"email"] firstObject];
-                    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings floatingErrorTitle]
+                    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_TITLE", nil)
                                                                             message:responseStr
                                                                    onViewController:self.navigationController.view
                                                                          shouldHide:YES];
@@ -113,7 +113,7 @@
                 } else if(httpResp.statusCode > 500) {
                     
                     NSString* responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings floatingErrorTitle]
+                    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_TITLE", nil)
                                                                             message:responseStr
                                                                    onViewController:self.navigationController.view
                                                                          shouldHide:YES];
@@ -121,7 +121,7 @@
                 
             } else {
                 
-                [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings floatingErrorTitle]
+                [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_TITLE", nil)
                                                                         message:[error localizedDescription]
                                                                onViewController:self.navigationController.view
                                                                      shouldHide:YES];
@@ -141,7 +141,7 @@
     
     self.messageLabel = [[UILabel alloc] init];
     self.messageLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
-    self.messageLabel.text = [Strings hadSendEmailWithCount:self.acountStr];
+    self.messageLabel.text = [TDLocalizeSelect(@"HAD_SEND_EMAIL", nil) oex_formatWithParameters:@{@"count" : self.acountStr}];
     self.messageLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
     self.messageLabel.textAlignment = NSTextAlignmentCenter;
     self.messageLabel.numberOfLines = 0;
@@ -151,7 +151,7 @@
     self.loginButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.loginButton.layer.masksToBounds = YES;
     self.loginButton.layer.cornerRadius = 4.0;
-    [self.loginButton setTitle:NSLocalizedString(@"ACTIVITY_LOGIN", nil) forState:UIControlStateNormal];
+    [self.loginButton setTitle:TDLocalizeSelect(@"ACTIVITY_LOGIN", nil) forState:UIControlStateNormal];
     self.loginButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     [self.loginButton addTarget:self action:@selector(loginButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.loginButton];
@@ -196,9 +196,9 @@
 }
 
 - (NSMutableAttributedString *)setAttribute {
-    NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"NO_RECEIVE_EMAIL", nil) attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr8]}];
+    NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:TDLocalizeSelect(@"NO_RECEIVE_EMAIL", nil) attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr8]}];
     
-    NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"CLICK_RESEND", nil) attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr1]}];
+    NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:TDLocalizeSelect(@"CLICK_RESEND", nil) attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr1]}];
     [str1 appendAttributedString:str2];
     return str1;
 }

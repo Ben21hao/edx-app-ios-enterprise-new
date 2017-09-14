@@ -30,4 +30,9 @@
 @property (nonatomic,strong) UIView *nullView;
 - (void)setNullDataView:(NSString *)title;
 
+/*
+ 选择语言发生改变
+ */
+- (void)languageChangeAction;
+
 @end

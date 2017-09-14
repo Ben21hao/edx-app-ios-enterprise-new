@@ -39,7 +39,7 @@ class JSONFormBuilderTextEditorViewController: TDSwiftBaseViewController {
             textView.placeholder = placeholder
         }
         
-        handInBtn.setTitle(Strings.submit, forState: .Normal)
+        handInBtn.setTitle(TDLocalizeSelectSwift("SUBMIT"), forState: .Normal)
         handInBtn.addTarget(self, action: #selector(JSONFormBuilderTextEditorViewController.handinButtonAction), forControlEvents: .TouchUpInside)
         handInBtn.backgroundColor = OEXStyles.sharedStyles().baseColor1()
         handInBtn.layer.cornerRadius = 4.0
@@ -79,10 +79,10 @@ class JSONFormBuilderTextEditorViewController: TDSwiftBaseViewController {
         self.textView.resignFirstResponder()
         
         if textView.text.characters.count == 0 { //昵称不能为空
-            self.view.makeToast(Strings.nicknameNull, duration: 1.08, position: CSToastPositionCenter)
+            self.view.makeToast(TDLocalizeSelectSwift("NICKNAME_NULL"), duration: 1.08, position: CSToastPositionCenter)
             
         } else if textView.text.characters.count == 1 {
-            self.view.makeToast( Strings.aleastTeoCharacter, duration: 1.08, position: CSToastPositionCenter)
+            self.view.makeToast(TDLocalizeSelectSwift("ALEAST_TEO_CHARACTER"), duration: 1.08, position: CSToastPositionCenter)
             
         } else if textView.text.characters.count <= 6 {
             let baseTool = TDBaseToolModel.init()
@@ -99,7 +99,7 @@ class JSONFormBuilderTextEditorViewController: TDSwiftBaseViewController {
             }
             
         } else { //不能超过六个字
-            self.view.makeToast(Strings.nicknameNumber, duration: 1.08, position: CSToastPositionCenter)
+            self.view.makeToast(TDLocalizeSelectSwift("NICKNAME_NUMBER"), duration: 1.08, position: CSToastPositionCenter)
         }
     }
     

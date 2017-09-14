@@ -68,19 +68,19 @@
     
     switch (indexPath.row) {
         case 0:
-            cell.titleLabel.text = NSLocalizedString(@"TRURE_NAME", nil);
+            cell.titleLabel.text = TDLocalizeSelect(@"TRURE_NAME", nil);
             cell.detailTextField.text = self.name;
             break;
         case 1:
-            cell.titleLabel.text = NSLocalizedString(@"CARD_ID", nil);
+            cell.titleLabel.text = TDLocalizeSelect(@"CARD_ID", nil);
             cell.detailTextField.text = self.identifyID;
             break;
         case 2:
-            cell.titleLabel.text = NSLocalizedString(@"USER_BIRTHDATE", nil);
+            cell.titleLabel.text = TDLocalizeSelect(@"USER_BIRTHDATE", nil);
             cell.detailTextField.text = self.birthDate;
             break;
         case 3: {
-            cell.titleLabel.text = NSLocalizedString(@"USER_SEX", nil);
+            cell.titleLabel.text = TDLocalizeSelect(@"USER_SEX", nil);
             cell.detailTextField.text = self.sexStr;
             
             UIView *line = [[UIView alloc] init];

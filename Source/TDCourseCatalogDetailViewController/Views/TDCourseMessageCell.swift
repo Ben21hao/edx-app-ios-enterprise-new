@@ -38,18 +38,18 @@ class TDCourseMessageCell: UITableViewCell {
     var courseModel : OEXCourse? {
         didSet {
             
-            timeLabel.text = courseModel!.effort?.stringByAppendingString(Strings.studyHour)
+            timeLabel.text = courseModel!.effort?.stringByAppendingString(TDLocalizeSelectSwift("STUDY_HOUR"))
             if ((courseModel!.effort?.containsString("约")) != nil) {
                 let timeStr = NSMutableString.init(string: courseModel!.effort!)
-                let time = timeStr.stringByReplacingOccurrencesOfString("约", withString:"\(Strings.aboutTime) ")
-                timeLabel.text = String(time.stringByAppendingString(" \(Strings.studyHour)"))
+                let time = timeStr.stringByReplacingOccurrencesOfString("约", withString:"\(TDLocalizeSelectSwift("ABOUT_TIME")) ")
+                timeLabel.text = String(time.stringByAppendingString(" \(TDLocalizeSelectSwift("STUDY_HOUR"))"))
             }
             
             if courseModel!.listen_count != nil {
                 let timeStr : String = courseModel!.listen_count!.stringValue
-                numberLabel.text = "\(timeStr) \(Strings.numberStudent)"
+                numberLabel.text = "\(timeStr) \(TDLocalizeSelectSwift("NUMBER_STUDENT"))"
             } else {
-                numberLabel.text = "0\(Strings.numberStudent)"
+                numberLabel.text = "0\(TDLocalizeSelectSwift("NUMBER_STUDENT"))"
             }
             
             dealWithCourse(courseModel?.is_public_course == false)
@@ -76,7 +76,7 @@ class TDCourseMessageCell: UITableViewCell {
         setIconLabelType("\u{f017}", label: clockLabel)
         bgView.addSubview(clockLabel)
         
-        setTitleLabelType(Strings.studyTime, label: studyLabel)
+        setTitleLabelType(TDLocalizeSelectSwift("STUDY_TIME"), label: studyLabel)
         bgView.addSubview(studyLabel)
         
         setTitleLabelType("", label: timeLabel)
@@ -89,7 +89,7 @@ class TDCourseMessageCell: UITableViewCell {
         setIconLabelType("\u{f007}", label: peopleLabel)
         bgView.addSubview(peopleLabel)
         
-        setTitleLabelType(Strings.applicationNumber, label: enrollmentLabel)
+        setTitleLabelType(TDLocalizeSelectSwift("APPLICATION_NUMBER"), label: enrollmentLabel)
         bgView.addSubview(enrollmentLabel)
         
         setTitleLabelType("", label: numberLabel)
@@ -102,13 +102,13 @@ class TDCourseMessageCell: UITableViewCell {
         setIconLabelType("\u{f133}", label: dateLabel)
         bgView.addSubview(dateLabel)
         
-        setTitleLabelType(Strings.dateLimit, label: limitLabel)
+        setTitleLabelType(TDLocalizeSelectSwift("DATE_LIMIT"), label: limitLabel)
         bgView.addSubview(limitLabel)
         
         let paragraph = NSMutableParagraphStyle.init()
         paragraph.lineSpacing = 2
-        let str1 = NSMutableAttributedString.init(string: "\(Strings.noLimit)\n", attributes: [NSFontAttributeName : UIFont.systemFontOfSize(14),NSForegroundColorAttributeName : OEXStyles.sharedStyles().baseColor10(),NSParagraphStyleAttributeName : paragraph])
-        let str2 = NSMutableAttributedString.init(string: Strings.enrollMessage, attributes: [NSFontAttributeName : UIFont.init(name: "OpenSans", size: 12)!,NSForegroundColorAttributeName : OEXStyles.sharedStyles().baseColor9(),NSParagraphStyleAttributeName : paragraph])
+        let str1 = NSMutableAttributedString.init(string: "\(TDLocalizeSelectSwift("NO_LIMIT"))\n", attributes: [NSFontAttributeName : UIFont.systemFontOfSize(14),NSForegroundColorAttributeName : OEXStyles.sharedStyles().baseColor10(),NSParagraphStyleAttributeName : paragraph])
+        let str2 = NSMutableAttributedString.init(string: TDLocalizeSelectSwift("ENROLL_MESSAGE"), attributes: [NSFontAttributeName : UIFont.init(name: "OpenSans", size: 12)!,NSForegroundColorAttributeName : OEXStyles.sharedStyles().baseColor9(),NSParagraphStyleAttributeName : paragraph])
         str1.appendAttributedString(str2)
         
         limitMessageLabel.attributedText = str1

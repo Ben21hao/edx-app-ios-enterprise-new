@@ -114,7 +114,7 @@ class TDUserCenterView: UIView,UITableViewDataSource {
                     if self.userProfile!.name != self.userProfile!.username && self.userProfile?.name?.characters.count != 0 {
                         cell.nameLabel.text = self.userProfile!.name
                     } else {
-                        cell.nameLabel.text = Strings.noName
+                        cell.nameLabel.text = TDLocalizeSelectSwift("NO_NAME")
                     }
                 }
                 
@@ -131,22 +131,21 @@ class TDUserCenterView: UIView,UITableViewDataSource {
                 }
                 
                 if statusCode == 400 || statusCode == 202 {
-                    cell.statusLabel.text = Strings.tdUnvertified
+                    cell.statusLabel.text = TDLocalizeSelectSwift("TD_UNVERTIFIED")
                     cell.statusLabel.backgroundColor = OEXStyles.sharedStyles().baseColor6()
                     cell.statusLabel.textColor =  OEXStyles.sharedStyles().baseColor8()
                     
                 } else if statusCode == 200 {
-                    cell.statusLabel.text = Strings.tdProcessing
+                    cell.statusLabel.text = TDLocalizeSelectSwift("TD_PROCESSING")
                     cell.statusLabel.backgroundColor = OEXStyles.sharedStyles().baseColor2()
                     cell.statusLabel.textColor = UIColor.whiteColor()
                     
                 } else if statusCode == 201 {
-                    cell.statusLabel.text = Strings.tdVertified
+                    cell.statusLabel.text = TDLocalizeSelectSwift("TD_VERTIFIED")
                     cell.statusLabel.backgroundColor = OEXStyles.sharedStyles().baseColor4()
                     cell.statusLabel.textColor =  UIColor.whiteColor()
                 }
             }
-            
             return cell
             
         } else {
@@ -159,12 +158,12 @@ class TDUserCenterView: UIView,UITableViewDataSource {
             if indexPath.section == 1 {
                 switch indexPath.row {
                 case 0:
-                    titleStr = Strings.studyCoins
-                    cell.messageLabel.attributedText = baseTool.setDetailString(Strings.nowHave(count: String(format: "%.2f",score)), withFont: 12, withColorStr: "#A7A4A4")
+                    titleStr = TDLocalizeSelectSwift("STUDY_COINS")
+                    cell.messageLabel.attributedText = baseTool.setDetailString(TDLocalizeSelectSwift("NOW_HAVE").oex_formatWithParameters(["count" : String(format: "%.2f",score)]), withFont: 12, withColorStr: "#A7A4A4")
                     imageStr = "baodian"
                 case 1:
-                    titleStr = Strings.couponPaper
-                    cell.messageLabel.text = Strings.couponNumber(count:String(format: "%.0f",coupons))
+                    titleStr = TDLocalizeSelectSwift("COUPON_PAPER")
+                    cell.messageLabel.text = TDLocalizeSelectSwift("COUPON_NUMBER").oex_formatWithParameters(["count" : String(format: "%.0f",coupons)])
                     imageStr = "coupons"
                     //隐藏优惠券
                     cell.messageLabel.hidden = true
@@ -172,15 +171,15 @@ class TDUserCenterView: UIView,UITableViewDataSource {
                     cell.iconImageView.hidden = true
                     cell.accessoryType = .None
                 default:
-                    titleStr = Strings.courseOrder
-                    cell.messageLabel.text = Strings.orderCount(count: String(format: "%.0f",orders))
+                    titleStr = TDLocalizeSelectSwift("COURSE_ORDER")
+                    cell.messageLabel.text = TDLocalizeSelectSwift("ORDER_COUNT").oex_formatWithParameters(["count" : String(format: "%.0f",orders)])
                     imageStr = "Page"
                 }
             } else {
                 switch indexPath.row {
                 case 0:
-                    titleStr = Strings.liveLectureText
-                    cell.messageLabel.text = Strings.participateLiveText
+                    titleStr = TDLocalizeSelectSwift("LIVE_LECTURE_TEXT")
+                    cell.messageLabel.text = TDLocalizeSelectSwift("PARTICIPATE_LIVE_TEXT")
                     imageStr = "lecture_image"
                     
 //                    cell.messageLabel.hidden = true
@@ -188,8 +187,8 @@ class TDUserCenterView: UIView,UITableViewDataSource {
 //                    cell.iconImageView.hidden = true
                     
                 default:
-                    titleStr = Strings.taService
-                    cell.messageLabel.text = Strings.viewTaService
+                    titleStr = TDLocalizeSelectSwift("TA_SERVICE")
+                    cell.messageLabel.text = TDLocalizeSelectSwift("VIEW_TA_SERVICE")
                     imageStr = "assistant_image"
                 }
             }

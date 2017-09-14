@@ -32,19 +32,19 @@ class ProfilePictureTaker : NSObject {
     func start(alreadyHasImage: Bool) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         if UIImagePickerController.isSourceTypeAvailable(.Camera) {
-            let action = UIAlertAction(title: Strings.Profile.takePicture, style: .Default) { _ in
+            let action = UIAlertAction(title: TDLocalizeSelectSwift("PROFILE.TAKE_PICTURE"), style: .Default) { _ in
                 self.showImagePicker(.Camera)
             }
             alert.addAction(action)
         }
         if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
-            let action = UIAlertAction(title: Strings.Profile.chooseExisting, style: .Default) { _ in
+            let action = UIAlertAction(title: TDLocalizeSelectSwift("PROFILE.CHOOSE_EXISTING"), style: .Default) { _ in
                 self.showImagePicker(.PhotoLibrary)
             }
             alert.addAction(action)
         }
         if alreadyHasImage {
-            let action = UIAlertAction(title: Strings.Profile.removeImage, style: .Destructive) { _ in
+            let action = UIAlertAction(title: TDLocalizeSelectSwift("PROFILE.REMOVE_IMAGE"), style: .Destructive) { _ in
                 self.delegate?.deleteImage()
             }
             alert.addAction(action)

@@ -27,10 +27,10 @@ class EnrolledCoursesFooterView : UIView {
         container.addSubview(promptLabel)
         container.addSubview(findCoursesButton)
         
-        self.promptLabel.attributedText = findCoursesTextStyle.attributedStringWithText(Strings.EnrollmentList.findCoursesPrompt)
+        self.promptLabel.attributedText = findCoursesTextStyle.attributedStringWithText(TDLocalizeSelectSwift("ENROLLMENT_LIST.FIND_COURSES_PROMPT"))
         self.promptLabel.textAlignment = .Center
         
-        self.findCoursesButton.applyButtonStyle(OEXStyles.sharedStyles().filledPrimaryButtonStyle, withTitle: Strings.EnrollmentList.findCourses)//.oex_uppercaseStringInCurrentLocale()大写字母
+        self.findCoursesButton.applyButtonStyle(OEXStyles.sharedStyles().filledPrimaryButtonStyle, withTitle: TDLocalizeSelectSwift("ENROLLMENT_LIST.FIND_COURSES"))//.oex_uppercaseStringInCurrentLocale()大写字母
         
         container.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
 //        container.applyBorderStyle(BorderStyle())

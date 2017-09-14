@@ -67,7 +67,7 @@
     self.bgView.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.bgView];
     
-    self.titleLabel = [self setLabelConstraint:NSLocalizedString(@"RETE_TA", nil)];
+    self.titleLabel = [self setLabelConstraint:TDLocalizeSelect(@"RETE_TA", nil)];
     [self.bgView addSubview:self.titleLabel];
     
     self.numLabel = [self setLabelConstraint:@"0/500"];
@@ -84,7 +84,7 @@
     self.inputTextView.layer.borderColor = [UIColor colorWithHexString:colorHexStr6].CGColor;
     [self.bgView addSubview:self.inputTextView];
     
-    self.holderLabel = [self setLabelConstraint:NSLocalizedString(@"ENTER_COMMENTS_TA", nil)];
+    self.holderLabel = [self setLabelConstraint:TDLocalizeSelect(@"ENTER_COMMENTS_TA", nil)];
     self.holderLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     [self.bgView addSubview:self.holderLabel];
 }

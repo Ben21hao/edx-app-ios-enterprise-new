@@ -46,6 +46,7 @@ class UserProfileViewController: OfflineSupportViewController, UserProfilePresen
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.addSubview(contentView)
         contentView.snp_makeConstraints {make in
             make.edges.equalTo(view)
@@ -56,7 +57,7 @@ class UserProfileViewController: OfflineSupportViewController, UserProfilePresen
             editButton.oex_setAction() { [weak self] in
                 self?.environment.router?.showProfileEditorFromController(self!)
             }
-            editButton.accessibilityLabel = Strings.Profile.editAccessibility
+            editButton.accessibilityLabel = TDLocalizeSelectSwift("PROFILE.EDIT_ACCESSIBILITY")
             navigationItem.rightBarButtonItem = editButton
         }
 
@@ -86,7 +87,7 @@ class UserProfileViewController: OfflineSupportViewController, UserProfilePresen
             self?.contentView.populateFields(profile, editable: editable, networkManager: networkManager)
             self?.loadController.state = .Loaded
             }, failure : { [weak self] error in
-                self?.loadController.state = LoadState.failed(error, message: Strings.Profile.unableToGet)
+                self?.loadController.state = LoadState.failed(error, message: TDLocalizeSelectSwift("PROFILE.UNABLE_TO_GET"))
             })
     }
 
@@ -100,7 +101,7 @@ class UserProfileViewController: OfflineSupportViewController, UserProfilePresen
     }
 
     func presenter(presenter: UserProfilePresenter, choseShareURL url: NSURL) {
-        let message = Strings.Accomplishments.shareText(platformName:self.environment.config.platformName())
+        let message = TDLocalizeSelectSwift("ACCOMPLISHMENTS.SHARE_TEXT").oex_formatWithParameters(["platform_name" : self.environment.config.platformName()])
         let controller = UIActivityViewController(
             activityItems: [message, url],
             applicationActivities: nil

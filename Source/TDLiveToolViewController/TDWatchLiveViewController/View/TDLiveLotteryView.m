@@ -42,8 +42,8 @@
 
 -(void)changeText {//抽奖中
     
-    if ([self.lotteryTip.text isEqualToString:[NSString stringWithFormat:@"%@...",NSLocalizedString(@"PROCESSING_TIP_TEXT", nil)]]) {
-        self.lotteryTip.text = NSLocalizedString(@"PROCESSING_TIP_TEXT", nil);
+    if ([self.lotteryTip.text isEqualToString:[NSString stringWithFormat:@"%@...",TDLocalizeSelect(@"PROCESSING_TIP_TEXT", nil)]]) {
+        self.lotteryTip.text = TDLocalizeSelect(@"PROCESSING_TIP_TEXT", nil);
     } else{
         self.lotteryTip.text = [self.lotteryTip.text stringByAppendingString:@"."];
     }
@@ -67,7 +67,7 @@
     [_lottery submitLotteryInfo:dict success:^{
         
         [self closeBtnAction:self.closeBtn];
-        [self makeToast:NSLocalizedString(@"HANDIN_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
+        [self makeToast:TDLocalizeSelect(@"HANDIN_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
         
     } failed:^(NSDictionary *failedData) {
         
@@ -86,10 +86,10 @@
     
     if (self.endLotteryModel.isWin) { //是否中奖
         self.bottomView.hidden = NO;
-        self.winTip.text = NSLocalizedString(@"CONGRATULATIONS", nil);
+        self.winTip.text = TDLocalizeSelect(@"CONGRATULATIONS", nil);
     } else {
         self.bottomView.hidden = YES;
-        self.winTip.text = NSLocalizedString(@"LUCKY_DRAW_RESULT", nil);
+        self.winTip.text = TDLocalizeSelect(@"LUCKY_DRAW_RESULT", nil);
     }
     
     [self.resultTable reloadData];
@@ -166,7 +166,7 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tablAction)];
     
-    self.lotteryTip = [self labelStly:NSLocalizedString(@"PROCESSING_TIP_TEXT", nil) font:18];
+    self.lotteryTip = [self labelStly:TDLocalizeSelect(@"PROCESSING_TIP_TEXT", nil) font:18];
     [self addSubview:self.lotteryTip];
     
     self.closeBtn = [[UIButton alloc] init];
@@ -181,7 +181,7 @@
     [self.resultView addGestureRecognizer:tap];
     [self addSubview:self.resultView];
 
-    self.winTip = [self labelStly:NSLocalizedString(@"LUCKY_DRAW_RESULT", nil) font:18];
+    self.winTip = [self labelStly:TDLocalizeSelect(@"LUCKY_DRAW_RESULT", nil) font:18];
     [self.resultView addSubview:self.winTip];
     
     self.resultTable = [[UITableView alloc] init];
@@ -196,7 +196,7 @@
     self.bottomView.userInteractionEnabled = YES;
     [self.resultView addSubview:self.bottomView];
     
-    self.lblName = [self labelStly:NSLocalizedString(@"TRURE_NAME_TEXT", nil) font:14];
+    self.lblName = [self labelStly:TDLocalizeSelect(@"TRURE_NAME_TEXT", nil) font:14];
     [self.bottomView addSubview:self.lblName];
 
     self.tfName = [[UITextField alloc] init];
@@ -205,7 +205,7 @@
     self.tfName.font = [UIFont fontWithName:@"OpenSans" size:14];
     [self.bottomView addSubview:self.tfName];
     
-    self.lblPhone = [self labelStly:NSLocalizedString(@"PHONE_NUMBER", nil) font:14];
+    self.lblPhone = [self labelStly:TDLocalizeSelect(@"PHONE_NUMBER", nil) font:14];
     [self.bottomView addSubview:self.lblPhone];
     
     self.tfPhone = [[UITextField alloc] init];
@@ -218,7 +218,7 @@
     self.btnSubmit.showsTouchWhenHighlighted = YES;
     self.btnSubmit.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     [self.btnSubmit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.btnSubmit setTitle:NSLocalizedString(@"SUBMIT", nil) forState:UIControlStateNormal];
+    [self.btnSubmit setTitle:TDLocalizeSelect(@"SUBMIT", nil) forState:UIControlStateNormal];
     [self.btnSubmit addTarget:self action:@selector(btnSubmitAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.bottomView addSubview:self.btnSubmit];
     

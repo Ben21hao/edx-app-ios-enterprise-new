@@ -118,8 +118,8 @@ static OEXFlowErrorViewController* _sharedInterface = nil;
 }
 
 - (void)showNoConnectionErrorOnView:(UIView *)view {
-    [self showErrorWithTitle:[Strings networkNotAvailableTitle]
-                     message:[Strings networkNotAvailableMessage]
+    [self showErrorWithTitle:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil)
+                     message:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_MESSAGE", nil)
             onViewController:view
                   shouldHide:YES];
 }

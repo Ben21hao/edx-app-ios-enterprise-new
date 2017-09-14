@@ -18,3 +18,11 @@ let ELITEU_URL = "http://enterprise.e-ducation.cn" //企业生产
 
 let TDScreenWidth = UIScreen.mainScreen().bounds.size.width
 let TDScreenHeight = UIScreen.mainScreen().bounds.size.height
+
+func TDLocalizeSelectSwift(key: String) -> String {
+    return LanguageChangeTool.bundle().localizedStringForKey(key, value: nil, table: "Localizable")
+}
+
+func TDNotificationCenter() -> NSNotificationCenter {
+    return NSNotificationCenter.defaultCenter()
+}

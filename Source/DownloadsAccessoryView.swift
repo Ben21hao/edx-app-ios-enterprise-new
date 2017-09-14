@@ -109,7 +109,7 @@ class DownloadsAccessoryView : UIView {
                     self.accessibilityLabel = message
                 }
                 else {
-                    self.accessibilityLabel = Strings.download
+                    self.accessibilityLabel = TDLocalizeSelectSwift("DOWNLOAD")
                 }
                 self.accessibilityTraits = UIAccessibilityTraitButton
             case .Downloading:
@@ -120,7 +120,7 @@ class DownloadsAccessoryView : UIView {
                 downloadButton.hidden = true
                 countLabel.hidden = true
                 
-                self.accessibilityLabel = Strings.downloading
+                self.accessibilityLabel = TDLocalizeSelectSwift("DOWNLOADING")
                 self.accessibilityTraits = UIAccessibilityTraitButton
             case .Done:
 //                useIcon(.CheckCircle)
@@ -137,7 +137,7 @@ class DownloadsAccessoryView : UIView {
                     self.accessibilityLabel = message
                 }
                 else {
-                    self.accessibilityLabel = Strings.downloaded
+                    self.accessibilityLabel = TDLocalizeSelectSwift("DOWNLOADED")
                 }
                 self.accessibilityTraits = UIAccessibilityTraitStaticText
             }

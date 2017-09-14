@@ -24,15 +24,15 @@
     
     float viewWidth = SCREEN_WIDTH;
     
-    self.btn_Edit = [self setButtonStyle:[Strings edit] hidden:NO];
+    self.btn_Edit = [self setButtonStyle:TDLocalizeSelect(@"EDIT", nil) hidden:NO];
     [self.btn_Edit setFrame:CGRectMake(0, 0, viewWidth, 50)];
     [self addSubview:self.btn_Edit];
     
-    self.btn_Cancel = [self setButtonStyle:[Strings cancel] hidden:YES];
+    self.btn_Cancel = [self setButtonStyle:TDLocalizeSelect(@"CANCEL", nil) hidden:YES];
     [self.btn_Cancel setFrame:CGRectMake(0, 0, (viewWidth - 2)/2 , 50)];
     [self addSubview:self.btn_Cancel];
     
-    self.btn_Delete = [self setButtonStyle:[Strings delete] hidden:YES];
+    self.btn_Delete = [self setButtonStyle:TDLocalizeSelect(@"DELETE", nil) hidden:YES];
     [self.btn_Delete setFrame:CGRectMake(viewWidth / 2, 0, (viewWidth - 2)/2, 50)];
     [self.btn_Delete setBackgroundColor:[UIColor darkGrayColor]];
     self.btn_Delete.enabled = NO;

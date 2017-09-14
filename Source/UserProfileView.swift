@@ -56,11 +56,11 @@ class UserProfileView : UIView, UIScrollViewDelegate {
         messageLabel.setContentHuggingPriority(1000, forAxis: .Vertical)
         scrollView.addSubview(messageLabel)
 
-        languageLabel.accessibilityHint = Strings.Profile.languageAccessibilityHint
+        languageLabel.accessibilityHint = TDLocalizeSelectSwift("PROFILE.LANGUAGE_ACCESSIBILITY_HINT")
         languageLabel.setContentHuggingPriority(1000, forAxis: .Vertical)
         scrollView.addSubview(languageLabel)
 
-        countryLabel.accessibilityHint = Strings.Profile.countryAccessibilityHint
+        countryLabel.accessibilityHint = TDLocalizeSelectSwift("PROFILE.COUNTRY_ACCESSIBILITY_HINT")
         countryLabel.setContentHuggingPriority(1000, forAxis: .Vertical)
         scrollView.addSubview(countryLabel)
 
@@ -182,7 +182,7 @@ class UserProfileView : UIView, UIScrollViewDelegate {
 
     private func messageForProfile(profile : UserProfile, editable : Bool) -> String? {
         if profile.sharingLimitedProfile {
-            return editable ? Strings.Profile.showingLimited : Strings.Profile.learnerHasLimitedProfile(platformName: OEXConfig.sharedConfig().platformName())
+            return editable ? TDLocalizeSelectSwift("PROFILE.SHOWING_LIMITED") : TDLocalizeSelectSwift("PROFILE.LEARNER_HAS_LIMITED_PROFILE").oex_formatWithParameters(["platform_name" : OEXConfig.sharedConfig().platformName()])
         }
         else {
             return nil
@@ -210,7 +210,7 @@ class UserProfileView : UIView, UIScrollViewDelegate {
 
         if profile.sharingLimitedProfile {
             if (profile.parentalConsent ?? false) && editable {
-                let message = NSMutableAttributedString(attributedString: messageStyle.attributedStringWithText(Strings.Profile.ageLimit))
+                let message = NSMutableAttributedString(attributedString: messageStyle.attributedStringWithText(TDLocalizeSelectSwift("PROFILE.AGE_LIMIT")))
 
                 bioSystemMessage.attributedText = message
                 bioSystemMessage.hidden = false
@@ -230,7 +230,7 @@ class UserProfileView : UIView, UIScrollViewDelegate {
             if let bio = profile.bio {
                 bioText.attributedText = bioStyle.attributedStringWithText(bio)
             } else {
-                let message = messageStyle.attributedStringWithText(Strings.Profile.noBio)
+                let message = messageStyle.attributedStringWithText(TDLocalizeSelectSwift("PROFILE.NO_BIO"))
                 bioSystemMessage.attributedText = message
                 bioSystemMessage.hidden = false
             }

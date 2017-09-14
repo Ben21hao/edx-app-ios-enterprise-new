@@ -43,7 +43,7 @@ static NSString* const OEXFindCoursePathPrefix = @"course/";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = [Strings findCourses];
+    self.navigationItem.title = TDLocalizeSelect(@"FIND_COURSES", nil);
 
     self.webViewHelper = [[FindCoursesWebViewHelper alloc] initWithConfig:[OEXConfig sharedConfig] delegate:self bottomBar:self.bottomBar showSearch:YES];
     self.view.backgroundColor = [[OEXStyles sharedStyles] standardBackgroundColor];

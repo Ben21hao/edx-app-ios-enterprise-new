@@ -38,8 +38,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = NSLocalizedString(@"APPOINTMENT_DETAILS", nil);
-    [self.rightButton setTitle:NSLocalizedString(@"SUBMIT", nil) forState:UIControlStateNormal];
+    self.titleViewLabel.text = TDLocalizeSelect(@"APPOINTMENT_DETAILS", nil);
+    [self.rightButton setTitle:TDLocalizeSelect(@"SUBMIT", nil) forState:UIControlStateNormal];
     WS(weakSelf);
     self.rightButtonHandle = ^(){
         [weakSelf.inputView resignFirstResponder];
@@ -113,7 +113,7 @@
         [self.tableView reloadData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"获取个人信息出错 -- %ld, %@",(long)error.code, error.userInfo[@"com.alamofire.serialization.response.error.data"]);
     }];
 }
@@ -125,7 +125,7 @@
         return;
     }
     
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"APPOINTMENT_ING", nil)];
+    [SVProgressHUD showWithStatus:TDLocalizeSelect(@"APPOINTMENT_ING", nil)];
     SVProgressHUD.defaultMaskType = SVProgressHUDMaskTypeBlack;
     SVProgressHUD.defaultStyle = SVProgressHUDAnimationTypeNative;
     
@@ -160,7 +160,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [SVProgressHUD dismiss];
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"预约助教出错 --- %ld",(long)error.code);
     }];
 }
@@ -192,20 +192,20 @@
     
     switch (indexPath.section) {
         case 0:
-            cell.textLabel.text = NSLocalizedString(@"PAYMENT_STANDARD", nil);
-            cell.detailTextLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%.2f%@",unitPrice,NSLocalizedString(@"COINTS_MIN", nil)] withFont:14 withColorStr:colorHexStr9];
+            cell.textLabel.text = TDLocalizeSelect(@"PAYMENT_STANDARD", nil);
+            cell.detailTextLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%.2f%@",unitPrice,TDLocalizeSelect(@"COINTS_MIN", nil)] withFont:14 withColorStr:colorHexStr9];
             break;
         case 1:
-            cell.textLabel.text = NSLocalizedString(@"RESERCED_PERIOD", nil);
+            cell.textLabel.text = TDLocalizeSelect(@"RESERCED_PERIOD", nil);
             cell.detailTextLabel.text = self.timeStr;
             break;
         case 2:
-            cell.textLabel.text = NSLocalizedString(@"PREPAID_COIS", nil);
-            cell.detailTextLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%@%@",self.iconStr,NSLocalizedString(@"COINS_VALUE", nil)] withFont:14 withColorStr:colorHexStr9];
+            cell.textLabel.text = TDLocalizeSelect(@"PREPAID_COIS", nil);
+            cell.detailTextLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%@%@",self.iconStr,TDLocalizeSelect(@"COINS_VALUE", nil)] withFont:14 withColorStr:colorHexStr9];
             break;
         case 3:
-            cell.textLabel.text = NSLocalizedString(@"AVAILABLE_COINS", nil);
-            cell.detailTextLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%.2f%@",self.effectiveIcon,NSLocalizedString(@"COINS_VALUE", nil)] withFont:14 withColorStr:colorHexStr9];
+            cell.textLabel.text = TDLocalizeSelect(@"AVAILABLE_COINS", nil);
+            cell.detailTextLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%.2f%@",self.effectiveIcon,TDLocalizeSelect(@"COINS_VALUE", nil)] withFont:14 withColorStr:colorHexStr9];
             break;
         default:
             break;
@@ -253,7 +253,7 @@
     self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, 158)];
     self.headerView.backgroundColor = [UIColor whiteColor];
     
-    UILabel *titleLabel = [self setLabelConstraint:NSLocalizedString(@"QUETIONS_DESCRIPTION", nil)];
+    UILabel *titleLabel = [self setLabelConstraint:TDLocalizeSelect(@"QUETIONS_DESCRIPTION", nil)];
     [self.headerView addSubview:titleLabel];
     
     self.inputView = [[UITextView alloc] init];
@@ -267,7 +267,7 @@
     self.inputView.delegate = self;
     [self.headerView addSubview:self.inputView];
     
-    self.holderLabel = [self setLabelConstraint:NSLocalizedString(@"TYPE_QUETIONS", nil)];
+    self.holderLabel = [self setLabelConstraint:TDLocalizeSelect(@"TYPE_QUETIONS", nil)];
     self.holderLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     [self.headerView addSubview:self.holderLabel];
     
@@ -318,7 +318,7 @@
     self.messageLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
     self.messageLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     self.messageLabel.textAlignment = NSTextAlignmentCenter;
-    self.messageLabel.text = NSLocalizedString(@"NOTE_COINS", nil);
+    self.messageLabel.text = TDLocalizeSelect(@"NOTE_COINS", nil);
     self.messageLabel.numberOfLines = 0;
     self.messageLabel.textAlignment = NSTextAlignmentCenter;
     [self.footerView addSubview:self.messageLabel];

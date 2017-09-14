@@ -46,7 +46,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = NSLocalizedString(@"TEACH_ASSISTANT", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"TEACH_ASSISTANT", nil);
     
     [self setViewConstraint];
     
@@ -144,17 +144,17 @@
             self.page --;
             [self hiddenFooterView];
             
-            [self.view makeToast:NSLocalizedString(@"NO_MORE_DATA", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"NO_MORE_DATA", nil) duration:1.08 position:CSToastPositionCenter];
             
         } else if ([code intValue] == 404) { //该课程暂无助教
             self.nullLabel.hidden = NO;
-            [self.view makeToast:NSLocalizedString(@"CURRENTLY_NO_TA", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"CURRENTLY_NO_TA", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         self.loadingView.hidden = YES;
         self.nullLabel.hidden = NO;
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"获取助教列表出错 -- %ld",(long)error.code);
     }];
 }
@@ -249,14 +249,14 @@
                 
             } else if ([status intValue] == 0) {
                 [self reloadData:indexpath status:status];
-                [self.view makeToast:NSLocalizedString(@"TA_OFFLINE", nil) duration:1.08 position:CSToastPositionCenter];
+                [self.view makeToast:TDLocalizeSelect(@"TA_OFFLINE", nil) duration:1.08 position:CSToastPositionCenter];
             } else {
                 [self reloadData:indexpath status:status];
-                [self.view makeToast:NSLocalizedString(@"TA_BUSY", nil) duration:1.08 position:CSToastPositionCenter];
+                [self.view makeToast:TDLocalizeSelect(@"TA_BUSY", nil) duration:1.08 position:CSToastPositionCenter];
             }
             
         } else {
-            [self.view makeToast:NSLocalizedString(@"SYSTEM_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"SYSTEM_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
         NSLog(@"查询助教状态 --- %@%@",code ,responseDic[@"msg"]);
@@ -319,7 +319,7 @@
     self.nullLabel = [[UILabel alloc] init];
     self.nullLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     self.nullLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
-    self.nullLabel.text = NSLocalizedString(@"CURRENTLY_NO_TA", nil);
+    self.nullLabel.text = TDLocalizeSelect(@"CURRENTLY_NO_TA", nil);
     [self.view addSubview:self.nullLabel];
     
     [self.nullLabel mas_makeConstraints:^(MASConstraintMaker *make) {

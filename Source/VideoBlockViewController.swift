@@ -97,7 +97,7 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
         videoController.fadeInOnLoad = false
         contentView?.addSubview(videoController.view)
         
-        rotateDeviceMessageView = IconMessageView(icon: .RotateDevice, message: Strings.rotateDevice)//旋转屏幕
+        rotateDeviceMessageView = IconMessageView(icon: .RotateDevice, message: TDLocalizeSelectSwift("ROTATE_DEVICE"))//旋转屏幕
         contentView?.addSubview(rotateDeviceMessageView!)
         
         let tapGesture = UITapGestureRecognizer()
@@ -162,7 +162,7 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
         
         if !canDownloadVideo() {
             guard let video = self.environment.interface?.stateForVideoWithID(self.blockID, courseID : self.courseID) where video.downloadState == .Complete else {
-                self.showOverlayMessage(Strings.noWifiMessage)
+                self.showOverlayMessage(TDLocalizeSelectSwift("NO_WIFI_MESSAGE"))
                 return
             }
         }
@@ -340,24 +340,24 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
     
     func movieTimedOut() {
         if let controller = videoController.moviePlayerController where controller.fullscreen {
-            UIAlertView(title: Strings.videoContentNotAvailable, message: "", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: Strings.close).show()
+            UIAlertView(title: TDLocalizeSelectSwift("VIDEO_CONTENT_NOT_AVAILABLE"), message: "", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: TDLocalizeSelectSwift("CLOSE")).show()
         }
         else {
-            self.showOverlayMessage(Strings.timeoutCheckInternetConnection)
+            self.showOverlayMessage(TDLocalizeSelectSwift("TIMEOUT_CHECK_INTERNET_CONNECTION"))
         }
     }
     
     private func showError(error : NSError?) {
-        loadController.state = LoadState.failed(error, icon: .UnknownError, message: Strings.videoContentNotAvailable)
+        loadController.state = LoadState.failed(error, icon: .UnknownError, message: TDLocalizeSelectSwift("VIDEO_CONTENT_NOT_AVAILABLE"))
     }
     
     private func showYoutubeMessage(url: NSURL) {//优酷 -- 通过url播放视频
-        let buttonInfo = MessageButtonInfo(title: Strings.Video.viewOnYoutube) {
+        let buttonInfo = MessageButtonInfo(title: TDLocalizeSelectSwift("VIDEO.VIEW_ON_YOUTUBE")) {
             if UIApplication.sharedApplication().canOpenURL(url){
                 UIApplication.sharedApplication().openURL(url)
             }
         }
-        loadController.state = LoadState.empty(icon: .CourseModeVideo, message: Strings.Video.onlyOnYoutube, attributedMessage: nil, accessibilityMessage: nil, buttonInfo: buttonInfo)
+        loadController.state = LoadState.empty(icon: .CourseModeVideo, message: TDLocalizeSelectSwift("VIDEO.ONLY_ON_YOUTUBE"), attributedMessage: nil, accessibilityMessage: nil, buttonInfo: buttonInfo)
     }
     
     func openVideoUrl(urlStr: String) {//用url来播放

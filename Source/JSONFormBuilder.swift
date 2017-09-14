@@ -27,7 +27,12 @@ protocol FormCell  {
 
 private func loadJSON(jsonFile: String) throws -> JSON {
     var js: JSON
-    if let filePath = NSBundle.mainBundle().pathForResource(jsonFile, ofType: "json") {
+    
+    //通过路径影响 bundle,从而手动改变系统语言
+    let str : String = "\(NSUserDefaults.standardUserDefaults().valueForKey("userLanguage")!)"
+    let str1 = str + ".lproj/" + jsonFile
+    
+    if let filePath = NSBundle.mainBundle().pathForResource(str1, ofType: "json") {
         if let data = NSData(contentsOfFile: filePath) {
             var error: NSError?
             js = JSON(data: data, error: &error)
@@ -89,6 +94,7 @@ class JSONFormBuilder {
         }
         
         func applyData(field: JSONFormBuilder.Field, data: FormData) {
+            
             let titleStyle = OEXTextStyle(weight: .Normal, size: .Base, color: OEXStyles.sharedStyles().neutralBlackT())
             let descriptionStyle = OEXMutableTextStyle(weight: .Light, size: .XSmall, color: OEXStyles.sharedStyles().neutralDark())
             descriptionStyle.lineBreakMode = .ByTruncatingTail
@@ -124,7 +130,7 @@ class JSONFormBuilder {
     }
     
     /** Show a cell that provides a long list of options in a new viewcontroller */
-    class OptionsCell: UITableViewCell, FormCell {
+    class OptionsCell: UITableViewCell, FormCell {  //选择的cell
         static let Identifier = "JSONForm.OptionsCell"
         private let choiceView = ChoiceLabel()
         
@@ -147,15 +153,17 @@ class JSONFormBuilder {
         }
         
         func applyData(field: Field, data: FormData) {
-            choiceView.titleText = Strings.formLabel(label: field.title!)
+            
+            choiceView.titleText = TDLocalizeSelectSwift("FORM_LABEL").oex_formatWithParameters(["label" : field.title!])
+            
             choiceView.valueText = data.displayValueForKey(field.name) ?? field.placeholder ?? ""
             
             print("名称和标题 ==1==  " + field.name + field.title!  + " === " + choiceView.titleText!+choiceView.valueText!)
         }
     }
     
-    /** Show an editable text area in a new view */
-    class TextAreaCell: UITableViewCell, FormCell {
+    /** Show an editable text area in a new view  */
+    class TextAreaCell: UITableViewCell, FormCell { //输入文本的cell
         static let Identifier = "JSONForm.TextAreaCell"
         private let choiceView = ChoiceLabel()
         
@@ -179,7 +187,9 @@ class JSONFormBuilder {
         
         func applyData(field: Field, data: FormData) {
             
-            choiceView.titleText = Strings.formLabel(label: field.title!)
+            choiceView.titleText = TDLocalizeSelectSwift("FORM_LABEL").oex_formatWithParameters(["label" : field.title!])
+//                        choiceView.titleText = field.title!
+            //            choiceView.titleText = Strings.formLabel(label: field.title!)
             //            choiceView.valueText = data.valueForField(field.name) ?? field.placeholder ?? ""
             
             if data.valueForField(field.name) != nil {
@@ -202,9 +212,8 @@ class JSONFormBuilder {
             } else {
                 choiceView.valueText = field.placeholder ?? ""
             }
-           
-            
-             print("名称和标题 ==2==  " + field.name + field.title! + " === " + choiceView.titleText!+choiceView.valueText!)
+        
+             print("名称和标题 ==2== " + field.name + field.title! + " === " + choiceView.titleText!+choiceView.valueText!)
         }
     }
     
@@ -282,9 +291,9 @@ class JSONFormBuilder {
         let placeholder: String?
         
         init (json: JSON) {
-            type = FieldType(jsonVal: json["type"].string)!
-            title = json["label"].string
-            name = json["name"].string!//昵称
+            type = FieldType(jsonVal: json["type"].string)! //类型
+            title = json["label"].string //左边标题
+            name = json["name"].string!  //值
             
             instructions = json["instructions"].string
             subInstructions = json["sub_instructions"].string
@@ -292,7 +301,7 @@ class JSONFormBuilder {
             dataType = DataType(json["data_type"].string)//选择样式
             defaultValue = json["default"].string
             accessibilityHint = json["accessibility_hint"].string
-            placeholder = json["placeholder"].string//关于我
+            placeholder = json["placeholder"].string  //底纹
         }
         
         private func attributedChooserRow(icon: Icon, title: String, value: String?) -> NSAttributedString {
@@ -336,7 +345,7 @@ class JSONFormBuilder {
                 //未选择+国家，语言等
                 //                let noneTitle = Strings.Profile.noField(fieldName: title!.oex_lowercaseStringInCurrentLocale()) //第一个字符变小写
                 //                let noneTitle = Strings.Profile.noField(fieldName: title!) //title -- 最高学历，国家等；
-                let noneTitle = Strings.unSelected;
+                let noneTitle = TDLocalizeSelectSwift("UN_SELECTED")
                 tableData.insert(ChooserDatum(value: "--", title: noneTitle, attributedTitle: nil), atIndex: 0)
                 defaultRow = 0
             }
@@ -348,7 +357,7 @@ class JSONFormBuilder {
             if dataType == .CountryType {
                 if let id = NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as? String {
                     let countryName = NSLocale.currentLocale().displayNameForKey(NSLocaleCountryCode, value: id)
-                    let title = attributedChooserRow(Icon.Country, title: Strings.Profile.currentLocationLabel, value: countryName)
+                    let title = attributedChooserRow(Icon.Country, title: TDLocalizeSelectSwift("PROFILE.CURRENT_LOCATION_LABEL"), value: countryName)
                     
                     tableData.insert(ChooserDatum(value: id, title: nil, attributedTitle: title), atIndex: 0)
                     if defaultRow >= 0 { defaultRow += 1 }
@@ -356,7 +365,7 @@ class JSONFormBuilder {
             } else if dataType == .LanguageType {
                 if let id = NSLocale.currentLocale().objectForKey(NSLocaleLanguageCode) as? String {
                     let languageName = NSLocale.currentLocale().displayNameForKey(NSLocaleLanguageCode, value: id)
-                    let title = attributedChooserRow(Icon.Comment, title: Strings.Profile.currentLanguageLabel, value: languageName)
+                    let title = attributedChooserRow(Icon.Comment, title: TDLocalizeSelectSwift("PROFILE.CURRENT_LANGUAGE_LABEL"), value: languageName)
                     
                     tableData.insert(ChooserDatum(value: id, title: nil, attributedTitle: title), atIndex: 0)
                     if defaultRow >= 0 { defaultRow += 1 }
@@ -364,7 +373,7 @@ class JSONFormBuilder {
             } else if dataType == .EducationType {
                 if let id = NSLocale.currentLocale().objectForKey(NSLocaleIdentifier) as? String {
                     let education = NSLocale.currentLocale().displayNameForKey(NSLocaleIdentifier, value: id)
-                    let title = attributedChooserRow(Icon.User, title: Strings.Profile.currentLanguageLabel, value: education)
+                    let title = attributedChooserRow(Icon.User, title: TDLocalizeSelectSwift("PROFILE.CURRENT_LANGUAGE_LABEL"), value: education)
                     
                     tableData.insert(ChooserDatum(value: id, title: nil, attributedTitle: title), atIndex: 0)
                     if defaultRow >= 0 { defaultRow += 1 }

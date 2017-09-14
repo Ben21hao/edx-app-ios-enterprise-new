@@ -104,7 +104,7 @@
         isSame = YES;
     }
     
-    [self remarkAlertView:NSLocalizedString(@"ENTER_CORRECT_NUMBER", nil) error:isErrorPhone isSame:isSame];
+    [self remarkAlertView:TDLocalizeSelect(@"ENTER_CORRECT_NUMBER", nil) error:isErrorPhone isSame:isSame];
     
     return YES;
 }
@@ -172,10 +172,10 @@
         return;
         
     } else if (self.phoneStr.length == 0) {
-        [self remarkAlerViewAfterRequest:NSLocalizedString(@"PLEASE_ENTER_PHONE_NUMBER", nil)];
+        [self remarkAlerViewAfterRequest:TDLocalizeSelect(@"PLEASE_ENTER_PHONE_NUMBER", nil)];
         
     } else if (![self.toolModel isValidateMobile:self.phoneStr]) {
-        [self remarkAlerViewAfterRequest:NSLocalizedString(@"ENTER_CORRECT_NUMBER", nil)];
+        [self remarkAlerViewAfterRequest:TDLocalizeSelect(@"ENTER_CORRECT_NUMBER", nil)];
         
     } else {
         /* 计时器 */
@@ -196,7 +196,7 @@
         requestModel.sendMsgHandle = ^(NSInteger type){
             if (type > 0) {
                 [weakSelf setCodeButtonUserEnabled:1];
-                NSString *errorStr = type == 1 ? NSLocalizedString(@"PHONE_HAD_REGITSTER", nil) : NSLocalizedString(@"FAILED_GET_VERIFICATION", nil);
+                NSString *errorStr = type == 1 ? TDLocalizeSelect(@"PHONE_HAD_REGITSTER", nil) : TDLocalizeSelect(@"FAILED_GET_VERIFICATION", nil);
                 [weakSelf remarkAlerViewAfterRequest:errorStr];
             }
         };
@@ -206,7 +206,7 @@
 
 - (void)timeChange {
     self.timeNum -= 1;
-    [self.codeButton setTitle:[NSString stringWithFormat:@"%ld%@",(long)self.timeNum,NSLocalizedString(@"SECOND", nil)] forState:UIControlStateNormal];
+    [self.codeButton setTitle:[NSString stringWithFormat:@"%ld%@",(long)self.timeNum,TDLocalizeSelect(@"SECOND", nil)] forState:UIControlStateNormal];
     
     if (self.timeNum < 0) {
         [self setCodeButtonUserEnabled:0];
@@ -219,7 +219,7 @@
 
 - (void)setCodeButtonUserEnabled:(NSInteger)type {
     [self.timer invalidate];
-    [self.codeButton setTitle:type == 0 ? NSLocalizedString(@"RESEND", nil) : NSLocalizedString(@"GET_VERIFICATION", nil) forState:UIControlStateNormal];
+    [self.codeButton setTitle:type == 0 ? TDLocalizeSelect(@"RESEND", nil) : TDLocalizeSelect(@"GET_VERIFICATION", nil) forState:UIControlStateNormal];
     self.codeButton.userInteractionEnabled = YES;
 }
 
@@ -248,22 +248,22 @@
         if (![self.toolModel networkingState]) { //无网络
             return;
         } else if (self.phoneTextField.text.length == 0) {
-            [self remarkAlerViewAfterRequest:NSLocalizedString(@"PLEASE_ENTER_PHONE_NUMBER", nil)];
+            [self remarkAlerViewAfterRequest:TDLocalizeSelect(@"PLEASE_ENTER_PHONE_NUMBER", nil)];
             
         } else if (self.codeTextFiled.text.length == 0) {
-            [self remarkAlerViewAfterRequest:NSLocalizedString(@"PLEASE_ENTER_VERI", nil)];
+            [self remarkAlerViewAfterRequest:TDLocalizeSelect(@"PLEASE_ENTER_VERI", nil)];
             
         } else if (![self.toolModel isValidateMobile:self.phoneTextField.text]) { //手机号码不正确
-            [self remarkAlerViewAfterRequest:NSLocalizedString(@"ENTER_CORRECT_NUMBER", nil)];
+            [self remarkAlerViewAfterRequest:TDLocalizeSelect(@"ENTER_CORRECT_NUMBER", nil)];
             
         } else if (self.phoneStr.length == 0) {//手机号码还没获取验证码
-            [self remarkAlerViewAfterRequest:NSLocalizedString(@"STILL_NO_GET_VERI", nil)];
+            [self remarkAlerViewAfterRequest:TDLocalizeSelect(@"STILL_NO_GET_VERI", nil)];
             
         } else if (![self.codeTextFiled.text isEqualToString:self.randomNumber]) {//验证码不正确
-            [self remarkAlerViewAfterRequest:NSLocalizedString(@"VERIFICATION_CODE_ERROR", nil)];
+            [self remarkAlerViewAfterRequest:TDLocalizeSelect(@"VERIFICATION_CODE_ERROR", nil)];
             
         } else if (![self.phoneStr isEqualToString:self.phoneTextField.text]) {//修改手机号码，请重新获取验证码。
-            [self remarkAlerViewAfterRequest:NSLocalizedString(@"MOBILE_CHANGED", nil)];
+            [self remarkAlerViewAfterRequest:TDLocalizeSelect(@"MOBILE_CHANGED", nil)];
             
         } else {
             [self regitsterNewUser]; //立即试听
@@ -297,19 +297,19 @@
             [self beginLogin:self.phoneTextField.text password:self.password];
             
         } else if (code == 301) {//开通试用失败
-            [self remarkAlerViewAfterRequest:NSLocalizedString(@"PHONE_HAD_REGITSTER", nil)];
+            [self remarkAlerViewAfterRequest:TDLocalizeSelect(@"PHONE_HAD_REGITSTER", nil)];
             
         } else if (code == 310) {//手机号码格式不正确
-            [self remarkAlerViewAfterRequest:NSLocalizedString(@"ENTER_CORRECT_NUMBER", nil)];
+            [self remarkAlerViewAfterRequest:TDLocalizeSelect(@"ENTER_CORRECT_NUMBER", nil)];
             
         } else if (code == 322) {//手机号码已存在，不能注册
-            [self remarkAlerViewAfterRequest:NSLocalizedString(@"PHONE_NUMBER_HAS_BEEN_REGISTERED", nil)];
+            [self remarkAlerViewAfterRequest:TDLocalizeSelect(@"PHONE_NUMBER_HAS_BEEN_REGISTERED", nil)];
             
         } else {
-            [self remarkAlerViewAfterRequest:NSLocalizedString(@"PHONE_HAD_REGITSTER", nil)];
+            [self remarkAlerViewAfterRequest:TDLocalizeSelect(@"PHONE_HAD_REGITSTER", nil)];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self remarkAlerViewAfterRequest:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil)];
+        [self remarkAlerViewAfterRequest:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil)];
     }];
 }
 
@@ -334,16 +334,16 @@
             [self loginSuccessful];//登录成功
             
         } else if(httpResp.statusCode >= 400 && httpResp.statusCode <= 500) {
-            NSString *errorStr = [Strings invalidUsernamePassword];
+            NSString *errorStr = TDLocalizeSelect(@"INVALID_USERNAME_PASSWORD", nil);
             [self loginFailedWithErrorMessage:errorStr title:nil];//登录失败
             
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self loginFailedWithErrorMessage:[Strings invalidUsernamePassword] title:nil];
+                [self loginFailedWithErrorMessage:TDLocalizeSelect(@"INVALID_USERNAME_PASSWORD", nil) title:nil];
             });
         }
     } else {
-        [self loginFailedWithErrorMessage:[Strings invalidUsernamePassword] title:nil];
+        [self loginFailedWithErrorMessage:TDLocalizeSelect(@"INVALID_USERNAME_PASSWORD", nil) title:nil];
     }
 }
 
@@ -356,7 +356,7 @@
                                                        onViewController:self
                                                              shouldHide:YES];
     } else {
-        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings floatingErrorLoginTitle]
+        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_LOGIN_TITLE", nil)
                                                                 message:errorStr
                                                        onViewController:self
                                                              shouldHide:YES];
@@ -384,10 +384,10 @@
 #pragma mark - UI
 - (void)configView:(NSInteger)type {
     
-    NSString *titleStr = type == 0 ? NSLocalizedString(@"START_FREE_COURSE", nil) : NSLocalizedString(@"FREE_TRIAL_ENDED", nil);
-    NSString *messageStr = type == 0 ? NSLocalizedString(@"MOBILE_USED_ACOUNT", nil) : NSLocalizedString(@"FREE_ENDED_ENROLL", nil);
-    NSString *cancelStr = type == 0 ? NSLocalizedString(@"CANCEL", nil) : NSLocalizedString(@"FREE_QUIT", nil);
-    NSString *sureStr = type == 0 ? NSLocalizedString(@"FREE_START", nil) : NSLocalizedString(@"FREE_ENROLL", nil);
+    NSString *titleStr = type == 0 ? TDLocalizeSelect(@"START_FREE_COURSE", nil) : TDLocalizeSelect(@"FREE_TRIAL_ENDED", nil);
+    NSString *messageStr = type == 0 ? TDLocalizeSelect(@"MOBILE_USED_ACOUNT", nil) : TDLocalizeSelect(@"FREE_ENDED_ENROLL", nil);
+    NSString *cancelStr = type == 0 ? TDLocalizeSelect(@"CANCEL", nil) : TDLocalizeSelect(@"FREE_QUIT", nil);
+    NSString *sureStr = type == 0 ? TDLocalizeSelect(@"FREE_START", nil) : TDLocalizeSelect(@"FREE_ENROLL", nil);
     
     self.otherTextField = [[UITextField alloc] init];
     
@@ -440,18 +440,18 @@
         
         self.codeBgView = [self setInputBgView];
         [self.messageView addSubview:self.codeBgView];
-        self.phoneTextField = [ self setTextField:NSLocalizedString(@"PLEASE_ENTER_PHONE_NUMBER", nil)];
+        self.phoneTextField = [ self setTextField:TDLocalizeSelect(@"PLEASE_ENTER_PHONE_NUMBER", nil)];
         [self.messageView addSubview:self.phoneTextField];
         
-        self.codeTextFiled = [self setTextField:NSLocalizedString(@"PLEASE_ENTER_VERI", nil)];
+        self.codeTextFiled = [self setTextField:TDLocalizeSelect(@"PLEASE_ENTER_VERI", nil)];
         [self.messageView addSubview:self.codeTextFiled];
         
-        self.codeButton = [self setButton:NSLocalizedString(@"GET_VERIFICATION", nil) color:colorHexStr2 titleColor:colorHexStr11];
+        self.codeButton = [self setButton:TDLocalizeSelect(@"GET_VERIFICATION", nil) color:colorHexStr2 titleColor:colorHexStr11];
         self.codeButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
         [self.codeButton addTarget:self action:@selector(codeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.messageView addSubview:self.codeButton];
         
-        self.errorLabel = [self setLabel:NSLocalizedString(@"VERIFICATION_CODE_ERROR", nil) font:14 color:colorHexStr3];
+        self.errorLabel = [self setLabel:TDLocalizeSelect(@"VERIFICATION_CODE_ERROR", nil) font:14 color:colorHexStr3];
         self.errorLabel.textColor = [UIColor colorWithHexString:@"#F47676"];
         self.errorLabel.textAlignment = NSTextAlignmentCenter;
         self.errorLabel.numberOfLines = 0;

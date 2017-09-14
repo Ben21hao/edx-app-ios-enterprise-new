@@ -127,14 +127,14 @@
     self.lblContent.text = [NSString stringWithFormat:@"%@\n\n\n", _model.content];
     
     if ([_model.type isEqualToString:@"question"]) {
-        [self.lblType setTitle:NSLocalizedString(@"ASK_TEXT", nil) forState:UIControlStateNormal];
+        [self.lblType setTitle:TDLocalizeSelect(@"ASK_TEXT", nil) forState:UIControlStateNormal];
         self.lblType.layer.borderColor=[UIColor redColor].CGColor;
         [self.lblType setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         [self.headImage sd_setImageWithURL:[NSURL URLWithString:[VHallApi currentUserHeadUrl]] placeholderImage:[UIImage imageNamed:@"UIModel.bundle/head50"]];
         
     } else if ([_model.type isEqualToString:@"answer"]) {
         
-        [self.lblType setTitle:NSLocalizedString(@"ANSWER_TEXT", nil) forState:UIControlStateNormal];
+        [self.lblType setTitle:TDLocalizeSelect(@"ANSWER_TEXT", nil) forState:UIControlStateNormal];
         self.lblType.layer.borderColor=[UIColor blueColor].CGColor;
         [self.lblType setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         

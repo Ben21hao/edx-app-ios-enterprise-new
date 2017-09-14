@@ -43,8 +43,8 @@ class DiscussionPostCell: UITableViewCell {
         
         for (button, icon, text) in [
             (voteButton, Icon.UpVote, nil as String?),
-            (followButton, Icon.FollowStar, Strings.discussionFollow),
-            (reportButton, Icon.ReportFlag, Strings.discussionReport)
+            (followButton, Icon.FollowStar, TDLocalizeSelectSwift("DISCUSSION_FOLLOW")),
+            (reportButton, Icon.ReportFlag, TDLocalizeSelectSwift("DISCUSSION_REPORT"))
             ]
            
         {
@@ -77,11 +77,11 @@ class DiscussionPostCell: UITableViewCell {
         }
         
         if let date = dateLabel.text {
-            accessibilityString.appendContentsOf(Strings.Accessibility.discussionPostedOn(date: date) + sentenceSeparator)
+            accessibilityString.appendContentsOf(TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_POSTED_ON").oex_formatWithParameters(["date" : date]) + sentenceSeparator)
         }
         
         if let author = authorNameLabel.text {
-            accessibilityString.appendContentsOf(Strings.accessibilityBy + " " + author + sentenceSeparator)
+            accessibilityString.appendContentsOf(TDLocalizeSelectSwift("ACCESSIBILITY_BY") + " " + author + sentenceSeparator)
         }
         
         if let visibility = visibilityLabel.text {
@@ -96,7 +96,7 @@ class DiscussionPostCell: UITableViewCell {
         
         if let authorName = authorNameLabel.text {
             self.authorButton.accessibilityLabel = authorName
-            self.authorButton.accessibilityHint = Strings.accessibilityShowUserProfileHint
+            self.authorButton.accessibilityHint = TDLocalizeSelectSwift("ACCESSIBILITY_SHOW_USER_PROFILE_HINT")
         }
     }
 }
@@ -127,7 +127,7 @@ class DiscussionResponseCell: UITableViewCell {
         self.selectionStyle = .None
         
         for (button, icon, text) in [
-            (reportButton, Icon.ReportFlag, Strings.discussionReport)]
+            (reportButton, Icon.ReportFlag, TDLocalizeSelectSwift("DISCUSSION_REPORT"))]
         {
             let iconString = icon.attributedTextWithStyle(cellButtonStyle, inline: true)
             let buttonText = NSAttributedString.joinInNaturalLayout([iconString,
@@ -183,11 +183,11 @@ class DiscussionResponseCell: UITableViewCell {
         accessibilityString.appendContentsOf(body + sentenceSeparator)
         
         if let date = dateLabel.text {
-            accessibilityString.appendContentsOf(Strings.Accessibility.discussionPostedOn(date: date) + sentenceSeparator)
+            accessibilityString.appendContentsOf(TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_POSTED_ON").oex_formatWithParameters(["date" : date]) + sentenceSeparator)
         }
         
         if let author = authorNameLabel.text {
-            accessibilityString.appendContentsOf(Strings.accessibilityBy + " " + author + sentenceSeparator)
+            accessibilityString.appendContentsOf(TDLocalizeSelectSwift("ACCESSIBILITY_BY") + " " + author + sentenceSeparator)
         }
         
         if endorsedByButton.hidden == false {
@@ -197,14 +197,14 @@ class DiscussionResponseCell: UITableViewCell {
         }
         
         if response.childCount > 0 {
-            accessibilityString.appendContentsOf(Strings.commentsToResponse(count: response.childCount))
+            accessibilityString.appendContentsOf(TDLocalizeSelectSwift("COMMENTS_TO_RESPONSE").oex_formatWithParameters(["count": response.childCount]))
         }
         
         self.accessibilityLabel = accessibilityString
         
         if let authorName = authorNameLabel.text {
             self.authorButton.accessibilityLabel = authorName
-            self.authorButton.accessibilityHint = Strings.accessibilityShowUserProfileHint
+            self.authorButton.accessibilityHint = TDLocalizeSelectSwift("ACCESSIBILITY_SHOW_USER_PROFILE_HINT")
         }
     }
 }
@@ -246,7 +246,7 @@ class DiscussionResponsesViewController: TDSwiftBaseViewController, UITableViewD
         let footerStyle = OEXTextStyle(weight: .Normal, size: .Base, color: OEXStyles.sharedStyles().neutralWhite())
         
         let icon = postClosed ? Icon.Closed : Icon.Create
-        let text = postClosed ? Strings.responsesClosed : Strings.addAResponse
+        let text = postClosed ? TDLocalizeSelectSwift("RESPONSES_CLOSED") : TDLocalizeSelectSwift("ADD_A_RESPONSE")
         
         let buttonTitle = NSAttributedString.joinInNaturalLayout([icon.attributedTextWithStyle(footerStyle.withSize(.XSmall)),
             footerStyle.attributedStringWithText(text)])
@@ -335,9 +335,9 @@ class DiscussionResponsesViewController: TDSwiftBaseViewController, UITableViewD
     func navigationItemTitleForThread(thread : DiscussionThread) -> String {
         switch thread.type {
         case .Discussion:
-            return Strings.discussion
+            return TDLocalizeSelectSwift("DISCUSSION")
         case .Question:
-            return thread.hasEndorsed ? Strings.answeredQuestion : Strings.unansweredQuestion
+            return thread.hasEndorsed ? TDLocalizeSelectSwift("ANSWERED_QUESTION") : TDLocalizeSelectSwift("UNANSWERED_QUESTION")
         }
     }
     
@@ -499,10 +499,10 @@ class DiscussionResponsesViewController: TDSwiftBaseViewController, UITableViewD
             
             let visibilityString : String
             if let cohortName = thread.groupName {
-                visibilityString = Strings.postVisibility(cohort: cohortName)
+                visibilityString = TDLocalizeSelectSwift("POST_VISIBILITY").oex_formatWithParameters(["cohort" : cohortName])
             }
             else {
-                visibilityString = Strings.postVisibilityEveryone
+                visibilityString = TDLocalizeSelectSwift("POST_VISIBILITY_EVERYONE")
             }
             cell.visibilityLabel.attributedText = infoTextStyle.attributedStringWithText(visibilityString)
             
@@ -632,13 +632,13 @@ class DiscussionResponsesViewController: TDSwiftBaseViewController, UITableViewD
         let commentStyle : OEXTextStyle
         
         if response.childCount == 0 {
-            prompt = postClosed ? Strings.commentsClosed : Strings.addAComment
+            prompt = postClosed ? TDLocalizeSelectSwift("COMMENTS_CLOSED") : TDLocalizeSelectSwift("ADD_A_COMMENT")
             icon = postClosed ? Icon.Closed : Icon.Comment
             commentStyle = isDiscussionBlackedOut ? disabledCommentStyle : responseMessageStyle
             cell.commentButton.enabled = !isDiscussionBlackedOut
         }
         else {
-            prompt = Strings.commentsToResponse(count: response.childCount)
+            prompt = TDLocalizeSelectSwift("COMMENTS_TO_RESPONSE").oex_formatWithParameters(["count": response.childCount])
             icon = Icon.Comment
             commentStyle = responseMessageStyle
         }
@@ -727,23 +727,23 @@ class DiscussionResponsesViewController: TDSwiftBaseViewController, UITableViewD
             Icon.UpVote.attributedTextWithStyle(iconStyle, inline : true),
             cellButtonStyle.attributedStringWithText(Strings.vote(count: voteCount))])
         button.setAttributedTitle(buttonText, forState:.Normal)
-        button.accessibilityHint = voted ? Strings.Accessibility.discussionUnvoteHint : Strings.Accessibility.discussionVoteHint
+        button.accessibilityHint = voted ? TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_UNVOTE_HINT") : TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_VOTE_HINT")
     }
     
     private func updateFollowText(button: DiscussionCellButton, following: Bool) {
         let iconStyle = following ? cellIconSelectedStyle : cellButtonStyle
         let buttonText = NSAttributedString.joinInNaturalLayout([Icon.FollowStar.attributedTextWithStyle(iconStyle, inline : true),
-            cellButtonStyle.attributedStringWithText(following ? Strings.discussionUnfollow : Strings.discussionFollow )])
+            cellButtonStyle.attributedStringWithText(following ? TDLocalizeSelectSwift("DISCUSSION_UNFOLLOW") : TDLocalizeSelectSwift("DISCUSSION_FOLLOW"))])
         button.setAttributedTitle(buttonText, forState:.Normal)
-        button.accessibilityHint = following ? Strings.Accessibility.discussionUnfollowHint : Strings.Accessibility.discussionFollowHint
+        button.accessibilityHint = following ? TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_UNFOLLOW_HINT") : TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_FOLLOW_HINT")
     }
     
     private func updateReportText(button: DiscussionCellButton, report: Bool) {
         let iconStyle = report ? cellIconSelectedStyle : cellButtonStyle
         let buttonText = NSAttributedString.joinInNaturalLayout([Icon.ReportFlag.attributedTextWithStyle(iconStyle, inline : true),
-            cellButtonStyle.attributedStringWithText(report ? Strings.discussionUnreport : Strings.discussionReport )])
+            cellButtonStyle.attributedStringWithText(report ? TDLocalizeSelectSwift("DISCUSSION_UNREPORT") : TDLocalizeSelectSwift("DISCUSSION_REPORT"))])
         button.setAttributedTitle(buttonText, forState:.Normal)
-        button.accessibilityHint = report ? Strings.Accessibility.discussionUnreportHint : Strings.Accessibility.discussionReportHint
+        button.accessibilityHint = report ? TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_UNREPORT_HINT") : TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_REPORT_HINT")
     }
     
     func increaseResponseCount() {
@@ -769,10 +769,10 @@ class DiscussionResponsesViewController: TDSwiftBaseViewController, UITableViewD
             }
             
             increaseResponseCount()
-            showOverlayMessage(Strings.discussionThreadPosted)
+            showOverlayMessage(TDLocalizeSelectSwift("DISCUSSION_THREAD_POSTED"))
         case .Comment(_):
             responsesDataController.addedChildComment(comment)
-            self.showOverlayMessage(Strings.discussionCommentPosted)
+            self.showOverlayMessage(TDLocalizeSelectSwift("DISCUSSION_COMMENT_POSTED"))
         }
         
         self.tableView.reloadData()
@@ -820,9 +820,9 @@ extension AuthorLabelProtocol {
         if let threadType = threadType {
             switch threadType {
             case .Question where endorsedLabel:
-                attributedStrings.append(textStyle.attributedStringWithText(Strings.markedAnswer))
+                attributedStrings.append(textStyle.attributedStringWithText(TDLocalizeSelectSwift("MARKED_ANSWER")))
             case .Discussion where endorsedLabel:
-                attributedStrings.append(textStyle.attributedStringWithText(Strings.endorsed))
+                attributedStrings.append(textStyle.attributedStringWithText(TDLocalizeSelectSwift("ENDORSED")))
             default: break
             }
         }
@@ -842,14 +842,14 @@ extension AuthorLabelProtocol {
             highlightStyle.weight = textStyle.weight
         }
             
-        let formattedUserName = highlightStyle.attributedStringWithText(name ?? Strings.anonymous.oex_lowercaseStringInCurrentLocale())
+        let formattedUserName = highlightStyle.attributedStringWithText(name ?? TDLocalizeSelectSwift("ANONYMOUS").oex_lowercaseStringInCurrentLocale())
         
         let byAuthor =  textStyle.apply(Strings.byAuthorLowerCase) (formattedUserName)
         
         attributedStrings.append(byAuthor)
         
         if let authorLabel = label {
-            attributedStrings.append(textStyle.attributedStringWithText(Strings.parenthesis(text: authorLabel)))
+            attributedStrings.append(textStyle.attributedStringWithText(TDLocalizeSelectSwift("PARENTHESIS").oex_formatWithParameters(["text" : authorLabel])))
         }
         
         return NSAttributedString.joinInNaturalLayout(attributedStrings)

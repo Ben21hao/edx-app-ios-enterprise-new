@@ -24,12 +24,12 @@ class CourseUnknownBlockViewController: UIViewController, CourseBlockViewControl
         self.courseID = courseID
         self.environment = environment
         
-        messageView = IconMessageView(icon: Icon.CourseUnknownContent, message: Strings.courseContentUnknown)
+        messageView = IconMessageView(icon: Icon.CourseUnknownContent, message: TDLocalizeSelectSwift("COURSE_CONTENT_UNKNOWN"))
         
         super.init(nibName: nil, bundle: nil)
         
         
-        messageView.buttonInfo = MessageButtonInfo(title : Strings.openInBrowser)
+        messageView.buttonInfo = MessageButtonInfo(title : TDLocalizeSelectSwift("OPEN_IN_BROWSER"))
             {
             [weak self] in
             self?.loader?.listen(self!, success : {URL -> Void in

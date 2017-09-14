@@ -55,7 +55,7 @@
             }
         } else {
             if (self.vertificationHandle) {
-                self.vertificationHandle(responDic,NSLocalizedString(@"RECHARGE_SUCCESS", nil));
+                self.vertificationHandle(responDic,TDLocalizeSelect(@"RECHARGE_SUCCESS", nil));
                 NSLog(@"-----验证成功---------");
             }
         }
@@ -85,9 +85,9 @@
         NSLog(@"允许程序内付费购买");
     } else {
         NSLog(@"不允许程序内付费购买");
-        UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"SYSTEM_WARING", nil)
+        UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"SYSTEM_WARING", nil)
                                                             message:@"您的手机没有打开程序内付费购买"
-                                                           delegate:nil cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil];
+                                                           delegate:nil cancelButtonTitle:TDLocalizeSelect(@"关闭",nil) otherButtonTitles:nil];
         
         [alerView show];
         
@@ -195,8 +195,8 @@
 //弹出错误信息
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error{
     NSLog(@"-------弹出错误信息----------");
-    UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"SYSTEM_WARING", nil) message:@"网络错误，请稍后再试"
-                                                       delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+    UIAlertView *alerView =  [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"SYSTEM_WARING", nil) message:@"网络错误，请稍后再试"
+                                                       delegate:nil cancelButtonTitle:TDLocalizeSelect(@"OK", nil) otherButtonTitles:nil];
     [alerView show];
     
 }

@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
  
-    self.titleViewLabel.text = NSLocalizedString(@"ORDER_DETAILS", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"ORDER_DETAILS", nil);
     [self setViewConstraint];
 }
 
@@ -57,7 +57,7 @@
 
         TDSuTitleCell *cell = [[TDSuTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDSubtitleCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.titleLabel.text = NSLocalizedString(@"QUETIONS_DESCRIPTION", nil);
+        cell.titleLabel.text = TDLocalizeSelect(@"QUETIONS_DESCRIPTION", nil);
         cell.subTitileLabel.text = self.model.question;
         return cell;
         
@@ -75,39 +75,39 @@
         TDBaseToolModel *toolModel = [[TDBaseToolModel alloc] init];
         switch (indexPath.section) {
             case 0:
-                cell.textLabel.text = NSLocalizedString(@"COURSE", nil);
+                cell.textLabel.text = TDLocalizeSelect(@"COURSE", nil);
                 cell.detailTextLabel.text = self.model.course_display_name;
                 break;
             case 1:
-                cell.textLabel.text = NSLocalizedString(@"ORDER_NUMBER", nil);
+                cell.textLabel.text = TDLocalizeSelect(@"ORDER_NUMBER", nil);
                 cell.detailTextLabel.text = self.model.id;
                 break;
             case 2:
-                cell.textLabel.text = NSLocalizedString(@"TEACH_ASSISTANT", nil);
+                cell.textLabel.text = TDLocalizeSelect(@"TEACH_ASSISTANT", nil);
                 cell.detailTextLabel.text = self.model.assistant_name;
                 break;
             case 3:
-                cell.textLabel.text = NSLocalizedString(@"SERVICE_TYPE", nil);
-                cell.detailTextLabel.text = [self.model.order_type intValue] == 1 ? NSLocalizedString(@"APPOINTMEN_SERVICE", nil) : NSLocalizedString(@"INSTANT_SERVICE", nil);
+                cell.textLabel.text = TDLocalizeSelect(@"SERVICE_TYPE", nil);
+                cell.detailTextLabel.text = [self.model.order_type intValue] == 1 ? TDLocalizeSelect(@"APPOINTMEN_SERVICE", nil) : TDLocalizeSelect(@"INSTANT_SERVICE", nil);
                 break;
             case 4:
-                cell.textLabel.text = NSLocalizedString(@"RESERCED_PERIOD", nil); //预约时间
+                cell.textLabel.text = TDLocalizeSelect(@"RESERCED_PERIOD", nil); //预约时间
                 cell.detailTextLabel.text = self.model.order_time_grap;
                 break;
             case 5:
-                cell.textLabel.text = NSLocalizedString(@"SERVICE_PERIOD", nil);
+                cell.textLabel.text = TDLocalizeSelect(@"SERVICE_PERIOD", nil);
                 cell.detailTextLabel.text = self.model.service_time;
                 break;
             case 6:
-                cell.textLabel.text = NSLocalizedString(@"PREPAID_COIS", nil); //预付宝典
-                cell.detailTextLabel.attributedText = [toolModel setDetailString:[NSString stringWithFormat:@"%.2f%@",[self.model.cost_coin floatValue],NSLocalizedString(@"COINS_VALUE", nil)] withFont:14 withColorStr:colorHexStr9];
+                cell.textLabel.text = TDLocalizeSelect(@"PREPAID_COIS", nil); //预付宝典
+                cell.detailTextLabel.attributedText = [toolModel setDetailString:[NSString stringWithFormat:@"%.2f%@",[self.model.cost_coin floatValue],TDLocalizeSelect(@"COINS_VALUE", nil)] withFont:14 withColorStr:colorHexStr9];
                 break;
             case 7:
-                cell.textLabel.text = NSLocalizedString(@"COINS_PAID", nil); //实付宝典
-                cell.detailTextLabel.attributedText = [toolModel setDetailString:[NSString stringWithFormat:@"%.2f%@",[self.model.real_cost_coin floatValue],NSLocalizedString(@"COINS_VALUE", nil)]withFont:14 withColorStr:colorHexStr9];
+                cell.textLabel.text = TDLocalizeSelect(@"COINS_PAID", nil); //实付宝典
+                cell.detailTextLabel.attributedText = [toolModel setDetailString:[NSString stringWithFormat:@"%.2f%@",[self.model.real_cost_coin floatValue],TDLocalizeSelect(@"COINS_VALUE", nil)]withFont:14 withColorStr:colorHexStr9];
                 break;
             case 8:
-                cell.textLabel.text = NSLocalizedString(@"ALL_STATUS", nil);
+                cell.textLabel.text = TDLocalizeSelect(@"ALL_STATUS", nil);
                 cell.detailTextLabel.text = self.statusStr;
                 break;
             default:

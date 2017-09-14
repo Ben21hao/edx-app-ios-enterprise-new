@@ -45,7 +45,7 @@
         
         //弹窗标题
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, 280, 40)];
-        label.text = NSLocalizedString(@"RESET_PASSWORD", nil);
+        label.text = TDLocalizeSelect(@"RESET_PASSWORD", nil);
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = [UIColor colorWithHexString:colorHexStr10];
         [imageView addSubview:label];
@@ -66,7 +66,7 @@
         //      设置属性
         NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
         attributes[NSFontAttributeName] = [UIFont systemFontOfSize:13];
-        textF1.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"PLEASE_ENTER_VERI", nil) attributes:attributes];
+        textF1.attributedPlaceholder = [[NSAttributedString alloc] initWithString:TDLocalizeSelect(@"PLEASE_ENTER_VERI", nil) attributes:attributes];
         textF1.keyboardType = UIKeyboardTypeNumberPad;
         self.textF1 = textF1;
         [imageView addSubview:textF1];
@@ -75,7 +75,7 @@
         UIButton *timeL = [[UIButton alloc] initWithFrame:CGRectMake(195, 60, 75, 40)];
         timeL.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
         timeL.titleLabel.font = [UIFont systemFontOfSize:14];
-        [timeL setTitle:[NSString stringWithFormat:@"%@",NSLocalizedString(@"GET_VERIFICATION", nil)] forState:UIControlStateNormal];
+        [timeL setTitle:[NSString stringWithFormat:@"%@",TDLocalizeSelect(@"GET_VERIFICATION", nil)] forState:UIControlStateNormal];
         timeL.tintColor = [UIColor blackColor];
         timeL.layer.cornerRadius = 3;
         timeL.userInteractionEnabled = NO;
@@ -95,7 +95,7 @@
         textF2.textColor = [UIColor colorWithHexString:colorHexStr9];
         
         //      S设置属性
-        textF2.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"PLEASE_ENTER_PASSWORD", nil) attributes:attributes];
+        textF2.attributedPlaceholder = [[NSAttributedString alloc] initWithString:TDLocalizeSelect(@"PLEASE_ENTER_PASSWORD", nil) attributes:attributes];
         self.textF2 = textF2;
         [imageView addSubview:textF2];
         
@@ -113,7 +113,7 @@
         
         //添加取消和确定按钮
         UIButton *cancleBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 152, 139, 48)];
-        [cancleBtn setTitle:NSLocalizedString(@"CANCEL", nil) forState:UIControlStateNormal];
+        [cancleBtn setTitle:TDLocalizeSelect(@"CANCEL", nil) forState:UIControlStateNormal];
         [cancleBtn setTitleColor:[UIColor colorWithHexString:colorHexStr9] forState:UIControlStateNormal];
         cancleBtn.tag = 0;
         cancleBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -121,7 +121,7 @@
         [imageView addSubview:cancleBtn];
         
         UIButton *quedingBtn = [[UIButton alloc] initWithFrame:CGRectMake(141, 152, 139, 48)];
-        [quedingBtn setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
+        [quedingBtn setTitle:TDLocalizeSelect(@"OK", nil) forState:UIControlStateNormal];
         [quedingBtn setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
         quedingBtn.tag = 1;
         quedingBtn.titleLabel.textAlignment = NSTextAlignmentCenter;

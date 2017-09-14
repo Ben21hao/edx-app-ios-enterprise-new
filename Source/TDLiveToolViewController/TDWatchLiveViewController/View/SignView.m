@@ -91,7 +91,7 @@ typedef BOOL(^BtnClickedBlock)();
         [v1 addSubview:btn];
         
         UILabel *info = [[UILabel alloc]initWithFrame:CGRectMake(0,20, v1.width, 15)];
-        info.text = NSLocalizedString(@"INITIATE_SIGN_IN", nil);
+        info.text = TDLocalizeSelect(@"INITIATE_SIGN_IN", nil);
         info.textColor = MakeColorRGB(0x2a2c31);
         info.font = [UIFont systemFontOfSize:21];
         info.textAlignment = NSTextAlignmentCenter;
@@ -105,7 +105,7 @@ typedef BOOL(^BtnClickedBlock)();
         
         UIButton *signbtn = [[UIButton alloc]initWithFrame:CGRectMake(0, v.height - 40, v.width, 40)];
         signbtn.tag =1011;
-        [signbtn setTitle:NSLocalizedString(@"SIGN_IN_BUTTON_TEXT", nil) forState:0];
+        [signbtn setTitle:TDLocalizeSelect(@"SIGN_IN_BUTTON_TEXT", nil) forState:0];
         signbtn.backgroundColor = MakeColorRGB(0xff3433);
         signbtn.layer.cornerRadius = 5;
         signbtn.layer.masksToBounds= YES;
@@ -126,7 +126,7 @@ typedef BOOL(^BtnClickedBlock)();
 - (void)remainingTime:(int)remainingTime {
     
     NSString *timeStr = [NSString stringWithFormat:@"%d",remainingTime];
-    _tiemlabel.text = [Strings secondsSignInCount:timeStr];
+    _tiemlabel.text =[TDLocalizeSelect(@"SECONDS_SIGN_IN", nil) oex_formatWithParameters:@{@"count" : timeStr}];
     
     NSRange r = [_tiemlabel.text rangeOfString:timeStr];
     NSMutableAttributedString *richText = [[NSMutableAttributedString alloc] initWithString:_tiemlabel.text];

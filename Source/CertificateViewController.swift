@@ -43,7 +43,7 @@ class CertificateViewController: TDBaseViewController, UIWebViewDelegate, Interf
         loadController.setupInController(self, contentView: webView)
         webView.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
 
-        titleViewLabel.text = Strings.Certificates.viewCertTitle
+        titleViewLabel.text = TDLocalizeSelectSwift("CERTIFICATES.VIEW_CERT_TITLE")
         loadController.state = .Initial
 
     }
@@ -74,7 +74,7 @@ class CertificateViewController: TDBaseViewController, UIWebViewDelegate, Interf
 
     func share() {
         guard let url = request?.URL else { return }
-        let text = Strings.Certificates.shareText(platformName: environment.config.platformName())
+        let text = TDLocalizeSelectSwift("CERTIFICATES.SHARE_TEXT").oex_formatWithParameters(["platform_name" : environment.config.platformName()])
         let controller = shareTextAndALink(text, url: url) { analyticsType in
             self.environment.analytics.trackCertificateShared(url.absoluteString!, type: analyticsType)
         }

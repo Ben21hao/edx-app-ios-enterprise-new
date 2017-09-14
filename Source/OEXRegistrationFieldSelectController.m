@@ -54,7 +54,7 @@
 - (BOOL)isValidInput {
     if(self.field.isRequired && ![self hasValue]) {
         if(!self.field.errorMessage.required) {
-            NSString* error = [Strings registrationFieldEmptySelectErrorWithFieldName:self.field.label];
+            NSString* error = [TDLocalizeSelect(@"REGISTRATION_FIELD_EMPTY_SELECT_ERROR", nil) oex_formatWithParameters:@{@"field_name" : self.field.label}];
             [self handleError:error];
         }
         else {

@@ -159,7 +159,7 @@
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
 														message:@"缺少partner或者seller或者私钥。"
 													   delegate:self
-											  cancelButtonTitle:NSLocalizedString(@"OK", nil)
+											  cancelButtonTitle:TDLocalizeSelect(@"OK", nil)
 											  otherButtonTitles:nil];
 		[alert show];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];

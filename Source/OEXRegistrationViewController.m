@@ -82,10 +82,10 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     
     self.navigationController.navigationBarHidden = NO;
     
-    [self setTitle:[Strings registerText]];
+    [self setTitle:TDLocalizeSelect(@"REGISTER_TEXT", nil)];
     
     UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_cancel"] style:UIBarButtonItemStylePlain target:self action:@selector(navigateBack:)];
-    closeButton.accessibilityLabel = [Strings close];
+    closeButton.accessibilityLabel = TDLocalizeSelect(@"CLOSE", nil);
     self.navigationItem.leftBarButtonItem = closeButton;
     
     //By default we only shows required fields
@@ -133,7 +133,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
         [self createAccount:nil];
     } forEvents:UIControlEventTouchUpInside];
     
-    [self.registerButton applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[Strings registrationCreateMyAccount]];
+    [self.registerButton applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:TDLocalizeSelect(@"REGISTRATION_CREATE_MY_ACCOUNT", nil)];
     self.registerButton.accessibilityIdentifier = @"register";
 
     ////Create progrssIndicator as subview to btnCreateAccount
@@ -148,9 +148,9 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     self.agreementLabel.numberOfLines = 0;
     self.agreementLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.agreementLabel.isAccessibilityElement = NO;
-    self.agreementLabel.text = [Strings registrationAgreementMessage];
+    self.agreementLabel.text = TDLocalizeSelect(@"REGISTRATION_AGREEMENT_MESSAGE", nil);
     self.agreementLink = [[UIButton alloc] init];
-    [self.agreementLink setTitle:[Strings registrationAgreementButtonTitleWithPlatformName:platform] forState:UIControlStateNormal];
+    [self.agreementLink setTitle:[TDLocalizeSelect(@"REGISTRATION_AGREEMENT_BUTTON_TITLE", nil) oex_formatWithParameters:@{@"platform_name" : platform}] forState:UIControlStateNormal];
     [self.agreementLink.titleLabel setFont:[self.environment.styles semiBoldSansSerifOfSize:10]];
     [self.agreementLink setTitleColor:[UIColor colorWithRed:0.16 green:0.44 blue:0.84 alpha:1] forState:UIControlStateNormal];
     self.agreementLink.accessibilityTraits = UIAccessibilityTraitLink;
@@ -160,13 +160,13 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     [self.agreementLink oex_addAction:^(id  _Nonnull control) {
         [self agreementButtonTapped:nil];
     } forEvents:UIControlEventTouchUpInside];
-    self.agreementLink.accessibilityLabel = [NSString stringWithFormat:@"%@ %@",[Strings registrationAgreementMessage],[Strings registrationAgreementButtonTitleWithPlatformName:platform]];
+    self.agreementLink.accessibilityLabel = [NSString stringWithFormat:@"%@ %@",TDLocalizeSelect(@"REGISTRATION_AGREEMENT_MESSAGE", nil),[TDLocalizeSelect(@"REGISTRATION_AGREEMENT_BUTTON_TITLE", nil) oex_formatWithParameters:@{@"platform_name" : platform}]];
 
     //This button will show and hide optional fields
     self.toggleOptionalFieldsButton = [[UIButton alloc] init];
     [self.toggleOptionalFieldsButton setBackgroundColor:[UIColor whiteColor]];
     [self.toggleOptionalFieldsButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    [self.toggleOptionalFieldsButton setTitle:[Strings registrationShowOptionalFields]  forState:UIControlStateNormal];
+    [self.toggleOptionalFieldsButton setTitle:TDLocalizeSelect(@"REGISTRATION_SHOW_OPTIONAL_FIELDS", nil)  forState:UIControlStateNormal];
     [self.toggleOptionalFieldsButton.titleLabel setFont:[self.environment.styles semiBoldSansSerifOfSize:14.0]];
 
     [self.toggleOptionalFieldsButton addTarget:self action:@selector(toggleOptionalFields:) forControlEvents:UIControlEventTouchUpInside];
@@ -348,10 +348,10 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 - (void)toggleOptionalFields:(id)sender {
     self.isShowingOptionalFields = !self.isShowingOptionalFields;
     if(self.isShowingOptionalFields) {
-        [self.toggleOptionalFieldsButton setTitle:[Strings registrationHideOptionalFields] forState:UIControlStateNormal];
+        [self.toggleOptionalFieldsButton setTitle:TDLocalizeSelect(@"REGISTRATION_HIDE_OPTIONAL_FIELDS", nil) forState:UIControlStateNormal];
     }
     else {
-        [self.toggleOptionalFieldsButton setTitle:[Strings registrationShowOptionalFields] forState:UIControlStateNormal];
+        [self.toggleOptionalFieldsButton setTitle:TDLocalizeSelect(@"REGISTRATION_SHOW_OPTIONAL_FIELDS", nil) forState:UIControlStateNormal];
     }
 
     [self refreshFormFields];
@@ -519,7 +519,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 }
 
 - (void) showNoNetworkError {
-    [[UIAlertController alloc] showAlertWithTitle:[Strings networkNotAvailableTitle] message:[Strings networkNotAvailableMessage] onViewController:self];
+    [[UIAlertController alloc] showAlertWithTitle:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil) message:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_MESSAGE", nil) onViewController:self];
 }
 
 - (void)scrollViewTapped:(id)sender {
@@ -535,12 +535,12 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 - (void)showProgress:(BOOL)status {
     if(status) {
         [self.progressIndicator startAnimating];
-        [self.registerButton applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[Strings registrationCreatingAccount]];
+        [self.registerButton applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:TDLocalizeSelect(@"REGISTRATION_CREATING_ACCOUNT", nil)];
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     }
     else {
         [self.progressIndicator stopAnimating];
-        [self.registerButton applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[Strings registrationCreateMyAccount]];
+        [self.registerButton applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:TDLocalizeSelect(@"REGISTRATION_CREATE_MY_ACCOUNT", nil)];
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     }
 }

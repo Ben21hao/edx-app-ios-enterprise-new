@@ -39,7 +39,7 @@
     self.totalButton = [[UIButton alloc] init];
     [self.totalButton setImage:[UIImage imageNamed:@"Shape1"] forState:UIControlStateNormal];
     [self.totalButton setImage:[UIImage imageNamed:@"Shape"] forState:UIControlStateSelected];
-    [self.totalButton setTitle:NSLocalizedString(@"SELCT_ALL", nil) forState:UIControlStateNormal];
+    [self.totalButton setTitle:TDLocalizeSelect(@"SELCT_ALL", nil) forState:UIControlStateNormal];
     [self.totalButton setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
     self.totalButton.titleLabel.font = [UIFont systemFontOfSize:14];
     self.totalButton.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
@@ -47,7 +47,7 @@
     [self.bottomView addSubview:self.totalButton];
     
     self.totalLabel = [[UILabel alloc] init];
-    self.totalLabel.text = NSLocalizedString(@"IN_TOTAL_PRICE", nil);
+    self.totalLabel.text = TDLocalizeSelect(@"IN_TOTAL_PRICE", nil);
     self.totalLabel.textColor = [UIColor colorWithHexString:colorHexStr9];
     self.totalLabel.font = [UIFont systemFontOfSize:14];
     [self.bottomView addSubview:self.totalLabel];
@@ -69,7 +69,7 @@
     self.summitButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     self.summitButton.titleLabel.numberOfLines = 0;
     self.summitButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [self.summitButton setTitle:NSLocalizedString(@"HANDIN_COURSE_LIST", nil) forState:UIControlStateNormal];
+    [self.summitButton setTitle:TDLocalizeSelect(@"HANDIN_COURSE_LIST", nil) forState:UIControlStateNormal];
     [self.summitButton addTarget:self action:@selector(submitCoursesButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.bottomView addSubview:self.summitButton];
 }

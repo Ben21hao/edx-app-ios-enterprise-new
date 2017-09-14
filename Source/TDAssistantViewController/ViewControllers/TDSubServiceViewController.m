@@ -59,16 +59,16 @@
     self.toolModel = [[TDBaseToolModel alloc] init];
     self.tableView.scrollsToTop = NO;
     
-    NSString *title = NSLocalizedString(@"TA_PENDING", nil);
+    NSString *title = TDLocalizeSelect(@"TA_PENDING", nil);
     switch (self.whereFrom) {
         case TDAssistantFromOne:
-            title = NSLocalizedString(@"TA_PENDING", nil);
+            title = TDLocalizeSelect(@"TA_PENDING", nil);
             break;
         case TDAssistantFromTwo:
-            title = NSLocalizedString(@"TA_FINISH", nil);
+            title = TDLocalizeSelect(@"TA_FINISH", nil);
             break;
         case TDAssistantFromThree:
-            title = NSLocalizedString(@"TA_CANCELLED", nil);
+            title = TDLocalizeSelect(@"TA_CANCELLED", nil);
             break;
             
         default:
@@ -206,7 +206,7 @@
                 self.page == 1 ? self.page = 1 : self.page --;
             }
         } else if ([code intValue] == 204) {
-            [self.view makeToast:NSLocalizedString(@"NO_MORE_DATA", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"NO_MORE_DATA", nil) duration:1.08 position:CSToastPositionCenter];
             [self noMoreDataHandle];
             
         } else {
@@ -216,7 +216,7 @@
         [self showNullData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         
         [self showNullData];
         
@@ -297,7 +297,7 @@
             [self.tableView reloadData];
             
         } else if ([code intValue] == 204) {
-            [self.view makeToast:NSLocalizedString(@"NO_MORE_DATA", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"NO_MORE_DATA", nil) duration:1.08 position:CSToastPositionCenter];
             [self noMoreDataHandle];
             
         } else {
@@ -308,7 +308,7 @@
         [self showNullData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
 
         [self showNullData];
         
@@ -373,13 +373,13 @@
 
     switch (self.whereFrom) {
         case TDAssistantFromOne:
-            self.nullLabel.text = NSLocalizedString(@"NO_PENDING", nil);
+            self.nullLabel.text = TDLocalizeSelect(@"NO_PENDING", nil);
             break;
         case TDAssistantFromTwo:
-            self.nullLabel.text = NSLocalizedString(@"NO_FINISHED", nil);
+            self.nullLabel.text = TDLocalizeSelect(@"NO_FINISHED", nil);
             break;
         case TDAssistantFromThree:
-            self.nullLabel.text = NSLocalizedString(@"NO_CENACLLED", nil);
+            self.nullLabel.text = TDLocalizeSelect(@"NO_CENACLLED", nil);
             break;
         default:
             break;
@@ -447,7 +447,7 @@
             assistantCell.whereFrom = self.whereFrom;
             
             if (model.question.length > 0) {
-                assistantCell.quetionLabel.text = [NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"QUETION_DESCRIPTION", nil),model.question];
+                assistantCell.quetionLabel.text = [NSString stringWithFormat:@"%@ %@",TDLocalizeSelect(@"QUETION_DESCRIPTION", nil),model.question];
             }
             return assistantCell;
         }
@@ -460,7 +460,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
             cell.textLabel.textColor = [UIColor colorWithHexString:colorHexStr9];
-            NSString *describeStr = [model.order_type intValue] == 1 ? NSLocalizedString(@"RESERCED_PERIOD",nil) : NSLocalizedString(@"INSTANT_SERVICE",nil);
+            NSString *describeStr = [model.order_type intValue] == 1 ? TDLocalizeSelect(@"RESERCED_PERIOD",nil) : TDLocalizeSelect(@"INSTANT_SERVICE",nil);
             cell.textLabel.text = [NSString stringWithFormat:@"%@：%@",describeStr,model.service_time];
             
             return cell;
@@ -567,21 +567,21 @@
             if ([self.dataArray containsObject:model]) {
                 [self.dataArray removeObject:model];
             }
-            [self.view makeToast:NSLocalizedString(@"ORDER_CANCELED", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"ORDER_CANCELED", nil) duration:1.08 position:CSToastPositionCenter];
             [self.tableView reloadData];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"Cancel_Order_Deal" object:nil];
             
         } else if ([code intValue] == 404) {
-            [self.view makeToast:NSLocalizedString(@"NOT_EXIST_ORDER", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"NOT_EXIST_ORDER", nil) duration:1.08 position:CSToastPositionCenter];
             
         } else {
-            [self.view makeToast:NSLocalizedString(@"UNABEL_CANCEL_ORDER", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"UNABEL_CANCEL_ORDER", nil) duration:1.08 position:CSToastPositionCenter];
         }
         NSLog(@"取消订单 %@ -- %@",responseDic[@"msg"],code);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"取消订单出错 -- %ld",(long)error.code);
     }];
 }
@@ -656,13 +656,13 @@
             }
             
         } else if ([code intValue] == 404) {
-            [self.view makeToast:NSLocalizedString(@"CLASSROMM_NOT_EXIST", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"CLASSROMM_NOT_EXIST", nil) duration:1.08 position:CSToastPositionCenter];
         } else {
-            [self.view makeToast:NSLocalizedString(@"UNABEL_ENTER_CLASSROOM", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"UNABEL_ENTER_CLASSROOM", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"获取classroom密码出错 -- %ld",(long)error.code);
     }];
 
@@ -672,10 +672,10 @@
      NSLog(@" --- 还没下载 ----");
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
-                                                        message:NSLocalizedString(@"NOT_INSTALLED_CLASSROOM", nil)
+                                                        message:TDLocalizeSelect(@"NOT_INSTALLED_CLASSROOM", nil)
                                                        delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)
-                                              otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+                                              cancelButtonTitle:TDLocalizeSelect(@"CANCEL", nil)
+                                              otherButtonTitles:TDLocalizeSelect(@"OK", nil), nil];
     [alertView show];
 }
 
@@ -688,7 +688,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

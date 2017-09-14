@@ -48,7 +48,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.titleViewLabel.text = NSLocalizedString(@"TA_SERVICE", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"TA_SERVICE", nil);
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
 }
 

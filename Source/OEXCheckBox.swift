@@ -43,8 +43,8 @@ public class OEXCheckBox: UIButton {
         let size = min(bounds.width, bounds.height)
         let image = newIcon.imageWithFontSize(size)
         setImage(image, forState: .Normal)
-        accessibilityLabel = checked ? Strings.accessibilityCheckboxChecked : Strings.accessibilityCheckboxUnchecked
-        accessibilityHint = checked ? Strings.accessibilityCheckboxHintChecked : Strings.accessibilityCheckboxHintUnchecked
+        accessibilityLabel = checked ? TDLocalizeSelectSwift("ACCESSIBILITY_CHECKBOX_CHECKED") : TDLocalizeSelectSwift("ACCESSIBILITY_CHECKBOX_UNCHECKED")
+        accessibilityHint = checked ? TDLocalizeSelectSwift("ACCESSIBILITY_CHECKBOX_HINT_CHECKED") : TDLocalizeSelectSwift("ACCESSIBILITY_CHECKBOX_HINT_UNCHECKED")
     }
     
     func tapped() {

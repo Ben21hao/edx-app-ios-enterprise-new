@@ -50,7 +50,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.navigationItem.title = NSLocalizedString(@"RESET_BY_PHONE", nil);
+    self.navigationItem.title = TDLocalizeSelect(@"RESET_BY_PHONE", nil);
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     
 }
@@ -60,7 +60,7 @@
     
     [self.timer invalidate];
     self.resendButton.userInteractionEnabled = YES;
-    [self.resendButton setTitle:NSLocalizedString(@"RESEND", nil) forState:UIControlStateNormal];
+    [self.resendButton setTitle:TDLocalizeSelect(@"RESEND", nil) forState:UIControlStateNormal];
     
     [self.codeField resignFirstResponder];
     [self.activityView stopAnimating];
@@ -115,14 +115,14 @@
             [self handleResendButton:YES];
             
             [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:@""
-                                                                    message:NSLocalizedString(@"PHONE_NUMBER_NOT_REGISTER", nil)
+                                                                    message:TDLocalizeSelect(@"PHONE_NUMBER_NOT_REGISTER", nil)
                                                            onViewController:self.navigationController.view
                                                                  shouldHide:YES];
             
         } else {
             [self handleResendButton:YES];
-            [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:NSLocalizedString(@"RESET_FAILED", nil)
-                                                                    message:NSLocalizedString(@"RESET_FAILED", nil)
+            [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"RESET_FAILED", nil)
+                                                                    message:TDLocalizeSelect(@"RESET_FAILED", nil)
                                                            onViewController:self.navigationController.view
                                                                  shouldHide:YES];
         }
@@ -130,7 +130,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         [self handleResendButton:YES];
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"-------->>> %ld",(long)error.code);
     }];
 }
@@ -139,7 +139,7 @@
     
     isEnable ? [self.codeActivitView stopAnimating] : [self.codeActivitView startAnimating];
     self.resendButton.userInteractionEnabled = isEnable;
-    [self.resendButton setTitle:isEnable ? NSLocalizedString(@"RESEND", nil) : @"" forState:UIControlStateNormal];
+    [self.resendButton setTitle:isEnable ? TDLocalizeSelect(@"RESEND", nil) : @"" forState:UIControlStateNormal];
     self.resendButton.alpha = 1;
 }
 
@@ -150,8 +150,8 @@
 #pragma mark -- 倒计时
 - (void)cutDownTime {
     
-    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:NSLocalizedString(@"SENT", nil)
-                                                            message:NSLocalizedString(@"PASSWORD_RESET_AUTHENTICATION_SENT", nil)
+    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"SENT", nil)
+                                                            message:TDLocalizeSelect(@"PASSWORD_RESET_AUTHENTICATION_SENT", nil)
                                                    onViewController:self.navigationController.view
                                                          shouldHide:YES];
     
@@ -173,7 +173,7 @@
     [self.codeActivitView stopAnimating];
     
     self.resendButton.userInteractionEnabled = NO;
-    [self.resendButton setTitle:[NSString stringWithFormat:@"%d%@",self.timeNum,NSLocalizedString(@"SECOND", nil)] forState:UIControlStateNormal];
+    [self.resendButton setTitle:[NSString stringWithFormat:@"%d%@",self.timeNum,TDLocalizeSelect(@"SECOND", nil)] forState:UIControlStateNormal];
     self.resendButton.alpha = 0.8;
     
     if (self.timeNum <= 0) {
@@ -188,14 +188,14 @@
     [self.codeField resignFirstResponder];
     
     if (![self.toolModel networkingState]) {
-        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings networkNotAvailableTitle]
-                                                                message:[Strings networkNotAvailableMessageTrouble]
+        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil)
+                                                                message:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_MESSAGE_TROUBLE", nil)
                                                        onViewController:self.navigationController.view
                                                              shouldHide:YES];
         return;
     }
     if (self.codeField.text.length == 0) {
-        [self.view makeToast:NSLocalizedString(@"VERIFICATION_CODE_IS_EMPTY", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"VERIFICATION_CODE_IS_EMPTY", nil) duration:1.08 position:CSToastPositionCenter];
         
     } else if ([self.codeField.text isEqualToString:self.randomNumber]) {//验证码正确
         
@@ -206,7 +206,7 @@
         [self.activityView startAnimating];
         
     } else {
-        [self.view makeToast:NSLocalizedString(@"VERIFICATION_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"VERIFICATION_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
     }
 }
 
@@ -215,8 +215,8 @@
     [self.codeField resignFirstResponder];
     
     if (![self.toolModel networkingState]) {
-        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings networkNotAvailableTitle]
-                                                                message:[Strings networkNotAvailableMessageTrouble]
+        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil)
+                                                                message:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_MESSAGE_TROUBLE", nil)
                                                        onViewController:self.navigationController.view
                                                              shouldHide:YES];
         return;
@@ -235,11 +235,11 @@
     self.messageLabel = [[UILabel alloc] init];
     self.messageLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     self.messageLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
-    self.messageLabel.text = NSLocalizedString(@"HAD_SEND_MESSAGE", nil);
+    self.messageLabel.text = TDLocalizeSelect(@"HAD_SEND_MESSAGE", nil);
     [self.view addSubview:self.messageLabel];
     
     self.codeField = [[UITextField alloc] init];
-    self.codeField.placeholder = NSLocalizedString(@"PLEASE_ENTER_VERI", nil);
+    self.codeField.placeholder = TDLocalizeSelect(@"PLEASE_ENTER_VERI", nil);
     self.codeField.textColor = [UIColor colorWithHexString:colorHexStr10];
     self.codeField.borderStyle = UITextBorderStyleRoundedRect;
     self.codeField.font = [UIFont fontWithName:@"OpenSans" size:15];
@@ -250,7 +250,7 @@
     self.resendButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:15];
     self.resendButton.layer.masksToBounds = YES;
     self.resendButton.layer.cornerRadius = 4.0;
-    [self.resendButton setTitle:NSLocalizedString(@"GET_VERIFICATION", nil) forState:UIControlStateNormal];
+    [self.resendButton setTitle:TDLocalizeSelect(@"GET_VERIFICATION", nil) forState:UIControlStateNormal];
     [self.resendButton addTarget:self action:@selector(resendButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.resendButton];
     
@@ -258,7 +258,7 @@
     self.nextButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.nextButton.layer.masksToBounds = YES;
     self.nextButton.layer.cornerRadius = 4.0;
-    [self.nextButton setTitle:NSLocalizedString(@"NEXT_TEST", nil) forState:UIControlStateNormal];
+    [self.nextButton setTitle:TDLocalizeSelect(@"NEXT_TEST", nil) forState:UIControlStateNormal];
     [self.nextButton addTarget:self action:@selector(nextButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.nextButton];
     

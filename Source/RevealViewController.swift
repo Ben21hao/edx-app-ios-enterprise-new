@@ -37,7 +37,7 @@ class RevealViewController: SWRevealViewController, SWRevealViewControllerDelega
         dimmingOverlay.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]    //自动调整子控件与父控件中间的位置
         dimmingOverlay.backgroundColor = OEXStyles.sharedStyles().neutralBlack()
         dimmingOverlay.exclusiveTouch = true   //避免同时点击多个button
-        dimmingOverlay.accessibilityLabel = Strings.accessibilityCloseMenu
+        dimmingOverlay.accessibilityLabel = TDLocalizeSelectSwift("ACCESSIBILITY_CLOSE_MENU")
         dimmingOverlay.oex_addAction({[weak self] _ in
             self?.toggleDrawerAnimated(true)
             }, forEvents: .TouchUpInside)

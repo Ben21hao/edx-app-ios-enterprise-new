@@ -30,7 +30,7 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
         self.environment = environment
         
         super.init(env: environment)
-        self.titleViewLabel.text = Strings.myCourses
+        
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -40,6 +40,9 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        LanguageChangeTool.initUserLanguage()
+        self.titleViewLabel.text = TDLocalizeSelectSwift("MY_COURSES")
+        
         self.view.accessibilityIdentifier = "enrolled-courses-screen"
         
         setviewConfig()
@@ -148,7 +151,7 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
     
     private func enrollmentsEmptyState() {
         if !environment.config.courseEnrollmentConfig.isCourseDiscoveryEnabled() {
-            let error = NSError.oex_errorWithCode(.Unknown, message: Strings.EnrollmentList.noEnrollment)
+            let error = NSError.oex_errorWithCode(.Unknown, message: TDLocalizeSelectSwift("ENROLLMENT_LIST.NO_ENROLLMENT"))
             loadController.state = LoadState.failed(error, icon: Icon.UnknownError)
         }
     }
@@ -158,7 +161,7 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
         NSNotificationCenter.defaultCenter().oex_addObserver(self, name: OEXExternalRegistrationWithExistingAccountNotification) { (notification, observer, _) -> Void in
             let platform = config.platformName()
             let service = notification.object as? String ?? ""
-            let message = Strings.externalRegistrationBecameLogin(platformName: platform, service: service)
+            let message = TDLocalizeSelectSwift("EXTERNAL_REGISTRATION_BECAME_LOGIN").oex_formatWithParameters(["platform_name" : platform, "service" : service])
             observer.showOverlayMessage(message)
         }
         
@@ -178,9 +181,9 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
     
     private func showVersionUpgradeSnackBarIfNecessary() {
         if let _ = VersionUpgradeInfoController.sharedController.latestVersion {
-            var infoString = Strings.VersionUpgrade.newVersionAvailable
+            var infoString = TDLocalizeSelectSwift("VERSION_UPGRADE.NEW_VERSION_AVAILABLE")
             if let _ = VersionUpgradeInfoController.sharedController.lastSupportedDateString {
-                infoString = Strings.VersionUpgrade.deprecatedMessage
+                infoString = TDLocalizeSelectSwift("VERSION_UPGRADE.DEPRECATED_MESSAGE")
             }
             
             if !isActionTakenOnUpgradeSnackBar {

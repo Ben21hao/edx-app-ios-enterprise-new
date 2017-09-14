@@ -43,7 +43,7 @@ static NSString* const OEXCourseInfoLinkPathIDPlaceholder = @"{path_id}";
     if(self != nil) {
         self.pathID = pathID;
         self.bottomBar = bottomBar;
-        self.navigationItem.title = [Strings findCourses];
+        self.navigationItem.title = TDLocalizeSelect(@"FIND_COURSES", nil);
     }
     return self;
 }

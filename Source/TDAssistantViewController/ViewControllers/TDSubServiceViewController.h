@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger,TDAssistantFrom) {
     TDAssistantFromThree
 };
 
-@interface TDSubServiceViewController : UIViewController
+@interface TDSubServiceViewController : TDBaseViewController
 
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSString *username;

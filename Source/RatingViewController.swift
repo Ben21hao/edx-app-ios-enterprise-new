@@ -101,15 +101,15 @@ class RatingViewController: UIViewController, RatingContainerDelegate {
     
     //MARK: - Positive Rating methods
     private func positiveRatingReceived() {
-        alertController = UIAlertController().showAlertWithTitle(Strings.AppReview.rateTheApp, message: Strings.AppReview.positiveReviewMessage,cancelButtonTitle: nil, onViewController: self)
-        alertController?.addButtonWithTitle(Strings.AppReview.maybeLater) {[weak self] (action) in
+        alertController = UIAlertController().showAlertWithTitle(TDLocalizeSelectSwift("APP_REVIEW.RATE_THE_APP"), message: TDLocalizeSelectSwift("APP_REVIEW.POSITIVE_REVIEW_MESSAGE"),cancelButtonTitle: nil, onViewController: self)
+        alertController?.addButtonWithTitle(TDLocalizeSelectSwift("APP_REVIEW.MAYBE_LATER")) {[weak self] (action) in
             self?.saveAppRating()
             if let rating = self?.selectedRating {
                 self?.environment.analytics.trackMaybeLater(rating)
             }
             self?.dismissViewController()
         }
-        alertController?.addButtonWithTitle(Strings.AppReview.rateTheApp) {[weak self] (action) in
+        alertController?.addButtonWithTitle(TDLocalizeSelectSwift("APP_REVIEW.RATE_THE_APP")) {[weak self] (action) in
             self?.saveAppRating(self?.selectedRating)
             if let rating = self?.selectedRating {
                 self?.environment.analytics.trackRateTheApp(rating)
@@ -128,15 +128,15 @@ class RatingViewController: UIViewController, RatingContainerDelegate {
     
     //MARK: - Negative Rating methods
     private func negativeRatingReceived() {
-        alertController = UIAlertController().showAlertWithTitle(Strings.AppReview.sendFeedback, message: Strings.AppReview.helpUsImprove,cancelButtonTitle: nil, onViewController: self)
-        alertController?.addButtonWithTitle(Strings.AppReview.maybeLater) {[weak self] (action) in
+        alertController = UIAlertController().showAlertWithTitle(TDLocalizeSelectSwift("APP_REVIEW.SEND_FEEDBACK"), message: TDLocalizeSelectSwift("APP_REVIEW.HELP_US_IMPROVE"),cancelButtonTitle: nil, onViewController: self)
+        alertController?.addButtonWithTitle(TDLocalizeSelectSwift("APP_REVIEW.MAYBE_LATER")) {[weak self] (action) in
             self?.saveAppRating()
             if let rating = self?.selectedRating {
                 self?.environment.analytics.trackMaybeLater(rating)
             }
             self?.dismissViewController()
         }
-        alertController?.addButtonWithTitle(Strings.AppReview.sendFeedback) {[weak self] (action) in
+        alertController?.addButtonWithTitle(TDLocalizeSelectSwift("APP_REVIEW.SEND_FEEDBACK")) {[weak self] (action) in
             self?.saveAppRating(self?.selectedRating)
             if let rating = self?.selectedRating {
                 self?.environment.analytics.trackSendFeedback(rating)
@@ -166,17 +166,17 @@ extension RatingViewController : MFMailComposeViewControllerDelegate {
     
     func launchEmailComposer() {
         if !MFMailComposeViewController.canSendMail() {
-            let alert = UIAlertView(title: Strings.emailAccountNotSetUpTitle,
-                                    message: Strings.emailAccountNotSetUpMessage,
+            let alert = UIAlertView(title: TDLocalizeSelectSwift("EMAIL_ACCOUNT_NOT_SET_UP_TITLE"),
+                                    message: TDLocalizeSelectSwift("EMAIL_ACCOUNT_NOT_SET_UP_MESSAGE"),
                                     delegate: nil,
-                                    cancelButtonTitle: Strings.ok)
+                                    cancelButtonTitle: TDLocalizeSelectSwift("OK"))
             alert.show()
             dismissViewController()
         } else {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
             mail.navigationBar.tintColor = OEXStyles.sharedStyles().navigationItemTintColor()
-            mail.setSubject(Strings.AppReview.messageSubject)
+            mail.setSubject(TDLocalizeSelectSwift("APP_REVIEW.MESSAGE_SUBJECT"))
             
             mail.setMessageBody(EmailTemplates.supportEmailMessageTemplate(), isHTML: false)
             if let fbAddress = environment.config.feedbackEmailAddress() {

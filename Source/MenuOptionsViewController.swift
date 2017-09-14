@@ -132,7 +132,7 @@ public class MenuOptionsViewController: UIViewController, UITableViewDataSource,
         cell.applyStandardSeparatorInsets()
         
         if delegate?.menuOptionsController(self, canSelectOptionAtIndex:indexPath.row) ?? false {
-            cell.accessibilityHint = Strings.accessibilitySelectValueHint
+            cell.accessibilityHint = TDLocalizeSelectSwift("ACCESSIBILITY_SELECT_VALUE_HINT")
         }
         else {
             cell.accessibilityHint = nil

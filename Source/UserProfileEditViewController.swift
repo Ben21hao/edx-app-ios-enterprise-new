@@ -249,7 +249,7 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
         self.navigationItem.leftBarButtonItem = leftBarItem
         
         self.titleLabel = UILabel(frame:CGRect(x:0, y:0, width:40, height:40))
-        self.titleLabel?.text = Strings.Profile.editTitle
+        self.titleLabel?.text = TDLocalizeSelectSwift("PROFILE.EDIT_TITLE")
         self.titleLabel?.font = UIFont(name:"OpenSans",size:18.0)
         self.titleLabel?.textColor = UIColor.whiteColor()
         self.navigationItem.titleView = self.titleLabel
@@ -281,7 +281,7 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
                     self?.profile = newProf
                     self?.reloadViews()
                 } else {
-                    let message = Strings.Profile.unableToSend(fieldName: fieldDescription)
+                    let message = TDLocalizeSelectSwift("PROFILE.UNABLE_TO_SEND").oex_formatWithParameters(["field_name" : fieldDescription])
                     self?.showToast(message)
                 }
             }
@@ -333,7 +333,7 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
         
         if let under13 = profile.parentalConsent where under13 == true {
             let descriptionStyle = OEXMutableTextStyle(weight: .Light, size: .XSmall, color: OEXStyles.sharedStyles().neutralDark())
-            segmentCell.descriptionLabel.attributedText = descriptionStyle.attributedStringWithText(Strings.Profile.ageLimit)
+            segmentCell.descriptionLabel.attributedText = descriptionStyle.attributedStringWithText(TDLocalizeSelectSwift("PROFILE.AGE_LIMIT"))
         }
         
         return cell
@@ -384,7 +384,7 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
         alertView.sureHandle = { (AnyObject) -> () in
             
             if AnyObject.characters.count == 0 {
-                alertView.errorLabel.text = Strings.loginPassword
+                alertView.errorLabel.text = TDLocalizeSelectSwift("LOGIN_PASSWORD")
                 alertView.vertifiFailed = true
                 
             } else {
@@ -399,7 +399,7 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
                         self.jumpToController(type)
                         
                     } else {
-                        alertView.errorLabel.text = code == 1011 ? Strings.networkConnetFail : Strings.passwordError
+                        alertView.errorLabel.text = code == 1011 ? TDLocalizeSelectSwift("NETWORK_CONNET_FAIL") : TDLocalizeSelectSwift("PASSWORD_ERROR")
                         alertView.vertifiFailed = true
                     }
                 }
@@ -547,7 +547,7 @@ extension UserProfileEditViewController : ProfilePictureTakerDelegate {
         environment.networkManager.taskForRequest(networkRequest) { result in
             if let _ = result.error {
                 endBlurimate.remove()
-                self.showToast(Strings.Profile.unableToRemovePhoto)
+                self.showToast(TDLocalizeSelectSwift("PROFILE.UNABLE_TO_REMOVE_PHOTO"))
             } else {
                 //Was sucessful upload
                 self.reloadProfileFromImageChange(endBlurimate)
@@ -576,7 +576,7 @@ extension UserProfileEditViewController : ProfilePictureTakerDelegate {
             OEXAnalytics.sharedAnalytics().trackSetProfilePhoto(anaylticsSource)
             if let _ = result.error {
                 endBlurimate.remove()
-                self.showToast(Strings.Profile.unableToSetPhoto)
+                self.showToast(TDLocalizeSelectSwift("PROFILE.UNABLE_TO_SET_PHOTO"))
             } else {
                 //Was successful delete
                 self.reloadProfileFromImageChange(endBlurimate)
@@ -598,7 +598,7 @@ extension UserProfileEditViewController : ProfilePictureTakerDelegate {
                 self.reloadViews()
                 self.banner.showProfile(newProf, networkManager: self.environment.networkManager)
             } else {
-                self.showToast(Strings.Profile.unableToGet)
+                self.showToast(TDLocalizeSelectSwift("PROFILE.UNABLE_TO_GET"))
             }
         }
     }

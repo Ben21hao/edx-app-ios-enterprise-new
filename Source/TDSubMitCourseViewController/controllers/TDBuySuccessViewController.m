@@ -49,8 +49,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.titleViewLabel.text = NSLocalizedString(@"ADD_SUCCESS", nil);
-    [self.rightButton setTitle:NSLocalizedString(@"GO_TO_STUDY", nil) forState:UIControlStateNormal];
+    self.titleViewLabel.text = TDLocalizeSelect(@"ADD_SUCCESS", nil);
+    [self.rightButton setTitle:TDLocalizeSelect(@"GO_TO_STUDY", nil) forState:UIControlStateNormal];
     self.rightButton.titleLabel.font = [UIFont systemFontOfSize:16];
     WS(weakSelf);
     self.rightButtonHandle = ^(){
@@ -108,7 +108,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.loadIngView removeFromSuperview];
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@" error -------%@",error);
     }];
 }
@@ -169,19 +169,19 @@
     TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
     switch (indexPath.row) {
         case 0: {
-            cell.textLabel.text = NSLocalizedString(@"COURSE_TITLE", nil);
+            cell.textLabel.text = TDLocalizeSelect(@"COURSE_TITLE", nil);
             NSString *courStr = self.dataDic[@"course_display_names"];
             cell.detailTextLabel.text = courStr;
         }
             break;
         case 1: {
-            cell.textLabel.text = NSLocalizedString(@"ORIGIN_PRICE", nil);
+            cell.textLabel.text = TDLocalizeSelect(@"ORIGIN_PRICE", nil);
             float oringin = [self.dataDic[@"total_amount"] floatValue];
             cell.detailTextLabel.attributedText = [baseTool setDetailString:[NSString  stringWithFormat:@"￥%.2f",oringin] withFont:14 withColorStr:colorHexStr8];
         }
             break;
         case 2: {
-            cell.textLabel.text = NSLocalizedString(@"CUT_ACTIVITY", nil);
+            cell.textLabel.text = TDLocalizeSelect(@"CUT_ACTIVITY", nil);
             float activity = [self.dataDic[@"activate_amount"] floatValue];
             cell.detailTextLabel.attributedText = [baseTool setDetailString:[NSString  stringWithFormat:@"-￥%.2f",activity] withFont:14 withColorStr:colorHexStr8];
             cell.textLabel.hidden = YES;
@@ -189,7 +189,7 @@
         }
             break;
         case 3: {
-            cell.textLabel.text = NSLocalizedString(@"CUT_COUPON", nil);
+            cell.textLabel.text = TDLocalizeSelect(@"CUT_COUPON", nil);
             float coupon = [self.dataDic[@"coupon_amount"] floatValue];
             cell.detailTextLabel.attributedText = [baseTool setDetailString:[NSString  stringWithFormat:@"-￥%.2f",coupon] withFont:14 withColorStr:colorHexStr8];
             cell.textLabel.hidden = YES;
@@ -197,21 +197,21 @@
         }
             break;
         case 4: {
-            cell.textLabel.text = NSLocalizedString(@"CUT_BAODIAN", nil);
+            cell.textLabel.text = TDLocalizeSelect(@"CUT_BAODIAN", nil);
             float baodian = [self.dataDic[@"cost_amount"] floatValue];
             cell.detailTextLabel.attributedText = [baseTool setDetailString:[NSString  stringWithFormat:@"-￥%.2f",baodian] withFont:14 withColorStr:colorHexStr8];
         }
             break;
         case 5: {
-            cell.textLabel.text = NSLocalizedString(@"PAY_LAST", nil);
+            cell.textLabel.text = TDLocalizeSelect(@"PAY_LAST", nil);
             float pay = [self.dataDic[@"real_amount"] floatValue];
             cell.detailTextLabel.attributedText = [baseTool setDetailString:[NSString  stringWithFormat:@"￥%.2f",pay] withFont:14 withColorStr:colorHexStr8];
         }
             break;
         case 6: {
-            cell.textLabel.text = NSLocalizedString(@"COIN_RECEIVE", nil);
+            cell.textLabel.text = TDLocalizeSelect(@"COIN_RECEIVE", nil);
             float pay = [self.dataDic[@"give_coin"] floatValue];
-            cell.detailTextLabel.attributedText = [baseTool setDetailString:[NSString  stringWithFormat:@"%.2f%@",pay,NSLocalizedString(@"COINS_VALUE", nil)] withFont:14 withColorStr:colorHexStr8];
+            cell.detailTextLabel.attributedText = [baseTool setDetailString:[NSString  stringWithFormat:@"%.2f%@",pay,TDLocalizeSelect(@"COINS_VALUE", nil)] withFont:14 withColorStr:colorHexStr8];
         }
             break;
             
@@ -238,7 +238,7 @@
     titelLabel.font = [UIFont systemFontOfSize:14];
     titelLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     titelLabel.textAlignment = NSTextAlignmentCenter;
-    titelLabel.text = [NSString stringWithFormat:@"——————— %@ ———————",NSLocalizedString(@"COURSE_MESSAGE",nil)];
+    titelLabel.text = [NSString stringWithFormat:@"——————— %@ ———————",TDLocalizeSelect(@"COURSE_MESSAGE",nil)];
     [headerView addSubview:titelLabel];
     
     [titelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -264,7 +264,7 @@
     [successButton setImage:[UIImage imageNamed:@"success"] forState:UIControlStateNormal];
     successButton.contentEdgeInsets = UIEdgeInsetsMake(0, -8, 0, 8);
     
-    [successButton setTitle:NSLocalizedString(@"ADD_COURSE_SUCCESS", nil) forState:UIControlStateNormal];
+    [successButton setTitle:TDLocalizeSelect(@"ADD_COURSE_SUCCESS", nil) forState:UIControlStateNormal];
     successButton.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, -8);
     [successButton setTitleColor:[UIColor colorWithHexString:colorHexStr10] forState:UIControlStateNormal];
     successButton.titleLabel.font = [UIFont systemFontOfSize:16];

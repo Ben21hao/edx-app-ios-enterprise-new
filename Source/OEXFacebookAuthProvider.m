@@ -21,7 +21,7 @@
 }
 
 - (NSString*)displayName {
-    return [Strings facebook];
+    return TDLocalizeSelect(@"FACEBOOK", nil);
 }
 
 - (NSString*)backendName {

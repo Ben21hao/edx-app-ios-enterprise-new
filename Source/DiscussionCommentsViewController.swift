@@ -198,7 +198,7 @@ class DiscussionCommentCell: UITableViewCell {
         
         let iconStyle = report ? smallIconSelectedStyle : smallIconStyle
         let reportIcon = Icon.ReportFlag.attributedTextWithStyle(iconStyle)
-        let reportTitle = smallTextStyle.attributedStringWithText((report ? Strings.discussionUnreport : Strings.discussionReport ))
+        let reportTitle = smallTextStyle.attributedStringWithText((report ? TDLocalizeSelectSwift("DISCUSSION_UNREPORT") : TDLocalizeSelectSwift("DISCUSSION_REPORT")))
         
         let buttonTitle = NSAttributedString.joinInNaturalLayout([reportIcon, reportTitle])
         button.setAttributedTitle(buttonTitle, forState: .Normal)
@@ -209,7 +209,7 @@ class DiscussionCommentCell: UITableViewCell {
             make.trailing.equalTo(contentView).offset(-2*StandardHorizontalMargin)
         }
         
-        button.accessibilityHint = report ? Strings.Accessibility.discussionUnreportHint : Strings.Accessibility.discussionReportHint
+        button.accessibilityHint = report ? TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_UNREPORT_HINT") : TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_REPORT_HINT")
     }
     
     func setAccessiblity(commentCount : String?) {
@@ -224,7 +224,7 @@ class DiscussionCommentCell: UITableViewCell {
         }
         
         if let author = authorNameLabel.text {
-            accessibilityString.appendContentsOf(Strings.accessibilityBy + " " + author + sentenceSeparator)
+            accessibilityString.appendContentsOf(TDLocalizeSelectSwift("ACCESSIBILITY_BY") + " " + author + sentenceSeparator)
         }
         
         if let endorsed = endorsedLabel.text where !endorsedLabel.hidden {
@@ -240,7 +240,7 @@ class DiscussionCommentCell: UITableViewCell {
         
         if let authorName = authorNameLabel.text {
             self.authorButton.accessibilityLabel = authorName
-            self.authorButton.accessibilityHint = Strings.accessibilityShowUserProfileHint
+            self.authorButton.accessibilityHint = TDLocalizeSelectSwift("ACCESSIBILITY_SHOW_USER_PROFILE_HINT")
         }
     }
 }
@@ -277,7 +277,7 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
             
             let textStyle = OEXTextStyle(weight : .Normal, size: .Base, color: OEXStyles.sharedStyles().neutralWhite())
             let icon = commentsClosed ? Icon.Closed : Icon.Create
-            let buttonText = commentsClosed ? Strings.commentsClosed : Strings.addAComment
+            let buttonText = commentsClosed ? TDLocalizeSelectSwift("COMMENTS_CLOSED") : TDLocalizeSelectSwift("ADD_A_COMMENT")
             let buttonTitle = NSAttributedString.joinInNaturalLayout([icon.attributedTextWithStyle(textStyle.withSize(.XSmall)), textStyle.attributedStringWithText(buttonText)])
             
             addCommentButton.setAttributedTitle(buttonTitle, forState: .Normal)
@@ -376,7 +376,7 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
         tableView.contentInset = UIEdgeInsetsMake(10.0, 0, 0, 0)
         tableView.clipsToBounds = true
         
-        self.navigationItem.title = Strings.comments
+        self.navigationItem.title = TDLocalizeSelectSwift("COMMENTS")
         view.backgroundColor = OEXStyles.sharedStyles().neutralXLight()
         self.contentView.backgroundColor = OEXStyles.sharedStyles().neutralXLight()
         
@@ -495,7 +495,7 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
         }
         
         delegate?.discussionCommentsView(self, updatedComment: responseItem)
-        showOverlayMessage(Strings.discussionCommentPosted)
+        showOverlayMessage(TDLocalizeSelectSwift("DISCUSSION_COMMENT_POSTED"))
     }
 }
 

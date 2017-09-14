@@ -33,7 +33,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.sexStr = NSLocalizedString(@"TD_MAN", nil);
+        self.sexStr = TDLocalizeSelect(@"TD_MAN", nil);
         [self setViewConstraint];
     }
     return self;
@@ -55,13 +55,13 @@
     self.titleLabel = [[UILabel alloc] init];
     self.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:18];
     self.titleLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
-    self.titleLabel.text = NSLocalizedString(@"THIRD_MESSAGE", nil);
+    self.titleLabel.text = TDLocalizeSelect(@"THIRD_MESSAGE", nil);
     [self.headerview addSubview:self.titleLabel];
     
     self.topLabel = [[UILabel alloc] init];
     self.topLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     self.topLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
-    self.topLabel.text = NSLocalizedString(@"ENTER_MESSAGE", nil);
+    self.topLabel.text = TDLocalizeSelect(@"ENTER_MESSAGE", nil);
     [self.headerview addSubview:self.topLabel];
     
     self.tableView.tableHeaderView = self.headerview;
@@ -69,7 +69,7 @@
     self.footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, TDHeight - 335)];
     
     self.handinButton = [[UIButton alloc] init];
-    [self.handinButton setTitle:NSLocalizedString(@"SUBMIT", nil) forState:UIControlStateNormal];
+    [self.handinButton setTitle:TDLocalizeSelect(@"SUBMIT", nil) forState:UIControlStateNormal];
     self.handinButton.layer.cornerRadius = 4.0;
     self.handinButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     [self.handinButton addTarget:self action:@selector(handinButtonAciton:) forControlEvents:UIControlEventTouchUpInside];
@@ -112,7 +112,7 @@
     self.dateView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     [self addSubview:self.dateView];
     
-    self.cancelButton = [self setButtonWithTitle:NSLocalizedString(@"CANCEL", nil)];
+    self.cancelButton = [self setButtonWithTitle:TDLocalizeSelect(@"CANCEL", nil)];
     [self.cancelButton addTarget:self action:@selector(cancelButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.dateView addSubview:self.cancelButton];
     [self.cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -121,7 +121,7 @@
         make.height.mas_equalTo(CGSizeMake(48, 40));
     }];
     
-    self.sureButton = [self setButtonWithTitle:NSLocalizedString(@"OK", nil)];
+    self.sureButton = [self setButtonWithTitle:TDLocalizeSelect(@"OK", nil)];
     [self.sureButton addTarget:self action:@selector(sureButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.dateView addSubview:self.sureButton];
     [self.sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -184,11 +184,11 @@
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return row == 0 ? NSLocalizedString(@"TD_MAN", nil) : NSLocalizedString(@"TD_WOMEN", nil);
+    return row == 0 ? TDLocalizeSelect(@"TD_MAN", nil) : TDLocalizeSelect(@"TD_WOMEN", nil);
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    self.sexStr = row == 0 ? NSLocalizedString(@"TD_MAN", nil) : NSLocalizedString(@"TD_WOMEN", nil);
+    self.sexStr = row == 0 ? TDLocalizeSelect(@"TD_MAN", nil) : TDLocalizeSelect(@"TD_WOMEN", nil);
 }
 
 - (UIButton *)setButtonWithTitle:(NSString *)title {

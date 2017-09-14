@@ -57,7 +57,7 @@
 
     [self reloadDownloadingVideos];
     
-    self.titleViewLabel.text = [Strings downloads];
+    self.titleViewLabel.text = TDLocalizeSelect(@"DOWNLOADS", nil);
     
     //Listen to notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadProgressNotification:) name:DOWNLOAD_PROGRESS_NOTIFICATION object:nil];
@@ -171,7 +171,7 @@
         [cell.progressView setProgress:progress];
         
         cell.btn_cancel.tag = indexPath.row;
-        cell.btn_cancel.accessibilityLabel = [Strings cancel];
+        cell.btn_cancel.accessibilityLabel = TDLocalizeSelect(@"CANCEL", nil);
 
         [cell.btn_cancel addTarget:self action:@selector(btnCancelPressed:) forControlEvents:UIControlEventTouchUpInside];
         

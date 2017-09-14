@@ -47,7 +47,7 @@ class TDLectureLiveViewController: TDSwiftBaseViewController, UIScrollViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.titleViewLabel.text = Strings.liveTitleText
+        self.titleViewLabel.text = TDLocalizeSelectSwift("LIVE_TITLE_TEXT")
         
         setViewConstraint()
         addAllChildrenView()

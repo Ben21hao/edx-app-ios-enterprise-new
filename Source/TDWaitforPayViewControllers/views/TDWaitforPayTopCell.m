@@ -41,7 +41,7 @@
     self.cancelButton.showsTouchWhenHighlighted = YES;
     self.cancelButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     [self.cancelButton setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
-    [self.cancelButton setTitle:NSLocalizedString(@"CANCEL", nil) forState:UIControlStateNormal];
+    [self.cancelButton setTitle:TDLocalizeSelect(@"CANCEL", nil) forState:UIControlStateNormal];
     [self.bgView addSubview:self.cancelButton];
 }
 

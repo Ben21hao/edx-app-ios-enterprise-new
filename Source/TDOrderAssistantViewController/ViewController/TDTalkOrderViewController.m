@@ -28,8 +28,8 @@
     [super viewDidLoad];
     
     self.toolModel = [[TDBaseToolModel alloc] init];
-    self.titleViewLabel.text = NSLocalizedString(@"INIT_INSTANT", nil);
-    [self.rightButton setTitle:NSLocalizedString(@"SUBMIT", nil) forState:UIControlStateNormal];
+    self.titleViewLabel.text = TDLocalizeSelect(@"INIT_INSTANT", nil);
+    [self.rightButton setTitle:TDLocalizeSelect(@"SUBMIT", nil) forState:UIControlStateNormal];
     WS(weakSelf);
     self.rightButtonHandle = ^{
         [weakSelf.inputView resignFirstResponder];
@@ -55,7 +55,7 @@
         return;
     }
     
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"SUBMIT_ING", nil)];
+    [SVProgressHUD showWithStatus:TDLocalizeSelect(@"SUBMIT_ING", nil)];
     SVProgressHUD.defaultMaskType = SVProgressHUDMaskTypeBlack;
     SVProgressHUD.defaultStyle = SVProgressHUDAnimationTypeNative;
     
@@ -95,17 +95,17 @@
                 }
             }
         } else if ([code intValue] == 401) {//不能预约自己
-            [self.view makeToast:NSLocalizedString(@"APPOINTMENT_SELF", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"APPOINTMENT_SELF", nil) duration:1.08 position:CSToastPositionCenter];
         } else if ([code intValue] == 402) {//先加入课程
-            [self.view makeToast:NSLocalizedString(@"ENROLL_COURSE_FIRST", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"ENROLL_COURSE_FIRST", nil) duration:1.08 position:CSToastPositionCenter];
         } else if ([code intValue] == 500) {
-            [self.view makeToast:NSLocalizedString(@"UNABEL_INIT_INSTANT", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"UNABEL_INIT_INSTANT", nil) duration:1.08 position:CSToastPositionCenter];
         } else {
-            [self.view makeToast:NSLocalizedString(@"UNABEL_INIT_INSTANT", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"UNABEL_INIT_INSTANT", nil) duration:1.08 position:CSToastPositionCenter];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [SVProgressHUD dismiss];
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"即时服务出错 -- %ld",(long)error.code);
     }];
 }
@@ -114,10 +114,10 @@
     NSLog(@" --- 还没下载 ----");
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
-                                                        message:NSLocalizedString(@"NOT_INSTALLED_CLASSROOM", nil)
+                                                        message:TDLocalizeSelect(@"NOT_INSTALLED_CLASSROOM", nil)
                                                        delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)
-                                              otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+                                              cancelButtonTitle:TDLocalizeSelect(@"CANCEL", nil)
+                                              otherButtonTitles:TDLocalizeSelect(@"OK", nil), nil];
     [alertView show];
 }
 
@@ -151,7 +151,7 @@
 #pragma mark - UI
 - (void)setViewConstraint {
     
-    UILabel *titleLabel = [self setLabelConstraint:NSLocalizedString(@"QUETIONS_DESCRIPTION", nil)];
+    UILabel *titleLabel = [self setLabelConstraint:TDLocalizeSelect(@"QUETIONS_DESCRIPTION", nil)];
     [self.view addSubview:titleLabel];
     
     self.numLabel = [self setLabelConstraint:@"0/100"];
@@ -168,7 +168,7 @@
     self.inputView.delegate = self;
     [self.view addSubview:self.inputView];
     
-    self.holderLabel = [self setLabelConstraint:NSLocalizedString(@"TYPE_QUETIONS", nil)];
+    self.holderLabel = [self setLabelConstraint:TDLocalizeSelect(@"TYPE_QUETIONS", nil)];
     self.holderLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     [self.view addSubview:self.holderLabel];
     
@@ -199,8 +199,8 @@
         
         self.messageLabel = [[UILabel alloc] init];
         self.messageLabel.textAlignment = NSTextAlignmentCenter;
-        NSMutableAttributedString *str1 = [self.toolModel setDetailString:NSLocalizedString(@"PAYMENT_NOTE", nil) withFont:14 withColorStr:colorHexStr9];
-        NSMutableAttributedString *str2 = [self.toolModel setDetailString:NSLocalizedString(@"PAYMENT_NOTE_LAST", nil) withFont:14 withColorStr:colorHexStr9];
+        NSMutableAttributedString *str1 = [self.toolModel setDetailString:TDLocalizeSelect(@"PAYMENT_NOTE", nil) withFont:14 withColorStr:colorHexStr9];
+        NSMutableAttributedString *str2 = [self.toolModel setDetailString:TDLocalizeSelect(@"PAYMENT_NOTE_LAST", nil) withFont:14 withColorStr:colorHexStr9];
         [str1 appendAttributedString:str2];
         self.messageLabel.attributedText = str1;
         self.messageLabel.numberOfLines = 0;

@@ -170,23 +170,23 @@ extension UserProfile { //ViewModel
     
     var educat: String? {
         if educationCode == "p" {
-            return Strings.dDegree
+            return TDLocalizeSelectSwift("D_DEGREE")
         } else if educationCode == "m" {
-            return Strings.mDegree
+            return TDLocalizeSelectSwift("M_DEGREE")
         } else if educationCode == "b" {
-            return Strings.bDegree
+            return TDLocalizeSelectSwift("B_DEGREE")
         } else if educationCode == "a" {
-            return Strings.aDegree
+            return TDLocalizeSelectSwift("A_DEGREE")
         } else if educationCode == "hs" {
-            return Strings.hsDegree
+            return TDLocalizeSelectSwift("HS_DEGREE")
         } else if educationCode == "jhs" {
-            return Strings.jhsDegree
+            return TDLocalizeSelectSwift("JHS_DEGREE")
         } else if educationCode == "el" {
-            return Strings.elDegree
+            return TDLocalizeSelectSwift("EL_DEGREE")
         } else if educationCode == "none" {
-            return Strings.noneDegree
+            return TDLocalizeSelectSwift("NONE_DEGREE")
         } else if educationCode == "other" {
-            return Strings.otherDegree
+            return TDLocalizeSelectSwift("OTHER_DEGREE")
         } else {
             return educationCode
         }

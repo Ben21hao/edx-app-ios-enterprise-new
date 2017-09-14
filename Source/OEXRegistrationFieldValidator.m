@@ -17,7 +17,7 @@
     NSString* errorMessage;
     if(field.isRequired && (currentValue == nil || [currentValue isEqualToString:@""])) {
         if(!field.errorMessage.required) {
-            return [Strings registrationFieldEmptyErrorWithFieldName:field.label];
+            return [TDLocalizeSelect(@"REGISTRATION_FIELD_EMPTY_ERROR", nil) oex_formatWithParameters:@{@"field_name" : field.label}];
         }
         else {
             return field.errorMessage.required;

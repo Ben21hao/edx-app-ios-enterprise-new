@@ -105,6 +105,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [LanguageChangeTool initUserLanguage];
+    
     [self setNavigationBarStye];  //导航栏样式
     [self setViewConstrainStye]; //页面样式
 }
@@ -207,7 +209,7 @@
     self.navigationController.navigationBar.titleTextAttributes = @{
                                                                     NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:18]
                                                                     };
-    self.navigationItem.title = [Strings signInText];
+    self.navigationItem.title = TDLocalizeSelect(@"SIGN_IN_TEXT", nil);
     
     //隐藏跳过按钮
 //    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 68, 48)];
@@ -215,7 +217,7 @@
 //    rightButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:16.0];
 //    rightButton.titleLabel.textAlignment = NSTextAlignmentRight;
 //    rightButton.showsTouchWhenHighlighted = YES;
-//    [rightButton setTitle:NSLocalizedString(@"JUMP_OVER", nil) forState:UIControlStateNormal];
+//    [rightButton setTitle:TDLocalizeSelect(@"JUMP_OVER", nil) forState:UIControlStateNormal];
 //    [rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 //    [rightButton addTarget:self action:@selector(rightButtonAciton:) forControlEvents:UIControlEventTouchUpInside];
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
@@ -223,7 +225,7 @@
     
     //    if (self.environment.config.isRegistrationEnabled) {
     //        UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_cancel"] style:UIBarButtonItemStylePlain target:self action:@selector(navigateBack)];
-    //        closeButton.accessibilityLabel = [Strings close];
+    //        closeButton.accessibilityLabel = TDLocalizeSelect(@"CLOSE", nil);
     //        self.navigationItem.leftBarButtonItem = closeButton;
     //    }
 }
@@ -261,7 +263,7 @@
 }
 
 - (NSString *)signInButtonText {
-    return NSLocalizedString(@"SIGN_IN", nil);
+    return TDLocalizeSelect(@"SIGN_IN", nil);
 }
 
 - (void)handleActivationDuringLogin {
@@ -309,7 +311,7 @@
         make.edges.equalTo(self.externalAuthContainer);
     }];
     
-    [self.lbl_OrSignIn setText:[Strings noAccount]];
+    [self.lbl_OrSignIn setText:TDLocalizeSelect(@"NO_ACCOUNT", nil)];
     [self.lbl_OrSignIn setTextColor:[UIColor colorWithHexString:colorHexStr8]];
     
     [self setExclusiveTouch];
@@ -330,7 +332,7 @@
 //    }
     
     NSString* appVersion = [NSBundle mainBundle].oex_buildVersionString;
-    self.versionLabel.text = [Strings versionDisplayWithNumber:appVersion];
+    self.versionLabel.text = [TDLocalizeSelect(@"VERSION_DISPLAY", nil) oex_formatWithParameters:@{@"number" : appVersion}];
     
     self.eyesButton.titleLabel.font = [UIFont fontWithName:@"FontAwesome" size:20.0];
     [self.eyesButton setTitle:@"\U0000f070" forState:UIControlStateNormal];
@@ -340,7 +342,7 @@
     self.btn_Login.layer.cornerRadius = 4;
     self.btn_Login.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.registerButton.showsTouchWhenHighlighted = YES;
-    [self.registerButton setTitle:NSLocalizedString(@"REGISTER", nil) forState:UIControlStateNormal];
+    [self.registerButton setTitle:TDLocalizeSelect(@"REGISTER", nil) forState:UIControlStateNormal];
     
     [self textField:self.tf_Password backgroundWithView:self.passwordBgView];
     [self textField:self.tf_EmailID backgroundWithView:self.acountBgView];
@@ -374,10 +376,10 @@
 }
 
 - (NSMutableAttributedString *)setAttribute {
-    NSString *str = [NSString stringWithFormat:@"%@\n",NSLocalizedString(@"SIGN_IP_AGREE_TEXT", nil)];
+    NSString *str = [NSString stringWithFormat:@"%@\n",TDLocalizeSelect(@"SIGN_IP_AGREE_TEXT", nil)];
     NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:str attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr8]}];
     
-    NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"AGREEMENT", nil) attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr1]}];
+    NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:TDLocalizeSelect(@"AGREEMENT", nil) attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr1]}];
     [str1 appendAttributedString:str2];
     return str1;
 }
@@ -387,8 +389,8 @@
     TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
     if (![baseTool networkingState]) {
         
-        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings networkNotAvailableTitle]
-                                                                message:[Strings networkNotAvailableMessageTrouble]
+        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil)
+                                                                message:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_MESSAGE_TROUBLE", nil)
                                                        onViewController:self.navigationController.view
                                                              shouldHide:YES];
         
@@ -398,8 +400,9 @@
     
     TDWebViewController *webViewcontroller = [[TDWebViewController alloc] init];
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"stipulation" withExtension:@"htm"];
+//    NSURL *url = [NSURL URLWithString:@"http://enterprise.e-ducation.cn/xblock/block-v1:hnlg+cs01+2017+type@problem+block@05dff71a8b904ae599fed3c1fe360ff2"];
     webViewcontroller.url = url;
-    webViewcontroller.titleStr = NSLocalizedString(@"AGREEMENT", nil);
+    webViewcontroller.titleStr = TDLocalizeSelect(@"AGREEMENT", nil);
     [self.navigationController pushViewController:webViewcontroller animated:YES];
 }
 
@@ -411,7 +414,7 @@
     image.layer.cornerRadius = 4;
     
     textField.textColor = [UIColor colorWithHexString:colorHexStr9];
-    textField.placeholder = [textField isEqual:_tf_EmailID] ? [Strings phoneOrEmail] : [Strings passwordPlaceholder];
+    textField.placeholder = [textField isEqual:_tf_EmailID] ? TDLocalizeSelect(@"PHONE_OR_EMAIL", nil) : TDLocalizeSelect(@"PASSWORD_PLACEHOLDER", nil);
     textField.text = @"";
     textField.accessibilityLabel = nil;
     textField.textAlignment = NSTextAlignmentNatural;
@@ -427,20 +430,20 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
 
-    self.lbl_Redirect.text = [Strings redirectText];
+    self.lbl_Redirect.text = TDLocalizeSelect(@"REDIRECT_TEXT", nil);
     self.lbl_Redirect.isAccessibilityElement = NO;
     
-    [self.btn_TroubleLogging setTitle:[Strings troubleInLoginButton] forState:UIControlStateNormal];
+    [self.btn_TroubleLogging setTitle:TDLocalizeSelect(@"TROUBLE_IN_LOGIN_BUTTON", nil) forState:UIControlStateNormal];
     [self.btn_TroubleLogging setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
     
     [self.btn_OpenEULA setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
 
-    NSString *termsText = [Strings registrationAgreementButtonTitleWithPlatformName:self.environment.config.platformName];
+    NSString *termsText = [TDLocalizeSelect(@"REGISTRATION_AGREEMENT_BUTTON_TITLE", nil) oex_formatWithParameters:@{@"platform_name" : self.environment.config.platformName}];
     [self.btn_OpenEULA setTitle:termsText forState:UIControlStateNormal];
     self.btn_OpenEULA.titleLabel.adjustsFontSizeToFitWidth = YES;
 
     self.btn_OpenEULA.accessibilityTraits = UIAccessibilityTraitLink;
-    self.btn_OpenEULA.accessibilityLabel = [NSString stringWithFormat:@"%@,%@",[Strings redirectText], termsText];
+    self.btn_OpenEULA.accessibilityLabel = [NSString stringWithFormat:@"%@,%@",TDLocalizeSelect(@"REDIRECT_TEXT", nil), termsText];
     
     [self.btn_Login setTitle:[self signInButtonText] forState:UIControlStateNormal];
     [self.activityIndicator stopAnimating];
@@ -449,7 +452,7 @@
 
     if(username) {
         _tf_EmailID.text = username;
-        _tf_EmailID.accessibilityLabel = [Strings phoneOrEmail];
+        _tf_EmailID.accessibilityLabel = TDLocalizeSelect(@"PHONE_OR_EMAIL", nil);
     }
 }
 
@@ -485,11 +488,11 @@
         [self.view setUserInteractionEnabled:NO];
 
         /* 弹框重置密码 */
-//        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings resetPasswordTitle]
-//                                                        message:[Strings resetPasswordPopupText]
+//        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"RESET_PASSWORD_TITLE", nil)
+//                                                        message:TDLocalizeSelect(@"RESET_PASSWORD_POPUP_TEXT", nil) 
 //                                                       delegate:self
-//                                              cancelButtonTitle:[Strings cancel]
-//                                              otherButtonTitles:[Strings ok], nil];
+//                                              cancelButtonTitle:TDLocalizeSelect(@"CANCEL", nil)
+//                                              otherButtonTitles:TDLocalizeSelect(@"OK", nil), nil];
 //
 //        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
 //        UITextField* textfield = [alert textFieldAtIndex:0];
@@ -497,7 +500,7 @@
 //
 //        if([self.tf_EmailID.text length] > 0) {
 //            UITextField* tf = [alert textFieldAtIndex:0];
-//            [[alert textFieldAtIndex:0] setPlaceholder:[Strings emailAddressPrompt]];
+//            [[alert textFieldAtIndex:0] setPlaceholder:TDLocalizeSelect(@"EMAIL_ADDRESS_PROMPT", nil)];
 //            tf.text = self.tf_EmailID.text;
 //        }
 //
@@ -509,8 +512,8 @@
     else {
         // error
         
-        [[UIAlertController alloc] showAlertWithTitle:[Strings networkNotAvailableTitle]
-                                              message:[Strings networkNotAvailableMessageTrouble]
+        [[UIAlertController alloc] showAlertWithTitle:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil)
+                                              message:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_MESSAGE_TROUBLE", nil)
                                      onViewController:self];
     }
 }
@@ -534,8 +537,8 @@
     TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
     
     if(!self.reachable) {
-        [[UIAlertController alloc] showAlertWithTitle:[Strings networkNotAvailableTitle]
-                                              message:[Strings networkNotAvailableMessage]
+        [[UIAlertController alloc] showAlertWithTitle:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil)
+                                              message:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_MESSAGE", nil)
                                      onViewController:self.navigationController
                                                             ];
         
@@ -546,16 +549,16 @@
 
     //Validation
     if([self.tf_EmailID.text length] == 0) {//账号为空
-        [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorLoginTitle]
-                                                                message:[Strings enterEmail]
+        [[UIAlertController alloc] showAlertWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_LOGIN_TITLE", nil)
+                                                                message:TDLocalizeSelect(@"ENTER_EMAIL", nil)
                                                        onViewController:self.navigationController
                                                             ];
 
         [self.view setUserInteractionEnabled:YES];
     }
     else if([self.tf_Password.text length] == 0) {//密码为空
-        [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorLoginTitle]
-                                                                message:[Strings enterPassword]
+        [[UIAlertController alloc] showAlertWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_LOGIN_TITLE", nil)
+                                                                message:TDLocalizeSelect(@"ENTER_PASSWORD", nil)
                                                        onViewController:self.navigationController
                                                             ];
 
@@ -563,16 +566,16 @@
         
     }
     else if (![baseTool isValidateMobile:self.tf_EmailID.text] && ![baseTool isValidateEmail:self.tf_EmailID.text]) {//不是手机号码和邮箱
-        [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorLoginTitle]
-                                              message:[Strings enterRightPhoneOrEmail]
+        [[UIAlertController alloc] showAlertWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_LOGIN_TITLE", nil)
+                                              message:TDLocalizeSelect(@"ENTER_RIGHT_PHONE_OR_EMAIL", nil)
                                      onViewController:self.navigationController
          ];
         
         [self.view setUserInteractionEnabled:YES];
     }
     else if([self.tf_Password.text length] < 6) { //密码少于6位
-        [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorLoginTitle]
-                                              message:[Strings morePassword]
+        [[UIAlertController alloc] showAlertWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_LOGIN_TITLE", nil)
+                                              message:TDLocalizeSelect(@"MORE_PASSWORD", nil)
                                      onViewController:self.navigationController
          ];
         
@@ -580,8 +583,8 @@
         
     }
     else if([self.tf_Password.text length] > 30) {//密码多于30位
-        [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorLoginTitle]
-                                              message:[Strings lessPassword]
+        [[UIAlertController alloc] showAlertWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_LOGIN_TITLE", nil)
+                                              message:TDLocalizeSelect(@"LESS_PASSWORD", nil)
                                      onViewController:self.navigationController
          ];
         
@@ -592,7 +595,7 @@
         [self.view endEditing:YES];
         [self.view setUserInteractionEnabled:NO];
         [self.activityIndicator startAnimating];
-        [self.btn_Login setTitle:[Strings signInButtonTextOnSignIn] forState:UIControlStateNormal];
+        [self.btn_Login setTitle:TDLocalizeSelect(@"SIGN_IN_BUTTON_TEXT_ON_SIGN_IN", nil) forState:UIControlStateNormal];
         
         self.signInID = _tf_EmailID.text;
         self.signInPassword = _tf_Password.text;
@@ -621,7 +624,7 @@
             [self showUpdateRequiredMessage];
         }
         else if(httpResp.statusCode >= 400 && httpResp.statusCode <= 500) {
-            NSString* errorStr = [Strings invalidUsernamePassword];
+            NSString* errorStr = TDLocalizeSelect(@"INVALID_USERNAME_PASSWORD", nil);
             
             NSString *code = [[NSUserDefaults standardUserDefaults] valueForKey:@"User_Login_Failed_Code"];
             
@@ -631,23 +634,23 @@
             }
             
             if ([code intValue] == 403) { //账号未激活
-                errorStr = [Strings tdAccountNotAssociated];
+                errorStr = TDLocalizeSelect(@"TD_ACCOUNT_NOT_ASSOCIATED", nil);
             }
             
             if ([code intValue] == 400) {
-                errorStr = [Strings passwordMiss];
+                errorStr = TDLocalizeSelect(@"PASSWORD_MISS", nil);
                 
             } else if ([code intValue] == 404){
-                errorStr = [Strings acountNoExist];
+                errorStr = TDLocalizeSelect(@"ACOUNT_NO_EXIST", nil);
             } else if ([code intValue] == 405) {
-                 errorStr = [Strings accountDisable];
+                 errorStr = TDLocalizeSelect(@"ACCOUNT_DISABLE", nil);
             }
             
             [self loginFailedWithErrorMessage:errorStr title:nil];
         }
         else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self loginFailedWithErrorMessage:[Strings invalidUsernamePassword] title:nil];
+                [self loginFailedWithErrorMessage:TDLocalizeSelect(@"INVALID_USERNAME_PASSWORD", nil) title:nil];
             });
         }
     }
@@ -663,11 +666,11 @@
     [self.activityIndicator stopAnimating];
     [self.btn_Login setTitle:[self signInButtonText] forState:UIControlStateNormal];
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"NEED_ACTIVITY", nil)
-                                                        message:NSLocalizedString(@"SEND_EMAIL_ACTIVITY", nil)
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"NEED_ACTIVITY", nil)
+                                                        message:TDLocalizeSelect(@"SEND_EMAIL_ACTIVITY", nil)
                                                        delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)
-                                              otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+                                              cancelButtonTitle:TDLocalizeSelect(@"CANCEL", nil)
+                                              otherButtonTitles:TDLocalizeSelect(@"OK", nil), nil];
     alertView.tag = 2001;
     [alertView show];
 }
@@ -675,17 +678,17 @@
 - (void)externalLoginWithProvider:(id <OEXExternalAuthProvider>)provider {
     self.authProvider = provider;
     if(!self.reachable) {
-        [[UIAlertController alloc] showAlertWithTitle:[Strings networkNotAvailableTitle]
-                                                                message:[Strings networkNotAvailableMessage]
-                                                       onViewController:self.navigationController
-                                                            ];
+        [[UIAlertController alloc] showAlertWithTitle:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil)
+                                              message:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_MESSAGE", nil)
+                                     onViewController:self.navigationController
+         ];
         self.authProvider = nil;
         return;
     }
     
     OEXURLRequestHandler handler = ^(NSData* data, NSHTTPURLResponse* response, NSError* error) {
         if(!response) {
-            [self loginFailedWithErrorMessage:[Strings invalidUsernamePassword] title:nil];
+            [self loginFailedWithErrorMessage:TDLocalizeSelect(@"INVALID_USERNAME_PASSWORD", nil) title:nil];
             return;
         }
         self.authProvider = nil;
@@ -706,12 +709,12 @@
 
     [self.view setUserInteractionEnabled:NO];
     [self.activityIndicator startAnimating];
-    [self.btn_Login setTitle:[Strings signInButtonTextOnSignIn] forState:UIControlStateNormal];
+    [self.btn_Login setTitle:TDLocalizeSelect(@"SIGN_IN_BUTTON_TEXT_ON_SIGN_IN", nil) forState:UIControlStateNormal];
 }
 
 - (void)loginHandleLoginError:(NSError*)error {
     if(error.code == -1003 || error.code == -1009 || error.code == -1005) {
-        [self loginFailedWithErrorMessage:[Strings invalidUsernamePassword] title:nil];
+        [self loginFailedWithErrorMessage:TDLocalizeSelect(@"INVALID_USERNAME_PASSWORD", nil) title:nil];
     }
     else {
         if(error.code == 401) {
@@ -731,8 +734,8 @@
 - (void)loginFailedWithServiceName:(NSString*)serviceName {
     NSString* platform = self.environment.config.platformName;
     NSString* destination = self.environment.config.platformDestinationName;
-    NSString* title = [Strings serviceAccountNotAssociatedTitleWithService:serviceName platformName:platform];
-    NSString* message = [Strings serviceAccountNotAssociatedMessageWithService:serviceName platformName:platform destinationName:destination];
+    NSString* title = [TDLocalizeSelect(@"SERVICE_ACCOUNT_NOT_ASSOCIATED_TITLE", nil) oex_formatWithParameters:@{@"service" : serviceName, @"platform_name" : platform}];
+    NSString* message = [TDLocalizeSelect(@"SERVICE_ACCOUNT_NOT_ASSOCIATED_MESSAGE", nil) oex_formatWithParameters:@{@"service" : serviceName, @"platform_name" : platform, @"destination_name" : destination}];
     [self loginFailedWithErrorMessage:message title:title];
 }
 
@@ -745,7 +748,7 @@
                              onViewController:self.navigationController];
     }
     else {
-        [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorLoginTitle]
+        [[UIAlertController alloc] showAlertWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_LOGIN_TITLE", nil)
                                       message:errorStr
                              onViewController:self.navigationController];
     }
@@ -766,7 +769,7 @@
     [self.view setUserInteractionEnabled:YES];
     [self tappedToDismiss];
     
-    UIAlertController *alertController = [[UIAlertController alloc] showAlertWithTitle:nil message:[VersionUpgrade outDatedLoginMessage] cancelButtonTitle:[Strings cancel] onViewController:self];
+    UIAlertController *alertController = [[UIAlertController alloc] showAlertWithTitle:nil message:[VersionUpgrade outDatedLoginMessage] cancelButtonTitle:TDLocalizeSelect(@"CANCEL", nil) onViewController:self];
     
     [alertController addButtonWithTitle:[VersionUpgrade update] actionBlock:^(UIAlertAction * _Nonnull action) {
         NSURL *url = _environment.config.appUpgradeConfig.iOSAppStoreURL;
@@ -816,7 +819,7 @@
 
         if(buttonIndex == 1) {
             if([EmailtextField.text length] == 0 || ![EmailtextField.text oex_isValidEmailAddress]) {
-                [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorTitle] message:[Strings invalidEmailMessage] onViewController:self.navigationController];
+                [[UIAlertController alloc] showAlertWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_TITLE", nil) message:TDLocalizeSelect(@"INVALID_EMAIL_MESSAGE", nil) onViewController:self.navigationController];
             }
             else {
                 self.str_ForgotEmail = [[NSString alloc] init];
@@ -825,8 +828,8 @@
 
                 [self.view setUserInteractionEnabled:NO];
 
-                [[UIAlertController alloc] showAlertWithTitle:[Strings resetPasswordTitle]
-                                              message:[Strings waitingForResponse]
+                [[UIAlertController alloc] showAlertWithTitle:TDLocalizeSelect(@"RESET_PASSWORD_TITLE", nil)
+                                              message:TDLocalizeSelect(@"WAITING_FOR_RESPONSE", nil)
                                      onViewController:self.navigationController];
                 [self resetPassword];
             }
@@ -851,10 +854,10 @@
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/account/resend_active_email/",ELITEU_URL];
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        [self.view makeToast:NSLocalizedString(@"SEND_EMAIL_SUCCESS", nil) duration:1.08 position:CSToastPositionTop];
+        [self.view makeToast:TDLocalizeSelect(@"SEND_EMAIL_SUCCESS", nil) duration:1.08 position:CSToastPositionTop];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"重发邮件 -- %ld",(long)error.code);
     }];
 }
@@ -868,29 +871,29 @@
                 if(!error) {
                     NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*) response;
                     if(httpResp.statusCode == 200) {
-                        [[[UIAlertView alloc] initWithTitle:[Strings resetPasswordConfirmationTitle]
-                                                    message:[Strings resetPasswordConfirmationMessage]
+                        [[[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"RESET_PASSWORD_CONFIRMATION_TITLE", nil)
+                                                    message:TDLocalizeSelect(@"RESET_PASSWORD_CONFIRMATION_MESSAGE", nil)
 
                                                    delegate:self
                                           cancelButtonTitle:nil
-                                          otherButtonTitles:[Strings ok], nil] show];
+                                          otherButtonTitles:TDLocalizeSelect(@"OK", nil), nil] show];
                     }
                     else if(httpResp.statusCode >= 400 && httpResp.statusCode < 500) {
                         NSDictionary* dictionary = [NSJSONSerialization oex_JSONObjectWithData:data error:nil];
                         NSString* responseStr = [[dictionary objectForKey:@"email"] firstObject];
                         [[UIAlertController alloc]
-                         showAlertWithTitle:[Strings floatingErrorTitle]
+                         showAlertWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_TITLE", nil)
                                     message:responseStr onViewController:self.navigationController];
                     }
                     else if(httpResp.statusCode >= 500) {
                         NSString* responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                        [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorTitle] message:responseStr onViewController:self.navigationController];
+                        [[UIAlertController alloc] showAlertWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_TITLE", nil) message:responseStr onViewController:self.navigationController];
                         
                     }
                 }
                 else {
                     [[UIAlertController alloc]
-                     showAlertWithTitle:[Strings floatingErrorTitle] message:[error localizedDescription] onViewController:self.navigationController];
+                     showAlertWithTitle:TDLocalizeSelect(@"FLOATING_ERROR_TITLE", nil) message:[error localizedDescription] onViewController:self.navigationController];
                 }
             });
     }];
@@ -919,7 +922,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if ([textField isEqual:_tf_EmailID] && [textField.text isEqualToString:@""] && string.length > 0) {
-        textField.accessibilityLabel = [Strings phoneOrEmail];
+        textField.accessibilityLabel = TDLocalizeSelect(@"PHONE_OR_EMAIL", nil);
     }
     else if([textField isEqual:_tf_EmailID] && [string isEqualToString:@""] && textField.text.length == 1) {
         textField.accessibilityLabel = nil;
@@ -927,7 +930,7 @@
     
     
     if ([textField isEqual:_tf_Password] && [textField.text isEqualToString:@""] && string.length > 0) {
-        textField.accessibilityLabel = [Strings passwordPlaceholder];
+        textField.accessibilityLabel = TDLocalizeSelect(@"PASSWORD_PLACEHOLDER", nil);
     }
     else if([textField isEqual:_tf_Password] && [string isEqualToString:@""] && textField.text.length == 1) {
         textField.accessibilityLabel = nil;

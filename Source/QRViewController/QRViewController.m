@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = NSLocalizedString(@"CLASS_TITLE", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"CLASS_TITLE", nil);
     
     [self configView];
     [self setConstraint];
@@ -43,7 +43,7 @@
 
 - (void)handlePress:(UILongPressGestureRecognizer *)pressGesture {
     if (!self.alert) {
-        self.alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"REMINDER", nil) message:NSLocalizedString(@"SAVE_QR_IMAGE", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"CANCEL", nil) otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+        self.alert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"REMINDER", nil) message:TDLocalizeSelect(@"SAVE_QR_IMAGE", nil) delegate:self cancelButtonTitle:TDLocalizeSelect(@"CANCEL", nil) otherButtonTitles:TDLocalizeSelect(@"OK", nil), nil];
         [self.alert show];
     }
 }
@@ -63,9 +63,9 @@
 // 指定回调方法
 - (void)image: (UIImage *) image didFinishSavingWithError:(NSError *) error contextInfo:(void *) contextInfo {
     
-    NSString *msg = NSLocalizedString(@"SAVE_QR_IMAGE_SUCCESS", nil);
+    NSString *msg = TDLocalizeSelect(@"SAVE_QR_IMAGE_SUCCESS", nil);
     if(error != NULL){
-        msg = NSLocalizedString(@"SAVE_QR_IMAGE_FAIL", nil);
+        msg = TDLocalizeSelect(@"SAVE_QR_IMAGE_FAIL", nil);
     }
     [self.view makeToast:msg duration:1.08 position:CSToastPositionCenter];
 }
@@ -80,7 +80,7 @@
     UIPasteboard *pastBoard = [UIPasteboard generalPasteboard];
     pastBoard.string = @"eliteu0831";
     
-    [self.view makeToast:NSLocalizedString(@"COPY_SUCCESS", nil) duration:1.08 position:CSToastPositionTop];
+    [self.view makeToast:TDLocalizeSelect(@"COPY_SUCCESS", nil) duration:1.08 position:CSToastPositionTop];
 }
 
 #pragma mark - UI
@@ -110,7 +110,7 @@
     self.wechatButton = [[UIButton alloc] init];
     self.wechatButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.wechatButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
-    [self.wechatButton setTitle:NSLocalizedString(@"COPY_WECHAT_NUMBER", nil) forState:UIControlStateNormal];
+    [self.wechatButton setTitle:TDLocalizeSelect(@"COPY_WECHAT_NUMBER", nil) forState:UIControlStateNormal];
     self.wechatButton.layer.cornerRadius = 10.0;
     [self.wechatButton addTarget:self action:@selector(wechatButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:self.wechatButton];
@@ -168,7 +168,7 @@
         make.height.mas_equalTo(size.height + 28);
     }];
     
-    CGSize size1 = [NSLocalizedString(@"COPY_WECHAT_NUMBER", nil) boundingRectWithSize:CGSizeMake(TDWidth - 36, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:12]} context:nil].size;
+    CGSize size1 = [TDLocalizeSelect(@"COPY_WECHAT_NUMBER", nil) boundingRectWithSize:CGSizeMake(TDWidth - 36, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:12]} context:nil].size;
     [self.wechatButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.scrollView.mas_centerX);
         make.top.mas_equalTo(self.qrImage.mas_bottom).offset(-8);

@@ -79,7 +79,7 @@ class StartupViewController: UIViewController, InterfaceOrientationOverriding {
     private func setupDiscoverButtons() {
 
         let discoverButton = UIButton()
-        discoverButton.applyButtonStyle(OEXStyles.sharedStyles().filledPrimaryButtonStyle, withTitle: Strings.Startup.discovercourses)
+        discoverButton.applyButtonStyle(OEXStyles.sharedStyles().filledPrimaryButtonStyle, withTitle: TDLocalizeSelectSwift("STARTUP.DISCOVERCOURSES"))
         let discoverEvent = OEXAnalytics.discoverCoursesEvent()
         discoverButton.oex_addAction({ [weak self] _ in
             self?.showCourses()
@@ -89,7 +89,7 @@ class StartupViewController: UIViewController, InterfaceOrientationOverriding {
 
 
         let exploreButton = UIButton()
-        exploreButton.applyButtonStyle(OEXStyles.sharedStyles().filledPrimaryButtonStyle, withTitle: Strings.Startup.exploreSubjects)
+        exploreButton.applyButtonStyle(OEXStyles.sharedStyles().filledPrimaryButtonStyle, withTitle: TDLocalizeSelectSwift("STARTUP.EXPLORE_SUBJECTS"))
         let exploreEvent = OEXAnalytics.exploreSubjectsEvent()
         exploreButton.oex_addAction({ [weak self] _ in
             self?.exploreSubjects()
@@ -166,13 +166,13 @@ private class BottomBarView: UIView, NSCopying {
         let line = UIView()
         bottomBar.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.90)
         
-        signInButton.setTitle(Strings.signIn, forState: .Normal)
+        signInButton.setTitle(TDLocalizeSelectSwift("SIGN_IN"), forState: .Normal)
         let signInEvent = OEXAnalytics.loginEvent()
         signInButton.oex_addAction({ [weak self] _ in
             self?.showLogin()
             }, forEvents: .TouchUpInside, analyticsEvent: signInEvent)
         
-        registerButton.setTitle(Strings.registerText, forState: .Normal)
+        registerButton.setTitle(TDLocalizeSelectSwift("REGISTER_TEXT"), forState: .Normal)
         let signUpEvent = OEXAnalytics.registerEvent()
         registerButton.oex_addAction({ [weak self] _ in
             self?.showRegistration()

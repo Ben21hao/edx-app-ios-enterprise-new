@@ -72,7 +72,7 @@ class DiscussionTopicCell: UITableViewCell {
 
 private extension String {
     var userFacingString : String {
-        return self.isEmpty ? Strings.untitled : self
+        return self.isEmpty ? TDLocalizeSelectSwift("UNTITLED") : self
     }
 }
 

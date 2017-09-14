@@ -116,12 +116,12 @@ class PostTableViewCell: UITableViewCell {
         if thread.closed { options.append(Icon.Closed.attributedTextWithStyle(infoTextStyle, inline : true)) }
         if thread.pinned { options.append(Icon.Pinned.attributedTextWithStyle(infoTextStyle, inline : true)) }
         if thread.following { options.append(Icon.FollowStar.attributedTextWithStyle(infoTextStyle)) }
-        if options.count > 0 { options.append(infoTextStyle.attributedStringWithText(Strings.pipeSign)) }
-        options.append(infoTextStyle.attributedStringWithText(Strings.Discussions.repliesCount(count: formatdCommentsCount(thread.commentCount))))
+        if options.count > 0 { options.append(infoTextStyle.attributedStringWithText(TDLocalizeSelectSwift("PIPE_SIGN"))) }
+        options.append(infoTextStyle.attributedStringWithText(TDLocalizeSelectSwift("DISCUSSIONS.REPLIES_COUNT").oex_formatWithParameters(["count" : formatdCommentsCount(thread.commentCount)])))
         
         if let updatedAt = thread.updatedAt {
-            options.append(infoTextStyle.attributedStringWithText(Strings.pipeSign))
-            options.append(infoTextStyle.attributedStringWithText(Strings.Discussions.lastPost(date: updatedAt.displayDate)))
+            options.append(infoTextStyle.attributedStringWithText(TDLocalizeSelectSwift("PIPE_SIGN")))
+            options.append(infoTextStyle.attributedStringWithText(TDLocalizeSelectSwift("DISCUSSIONS.LAST_POST").oex_formatWithParameters(["date" : updatedAt.displayDate])))
         }
         
         infoLabel.attributedText = NSAttributedString.joinInNaturalLayout(options)
@@ -163,38 +163,38 @@ class PostTableViewCell: UITableViewCell {
         
         switch thread.type {
         case .Discussion:
-            accessibilityString = Strings.discussion
+            accessibilityString = TDLocalizeSelectSwift("DISCUSSION")
         case .Question:
-            thread.hasEndorsed ? (accessibilityString = Strings.answeredQuestion) : (accessibilityString = Strings.question)
+            thread.hasEndorsed ? (accessibilityString = TDLocalizeSelectSwift("ANSWERED_QUESTION")) : (accessibilityString = TDLocalizeSelectSwift("QUESTION"))
         }
         
         accessibilityString = accessibilityString+","+(thread.title ?? "")
         
         if thread.closed {
-            accessibilityString = accessibilityString+","+Strings.Accessibility.discussionClosed
+            accessibilityString = accessibilityString+","+TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_CLOSED")
         }
         
         if thread.pinned {
-            accessibilityString = accessibilityString+","+Strings.Accessibility.discussionPinned
+            accessibilityString = accessibilityString+","+TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_PINNED")
         }
         
         if thread.following {
-            accessibilityString = accessibilityString+","+Strings.Accessibility.discussionFollowed
+            accessibilityString = accessibilityString+","+TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_FOLLOWED")
         }
         
-        accessibilityString = accessibilityString+","+Strings.Discussions.repliesCount(count: formatdCommentsCount(thread.commentCount))
+        accessibilityString = accessibilityString+","+TDLocalizeSelectSwift("DISCUSSIONS.REPLIES_COUNT").oex_formatWithParameters(["count" : formatdCommentsCount(thread.commentCount)])
         
         
         if let updatedAt = thread.updatedAt {
-            accessibilityString = accessibilityString+","+Strings.Accessibility.discussionLastPostOn(date: updatedAt.displayDate)
+            accessibilityString = accessibilityString+","+TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_LAST_POST_ON").oex_formatWithParameters(["date" : updatedAt.displayDate])
         }
         
         if thread.unreadCommentCount > 0 {
-            accessibilityString = accessibilityString+","+Strings.Accessibility.discussionUnreadReplies(count: formatdCommentsCount(thread.unreadCommentCount));
+            accessibilityString = accessibilityString+","+TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_UNREAD_REPLIES").oex_formatWithParameters(["count" : formatdCommentsCount(thread.unreadCommentCount)])
         }
         
         accessibilityLabel = accessibilityString
-        accessibilityHint = Strings.Accessibility.discussionThreadHint
+        accessibilityHint = TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_THREAD_HINT")
         
     }
 }

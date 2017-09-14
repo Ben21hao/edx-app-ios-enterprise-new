@@ -119,7 +119,7 @@
         
     } else {//当前时间已过开始时间
         self.enterButton.userInteractionEnabled = YES;
-        [self.enterButton setTitle:NSLocalizedString(@"ENTER_LIVE_BUTTON_TEXT", nil) forState:UIControlStateNormal];
+        [self.enterButton setTitle:TDLocalizeSelect(@"ENTER_LIVE_BUTTON_TEXT", nil) forState:UIControlStateNormal];
     }
 }
 
@@ -131,7 +131,7 @@
     if (self.timeNum <= 0) {
         [self.timer invalidate];
         self.enterButton.userInteractionEnabled = YES;
-        [self.enterButton setTitle:NSLocalizedString(@"ENTER_LIVE_BUTTON_TEXT", nil) forState:UIControlStateNormal];
+        [self.enterButton setTitle:TDLocalizeSelect(@"ENTER_LIVE_BUTTON_TEXT", nil) forState:UIControlStateNormal];
     }
 }
 
@@ -161,7 +161,7 @@
         secondStr = second < 10 ? [NSString stringWithFormat:@"0%d",second] :[NSString stringWithFormat:@"%d",second];
     }
     
-    NSString *str = [Strings timeCountNumWithDay:dayStr hour:hourStr min:muniteStr second:secondStr];
+    NSString *str = [TDLocalizeSelect(@"TIME_COUNT_NUM", nil) oex_formatWithParameters:@{@"day" : dayStr, @"hour" : hourStr, @"min" : muniteStr, @"second" : secondStr}];
     [self.enterButton setTitle:str forState:UIControlStateNormal];
 }
 
@@ -213,9 +213,9 @@
     self.lineImage.image = [toolModel drawLineByImageView:self.lineImage color:colorHexStr7];
     [self.bgView addSubview:self.lineImage];
     
-    [self.enterButton setTitle:NSLocalizedString(@"ENTER_LIVE_BUTTON_TEXT", nil) forState:UIControlStateNormal];
-    [self.praticeButton setTitle:NSLocalizedString(@"EXERCISSES_BUTTON_TEXT", nil) forState:UIControlStateNormal];
-    [self.playButton setTitle:NSLocalizedString(@"PLAY_BACK_BUTTON_TEXT", nil) forState:UIControlStateNormal];
+    [self.enterButton setTitle:TDLocalizeSelect(@"ENTER_LIVE_BUTTON_TEXT", nil) forState:UIControlStateNormal];
+    [self.praticeButton setTitle:TDLocalizeSelect(@"EXERCISSES_BUTTON_TEXT", nil) forState:UIControlStateNormal];
+    [self.playButton setTitle:TDLocalizeSelect(@"PLAY_BACK_BUTTON_TEXT", nil) forState:UIControlStateNormal];
 }
 
 - (UIButton *)setButtonStyle {

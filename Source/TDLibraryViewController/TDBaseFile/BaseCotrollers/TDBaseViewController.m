@@ -20,6 +20,9 @@
     [self setTitleLabel];
     [self setLeftNavigationBar];
     [self setRightNavigationBar];
+
+    [LanguageChangeTool initUserLanguage];//初始化应用语言
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChangeAction) name:@"languageSelectedChange" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -35,6 +38,10 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+}
+
+- (void)languageChangeAction {
     
 }
 

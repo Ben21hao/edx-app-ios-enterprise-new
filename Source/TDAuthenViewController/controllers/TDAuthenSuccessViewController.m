@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = NSLocalizedString(@"AUTHENTICATION_MESSAGE", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"AUTHENTICATION_MESSAGE", nil);
     
     [self configView];
     [self setViewConstraint];
@@ -35,7 +35,7 @@
     [self.view addSubview:self.imageView];
     
     self.messageLabel = [[UILabel alloc] init];
-    self.messageLabel.text = NSLocalizedString(@"AUTHENTE_SUCCESS", nil);
+    self.messageLabel.text = TDLocalizeSelect(@"AUTHENTE_SUCCESS", nil);
     self.messageLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     self.messageLabel.textColor = [UIColor colorWithHexString:colorHexStr9];
     [self.view addSubview:self.messageLabel];

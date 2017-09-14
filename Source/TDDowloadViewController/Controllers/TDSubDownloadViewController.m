@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = NSLocalizedString(@"ALL_VIDEOS", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"ALL_VIDEOS", nil);
     
     [self setViewConstraint];
 }
@@ -101,7 +101,7 @@
     self.noDataLabel = [[UILabel alloc] init];
     self.noDataLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     self.noDataLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
-    self.noDataLabel.text = [Strings noVideosDownloaded];
+    self.noDataLabel.text = TDLocalizeSelect(@"NO_VIDEOS_DOWNLOADED", nil);
     self.noDataLabel.hidden = YES;
     self.noDataLabel.numberOfLines = 0;
     self.noDataLabel.textAlignment = NSTextAlignmentCenter;

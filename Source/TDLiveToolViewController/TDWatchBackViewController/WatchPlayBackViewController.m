@@ -63,7 +63,7 @@ static AnnouncementView* announcementView = nil;
     if (!_textLabel) {
         _textLabel = [[UILabel alloc] init];
         _textLabel.frame = CGRectMake(0, 10, self.textImageView.width, 21);
-        _textLabel.text = NSLocalizedString(@"NO_DOCUMENT", nil);
+        _textLabel.text = TDLocalizeSelect(@"NO_DOCUMENT", nil);
         _textLabel.textAlignment = NSTextAlignmentLeft;
     }
     return _textLabel;
@@ -105,7 +105,7 @@ static AnnouncementView* announcementView = nil;
     [self.backView addSubview:self.hlsMoviePlayer.view];
     [self.backView sendSubviewToBack:self.hlsMoviePlayer.view];
     
-    self.liveTypeLabel.text = self.playModelTemp == VHallMovieVideoPlayModeTextAndVoice ? NSLocalizedString(@"VOICE_REPLAYING", nil) : @"";
+    self.liveTypeLabel.text = self.playModelTemp == VHallMovieVideoPlayModeTextAndVoice ? TDLocalizeSelect(@"VOICE_REPLAYING", nil) : @"";
     
     if (self.textImageView.image == nil) {
         [self.textImageView addSubview:self.textLabel];
@@ -167,10 +167,10 @@ static AnnouncementView* announcementView = nil;
     
     [self registerLiveNotification];
     
-    self.bufferCountLabel.text = [NSString stringWithFormat:@"%@ 0",NSLocalizedString(@"BUFFERING", nil)];
-    [self.commentBtn setTitle:NSLocalizedString(@"COMMENT_TEXT", nil) forState:UIControlStateNormal];
-    [self.docBtn setTitle:NSLocalizedString(@"DOCUMENT_TEXT", nil) forState:UIControlStateNormal];
-    [self.detalBtn setTitle:NSLocalizedString(@"DETAILS_TEXT", nil) forState:UIControlStateNormal];
+    self.bufferCountLabel.text = [NSString stringWithFormat:@"%@ 0",TDLocalizeSelect(@"BUFFERING", nil)];
+    [self.commentBtn setTitle:TDLocalizeSelect(@"COMMENT_TEXT", nil) forState:UIControlStateNormal];
+    [self.docBtn setTitle:TDLocalizeSelect(@"DOCUMENT_TEXT", nil) forState:UIControlStateNormal];
+    [self.detalBtn setTitle:TDLocalizeSelect(@"DETAILS_TEXT", nil) forState:UIControlStateNormal];
     
     _moviePlayer = [[VHallMoviePlayer alloc] initWithDelegate:self];
     
@@ -345,22 +345,22 @@ static AnnouncementView* announcementView = nil;
     NSString *msg = @"";
     switch (livePlayErrorType) {
         case kLivePlayParamError: {
-            msg = NSLocalizedString(@"ERROR_PARAMTER", nil);
+            msg = TDLocalizeSelect(@"ERROR_PARAMTER", nil);
             resetStartPlay(msg);
         }
             break;
         case kLivePlayRecvError: {
-            msg = NSLocalizedString(@"LIVE_LECTURE_ENDED", nil);
+            msg = TDLocalizeSelect(@"LIVE_LECTURE_ENDED", nil);
             resetStartPlay(msg);
         }
             break;
         case kLivePlayCDNConnectError: {
-            msg = NSLocalizedString(@"UNABLE_CONNECT_SERVER", nil);
+            msg = TDLocalizeSelect(@"UNABLE_CONNECT_SERVER", nil);
             resetStartPlay(msg);
         }
             break;
         case kLivePlayGetUrlError: {
-            msg = NSLocalizedString(@"UNABLE_ACQUIRE_SERVER", nil);
+            msg = TDLocalizeSelect(@"UNABLE_ACQUIRE_SERVER", nil);
             resetStartPlay(info[@"content"]);
         }
             break;
@@ -414,7 +414,7 @@ static AnnouncementView* announcementView = nil;
             
             break;
         case VHallMovieVideoPlayModeTextAndVoice: {
-            self.liveTypeLabel.text = NSLocalizedString(@"LIVE_VOICE_ONGOING", nil);
+            self.liveTypeLabel.text = TDLocalizeSelect(@"LIVE_VOICE_ONGOING", nil);
         }
             break;
             
@@ -479,7 +479,7 @@ static AnnouncementView* announcementView = nil;
         case MPMoviePlaybackStatePlaying: {
             VHLog(@"播放");
             if (self.playModelTemp == VHallMovieVideoPlayModeTextAndVoice )
-                self.liveTypeLabel.text = NSLocalizedString(@"VOICE_REPLAYING", nil);
+                self.liveTypeLabel.text = TDLocalizeSelect(@"VOICE_REPLAYING", nil);
         }
             break;
         case MPMoviePlaybackStateSeekingBackward:
@@ -497,7 +497,7 @@ static AnnouncementView* announcementView = nil;
                 [MBProgressHUD hideAllHUDsForView:self.hlsMoviePlayer.view animated:YES];
             }
             if (self.playModelTemp == VHallMovieVideoPlayModeTextAndVoice )
-                self.liveTypeLabel.text = NSLocalizedString(@"VOICE_REPLAY", nil);
+                self.liveTypeLabel.text = TDLocalizeSelect(@"VOICE_REPLAY", nil);
         }
             break;
         case MPMoviePlaybackStateStopped: {
@@ -506,7 +506,7 @@ static AnnouncementView* announcementView = nil;
                 [MBProgressHUD hideAllHUDsForView:self.hlsMoviePlayer.view animated:YES];
             }
             if (self.playModelTemp == VHallMovieVideoPlayModeTextAndVoice )
-                self.liveTypeLabel.text = NSLocalizedString(@"VOICE_REPLAY", nil);
+                self.liveTypeLabel.text = TDLocalizeSelect(@"VOICE_REPLAY", nil);
         }
             break;
         default:
@@ -638,7 +638,7 @@ static AnnouncementView* announcementView = nil;
     self.messageToolView.maxLength = 140;
     WS(weakSelf);
     self.messageToolView.handleNoText = ^(){
-        [weakSelf.view makeToast:NSLocalizedString(@"ENTER_SEND_MESSAGE", nil) duration:1.08 position:CSToastPositionCenter];
+        [weakSelf.view makeToast:TDLocalizeSelect(@"ENTER_SEND_MESSAGE", nil) duration:1.08 position:CSToastPositionCenter];
     };
 
     _toolViewBackView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, VH_SW, VH_SH)];
@@ -666,7 +666,7 @@ static AnnouncementView* announcementView = nil;
         [_comment sendComment:text success:^{
             
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            [self.view makeToast:NSLocalizedString(@"SENT_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"SENT_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
             
             [weakSelf getHistoryComment];
             
@@ -674,7 +674,7 @@ static AnnouncementView* announcementView = nil;
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             
             NSString* code = [NSString stringWithFormat:@"%@", failedData[@"code"]];
-            NSString *msg = [code isEqualToString:@"10407"] ? NSLocalizedString(@"NO_CHAT_RECORD", nil) : failedData[@"content"];
+            NSString *msg = [code isEqualToString:@"10407"] ? TDLocalizeSelect(@"NO_CHAT_RECORD", nil) : failedData[@"content"];
             [self.view makeToast:msg duration:1.08 position:CSToastPositionCenter];
         }];
     }
@@ -686,26 +686,26 @@ static AnnouncementView* announcementView = nil;
     NSString *message = nil;
     switch (state) {
         case 0:
-            message = NSLocalizedString(@"NO_CONTENT", nil);
+            message = TDLocalizeSelect(@"NO_CONTENT", nil);
             break;
         case 1:
-            message = NSLocalizedString(@"VIDEO_ONLY", nil);
+            message = TDLocalizeSelect(@"VIDEO_ONLY", nil);
             break;
         case 2:
-            message = NSLocalizedString(@"DOCUMENT_AND_VOICE", nil);
+            message = TDLocalizeSelect(@"DOCUMENT_AND_VOICE", nil);
             break;
         case 3:
-            message = NSLocalizedString(@"DOCUMENT_AND_VIDEO", nil);
+            message = TDLocalizeSelect(@"DOCUMENT_AND_VIDEO", nil);
             break;
             
         default:
             break;
     }
     
-    NSString *typeStr = [NSString stringWithFormat:@"%@: %@",NSLocalizedString(@"LECTURE_TYPE", nil),message];
+    NSString *typeStr = [NSString stringWithFormat:@"%@: %@",TDLocalizeSelect(@"LECTURE_TYPE", nil),message];
     [self.view makeToast:typeStr duration:1.08 position:CSToastPositionCenter];
     
-//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"SYSTEM_WARING", nil) message:message delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
+//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:TDLocalizeSelect(@"SYSTEM_WARING", nil) message:message delegate:nil cancelButtonTitle:TDLocalizeSelect(@"OK", nil) otherButtonTitles:nil, nil];
 //    [alert show];
 }
 
@@ -778,7 +778,7 @@ static AnnouncementView* announcementView = nil;
         NSString *code = [NSString stringWithFormat:@"%@", failedData[@"code"]];
         
 //        [UIAlertView popupAlertByDelegate:nil title:failedData[@"content"] message:code];
-        NSString *msg = [code isEqualToString:@"10407"] ? NSLocalizedString(@"NO_CHAT_RECORD", nil) : failedData[@"content"];
+        NSString *msg = [code isEqualToString:@"10407"] ? TDLocalizeSelect(@"NO_CHAT_RECORD", nil) : failedData[@"content"];
         [self.view makeToast:msg duration:1.08 position:CSToastPositionCenter];
     }];
 }

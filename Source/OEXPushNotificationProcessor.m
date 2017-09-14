@@ -75,7 +75,7 @@ static NSString* const OEXPushSpawnStateKey = @"OEXPushSpawnStateKey";
             break;
         case OEXPushActionAnnouncement: {
             NSString* courseName = userInfo[OEXPushAnnouncementCourseNameKey];
-            return [Strings courseAnnouncementNotificationBodyWithCourseName:courseName];
+            return [TDLocalizeSelect(@"COURSE_ANNOUNCEMENT_NOTIFICATION_BODY", nil) oex_formatWithParameters:@{@"course_name" : courseName}];
         }
         default:
             break;

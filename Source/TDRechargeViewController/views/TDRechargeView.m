@@ -58,7 +58,7 @@
         sender.selected = YES;
         sender.backgroundColor = [UIColor colorWithHexString:colorHexStr4];
         sender.layer.borderColor = [UIColor colorWithHexString:colorHexStr4].CGColor;
-        NSMutableAttributedString *title = [self selectedButtonAttributeMoneyStr:[NSString stringWithFormat:@"￥%@\n",self.moneyArray[sender.tag]] withBaodianStr:[NSString stringWithFormat:@"%d %@",[self.moneyArray[sender.tag] intValue] * 10,NSLocalizedString(@"COINS_VALUE", nil)]];
+        NSMutableAttributedString *title = [self selectedButtonAttributeMoneyStr:[NSString stringWithFormat:@"￥%@\n",self.moneyArray[sender.tag]] withBaodianStr:[NSString stringWithFormat:@"%d %@",[self.moneyArray[sender.tag] intValue] * 10,TDLocalizeSelect(@"COINS_VALUE", nil)]];
         [sender setAttributedTitle:title forState:UIControlStateSelected];
         
         self.selectedButton = sender;
@@ -97,7 +97,7 @@
         
         if (i == 0 && type == 1) {
             moneyButton.backgroundColor = [UIColor colorWithHexString:colorHexStr4];
-            NSMutableAttributedString *title = [self selectedButtonAttributeMoneyStr:[NSString stringWithFormat:@"￥%@\n",_moneyArray[i]] withBaodianStr:[NSString stringWithFormat:@"%d %@",[_moneyArray[i] intValue] * 10,NSLocalizedString(@"COINS_VALUE", nil)]];
+            NSMutableAttributedString *title = [self selectedButtonAttributeMoneyStr:[NSString stringWithFormat:@"￥%@\n",_moneyArray[i]] withBaodianStr:[NSString stringWithFormat:@"%d %@",[_moneyArray[i] intValue] * 10,TDLocalizeSelect(@"COINS_VALUE", nil)]];
             [moneyButton setAttributedTitle:title forState:UIControlStateSelected];
             moneyButton.selected = YES;
             self.selectedButton = moneyButton;
@@ -148,7 +148,7 @@
     
     self.inputField = [[UITextField alloc] init];
     self.inputField.font = [UIFont fontWithName:@"OpenSans" size:14];
-    self.inputField.placeholder = NSLocalizedString(@"ENTER_OTHERPRICE", nil);
+    self.inputField.placeholder = TDLocalizeSelect(@"ENTER_OTHERPRICE", nil);
     self.inputField.borderStyle = UITextBorderStyleRoundedRect;
     self.inputField.textColor = [UIColor colorWithHexString:colorHexStr8];
     self.inputField.backgroundColor = [UIColor whiteColor];
@@ -201,7 +201,7 @@
     
     self.rechargeButton = [[UIButton alloc] init];
     self.rechargeButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
-    [self.rechargeButton setTitle:NSLocalizedString(@"SURE_RECHARGE", nil) forState:UIControlStateNormal];
+    [self.rechargeButton setTitle:TDLocalizeSelect(@"SURE_RECHARGE", nil) forState:UIControlStateNormal];
     self.rechargeButton.layer.cornerRadius = 4.0;
     [footerVeiw addSubview:self.rechargeButton];
     

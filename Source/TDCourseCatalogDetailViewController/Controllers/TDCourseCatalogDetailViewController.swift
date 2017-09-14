@@ -141,7 +141,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
                 paragraph.lineSpacing = 2
                 let attributes = [NSFontAttributeName : UIFont.init(name: "OpenSans", size: 12)!,NSForegroundColorAttributeName : OEXStyles.sharedStyles().baseColor9(),NSParagraphStyleAttributeName : paragraph]
                 
-                let str = "\(Strings.noLimit)\n\(Strings.enrollMessage)"
+                let str = "\(TDLocalizeSelectSwift("NO_LIMIT"))\n\(TDLocalizeSelectSwift("ENROLL_MESSAGE"))"
                 let size = str.boundingRectWithSize(CGSizeMake(TDScreenWidth - 198, TDScreenHeight), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil).size
                 
                 return size.height + 128
@@ -299,7 +299,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
     
     func ownCompanyCourseFullHandle() {
         
-        let warmingAlertView = UIAlertView.init(title: Strings.systemWaring, message: Strings.fullFreeEnrollment, delegate: self, cancelButtonTitle: Strings.ok)
+        let warmingAlertView = UIAlertView.init(title: TDLocalizeSelectSwift("SYSTEM_WARING"), message: TDLocalizeSelectSwift("FULL_FREE_ENROLLMENT"), delegate: self, cancelButtonTitle: TDLocalizeSelectSwift("OK"))
         warmingAlertView.tag = 301
         warmingAlertView.show()
     }
@@ -329,7 +329,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
             
         } else {
             if seconds == -1 || seconds == -2 {//－2 代表未购买未试听 ;－1 代表已购买
-                self.courseModel.freeStr = Strings.freeTrial//免费试听30分钟
+                self.courseModel.freeStr = TDLocalizeSelectSwift("FREE_TRIAL")//免费试听30分钟
                 
             } else {//试听中
                 self.setFreeBttuonText("\(self.courseModel.trial_seconds!)")
@@ -339,7 +339,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         let currentUser = self.session.currentUser //登录状态
         if  (currentUser != nil){//已登录
         } else {//未登录
-            self.courseModel.freeStr = Strings.freeTrial//免费试听30分钟
+            self.courseModel.freeStr = TDLocalizeSelectSwift("FREE_TRIAL") //免费试听30分钟
         }
         print(" 时间 ----> \(self.courseModel.course_status) --> \(self.courseModel.trial_expire_at)")
         
@@ -478,8 +478,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         
         requestModel.addFreeCourseFailed = { () in//加入失败，重新登录
             self.courseDetailView.activityView.stopAnimating()
-            
-            let alertView = UIAlertView.init(title: Strings.systemWaring, message: Strings.loginOverDue, delegate: self, cancelButtonTitle: Strings.ok)
+            let alertView = UIAlertView.init(title: TDLocalizeSelectSwift("SYSTEM_WARING"), message: TDLocalizeSelectSwift("LOGIN_OVER_DUE"), delegate: self, cancelButtonTitle: TDLocalizeSelectSwift("OK"))
             alertView.tag = 1011
             alertView.show()
         }
@@ -529,7 +528,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         
         let minuteStr = minute < 10 ? "0\(minute)" : "\(minute)"
         let secondStr = second < 10 ? "0\(second)" : "\(second)"
-        self.courseModel.freeStr = "\(Strings.freeTialTime)（\(minuteStr):\(secondStr)）"
+        self.courseModel.freeStr = "\(TDLocalizeSelectSwift("FREE_TIAL_TIME"))（\(minuteStr):\(secondStr)）"
         if type == 1 {
             self.courseDetailView.freeButtonStrHandle()
         }
@@ -580,7 +579,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
     
     func freeCourseEndedStr() {
         freeFinish = 1
-        self.courseModel.freeStr = Strings.freeCourseEnded
+        self.courseModel.freeStr = TDLocalizeSelectSwift("FREE_COURSE_ENDED")
     }
     
     func appEnterForeground() { //app进入前台，重新计算时间

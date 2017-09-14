@@ -43,7 +43,7 @@ class CourseOutlineModeController : NSObject {
         self.dataSource = dataSource
         let button = UIButton(type: .System)
         self.barItem = UIBarButtonItem(customView: button)
-        self.barItem.accessibilityLabel = Strings.courseModePickerDescription
+        self.barItem.accessibilityLabel = TDLocalizeSelectSwift("COURSE_MODE_PICKER_DESCRIPTION")
         
         super.init()
         
@@ -93,8 +93,8 @@ class CourseOutlineModeController : NSObject {
     
     func showModeChanger() {
         let items : [(title : String, value : CourseOutlineMode)] = [
-            (title :Strings.courseModeFull, value : CourseOutlineMode.Full),
-            (title : Strings.courseModeVideo, value : CourseOutlineMode.Video)
+            (title : TDLocalizeSelectSwift("COURSE_MODE_FULL"), value : CourseOutlineMode.Full),
+            (title : TDLocalizeSelectSwift("COURSE_MODE_VIDEO"), value : CourseOutlineMode.Video)
         ]
         
         let controller = UIAlertController.actionSheetWithItems(items, currentSelection: self.currentMode) {[weak self] mode in

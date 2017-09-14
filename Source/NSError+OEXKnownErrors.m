@@ -27,15 +27,15 @@ NSString* const OEXErrorDomain = @"org.edx.error";
 }
 
 + (NSError*)oex_courseContentLoadError {
-    return [self oex_errorWithCode:OEXErrorCodeCouldNotLoadCourseContent message:[Strings unableToLoadCourseContent]];
+    return [self oex_errorWithCode:OEXErrorCodeCouldNotLoadCourseContent message:TDLocalizeSelect(@"UNABLE_TO_LOAD_COURSE_CONTENT", nil)];
 }
 
 + (NSError*)oex_invalidURLError {
-    return [self oex_errorWithCode:OEXErrorCodeInvalidURL message:[Strings unableToLoadCourseContent]];
+    return [self oex_errorWithCode:OEXErrorCodeInvalidURL message:TDLocalizeSelect(@"UNABLE_TO_LOAD_COURSE_CONTENT", nil)];
 }
 
 + (NSError*)oex_unknownError {
-    return [self oex_errorWithCode:OEXErrorCodeUnknown message:[Strings unableToLoadCourseContent]];
+    return [self oex_errorWithCode:OEXErrorCodeUnknown message:TDLocalizeSelect(@"UNABLE_TO_LOAD_COURSE_CONTENT", nil)];
 }
 
 @end
@@ -53,7 +53,7 @@ NSString* const OEXErrorDomain = @"org.edx.error";
     self = [super initWithDomain: OEXErrorDomain
             code:OEXErrorCodeCoursewareAccess
             userInfo:@{
-                       NSLocalizedDescriptionKey : access.user_message ?: [Strings unableToLoadCourseContent]
+                       NSLocalizedDescriptionKey : access.user_message ?: TDLocalizeSelect(@"UNABLE_TO_LOAD_COURSE_CONTENT", nil)
                        }];
     if(self != nil) {
         self.access = access;
@@ -67,7 +67,7 @@ NSString* const OEXErrorDomain = @"org.edx.error";
     switch (self.access.error_code) {
         case OEXStartDateError: {
             
-            NSAttributedString*(^template)(NSAttributedString*) = [style apply:^(NSString* s){ return [Strings courseWillStartAtDate:s]; }];
+            NSAttributedString*(^template)(NSAttributedString*) = [style apply:^(NSString* s){ return [TDLocalizeSelect(@"COURSE_WILL_START_AT", nil) oex_formatWithParameters:@{@"date" : s}]; }];
             if(self.displayInfo.type == OEXStartTypeString && self.displayInfo.displayDate.length > 0) {
                 NSAttributedString* styledDate = [style.withWeight(OEXTextWeightBold) attributedStringWithText:self.displayInfo.displayDate];
                 NSAttributedString* message = template(styledDate);
@@ -80,13 +80,13 @@ NSString* const OEXErrorDomain = @"org.edx.error";
                 return message;
             }
             else {
-                return [style attributedStringWithText: [Strings courseNotStarted]];
+                return [style attributedStringWithText: TDLocalizeSelect(@"COURSE_NOT_STARTED", nil)];
             }
         }
         case OEXMilestoneError:
         case OEXVisibilityError:
         case OEXUnknownError:
-            return [style attributedStringWithText: self.access.user_message ?: [Strings coursewareUnavailable]];
+            return [style attributedStringWithText: self.access.user_message ?: TDLocalizeSelect(@"COURSEWARE_UNAVAILABLE", nil)];
     }
 
 }

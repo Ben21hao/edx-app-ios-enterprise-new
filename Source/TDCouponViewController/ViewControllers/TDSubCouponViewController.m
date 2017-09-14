@@ -39,11 +39,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSString *titleStr = NSLocalizedString(@"NO_USE_COUPON", nil);
+    NSString *titleStr = TDLocalizeSelect(@"NO_USE_COUPON", nil);
     if (self.whereFrom == 2) {
-        titleStr = NSLocalizedString(@"IS_USED_COUPON", nil);
+        titleStr = TDLocalizeSelect(@"IS_USED_COUPON", nil);
     } else if (self.whereFrom == 3) {
-        titleStr = NSLocalizedString(@"IS_OVERDUE_COUPON", nil);
+        titleStr = TDLocalizeSelect(@"IS_OVERDUE_COUPON", nil);
     }
     self.title = titleStr;
     
@@ -152,7 +152,7 @@
             self.page --;
             [self hideTableFooterView];
             
-            [self.view makeToast:NSLocalizedString(@"NO_MORE_DATA", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"NO_MORE_DATA", nil) duration:1.08 position:CSToastPositionCenter];
             
         } else if (code == 404) {
             [self judgeNumOfCoupons:0];
@@ -160,7 +160,7 @@
         } else {
             [self judgeNumOfCoupons:1];
             
-            [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
         NSLog(@"--->> %d --->> %@",code,responseDic[@"msg"]);
@@ -168,7 +168,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         [self judgeNumOfCoupons:1];
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"优惠券 error---- %@",error);
     }];
 }
@@ -184,11 +184,11 @@
         
         [self hideTableFooterView];
         
-        NSString *warmingStr = NSLocalizedString(@"NO_AVALIDE_COUPON", nil);
+        NSString *warmingStr = TDLocalizeSelect(@"NO_AVALIDE_COUPON", nil);
         if (self.whereFrom == 2) {
-            warmingStr = NSLocalizedString(@"NO_USED_COUPON", nil);
+            warmingStr = TDLocalizeSelect(@"NO_USED_COUPON", nil);
         } else if (self.whereFrom == 3) {
-            warmingStr = NSLocalizedString(@"NO_EXPIRED_COUPON", nil);
+            warmingStr = TDLocalizeSelect(@"NO_EXPIRED_COUPON", nil);
         }
         
         if (type == 0) {

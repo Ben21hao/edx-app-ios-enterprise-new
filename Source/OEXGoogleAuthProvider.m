@@ -22,7 +22,7 @@
 }
 
 - (NSString*)displayName {
-    return [Strings google];
+    return TDLocalizeSelect(@"GOOGLE", nil);
 }
 
 - (NSString*)backendName {

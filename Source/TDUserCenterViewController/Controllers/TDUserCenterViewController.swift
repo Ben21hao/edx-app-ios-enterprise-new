@@ -49,6 +49,9 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        LanguageChangeTool.initUserLanguage()
+        TDNotificationCenter().addObserver(self, selector: #selector(languageChangeAction), name: "languageSelectedChange", object: nil)
+        
         setUpViewConstraint()        
         addProfileListener()//数据请求
     }
@@ -56,7 +59,7 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.titleViewLabel.text = Strings.userCenter
+        self.titleViewLabel.text = TDLocalizeSelectSwift("USER_CENTER")
         
         environment.analytics.trackScreenWithName(OEXAnalyticsScreenProfileView)
         presenter.refresh()
@@ -77,8 +80,13 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
             self?.loadController.state = .Loaded
             
             }, failure : { [weak self] error in
-                self?.loadController.state = LoadState.failed(error, message: Strings.Profile.unableToGet)
+                self?.loadController.state = LoadState.failed(error, message: TDLocalizeSelectSwift("PROFILE.UNABLE_TO_GET"))
             })
+    }
+    
+    func languageChangeAction() {
+        self.titleViewLabel.text = TDLocalizeSelectSwift("USER_CENTER")
+        self.tableView.reloadData()
     }
     
     //MARK: UI
@@ -201,7 +209,7 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     
     //MARK: UserProfilePresenterDelegate
     func presenter(presenter: UserProfilePresenter, choseShareURL url: NSURL) {
-        let message = Strings.Accomplishments.shareText(platformName:self.environment.config.platformName())
+        let message = TDLocalizeSelectSwift("ACCOMPLISHMENTS.SHARE_TEXT").oex_formatWithParameters(["platform_name" : self.environment.config.platformName()])
         let controller = UIActivityViewController(
             activityItems: [message, url],
             applicationActivities: nil

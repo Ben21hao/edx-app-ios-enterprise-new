@@ -270,11 +270,11 @@
             
         } else {
             
-            NSString *msg = NSLocalizedString(@"FAILED_GET_FREE", nil);
+            NSString *msg = TDLocalizeSelect(@"FAILED_GET_FREE", nil);
             if (code == 301) {//已经购买课程无需试听
-                msg = NSLocalizedString(@"HAD_BUY", nil);
+                msg = TDLocalizeSelect(@"HAD_BUY", nil);
             } else if (code == 302) {//试听已结束
-                msg = NSLocalizedString(@"FREE_COURSE_ENDED", nil);
+                msg = TDLocalizeSelect(@"FREE_COURSE_ENDED", nil);
             }
             if (self.showMsgHandle) {
                 self.showMsgHandle(msg);

@@ -132,15 +132,15 @@ class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebView
         self.useAnnouncements(announceArray as! [OEXAnnouncement])
         }
         requestModel.requestFailed = { () in
-            self.loadController.state = LoadState.empty(icon: nil, message: Strings.announcementUnavailable)
-            self.webView.makeToast("暂无资料", duration: 1.08, position: CSToastPositionCenter)
+            self.loadController.state = LoadState.empty(icon: nil, message: TDLocalizeSelectSwift("ANNOUNCEMENT_UNAVAILABLE"))
+            self.webView.makeToast(TDLocalizeSelectSwift("NO_DATA_TEXT"), duration: 1.08, position: CSToastPositionCenter)
         }
     }
     
     //MARK: - Presenter
     private func useAnnouncements(announcements: [OEXAnnouncement]) {
         guard announcements.count > 0 else {
-            self.loadController.state = LoadState.empty(icon: nil, message: Strings.announcementUnavailable)
+            self.loadController.state = LoadState.empty(icon: nil, message: TDLocalizeSelectSwift("ANNOUNCEMENT_UNAVAILABLE"))
             return
         }
         
@@ -226,7 +226,7 @@ class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebView
     }
     
     private func setStyles() {
-        self.titleViewLabel.text = Strings.courseAnnouncements
+        self.titleViewLabel.text = TDLocalizeSelectSwift("COURSE_ANNOUNCEMENTS")
         
         let leftButton = UIButton.init(frame: CGRectMake(0, 0, 48, 48))
         leftButton.setImage(UIImage.init(named: "backImagee"), forState: .Normal)
@@ -241,7 +241,7 @@ class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebView
         
         notificationBar.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
         switchStyle.applyToSwitch(notificationSwitch)
-        notificationLabel.attributedText = fontStyle.attributedStringWithText(Strings.notificationsEnabled)
+        notificationLabel.attributedText = fontStyle.attributedStringWithText(TDLocalizeSelectSwift("NOTIFICATIONS_ENABLED"))
         notificationSwitch.on = !environment.dataManager.pushSettings.isPushDisabledForCourseWithID(courseID)
         
         notificationSwitch.oex_addAction({[weak self] _ in

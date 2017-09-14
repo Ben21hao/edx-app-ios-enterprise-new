@@ -72,8 +72,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.titleViewLabel.text = NSLocalizedString(@"COUPON_PAPER", nil);
-    [self.rightButton setTitle:NSLocalizedString(@"EXCHANGE_TITLE", nil) forState:UIControlStateNormal];
+    self.titleViewLabel.text = TDLocalizeSelect(@"COUPON_PAPER", nil);
+    [self.rightButton setTitle:TDLocalizeSelect(@"EXCHANGE_TITLE", nil) forState:UIControlStateNormal];
     
     WS(weakSelf);
     self.rightButtonHandle = ^(){
@@ -246,25 +246,25 @@
 #pragma mark -- 兑换优惠券
 //兑换
 - (void)exchange {
-    _exchangeV = [[WYAlertView alloc] initWithTitle:NSLocalizedString(@"EXCHANGE_COUPON", nil) message:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil) rightButtonTitle:NSLocalizedString(@"OK", nil) beTextField:YES];
-    _exchangeV.text.placeholder = NSLocalizedString(@"ENTER_COUPON_NUM", nil);
+    _exchangeV = [[WYAlertView alloc] initWithTitle:TDLocalizeSelect(@"EXCHANGE_COUPON", nil) message:nil cancelButtonTitle:TDLocalizeSelect(@"CANCEL", nil) rightButtonTitle:TDLocalizeSelect(@"OK", nil) beTextField:YES];
+    _exchangeV.text.placeholder = TDLocalizeSelect(@"ENTER_COUPON_NUM", nil);
     [_exchangeV show];
     [_exchangeV.rightbtn addTarget:self action:@selector(exchangeCoupons) forControlEvents:UIControlEventTouchUpInside];
 }
 //0.断网
 - (void)disconnect {
-    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:NSLocalizedString(@"EXCHANGE_FAIL", nil)
-                                                            message:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil)
+    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"EXCHANGE_FAIL", nil)
+                                                            message:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil)
                                                    onViewController:self.navigationController.view
                                                          shouldHide:YES];
 }
 //1.兑换成功
 - (void)exchangeSuccess {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"EXCHANGE_SUCCESS", nil)
-                                                    message:NSLocalizedString(@"EXCHANGE_AND_USE", nil)
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"EXCHANGE_SUCCESS", nil)
+                                                    message:TDLocalizeSelect(@"EXCHANGE_AND_USE", nil)
                                                    delegate:self
                                           cancelButtonTitle:nil
-                                          otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+                                          otherButtonTitles:TDLocalizeSelect(@"OK", nil), nil];
     alert.delegate = self;
     [alert show];
 }
@@ -278,51 +278,51 @@
 
 //2.您已经领用了优惠券
 - (void)alreadyUsed{
-    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:NSLocalizedString(@"EXCHANGE_FAIL", nil)
-                                                            message:NSLocalizedString(@"HAD_EXCHANGE", nil)
+    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"EXCHANGE_FAIL", nil)
+                                                            message:TDLocalizeSelect(@"HAD_EXCHANGE", nil)
                                                    onViewController:self.navigationController.view
                                                          shouldHide:YES];
 }
 //3.很抱歉，优惠券已经领用完了
 - (void)couponsUp{
-    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:NSLocalizedString(@"EXCHANGE_FAIL", nil)
-                                                            message:NSLocalizedString(@"HAS_NO_COUPON", nil)
+    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"EXCHANGE_FAIL", nil)
+                                                            message:TDLocalizeSelect(@"HAS_NO_COUPON", nil)
                                                    onViewController:self.navigationController.view
                                                          shouldHide:YES];
 }
 //4.优惠券兑换时间未到！
 - (void)notExchangeTime{
-    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:NSLocalizedString(@"EXCHANGE_FAIL", nil)
-                                                            message:NSLocalizedString(@"COUPON_TIME_EARLY", nil)
+    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"EXCHANGE_FAIL", nil)
+                                                            message:TDLocalizeSelect(@"COUPON_TIME_EARLY", nil)
                                                    onViewController:self.navigationController.view
                                                          shouldHide:YES];
 }
 //5.优惠券已过期！
 - (void)couponsOutTime{
-    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:NSLocalizedString(@"EXCHANGE_FAIL", nil)
-                                                            message:NSLocalizedString(@"COUPON_TIME_LATER", nil)
+    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"EXCHANGE_FAIL", nil)
+                                                            message:TDLocalizeSelect(@"COUPON_TIME_LATER", nil)
                                                    onViewController:self.navigationController.view
                                                          shouldHide:YES];
 }
 //6.优惠券已失效！
 - (void)couponsInvalid{
-    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:NSLocalizedString(@"EXCHANGE_FAIL", nil)
-                                                            message: NSLocalizedString(@"COUPON_NO_USERENABLE", nil)
+    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"EXCHANGE_FAIL", nil)
+                                                            message: TDLocalizeSelect(@"COUPON_NO_USERENABLE", nil)
                                                    onViewController:self.navigationController.view
                                                          shouldHide:YES];
 }
 //7.优惠券不存在!
 - (void)notExist{
-    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:NSLocalizedString(@"EXCHANGE_FAIL", nil)
-                                                            message:NSLocalizedString(@"NO_INVALIDE_COUPON", nil)
+    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"EXCHANGE_FAIL", nil)
+                                                            message:TDLocalizeSelect(@"NO_INVALIDE_COUPON", nil)
                                                    onViewController:self.navigationController.view
                                                          shouldHide:YES];
 }
 
 //8.企业优惠券兑换失败
 - (void)failExchangeCompanyCode{
-    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:NSLocalizedString(@"EXCHANGE_FAIL", nil)
-                                                            message:NSLocalizedString(@"COMPANY_COUPON_FAIL", nil)
+    [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"EXCHANGE_FAIL", nil)
+                                                            message:TDLocalizeSelect(@"COMPANY_COUPON_FAIL", nil)
                                                    onViewController:self.navigationController.view
                                                          shouldHide:YES];
 }
@@ -371,11 +371,11 @@
             [self notExist];
             
         } else {
-            [self.view makeToast:NSLocalizedString(@"EXCHANGE_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"EXCHANGE_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error--exchange--%@",error);
     }];
 }

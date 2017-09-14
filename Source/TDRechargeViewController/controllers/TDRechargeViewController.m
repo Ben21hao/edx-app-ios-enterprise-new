@@ -75,7 +75,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.titleViewLabel.text = NSLocalizedString(@"RECHARGE_Coins", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"RECHARGE_Coins", nil);
     [self.leftButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     
@@ -117,8 +117,8 @@
     };
     
     self.purchaseManager.vertificationHandle = ^(id dataObject,NSString *tips){
-        if ([tips isEqualToString:NSLocalizedString(@"RECHARGE_SUCCESS", nil)]) {
-            [weakSelf.view makeToast:NSLocalizedString(@"RECHARGE_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
+        if ([tips isEqualToString:TDLocalizeSelect(@"RECHARGE_SUCCESS", nil)]) {
+            [weakSelf.view makeToast:TDLocalizeSelect(@"RECHARGE_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
             [weakSelf successPay];
             
         } else {
@@ -158,7 +158,7 @@
     successVC.whereFrom = self.whereFrom;
     WS(weakSelf);
     successVC.updateTotalCoinHandle = ^(NSString *totalStr){
-        weakSelf.rechargeView.topLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%@ %.2f)",NSLocalizedString(@"CURRENT_COINS", nil),[totalStr floatValue]] withFont:14 withColorStr:colorHexStr8];
+        weakSelf.rechargeView.topLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%@ %.2f)",TDLocalizeSelect(@"CURRENT_COINS", nil),[totalStr floatValue]] withFont:14 withColorStr:colorHexStr8];
     };
     
     [self.navigationItem setTitle:@""];
@@ -194,7 +194,7 @@
             self.currentCanons = [responDic[@"data"][@"remain_score"] doubleValue];
             
         } else if ([code intValue] == 404) {
-            [self.view makeToast:NSLocalizedString(@"NO_EXIST_USER", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"NO_EXIST_USER", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
         if (self.moneyArray.count > 0) {
@@ -202,7 +202,7 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         [self.loadIngView removeFromSuperview];
         NSLog(@"error -- %@",error);
     }];
@@ -212,8 +212,8 @@
 - (void)setUpView {
     
     int selectWX = [WXApi isWXAppInstalled] ? 0 : 1;
-    NSDictionary *dic1 = [NSDictionary dictionaryWithObjectsAndKeys:@"weChat",@"imageStr",NSLocalizedString(@"WECHAT_PAY", nil),@"payStr", @(1),@"isSelected",@"0",@"payType",nil];
-    NSDictionary *dic2 = [NSDictionary dictionaryWithObjectsAndKeys:@"zhifu",@"imageStr",NSLocalizedString(@"ALI_PAY", nil),@"payStr", @(selectWX),@"isSelected",@"1",@"payType",nil];
+    NSDictionary *dic1 = [NSDictionary dictionaryWithObjectsAndKeys:@"weChat",@"imageStr",TDLocalizeSelect(@"WECHAT_PAY", nil),@"payStr", @(1),@"isSelected",@"0",@"payType",nil];
+    NSDictionary *dic2 = [NSDictionary dictionaryWithObjectsAndKeys:@"zhifu",@"imageStr",TDLocalizeSelect(@"ALI_PAY", nil),@"payStr", @(selectWX),@"isSelected",@"1",@"payType",nil];
     
     if ([WXApi isWXAppInstalled]) {
         self.payType = 0;
@@ -230,7 +230,7 @@
     
     self.rechargeView = [[TDRechargeView alloc] initWithType:type]; //type: 1 审核通过，2 审核中
     [self.rechargeView setMoneyViewData:self.moneyArray withType:1];
-    self.rechargeView.topLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%@ %.2f)",NSLocalizedString(@"CURRENT_COINS", nil),self.currentCanons] withFont:14 withColorStr:colorHexStr8];
+    self.rechargeView.topLabel.attributedText = [self.baseTool setDetailString:[NSString stringWithFormat:@"%@ %.2f)",TDLocalizeSelect(@"CURRENT_COINS", nil),self.currentCanons] withFont:14 withColorStr:colorHexStr8];
 
     self.rechargeView.tableView.delegate = self;
     self.rechargeView.tableView.dataSource = self;
@@ -257,10 +257,10 @@
     if ([moneyStr intValue] > 0) {
         
         int giveMoney = [moneyStr intValue] * 10 * ([self.exchangeRate floatValue] - 1);
-        NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d %@",[moneyStr intValue] * 10,NSLocalizedString(@"COINS_VALUE", nil)] attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr9]}];
+        NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d %@",[moneyStr intValue] * 10,TDLocalizeSelect(@"COINS_VALUE", nil)] attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr9]}];
         
         if (giveMoney > 0) {
-            NSMutableAttributedString *str2 = [[NSMutableAttributedString  alloc] initWithString:[NSString stringWithFormat:@"%@",[Strings giveCoinsWithCount:[NSString stringWithFormat:@"%d",giveMoney]]] attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr4]}];
+            NSMutableAttributedString *str2 = [[NSMutableAttributedString  alloc] initWithString:[NSString stringWithFormat:@"%@",[TDLocalizeSelect(@"GIVE_COINS", nil) oex_formatWithParameters:@{@"count" : [NSString stringWithFormat:@"%d",giveMoney]}]] attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr4]}];
             [str1 appendAttributedString:str2];
         }
         
@@ -301,7 +301,7 @@
     }
     
     if ([self.rechargeMoney intValue] == 0) {
-        [self.view makeToast:NSLocalizedString(@"ENTER_OR_SELECT_RECHARGE_MONEY", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"ENTER_OR_SELECT_RECHARGE_MONEY", nil) duration:1.08 position:CSToastPositionCenter];
         return;
     }
     
@@ -353,7 +353,7 @@
                 [self rqPayByApple];
             }
         } else {
-            [self.view makeToast:NSLocalizedString(@"RECHARGE_FAILE", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"RECHARGE_FAILE", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
         
@@ -362,7 +362,7 @@
         
         self.view.userInteractionEnabled = YES;
         [self.rechargeView.activityView stopAnimating];
-        [self.view makeToast:NSLocalizedString(@"NETWORK_NOT_AVAILABLE_TITLE", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error--%@",error);
     }];
 }
@@ -381,7 +381,7 @@
 
 #pragma mark - 苹果内购
 - (void)rqPayByApple {
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"IS_RECHARGE", nil)];
+    [SVProgressHUD showWithStatus:TDLocalizeSelect(@"IS_RECHARGE", nil)];
     SVProgressHUD.defaultMaskType = SVProgressHUDMaskTypeBlack;
     SVProgressHUD.defaultStyle = SVProgressHUDAnimationTypeNative;
     
@@ -439,9 +439,9 @@
     }
     if (moneyStr.length > 5) {
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:NSLocalizedString(@"ENTER_LASS_FIVE", nil)
+                                                        message:TDLocalizeSelect(@"ENTER_LASS_FIVE", nil)
                                                        delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                              cancelButtonTitle:TDLocalizeSelect(@"OK", nil)
                                               otherButtonTitles:nil];
         
         [alert show];
@@ -528,7 +528,7 @@
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
-    titleLabel.text = self.isHidePurchase ? NSLocalizedString(@"SELECT_PAYWAY", nil) : @"";
+    titleLabel.text = self.isHidePurchase ? TDLocalizeSelect(@"SELECT_PAYWAY", nil) : @"";
     titleLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     [sectionView addSubview:titleLabel];
     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -552,7 +552,7 @@
 #pragma mark - 返回
 - (void)backButtonAction:(UIButton *)sender {
     if (self.isPurchassing) {
-        [self.view makeToast:NSLocalizedString(@"IS_RECHARGE_NO_LEVE", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"IS_RECHARGE_NO_LEVE", nil) duration:1.08 position:CSToastPositionCenter];
         return;
     }
     [self.navigationController popViewControllerAnimated:YES];

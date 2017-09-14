@@ -283,7 +283,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
 //        }
         
         /*课件*/
-        var item = StandardCourseDashboardItem(title: Strings.courseDashboardCourseware, detail: Strings.courseDashboardCourseDetail, icon : .Courseware) {[weak self] () -> Void in
+        var item = StandardCourseDashboardItem(title: TDLocalizeSelectSwift("COURSE_DASHBOARD_COURSEWARE"), detail: TDLocalizeSelectSwift("COURSE_DASHBOARD_COURSE_DETAIL"), icon : .Courseware) {[weak self] () -> Void in
             self?.showCourseware()
         }
         cellItems.append(item)
@@ -291,26 +291,26 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         /*讨论*/
         if shouldShowDiscussions(enrollment.course) {
             let courseID = self.courseID
-            item = StandardCourseDashboardItem(title: Strings.courseDashboardDiscussion, detail: Strings.courseDashboardDiscussionDetail, icon: .Discussions) {[weak self] () -> Void in
+            item = StandardCourseDashboardItem(title: TDLocalizeSelectSwift("COURSE_DASHBOARD_DISCUSSION"), detail: TDLocalizeSelectSwift("COURSE_DASHBOARD_DISCUSSION_DETAIL"), icon: .Discussions) {[weak self] () -> Void in
                 self?.showDiscussionsForCourseID(courseID)
             }
             cellItems.append(item)
         }
         
         /*资料*/
-        item = StandardCourseDashboardItem(title: Strings.courseDashboardHandouts, detail: Strings.courseDashboardHandoutsDetail, icon: .Handouts) {[weak self] () -> Void in
+        item = StandardCourseDashboardItem(title: TDLocalizeSelectSwift("COURSE_DASHBOARD_HANDOUTS"), detail: TDLocalizeSelectSwift("COURSE_DASHBOARD_HANDOUTS_DETAIL"), icon: .Handouts) {[weak self] () -> Void in
             self?.showHandouts()
         }
         cellItems.append(item)
         
         /*公告*/
-        item = StandardCourseDashboardItem(title: Strings.courseDashboardAnnouncements, detail: Strings.courseDashboardAnnouncementsDetail, icon: .Announcements) {[weak self] () -> Void in
+        item = StandardCourseDashboardItem(title: TDLocalizeSelectSwift("COURSE_DASHBOARD_ANNOUNCEMENTS"), detail: TDLocalizeSelectSwift("COURSE_DASHBOARD_ANNOUNCEMENTS_DETAIL"), icon: .Announcements) {[weak self] () -> Void in
             self?.showAnnouncements()
         }
         cellItems.append(item)
         
         /*班级*/
-        item = StandardCourseDashboardItem(title: Strings.classTitle, detail: Strings.entetClass, icon: .Group) {[weak self] () -> Void in
+        item = StandardCourseDashboardItem(title: TDLocalizeSelectSwift("CLASS_TITLE"), detail: TDLocalizeSelectSwift("ENTET_CLASS"), icon: .Group) {[weak self] () -> Void in
             self?.showQRViewController()
         }
         cellItems.append(item)

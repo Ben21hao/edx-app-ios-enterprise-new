@@ -9,10 +9,15 @@
 #import "VHDocumentView.h"
 #import "VHDrawView.h"
 #import "UIImageView+WebCache.h"
+
 @interface VHDocumentView()
+
 @property(nonatomic,strong) VHDrawView *pptDrawView;
-@property(nonatomic,strong) UIView     *boardContainer;//白板容器
 @property(nonatomic,strong) VHDrawView *boardDrawView;
+
+@property(nonatomic,strong) UIView *boardContainer;//白板容器
+
+
 @end
 
 @implementation VHDocumentView
@@ -25,12 +30,10 @@
 }
 */
 
-- (void)setImagePath:(NSString *)imagePath
-{
+- (void)setImagePath:(NSString *)imagePath {
     _imagePath = imagePath;
+    
      self.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imagePath]]];
-    
-    
 }
 
 //- (void)setFrame:(CGRect)frame
@@ -39,41 +42,32 @@
 //    
 //}
 
-- (void)drawDocHandList:(NSArray*)docList whiteBoardHandList:(NSArray*)boardList
-{
-    
+- (void)drawDocHandList:(NSArray*)docList whiteBoardHandList:(NSArray*)boardList {
 
     //NSLog(@"%lu %lu",(unsigned long)docList.count,(unsigned long)boardList.count);
-    if(docList)
-    {
-        if(!_pptDrawView)
-        {
+    if(docList) {
+        if(!_pptDrawView) {
             _pptDrawView = [[VHDrawView alloc]init];
             _pptDrawView.backgroundColor = [UIColor clearColor];
             [self addSubview:_pptDrawView];
         }
          _pptDrawView.drawData = docList;
         [self pptDrawPoint];
-       
+        
         [self bringSubviewToFront:_pptDrawView];
-    }
-    else
-    {
+    } else {
         [_pptDrawView removeFromSuperview];
         _pptDrawView = nil;
     }
     
     
-    if (boardList)
-    {
-        if (!_boardContainer)
-        {
+    if (boardList) {
+        if (!_boardContainer) {
             _boardContainer =[[UIView alloc] initWithFrame:self.bounds];
             _boardContainer.backgroundColor=MakeColorRGB(0xe2e8eb);
             [self addSubview:_boardContainer];
         }
-        if (!_boardDrawView)
-        {
+        if (!_boardDrawView) {
             _boardDrawView =[[VHDrawView alloc] init];
             _boardDrawView.backgroundColor = [UIColor whiteColor];
         }
@@ -81,16 +75,15 @@
          _boardDrawView.drawData = boardList;
         [self whiteBoardPoint];
         [self bringSubviewToFront:_boardContainer];
-    }else
-    {
+        
+    } else {
         [_boardContainer removeFromSuperview];
         _boardContainer =nil;
     }
 
 }
 
--(void)layoutSubviews
-{
+-(void)layoutSubviews {
 //    if (_pptDrawView) {
 //         _pptDrawView.frame = CGRectMake(0,0,self.image.size.width,self.image.size.height);
 //    }
@@ -99,10 +92,9 @@
     [self whiteBoardPoint];
 }
 
--(void)pptDrawPoint
-{
-    if (_pptDrawView)
-    {
+-(void)pptDrawPoint {
+    
+    if (_pptDrawView) {
         _pptDrawView.transform = CGAffineTransformIdentity;
         _pptDrawView.frame = CGRectMake(0,0,self.image.size.width,self.image.size.height);
        
@@ -114,10 +106,10 @@
     }
 }
 
--(void)whiteBoardPoint
-{
-    if (_boardContainer)
-    {
+-(void)whiteBoardPoint {
+    
+    if (_boardContainer) {
+        
         [_boardContainer setFrame:self.bounds];
         _boardDrawView.transform = CGAffineTransformIdentity;
         _boardDrawView.frame =CGRectMake(0,0,1024,768);

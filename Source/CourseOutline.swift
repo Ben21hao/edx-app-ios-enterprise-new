@@ -80,7 +80,7 @@ public struct CourseOutline {
                         type = .Problem
                     case CourseBlock.Category.Video :
                         let bodyData = (body[Fields.StudentViewData].object as? NSDictionary).map { [Fields.Summary.rawValue : $0 ] }
-                        let summary = OEXVideoSummary(dictionary: bodyData ?? [:], videoID: blockID, name : name ?? Strings.untitled)
+                        let summary = OEXVideoSummary(dictionary: bodyData ?? [:], videoID: blockID, name : name ?? TDLocalizeSelectSwift("UNTITLED"))
                         type = .Video(summary)
                     case CourseBlock.Category.Discussion:
                         // Inline discussion is in progress feature. Will remove this code when it's ready to ship
@@ -176,7 +176,7 @@ public class CourseBlock {
     /// User visible name of the block.
     public var displayName : String {
         guard let name = name where !name.isEmpty else {
-            return Strings.untitled
+            return TDLocalizeSelectSwift("UNTITLED")
         }
         return name
     }

@@ -39,7 +39,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.navigationItem.title =NSLocalizedString(@"RESET_BY_PHONE", nil);
+    self.navigationItem.title =TDLocalizeSelect(@"RESET_BY_PHONE", nil);
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
 }
 
@@ -75,20 +75,20 @@
     
     TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
     if (![baseTool networkingState]) {
-        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:[Strings networkNotAvailableTitle]
-                                                                message:[Strings networkNotAvailableMessageTrouble]
+        [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil)
+                                                                message:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_MESSAGE_TROUBLE", nil)
                                                        onViewController:self.navigationController.view
                                                              shouldHide:YES];
         return;
     }
     
     if (self.passwordTextField.text.length == 0) {
-        [self.view makeToast:NSLocalizedString(@"PLEASE_SET_PASSWORD", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"PLEASE_SET_PASSWORD", nil) duration:1.08 position:CSToastPositionCenter];
     }else if (self.passwordTextField.text.length < 6) {
-        [self.view makeToast:NSLocalizedString(@"MORE_PASSWORD", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"MORE_PASSWORD", nil) duration:1.08 position:CSToastPositionCenter];
         
     } else if (self.passwordTextField.text.length > 30) {
-        [self.view makeToast:NSLocalizedString(@"LESS_PASSWORD", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"LESS_PASSWORD", nil) duration:1.08 position:CSToastPositionCenter];
     } else {
         [self resetPhonePassWord];
     }
@@ -111,25 +111,25 @@
         
         if (CODE == 200) {//请求成功
             
-            UIAlertView *successAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"RESET_PASSWORD_SUCCESS", nil)
-                                                                   message:NSLocalizedString(@"MOBILE_PHONE_ACCOUNT_RESET_SUCCESS", nil)
+            UIAlertView *successAlert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"RESET_PASSWORD_SUCCESS", nil)
+                                                                   message:TDLocalizeSelect(@"MOBILE_PHONE_ACCOUNT_RESET_SUCCESS", nil)
                                                                   delegate:self
-                                                         cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                                         cancelButtonTitle:TDLocalizeSelect(@"OK", nil)
                                                          otherButtonTitles:nil, nil];
             successAlert.tag = 100;
             [successAlert show];
             
         } else { //请求失败
-            UIAlertView *failAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"RESET_THE_PASSWORD_FAILED", nil)
-                                                                message:NSLocalizedString(@"MOBILE_PHONE_ACCOUNT_RESET_FAILED", nil)
+            UIAlertView *failAlert = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"RESET_THE_PASSWORD_FAILED", nil)
+                                                                message:TDLocalizeSelect(@"MOBILE_PHONE_ACCOUNT_RESET_FAILED", nil)
                                                                delegate:self
-                                                      cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                                      cancelButtonTitle:TDLocalizeSelect(@"OK", nil)
                                                       otherButtonTitles:nil, nil];
             [failAlert show];
         };
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"密码重置 ---  %ld",(long)error.code);
     }];
 }
@@ -163,7 +163,7 @@
 #pragma mark - ui
 - (void)configView {
     self.topLabel = [[UILabel alloc] init];
-    self.topLabel.text = NSLocalizedString(@"SET_PASSWORD", nil);
+    self.topLabel.text = TDLocalizeSelect(@"SET_PASSWORD", nil);
     self.topLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     self.topLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
     [self.view addSubview:self.topLabel];
@@ -178,7 +178,7 @@
     
     self.passwordTextField = [[UITextField alloc] init];
     self.passwordTextField.secureTextEntry = YES;
-    self.passwordTextField.placeholder = NSLocalizedString(@"PASSWORD_NUM", nil);
+    self.passwordTextField.placeholder = TDLocalizeSelect(@"PASSWORD_NUM", nil);
     self.passwordTextField.font = [UIFont fontWithName:@"OpenSans" size:14];
     self.passwordTextField.textColor = [UIColor colorWithHexString:colorHexStr10];
     [self.bgView addSubview:self.passwordTextField];
@@ -194,7 +194,7 @@
     self.handinButton = [[UIButton alloc] init];
     self.handinButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.handinButton.layer.cornerRadius = 4.0;
-    [self.handinButton setTitle:NSLocalizedString(@"SUBMIT", nil) forState:UIControlStateNormal];
+    [self.handinButton setTitle:TDLocalizeSelect(@"SUBMIT", nil) forState:UIControlStateNormal];
     [self.handinButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.handinButton addTarget:self action:@selector(handinButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.handinButton];

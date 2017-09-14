@@ -84,7 +84,7 @@ extension UIAlertController {
         
         return self.showAlertWithTitle(title,
                                        message: message,
-                                       cancelButtonTitle: Strings.ok,
+                                       cancelButtonTitle: TDLocalizeSelectSwift("OK"),
                                        onViewController: viewController)
         
     }

@@ -54,6 +54,9 @@ class OEXRearTableViewController : UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        LanguageChangeTool.initUserLanguage()
+        TDNotificationCenter().addObserver(self, selector: #selector(LanguageChangeAction), name: "languageSelectedChange", object: nil)
+        
         setupProfileLoader()
         updateUIWithUserInfo()
         
@@ -70,22 +73,12 @@ class OEXRearTableViewController : UITableViewController {
         
         self.view.backgroundColor = OEXStyles.sharedStyles().baseColor7()
         self.tableView.backgroundColor = OEXStyles.sharedStyles().baseColor7()
-        //UI
+        
 //        logoutButton.setBackgroundImage(UIImage(named: "bt_logout_active"), forState: .Highlighted)
         logoutButton.backgroundColor = OEXStyles.sharedStyles().baseColor7()
         logoutButton.layer.cornerRadius = 4.0
-        
-        //Listen to notification
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(OEXRearTableViewController.dataAvailable(_:)), name: NOTIFICATION_URL_RESPONSE, object: nil)
-        
-        coursesLabel.text = Strings.myCourses
-        videosLabel.text = Strings.myVideos
-        findCoursesLabel.text = Strings.findCourses
-        assistantLabel.text = Strings.userCenter
-        settingsLabel.text = Strings.mySettings
-        submitFeedbackLabel.text = Strings.SubmitFeedback.optionTitle
-        logoutButton.setTitle(Strings.logout, forState: .Normal)
-        loginButton.setTitle(Strings.signIn, forState: .Normal)
+    
+        LanguageChangeAction()
         
         setNaturalTextAlignment()
         setAccessibilityLabels()
@@ -100,14 +93,16 @@ class OEXRearTableViewController : UITableViewController {
             heightConstraint.constant = 85
         }
 
+        //Listen to notification
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(OEXRearTableViewController.dataAvailable(_:)), name: NOTIFICATION_URL_RESPONSE, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         if let profileCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: OEXRearViewOptions.UserProfile.rawValue, inSection: 0)) {
-            profileCell.accessibilityLabel = Strings.Accessibility.LeftDrawer.profileLabel(userName: environment.session.currentUser?.name ?? "", userEmail: environment.session.currentUser?.email ?? "")
-            profileCell.accessibilityHint = Strings.Accessibility.LeftDrawer.profileHint
+            profileCell.accessibilityLabel = TDLocalizeSelectSwift("ACCESSIBILITY.LEFT_DRAWER.PROFILE_LABEL").oex_formatWithParameters(["user_name" : environment.session.currentUser?.name ?? "", "user_email" : environment.session.currentUser?.email ?? ""])
+            profileCell.accessibilityHint = TDLocalizeSelectSwift("ACCESSIBILITY.LEFT_DRAWER.PROFILE_HINT")
         }
     }
     
@@ -115,6 +110,17 @@ class OEXRearTableViewController : UITableViewController {
         super.viewDidDisappear(animated)
         
         self.tableView.userInteractionEnabled = true
+    }
+    
+    func LanguageChangeAction() {
+        coursesLabel.text = TDLocalizeSelectSwift("MY_COURSES")
+        videosLabel.text = TDLocalizeSelectSwift("MY_VIDEOS")
+        findCoursesLabel.text = TDLocalizeSelectSwift("FIND_COURSES")
+        assistantLabel.text = TDLocalizeSelectSwift("USER_CENTER")
+        settingsLabel.text = TDLocalizeSelectSwift("MY_SETTINGS")
+        submitFeedbackLabel.text = TDLocalizeSelectSwift("SUBMIT_FEEDBACK.OPTION_TITLE")
+        logoutButton.setTitle(TDLocalizeSelectSwift("LOGOUT"), forState: .Normal)
+        loginButton.setTitle(TDLocalizeSelectSwift("SIGN_IN"), forState: .Normal)
     }
     
     private func setupProfileLoader() {
@@ -146,7 +152,7 @@ class OEXRearTableViewController : UITableViewController {
                 if profile.name != profile.username {
                     self.userNameLabel.text = profile.name
                 } else {
-                    self.userNameLabel.text = Strings.noName
+                    self.userNameLabel.text = TDLocalizeSelectSwift("NO_NAME")
                 }
             }
             
@@ -180,7 +186,7 @@ class OEXRearTableViewController : UITableViewController {
                 if currentUser?.name != currentUser?.username {
                     userNameLabel.text = currentUser!.name
                 } else {
-                    userNameLabel.text = Strings.noName
+                    userNameLabel.text = TDLocalizeSelectSwift("NO_NAME")
                 }
             }
             
@@ -236,7 +242,7 @@ class OEXRearTableViewController : UITableViewController {
         settingsLabel.accessibilityLabel = settingsLabel.text
         submitFeedbackLabel.accessibilityLabel = submitFeedbackLabel.text
         logoutButton.accessibilityLabel = logoutButton.titleLabel!.text
-//        userProfilePicture.accessibilityLabel = Strings.accessibilityUserAvatar
+//        userProfilePicture.accessibilityLabel = TDLocalizeSelectSwift("ACCESSIBILITY_USER_AVATAR")
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -378,16 +384,16 @@ extension OEXRearTableViewController : MFMailComposeViewControllerDelegate {
 
     func launchEmailComposer() {
         if !MFMailComposeViewController.canSendMail() {
-            let alert = UIAlertView(title: Strings.emailAccountNotSetUpTitle,
-                message: Strings.emailAccountNotSetUpMessage,
+            let alert = UIAlertView(title: TDLocalizeSelectSwift("EMAIL_ACCOUNT_NOT_SET_UP_TITLE"),
+                message: TDLocalizeSelectSwift("EMAIL_ACCOUNT_NOT_SET_UP_MESSAGE"),
                 delegate: nil,
-                cancelButtonTitle: Strings.ok)
+                cancelButtonTitle: TDLocalizeSelectSwift("OK"))
             alert.show()
         } else {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
             mail.navigationBar.tintColor = OEXStyles.sharedStyles().navigationItemTintColor()
-            mail.setSubject(Strings.SubmitFeedback.messageSubject)
+            mail.setSubject(TDLocalizeSelectSwift("SUBMIT_FEEDBACK.MESSAGE_SUBJECT"))
 
             mail.setMessageBody(EmailTemplates.supportEmailMessageTemplate(), isHTML: false)
             if let fbAddress = environment.config.feedbackEmailAddress() {

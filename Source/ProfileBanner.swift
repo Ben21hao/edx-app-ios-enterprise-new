@@ -59,8 +59,8 @@ class ProfileBanner: UIView {
             userInteractionEnabled = true
             addSubview(changeButton)
 
-            changeButton.setIconAndTitle(Icon.Camera, title: Strings.Profile.changePictureButton)
-            changeButton.accessibilityHint = Strings.Profile.changePictureAccessibilityHint
+            changeButton.setIconAndTitle(Icon.Camera, title: TDLocalizeSelectSwift("PROFILE.CHANGE_PICTURE_BUTTON"))
+            changeButton.accessibilityHint = TDLocalizeSelectSwift("PROFILE.CHANGE_PICTURE_ACCESSIBILITY_HINT")
             
             changeButton.snp_makeConstraints(closure: { (make) -> Void in
                 make.centerY.equalTo(shortProfView)
@@ -106,7 +106,7 @@ class ProfileBanner: UIView {
             if profile.name != profile.username && profile.name?.characters.count != 0 {
                 nickname = profile.name
             } else {
-                nickname = Strings.noName
+                nickname = TDLocalizeSelectSwift("NO_NAME")
             }
         }
         usernameLabel.attributedText = usernameStyle.attributedStringWithText(nickname)

@@ -32,7 +32,7 @@ static NSString *ID = @"cell";
     if (!_couponArray) {
         _couponArray = [[NSMutableArray alloc] init];
         CouponsNameItem *model = [[CouponsNameItem alloc] init];
-        model.coupon_name =NSLocalizedString(@"SELECT_COUPON", nil);
+        model.coupon_name =TDLocalizeSelect(@"SELECT_COUPON", nil);
         [_couponArray addObject:model];
     }
     return _couponArray;
@@ -42,7 +42,7 @@ static NSString *ID = @"cell";
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
-    self.titleViewLabel.text = NSLocalizedString(@"COUPON_PAPER", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"COUPON_PAPER", nil);
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.scrollEnabled = NO;
     
@@ -61,7 +61,7 @@ static NSString *ID = @"cell";
     
     self.noDataLabel = [[UILabel alloc] init];
     self.noDataLabel.center = self.view.center;
-    self.noDataLabel.text = NSLocalizedString(@"NO_CHOOSE_COUPON", nil);
+    self.noDataLabel.text = TDLocalizeSelect(@"NO_CHOOSE_COUPON", nil);
     self.noDataLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     self.noDataLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.noDataLabel];
@@ -111,7 +111,7 @@ static NSString *ID = @"cell";
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.loadIngView removeFromSuperview];
-        [self.view makeToast:NSLocalizedString(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"error--%@",error);
     }];
 }

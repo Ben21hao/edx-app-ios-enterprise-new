@@ -36,8 +36,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.signInButton setTitle:[Strings loginSplashSignIn] forState:UIControlStateNormal];
-    [self.signUpButton applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[Strings loginSplashSignUp]];
+    [self.signInButton setTitle:TDLocalizeSelect(@"LOGIN_SPLASH_SIGN_IN", nil) forState:UIControlStateNormal];
+    [self.signUpButton applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:TDLocalizeSelect(@"LOGIN_SPLASH_SIGN_UP", nil)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

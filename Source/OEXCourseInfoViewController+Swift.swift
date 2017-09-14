@@ -21,7 +21,7 @@ extension OEXCourseInfoViewController {
         let environment = OEXRouter.sharedRouter().environment;
         
         if let _ = environment.dataManager.enrollmentManager.enrolledCourseWithID(courseID) {
-            showMainScreenWithMessage(Strings.findCoursesAlreadyEnrolledMessage, courseID: courseID)
+            showMainScreenWithMessage(TDLocalizeSelectSwift("FIND_COURSES_ALREADY_ENROLLED_MESSAGE"), courseID: courseID)
             return
         }
         
@@ -29,10 +29,10 @@ extension OEXCourseInfoViewController {
         environment.networkManager.taskForRequest(request) {[weak self] response in
             if response.response?.httpStatusCode.is2xx ?? false {
                 environment.analytics.trackUserEnrolledInCourse(courseID)
-                self?.showMainScreenWithMessage(Strings.findCoursesEnrollmentSuccessfulMessage, courseID: courseID)
+                self?.showMainScreenWithMessage(TDLocalizeSelectSwift("FIND_COURSES_ENROLLMENT_SUCCESSFUL_MESSAGE"), courseID: courseID)
             }
             else {
-                self?.showOverlayMessage(Strings.findCoursesEnrollmentErrorDescription)
+                self?.showOverlayMessage(TDLocalizeSelectSwift("FIND_COURSES_ENROLLMENT_ERROR_DESCRIPTION"))
             }
         }
     }

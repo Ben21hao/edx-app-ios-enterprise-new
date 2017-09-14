@@ -63,10 +63,10 @@
     if ([UserCouponItem.coupon_type isEqualToString:@"满减券"]) {
         float money = [_UserCouponItem.cutdown_price floatValue];
         titleStr = [NSString stringWithFormat:@"￥%.2f",money];
-        subTitleStr = [Strings couponDeduction];
+        subTitleStr = TDLocalizeSelect(@"COUPON_DEDUCTION", nil);
         
     } else if ([UserCouponItem.coupon_type isEqualToString:@"折扣券"]) {
-        subTitleStr = [Strings couponDiscount];
+        subTitleStr = TDLocalizeSelect(@"COUPON_DISCOUNT", nil);
         
         float rate = [_UserCouponItem.discount_rate floatValue] * 10.0;
         titleStr = [NSString stringWithFormat:@"%.2lf折",rate];
@@ -77,8 +77,8 @@
         
     } else {
         float money = [_UserCouponItem.cutdown_price floatValue];
-        titleStr = [Strings couponForCourseWithCount:[NSString stringWithFormat:@"%.2lf",money]];
-        subTitleStr = [Strings couponEnterprise];
+        titleStr = [TDLocalizeSelect(@"COUPON_FOR_COURSE", nil) oex_formatWithParameters:@{@"count" : [NSString stringWithFormat:@"%.2lf",money]}];
+        subTitleStr = TDLocalizeSelect(@"COUPON_ENTERPRISE", nil);
     }
     
     _firstL.attributedText = [baseTool setDetailString:titleStr withFont:32 withColorStr:@"#ffffff"];
@@ -100,7 +100,7 @@
     self.detailButton.selected = self.UserCouponItem.isSelected;
     
     NSRange range = [self.UserCouponItem.coupon_begin_at rangeOfString:@"T"];
-    self.fourthL.text = [Strings couponPeriodWithStartdate:[_UserCouponItem.coupon_begin_at substringToIndex:range.location] enddate:[_UserCouponItem.coupon_end_at substringToIndex:range.location]];
+    self.fourthL.text =  [TDLocalizeSelect(@"", nil) oex_formatWithParameters:@{@"startDate" : [_UserCouponItem.coupon_begin_at substringToIndex:range.location], @"endDate" : [_UserCouponItem.coupon_end_at substringToIndex:range.location]}];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

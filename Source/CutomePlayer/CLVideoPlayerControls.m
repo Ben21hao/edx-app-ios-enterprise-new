@@ -130,14 +130,14 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
 @implementation CLVideoPlayerControls
 
 - (void)setPlayerControlAccessibilityID {
-    _durationSlider.accessibilityLabel = [Strings accessibilitySeekBar];
-    _btnPrevious.accessibilityLabel = [Strings previous];
-    _btnNext.accessibilityLabel = [Strings next];
-    _rewindButton.accessibilityLabel = [Strings accessibilityRewind];
-    _rewindButton.accessibilityHint = [Strings accessibilityRewindHint];
-    [_playPauseButton setAccessibilityLabelsForStateNormalWithNormalStateLabel:[Strings accessibilityPause] selectedStateLabel:[Strings accessibilityPlay]];
-    _btnSettings.accessibilityLabel = [Strings accessibilitySettings];
-    _fullscreenButton.accessibilityLabel = [Strings accessibilityFullscreen];
+    _durationSlider.accessibilityLabel = TDLocalizeSelect(@"ACCESSIBILITY_SEEK_BAR", nil) ;
+    _btnPrevious.accessibilityLabel = TDLocalizeSelect(@"PREVIOUS", nil);
+    _btnNext.accessibilityLabel = TDLocalizeSelect(@"NEXT", nil);
+    _rewindButton.accessibilityLabel = TDLocalizeSelect(@"ACCESSIBILITY_REWIND", nil);
+    _rewindButton.accessibilityHint = TDLocalizeSelect(@"ACCESSIBILITY_REWIND_HINT", nil);
+    [_playPauseButton setAccessibilityLabelsForStateNormalWithNormalStateLabel:TDLocalizeSelect(@"ACCESSIBILITY_PAUSE", nil) selectedStateLabel:TDLocalizeSelect(@"ACCESSIBILITY_PLAY", nil)];
+    _btnSettings.accessibilityLabel = TDLocalizeSelect(@"ACCESSIBILITY_SETTINGS", nil);
+    _fullscreenButton.accessibilityLabel = TDLocalizeSelect(@"ACCESSIBILITY_FULLSCREEN", nil);
     _tapButton.isAccessibilityElement = NO;
 }
 
@@ -1722,7 +1722,7 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
         self.playPauseButton.frame = CGRectMake((self.frame.size.width / 2) - (playWidth / 2), (self.frame.size.height / 2) - (playHeight / 2), playWidth, playHeight);
 
         [_fullscreenButton setImage:[UIImage ShrinkIcon] forState:UIControlStateNormal];
-        _fullscreenButton.accessibilityLabel = [Strings accessibilityExitFullscreen];
+        _fullscreenButton.accessibilityLabel = TDLocalizeSelect(@"ACCESSIBILITY_EXIT_FULLSCREEN", nil);
         [self voiceOverOnSettings];
     }
     else if(self.style == CLVideoPlayerControlsStyleEmbedded || (self.style == CLVideoPlayerControlsStyleDefault && !self.moviePlayer.isFullscreen)) {
@@ -1751,7 +1751,7 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
         self.playPauseButton.frame = CGRectMake((self.frame.size.width / 2) - (playWidth / 2), (self.frame.size.height / 2) - (playHeight / 2), playWidth, playHeight);
 
         [_fullscreenButton setImage:[UIImage ExpandIcon] forState:UIControlStateNormal];
-        _fullscreenButton.accessibilityLabel = [Strings accessibilityFullscreen];
+        _fullscreenButton.accessibilityLabel = TDLocalizeSelect(@"ACCESSIBILITY_FULLSCREEN", nil);
         [self voiceOverOnSettings];
         [self didHidePrevNext];
     }

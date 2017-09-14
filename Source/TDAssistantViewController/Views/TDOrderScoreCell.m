@@ -90,19 +90,19 @@
     
     switch (sender.tag) {
         case 0:
-            self.scoreLabel.text = NSLocalizedString(@"NOT_SATISFIED", nil);
+            self.scoreLabel.text = TDLocalizeSelect(@"NOT_SATISFIED", nil);
             break;
         case 1:
-            self.scoreLabel.text = NSLocalizedString(@"NOT_SATISFIED", nil);
+            self.scoreLabel.text = TDLocalizeSelect(@"NOT_SATISFIED", nil);
             break;
         case 2:
-            self.scoreLabel.text = NSLocalizedString(@"COMMOND_SATISFIED", nil);
+            self.scoreLabel.text = TDLocalizeSelect(@"COMMOND_SATISFIED", nil);
             break;
         case 3:
-            self.scoreLabel.text = NSLocalizedString(@"COMMOND_SATISFIED", nil);
+            self.scoreLabel.text = TDLocalizeSelect(@"COMMOND_SATISFIED", nil);
             break;
         case 4:
-            self.scoreLabel.text = NSLocalizedString(@"VERY_SATISFIED", nil);
+            self.scoreLabel.text = TDLocalizeSelect(@"VERY_SATISFIED", nil);
             break;
             
         default:
@@ -168,7 +168,7 @@
     self.bgView.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.bgView];
     
-    self.topView = [[TDBaseView alloc] initWithTitle:NSLocalizedString(@"STATISFACTION_LEVEL", nil)];
+    self.topView = [[TDBaseView alloc] initWithTitle:TDLocalizeSelect(@"STATISFACTION_LEVEL", nil)];
     [self.bgView addSubview:self.topView];
     
     self.starView = [[UIView alloc] init];

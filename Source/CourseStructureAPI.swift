@@ -49,7 +49,7 @@ public struct CourseOutlineAPI {
             blockCount : [CourseBlock.Category.Video.rawValue],
             studentViewData : [CourseBlock.Category.Video, CourseBlock.Category.Discussion]
         )
-        print("课程大纲  --------- ==== \(courseID)\n --- \(parameters) ")
+        print("课件大纲列表  --------- ==== \(courseID)\n --- \(parameters) ")
         return NetworkRequest(
             method : .GET,
             path : "/api/courses/v1/blocks/",

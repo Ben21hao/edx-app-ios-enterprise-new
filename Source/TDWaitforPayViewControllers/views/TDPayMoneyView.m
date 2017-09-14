@@ -29,7 +29,7 @@
     self.createOrderButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.createOrderButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     [self.createOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.createOrderButton setTitle:NSLocalizedString(@"PAY_TITLE", nil) forState:UIControlStateNormal];
+    [self.createOrderButton setTitle:TDLocalizeSelect(@"PAY_TITLE", nil) forState:UIControlStateNormal];
     [self addSubview:self.createOrderButton];
     
     self.moneyLabel = [[UILabel alloc] init];

@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface VHDocumentView : UIImageView
-@property(nonatomic,copy) NSString  *imagePath;
+
+@property(nonatomic,copy) NSString *imagePath;
+
 - (void)drawDocHandList:(NSArray*)docList whiteBoardHandList:(NSArray*)boardList;
+
 @end

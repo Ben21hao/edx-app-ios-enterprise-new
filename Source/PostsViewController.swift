@@ -39,9 +39,9 @@ class PostsViewController: TDSwiftBaseViewController, UITableViewDataSource, UIT
         var navigationItemTitle : String? {
             switch self {
             case let Topic(topic): return topic.name
-            case Search(_): return Strings.searchResults
-            case Following(_): return Strings.postsImFollowing
-            case AllPosts(_): return Strings.allPosts
+            case Search(_): return TDLocalizeSelectSwift("SEARCH_RESULTS")
+            case Following(_): return TDLocalizeSelectSwift("POSTS_IM_FOLLOWING")
+            case AllPosts(_): return TDLocalizeSelectSwift("ALL_POSTS")
             }
         }
 
@@ -57,10 +57,10 @@ class PostsViewController: TDSwiftBaseViewController, UITableViewDataSource, UIT
         
         var noResultsMessage : String {
             switch self {
-            case Topic(_): return Strings.noResultsFound //此讨论内容暂未有帖子。
-            case AllPosts: return Strings.noCourseResults //课程讨论暂未有内容。
-            case Following: return Strings.noFollowingResults //您没有关注任何帖子。
-            case let .Search(string) : return Strings.emptyResultset(queryString: string) //未找到{}的结果
+            case Topic(_): return TDLocalizeSelectSwift("NO_RESULTS_FOUND") //此讨论内容暂未有帖子。
+            case AllPosts: return TDLocalizeSelectSwift("NO_COURSE_RESULTS") //课程讨论暂未有内容。
+            case Following: return TDLocalizeSelectSwift("NO_FOLLOWING_RESULTS") //您没有关注任何帖子。
+            case let .Search(string) : return TDLocalizeSelectSwift("EMPTY_RESULTSET").oex_formatWithParameters(["query_string" : string]) //未找到{}的结果
             }
         }
         
@@ -214,10 +214,10 @@ class PostsViewController: TDSwiftBaseViewController, UITableViewDataSource, UIT
     
     private func updateAccessibility() {
         
-        filterButton.accessibilityLabel = Strings.Accessibility.discussionFilterBy(filterBy: titleForFilter(selectedFilter))
-        filterButton.accessibilityHint = Strings.accessibilityShowsDropdownHint
-        sortButton.accessibilityLabel = Strings.Accessibility.discussionSortBy(sortBy: titleForSort(selectedOrderBy))
-        sortButton.accessibilityHint = Strings.accessibilityShowsDropdownHint
+        filterButton.accessibilityLabel = TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_FILTER_BY").oex_formatWithParameters(["filter_by" : titleForFilter(selectedFilter)])
+        filterButton.accessibilityHint = TDLocalizeSelectSwift("ACCESSIBILITY_SHOWS_DROPDOWN_HINT")
+        sortButton.accessibilityLabel = TDLocalizeSelectSwift("ACCESSIBILITY.DISCUSSION_SORT_BY").oex_formatWithParameters(["sort_by" : titleForSort(selectedOrderBy)])
+        sortButton.accessibilityHint = TDLocalizeSelectSwift("ACCESSIBILITY_SHOWS_DROPDOWN_HINT")
     }
     
     private func configureSearchBar() {
@@ -226,7 +226,7 @@ class PostsViewController: TDSwiftBaseViewController, UITableViewDataSource, UIT
         }
         
 //        searchBar = UISearchBar()
-        searchBar.applyStandardStyles(withPlaceholder: Strings.searchAllPosts)
+        searchBar.applyStandardStyles(withPlaceholder: TDLocalizeSelectSwift("SEARCH_ALL_POSTS"))
         searchBar.text = context.queryString
         searchBarDelegate = DiscussionSearchBarDelegate() { [weak self] text in
             self?.context = Context.Search(text)
@@ -329,7 +329,7 @@ class PostsViewController: TDSwiftBaseViewController, UITableViewDataSource, UIT
         
         view.backgroundColor = environment.styles.baseColor5()
         
-        self.refineLabel.attributedText = self.refineTextStyle.attributedStringWithText(Strings.refine)
+        self.refineLabel.attributedText = self.refineTextStyle.attributedStringWithText(TDLocalizeSelectSwift("REFINE"))
         
         var buttonTitle = NSAttributedString.joinInNaturalLayout(
             [Icon.Filter.attributedTextWithStyle(filterTextStyle.withSize(.XSmall)),
@@ -337,14 +337,14 @@ class PostsViewController: TDSwiftBaseViewController, UITableViewDataSource, UIT
         filterButton.setAttributedTitle(buttonTitle, forState: .Normal, animated : false)
         
         buttonTitle = NSAttributedString.joinInNaturalLayout([Icon.Sort.attributedTextWithStyle(filterTextStyle.withSize(.XSmall)),
-            filterTextStyle.attributedStringWithText(Strings.recentActivity)])
+            filterTextStyle.attributedStringWithText(TDLocalizeSelectSwift("RECENT_ACTIVITY"))])
         sortButton.setAttributedTitle(buttonTitle, forState: .Normal, animated : false)
         
         updateNewPostButtonStyle()
         
         let style = OEXTextStyle(weight : .Normal, size: .Base, color: environment.styles.neutralWhite())
         buttonTitle = NSAttributedString.joinInNaturalLayout([Icon.Create.attributedTextWithStyle(style.withSize(.XSmall)),
-            style.attributedStringWithText(Strings.createANewPost)])
+            style.attributedStringWithText(TDLocalizeSelectSwift("CREATE_A_NEW_POST"))])
         newPostButton.setAttributedTitle(buttonTitle, forState: .Normal)
         
         newPostButton.contentVerticalAlignment = .Center
@@ -535,17 +535,17 @@ class PostsViewController: TDSwiftBaseViewController, UITableViewDataSource, UIT
 
     func titleForFilter(filter : DiscussionPostsFilter) -> String {
         switch filter {
-        case .AllPosts: return Strings.allPosts
-        case .Unread: return Strings.unread
-        case .Unanswered: return Strings.unanswered
+        case .AllPosts: return TDLocalizeSelectSwift("ALL_POSTS")
+        case .Unread: return TDLocalizeSelectSwift("UNREAD")
+        case .Unanswered: return TDLocalizeSelectSwift("UNANSWERED")
         }
     }
     
     func titleForSort(filter : DiscussionPostsSort) -> String {
         switch filter {
-        case .RecentActivity: return Strings.recentActivity
-        case .MostActivity: return Strings.mostActivity
-        case .VoteCount: return Strings.mostVotes
+        case .RecentActivity: return TDLocalizeSelectSwift("RECENT_ACTIVITY")
+        case .MostActivity: return TDLocalizeSelectSwift("MOST_ACTIVITY")
+        case .VoteCount: return TDLocalizeSelectSwift("MOST_VOTES")
         }
     }
     
@@ -563,7 +563,7 @@ class PostsViewController: TDSwiftBaseViewController, UITableViewDataSource, UIT
         }
         
         if isFilterApplied() {
-            return context.noResultsMessage + " " + Strings.removeFilter
+            return context.noResultsMessage + " " + TDLocalizeSelectSwift("REMOVE_FILTER")
         }
         else {
             return context.noResultsMessage

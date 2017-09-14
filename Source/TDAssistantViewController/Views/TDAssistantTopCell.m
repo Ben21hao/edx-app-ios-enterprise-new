@@ -40,11 +40,11 @@
     self.videoButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.videoButton.layer.cornerRadius = 13.0;
     self.videoButton.showsTouchWhenHighlighted = YES;
-    [self.videoButton setTitle:NSLocalizedString(@"VIDEO_REPLAY", nil) forState:UIControlStateNormal];
+    [self.videoButton setTitle:TDLocalizeSelect(@"VIDEO_REPLAY", nil) forState:UIControlStateNormal];
     [self.videoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.bgView addSubview:self.videoButton];
     
-    self.cancelButton = [self setButtonConstraint:NSLocalizedString(@"CANCEL", nil) backGroundColor:colorHexStr1 titleColor:colorHexStr13];
+    self.cancelButton = [self setButtonConstraint:TDLocalizeSelect(@"CANCEL", nil) backGroundColor:colorHexStr1 titleColor:colorHexStr13];
     [self.bgView addSubview:self.cancelButton];
 }
 
