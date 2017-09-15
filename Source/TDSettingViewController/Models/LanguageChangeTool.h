@@ -10,7 +10,7 @@
 
 @interface LanguageChangeTool : NSObject
 
-+ (NSBundle *)bundle;//获取当前资源文件
++ (NSBundle *)bundle;//获取当前资源文件 
 
 + (void)initUserLanguage;//初始化语言文件
 

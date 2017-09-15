@@ -236,6 +236,7 @@
 }
 
 - (void)tapGestureAction { //收起弹框
+    self.payType = self.isInstallWechat ? 1 : 2;
     [self.sheetView removeFromSuperview];
 }
 
@@ -246,6 +247,7 @@
 - (void)wechatAction:(UIButton *)sender { //微信
     [self choosePayType:YES];
 }
+
 
 - (void)alipayAction:(UIButton *)sender { //支付宝
     [self choosePayType:NO];

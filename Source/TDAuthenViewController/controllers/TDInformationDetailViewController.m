@@ -115,6 +115,7 @@ typedef NS_ENUM(NSInteger,TDMessageShow) {
             NSString *identifyStr = [NSString stringWithFormat:@"%@%@",ELITEU_URL,dataDic[@"identity_image"]];
             
             [self.leftImage sd_setImageWithURL:[NSURL URLWithString:faceStr] placeholderImage:[UIImage imageNamed:@"tdFaceImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//                NSLog(@"%ld------>>%@",(long)cacheType,imageURL);
             }];
             [self.rightImage sd_setImageWithURL:[NSURL URLWithString:identifyStr] placeholderImage:[UIImage imageNamed:@"tdIdentify"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             }];
@@ -128,7 +129,7 @@ typedef NS_ENUM(NSInteger,TDMessageShow) {
         }
         
         [self.loadIngView removeFromSuperview];
-        NSLog(@"msg ---- %@ \n responseDic ==== %@",responseDic[@"msg"],responseDic);
+//        NSLog(@"msg ---- %@ \n responseDic ==== %@",responseDic[@"msg"],responseDic);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];

@@ -154,6 +154,12 @@
 /* 对图片链接中的 中文 和 空格进行处理，要不就显示不出来 */
 - (NSString *)dealwithImageStr:(NSString *)imageStr;
 
+
+/* 相机权限设置提示 
+ type ：0 相册，1 相机
+ */
+- (BOOL)judgeCameraOrAlbumUserAllow:(NSInteger)type;
+
 @end
 
 

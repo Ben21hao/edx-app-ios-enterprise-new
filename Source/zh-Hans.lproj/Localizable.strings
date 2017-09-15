@@ -1746,4 +1746,8 @@
 "LANGUAGE_SETTING_TEXT" = "设置语言";
 /*暂无资料 No data yes.*/
 "NO_DATA_TEXT" = "暂无资料";
+/*暂未允许{name}访问您的相机，请前往设置 Not allow app to access your camera, please go to settings.*/
+"ALLOW_USE_CAMERA_TEXT" = "暂未允许{name}访问您的相机，请前往设置";
+/*暂未允许{name}访问您的相机，请前往设置 Not allow app to access your album, please go to settings.*/
+"ALLOW_USE_ALBUM_TEXT" = "暂未允许{name}访问您的相册，请前往设置";
 

@@ -29,7 +29,7 @@ private func loadJSON(jsonFile: String) throws -> JSON {
     var js: JSON
     
     //通过路径影响 bundle,从而手动改变系统语言
-    let str : String = "\(NSUserDefaults.standardUserDefaults().valueForKey("userLanguage")!)"
+    let str : String = "\(NSUserDefaults.standardUserDefaults().valueForKey("userLanguage")!)" //当前选择的语言
     let str1 = str + ".lproj/" + jsonFile
     
     if let filePath = NSBundle.mainBundle().pathForResource(str1, ofType: "json") {

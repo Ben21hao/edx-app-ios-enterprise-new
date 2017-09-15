@@ -116,3 +116,4 @@ class ProfileBanner: UIView {
         return OEXTextStyle(weight : .Normal, size: .Large, color: style.textColor)
     }
 }
+

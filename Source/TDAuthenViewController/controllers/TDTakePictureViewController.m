@@ -12,8 +12,9 @@
 
 #import "TDTakePitureView.h"
 #import "UIImage+Crop.h"
+#import "NSString+OEXFormatting.h"
 
-@interface TDTakePictureViewController () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface TDTakePictureViewController () <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
 
 @property (nonatomic,strong) TDTakePitureView *authenPhotoView;
 @property (nonatomic,strong) UIImage *image;
@@ -83,7 +84,34 @@
 
 #pragma mark - action
 - (void)imageButtonAction:(UIButton *)sender { //拍照
-    [self selectWayToGetPhoto];
+    TDBaseToolModel *model = [[TDBaseToolModel alloc] init];
+    BOOL isAuthen = [model judgeCameraOrAlbumUserAllow:1];
+    
+    isAuthen ? [self selectWayToGetPhoto] : [self showAlertView:1];
+}
+
+- (void)showAlertView:(NSInteger)type {
+    
+    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+    CFShow((__bridge CFTypeRef)(infoDic));
+    NSString *appName = infoDic[@"CFBundleDisplayName"];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"SYSTEM_WARING", nil)
+                                                        message:[TDLocalizeSelect(@"ALLOW_USE_CAMERA_TEXT", nil) oex_formatWithParameters:@{@"name": appName}]
+                                                       delegate:self
+                                              cancelButtonTitle:TDLocalizeSelect(@"CANCEL", nil)
+                                              otherButtonTitles:TDLocalizeSelect(@"OK", nil), nil];
+    [alertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        [self gotoPhoneSystemSetting];
+    }
+}
+
+- (void)gotoPhoneSystemSetting {
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 }
 
 - (void)resetButtonAction:(UIButton *)sender { //重拍

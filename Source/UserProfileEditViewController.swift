@@ -118,7 +118,7 @@ extension UserProfile : FormData {
     }
 }
 
-class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDelegate {
+class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDelegate,UIAlertViewDelegate {
     
     typealias Environment = protocol<OEXAnalyticsProvider, DataManagerProvider, NetworkManagerProvider>
     
@@ -148,7 +148,7 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
     
     private func makeHeader() -> UIView { //表头
         
-        banner = ProfileBanner(editable: true) { [weak self] in
+        banner = ProfileBanner(editable: true) { [weak self] in //更改
             self?.imagePicker = ProfilePictureTaker(delegate: self!)
             self?.imagePicker?.start(self!.profile.hasProfileImage)
         }
@@ -482,6 +482,28 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
         
         self.tableView.tableHeaderView = self.tableView.tableHeaderView
     }
+    
+    func showAlertView(type: NSInteger) {
+        
+        let infoDic : NSDictionary = NSBundle.mainBundle().infoDictionary!
+        CFShow(infoDic)
+        let appName = infoDic["CFBundleDisplayName"]
+        
+        let typeStr : String = type == 0 ? "ALLOW_USE_ALBUM_TEXT" : "ALLOW_USE_CAMERA_TEXT"
+        
+        let alertView = UIAlertView.init(title: TDLocalizeSelectSwift("SYSTEM_WARING"), message: TDLocalizeSelectSwift(typeStr).oex_formatWithParameters(["name": "\(appName!)"]), delegate: self, cancelButtonTitle: TDLocalizeSelectSwift("CANCEL"), otherButtonTitles: TDLocalizeSelectSwift("OK"))
+        alertView.show()
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex == 1 {
+            gotoPhoneSystemSetting()
+        }
+    }
+    
+    func gotoPhoneSystemSetting() {
+        UIApplication.sharedApplication().openURL(NSURL.init(string: UIApplicationOpenSettingsURLString)!)
+    }
 }
 
 /** Error Toast */
@@ -531,6 +553,10 @@ private class ErrorToastView : UIView {
 
 //MARK: imagePicker Delegate
 extension UserProfileEditViewController : ProfilePictureTakerDelegate {
+    
+    func gotoSystemSettins(type: NSInteger) {
+        self.showAlertView(type)
+    }
     
     func showChooserAlert(alert: UIAlertController) {
         self.presentViewController(alert, animated: true, completion: nil)

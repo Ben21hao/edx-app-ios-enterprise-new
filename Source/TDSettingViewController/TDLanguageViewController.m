@@ -41,7 +41,7 @@
 }
 
 - (void)languageChangeAction {
-    self.titleViewLabel.text = TDLocalizeSelect(@"LANGUAGE_TEXT", nil);
+    self.titleViewLabel.text = TDLocalizeSelect(@"LANGUAGE_SETTING_TEXT", nil);
 }
 
 #pragma mark - tableView Delegate
@@ -65,8 +65,8 @@
     cell.textLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
     
     NSString *rowStr = [[NSUserDefaults standardUserDefaults] valueForKey:@"languageSelected"];
-    NSString *languageStr = [[NSUserDefaults standardUserDefaults] valueForKey:@"userLanguage"];
-    NSLog(@"%@ -- >> %@",rowStr,languageStr);
+//    NSString *languageStr = [[NSUserDefaults standardUserDefaults] valueForKey:@"userLanguage"];
+//    NSLog(@"%@ -- >> %@",rowStr,languageStr);
     
     cell.accessoryType = [rowStr intValue] == indexPath.row ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
 
@@ -95,7 +95,8 @@
     
     if (indexPath.row == 0) {
         
-        NSArray* languages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
+        //查看当前系统语言 - 可以有几种方式拿到
+        NSArray *languages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
         NSString *systemStr = [languages objectAtIndex:0];
         [LanguageChangeTool setUserlanguage: [systemStr isEqualToString:@"en"] ? @"en" : @"zh-Hans"];//zh-Hans-CN
 
