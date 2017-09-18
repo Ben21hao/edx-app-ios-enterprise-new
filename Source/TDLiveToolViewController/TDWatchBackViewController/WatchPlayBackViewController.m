@@ -44,7 +44,6 @@ static AnnouncementView* announcementView = nil;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
 @property (weak, nonatomic) IBOutlet UIView *showView;//显示数据页面
 @property (strong, nonatomic) IBOutlet UIView *inputView;//输入页
-@property (strong, nonatomic) IBOutlet UIButton *inputButton;//输入按钮
 
 @property (nonatomic,assign) VHallMovieVideoPlayMode playModelTemp;
 @property (nonatomic,strong) MPMoviePlayerController *hlsMoviePlayer;
@@ -337,7 +336,6 @@ static AnnouncementView* announcementView = nil;
     
     void (^resetStartPlay)(NSString *msg) = ^(NSString *msg){
         dispatch_async(dispatch_get_main_queue(), ^{
-//            [UIAlertView popupAlertByDelegate:nil title:msg message:nil];
             [self.view makeToast:msg duration:1.08 position:CSToastPositionCenter];
         });
     };
@@ -360,7 +358,7 @@ static AnnouncementView* announcementView = nil;
         }
             break;
         case kLivePlayGetUrlError: {
-            msg = TDLocalizeSelect(@"UNABLE_ACQUIRE_SERVER", nil);
+//            msg = TDLocalizeSelect(@"UNABLE_ACQUIRE_SERVER", nil);
             resetStartPlay(info[@"content"]);
         }
             break;

@@ -1750,3 +1750,14 @@
 "ALLOW_USE_CAMERA_TEXT" = "Not allow {name} to access your camera, please go to settings.";
 /*暂未允许{name}访问您的相机，请前往设置 Not allow app to access your album, please go to settings.*/
 "ALLOW_USE_ALBUM_TEXT" = "暂未允许{name}访问您的相册，请前往设置";
+
+/*正在刷新Refreshing*/
+"REFRESHING_TEXT" = "Refreshing";
+/*下拉刷新Drop refresh*/
+"DROP_REFRESH_TEXT" = "Drop refresh";
+/*松开后刷新Refresh after release*/
+"RELEASE_REFRESH_TEXT" = "Refresh after release";
+/*正在加载...Loading...*/
+"LOADING_TEXT" = "Loading...";
+/*已加载全部Loaded all*/
+"LOADED_ALL_TEXT" = "Loaded all";

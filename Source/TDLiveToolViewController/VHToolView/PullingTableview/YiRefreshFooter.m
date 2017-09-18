@@ -12,8 +12,7 @@
 
 #import "YiRefreshFooter.h"
 #import "RefreshAnimationView.h"
-#define kRefreshHeaderTitleLoading @"正在加载..."
-#define kRefreshHeaderTitleEnd     @"已加载全部"
+
 
 #define kTextColor MakeColor(127, 127, 127, 1)
 
@@ -35,8 +34,8 @@
 
 @implementation YiRefreshFooter
 
-- (void)footer
-{
+- (void)footer {
+    
     scrollWidth=_scrollView.frame.size.width;
     footerHeight=40;
     scrollFrameHeight=_scrollView.frame.size.height;
@@ -52,10 +51,10 @@
     
     footerLabel=[[UILabel alloc] initWithFrame:CGRectMake((scrollWidth-labelWidth)/2, footerIV.bottom+5, labelWidth, footerHeight)];
     [footerView addSubview:footerLabel];
-    footerLabel.textAlignment=NSTextAlignmentCenter;
-    footerLabel.text=kRefreshHeaderTitleLoading;
+    footerLabel.textAlignment = NSTextAlignmentCenter;
+    footerLabel.text = TDLocalizeSelect(@"LOADING_TEXT", nil);
     footerLabel.font=[UIFont systemFontOfSize:12];
-    footerLabel.textColor=kTextColor;
+    footerLabel.textColor = kTextColor;
     
 //    footerIV.image=[UIImage imageNamed:@"loading1.png"];
 //    
@@ -97,8 +96,7 @@
 /**
  *  开始刷新操作  如果正在刷新则不做操作
  */
-- (void)beginRefreshing
-{
+- (void)beginRefreshing {
     if (!isRefresh && !_reachedTheEnd) {
         isRefresh=YES;
         [footerIV startAnimating];
@@ -114,8 +112,7 @@
 /**
  *  关闭刷新操作  请加在UIScrollView数据刷新后，如[tableView reloadData];
  */
-- (void)endRefreshing
-{
+- (void)endRefreshing {
     if(!isRefresh)return;
     
     isRefresh=NO;
@@ -128,8 +125,7 @@
     });
 }
 
-- (void)endRefreshingWithResponsed:(void(^)())responsed
-{
+- (void)endRefreshingWithResponsed:(void(^)())responsed {
     
     if(!isRefresh)return;
     
@@ -147,17 +143,14 @@
     });
 
 }
-- (void)dealloc
-{
+- (void)dealloc {
     [_scrollView removeObserver:self forKeyPath:@"contentOffset"];
 }
 
-
-- (void)setReachedTheEnd:(BOOL)reachedTheEnd
-{
+- (void)setReachedTheEnd:(BOOL)reachedTheEnd {
     _reachedTheEnd = reachedTheEnd;
     footerIV.hidden = _reachedTheEnd;
-    footerLabel.text =_reachedTheEnd?kRefreshHeaderTitleEnd:kRefreshHeaderTitleLoading;
+    footerLabel.text =_reachedTheEnd ? TDLocalizeSelect(@"LOADED_ALL_TEXT", nil) : TDLocalizeSelect(@"LOADING_TEXT", nil);
 }
 
 @end

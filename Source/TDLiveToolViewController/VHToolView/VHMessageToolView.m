@@ -82,8 +82,8 @@
     
     _previousTextViewContentHeight = [self getTextViewContentH:_msgTextView];
     
-    self.sendMsgButton.titleLabel.font = [UIFont systemFontOfSize:16];
     self.sendMsgButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.sendMsgButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     [self.sendMsgButton setTitle:TDLocalizeSelect(@"SEND_MESSAGE_BUTTON", nil) forState:UIControlStateNormal];
     [self.sendMsgButton setUserInteractionEnabled:NO];
     
@@ -94,7 +94,7 @@
         [self.sendMsgButton setTitleColor:MessageTool_SendBtnColor forState:UIControlStateNormal];
     }
     
-    self.sendMsgButton.frame = CGRectMake(CGRectGetWidth(self.bounds) - 55 ,kVerticalPadding, 50, kInputTextViewMinHeight);
+    self.sendMsgButton.frame = CGRectMake(CGRectGetWidth(self.bounds) - 53 ,kVerticalPadding, 50, kInputTextViewMinHeight);
     [self.sendMsgButton addTarget:self action:@selector(sendMsgButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.toolBackGroundView addSubview:self.sendMsgButton];
     
@@ -104,7 +104,6 @@
     } else {
         [_smallButton setBackgroundImage: [UIImage imageNamed:@"UIModel.bundle/message_emoji.tiff"] forState:UIControlStateNormal];
     }
-    
     [_smallButton setBackgroundImage: [UIImage imageNamed:@"UIModel.bundle/live_keyboard.tiff"] forState:UIControlStateSelected];
     
     [_smallButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];

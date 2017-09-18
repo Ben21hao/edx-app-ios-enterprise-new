@@ -34,10 +34,10 @@
 
 @property (strong, nonatomic) UIView *toolBackGroundView;
 @property (strong, nonatomic) VHMessageTextView *msgTextView;
-@property (strong, nonatomic) UIButton *sendMsgButton;
+@property (strong, nonatomic) UIButton *sendMsgButton;//发送
+@property (strong, nonatomic) UIButton *smallButton;//表情
 
 @property (nonatomic) CGFloat maxTextInputViewHeight;
-@property (strong, nonatomic) UIButton *smallButton;
 @property (nonatomic) CGRect faceRect;
 @property(nonatomic,assign) int  maxLength;//最大字符个数
 

@@ -563,7 +563,7 @@ static const NSTimeInterval RewindTimeInterval = 30;
     [self.captionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.barView.mas_top);
         make.right.mas_equalTo(self.topView.mas_right).offset(-58);
-        make.size.mas_equalTo(CGSizeMake(88, 44));
+        make.size.mas_equalTo(CGSizeMake(108, 44));
     }];
     
     [self.activityView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -600,7 +600,6 @@ static const NSTimeInterval RewindTimeInterval = 30;
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

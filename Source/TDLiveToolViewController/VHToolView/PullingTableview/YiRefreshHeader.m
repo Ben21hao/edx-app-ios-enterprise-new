@@ -12,9 +12,6 @@
 #import "YiRefreshHeader.h"
 #import "RefreshAnimationView.h"
 
-#define kRefreshHeaderTitleLoading @"正在刷新"
-#define kRefreshHeaderTitlePullDown @"下拉刷新"
-#define kRefreshHeaderTitleRelease @"松开后刷新"
 
 #define kTextColor MakeColor(127, 127, 127, 1)
 
@@ -39,9 +36,9 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _titleLoading=kRefreshHeaderTitleLoading;
-        _titlePullDown=kRefreshHeaderTitlePullDown;
-        _titleRelease=kRefreshHeaderTitleRelease;
+        _titleLoading = TDLocalizeSelect(@"REFRESHING_TEXT", nil);
+        _titlePullDown = TDLocalizeSelect(@"DROP_REFRESH_TEXT", nil);
+        _titleRelease = TDLocalizeSelect(@"RELEASE_REFRESH_TEXT", nil);
     }
     return self;
 }
