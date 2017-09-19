@@ -24,13 +24,16 @@ static NSBundle *bundle = nil;
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     NSString *string = [def valueForKey:@"userLanguage"];
     
-    if(string.length == 0){
+    
+    //获取系统当前语言版本(中文zh-Hans-CN,英文en-CN)
+    NSArray* languages = [def objectForKey:@"AppleLanguages"];
+    NSString *systemStr = [languages objectAtIndex:0];
+    
+    NSString *rowStr = [[NSUserDefaults standardUserDefaults] valueForKey:@"languageSelected"];
+    
+    if(string.length == 0 || [rowStr intValue] == 0){
         
-        //获取系统当前语言版本(中文zh-Hans,英文en)
-        NSArray* languages = [def objectForKey:@"AppleLanguages"];
-        NSString *systemStr = [languages objectAtIndex:0];
-        
-        string = [systemStr isEqualToString:@"en"] ? @"en" : @"zh-Hans";
+        string = [systemStr isEqualToString:@"en-CN"] || [systemStr isEqualToString:@"en"] ? @"en" : @"zh-Hans";
 
         [def setValue:string forKey:@"userLanguage"];
         [def synchronize];//持久化，不加的话不会保存
