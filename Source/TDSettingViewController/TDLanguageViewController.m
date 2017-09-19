@@ -98,7 +98,7 @@
         //查看当前系统语言 - 可以有几种方式拿到
         NSArray *languages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
         NSString *systemStr = [languages objectAtIndex:0];
-        [LanguageChangeTool setUserlanguage: [systemStr isEqualToString:@"en"] ? @"en" : @"zh-Hans"];//zh-Hans-CN
+        [LanguageChangeTool setUserlanguage: [systemStr isEqualToString:@"en-CN"] || [systemStr isEqualToString:@"en"] ? @"en" : @"zh-Hans"];//zh-Hans-CN
 
     } else {
          [LanguageChangeTool setUserlanguage: indexPath.row == 1 ? @"zh-Hans" : @"en"];
