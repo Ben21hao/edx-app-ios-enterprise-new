@@ -265,7 +265,7 @@
         
         self.loadingView.hidden = YES;
         [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
-        NSLog(@"获取评论数据 error--%@",error);
+        NSLog(@"获取评论数据 error -- %@",error);
     }];
 }
 

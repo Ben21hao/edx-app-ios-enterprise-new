@@ -33,7 +33,7 @@
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
     self.holderLabel.hidden = YES;
     if (self.inputViewResponderHandle) {
-        self.inputViewResponderHandle(YES);
+        self.inputViewResponderHandle(TDHeight > 568 ? NO : YES);
     }
     return YES;
 }
@@ -127,15 +127,5 @@
     return label;
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 @end

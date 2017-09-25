@@ -41,6 +41,7 @@
         [weakSelf handinComment];
     };
     
+    [self setButtonNoSelected];
     [self setViewConstraint];
     
     self.scoreStr = @"5";
@@ -49,6 +50,14 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+}
+
+- (void)setButtonNoSelected {
+    if (self.tagsArray.count > 0) {
+        for (TDAssistantCommentTagModel *tagModel in self.tagsArray) {
+            tagModel.isSelected = NO;
+        }
+    }
 }
 
 #pragma mark - 提交

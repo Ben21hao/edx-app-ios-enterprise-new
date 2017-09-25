@@ -177,6 +177,7 @@
             }
             
         }else if ([code intValue] == 312){
+            self.praiseButton.selected = YES;
             [[UIApplication sharedApplication].keyWindow.rootViewController.view makeToast:TDLocalizeSelect(@"AREADY_COMMENT", nil) duration:1.08 position:CSToastPositionCenter];
         } else {
             NSLog(@" 点赞出错 ==  %@",code);

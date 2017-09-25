@@ -1761,3 +1761,5 @@
 "LOADING_TEXT" = "Loading...";
 /*已加载全部Loaded all*/
 "LOADED_ALL_TEXT" = "Loaded all";
+/*检测到有版本更新，是否更新？ New version detected. Update now?*/
+"NEW_VERSION_UPDATE" = "New version detected. Update now?";

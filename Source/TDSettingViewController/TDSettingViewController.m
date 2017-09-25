@@ -100,6 +100,7 @@
         cell.textLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
         
         cell.textLabel.text = indexPath.row == 2 ? TDLocalizeSelect(@"ABOUT_APP", nil) : TDLocalizeSelect(@"LANGUAGE_TEXT", nil);
+        
         return cell;
     } 
 }
@@ -114,7 +115,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+
     if (indexPath.row == 2) {
         [self gotoAboutViewController];
         
@@ -145,9 +146,7 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
 
 
 @end
