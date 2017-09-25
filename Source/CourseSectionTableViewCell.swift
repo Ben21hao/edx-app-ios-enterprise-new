@@ -38,26 +38,29 @@ class CourseSectionTableViewCell: UITableViewCell, CourseBlockContainerCell {
         }
         
         videosStream.listen(self) {[weak self] downloads in //数据
+            
             if let downloads = downloads.value, state = self?.downloadStateForDownloads(downloads) {
                 self?.downloadView.state = state
                 self?.content.trailingView = self?.downloadView
                 self?.downloadView.itemCount = downloads.count
-            }
-            else {
+            
+            } else {
                 self?.content.trailingView = nil
             }
         }
         
         for notification in [OEXDownloadProgressChangedNotification, OEXDownloadEndedNotification, OEXVideoStateChangedNotification] {
+            
             NSNotificationCenter.defaultCenter().oex_addObserver(self, name: notification) { (_, observer, _) -> Void in
+                
                 if let state = observer.downloadStateForDownloads(observer.videosStream.value) {
                     observer.downloadView.state = state
-                }
-                else {
+                } else {
                     observer.content.trailingView = nil
                 }
             }
         }
+        
         let tapGesture = UITapGestureRecognizer()
         tapGesture.addAction {[weak self]_ in
             if let owner = self where owner.downloadView.state == .Downloading {
@@ -86,6 +89,7 @@ class CourseSectionTableViewCell: UITableViewCell, CourseBlockContainerCell {
     }
     
     func downloadStateForDownloads(videos : [OEXHelperVideoDownload]?) -> DownloadsAccessoryView.State? {
+        
         if let videos = videos where videos.count > 0 {
             let allDownloading = videos.reduce(true) {(acc, video) in
                 return acc && video.downloadState == .Partial
@@ -97,15 +101,12 @@ class CourseSectionTableViewCell: UITableViewCell, CourseBlockContainerCell {
             
             if allDownloading {
                 return .Downloading
-            }
-            else if allCompleted {
+            } else if allCompleted {
                 return .Done
-            }
-            else {
+            } else {
                 return .Available
             }
-        }
-        else {
+        } else {
             return nil
         }
     }

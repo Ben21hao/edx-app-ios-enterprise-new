@@ -303,11 +303,10 @@ public class CourseOutlineViewController :
         let courseID = self.courseID
         let analytics = environment.analytics
         
-        courseQuerier.parentOfBlockWithID(block.blockID).listenOnce(self, success:
-            { parentID in
+        courseQuerier.parentOfBlockWithID(block.blockID).listenOnce(self, success: { parentID in
                 analytics.trackSubSectionBulkVideoDownload(parentID, subsection: block.blockID, courseID: courseID, videoCount: videos.count)
-            },
-            failure: {error in
+            
+            }, failure: {error in
                 Logger.logError("ANALYTICS", "Unable to find parent of block: \(block). Error: \(error.localizedDescription)")
             }
         )

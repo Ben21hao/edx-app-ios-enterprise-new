@@ -52,6 +52,7 @@ class ProfileBanner: UIView {
         
         usernameLabel.snp_makeConstraints { (make) -> Void in
             make.leading.equalTo(shortProfView.snp_trailing).offset(6)
+            make.trailing.equalTo(self.snp_trailing).offset(-58)
             make.centerY.equalTo(shortProfView)
         }
         
@@ -72,8 +73,6 @@ class ProfileBanner: UIView {
                 self?.changeCallback?()
             }, forEvents: .TouchUpInside)
         }
-      
-
     }
     
     init(editable: Bool, didChange: (()->())) {

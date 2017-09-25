@@ -13,7 +13,8 @@ import UIKit
 
 //let ELITEU_URL = "http://192.168.0.182:8000"
 //let ELITEU_URL = "http://demo.e-ducation.cn" //f版 - 测试
-let ELITEU_URL = "http://enterprise.e-ducation.cn" //企业生产
+//let ELITEU_URL = "http://enterprise.e-ducation.cn" //企业生产
+let ELITEU_URL = "https://enterprise.demo.e-ducation.cn"
 
 
 let TDScreenWidth = UIScreen.mainScreen().bounds.size.width

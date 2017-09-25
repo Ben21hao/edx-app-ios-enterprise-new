@@ -97,7 +97,7 @@ static OEXDBManager* _sharedManager = nil;
     }
     NSPersistentStoreCoordinator* coordinator = [self persistentStoreCoordinator];
     if(coordinator != nil) {
-        self.masterManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        self.masterManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];//主线，储存无延迟
         [_masterManagedObjectContext performBlockAndWait:^{
             [_masterManagedObjectContext setPersistentStoreCoordinator:coordinator];
         }];
@@ -137,7 +137,7 @@ static OEXDBManager* _sharedManager = nil;
     NSManagedObjectContext* newContext = nil;
     NSManagedObjectContext* masterContext = _masterManagedObjectContext;
     if(masterContext != nil) {
-        newContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        newContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType]; //分支线程， 存储有延迟
         [newContext performBlockAndWait:^{
             [newContext setParentContext:masterContext];
         }];
@@ -342,7 +342,7 @@ static OEXDBManager* _sharedManager = nil;
     return [resourceData.downloadState intValue];
 }
 
-- (NSData*)dataForURLString:(NSString*)URLString {
+- (NSData *)dataForURLString:(NSString*)URLString {
     NSString* filePath = [OEXFileUtility filePathForRequestKey:URLString];
 
     if([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
@@ -764,7 +764,7 @@ static OEXDBManager* _sharedManager = nil;
 #pragma - Fetch / selection query
 
 //select the video data to show up for a user
-- (NSArray*)getAllVideoDataFor:(NSString*)username {
+- (NSArray *)getAllVideoDataFor:(NSString*)username {
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
 
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"VideoData" inManagedObjectContext:_backGroundContext]];
@@ -781,7 +781,7 @@ static OEXDBManager* _sharedManager = nil;
     return resultArray;
 }
 
-- (NSArray*)getVideoDataFor:(NSString*)username
+- (NSArray *)getVideoDataFor:(NSString*)username
                     VideoID:(NSString*)video_id {
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
 

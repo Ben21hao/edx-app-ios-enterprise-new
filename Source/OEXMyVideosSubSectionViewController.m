@@ -84,6 +84,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 //    [self setTitle:self.course.name];
     self.titleViewLabel.text = self.course.name;
     [self.leftButton addTarget:self action:@selector(navigateBack) forControlEvents:UIControlEventTouchUpInside];
+    [self setLoadDataView]; //加载页
     
     self.dataInterface = self.environment.interface;
     
@@ -102,6 +103,10 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     self.selectAllButton = [[OEXCheckBox alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     [self.selectAllButton addTarget:self action:@selector(selectAllChanged:) forControlEvents:UIControlEventTouchUpInside];
     
+    self.selectAllButton.hidden = YES;
+    self.selectAllButton.accessibilityLabel = TDLocalizeSelect(@"ACCESSIBILITY_SELECT_ALL", nil);
+    self.selectAllButton.tintColor = [[OEXStyles sharedStyles] navigationItemTintColor];
+    
     self.progressController = [[ProgressController alloc] initWithOwner:self router:self.environment.router dataInterface:self.environment.interface];
     [self.progressController hideProgessView];
     self.navigationItem.rightBarButtonItem = [self.progressController navigationItem];
@@ -116,10 +121,6 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     [self.customEditing.btn_Edit addTarget:self action:@selector(editTableClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.customEditing.btn_Delete addTarget:self action:@selector(deleteTableClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.customEditing.btn_Cancel addTarget:self action:@selector(cancelTableClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.selectAllButton.hidden = YES;
-    self.selectAllButton.accessibilityLabel = TDLocalizeSelect(@"ACCESSIBILITY_SELECT_ALL", nil);
-    self.selectAllButton.tintColor = [[OEXStyles sharedStyles] navigationItemTintColor];
     
     self.isTableEditing = NO;           // 点击编辑按钮  Check Edit button is clicked
     self.selectAll = NO;        // 是否全选  Check if all are selected
@@ -136,6 +137,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     
     [self cancelTableClicked:nil]; // To clear already selected items when traverese back from Download screen.
     
+    self.table_SubSectionVideos.tableFooterView = [UIView new];
     self.table_SubSectionVideos.separatorInset = UIEdgeInsetsZero;
 #ifdef __IPHONE_8_0
     if(IS_IOS8) {
@@ -243,7 +245,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
         }
     }
 
-    // arr_CourseData --> array of all HelperVideoDownload objects in clicked Course
+    // arr_CourseData -- array of all HelperVideoDownload objects in clicked Course
 
     for(OEXHelperVideoDownload* video in self.arr_CourseData) {
         NSMutableArray* arr_section = [[NSMutableArray alloc] init];
@@ -281,6 +283,10 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     if (self.arr_SubsectionData.count == 0 && self.requestCount == 0) {
         self.requestCount += 1;
         [self getSubsectionVideoDataFromArray];
+    }
+    
+    if (self.arr_SubsectionData.count > 0) {
+        [self.loadIngView removeFromSuperview];
     }
     
     [self.table_SubSectionVideos reloadData];

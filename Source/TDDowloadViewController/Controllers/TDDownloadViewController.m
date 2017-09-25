@@ -135,7 +135,7 @@
     NSURL* url = task.originalRequest.URL;
     
     if([OEXInterface isURLForVideo:url.absoluteString]) {
-        [self getMyVideosTableData];
+        [self reloadTable];
     }
 }
 
@@ -207,7 +207,7 @@
     }
 }
 
-- (NSString*)calculateVideosSizeInCourse:(NSArray*)arrvideo {
+- (NSString *)calculateVideosSizeInCourse:(NSArray*)arrvideo {
     
     NSString *strSize = nil;
     double size = 0.0;

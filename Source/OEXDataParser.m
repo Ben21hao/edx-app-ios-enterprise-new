@@ -84,19 +84,22 @@
     return obj_userdetails;
 }
 
-- (NSArray*)userCourseEnrollmentsWithData:(NSData*)receivedData {
+- (NSArray *)userCourseEnrollmentsWithData:(NSData*)receivedData {
+    
     NSError* error;
     NSArray* arrResponse = [NSJSONSerialization oex_JSONObjectWithData:receivedData error:&error];
+    
     NSMutableArray* arr_CourseEnrollmentObjetcs = [[NSMutableArray alloc] init];
     for(NSDictionary* dict in arrResponse) {
-        // parse level - 1
-        if(![dict isKindOfClass:[NSDictionary class]]) {
+        
+        if(![dict isKindOfClass:[NSDictionary class]]) { // parse level - 1
             continue;
         }
         NSDictionary* dictResponse = [dict oex_replaceNullsWithEmptyStrings];
 
         UserCourseEnrollment* usercoruse = [[UserCourseEnrollment alloc] initWithDictionary:dictResponse];
 
+        NSLog(@"OEXDataParser ---->> %d",usercoruse.isActive);
         // array populated with objects and returned
         if (usercoruse.isActive) {
             [arr_CourseEnrollmentObjetcs addObject:usercoruse];

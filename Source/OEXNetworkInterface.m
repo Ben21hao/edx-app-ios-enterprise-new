@@ -89,16 +89,16 @@
     return task;
 }
 
-- (NSString*)URLStringForType:(NSString*)type {
+- (NSString *)URLStringForType:(NSString*)type {
     NSMutableString* URLString = [OEXConfig sharedConfig].apiHostURL.absoluteString.mutableCopy;
 
     if([type isEqualToString:URL_USER_DETAILS]) {
         [URLString appendFormat:@"%@/%@", URL_USER_DETAILS, [OEXSession sharedSession].currentUser.username];
-    }
-    else if([type isEqualToString:URL_COURSE_ENROLLMENTS]) {
+        
+    } else if([type isEqualToString:URL_COURSE_ENROLLMENTS]) {
         [URLString appendFormat:@"%@/%@%@", URL_USER_DETAILS, [OEXSession sharedSession].currentUser.username, URL_COURSE_ENROLLMENTS];
-    }
-    else {
+        
+    } else {
         URLString = [NSMutableString stringWithString:type];
     }
 
@@ -108,7 +108,7 @@
     return URLString;
 }
 
-#pragma mark NetworkDelegate
+#pragma mark - NetworkDelegate
 
 - (void)receivedData:(NSData*)data forTask:(NSURLSessionTask*)task {
     dispatch_async(dispatch_get_main_queue(), ^{

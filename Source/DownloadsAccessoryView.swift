@@ -44,7 +44,6 @@ class DownloadsAccessoryView : UIView {
         downloadSpinner.accessibilityTraits = UIAccessibilityTraitNotEnabled;
         countLabel.accessibilityTraits = UIAccessibilityTraitNotEnabled;
         downloadButton.accessibilityTraits = UIAccessibilityTraitNotEnabled;
-        downloadButton.backgroundColor = UIColor.redColor()
         
         downloadSpinner.stopAnimating()
         

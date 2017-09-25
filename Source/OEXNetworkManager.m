@@ -271,7 +271,7 @@ static OEXNetworkManager* _sharedManager = nil;
     }
 }
 
-- (void)    URLSession:(NSURLSession*)session dataTask:(NSURLSessionDataTask*)dataTask
+- (void)URLSession:(NSURLSession*)session dataTask:(NSURLSessionDataTask*)dataTask
     didReceiveResponse:(NSURLResponse*)response
      completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler {
     if(![self isValidSession:session]) {
@@ -290,8 +290,7 @@ static OEXNetworkManager* _sharedManager = nil;
     completionHandler(NSURLSessionResponseAllow);
 }
 
-- (void)URLSession:(NSURLSession*)session dataTask:(NSURLSessionDataTask*)dataTask
-    didReceiveData:(NSData*)data {
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
     if(![self isValidSession:session]) {
         return;
     }

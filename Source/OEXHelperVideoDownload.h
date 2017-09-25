@@ -21,9 +21,9 @@ extern double const OEXMaxDownloadProgress;
 @property (nonatomic, assign) double downloadProgress;
 @property (nonatomic, strong) NSString* filePath;
 
-@property (nonatomic, assign) BOOL isVideoDownloading;  // used to get if the video downloading is in progress
-@property (nonatomic, assign) OEXDownloadState downloadState;
-@property (nonatomic, assign) OEXPlayedState watchedState;
+@property (nonatomic, assign) BOOL isVideoDownloading;  // used to get if the video downloading is in progress 是否正在下载
+@property (nonatomic, assign) OEXDownloadState downloadState; //视频下载状态，如Complete，Partial，New
+@property (nonatomic, assign) OEXPlayedState watchedState; //视频的观看状态，如Unwatched，PartiallyWatched，Watched
 @property (nonatomic, strong, nullable) NSDate* completedDate;
 @property (nonatomic, assign) NSTimeInterval lastPlayedInterval;
 

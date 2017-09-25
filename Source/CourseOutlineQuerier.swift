@@ -87,7 +87,7 @@ public class CourseOutlineQuerier : NSObject {
             }
         }
         
-//        self.interface?.addVideos(videos, forCourseWithID: courseID) //会导致视频大小和时间为0
+        self.interface?.addVideos(videos, forCourseWithID: courseID) //会导致视频大小和时间为0
     }
     
     private func loadOutlineIfNecessary() {

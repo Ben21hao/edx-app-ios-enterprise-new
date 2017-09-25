@@ -43,7 +43,7 @@ static NSBundle *bundle = nil;
     NSString *path = [[NSBundle mainBundle] pathForResource:string ofType:@"lproj"];
     bundle = [NSBundle bundleWithPath:path];//生成bundle
     
-    NSLog(@" 11--- %@ ---> %@ --- > %@" , string,path,bundle);
+//    NSLog(@" 11--- %@ ---> %@ --- > %@" , string,path,bundle);
 }
 
 // 设置语言方法

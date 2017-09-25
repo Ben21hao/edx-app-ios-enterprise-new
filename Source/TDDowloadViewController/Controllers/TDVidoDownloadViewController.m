@@ -203,8 +203,7 @@ typedef  enum OEXAlertType
 }
 
 - (void)playbackStateChanged:(NSNotification*)notification {
-    switch([_videoPlayerInterface.moviePlayerController playbackState])
-    {
+    switch([_videoPlayerInterface.moviePlayerController playbackState]) {
         case MPMoviePlaybackStateStopped:
             OEXLogInfo(@"VIDEO", @"Stopped");
             OEXLogInfo(@"VIDEO", @"Player current current duration %f total duration %f ", self.videoPlayerInterface.moviePlayerController.currentPlaybackTime, self.videoPlayerInterface.moviePlayerController.duration);
@@ -259,10 +258,9 @@ typedef  enum OEXAlertType
             
             [self.tableView reloadData];
         }
-    }
-    else if(reason == MPMovieFinishReasonUserExited) {
-    }
-    else if(reason == MPMovieFinishReasonPlaybackError) {
+        
+    } else if(reason == MPMovieFinishReasonUserExited) {
+    } else if(reason == MPMovieFinishReasonPlaybackError) {
         if([_currentTappedVideo.summary.videoURL isEqualToString:@""]) {
             [self showAlert:OEXAlertTypePlayBackContentUnAvailable];
         }

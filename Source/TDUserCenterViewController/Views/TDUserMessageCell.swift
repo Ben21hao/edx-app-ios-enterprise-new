@@ -74,6 +74,7 @@ class TDUserMessageCell: UITableViewCell {
         
         nameLabel.snp_makeConstraints { (make) in
             make.left.equalTo(headerImageView.snp_right).offset(18)
+            make.right.equalTo(bgView.snp_right).offset(-3)
             make.bottom.equalTo(bgView.snp_centerY).offset(-1)
         }
         
