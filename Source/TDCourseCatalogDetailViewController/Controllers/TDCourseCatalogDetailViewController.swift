@@ -82,7 +82,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
             setNilTimer()
         }
         
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("Come_From_Course_Detail")
+//        NSUserDefaults.standardUserDefaults().removeObjectForKey("Come_From_Course_Detail")
     }
     
     func loadCourseData() {//数据

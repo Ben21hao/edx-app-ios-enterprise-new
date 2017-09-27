@@ -116,7 +116,6 @@
 		699FF8541E5AE74300AD98A5 /* EmailTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699FF8531E5AE74300AD98A5 /* EmailTemplates.swift */; };
 		69C12C661E07F5F8004E7261 /* VideoTranscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C12C651E07F5F8004E7261 /* VideoTranscript.swift */; };
 		69E1CD011D7D7BA300531449 /* OEXRegistrationViewController+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E1CD001D7D7BA300531449 /* OEXRegistrationViewController+Swift.swift */; };
-		69ECC5FD1D50D1170030CF87 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5A31D50D1170030CF87 /* FontAwesome.otf */; };
 		69ECC5FE1D50D1170030CF87 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5A41D50D1170030CF87 /* OpenSans-Bold.ttf */; };
 		69ECC5FF1D50D1170030CF87 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5A51D50D1170030CF87 /* OpenSans-BoldItalic.ttf */; };
 		69ECC6001D50D1170030CF87 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5A61D50D1170030CF87 /* OpenSans-ExtraBold.ttf */; };
@@ -438,6 +437,7 @@
 		A413A4AC1F580BEA008556C2 /* TDLiveQACell.m in Sources */ = {isa = PBXBuildFile; fileRef = A413A4AB1F580BEA008556C2 /* TDLiveQACell.m */; };
 		A417335E1F5D2BE6005554B1 /* TDLiveLotteryView.m in Sources */ = {isa = PBXBuildFile; fileRef = A417335D1F5D2BE6005554B1 /* TDLiveLotteryView.m */; };
 		A420E2511F3C55A200340683 /* TDBaseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A420E2501F3C55A200340683 /* TDBaseButton.m */; };
+		A48B69B61F79F6A900160C61 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = A48B69B51F79F6A900160C61 /* FontAwesome.otf */; };
 		A4F456771F42DF1600C3F5B5 /* TDWebUrlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F456761F42DF1600C3F5B5 /* TDWebUrlViewController.m */; };
 		B4132C10195AAFBE00F50B46 /* OEXAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = B4132C0F195AAFBE00F50B46 /* OEXAuthentication.m */; };
 		B419295E1A8A3F1900448AD5 /* OEXNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B419295D1A8A3F1900448AD5 /* OEXNetworkManager.m */; };
@@ -534,8 +534,6 @@
 		B50DF9B21EAAF6B9001F38BD /* TDTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B50DF9AA1EAAF6B9001F38BD /* TDTextView.m */; };
 		B5148C101ED279CB00F6DACD /* TDRequestBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5148C0F1ED279CB00F6DACD /* TDRequestBaseModel.m */; };
 		B5148C131ED2815F00F6DACD /* TDFreeAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5148C121ED2815F00F6DACD /* TDFreeAlertView.m */; };
-		B5168B6D1EB826B300C80436 /* aliData.m in Sources */ = {isa = PBXBuildFile; fileRef = B5168B6C1EB826B300C80436 /* aliData.m */; };
-		B5168B701EB8274400C80436 /* dataUrlItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B5168B6F1EB8274400C80436 /* dataUrlItem.m */; };
 		B5168B731EB8294800C80436 /* TDSubmitCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5168B721EB8294800C80436 /* TDSubmitCourseViewController.m */; };
 		B5168B761EB832A000C80436 /* TDWaitforPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5168B751EB832A000C80436 /* TDWaitforPayCell.m */; };
 		B518BE5F1EA9B91B0027569D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B518BE611EA9B91B0027569D /* Localizable.strings */; };
@@ -606,7 +604,6 @@
 		B52590E91EB32852003A950D /* PurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B52590E61EB32852003A950D /* PurchaseManager.m */; };
 		B52590EA1EB32852003A950D /* PurchaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B52590E81EB32852003A950D /* PurchaseModel.m */; };
 		B52590EF1EB32C9B003A950D /* weChatParamsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B52590EE1EB32C9B003A950D /* weChatParamsItem.m */; };
-		B52590F21EB32CB6003A950D /* aliPayParamsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B52590F11EB32CB6003A950D /* aliPayParamsItem.m */; };
 		B52590FB1EB32D86003A950D /* WeChatPay.m in Sources */ = {isa = PBXBuildFile; fileRef = B52590FA1EB32D86003A950D /* WeChatPay.m */; };
 		B52590FF1EB32DE5003A950D /* Encryption.m in Sources */ = {isa = PBXBuildFile; fileRef = B52590FE1EB32DE5003A950D /* Encryption.m */; };
 		B52591001EB342DF003A950D /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B52590F41EB32D6D003A950D /* libWeChatSDK.a */; };
@@ -1093,7 +1090,6 @@
 		699FF8531E5AE74300AD98A5 /* EmailTemplates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailTemplates.swift; sourceTree = "<group>"; };
 		69C12C651E07F5F8004E7261 /* VideoTranscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTranscript.swift; sourceTree = "<group>"; };
 		69E1CD001D7D7BA300531449 /* OEXRegistrationViewController+Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OEXRegistrationViewController+Swift.swift"; sourceTree = "<group>"; };
-		69ECC5A31D50D1170030CF87 /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
 		69ECC5A41D50D1170030CF87 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		69ECC5A51D50D1170030CF87 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		69ECC5A61D50D1170030CF87 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -1479,6 +1475,7 @@
 		A417335D1F5D2BE6005554B1 /* TDLiveLotteryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDLiveLotteryView.m; sourceTree = "<group>"; };
 		A420E24F1F3C55A200340683 /* TDBaseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBaseButton.h; sourceTree = "<group>"; };
 		A420E2501F3C55A200340683 /* TDBaseButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBaseButton.m; sourceTree = "<group>"; };
+		A48B69B51F79F6A900160C61 /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
 		A4F456751F42DF1600C3F5B5 /* TDWebUrlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWebUrlViewController.h; sourceTree = "<group>"; };
 		A4F456761F42DF1600C3F5B5 /* TDWebUrlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWebUrlViewController.m; sourceTree = "<group>"; };
 		B1AF3BB032520841A93A174B /* Pods-edX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-edX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-edX/Pods-edX.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1661,10 +1658,6 @@
 		B5148C0F1ED279CB00F6DACD /* TDRequestBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRequestBaseModel.m; sourceTree = "<group>"; };
 		B5148C111ED2815F00F6DACD /* TDFreeAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDFreeAlertView.h; sourceTree = "<group>"; };
 		B5148C121ED2815F00F6DACD /* TDFreeAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFreeAlertView.m; sourceTree = "<group>"; };
-		B5168B6B1EB826B300C80436 /* aliData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aliData.h; sourceTree = "<group>"; };
-		B5168B6C1EB826B300C80436 /* aliData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aliData.m; sourceTree = "<group>"; };
-		B5168B6E1EB8274400C80436 /* dataUrlItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dataUrlItem.h; sourceTree = "<group>"; };
-		B5168B6F1EB8274400C80436 /* dataUrlItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dataUrlItem.m; sourceTree = "<group>"; };
 		B5168B711EB8294800C80436 /* TDSubmitCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSubmitCourseViewController.h; sourceTree = "<group>"; };
 		B5168B721EB8294800C80436 /* TDSubmitCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSubmitCourseViewController.m; sourceTree = "<group>"; };
 		B5168B741EB832A000C80436 /* TDWaitforPayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWaitforPayCell.h; sourceTree = "<group>"; };
@@ -1782,8 +1775,6 @@
 		B52590E81EB32852003A950D /* PurchaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseModel.m; sourceTree = "<group>"; };
 		B52590ED1EB32C9B003A950D /* weChatParamsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = weChatParamsItem.h; sourceTree = "<group>"; };
 		B52590EE1EB32C9B003A950D /* weChatParamsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = weChatParamsItem.m; sourceTree = "<group>"; };
-		B52590F01EB32CB6003A950D /* aliPayParamsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aliPayParamsItem.h; sourceTree = "<group>"; };
-		B52590F11EB32CB6003A950D /* aliPayParamsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aliPayParamsItem.m; sourceTree = "<group>"; };
 		B52590F41EB32D6D003A950D /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		B52590F51EB32D6D003A950D /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		B52590F61EB32D6D003A950D /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
@@ -2718,7 +2709,7 @@
 			isa = PBXGroup;
 			children = (
 				BD7C6C3F1DCA329A0004D135 /* fonts.json */,
-				69ECC5A31D50D1170030CF87 /* FontAwesome.otf */,
+				A48B69B51F79F6A900160C61 /* FontAwesome.otf */,
 				69ECC5A41D50D1170030CF87 /* OpenSans-Bold.ttf */,
 				69ECC5A51D50D1170030CF87 /* OpenSans-BoldItalic.ttf */,
 				69ECC5A61D50D1170030CF87 /* OpenSans-ExtraBold.ttf */,
@@ -4028,12 +4019,6 @@
 				B52591021EB34864003A950D /* TDAlipay.m */,
 				B52591031EB34864003A950D /* TDAliPayModel.h */,
 				B52591041EB34864003A950D /* TDAliPayModel.m */,
-				B52590F01EB32CB6003A950D /* aliPayParamsItem.h */,
-				B52590F11EB32CB6003A950D /* aliPayParamsItem.m */,
-				B5168B6B1EB826B300C80436 /* aliData.h */,
-				B5168B6C1EB826B300C80436 /* aliData.m */,
-				B5168B6E1EB8274400C80436 /* dataUrlItem.h */,
-				B5168B6F1EB8274400C80436 /* dataUrlItem.m */,
 			);
 			path = TDAlipayManager;
 			sourceTree = "<group>";
@@ -5712,7 +5697,6 @@
 				B5FAF7501EB047D2000C2169 /* PayTableViewCell.xib in Resources */,
 				B52E8C301F0B8C0400F3170D /* WatchPlayBackViewController.xib in Resources */,
 				B52E8DE91F0B951700F3170D /* Expression_76@2x.png in Resources */,
-				69ECC5FD1D50D1170030CF87 /* FontAwesome.otf in Resources */,
 				B52E8DDB1F0B951700F3170D /* Expression_63@2x.png in Resources */,
 				B51B77E51F27410500AECD99 /* Icon-40.png in Resources */,
 				77DC29601ABCA0F200FAD22C /* OEXLoginSplashViewController.xib in Resources */,
@@ -5810,6 +5794,7 @@
 				B52E8DBA1F0B951700F3170D /* Expression_33@2x.png in Resources */,
 				69ECC61F1D50D1170030CF87 /* bt_signin_active.png in Resources */,
 				6960892B1D53935500EE66DD /* courseCertificate.png in Resources */,
+				A48B69B61F79F6A900160C61 /* FontAwesome.otf in Resources */,
 				B52E8DFD1F0B951700F3170D /* MLEmoji_Expression.bundle in Resources */,
 				69ECC6071D50D1170030CF87 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				B52E8DB11F0B951700F3170D /* Expression_25@2x.png in Resources */,
@@ -6118,7 +6103,6 @@
 				B52590FF1EB32DE5003A950D /* Encryption.m in Sources */,
 				191A00201940560D004F7902 /* OEXDataParser.m in Sources */,
 				774B39391B5DD85A00595D33 /* UIView+LayoutDirection.swift in Sources */,
-				B52590F21EB32CB6003A950D /* aliPayParamsItem.m in Sources */,
 				9EDCC51E1B395BDE00A4F39D /* CourseInfoAPI.swift in Sources */,
 				B52E8CA01F0B8CB500F3170D /* VHDrawView.m in Sources */,
 				B53F37811F05E59D00277601 /* TDWaitforPayModel.m in Sources */,
@@ -6158,7 +6142,6 @@
 				7725016A1C80FB5C002549A9 /* ServerChangedChecker.swift in Sources */,
 				B52590E91EB32852003A950D /* PurchaseManager.m in Sources */,
 				E07107931C7591360004B76C /* DiscussionHelper.swift in Sources */,
-				B5168B701EB8274400C80436 /* dataUrlItem.m in Sources */,
 				B52E8C901F0B8CB500F3170D /* DXFaceView.m in Sources */,
 				77092C751B42E4C1004AA1A1 /* UIStatusBarStyle+Styles.swift in Sources */,
 				B59238E81EADD0BE00C686D8 /* TDActivityViewController.m in Sources */,
@@ -6265,7 +6248,6 @@
 				7784C68B1B03BA1E00529C7C /* LoadStateViewController.swift in Sources */,
 				B52E8CDC1F0B8D6300F3170D /* SZConfigure.m in Sources */,
 				B50DF9AB1EAAF6B9001F38BD /* TDBaseViewController.m in Sources */,
-				B5168B6D1EB826B300C80436 /* aliData.m in Sources */,
 				778F176C1C0CF57F0099BF93 /* RouterEnvironment.swift in Sources */,
 				778C72F11B17C30000FC3F68 /* Dictionary+Functional.swift in Sources */,
 				A4F456771F42DF1600C3F5B5 /* TDWebUrlViewController.m in Sources */,

@@ -8,7 +8,6 @@
 
 #import "TDProfessorViewController.h"
 #import <UIImageView+WebCache.h>
-#import "TDBaseToolModel.h"
 
 @interface TDProfessorViewController ()<UITableViewDelegate,UITableViewDataSource>
 

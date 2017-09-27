@@ -1139,7 +1139,7 @@
 "PHONE_OR_EMAIL" = "手机号码或邮箱";
 /*我们给您发送了一封重置密码邮件，请进入邮箱查收并按提示设置新密码。*/
 "HAD_SEND_EMAIL" = "我们给您发送了一封重置密码邮件，请进入邮箱{count}查收并按提示设置新密码。";
-/*已经激活？马上登录*/
+/*重置成功？马上登录*/
 "ACTIVITY_LOGIN" = "重置成功？马上登录";
 /*没有收到邮件？*/
 "NO_RECEIVE_EMAIL" = "没有收到邮件？";
@@ -1750,7 +1750,6 @@
 "ALLOW_USE_CAMERA_TEXT" = "暂未允许{name}访问您的相机，请前往设置";
 /*暂未允许{name}访问您的相机，请前往设置 Not allow app to access your album, please go to settings.*/
 "ALLOW_USE_ALBUM_TEXT" = "暂未允许{name}访问您的相册，请前往设置";
-
 /*正在刷新Refreshing*/
 "REFRESHING_TEXT" = "正在刷新";
 /*下拉刷新Drop refresh*/
@@ -1761,6 +1760,7 @@
 "LOADING_TEXT" = "正在加载...";
 /*已加载全部Loaded all*/
 "LOADED_ALL_TEXT" = "已加载全部";
-
 /*检测到有版本更新，是否更新？ New version detected. Update now?*/
 "NEW_VERSION_UPDATE" = "检测到有版本更新，是否更新？";
+/*取消订单失败 Failure to cancel order*/
+"FAIL_CANCEL_ORDER" = "取消订单失败";

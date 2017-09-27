@@ -18,11 +18,9 @@
 #import "JHCouponsAlertView.h"
 
 #import <AlipaySDK/AlipaySDK.h>
-#import "aliPayParamsItem.h"
 #import "DataSigner.h"
-#import "dataUrlItem.h"
-#import "aliData.h"
-#import "Order.h"
+#import "TDAliPayModel.h"
+#import "TDAlipay.h"
 
 #import "weChatParamsItem.h"
 #import "WeChatPay.h"
@@ -69,8 +67,8 @@
 @property (nonatomic,assign) BOOL isCampony;
 @property (nonatomic,assign) BOOL hadCreateOrder;//是否已创建订单
 
+@property (nonatomic,strong) TDAliPayModel *aliPayModel;
 @property (nonatomic,strong) weChatParamsItem *weChatItem;
-@property (nonatomic,strong) aliPayParamsItem *aliPayItem;
 
 @end
 
@@ -313,9 +311,9 @@
     [dic setValue:priceStr forKey:@"apply_amount"];
     //    [dic setValue:[NSNumber numberWithFloat:self.payMoney] forKey:@"apply_amount"];
     
-    if (type == 1) {//微信
+    if (type == 1) { //微信
         [dic setValue:@1 forKey:@"pay_method"];
-    } else if (type == 2) {//支付宝
+    } else if (type == 2) { //支付宝
         [dic setValue:@2 forKey:@"pay_method"];
     }
     
@@ -335,8 +333,9 @@
             if (type == 1) {
                 self.weChatItem = [weChatParamsItem mj_objectWithKeyValues:responseObject[@"data"]];
                 [self payByWeChat];
+                
             } else if (type == 2) {
-                _aliPayItem = [aliPayParamsItem mj_objectWithKeyValues:responseObject];
+                self.aliPayModel = [TDAliPayModel mj_objectWithKeyValues:responDic[@"data"][@"data_url"]];
                 [self payByAliPay];
             }
              [[NSNotificationCenter defaultCenter] postNotificationName:@"Course_Status_Handle" object:nil];
@@ -362,83 +361,7 @@
 #pragma mark - 支付宝支付
 - (void)payByAliPay {
     
-    Order *order = [[Order alloc] init];
-    order.partner = _aliPayItem.data.data_url.partner;
-    order.sellerID = _aliPayItem.data.data_url.seller_id;
-    order.outTradeNO = _aliPayItem.data.data_url.out_trade_no; //订单ID（由商家自行制定）
-    NSLog(@"order.outTradeNO--%@",order.outTradeNO);
-    order.subject = _aliPayItem.data.data_url.subject; //商品标题
-    order.body = _aliPayItem.data.data_url.body; //商品描述
-    order.totalFee = _aliPayItem.data.data_url.total_fee;//商品价格
-    order.notifyURL =  _aliPayItem.data.data_url.notify_url; //回调URL
-    order.service = _aliPayItem.data.data_url.service;
-    order.paymentType = @"1";
-    order.inputCharset = @"utf-8";
-    //    order.itBPay = @"30m";
-    //    order.showURL = @"m.alipay.com";
-    
-    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
-    //    NSString *appScheme = @"alisdkdemo";
-    NSString *appScheme = @"org.eliteu.mobile-enterprise";
-    //将商品信息拼接成字符串
-    NSString *orderSpec = [order description];
-    NSLog(@"orderSpec = %@",orderSpec);
-    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
-    //    id<DataSigner> signer = CreateRSADataSigner(privateKey);
-    //    NSString *signedString = [signer signString:orderSpec];
-    
-    NSString *base64String = _aliPayItem.data.data_url.sign;
-    NSString *signedString = [self urlEncodedString:base64String];
-    //将签名成功字符串格式化为订单字符串,请严格按照该格式
-    NSString *orderString = nil;
-    if (signedString != nil) {
-        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",orderSpec, signedString, @"RSA"];
-        NSLog(@"orderString = %@",orderString);
-        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-            //【callback处理支付结果】
-            NSLog(@"A--reslut = %@",resultDic);
-            
-            NSString *resultStatus = resultDic[@"resultStatus"];
-            
-            NSString *strTitle = TDLocalizeSelect(@"PAY_RESULT", nil);
-            NSString *str;
-            switch ([resultStatus integerValue]) {
-                case 6001:
-                    str = TDLocalizeSelect(@"PAY_CANCEL", nil);
-                    break;
-                case 9000:
-                    str = TDLocalizeSelect(@"PAY_SUCCESS", nil);
-                    break;
-                case 8000:
-                    str = TDLocalizeSelect(@"IS_HANDLE", nil);
-                    break;
-                case 4000:
-                    str = TDLocalizeSelect(@"PAY_FAIL", nil);
-                    break;
-                case 6002:
-                    str = TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil);
-                    break;
-                    
-                default:
-                    break;
-            }
-            if ([resultStatus isEqualToString:@"9000"]) {
-                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"aliPaySuccess" object:nil]];
-                
-            } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:str delegate:self cancelButtonTitle:TDLocalizeSelect(@"OK", nil) otherButtonTitles:nil, nil];
-                alert.tag = 9000;
-                [alert show];
-            }
-        }];
-    }
-}
-
-- (NSString*)urlEncodedString:(NSString *)string {
-    
-    NSString * encodedString = (__bridge_transfer  NSString*) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (__bridge CFStringRef)string, NULL, (__bridge CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8 );
-    
-    return encodedString;
+    [[[TDAlipay alloc] init] submitPostAliPay:self.aliPayModel];
 }
 
 
@@ -551,7 +474,7 @@
             
         } else {
             
-            self.usedcoin = alertView.textF2.text;
+            self.usedcoin = coin > 0.0 ? alertView.textF2.text : @"0";
             currentM -= 0.1 * coin;
             //            self.moneyLabel.text = [NSString stringWithFormat:@"¥%.2f",currentM];
             self.moneyLabel.attributedText = [self.baseTool setString:[NSString stringWithFormat:@"¥%.2f",currentM] withFont:16 type:1];
@@ -851,7 +774,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

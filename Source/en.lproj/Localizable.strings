@@ -1136,7 +1136,7 @@
 /*邮箱或手机号码*/
 "PHONE_OR_EMAIL" = "Mobile or email";
 /*我们给您发送了一封重置密码邮件，请进入邮箱查收并按提示设置新密码。*/
-"HAD_SEND_EMAIL" = "An activation mail has been sent. Please log in {count} and follow the instruction to activate.";
+"HAD_SEND_EMAIL" = "An activation mail has been sent. Please log in {count} and follow the instruction to set the new password.";
 /*已经激活？马上登录*/
 "ACTIVITY_LOGIN" = "Already activated? Log in now";
 /*没有收到邮件？*/
@@ -1763,3 +1763,5 @@
 "LOADED_ALL_TEXT" = "Loaded all";
 /*检测到有版本更新，是否更新？ New version detected. Update now?*/
 "NEW_VERSION_UPDATE" = "New version detected. Update now?";
+/*取消订单失败 Failure to cancel order*/
+"FAIL_CANCEL_ORDER" = "Failure to cancel order";

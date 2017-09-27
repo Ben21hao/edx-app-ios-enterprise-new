@@ -86,7 +86,7 @@
     if (indexPath.row == 0) {
         TDSettingCell *cell = [[TDSettingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDWifiCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
+        return cell; 
         
     } else {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"settingCell"];

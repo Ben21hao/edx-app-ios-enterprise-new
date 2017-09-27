@@ -360,7 +360,6 @@
         make.right.mas_equalTo(headerView.mas_right).offset(-13);
     }];
     
-    headerImage.image = [UIImage imageNamed:@"tdIdentify"];
     //设置头像
     TDBaseToolModel *model = [[TDBaseToolModel alloc] init];
     NSString *url = [model dealwithImageStr:self.model.avatar_url[@"large"]];
