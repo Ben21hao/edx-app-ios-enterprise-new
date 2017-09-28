@@ -80,8 +80,6 @@
 #import "UIView+Toast.h"
 #import "UIColor+JHHexColor.h"
 #import "TDAssistantServiceViewController.h"
-#import "UserYouViewController.h"
-#import "UserFirstViewController.h"
 #import "TDCouponViewController.h"
 #import "TDBindEmailViewController.h"
 #import "TDBindPhoneViewController.h"

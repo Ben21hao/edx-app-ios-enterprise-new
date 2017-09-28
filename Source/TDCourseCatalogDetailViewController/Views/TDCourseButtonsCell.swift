@@ -30,17 +30,20 @@ class TDCourseButtonsCell: UITableViewCell {
     
     var courseModel : OEXCourse? {
         didSet {
+            
             let submitType = courseModel?.submitType
             if submitType == 0 || submitType == 3 {
                 remarkAuditionButton()
                 
-            } else if (submitType == 1 && courseModel?.course_price?.floatValue == 0) || courseModel?.is_public_course == false { //立即加入，而且价格为0(区别is_public_course）
+            } else if (submitType == 1  && courseModel?.course_price?.floatValue == 0) || courseModel?.is_public_course == false { //立即加入，而且价格为0(区别is_public_course）
+                remarkAuditionButton()
+            } else if (submitType == 2 && courseModel?.course_price?.floatValue == 0  ) {
                 remarkAuditionButton()
             }
         }
     }
     
-    func remarkAuditionButton(){
+    func remarkAuditionButton(){ //隐藏 试听按钮
         
         auditionButton.snp_remakeConstraints { (make) in
         make.left.equalTo(bgView.snp_left).offset(18)

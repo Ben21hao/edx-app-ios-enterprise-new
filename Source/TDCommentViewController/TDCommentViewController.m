@@ -25,7 +25,6 @@
 @property (nonatomic,strong) NSMutableArray *topArry;//头部标签
 @property (nonatomic,strong) NSMutableArray *commentArray;//评论数组
 @property (nonatomic,assign) NSInteger page;//页码
-@property (nonatomic,assign) int maxPage;//最大页数
 @property (nonatomic,strong) NSString *scoreStr;//评分
 @property (nonatomic,strong) NSString *selectId;//选中的标签
 @property (nonatomic,strong) UIButton *selectedButton;//选中的标签
@@ -58,14 +57,19 @@
     self.page = 1;
     self.selectedButton = [[UIButton alloc] init];
     
-    [self setLoadDataView];
-    [self requestTopData];
+    [self setLoadDataView]; //下载页面
+    
+    [self requestTopData]; //获取数据
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     self.titleViewLabel.text = TDLocalizeSelect(@"STUDENT_COMMENT", nil);
+}
+
+- (void)requestCommentData { //多并发网络请求
+    
 }
 
 #pragma mark - 获取头部数据
@@ -153,11 +157,6 @@
         return;
     }
     
-    if (self.page == 1) {
-        [self.tableView.mj_footer resetNoMoreData];
-        self.tableView.mj_footer.hidden = NO;
-    }
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:self.courseID forKey:@"course_id"];
     [params setValue:self.userName forKey:@"username"];
@@ -174,6 +173,8 @@
     [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [self.loadIngView removeFromSuperview];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
         
         NSDictionary *responseDic = (NSDictionary *)responseObject;
         id code = responseDic[@"code"];
@@ -187,6 +188,16 @@
             NSDictionary *dataDic = responseObject[@"data"];
             NSArray *listArray = (NSArray *)dataDic[@"comment_list"];
             
+            if (listArray.count < 8) {
+                [self hiddenFooterView];
+                
+            } else {
+                if (self.page == 1) {
+                    [self.tableView.mj_footer resetNoMoreData];
+                    self.tableView.mj_footer.hidden = NO;
+                }
+            }
+            
             if (listArray.count > 0) {
                 for (int i = 0; i <listArray.count; i ++) {
                     CommentDetailItem *detailItem = [CommentDetailItem mj_objectWithKeyValues:listArray[i]];
@@ -195,17 +206,11 @@
                     }
                 }
                 self.page ++;
-                
-            } else {
-                self.page > 1 ? self.page = 1 : self.page --;
-            }
-            
-            if ([dataDic objectForKey:@"pages"]) {
-                self.maxPage = [dataDic[@"pages"] intValue];
             }
             
         } else {
-            [self.view makeToast:TDLocalizeSelect(@"SYSTEM_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
+            [self hiddenFooterView];
+            [self.view makeToast:TDLocalizeSelect(@"QUERY_FAILED", nil) duration:1.08 position:CSToastPositionCenter];
             NSLog(@"评论 --- %@",responseObject[@"msg"]);
         }
         
@@ -213,6 +218,7 @@
             if (self.topArry.count == 0 && self.commentArray.count == 0) {
                 [self setNullDataView:TDLocalizeSelect(@"NO_STUDENT_COMMENT", nil)];
                 return;
+                
             } else {
                 [self setviewConstraint];
             }
@@ -220,26 +226,16 @@
         
         [self.tableView reloadData];
         
-        if (type == 2) {
-            if (self.page >= self.maxPage) {
-                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-                self.tableView.mj_footer.hidden = YES;
-            }else{
-                [self.tableView.mj_footer endRefreshing];
-            }
-        } else {
-            [self.tableView.mj_header endRefreshing];
-            if (self.commentArray.count <= 8) {
-                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-                self.tableView.mj_footer.hidden = YES;
-            }
-        }
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         [self.loadIngView removeFromSuperview];
         NSLog(@"获取评论数据 error--%@",error);
     }];
+}
+
+- (void)hiddenFooterView {
+    self.tableView.mj_footer.hidden = YES;
+    [self.tableView.mj_footer endRefreshingWithNoMoreData];
 }
 
 #pragma mark - tableview delegate
@@ -322,12 +318,19 @@
     }];
     
     self.tableView.tableHeaderView = [self headerView];
+    
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(pullDownRefresh)];
-    header.lastUpdatedTimeLabel.hidden = YES;
+    header.lastUpdatedTimeLabel.hidden = YES; //隐藏时间
+    [header setTitle:TDLocalizeSelect(@"DROP_REFRESH_TEXT", nil) forState:MJRefreshStateIdle];
+    [header setTitle:TDLocalizeSelect(@"RELEASE_REFRESH_TEXT", nil) forState:MJRefreshStatePulling];
+    [header setTitle:TDLocalizeSelect(@"REFRESHING_TEXT", nil) forState:MJRefreshStateRefreshing];
     self.tableView.mj_header = header;
     
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(topPullLoading)];
-    self.tableView.mj_footer.automaticallyHidden = YES;
+    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(topPullLoading)];
+    [footer setTitle:TDLocalizeSelect(@"LOADING_TEXT", nil) forState:MJRefreshStateRefreshing];
+    [footer setTitle:TDLocalizeSelect(@"LOADED_ALL_TEXT", nil) forState:MJRefreshStateNoMoreData];
+    [footer setTitle:TDLocalizeSelect(@"CLICK_PULL_LOAD_MORE", nil) forState:MJRefreshStateIdle];
+    self.tableView.mj_footer = footer;
 }
 
 #pragma mark - 头部视图
@@ -411,7 +414,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

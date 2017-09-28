@@ -239,18 +239,16 @@
                     }
                 }
                 self.page ++;
-                
-            } else {
-                self.page > 1 ? self.page = 1 : self.page --;
+            }
+            
+            if (self.commentArray.count < 20) {
+                [self noMoreData];
             }
             
             [self.tableView reloadData];
            
         } else if ([code intValue] == 201) { //没有更多数据了
-            if (type == 2) {
-                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-                self.tableView.mj_footer.hidden = YES;
-            }
+            [self noMoreData];
             [self.view makeToast:TDLocalizeSelect(@"NO_MORE_DATA", nil) duration:1.08 position:CSToastPositionCenter];
             
         } else if ([code intValue] == 404) { //该课程暂无此助教助教评论
@@ -267,6 +265,11 @@
         [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"获取评论数据 error -- %@",error);
     }];
+}
+
+- (void)noMoreData {
+    [self.tableView.mj_footer endRefreshingWithNoMoreData];
+    self.tableView.mj_footer.hidden = YES;
 }
 
 
@@ -383,8 +386,12 @@
     
     if (self.topArry.count > 0) {
         self.tableView.tableHeaderView = [self headerView];
-        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(topPullLoading)];
-        self.tableView.mj_footer.automaticallyHidden = YES;
+        
+        MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(topPullLoading)];
+        [footer setTitle:TDLocalizeSelect(@"CLICK_PULL_LOAD_MORE", nil) forState:MJRefreshStateIdle];
+        [footer setTitle:TDLocalizeSelect(@"LOADING_TEXT", nil) forState:MJRefreshStateRefreshing];
+        [footer setTitle:TDLocalizeSelect(@"LOADED_ALL_TEXT", nil) forState:MJRefreshStateNoMoreData];
+        self.tableView.mj_footer = footer;
     }
 }
 

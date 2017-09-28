@@ -141,8 +141,8 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
                 let cell = TDCourseButtonsCell.init(style: .Default, reuseIdentifier: "TDCourseButtonsCell")
                 cell.selectionStyle = .None
                 
-                switch self.courseModel.submitType {
-                case 0:
+                switch self.courseModel.submitType { //0 已购买，1 立即加入, 2 查看待支付，3 即将开课
+                case 0: 
                     cell.submitButton.setTitle(TDLocalizeSelectSwift("COURSE_DETAIL.VIEW_COURSE"), forState: .Normal)
                 case 1:
                     if self.courseModel.is_public_course == true && self.courseModel.course_price?.floatValue != 0 {
@@ -152,8 +152,11 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
                        cell.submitButton.setTitle(TDLocalizeSelectSwift("COURSE_DETAIL.ENROLL_NOW"), forState: .Normal)
                     }
                 case 2:
-                    cell.submitButton.setAttributedTitle(setSubmitTitle(TDLocalizeSelectSwift("VIEW_PREPARE_ORDER")), forState: .Normal)
-                    cell.submitButton.setTitle(TDLocalizeSelectSwift("VIEW_PREPARE_ORDER"), forState: .Normal)
+                    if self.courseModel.course_price?.floatValue == 0 {
+                        cell.submitButton.setTitle(TDLocalizeSelectSwift("VIEW_PREPARE_ORDER"), forState: .Normal)
+                    } else {
+                        cell.submitButton.setAttributedTitle(setSubmitTitle(TDLocalizeSelectSwift("VIEW_PREPARE_ORDER")), forState: .Normal)
+                    }
                     setButtonCellDiscountLabel(cell)
                 default:
                     cell.submitButton.setTitle(TDLocalizeSelectSwift("WILL_BEGIN_COURSE"), forState: .Normal)
@@ -204,7 +207,7 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
         }
     }
     
-    func setButtonCellDiscountLabel(cell: TDCourseButtonsCell) {
+    func setButtonCellDiscountLabel(cell: TDCourseButtonsCell) { //赠送宝典信息
         if (self.courseModel.give_coin?.floatValue)! > 0 {
             let coinStr = NSString(format: "%.2f", (self.courseModel.give_coin?.floatValue)!)
             

@@ -76,11 +76,11 @@
 }
 
 - (void)exchangeHandle {
-    [self getNewData];
+    [self pullDownRefresh];
 }
 
 //下拉刷新
-- (void)getNewData {
+- (void)pullDownRefresh {
     self.page = 1;
     [self.tableView.mj_footer resetNoMoreData];//消除没有更多数据状态
     self.tableView.mj_footer.hidden = NO;
@@ -89,7 +89,7 @@
 }
 
 //上拉加载
-- (void)loadMoreData {
+- (void)topPullLoading {
     self.page ++;
     [self requestCouponData:2];
 }
@@ -260,17 +260,24 @@
 }
 
 - (void)setUpRefreshView{
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getNewData)];
-    header.lastUpdatedTimeLabel.hidden = YES;
+    
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(pullDownRefresh)];
+    header.lastUpdatedTimeLabel.hidden = YES; //隐藏时间
+    [header setTitle:TDLocalizeSelect(@"DROP_REFRESH_TEXT", nil) forState:MJRefreshStateIdle];
+    [header setTitle:TDLocalizeSelect(@"RELEASE_REFRESH_TEXT", nil) forState:MJRefreshStatePulling];
+    [header setTitle:TDLocalizeSelect(@"REFRESHING_TEXT", nil) forState:MJRefreshStateRefreshing];
     self.tableView.mj_header = header;
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
-    self.tableView.mj_footer.automaticallyHidden = YES;
+    
+    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(topPullLoading)];
+    [footer setTitle:TDLocalizeSelect(@"LOADING_TEXT", nil) forState:MJRefreshStateRefreshing];
+    [footer setTitle:TDLocalizeSelect(@"LOADED_ALL_TEXT", nil) forState:MJRefreshStateNoMoreData];
+    [footer setTitle:TDLocalizeSelect(@"CLICK_PULL_LOAD_MORE", nil) forState:MJRefreshStateIdle];
+    self.tableView.mj_footer = footer;
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

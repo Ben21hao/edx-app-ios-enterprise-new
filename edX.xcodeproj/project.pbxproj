@@ -508,19 +508,6 @@
 		B504716A1F0526D6003A7268 /* TDWaitforPayTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B50471691F0526D6003A7268 /* TDWaitforPayTopCell.m */; };
 		B504716D1F0529FE003A7268 /* TDWaitforPayBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B504716C1F0529FE003A7268 /* TDWaitforPayBottomCell.m */; };
 		B50D403F1F26F2E90069D2EA /* stipulation.htm in Resources */ = {isa = PBXBuildFile; fileRef = B50D403D1F26F2E90069D2EA /* stipulation.htm */; };
-		B50DF9821EAAF15B001F38BD /* UserFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50DF96D1EAAF15B001F38BD /* UserFirstViewController.m */; };
-		B50DF9831EAAF15B001F38BD /* UserFirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B50DF96E1EAAF15B001F38BD /* UserFirstViewController.xib */; };
-		B50DF9841EAAF15B001F38BD /* UserSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50DF9701EAAF15B001F38BD /* UserSecondViewController.m */; };
-		B50DF9851EAAF15B001F38BD /* UserSecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B50DF9711EAAF15B001F38BD /* UserSecondViewController.xib */; };
-		B50DF9861EAAF15B001F38BD /* UserThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50DF9731EAAF15B001F38BD /* UserThirdViewController.m */; };
-		B50DF9871EAAF15B001F38BD /* UserThirdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B50DF9741EAAF15B001F38BD /* UserThirdViewController.xib */; };
-		B50DF9881EAAF15B001F38BD /* UserYouViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50DF9761EAAF15B001F38BD /* UserYouViewController.m */; };
-		B50DF9891EAAF15B001F38BD /* UserYouViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B50DF9771EAAF15B001F38BD /* UserYouViewController.xib */; };
-		B50DF98A1EAAF15B001F38BD /* UserCouponItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B50DF97A1EAAF15B001F38BD /* UserCouponItem.m */; };
-		B50DF98B1EAAF15B001F38BD /* UserCouponTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B50DF97D1EAAF15B001F38BD /* UserCouponTableViewCell.m */; };
-		B50DF98C1EAAF15B001F38BD /* UserCouponTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B50DF97E1EAAF15B001F38BD /* UserCouponTableViewCell.xib */; };
-		B50DF98D1EAAF15B001F38BD /* UserDiscountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B50DF9801EAAF15B001F38BD /* UserDiscountTableViewCell.m */; };
-		B50DF98E1EAAF15B001F38BD /* UserDiscountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B50DF9811EAAF15B001F38BD /* UserDiscountTableViewCell.xib */; };
 		B50DF9931EAAF299001F38BD /* JHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B50DF9901EAAF299001F38BD /* JHAlertView.m */; };
 		B50DF9941EAAF299001F38BD /* JHFindPWDView.m in Sources */ = {isa = PBXBuildFile; fileRef = B50DF9921EAAF299001F38BD /* JHFindPWDView.m */; };
 		B50DF9971EAAF302001F38BD /* TDAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B50DF9961EAAF302001F38BD /* TDAlertView.m */; };
@@ -1613,26 +1600,6 @@
 		B504716B1F0529FE003A7268 /* TDWaitforPayBottomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWaitforPayBottomCell.h; sourceTree = "<group>"; };
 		B504716C1F0529FE003A7268 /* TDWaitforPayBottomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWaitforPayBottomCell.m; sourceTree = "<group>"; };
 		B50D403E1F26F2E90069D2EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/stipulation.htm; sourceTree = "<group>"; };
-		B50DF96C1EAAF15B001F38BD /* UserFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserFirstViewController.h; sourceTree = "<group>"; };
-		B50DF96D1EAAF15B001F38BD /* UserFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserFirstViewController.m; sourceTree = "<group>"; };
-		B50DF96E1EAAF15B001F38BD /* UserFirstViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserFirstViewController.xib; sourceTree = "<group>"; };
-		B50DF96F1EAAF15B001F38BD /* UserSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSecondViewController.h; sourceTree = "<group>"; };
-		B50DF9701EAAF15B001F38BD /* UserSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSecondViewController.m; sourceTree = "<group>"; };
-		B50DF9711EAAF15B001F38BD /* UserSecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserSecondViewController.xib; sourceTree = "<group>"; };
-		B50DF9721EAAF15B001F38BD /* UserThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserThirdViewController.h; sourceTree = "<group>"; };
-		B50DF9731EAAF15B001F38BD /* UserThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserThirdViewController.m; sourceTree = "<group>"; };
-		B50DF9741EAAF15B001F38BD /* UserThirdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserThirdViewController.xib; sourceTree = "<group>"; };
-		B50DF9751EAAF15B001F38BD /* UserYouViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserYouViewController.h; sourceTree = "<group>"; };
-		B50DF9761EAAF15B001F38BD /* UserYouViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserYouViewController.m; sourceTree = "<group>"; };
-		B50DF9771EAAF15B001F38BD /* UserYouViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserYouViewController.xib; sourceTree = "<group>"; };
-		B50DF9791EAAF15B001F38BD /* UserCouponItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCouponItem.h; sourceTree = "<group>"; };
-		B50DF97A1EAAF15B001F38BD /* UserCouponItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCouponItem.m; sourceTree = "<group>"; };
-		B50DF97C1EAAF15B001F38BD /* UserCouponTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCouponTableViewCell.h; sourceTree = "<group>"; };
-		B50DF97D1EAAF15B001F38BD /* UserCouponTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCouponTableViewCell.m; sourceTree = "<group>"; };
-		B50DF97E1EAAF15B001F38BD /* UserCouponTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCouponTableViewCell.xib; sourceTree = "<group>"; };
-		B50DF97F1EAAF15B001F38BD /* UserDiscountTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDiscountTableViewCell.h; sourceTree = "<group>"; };
-		B50DF9801EAAF15B001F38BD /* UserDiscountTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDiscountTableViewCell.m; sourceTree = "<group>"; };
-		B50DF9811EAAF15B001F38BD /* UserDiscountTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserDiscountTableViewCell.xib; sourceTree = "<group>"; };
 		B50DF98F1EAAF299001F38BD /* JHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHAlertView.h; sourceTree = "<group>"; };
 		B50DF9901EAAF299001F38BD /* JHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHAlertView.m; sourceTree = "<group>"; };
 		B50DF9911EAAF299001F38BD /* JHFindPWDView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHFindPWDView.h; sourceTree = "<group>"; };
@@ -3682,18 +3649,6 @@
 				B51E9EA41EE8ED0D0019D764 /* TDCouponViewController.m */,
 				B51E9EA51EE8ED0D0019D764 /* TDSubCouponViewController.h */,
 				B51E9EA61EE8ED0D0019D764 /* TDSubCouponViewController.m */,
-				B50DF96C1EAAF15B001F38BD /* UserFirstViewController.h */,
-				B50DF96D1EAAF15B001F38BD /* UserFirstViewController.m */,
-				B50DF96E1EAAF15B001F38BD /* UserFirstViewController.xib */,
-				B50DF96F1EAAF15B001F38BD /* UserSecondViewController.h */,
-				B50DF9701EAAF15B001F38BD /* UserSecondViewController.m */,
-				B50DF9711EAAF15B001F38BD /* UserSecondViewController.xib */,
-				B50DF9721EAAF15B001F38BD /* UserThirdViewController.h */,
-				B50DF9731EAAF15B001F38BD /* UserThirdViewController.m */,
-				B50DF9741EAAF15B001F38BD /* UserThirdViewController.xib */,
-				B50DF9751EAAF15B001F38BD /* UserYouViewController.h */,
-				B50DF9761EAAF15B001F38BD /* UserYouViewController.m */,
-				B50DF9771EAAF15B001F38BD /* UserYouViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -3703,8 +3658,6 @@
 			children = (
 				B51E9EA91EE8ED2D0019D764 /* TDCouponModel.h */,
 				B51E9EAA1EE8ED2D0019D764 /* TDCouponModel.m */,
-				B50DF9791EAAF15B001F38BD /* UserCouponItem.h */,
-				B50DF97A1EAAF15B001F38BD /* UserCouponItem.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3714,12 +3667,6 @@
 			children = (
 				B51E9EAC1EE8ED890019D764 /* TDCouponCell.h */,
 				B51E9EAD1EE8ED890019D764 /* TDCouponCell.m */,
-				B50DF97C1EAAF15B001F38BD /* UserCouponTableViewCell.h */,
-				B50DF97D1EAAF15B001F38BD /* UserCouponTableViewCell.m */,
-				B50DF97E1EAAF15B001F38BD /* UserCouponTableViewCell.xib */,
-				B50DF97F1EAAF15B001F38BD /* UserDiscountTableViewCell.h */,
-				B50DF9801EAAF15B001F38BD /* UserDiscountTableViewCell.m */,
-				B50DF9811EAAF15B001F38BD /* UserDiscountTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5678,7 +5625,6 @@
 				B52E8C921F0B8CB500F3170D /* live_keyboard@2x.png in Resources */,
 				B52E8C9A1F0B8CB500F3170D /* loadingout@3x.png in Resources */,
 				B52E8DB21F0B951700F3170D /* Expression_26@2x.png in Resources */,
-				B50DF98E1EAAF15B001F38BD /* UserDiscountTableViewCell.xib in Resources */,
 				6926CDAC1D59BE3600A16E22 /* ic_next.png in Resources */,
 				B52E8DD21F0B951700F3170D /* Expression_55@2x.png in Resources */,
 				B52E8DDC1F0B951700F3170D /* Expression_64@2x.png in Resources */,
@@ -5711,7 +5657,6 @@
 				69ECC6201D50D1170030CF87 /* bt_signin_deactive.png in Resources */,
 				B52E8DC61F0B951700F3170D /* Expression_44@2x.png in Resources */,
 				69ECC62F1D50D1170030CF87 /* ic_cancel@3x.png in Resources */,
-				B50DF9871EAAF15B001F38BD /* UserThirdViewController.xib in Resources */,
 				B52E8CF31F0B8DB500F3170D /* CustomPickerView.xib in Resources */,
 				B52E8DE41F0B951700F3170D /* Expression_71@2x.png in Resources */,
 				B52E8DD61F0B951700F3170D /* Expression_59@2x.png in Resources */,
@@ -5733,7 +5678,6 @@
 				B51B77EB1F27410500AECD99 /* Icon-76.png in Resources */,
 				B52E8DA91F0B951700F3170D /* Expression_18@2x.png in Resources */,
 				B52E8DEF1F0B951700F3170D /* Expression_81@2x.png in Resources */,
-				B50DF9891EAAF15B001F38BD /* UserYouViewController.xib in Resources */,
 				BD7C6C401DCA329A0004D135 /* fonts.json in Resources */,
 				B52E8DF01F0B951700F3170D /* Expression_82@2x.png in Resources */,
 				B52E8DF91F0B951700F3170D /* Expression_90@2x.png in Resources */,
@@ -5748,7 +5692,6 @@
 				B50D403F1F26F2E90069D2EA /* stipulation.htm in Resources */,
 				B52E8DCC1F0B951700F3170D /* Expression_4@2x.png in Resources */,
 				69ECC6321D50D1170030CF87 /* ic_download_arrow.png in Resources */,
-				B50DF98C1EAAF15B001F38BD /* UserCouponTableViewCell.xib in Resources */,
 				B52E8DA61F0B951600F3170D /* Expression_15@2x.png in Resources */,
 				69ECC6391D50D1170030CF87 /* ic_unwatched@3x.png in Resources */,
 				B52E8C0B1F0B7B1000F3170D /* kodak.inf in Resources */,
@@ -5775,7 +5718,6 @@
 				5D836DC91B2FA12E00411CAB /* DiscussionNewCommentViewController.xib in Resources */,
 				69ECC6101D50D1170030CF87 /* profilePhotoPlaceholder.png in Resources */,
 				B52E8C991F0B8CB500F3170D /* loadingout@2x.png in Resources */,
-				B50DF9831EAAF15B001F38BD /* UserFirstViewController.xib in Resources */,
 				B52E8CDA1F0B8D6300F3170D /* WatchLiveViewController.xib in Resources */,
 				B52E8DB61F0B951700F3170D /* Expression_2@2x.png in Resources */,
 				B52E8DB01F0B951700F3170D /* Expression_24@2x.png in Resources */,
@@ -5828,7 +5770,6 @@
 				B52E8DB91F0B951700F3170D /* Expression_32@2x.png in Resources */,
 				69ECC6351D50D1170030CF87 /* ic_next_default.png in Resources */,
 				69ECC6311D50D1170030CF87 /* ic_download.png in Resources */,
-				B50DF9851EAAF15B001F38BD /* UserSecondViewController.xib in Resources */,
 				B52E8DB81F0B951700F3170D /* Expression_31@2x.png in Resources */,
 				69ECC6001D50D1170030CF87 /* OpenSans-ExtraBold.ttf in Resources */,
 				B52E8DCA1F0B951700F3170D /* Expression_48@2x.png in Resources */,
@@ -6052,11 +5993,9 @@
 				B4B6D5E51A9490E9000F44E8 /* OEXLoginSplashViewController.m in Sources */,
 				7726BD1D1A36572F003B3354 /* NSMutableDictionary+OEXSafeAccess.m in Sources */,
 				A417335E1F5D2BE6005554B1 /* TDLiveLotteryView.m in Sources */,
-				B50DF9821EAAF15B001F38BD /* UserFirstViewController.m in Sources */,
 				778F177C1C0D12780099BF93 /* CourseCatalogAPI.swift in Sources */,
 				B59238EB1EADD0BE00C686D8 /* ChooseCourseItem.m in Sources */,
 				B4B285E21A9A497A00DD603A /* OEXSegmentConfig.m in Sources */,
-				B50DF98B1EAAF15B001F38BD /* UserCouponTableViewCell.m in Sources */,
 				7772BEA31AFA68330081CA7A /* ConstraintAttributes.swift in Sources */,
 				B52E8D2F1F0B94E900F3170D /* BarrageFloatImageSprite.m in Sources */,
 				773A04801AF2E6DA0076532C /* CourseOutlineTableSource.swift in Sources */,
@@ -6213,7 +6152,6 @@
 				77691FA31B3B4596003922F2 /* UIColor+OEXHex.m in Sources */,
 				E01F45671E03D04100B9D7DC /* FirebaseAnalyticsTracker.swift in Sources */,
 				9EEB85A71BD6564E000F3E9E /* PressableCustomButton.swift in Sources */,
-				B50DF9881EAAF15B001F38BD /* UserYouViewController.m in Sources */,
 				B4B6D62C1A949F1B000F44E8 /* OEXRegistrationFieldPasswordController.m in Sources */,
 				1A3671F51BB03C7A00704032 /* OEXRearTableViewController.swift in Sources */,
 				B50DF9AE1EAAF6B9001F38BD /* TDBaseToolModel.m in Sources */,
@@ -6227,7 +6165,6 @@
 				9E30B4021B00BFB0007F673E /* CourseDashboardViewController.swift in Sources */,
 				B52591771EB348C3003A950D /* MD5DataSigner.m in Sources */,
 				77503E8A1B275F4500C47229 /* UIDevice+OSVersion.swift in Sources */,
-				B50DF98A1EAAF15B001F38BD /* UserCouponItem.m in Sources */,
 				B41F22BB1A113D3D0022E01F /* OEXDownloadManager.m in Sources */,
 				B4B6D61B1A949F0F000F44E8 /* OEXRegistrationFieldCheckBoxView.m in Sources */,
 				B52E8D301F0B94E900F3170D /* BarrageFloatSprite.m in Sources */,
@@ -6261,14 +6198,12 @@
 				7C2DD5531D4A8669006148E0 /* UserPreferenceManager.swift in Sources */,
 				BE45DA8F192623F4003BD39B /* OEXTabBarItemsCell.m in Sources */,
 				A409D1BA1F677D8300F6BF74 /* LanguageChangeTool.m in Sources */,
-				B50DF98D1EAAF15B001F38BD /* UserDiscountTableViewCell.m in Sources */,
 				775EB3AC1B1FC37C009526A8 /* SpinnerView.swift in Sources */,
 				8FE04B4D1A1E2637007F88B8 /* OEXFBSocial.m in Sources */,
 				9EDB10B41B0C732300C760C6 /* CourseGenericBlockTableViewCell.swift in Sources */,
 				B4D5C7EC1A6FBAA300427D1D /* OEXPersistentCredentialStorage.m in Sources */,
 				7713DFBF1AC3C16C005A1756 /* OEXRegisteringUserDetails.m in Sources */,
 				77FDF40F1AFBAE7700E8C639 /* OEXRouter+Swift.swift in Sources */,
-				B50DF9841EAAF15B001F38BD /* UserSecondViewController.m in Sources */,
 				77056C3E1B3F320800D9DB4A /* DetailToolbarButton.swift in Sources */,
 				B52E8D331F0B94E900F3170D /* BarrageSpriteUtility.m in Sources */,
 				77691F9C1B3A0774003922F2 /* Result+JSON.swift in Sources */,
@@ -6382,7 +6317,6 @@
 				B4B6D6051A949EFC000F44E8 /* OEXRegistrationAgreement.m in Sources */,
 				7712732E1BA8F5C7008BA397 /* SegmentAnalyticsTracker.swift in Sources */,
 				776459821A09650C008404CC /* NSDictionary+OEXEncoding.m in Sources */,
-				B50DF9861EAAF15B001F38BD /* UserThirdViewController.m in Sources */,
 				9C9B7F731A8CC80E00A857B2 /* OEXURLSessionManager.m in Sources */,
 				B50471671F052523003A7268 /* TDWaitforPayViewController.m in Sources */,
 				B50DF9B21EAAF6B9001F38BD /* TDTextView.m in Sources */,

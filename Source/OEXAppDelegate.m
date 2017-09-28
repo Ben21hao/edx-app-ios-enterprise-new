@@ -56,7 +56,6 @@
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
     
     [LanguageChangeTool initUserLanguage]; //语言本地化初始化
-    [self judgeAppVersion];//判断版本是否更新
     
     [WXApi registerApp:APPID_Weixin]; //1.向微信注册
     
@@ -94,6 +93,8 @@
 
     [self.environment.router openInWindow:self.window];
 
+    [self judgeAppVersion];//判断版本是否更新
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
@@ -108,7 +109,7 @@
 - (void)judgeAppVersion {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    NSString *url = @"https://enterprise.e-ducation.cn/api/mobile/v0.5/get_last_version";
+    NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/get_last_version",ELITEU_URL];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setValue:@"iOS_enterprise" forKey:@"platform"];
@@ -147,7 +148,6 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
     }];
-    
 }
 
 //2.微信
@@ -196,7 +196,6 @@
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
     // NOTE: 9.0以后使用新API接口
-    //    NSLog(@"url--%@",url);
     if ([url.host isEqualToString:@"safepay"]) {
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
@@ -236,8 +235,6 @@
                 alert.delegate = self;
                 [alert show];
             }
-            
-            NSLog(@"B---result = %@",resultDic);
         }];
     }
     //这里判断是否发起的请求为微信支付，如果是的话，用WXApi的方法调起微信客户端的支付页面（://pay 之前的那串字符串就是你的APPID，）
@@ -289,8 +286,6 @@
             NSLog(@"result = %@",resultDic);
         }];
     }
-
-    
     return handled;
 }
 
@@ -362,9 +357,9 @@
     }
 }
 
-#pragma mark Environment
+#pragma mark - Environment
 
-- (void)setupGlobalEnvironment {
+- (void)setupGlobalEnvironment { //获取配置
     [UserAgentOverrideOperation overrideUserAgent:nil];
     
     self.environment = [[OEXEnvironment alloc] init];

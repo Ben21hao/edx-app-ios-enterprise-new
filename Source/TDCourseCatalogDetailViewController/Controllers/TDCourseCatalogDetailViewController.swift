@@ -679,51 +679,6 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-
-    func getData() -> Void {
-        let path = "\(ELITEU_URL)/api/courses/v1/get_wait_order_list/?username=\(self.username)"
-        let url:NSURL = NSURL(string: path)!
-        
-        let request : NSMutableURLRequest = NSMutableURLRequest(URL: url)
-        let session : NSURLSession = NSURLSession.sharedSession()
-        let dataTask : NSURLSessionDataTask = session.dataTaskWithRequest(request) { (data, respone, error) in
-            
-            if(error == nil) {
-                
-                var dict : NSDictionary? = nil
-                do {
-                    dict = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.init(rawValue: 0)) as?NSDictionary
-                } catch {
-                    
-                }
-                print("+++++++++++++++++++++++%@+++++++++++++",dict)
-                
-                if let dataArrary = dict!["data"] as? NSArray {
-                    for i in 0..<dataArrary.count {
-                        if  let dataDic = dataArrary[i] as? NSDictionary {
-                            if let subDataArray = dataDic["order_items"] as? NSArray {
-                                for j in 0 ..< subDataArray.count  {
-                                    if let subDataDic = subDataArray[j] as? NSDictionary {
-                                        if let courseId = subDataDic["course_id"] as? NSString {
-                                            if self.courseID == courseId {
-                                                self.prepareOrder = true
-                                                self.courseModel.submitType = 2//查看待支付
-                                                self.courseDetailView.freeButtonStrHandle()
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        dataTask.resume()
-    }
-
-    
 }

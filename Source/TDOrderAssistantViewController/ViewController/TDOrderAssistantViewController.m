@@ -53,8 +53,7 @@
     self.baseTool = [[TDBaseToolModel alloc] init];
     self.is_public_course = YES; //默认是付费的
     
-    self.page = 1;
-    [self requestData:1];
+    [self pullDownRefresh]; //数据
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -91,11 +90,6 @@
         return;
     }
     
-    if (self.page == 1) {
-        self.tableView.mj_footer.hidden = NO;
-        [self.tableView.mj_footer resetNoMoreData];
-    }
-    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setValue:self.courseId forKey:@"course_id"];
     [dic setValue:@(self.page) forKey:@"pageindex"];
@@ -121,6 +115,16 @@
             
             self.is_public_course = [responseDic[@"extra_data"][@"is_public_course"] boolValue];
             NSArray *dataArray = responseDic[@"data"];
+            
+            if (dataArray.count < 8) {
+                [self hiddenFooterView];
+            } else {
+                if (self.page == 1) {
+                    self.tableView.mj_footer.hidden = NO;
+                    [self.tableView.mj_footer resetNoMoreData];
+                }
+            }
+            
             if (dataArray.count > 0) {
                 for (int i = 0; i < dataArray.count; i ++) {
                     TDTeacherModel *model = [TDTeacherModel mj_objectWithKeyValues:dataArray[i]];
@@ -128,15 +132,12 @@
                         [self.teacherArray addObject:model];
                     }
                 }
-                if (self.teacherArray.count > 0) {
-                    [self.tableView reloadData];
-                } else {
-                    self.nullLabel.hidden = NO;
-                }
             }
             
-            if (dataArray.count < 8) {
-                [self hiddenFooterView];
+            if (self.teacherArray.count > 0) {
+                [self.tableView reloadData];
+            } else {
+                self.nullLabel.hidden = NO;
             }
             
         } else if ([code intValue] == 201) { //没有更多数据了
@@ -293,13 +294,20 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorInset = UIEdgeInsetsZero;
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(topPullLoading)];
-    self.tableView.mj_footer.automaticallyHidden = YES;
+    [self.view addSubview:self.tableView];
+    
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(pullDownRefresh)];
-    header.lastUpdatedTimeLabel.hidden = YES;
+    header.lastUpdatedTimeLabel.hidden = YES; //隐藏时间
+    [header setTitle:TDLocalizeSelect(@"DROP_REFRESH_TEXT", nil) forState:MJRefreshStateIdle];
+    [header setTitle:TDLocalizeSelect(@"RELEASE_REFRESH_TEXT", nil) forState:MJRefreshStatePulling];
+    [header setTitle:TDLocalizeSelect(@"REFRESHING_TEXT", nil) forState:MJRefreshStateRefreshing];
     self.tableView.mj_header = header;
     
-    [self.view addSubview:self.tableView];
+    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(topPullLoading)];
+    [footer setTitle:TDLocalizeSelect(@"LOADING_TEXT", nil) forState:MJRefreshStateRefreshing];
+    [footer setTitle:TDLocalizeSelect(@"LOADED_ALL_TEXT", nil) forState:MJRefreshStateNoMoreData];
+    [footer setTitle:TDLocalizeSelect(@"CLICK_PULL_LOAD_MORE", nil) forState:MJRefreshStateIdle];
+    self.tableView.mj_footer = footer;
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.mas_equalTo(self.view);
@@ -332,7 +340,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

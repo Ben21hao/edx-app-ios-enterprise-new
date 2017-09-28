@@ -79,7 +79,7 @@
      [self setViewConstraint];
     self.isForgound = YES;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downRefreshData) name:@"Cancel_Order_Deal" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pullDownRefresh) name:@"Cancel_Order_Deal" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterAppForground) name:@"App_EnterForeground_Get_Code" object:nil];
 }
 
@@ -126,19 +126,19 @@
 }
 
 #pragma mark - 上拉加载
-- (void)upLoadMoreData {
+- (void)topPullLoading {
     [self dataHadChange];
 }
 
 #pragma mark - 下拉加载
-- (void)downRefreshData {
+- (void)pullDownRefresh {
     self.page = 1;
     [self dataHadChange];
 }
 
 - (void)enterAppForground { //后台进入前台
     if (self.whereFrom == TDAssistantFromOne) {
-        [self downRefreshData];
+        [self pullDownRefresh];
     }
 }
 
@@ -211,7 +211,7 @@
             
         } else {
             [self endTableviewRefreshing];
-            NSLog(@"助教服务数据请求错误 -- %@",code);
+            NSLog(@"助教服务数据请求错误 -- %@ -->> %@",code,responseDic[@"msg"]);
         }
         [self showNullData];
         
@@ -302,7 +302,7 @@
             
         } else {
             [self endTableviewRefreshing];
-            NSLog(@"已完成的助教服务数据请求错误 -- %@",code);
+            NSLog(@"已完成的助教服务数据请求错误 -- %@ -->> %@",code,responseDic[@"msg"]);
         }
         
         [self showNullData];
@@ -329,10 +329,13 @@
 }
 
 - (void)endTableviewRefreshing {
-    if (self.page == 1) {
-        [self.tableView.mj_header endRefreshing];
-    } else {
-        [self.tableView.mj_footer endRefreshing];
+    
+    [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
+    
+    if (self.dataArray.count == 0) {
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        self.tableView.mj_footer.hidden = YES;
     }
 }
 
@@ -351,11 +354,20 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(downRefreshData)];
-    header.lastUpdatedTimeLabel.hidden = YES;
+    
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(pullDownRefresh)];
+    header.lastUpdatedTimeLabel.hidden = YES; //隐藏时间
+    [header setTitle:TDLocalizeSelect(@"DROP_REFRESH_TEXT", nil) forState:MJRefreshStateIdle];
+    [header setTitle:TDLocalizeSelect(@"RELEASE_REFRESH_TEXT", nil) forState:MJRefreshStatePulling];
+    [header setTitle:TDLocalizeSelect(@"REFRESHING_TEXT", nil) forState:MJRefreshStateRefreshing];
     self.tableView.mj_header = header;
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(upLoadMoreData)];
-    self.tableView.mj_footer.automaticallyHidden = YES;
+    
+    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(topPullLoading)];
+    [footer setTitle:TDLocalizeSelect(@"LOADING_TEXT", nil) forState:MJRefreshStateRefreshing];
+    [footer setTitle:TDLocalizeSelect(@"LOADED_ALL_TEXT", nil) forState:MJRefreshStateNoMoreData];
+    [footer setTitle:TDLocalizeSelect(@"CLICK_PULL_LOAD_MORE", nil) forState:MJRefreshStateIdle];
+    self.tableView.mj_footer = footer;
+    
     self.tableView.tableFooterView = [UIView new];
     [self.view addSubview:self.tableView];
     

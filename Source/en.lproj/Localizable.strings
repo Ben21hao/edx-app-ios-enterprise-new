@@ -1761,7 +1761,11 @@
 "LOADING_TEXT" = "Loading...";
 /*已加载全部Loaded all*/
 "LOADED_ALL_TEXT" = "Loaded all";
+/*点击或上拉加载更多数据Click or pull to load more data*/
+"CLICK_PULL_LOAD_MORE" = "点击或上拉加载更多数据";
 /*检测到有版本更新，是否更新？ New version detected. Update now?*/
 "NEW_VERSION_UPDATE" = "New version detected. Update now?";
 /*取消订单失败 Failure to cancel order*/
 "FAIL_CANCEL_ORDER" = "Failure to cancel order";
+/*查询失败 Query failed*/
+"QUERY_FAILED" = "Query failed";
