@@ -21,41 +21,38 @@ static NSBundle *bundle = nil;
 // userLanguage储存在NSUserDefaults中，首次加载时要检测是否存在，如果不存在的话读AppleLanguages，并赋值给userLanguage。
 + (void)initUserLanguage{
     
-    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-    NSString *string = [def valueForKey:@"userLanguage"];
-    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSString *string = [userDefault valueForKey:@"userLanguage"];
     
     //获取系统当前语言版本(中文zh-Hans-CN,英文en-CN)
-    NSArray* languages = [def objectForKey:@"AppleLanguages"];
+    NSArray* languages = [userDefault objectForKey:@"AppleLanguages"];
     NSString *systemStr = [languages objectAtIndex:0];
     
-    NSString *rowStr = [[NSUserDefaults standardUserDefaults] valueForKey:@"languageSelected"];
-    
-    if(string.length == 0 || [rowStr intValue] == 0){
+    if(string.length == 0){
         
         string = [systemStr isEqualToString:@"en-CN"] || [systemStr isEqualToString:@"en"] ? @"en" : @"zh-Hans";
 
-        [def setValue:string forKey:@"userLanguage"];
-        [def synchronize];//持久化，不加的话不会保存
+        [userDefault setValue:string forKey:@"userLanguage"];
+        [userDefault synchronize];//持久化，不加的话不会保存
     }
     
     //获取文件路径
     NSString *path = [[NSBundle mainBundle] pathForResource:string ofType:@"lproj"];
-    bundle = [NSBundle bundleWithPath:path];//生成bundle
-    
-//    NSLog(@" 11--- %@ ---> %@ --- > %@" , string,path,bundle);
+    bundle = [NSBundle bundleWithPath:path]; //生成bundle
 }
 
 // 设置语言方法
 + (void)setUserlanguage:(NSString *)language{
     
-    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSLog(@"设置语言 ---->>>> %@",language);
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
     NSString *path = [[NSBundle mainBundle] pathForResource:language ofType:@"lproj" ]; //1.第一步改变bundle的值
     bundle = [NSBundle bundleWithPath:path];
     
-    [def setValue:language forKey:@"userLanguage"]; //2.持久化
-    [def synchronize];
+    [userDefault setValue:language forKey:@"userLanguage"]; //2.持久化
+    [userDefault synchronize];
 }
 
 

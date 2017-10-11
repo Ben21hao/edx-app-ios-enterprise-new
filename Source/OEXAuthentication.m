@@ -174,7 +174,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
     [task resume];
 }
 
-// Returns authentication header for every authenticated webservice call
+// Returns authentication header for every authenticated webservice call 返回认证头每个认证的WebService调用
 + (NSString*)authHeaderForApiAccess {
     OEXSession* session = [OEXSession sharedSession];
     if(session.token.accessToken && session.token.tokenType) {

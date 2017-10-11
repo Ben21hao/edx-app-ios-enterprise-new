@@ -42,6 +42,7 @@ public class UserProfile {
         case companyDic = "company"//公司dic
         case logoUrl = "logo"//公司logo
         case company_id = "id" //公司id
+        case Language_Like = "language" //语言习惯
     }
     
     let hasProfileImage: Bool
@@ -70,8 +71,10 @@ public class UserProfile {
     var order : Double?//未支付订单
     let logoUrl: String?//公司logo
     let company_id: Int?
+    let language_Like: String? //语言习惯
     
     public init?(json: JSON) {
+        
         let profileImage = json[ProfileFields.Image]
         if let hasImage = profileImage[ProfileFields.HasImage].bool where hasImage {
             hasProfileImage = true
@@ -104,11 +107,13 @@ public class UserProfile {
         order = json[ProfileFields.order].double//未支付订单
         remainscore = json[ProfileFields.Remainscore].double
         educationCode = json[ProfileFields.Education].string
+        language_Like = json[ProfileFields.Language_Like].string
         
-//        print("json-----\(json)")
+//        print("json----->>>>> \(json)")
+//        print("语言 ---->>>> \(language_Like!)")
     }
     
-    internal init(user_id : Int,company_id : Int, username : String, bio : String? = nil, parentalConsent : Bool? = false, countryCode : String? = nil, accountPrivacy : ProfilePrivacy? = nil,name : String, education : String? = nil,nickname : String,remainscore : Double,phone : String,email : String,coupon : Double,order : Double) {
+    internal init(user_id : Int,company_id : Int, username : String, bio : String? = nil, parentalConsent : Bool? = false, countryCode : String? = nil, accountPrivacy : ProfilePrivacy? = nil,name : String, education : String? = nil,nickname : String, language_Like : String,remainscore : Double,phone : String,email : String,coupon : Double,order : Double) {
         
         self.accountPrivacy = accountPrivacy
         self.username = username
@@ -130,6 +135,7 @@ public class UserProfile {
         self.order = order
         self.logoUrl = nil
         self.company_id = company_id
+        self.language_Like = language_Like
     }
     
     var languageCode: String? {

@@ -10,4 +10,6 @@
 
 @interface TDSettingViewController : UIViewController
 
+@property (nonatomic,strong) NSString *username;
+
 @end

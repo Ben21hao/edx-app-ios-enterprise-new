@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSString *english_name;//公司英文名字
 @property (nonatomic, copy, nullable) NSString *introduction;//公司介绍
 @property (nonatomic, copy, nullable) NSString *domain_name;//域名
+@property (nonatomic, copy, nullable) NSString *language;//语言习惯
 
 
 /*

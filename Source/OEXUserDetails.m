@@ -10,6 +10,7 @@
 #import "OEXSession.h"
 #import "NSMutableDictionary+OEXSafeAccess.h"
 #import <MJExtension/MJExtension.h>
+#import "LanguageChangeTool.h"
 
 static OEXUserDetails* user = nil;
 
@@ -22,6 +23,8 @@ static NSString* const OEXUserDetailsUrlKey = @"url";
 
 static NSString* const OEXUserDetailsPhoneNubmerKey = @"mobile";//手机号码
 static NSString* const OEXUserDetailsNickNameKey = @"nick_name";//昵称
+static NSString* const OEXUserDetailsCompanyLanguageKey = @"language";//语言习惯
+
 static NSString* const OEXUserDetailsCompanyKey = @"company"; //公司key
 static NSString* const OEXUserDetailsCompanyIdKey = @"id";//公司id
 static NSString* const OEXUserDetailsCompanyLogoKey = @"logo";//公司logo
@@ -62,6 +65,7 @@ static NSString* const OEXUserDetailsCompanyDomainNameKey = @"domain_name";//公
 //    return self;
 //}
 - (id)initWithUserName:(NSString*)username email:(NSString*)email courseEnrollments:(NSString*)course_enrollments name:(NSString*)name userId:(NSNumber*)userId Url:(NSString*)url PhoneNumber:(NSString *)phoneNumber andNickName:(NSString *)nickName{
+    
     if((self = [super init])) {
         _username = [username copy];
         _email = [email copy];
@@ -69,10 +73,11 @@ static NSString* const OEXUserDetailsCompanyDomainNameKey = @"domain_name";//公
         _name = [name copy];
         _userId = [userId copy];
         _url = [url copy];
-        //手机号码
-        _mobile = [_mobile copy];
-        //昵称
-        _nick_name = [_nick_name copy];
+        
+        _mobile = [_mobile copy];//手机号码
+        _nick_name = [_nick_name copy];//昵称
+        _language = [_language copy];
+        
         /*公司信息*/
         _company_id = [_company_id copy];
         _logo = [_logo copy];
@@ -86,6 +91,7 @@ static NSString* const OEXUserDetailsCompanyDomainNameKey = @"domain_name";//公
         _english_name = [_english_name copy];
         _introduction = [_introduction copy];
         _domain_name = [_domain_name copy];
+        
     }
     return self;
 }
@@ -115,18 +121,18 @@ static NSString* const OEXUserDetailsCompanyDomainNameKey = @"domain_name";//公
 //
 //    return self;
 //}
-- (id)initWithUserDictionary:(NSDictionary*)userDetailsDictionary {
+- (id)initWithUserDictionary:(NSDictionary *)userDetailsDictionary {
     self = [super init];
+    
     if(self) {
         NSString* dictionaryUserName = userDetailsDictionary[OEXUserDetailsUserNameKey];
         NSString* dictionaryCourseEnrollments = userDetailsDictionary[OEXUserDetailsCourseEnrollmentsKey];
-        if(dictionaryUserName == nil || [dictionaryUserName stringByTrimmingCharactersInSet:
-                                         [NSCharacterSet whitespaceCharacterSet]].length == 0) {
+        
+        if(dictionaryUserName == nil || [dictionaryUserName stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]].length == 0) {
             return nil;
         }
         
-        if(dictionaryCourseEnrollments == nil || [dictionaryCourseEnrollments stringByTrimmingCharactersInSet:
-                                                  [NSCharacterSet whitespaceCharacterSet]].length == 0) {
+        if(dictionaryCourseEnrollments == nil || [dictionaryCourseEnrollments stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]].length == 0) {
             return nil;
         }
         
@@ -161,6 +167,18 @@ static NSString* const OEXUserDetailsCompanyDomainNameKey = @"domain_name";//公
         if ([_nick_name isEqual:[NSNull null]]) {
             _nick_name = nil;
         }
+        
+        //用户语言习惯
+        _language = [userDetailsDictionary objectForKey:OEXUserDetailsCompanyLanguageKey];
+        if ([_language isEqual:[NSNull null]]) {
+            _language = nil;
+        }
+        NSLog(@"用户语言 ---->>>> %@",_language);
+        
+        [[NSUserDefaults standardUserDefaults] setValue:_language forKey:@"userLanguage"];
+        NSString *str = [_language isEqualToString:@"en"] ? @"en" : @"zh-Hans";
+        [LanguageChangeTool setUserlanguage:str];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"languageSelectedChange" object:nil];
         
         /*公司信息*/
         NSDictionary *companyDic = userDetailsDictionary[OEXUserDetailsCompanyKey];
@@ -241,8 +259,9 @@ static NSString* const OEXUserDetailsCompanyDomainNameKey = @"domain_name";//公
 //    return data;
 //}
 - (NSData *)userDetailsData {
+    
     NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-    NSLog(@"%@--%@",_username,_course_enrollments);
+    NSLog(@"%@ ---->>> %@",_username,_course_enrollments);
     
     if(_username && _course_enrollments) {
         [dict safeSetObject:_username forKey:OEXUserDetailsUserNameKey];
@@ -251,10 +270,10 @@ static NSString* const OEXUserDetailsCompanyDomainNameKey = @"domain_name";//公
         [dict setObjectOrNil:_userId forKey:OEXUserDetailsUserIdKey];
         [dict setObjectOrNil:_url forKey:OEXUserDetailsUrlKey];
         [dict setObjectOrNil:_name forKey:OEXUserDetailsNameKey];
-        //手机号码
-        [dict setObjectOrNil:_mobile forKey:OEXUserDetailsPhoneNubmerKey];
-        //昵称
-        [dict setObjectOrNil:_nick_name forKey:OEXUserDetailsNickNameKey];
+        
+        [dict setObjectOrNil:_mobile forKey:OEXUserDetailsPhoneNubmerKey]; //手机号码
+        [dict setObjectOrNil:_nick_name forKey:OEXUserDetailsNickNameKey];//昵称
+        [dict setObjectOrNil:_language forKey:OEXUserDetailsCompanyLanguageKey]; //语言习惯
         
         /*公司信息*/
         NSMutableDictionary *companyDic = [NSMutableDictionary dictionary];
@@ -270,14 +289,15 @@ static NSString* const OEXUserDetailsCompanyDomainNameKey = @"domain_name";//公
         [companyDic setObjectOrNil:_english_name forKey:OEXUserDetailsCompanyEnglishNameKey];
         [companyDic setObjectOrNil:_introduction forKey:OEXUserDetailsCompanyIntroductionKey];
         [companyDic setObjectOrNil:_domain_name forKey:OEXUserDetailsCompanyDomainNameKey];
+        
         [dict setObjectOrNil:companyDic forKey:OEXUserDetailsCompanyKey];
-    }
-    else {
+        
+    } else {
         return nil;
     }
-    
+
     NSError* error = nil;
-    NSData* data = [NSPropertyListSerialization dataWithPropertyList:dict format:NSPropertyListXMLFormat_v1_0 options:0 error:&error];
+    NSData* data = [NSPropertyListSerialization dataWithPropertyList:dict format:NSPropertyListXMLFormat_v1_0 options:0 error:&error];//缓存
     NSAssert(error == nil, @"UserDetails error => %@ ", [error description]);
     return data;
 }

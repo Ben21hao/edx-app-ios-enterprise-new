@@ -1740,8 +1740,6 @@
 
 /*多语言*/
 "LANGUAGE_TEXT" = "Language";
-/*跟随手机系统 Follow the phone system*/
-"FOLLOW_SYSTEM_LANGUAGE" = "Default";
 /*设置语言Language Setting*/
 "LANGUAGE_SETTING_TEXT" = "Language Setting";
 /*暂无资料 No data yes.*/
@@ -1752,7 +1750,7 @@
 "ALLOW_USE_ALBUM_TEXT" = "Not allow {name} to access your album, please go to settings.";
 
 /*正在刷新Refreshing*/
-"REFRESHING_TEXT" = "Refreshing";
+"REFRESHING_TEXT" = "Refreshing...";
 /*下拉刷新Drop refresh*/
 "DROP_REFRESH_TEXT" = "Drop refresh";
 /*松开后刷新Refresh after release*/
@@ -1769,3 +1767,9 @@
 "FAIL_CANCEL_ORDER" = "Failure to cancel order";
 /*查询失败 Query failed*/
 "QUERY_FAILED" = "Query failed";
+/*刷新成功 Refresh success*/
+"REFRESHING_SUCESS_TEXT" = "Refresh success";
+/*刷新失败 Refresh failed*/
+"REFRESHING_FAILED_TEXT" = "Refresh failed";
+/*加入失败 Failed to add course*/
+"ADD_FAILED_TEXT" = "Failed to add course";

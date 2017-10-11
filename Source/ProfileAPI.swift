@@ -14,13 +14,13 @@ public class ProfileAPI: NSObject {
     private static var currentUserFeed = [String: Feed<UserProfile>]()
     
     private static func profileDeserializer(response : NSHTTPURLResponse, json : JSON) -> Result<UserProfile> {
-        return UserProfile(json: json).toResult()
+        return UserProfile(json: json).toResult() //UserProfile 初始化
     }
 
     private static func imageResponseDeserializer(response : NSHTTPURLResponse) -> Result<()> {
         return Success()
     }
-    //用户详细信息
+    //用户信息 - 详细
     private class func path(username:String) -> String {
         return "/api/user/v1/accounts/{username}".oex_formatWithParameters(["username": username])
     }

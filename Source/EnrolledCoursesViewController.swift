@@ -40,8 +40,10 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        LanguageChangeTool.initUserLanguage()
-        self.titleViewLabel.text = TDLocalizeSelectSwift("MY_COURSES")
+        LanguageChangeTool.initUserLanguage()//语言
+        TDNotificationCenter().addObserver(self, selector: #selector(LanguageChangeAction), name: "languageSelectedChange", object: nil)
+        
+        LanguageChangeAction()
         
         self.view.accessibilityIdentifier = "enrolled-courses-screen"
         
@@ -76,6 +78,10 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
         showVersionUpgradeSnackBarIfNecessary()
         super.viewWillAppear(animated)
         hideSnackBarForFullScreenError()
+    }
+    
+    func LanguageChangeAction() {
+        self.titleViewLabel.text = TDLocalizeSelectSwift("MY_COURSES")
     }
     
     override func reloadViewData() {

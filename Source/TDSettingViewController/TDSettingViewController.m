@@ -15,6 +15,7 @@
 #import "edX-Swift.h"
 #import "WYAlertView.h"
 
+#import "TDRequestManager.h"
 
 @interface TDSettingViewController () <UITableViewDataSource, UITableViewDelegate,WYAlertViewDelegate>
 
@@ -43,6 +44,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
 }
 
 - (void)languageChangeAction {
@@ -132,6 +134,7 @@
 
 - (void)gotoLanguageViewController {
     TDLanguageViewController *languageVc = [[TDLanguageViewController alloc] init];
+    languageVc.username = self.username;
     [self.navigationController pushViewController:languageVc animated:YES];
 }
 

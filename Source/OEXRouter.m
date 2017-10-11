@@ -222,6 +222,7 @@ OEXRegistrationViewControllerDelegate
 - (void)showMySettings { //设置
     
     TDSettingViewController *controller = [[TDSettingViewController alloc] init];
+    controller.username = self.environment.session.currentUser.username;
     [self showContentStackWithRootController:controller animated:YES];
 }
 

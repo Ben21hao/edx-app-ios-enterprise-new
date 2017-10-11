@@ -16,4 +16,10 @@
 - (void)addOwnCompanyCourse:(NSString *)course_id username:(NSString *)username companyID:(NSString *)company_id;
 @property (nonatomic,copy) void(^addOwnCompanyCourseHandle)(NSInteger type);
 
+/*
+ 获取用户详细信息
+ */
+- (void)getUserDetailMessage:(NSString *)usernam;
+@property (nonatomic,copy) void(^getUserMessageHandle)(NSString *languageStr);
+
 @end

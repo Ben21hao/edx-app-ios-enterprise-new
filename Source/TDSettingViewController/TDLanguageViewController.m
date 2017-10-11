@@ -7,6 +7,10 @@
 //
 
 #import "TDLanguageViewController.h"
+#import "OEXAuthentication.h"
+#import "OEXUserDetails.h"
+#import "OEXSession.h"
+#import "OEXAccessToken.h"
 
 @interface TDLanguageViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -44,13 +48,58 @@
     self.titleViewLabel.text = TDLocalizeSelect(@"LANGUAGE_SETTING_TEXT", nil);
 }
 
+- (void)handinToService:(NSString *)languageStr { // 0 中文， 1 英语
+    
+    TDBaseToolModel *model = [[TDBaseToolModel alloc] init];
+    if (![model networkingState]) {
+        return;
+    }
+    
+    [SVProgressHUD showWithStatus:TDLocalizeSelect(@"REFRESHING_TEXT", nil)];
+    SVProgressHUD.defaultMaskType = SVProgressHUDMaskTypeBlack;
+    SVProgressHUD.defaultStyle = SVProgressHUDAnimationTypeNative;
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:languageStr forKey:@"language"];
+    NSString *url = [NSString stringWithFormat:@"%@/api/user/v1/accounts/%@",ELITEU_URL,self.username];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer]; // 返回的格式 JSON
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html",@"text/json",@"text/javascript", nil];// 可接受的文本参数规格
+    manager.requestSerializer = [AFJSONRequestSerializer serializer]; //先讲请求设置为json
+    [manager.requestSerializer setValue:@"application/merge-patch+json" forHTTPHeaderField:@"Content-Type"];// 开始设置请求头
+    
+    NSString* authValue = [NSString stringWithFormat:@"%@", [OEXAuthentication authHeaderForApiAccess]];
+    [manager.requestSerializer setValue:authValue forHTTPHeaderField:@"Authorization"];//安全验证
+    
+    [manager PATCH:url parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *respondDic = (NSDictionary *)responseObject;
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:respondDic];
+        [dic setValue:respondDic[@"nickname"] forKey:@"nick_name"];
+        [dic setValue:respondDic[@"user_id"] forKey:@"id"];
+        //更新本地的缓存
+        OEXSession* session = [OEXSession sharedSession];
+        OEXUserDetails* userDetails = [[OEXUserDetails alloc] initWithUserDictionary:dic];
+        [[OEXSession sharedSession] saveAccessToken:session.token userDetails:userDetails];//保存登录信息
+        
+        NSLog(@"更新语言 ---->>>> %@ ---- %@",respondDic[@"language"],userDetails);
+        [SVProgressHUD dismiss];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [SVProgressHUD dismiss];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        NSLog(@"绑定出错 -- %ld, %@",(long)error.code, error.userInfo[@"com.alamofire.serialization.response.error.data"]);
+    }];
+}
+
 #pragma mark - tableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -64,20 +113,16 @@
     cell.textLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     cell.textLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
     
-    NSString *rowStr = [[NSUserDefaults standardUserDefaults] valueForKey:@"languageSelected"];
-//    NSString *languageStr = [[NSUserDefaults standardUserDefaults] valueForKey:@"userLanguage"];
+    NSString *languageStr = [[NSUserDefaults standardUserDefaults] valueForKey:@"userLanguage"];
 //    NSLog(@"%@ -- >> %@",rowStr,languageStr);
-    
-    cell.accessoryType = [rowStr intValue] == indexPath.row ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    NSUInteger row = [languageStr isEqualToString:@"en-CN"] || [languageStr isEqualToString:@"en"] ? 1 : 0;
+    cell.accessoryType = row == indexPath.row ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
 
     switch (indexPath.row) {
         case 0:
-            cell.textLabel.text = TDLocalizeSelect(@"FOLLOW_SYSTEM_LANGUAGE", nil);
-            break;
-        case 1:
             cell.textLabel.text = @"中文";
             break;
-        case 2:
+        case 1:
             cell.textLabel.text = @"English";
             break;
         default:
@@ -90,21 +135,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%ld",(long)indexPath.row] forKey:@"languageSelected"];
-    [tableView reloadData];
+    NSString *rowStr = indexPath.row == 0 ? @"zh-Hans" : @"en";
+    NSString *languageStr = [[NSUserDefaults standardUserDefaults] valueForKey:@"userLanguage"];
     
-    if (indexPath.row == 0) {
-        
-        //查看当前系统语言 - 可以有几种方式拿到
-        NSArray *languages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
-        NSString *systemStr = [languages objectAtIndex:0];
-        [LanguageChangeTool setUserlanguage: [systemStr isEqualToString:@"en-CN"] || [systemStr isEqualToString:@"en"] ? @"en" : @"zh-Hans"];//zh-Hans-CN
-
-    } else {
-         [LanguageChangeTool setUserlanguage: indexPath.row == 1 ? @"zh-Hans" : @"en"];
+    if ([languageStr isEqualToString:rowStr]) {
+        return;
     }
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"languageSelectedChange" object:nil];
+    
+    [LanguageChangeTool setUserlanguage:rowStr]; //zh-Hans-CN
+    [self handinToService:rowStr]; //更新语言
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"languageSelectedChange" object:nil]; //通知语言发生变化
+    [tableView reloadData];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

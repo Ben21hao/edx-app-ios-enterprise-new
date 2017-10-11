@@ -10,4 +10,6 @@
 
 @interface TDLanguageViewController : TDBaseViewController
 
+@property (nonatomic,strong) NSString *username;
+
 @end
