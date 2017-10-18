@@ -17,6 +17,7 @@ extern NSString* const OEXVideoEncodingMobileLow;
 
 @interface OEXVideoEncoding : NSObject
 
+/* 返回 model */
 - (id)initWithDictionary:(NSDictionary*)dictionary name:(NSString*)name;
 - (id)initWithName:(nullable NSString*)name URL:(NSString*)URL size:(NSNumber*)size;
 

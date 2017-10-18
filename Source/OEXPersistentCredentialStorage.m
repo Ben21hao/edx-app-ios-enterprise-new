@@ -39,7 +39,7 @@
     [self saveService:kCredentialsService data:sessionDictionary];
 }
 
-- (void)clear {//清除
+- (void)clear {//清除用户缓存 cookie
     [self deleteService:kCredentialsService];
     
     NSHTTPCookieStorage* cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
@@ -76,9 +76,9 @@
 - (void)saveService:(NSString*)service data:(id)data {
     OSStatus result;
     NSMutableDictionary* keychainQuery = [self getKeychainQuery:service];
-    SecItemDelete((__bridge CFDictionaryRef)keychainQuery);
+    SecItemDelete((__bridge CFDictionaryRef)keychainQuery);   //删除 Keychain 中符号查询条件的记录
     [keychainQuery setObject:[NSKeyedArchiver archivedDataWithRootObject:data] forKey:(__bridge id)kSecValueData];
-    result = SecItemAdd((__bridge CFDictionaryRef)keychainQuery, NULL);
+    result = SecItemAdd((__bridge CFDictionaryRef)keychainQuery, NULL); //往 Keychain 里增加一条数据
 #ifdef DEBUG
     NSAssert(result == noErr, @"Could not add credential to keychain");
 #endif
@@ -90,10 +90,10 @@
     [keychainQuery setObject:(__bridge id)kCFBooleanTrue forKey:(__bridge id)kSecReturnData];
     [keychainQuery setObject:(__bridge id)kSecMatchLimitOne forKey:(__bridge id)kSecMatchLimit];
     CFDataRef keyData = NULL;
-    if(SecItemCopyMatching((__bridge CFDictionaryRef)keychainQuery, (CFTypeRef*)&keyData) == noErr) {
+    if(SecItemCopyMatching((__bridge CFDictionaryRef)keychainQuery, (CFTypeRef*)&keyData) == noErr) { //查询Keychain里是否有符号条件的记录
         // TODO: Replace this with code that doesn't raise and swallow exceptions
         @try {
-            ret = [NSKeyedUnarchiver unarchiveObjectWithData:(__bridge NSData*)keyData];
+            ret = [NSKeyedUnarchiver unarchiveObjectWithData:(__bridge NSData*)keyData]; //反归档
         }
         @catch(NSException* e) {
             OEXLogInfo(@"STORAGE", @"Unarchive of %@ failed: %@", service, e);
@@ -101,14 +101,14 @@
         @finally {}
     }
     if(keyData) {
-        CFRelease(keyData);
+        CFRelease(keyData); //释放掉一个类的所占的内存
     }
     return ret;
 }
 
 - (void)deleteService:(NSString*)service {
     NSMutableDictionary* keychainQuery = [self getKeychainQuery:service];
-    SecItemDelete((__bridge CFDictionaryRef)keychainQuery);
+    SecItemDelete((__bridge CFDictionaryRef)keychainQuery); //删除 Keychain 中符号查询条件的记录
 }
 
 - (NSMutableDictionary*)getKeychainQuery:(NSString*)service {

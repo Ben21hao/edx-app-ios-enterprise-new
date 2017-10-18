@@ -11,6 +11,7 @@ import edXCore
 
 //TODO: remove NSObject when done with @objc
 public class UserCourseEnrollment : NSObject {
+    
     let created: String?
     let mode: String?
     let isActive: Bool
@@ -22,6 +23,7 @@ public class UserCourseEnrollment : NSObject {
     let certificateUrl: String?
 
     init?(dictionary: [String: AnyObject]) {
+        
         created = dictionary["created"] as? String
         mode = dictionary["mode"] as? String
         isActive = (dictionary["is_active"] as? NSNumber)?.boolValue ?? false

@@ -21,7 +21,7 @@
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) TDEditeBottomView *customEditing;
 
-@property (nonatomic,strong) NSMutableArray *arr_CourseData;
+@property (nonatomic,strong) NSMutableArray *courseDataArray;
 @property (nonatomic, strong) OEXInterface *dataInterface;
 
 @property (nonatomic,copy) void(^judgEditeHandle)(BOOL isTableEditing);

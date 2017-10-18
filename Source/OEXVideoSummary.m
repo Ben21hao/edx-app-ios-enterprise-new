@@ -20,8 +20,7 @@
 
 @property (nonatomic, copy) NSString* sectionURL;       // used for OPEN IN BROWSER
 
-/// path : OEXVideoPathEntry array
-@property (nonatomic, copy) NSArray* path;
+@property (nonatomic, copy) NSArray* path; // path : OEXVideoPathEntry array
 @property (strong, nonatomic) OEXVideoPathEntry* chapterPathEntry;
 @property (strong, nonatomic) OEXVideoPathEntry* sectionPathEntry;
 
@@ -30,6 +29,7 @@
 @property (nonatomic, copy) NSString* videoThumbnailURL;
 @property (nonatomic, copy) NSString* videoID;
 @property (nonatomic, copy) NSString* unitURL;
+
 @property (nonatomic, assign) BOOL onlyOnWeb;
 @property (nonatomic, strong) NSDictionary* transcripts;
 @property (nonatomic, strong) OEXVideoEncoding *defaultEncoding;
@@ -38,11 +38,12 @@
 
 @implementation OEXVideoSummary
 
-- (id)initWithDictionary:(NSDictionary*)dictionary {
+- (id)initWithDictionary:(NSDictionary *)dictionary {
+    
     self = [super init];
     if(self != nil) {
-        //Section url
-        if([[dictionary objectForKey:@"section_url"] isKindOfClass:[NSString class]]) {
+        
+        if([[dictionary objectForKey:@"section_url"] isKindOfClass:[NSString class]]) { //Section url
             self.sectionURL = [dictionary objectForKey:@"section_url"];
         }
 
@@ -53,50 +54,47 @@
         self.unitURL = [dictionary objectForKey:@"unit_url"];
 
         NSDictionary* summary = [dictionary objectForKey:@"summary"];
-
-        // Data from inside summary dictionary
-        self.category = [summary objectForKey:@"category"];
+        self.category = [summary objectForKey:@"category"]; // Data from inside summary dictionary
 
         self.name = [summary objectForKey:@"name"];
         if([self.name length] == 0 || self.name == nil) {
             self.name = TDLocalizeSelect(@"UNTITLED", nil);
         }
         
-        NSDictionary* rawEncodings = OEXSafeCastAsClass(summary[@"encoded_videos"], NSDictionary);
-        NSMutableDictionary* encodings = [[NSMutableDictionary alloc] init];
-        
-        [rawEncodings enumerateKeysAndObjectsUsingBlock:^(NSString* name, NSDictionary* encodingInfo, BOOL *stop) {
-            OEXVideoEncoding* encoding = [[OEXVideoEncoding alloc] initWithDictionary:encodingInfo name:name];
-            [encodings safeSetObject:encoding forKey:name];
-        }];
-        self.encodings = encodings;
-
         self.videoThumbnailURL = [summary objectForKey:@"video_thumbnail_url"];
         self.videoID = [summary objectForKey:@"id"] ;
-
-//        self.duration = [OEXSafeCastAsClass([summary objectForKey:@"duration"], NSNumber) doubleValue];
-        NSString *timeStr = summary[@"duration"];
         
+        //        self.duration = [OEXSafeCastAsClass([summary objectForKey:@"duration"], NSNumber) doubleValue];
+        NSString *timeStr = summary[@"duration"];
         if (![timeStr isEqual:[NSNull null]]) {
-            //            NSLog(@"timeStr +++++++  %@",timeStr);
             self.duration = [OEXSafeCastAsClass([NSNumber numberWithDouble:[summary[@"duration"] doubleValue]], NSNumber) stringValue];
+            //            NSLog(@"timeStr +++++++  %@",timeStr);
         }
         
         self.onlyOnWeb = [[summary objectForKey:@"only_on_web"] boolValue];
-
         self.transcripts = [summary objectForKey:@"transcripts"];
+        
+        NSMutableDictionary* encodings = [[NSMutableDictionary alloc] init];
+        NSDictionary* rawEncodings = OEXSafeCastAsClass(summary[@"encoded_videos"], NSDictionary);
+        
+        [rawEncodings enumerateKeysAndObjectsUsingBlock:^(NSString* name, NSDictionary* encodingInfo, BOOL *stop) {//遍历字典中中所有的key－value
+            
+            OEXVideoEncoding* encoding = [[OEXVideoEncoding alloc] initWithDictionary:encodingInfo name:name]; //将字典转为model
+            [encodings safeSetObject:encoding forKey:name]; 
+        }];
+        self.encodings = encodings;
         
         if (_encodings.count <= 0) {
             _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
         }
-        
         NSLog(@"OEXVideoSummary 视频时长 %@ --- >>大小  %@ ---->> %@",self.duration,[summary objectForKey:@"size"],_defaultEncoding.size);
     }
 
     return self;
 }
 
-- (id)initWithDictionary:(NSDictionary*)dictionary videoID:(NSString*)videoID name:(NSString*)name {
+- (id)initWithDictionary:(NSDictionary *)dictionary videoID:(NSString *)videoID name:(NSString *)name {
+    
     self = [self initWithDictionary:dictionary];
     if(self != nil) {
         self.videoID = videoID;
@@ -105,9 +103,11 @@
     return self;
 }
 
-- (id)initWithVideoID:(NSString*)videoID name:(NSString*)name path:(NSArray*)path {
+- (id)initWithVideoID:(NSString *)videoID name:(NSString *)name path:(NSArray *)path {
+    
     self = [super init];
     if(self != nil) {
+        
         self.videoID = videoID;
         self.name = name;
         self.path = path;
@@ -116,8 +116,10 @@
 }
 
 - (id)initWithVideoID:(NSString *)videoID name:(NSString *)name encodings:(NSDictionary<NSString*, OEXVideoEncoding *> *)encodings {
+    
     self = [super init];
     if(self != nil) {
+        
         self.name = name;
         self.videoID = videoID;
         self.encodings = encodings;
@@ -125,19 +127,19 @@
     return self;
 }
 
-- (OEXVideoEncoding*)preferredEncoding {
+- (OEXVideoEncoding *)preferredEncoding {
+    
     for(NSString* name in [OEXVideoEncoding knownEncodingNames]) {
+        
         OEXVideoEncoding* encoding = self.encodings[name];
         if (encoding != nil) {
             return encoding;
         }
     }
-    
-    // Don't have a known encoding, so return default encoding
-    return self.defaultEncoding;
+    return self.defaultEncoding; // Don't have a known encoding, so return default encoding
 }
 
-- (BOOL) isYoutubeVideo {
+- (BOOL)isYoutubeVideo {
     
     for(NSString* name in [OEXVideoEncoding knownEncodingNames]) {
         OEXVideoEncoding* encoding = self.encodings[name];
@@ -145,8 +147,8 @@
         NSString *name = [encoding name];
         if ([name isEqualToString:OEXVideoEncodingMobileHigh] || [name isEqualToString:OEXVideoEncodingMobileLow]) {
             return false;
-        }
-        else if ([[encoding name] isEqualToString:OEXVideoEncodingYoutube]) {
+            
+        } else if ([[encoding name] isEqualToString:OEXVideoEncodingYoutube]) {
             return true;
         }
     }
@@ -154,32 +156,35 @@
     return false;
 }
 
-- (BOOL) isSupportedVideo {
+- (BOOL)isSupportedVideo {
+    
     BOOL isSupportedEncoding = false;
+    
     for(NSString* name in [OEXVideoEncoding knownEncodingNames]) {
+        
         OEXVideoEncoding* encoding = self.encodings[name];
         NSString *name = [encoding name];
-        // fallback encoding can be with unsupported type like webm
-        if (([encoding URL] && [OEXInterface isURLForVideo:[encoding URL]]) && ([name isEqualToString:OEXVideoEncodingMobileHigh] || [name isEqualToString:OEXVideoEncodingMobileLow])) {
+        
+        if (([encoding URL] && [OEXInterface isURLForVideo:[encoding URL]]) && ([name isEqualToString:OEXVideoEncodingMobileHigh] || [name isEqualToString:OEXVideoEncodingMobileLow]))   {// fallback encoding can be with unsupported type like webm
+            
             isSupportedEncoding = true;
             break;
         }
     }
-    
-    return !self.onlyOnWeb && isSupportedEncoding;
+    return !self.onlyOnWeb && isSupportedEncoding; //不仅仅在网页，且支持
 }
 
-- (NSString*)videoURL {
+- (NSString *)videoURL {
     return self.preferredEncoding.URL;
 }
 
-- (NSNumber*)size {
+- (NSNumber *)size {
     return self.preferredEncoding.size;
 }
 
-- (OEXVideoPathEntry*)chapterPathEntry {
+- (OEXVideoPathEntry *)chapterPathEntry {
     __block OEXVideoPathEntry* result = nil;
-    [self.path enumerateObjectsUsingBlock:^(OEXVideoPathEntry* entry, NSUInteger idx, BOOL* stop) {
+    [self.path enumerateObjectsUsingBlock:^(OEXVideoPathEntry* entry, NSUInteger idx, BOOL* stop) {//遍历数组
         if(entry.category == OEXVideoPathEntryCategoryChapter) {
             result = entry;
             *stop = YES;
@@ -188,9 +193,10 @@
     return result;
 }
 
-- (OEXVideoPathEntry*)sectionPathEntry {
+- (OEXVideoPathEntry *)sectionPathEntry {
+    
     __block OEXVideoPathEntry* result = nil;
-    [self.path enumerateObjectsUsingBlock:^(OEXVideoPathEntry* entry, NSUInteger idx, BOOL* stop) {
+    [self.path enumerateObjectsUsingBlock:^(OEXVideoPathEntry* entry, NSUInteger idx, BOOL* stop) { //遍历数组
         if(entry.category == OEXVideoPathEntryCategorySection) {
             result = entry;
             *stop = YES;
@@ -199,18 +205,20 @@
     return result;
 }
 
-- (NSArray*)displayPath {
+- (NSArray *)displayPath {
+    
     NSMutableArray* result = [[NSMutableArray alloc] init];
     if(self.chapterPathEntry != nil) {
         [result addObject:self.chapterPathEntry];
     }
+    
     if(self.sectionPathEntry) {
         [result addObject:self.sectionPathEntry];
     }
     return result;
 }
 
-- (NSString*)description {
+- (NSString *)description {
     return [NSString stringWithFormat:@"<%@: %p, video_id=%@>", [self class], self, self.videoID];
 }
 

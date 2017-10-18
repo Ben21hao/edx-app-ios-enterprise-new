@@ -19,8 +19,9 @@
 - (void)submitPostAliPay:(TDAliPayModel *)aliPayModel {
     
     Order *order = [[Order alloc] init];
-    order.partner = aliPayModel.partner;
-    order.sellerID = aliPayModel.seller_id;
+    
+    order.partner = aliPayModel.partner; //合作者身份ID
+    order.sellerID = aliPayModel.seller_id; //卖家支付宝ID
     order.outTradeNO = aliPayModel.out_trade_no; //订单ID（由商家自行制定）
     NSLog(@"order.outTradeNO--%@",order.outTradeNO);
     
@@ -28,7 +29,7 @@
     order.body = aliPayModel.body;  //商品描述
     order.totalFee = aliPayModel.total_fee; //商品价格
     order.notifyURL =  aliPayModel.notify_url; //回调URL
-    order.service = aliPayModel.service;
+    order.service = aliPayModel.service; //接口名称
     order.paymentType = @"1";
     order.inputCharset = @"utf-8";
     //    order.itBPay = @"30m";

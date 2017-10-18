@@ -74,6 +74,7 @@ public class EnrollmentManager : NSObject {
     }
     
     private func clearFeed() {
+        
         let feed = Feed<[UserCourseEnrollment]?> { stream in
             stream.removeAllBackings()
             stream.send(Success(nil))
@@ -87,13 +88,14 @@ public class EnrollmentManager : NSObject {
         guard let username = userDetails.username else { return }
         guard let companyId = userDetails.company_id else { return }
         let organizationCode = self.config.organizationCode()
+        
         let feed = freshFeedWithUsername(username, organizationCode: organizationCode ,companyId: companyId)
         enrollmentFeed.backWithFeed(feed.map {x in x})
         enrollmentFeed.refresh()
     }
     
     func freshFeedWithUsername(username: String, organizationCode: String? , companyId: String) -> Feed<[UserCourseEnrollment]> {
-        let request = CoursesAPI.getUserEnrollments(username, organizationCode: organizationCode ,companyId: companyId)
+        let request = CoursesAPI.getUserEnrollments(username, organizationCode: organizationCode ,companyId: companyId) //我的课程
         return Feed(request: request, manager: networkManager, persistResponse: true)
     }
 }

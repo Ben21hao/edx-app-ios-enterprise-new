@@ -77,6 +77,7 @@
 
 #pragma mark - 数据
 - (void)requestData {
+    
     TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
     if (![baseTool networkingState]) {
         return;
@@ -97,11 +98,12 @@
         id code = responDic[@"code"];
         if ([code intValue] == 200) {
             self.dataDic = [NSDictionary dictionaryWithDictionary:responDic[@"data"]];
-            [self.tableView reloadData];
             
         } else {
-            
+            [self repeatAction];
         }
+        [self.tableView reloadData];
+        
         NSLog(@"----- 支付成功 ----- code %@  -- > msg %@",code,responDic[@"msg"]);
         
         [self.loadIngView removeFromSuperview];
@@ -286,7 +288,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

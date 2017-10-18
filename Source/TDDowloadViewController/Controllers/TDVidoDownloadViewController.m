@@ -57,11 +57,11 @@ typedef  enum OEXAlertType
     return _arr_SubsectionData;
 }
 
-- (NSMutableArray *)arr_CourseData {
-    if (!_arr_CourseData) {
-        _arr_CourseData = [[NSMutableArray alloc] init];
+- (NSMutableArray *)courseDataArray {
+    if (!_courseDataArray) {
+        _courseDataArray = [[NSMutableArray alloc] init];
     }
-    return _arr_CourseData;
+    return _courseDataArray;
 }
 
 - (void)viewDidLoad {
@@ -99,7 +99,7 @@ typedef  enum OEXAlertType
 
 - (void)playVideoForIndexPath:(NSIndexPath*)indexPath {
     
-    NSArray* videos = [[self.arr_CourseData objectAtIndex:indexPath.section] objectForKey:CAV_KEY_RECENT_VIDEOS];
+    NSArray* videos = [[self.courseDataArray objectAtIndex:indexPath.section] objectForKey:CAV_KEY_RECENT_VIDEOS];
     
     self.currentTappedVideo = [videos objectAtIndex:indexPath.row];
     
@@ -362,7 +362,7 @@ typedef  enum OEXAlertType
         
         self.selectAll = NO;
         
-        for(NSDictionary* dict in self.arr_CourseData) {
+        for(NSDictionary* dict in self.courseDataArray) {
             for(OEXHelperVideoDownload* obj_video in [dict objectForKey : CAV_KEY_RECENT_VIDEOS]) {
                 obj_video.isSelected = NO;
                 [self.arr_SelectedObjects removeObject:obj_video];
@@ -377,7 +377,7 @@ typedef  enum OEXAlertType
         
         self.selectAll = YES;
         
-        for(NSDictionary* dict in self.arr_CourseData) {
+        for(NSDictionary* dict in self.courseDataArray) {
             for(OEXHelperVideoDownload* obj_video in [dict objectForKey : CAV_KEY_RECENT_VIDEOS]) {
                 obj_video.isSelected = YES;
                 [self.arr_SelectedObjects addObject:obj_video];
@@ -416,7 +416,7 @@ typedef  enum OEXAlertType
 
 - (void)cancelTableClicked:(id)sender {//取消
     // set isSelected to NO for all the objects
-    for(NSDictionary* dict in self.arr_CourseData) {
+    for(NSDictionary* dict in self.courseDataArray) {
         for(OEXHelperVideoDownload* obj_video in [dict objectForKey : CAV_KEY_RECENT_VIDEOS]) {
             obj_video.isSelected = NO;
         }
@@ -468,20 +468,20 @@ typedef  enum OEXAlertType
 #pragma mark - tableView Delegate 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    self.noDataLabel.hidden = self.arr_CourseData.count == 0 ? NO : YES;
-    return [self.arr_CourseData count];
+    self.noDataLabel.hidden = self.courseDataArray.count == 0 ? NO : YES;
+    return [self.courseDataArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     _selectedIndexPath = nil;
-    return [[[self.arr_CourseData objectAtIndex:section] objectForKey:CAV_KEY_RECENT_VIDEOS] count];
+    return [[[self.courseDataArray objectAtIndex:section] objectForKey:CAV_KEY_RECENT_VIDEOS] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     TDDownloadSubCell *cell = [[TDDownloadSubCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDDownloadSubCell"];
     
-    NSArray *videos = [[self.arr_CourseData objectAtIndex:indexPath.section] objectForKey:CAV_KEY_RECENT_VIDEOS];
+    NSArray *videos = [[self.courseDataArray objectAtIndex:indexPath.section] objectForKey:CAV_KEY_RECENT_VIDEOS];
     OEXHelperVideoDownload *obj_video = [videos objectAtIndex:indexPath.row];
     cell.lbl_Title.text = obj_video.summary.name;
     if([cell.lbl_Title.text length] == 0) {
@@ -598,7 +598,7 @@ typedef  enum OEXAlertType
 
 - (UIView *)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
     
-    NSDictionary *dictVideo = [self.arr_CourseData objectAtIndex:section];
+    NSDictionary *dictVideo = [self.courseDataArray objectAtIndex:section];
     OEXCourse *obj_course = [dictVideo objectForKey:CAV_KEY_COURSE];
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, RECENT_HEADER_HEIGHT )];
@@ -624,7 +624,7 @@ typedef  enum OEXAlertType
     NSInteger section = ([sender tag]) / 100;
     NSInteger row = ([sender tag]) % 100;
     
-    NSArray* videos = [[self.arr_CourseData objectAtIndex:section] objectForKey:CAV_KEY_RECENT_VIDEOS];
+    NSArray* videos = [[self.courseDataArray objectAtIndex:section] objectForKey:CAV_KEY_RECENT_VIDEOS];
     OEXHelperVideoDownload* obj_video = [videos objectAtIndex:row];
     
     // change status of the object and reload table
@@ -651,7 +651,7 @@ typedef  enum OEXAlertType
     // check if all the boxes checked on table then show SelectAll checkbox checked
     BOOL flagBreaked = NO;
     
-    for(NSDictionary* dict in self.arr_CourseData) {
+    for(NSDictionary* dict in self.courseDataArray) {
         for(OEXHelperVideoDownload* obj_video in [dict objectForKey : CAV_KEY_RECENT_VIDEOS]) {
             if(!obj_video.isSelected) {
                 self.selectAll = NO;
@@ -828,7 +828,7 @@ typedef  enum OEXAlertType
             for(OEXHelperVideoDownload* selectedVideo in self.arr_SelectedObjects) {
                 // make a copy of array to avoid GeneralException(updation of array in loop) - crashes app
                 
-                NSMutableArray* arrCopySubsection = [self.arr_CourseData mutableCopy];
+                NSMutableArray* arrCopySubsection = [self.courseDataArray mutableCopy];
                 
                 NSInteger index = -1;
                 
@@ -838,12 +838,12 @@ typedef  enum OEXAlertType
                     
                     for(OEXHelperVideoDownload* videos in arrvideos) {
                         if(selectedVideo == videos) {
-                            [[[self.arr_CourseData objectAtIndex:index] objectForKey:CAV_KEY_RECENT_VIDEOS] removeObject:videos];
+                            [[[self.courseDataArray objectAtIndex:index] objectForKey:CAV_KEY_RECENT_VIDEOS] removeObject:videos];
                             
                             // remove for key CAV_KEY_VIDEOS also to maintain consistency.
                             // As it is unsorted array used to sort and put in array for key CAV_KEY_RECENT_VIDEOS
                             
-                            [[[self.arr_CourseData objectAtIndex:index] objectForKey:CAV_KEY_VIDEOS] removeObject:videos];
+                            [[[self.courseDataArray objectAtIndex:index] objectForKey:CAV_KEY_VIDEOS] removeObject:videos];
                             
                             [[OEXInterface sharedInterface] deleteDownloadedVideoForVideoId:selectedVideo.summary.videoID completionHandler:^(BOOL success) {
                                 selectedVideo.downloadState = OEXDownloadStateNew;
@@ -853,8 +853,8 @@ typedef  enum OEXAlertType
                             
                             deleteCount++;
                             // if no objects in a particular section then remove the array
-                            if([[[self.arr_CourseData objectAtIndex:index] objectForKey:CAV_KEY_RECENT_VIDEOS] count] == 0) {
-                                [self.arr_CourseData removeObject:dict];
+                            if([[[self.courseDataArray objectAtIndex:index] objectForKey:CAV_KEY_RECENT_VIDEOS] count] == 0) {
+                                [self.courseDataArray removeObject:dict];
                             }
                         }
                     }
@@ -862,7 +862,7 @@ typedef  enum OEXAlertType
             }
             
             // if no objects to show
-            if([self.arr_CourseData count] == 0) {
+            if([self.courseDataArray count] == 0) {
 //                self.btn_SelectAllEditing.hidden = YES;
 //                self.btn_SelectAllEditing.checked = NO;
                 [self handleEditeCheck:NO hidden:YES];

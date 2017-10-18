@@ -52,7 +52,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
 
 @implementation OEXAuthentication
 
-//This method gets called when user try to login with username password
+//This method gets called when user try to login with username password - 当用户尝试使用用户名口令登录时，该方法将被调用
 + (void)requestTokenWithUser:(NSString* )username password:(NSString* )password completionHandler:(OEXURLRequestHandler)completionBlock {
     NSString* body = [self plainTextAuthorizationHeaderForUserName:username password:password];
     
@@ -144,7 +144,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
     [self executePOSTRequestWithPath:URL_RESET_PASSWORD parameters:parameters completion:completionBlock];
 }
 
-// This retuns header for password authentication method
+// This retuns header for password authentication method - 这头返回密码验证的方法
 + (NSString*)plainTextAuthorizationHeaderForUserName:(NSString*)userName password:(NSString*)password {
     NSString* clientID = [[OEXConfig sharedConfig] oauthClientID];
     
@@ -158,7 +158,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
     return [arguments oex_stringByUsingFormEncoding];
 }
 
-//// This methods is used to get user details when user access token is available
+// This methods is used to get user details when user access token is available 当用户访问令牌可用时，此方法用于获取用户详细信息
 - (void)getUserDetailsWith:(OEXAccessToken*)edxToken completionHandler:(OEXURLRequestHandler)completionBlock {
     self.edxToken = edxToken;
 
@@ -174,7 +174,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
     [task resume];
 }
 
-// Returns authentication header for every authenticated webservice call 返回认证头每个认证的WebService调用
+// Returns authentication header for every authenticated webservice call - 返回认证头每个认证的WebService调用
 + (NSString*)authHeaderForApiAccess {
     OEXSession* session = [OEXSession sharedSession];
     if(session.token.accessToken && session.token.tokenType) {
@@ -193,6 +193,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
     willPerformHTTPRedirection:(NSHTTPURLResponse*)redirectResponse
                     newRequest:(NSURLRequest*)request
              completionHandler:(void (^)(NSURLRequest*))completionHandler {
+    
     NSMutableURLRequest* mutablerequest = [request mutableCopy];
     NSString* authValue = [NSString stringWithFormat:@"%@ %@", self.edxToken.tokenType, self.edxToken.accessToken];
     [mutablerequest setValue:authValue forHTTPHeaderField:@"Authorization"];

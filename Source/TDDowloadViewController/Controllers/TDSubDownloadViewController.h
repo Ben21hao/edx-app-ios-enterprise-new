@@ -18,6 +18,6 @@
 @property (strong, nonatomic) RouterEnvironment *environment;
 
 @property (nonatomic,strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray *arr_CourseData;
+@property (nonatomic, strong) NSArray *courseDataArray;
 
 @end

@@ -39,9 +39,9 @@
 #pragma mark - tableview Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    self.noDataLabel.hidden = self.arr_CourseData.count == 0 ? NO : YES;
+    self.noDataLabel.hidden = self.courseDataArray.count == 0 ? NO : YES;
     
-    return self.arr_CourseData.count;
+    return self.courseDataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -58,7 +58,7 @@
         [owner choseCourse:card.course];
     };
     
-    NSDictionary *dictVideo = [self.arr_CourseData objectAtIndex:indexPath.section];
+    NSDictionary *dictVideo = [self.courseDataArray objectAtIndex:indexPath.section];
     OEXCourse *obj_course = [dictVideo objectForKey:CAV_KEY_COURSE];
     
     NSInteger count = [[dictVideo objectForKey:CAV_KEY_VIDEOS] count];

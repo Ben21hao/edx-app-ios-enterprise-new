@@ -105,10 +105,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [LanguageChangeTool initUserLanguage];
+    [LanguageChangeTool initUserLanguage];  //语言偏好
     
     [self setNavigationBarStye];  //导航栏样式
-    [self setViewConstrainStye]; //页面样式
+    [self setViewConstrainStye];  //页面样式
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -72,6 +72,7 @@ static NSString* const OEXRefreshTokenKey = @"refresh_token";
         return nil;
     }
 
+    //NSPropertyListSerialization 数据持久化数组或字典
     NSError* error = nil;
     NSData* data = [NSPropertyListSerialization dataWithPropertyList:dict format:NSPropertyListXMLFormat_v1_0 options:0 error:&error];
     if(error) {

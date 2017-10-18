@@ -298,6 +298,7 @@
     
 }
 
+//重新获取试听课程信息
 - (void)getMyFreeCourseDetail:(NSString *)username courseID:(NSString *)courseID {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -322,7 +323,7 @@
             if (self.getDetailHandle) {
                 self.getDetailHandle();
             }
-            NSLog(@"加入试听课程的结果 ---  %ld -->> %@ - 目录 %@",(long)enrollment.trial_seconds,enrollment.trial_expire_at,enrollment.course.video_outline);
+//            NSLog(@"加入试听课程的结果 ---  %ld -->> %@ - 目录 %@",(long)enrollment.trial_seconds,enrollment.trial_expire_at,enrollment.course.video_outline);
             
         } else {
         }

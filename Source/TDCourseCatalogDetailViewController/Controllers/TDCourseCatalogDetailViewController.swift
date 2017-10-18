@@ -67,6 +67,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(appEnterForeground), name: "App_EnterForeground_Free_Course", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(courseStatusHandle), name: "Course_Status_Handle", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(aliPaySuccess), name: "aliPaySuccess", object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -634,6 +635,13 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         chooseCourseVC.courseID = "\(courseId!)"
         chooseCourseVC.whereFrom = 1
         self.navigationController?.pushViewController(chooseCourseVC, animated: true)
+    }
+    
+    func aliPaySuccess() {
+        
+        if freeTimer != nil {
+            setNilTimer()
+        }
     }
     
     //MARK:  ----->>> UI <<<------

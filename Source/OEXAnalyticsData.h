@@ -90,8 +90,8 @@ extern NSString* const OEXAnalyticsEventCourseShared;
 #define value_bulk_download_subsection @"edx.bi.video.subsection.bulkdownload.requested"
 #define value_single_download @"edx.bi.video.download.requested"
 #define value_fullscreen @"edx.bi.video.screen.fullscreen.toggled"
-#define value_login @"edx.bi.app.user.login"
-#define value_logout @"edx.bi.app.user.logout"
+#define value_login @"edx.bi.app.user.login" //登录
+#define value_logout @"edx.bi.app.user.logout" //退出登录
 #define value_browser_launched @"edx.bi.app.browser.launched"
 #define value_transcript_language @"edx.bi.video.transcript.language.selected"
 #define value_no_acccout @"edx.bi.app.user.no_account"

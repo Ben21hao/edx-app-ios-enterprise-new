@@ -77,7 +77,7 @@ static OEXAnalytics* sAnalytics;
 }
 
 - (void) addObservers {
-    [[NSNotificationCenter defaultCenter] oex_addObserver:self notification:OEXSessionEndedNotification action:^(NSNotification *notification, OEXAnalytics* observer, id<OEXRemovable> removable) {
+    [[NSNotificationCenter defaultCenter] oex_addObserver:self notification:OEXSessionEndedNotification action:^(NSNotification *notification, OEXAnalytics* observer, id<OEXRemovable> removable) { //session 结束
         [observer trackUserLogout];
         [observer clearIdentifiedUser];
     }];
@@ -110,7 +110,7 @@ static OEXAnalytics* sAnalytics;
     }
 }
 
-- (void)clearIdentifiedUser {
+- (void)clearIdentifiedUser { //清除用户 id 信息
     for(id <OEXAnalyticsTracker> tracker in self.trackers) {
         [tracker clearIdentifiedUser];
     }
@@ -119,6 +119,7 @@ static OEXAnalytics* sAnalytics;
 #pragma mark Video Events
 
 - (void)trackVideoEvent:(OEXAnalyticsVideoEvent*)event forComponent:(NSString*)component withInfo:(NSDictionary*)info {
+    
     NSMutableDictionary* fullInfo = [[NSMutableDictionary alloc] initWithDictionary:info];
     [fullInfo setObjectOrNil:event.moduleID forKey:key_module_id];
     [fullInfo setObjectOrNil:value_mobile forKey:key_code];
@@ -376,7 +377,7 @@ static OEXAnalytics* sAnalytics;
     [self trackVideoPlayerEvent:event withInfo:info];
 }
 
-- (void)trackUserLogin:(NSString *)method {
+- (void)trackUserLogin:(NSString *)method { //登录
     NSMutableDictionary* info = @{}.mutableCopy;
     [info safeSetObject:method forKey:key_method];
 
@@ -386,7 +387,7 @@ static OEXAnalytics* sAnalytics;
     [self trackEvent:event forComponent:nil withInfo:info];
 }
 
-- (void)trackUserLogout {
+- (void)trackUserLogout { //退出登录
     OEXAnalyticsEvent* event = [[OEXAnalyticsEvent alloc] init];
     event.name = value_logout;
     event.displayName = @"User Logout";
@@ -497,7 +498,7 @@ static OEXAnalytics* sAnalytics;
     [self trackEvent:event forComponent:nil withInfo:@{@"name": courseName, @"url" : aboutUrl, @"type": type}];
 }
 
-#pragma mark- Discussion
+#pragma mark - Discussion
 
 - (void) trackDiscussionScreenWithName:(NSString *) screenName courseId:(NSString *) courseID value:(nullable NSString *) value threadId:(nullable NSString *) threadID topicId:(nullable NSString *) topicID responseID:(nullable NSString *) responseID {
 

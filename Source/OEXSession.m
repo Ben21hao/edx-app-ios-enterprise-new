@@ -65,19 +65,22 @@ static NSString* OEXSessionClearedCache = @"OEXSessionClearedCache";
 
     self.token = token;
     self.currentUser = userDetails;
+    
     if(token != nil && userDetails != nil) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:OEXSessionStartedNotification object:nil userInfo:@{OEXSessionStartedUserDetailsKey : userDetails}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:OEXSessionStartedNotification object:nil userInfo:@{OEXSessionStartedUserDetailsKey : userDetails}]; //开始缓存
     }
 }
 
 //获取缓存的用户信息
 - (void)loadTokenFromStore {
+    
     OEXAccessToken* tokenData = self.credentialStore.storedAccessToken;
     OEXUserDetails* userDetails = self.credentialStore.storedUserDetails;
 
     if(tokenData && userDetails) {
         self.token = tokenData;
         self.currentUser = userDetails;
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:OEXSessionStartedNotification object:nil userInfo:@{OEXSessionStartedUserDetailsKey : userDetails}];
     }
     else {

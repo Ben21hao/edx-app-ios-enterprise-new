@@ -17,7 +17,7 @@
 
 #define TitleView_Height 48
 
-@interface TDDownloadViewController ()<UIScrollViewDelegate,UIGestureRecognizerDelegate>
+@interface TDDownloadViewController () <UIScrollViewDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) TDSubDownloadViewController *courseVC;
 @property (nonatomic,strong) TDVidoDownloadViewController *videoSubVC;
@@ -28,14 +28,14 @@
 
 @property (nonatomic,strong) TDBaseView *loadingView;
 
-@property (nonatomic,strong) NSMutableArray *titleButtons;
+@property (nonatomic,strong) NSMutableArray *titleButtonArray;
 @property (nonatomic,strong) NSMutableArray *lineArray;
 
 @property (nonatomic, strong) OEXInterface *dataInterface;
-@property (nonatomic, strong) NSMutableArray *arr_CourseData;
+@property (nonatomic, strong) NSMutableArray *courseDataArray; //下载课程的数组
 
-@property (strong, nonatomic) OEXCheckBox *btn_SelectAllEditing;
-@property (strong, nonatomic) ProgressController *progressController;
+@property (strong, nonatomic) OEXCheckBox *selectAllButton;//全选按钮
+@property (strong, nonatomic) ProgressController *progressController;//下载进度
 
 @property (nonatomic,assign) BOOL isTableEditing;
 @property (nonatomic,assign) BOOL isFullScreen;
@@ -44,11 +44,11 @@
 
 @implementation TDDownloadViewController
 
-- (NSMutableArray *)titleButtons {
-    if (!_titleButtons) {
-        _titleButtons = [[NSMutableArray alloc] init];
+- (NSMutableArray *)titleButtonArray {
+    if (!_titleButtonArray) {
+        _titleButtonArray = [[NSMutableArray alloc] init];
     }
-    return _titleButtons;
+    return _titleButtonArray;
 }
 
 - (NSMutableArray *)lineArray {
@@ -61,11 +61,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [LanguageChangeTool initUserLanguage];
+    [LanguageChangeTool initUserLanguage]; //语言
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     
     [self setTitleLabel];
     [self setViewConstraint];
+    
     [self addAllChildViewController];
     [self addTopTitlebutton];
     
@@ -74,7 +75,7 @@
     self.dataInterface = [OEXInterface sharedInterface];
     [self.dataInterface setNumberOfRecentDownloads:0];
     
-    self.btn_SelectAllEditing.tintColor = [[OEXStyles sharedStyles] navigationItemTintColor];
+    self.selectAllButton.tintColor = [[OEXStyles sharedStyles] navigationItemTintColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -112,10 +113,7 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"TD_Download_Disapear" object:nil];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:OEXDownloadProgressChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:OEXDownloadEndedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:OEXDownloadProgressChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_DOWNLOAD_DATA object:nil];
+    [self removeAbservers];
 }
 
 - (void)addObservers {
@@ -126,9 +124,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadDataAppear:) name:NOTIFICATION_DOWNLOAD_DATA object:nil];
 }
 
+- (void)removeAbservers {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:OEXDownloadProgressChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:OEXDownloadEndedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_DOWNLOAD_DATA object:nil];
+}
+
 #pragma mark - update total download progress
 
-- (void)downloadCompleteNotification:(NSNotification*)notification {
+- (void)downloadCompleteNotification:(NSNotification *)notification {
+    
     NSDictionary* dict = notification.userInfo;
     
     NSURLSessionTask* task = [dict objectForKey:VIDEO_DL_COMPLETE_N_TASK];
@@ -139,17 +145,17 @@
     }
 }
 
-- (void)updateTotalDownloadProgress:(NSNotification* )notification {
+- (void)updateTotalDownloadProgress:(NSNotification *)notification {
     [self updateNavigationItemButtons];
 }
 
 #pragma mark - 导航栏
 - (void)setNavigationStyle {
     
-    self.btn_SelectAllEditing = [[OEXCheckBox alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    self.btn_SelectAllEditing.tintColor = [[OEXStyles sharedStyles] navigationItemTintColor];
-    self.btn_SelectAllEditing.hidden = YES;
-    [self.btn_SelectAllEditing addTarget:self action:@selector(selectAllChanged:) forControlEvents:UIControlEventTouchUpInside];
+    self.selectAllButton = [[OEXCheckBox alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    self.selectAllButton.tintColor = [[OEXStyles sharedStyles] navigationItemTintColor];
+    self.selectAllButton.hidden = YES;
+    [self.selectAllButton addTarget:self action:@selector(selectAllChanged:) forControlEvents:UIControlEventTouchUpInside];
     
     self.progressController = [[ProgressController alloc] initWithOwner:self router:self.environment.router dataInterface:self.environment.interface];
     self.navigationItem.rightBarButtonItem = [self.progressController navigationItem];
@@ -160,7 +166,7 @@
     
     NSMutableArray *barButtons = [[NSMutableArray alloc] init];
     if(self.isTableEditing) {
-        [barButtons addObject:[[UIBarButtonItem alloc] initWithCustomView:self.btn_SelectAllEditing]];
+        [barButtons addObject:[[UIBarButtonItem alloc] initWithCustomView:self.selectAllButton]];
     }
     if(![self.progressController progressView].hidden){
         [barButtons addObject:[self.progressController navigationItem]];
@@ -178,7 +184,7 @@
 #pragma mark - 数据
 - (void)getMyVideosTableData {
     
-    self.arr_CourseData = [[NSMutableArray alloc] init];
+    self.courseDataArray = [[NSMutableArray alloc] init];
     
     NSMutableArray *arrCourseAndVideo = [[NSMutableArray alloc] initWithArray: [self.dataInterface coursesAndVideosForDownloadState:OEXDownloadStateComplete] ];
     
@@ -197,17 +203,17 @@
                                  CAV_KEY_RECENT_VIDEOS: arr_SortedArray,
                                  CAV_KEY_VIDEOS_SIZE: strSize};
         
-        [self.arr_CourseData addObject:videos];
+        [self.courseDataArray addObject:videos];
     }
     
     [self reloadDownloadData];
     
-    if (self.arr_CourseData.count > 0) {
+    if (self.courseDataArray.count > 0) {
         [self.loadingView removeFromSuperview];
     }
 }
 
-- (NSString *)calculateVideosSizeInCourse:(NSArray*)arrvideo {
+- (NSString *)calculateVideosSizeInCourse:(NSArray *)arrvideo {
     
     NSString *strSize = nil;
     double size = 0.0;
@@ -223,10 +229,10 @@
 
 - (void)reloadDownloadData { //刷新数据
     
-    self.courseVC.arr_CourseData = self.arr_CourseData;
+    self.courseVC.courseDataArray = self.courseDataArray;
     [self.courseVC.tableView reloadData];
     
-    self.videoSubVC.arr_CourseData = self.arr_CourseData;
+    self.videoSubVC.courseDataArray = self.courseDataArray;
     [self.videoSubVC.tableView reloadData];
 }
 
@@ -245,9 +251,9 @@
     self.contentView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     [self.view addSubview:self.contentView];
     
-    UILabel *sss = [[UILabel alloc] initWithFrame:CGRectMake(0, TitleView_Height - 1, TDWidth, 1)];
-    sss.backgroundColor = [UIColor colorWithHexString:colorHexStr6];
-    [self.titleView addSubview:sss];
+    UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, TitleView_Height - 1, TDWidth, 1)];
+    line.backgroundColor = [UIColor colorWithHexString:colorHexStr6];
+    [self.titleView addSubview:line];
 }
 
 - (void)addAllChildViewController {
@@ -265,10 +271,10 @@
         [weakSelf updateNavigationItemButtons];
     };
     self.videoSubVC.hideEditeHandle = ^(BOOL isHidden){
-        weakSelf.btn_SelectAllEditing.hidden = isHidden;
+        weakSelf.selectAllButton.hidden = isHidden;
     };
     self.videoSubVC.checkEditeHandle = ^(BOOL isChecked){
-        weakSelf.btn_SelectAllEditing.checked = isChecked;
+        weakSelf.selectAllButton.checked = isChecked;
     };
     self.videoSubVC.reloadSubDataHandle = ^{
         [weakSelf.courseVC.tableView reloadData];
@@ -295,7 +301,7 @@
         [titleButton addTarget:self action:@selector(titleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.titleView addSubview:titleButton];
         
-        [self.titleButtons addObject:titleButton];
+        [self.titleButtonArray addObject:titleButton];
         
         UIView *sliView = [[UIView alloc] initWithFrame:CGRectMake(width * i, TitleView_Height - 2, width, 2)];
         sliView.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
@@ -327,12 +333,12 @@
     
     if (sender.tag == 0) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TD_SubDowload_Appear" object:nil];
-        self.btn_SelectAllEditing.hidden = YES;
-        self.btn_SelectAllEditing.checked = NO;
+        self.selectAllButton.hidden = YES;
+        self.selectAllButton.checked = NO;
     }
     
-    for (int i = 0 ; i < self.titleButtons.count; i ++) {
-        UIButton *button = self.titleButtons[i];
+    for (int i = 0 ; i < self.titleButtonArray.count; i ++) {
+        UIButton *button = self.titleButtonArray[i];
         NSString *colorStr = i == sender.tag ? colorHexStr1 : colorHexStr9;
         [button setTitleColor:[UIColor colorWithHexString:colorStr] forState:UIControlStateNormal];
 
@@ -346,7 +352,7 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
     NSInteger page = scrollView.contentOffset.x / TDWidth;
-    UIButton *selButton = self.titleButtons[page];
+    UIButton *selButton = self.titleButtonArray[page];
     [self selectButton:selButton];
     [self setUpChildViewController:page];//添加子控制器的view
 }
@@ -391,7 +397,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

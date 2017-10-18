@@ -261,7 +261,7 @@ static NSString* const OEXUserDetailsCompanyDomainNameKey = @"domain_name";//公
 - (NSData *)userDetailsData {
     
     NSMutableDictionary* dict = [NSMutableDictionary dictionary];
-    NSLog(@"%@ ---->>> %@",_username,_course_enrollments);
+//    NSLog(@"%@ ---->>> %@",_username,_course_enrollments);
     
     if(_username && _course_enrollments) {
         [dict safeSetObject:_username forKey:OEXUserDetailsUserNameKey];
@@ -296,6 +296,7 @@ static NSString* const OEXUserDetailsCompanyDomainNameKey = @"domain_name";//公
         return nil;
     }
 
+    //NSPropertyListSerialization 数据持久化数组或字典
     NSError* error = nil;
     NSData* data = [NSPropertyListSerialization dataWithPropertyList:dict format:NSPropertyListXMLFormat_v1_0 options:0 error:&error];//缓存
     NSAssert(error == nil, @"UserDetails error => %@ ", [error description]);

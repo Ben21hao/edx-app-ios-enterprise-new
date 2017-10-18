@@ -24,7 +24,7 @@ NSString* const OEXVideoEncodingFallback = @"fallback";
 
 @implementation OEXVideoEncoding
 
-+ (NSArray*)knownEncodingNames {
++ (NSArray *)knownEncodingNames {
     return @[OEXVideoEncodingMobileLow, OEXVideoEncodingMobileHigh, OEXVideoEncodingFallback, OEXVideoEncodingYoutube];
 }
 
@@ -44,7 +44,7 @@ NSString* const OEXVideoEncodingFallback = @"fallback";
 }
 
 
-- (id)initWithName:(NSString*)name URL:(NSString*)URL size:(NSNumber*)size {
+- (id)initWithName:(NSString *)name URL:(NSString *)URL size:(NSNumber *)size {
     self = [super init];
     if(self != nil) {
         self.name = name;

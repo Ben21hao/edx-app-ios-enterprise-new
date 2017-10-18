@@ -611,9 +611,9 @@
      NSDate *nowDate = [formatter dateFromString:nowTime];;//当前时间
     
     //统一用东八区时间
-    NSDate *now = [self getChinaTime:nowDate];
+//    NSDate *now = [self getChinaTime:nowDate];
     
-    NSTimeInterval nowInterval = [now timeIntervalSince1970]*1;//手机系统时间
+    NSTimeInterval nowInterval = [nowDate timeIntervalSince1970]*1;//手机系统时间
     NSTimeInterval startInterval = [startDate timeIntervalSince1970]*1;//课程结束时间
     NSInteger timeNum = startInterval - nowInterval;
     
@@ -625,12 +625,12 @@
     return YES;
 }
 
-- (NSDate *)getChinaTime:(NSDate *)date {//计算东八区的时间
-    NSTimeZone* localTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0800"];//获取本地时区(中国时区)
-    NSInteger offset = [localTimeZone secondsFromGMTForDate:date];//计算世界时间与本地时区的时间偏差值
-    NSDate *localDate = [date dateByAddingTimeInterval:offset];//世界时间＋偏差值 得出中国区时间
-    return localDate;
-}
+//- (NSDate *)getChinaTime:(NSDate *)date {//计算东八区的时间
+//    NSTimeZone* localTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0800"];//获取本地时区(中国时区)
+//    NSInteger offset = [localTimeZone secondsFromGMTForDate:date];//计算世界时间与本地时区的时间偏差值
+//    NSDate *localDate = [date dateByAddingTimeInterval:offset];//世界时间＋偏差值 得出中国区时间
+//    return localDate;
+//}
 
 #pragma mark - 进入教室
 - (void)getClassRoomPassword:(NSString *)orderId {
