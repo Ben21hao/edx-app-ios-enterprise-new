@@ -62,7 +62,7 @@
     [hud hide:YES afterDelay:delay];
 }
 
--(void) showRendererMsg:(NSString*)msg afterDelay:(NSTimeInterval)delay {
+-(void)showRendererMsg:(NSString*)msg afterDelay:(NSTimeInterval)delay {
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeText;

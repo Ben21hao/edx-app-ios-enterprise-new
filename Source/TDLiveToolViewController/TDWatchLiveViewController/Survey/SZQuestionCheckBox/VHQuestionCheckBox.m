@@ -7,6 +7,7 @@
 //
 
 #import "VHQuestionCheckBox.h"
+
 #import "SZQuestionCell.h"
 #import "SZQuestionOptionCell.h"
 #import "VHallApi.h"
@@ -15,17 +16,20 @@
 
 @property (nonatomic, assign) CGFloat titleWidth;
 @property (nonatomic, assign) CGFloat OptionWidth;
+
 @property (nonatomic, assign) BOOL complete;
 @property (nonatomic, strong) NSArray *tempArray;
 @property (nonatomic, strong) NSMutableArray *arrayM;
+
 @property (nonatomic, strong) SZConfigure *configure;
 @property (nonatomic, assign) QuestionCheckBoxType chekBoxType;
 
 @property (nonatomic,strong) UITableView *tableView;
-
 @property (nonatomic,strong) UILabel *waringLabel;//警告label;
+
 @property (nonatomic,strong) NSMutableArray *isHaveAnser;//是否回答
 @property (nonatomic,strong) NSMutableArray *uploadArray;
+
 @end
 
 @implementation VHQuestionCheckBox
@@ -160,11 +164,6 @@
     self.OptionWidth = self.view.frame.size.width - self.configure.optionSideMargin * 2 - self.configure.buttonSize - 5;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (BOOL)isComplete {
     
     [self getResult];
@@ -203,6 +202,7 @@
     
         NSDictionary *dict =[self.sourceArray objectAtIndex:i];
         NSMutableDictionary *tempDic=[[NSMutableDictionary alloc] init];
+        
         if ([dict[@"type"] integerValue] == SZQuestionOpenQuestion) {
             NSString *str = dict[@"marked"];
             if (str.length > 0) {
@@ -210,6 +210,7 @@
             } else {
                 [tempDic setValue:@"0" forKey:[NSString stringWithFormat:@"%d",i]];
             }
+            
         } else {
             NSArray *array = dict[@"marked"];
             if ([array containsObject:@"YES"] || [array containsObject:@"yes"] || [array containsObject:@(1)] || [array containsObject:@"1"]) {
@@ -220,7 +221,6 @@
             }
         }
         [_isHaveAnser addObject:tempDic];
-
     }
     
     self.complete   = complete;
@@ -498,7 +498,8 @@
      [self uploadDataWithArray:_uploadArray];
 }
 
--(void)uploadDataWithArray:(NSArray *)dataArray {
+- (void)uploadDataWithArray:(NSArray *)dataArray {
+    
     __weak typeof(self) weakSelf = self;
     
     [_survey sendMsg:dataArray success:^{
@@ -533,6 +534,10 @@
 #pragma mark event
 -(void)closeVC {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
 @end

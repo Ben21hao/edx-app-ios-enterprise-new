@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, SZQuestionItemType) {
-    SZQuestionSingleChoice = 1,
-    SZQuestionMultipleChoice,
-    SZQuestionOpenQuestion,
+    SZQuestionSingleChoice = 1, //单选
+    SZQuestionMultipleChoice, //多选
+    SZQuestionOpenQuestion, //问答
+    SZQuestionOpenSection, //小节
+    SZQuestionOpenCity //城市
 };
 
 @interface SZQuestionItem : NSObject

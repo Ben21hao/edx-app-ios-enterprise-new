@@ -11,7 +11,7 @@
 
 @implementation NSDictionary (OEXEncoding)
 
-- (NSString*)oex_stringByUsingFormEncoding {
+- (NSString*)oex_stringByUsingFormEncoding { //给字典排序，然后拼接成 key=value&key=value 的字符串
     NSMutableString* result = [[NSMutableString alloc] init];
     __block NSUInteger remaining = self.count;
     [self enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSString* value, BOOL* stop) {

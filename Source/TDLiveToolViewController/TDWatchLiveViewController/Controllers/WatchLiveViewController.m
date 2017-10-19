@@ -676,7 +676,7 @@ static AnnouncementView *announcementView = nil;
     return height;
 }
 
--(void)clickSurvey:(id)mode {
+- (void)clickSurvey:(id)mode {
     
     VHallSurveyModel *model = mode;
     __weak typeof(self) weakSelf = self;
@@ -697,8 +697,8 @@ static AnnouncementView *announcementView = nil;
     }];
 }
 //调查问卷页面
--(void)showSurveyVCWithSruveyModel:(VHallSurvey*)survey {
-    //    __weak typeof(self) weakSelf =self;
+- (void)showSurveyVCWithSruveyModel:(VHallSurvey *)survey {
+    
     NSMutableArray *titleArray = [[NSMutableArray alloc] init];
     NSMutableArray *optionArray = [[NSMutableArray alloc] init];
     NSMutableArray *typeArry  = [[NSMutableArray alloc] init];
@@ -710,12 +710,6 @@ static AnnouncementView *announcementView = nil;
     for (VHallSurveyQuestion *question in survey.questionArray) {
         [titleArray addObject:question.questionTitle];
         
-        if (question.quesionSelectArray != nil) {
-            [optionArray addObject:question.quesionSelectArray];
-            
-        } else {
-            [optionArray addObject:@[]];
-        }
         // 选项类型 （0问答 1单选 2多选）
         if (question.type == 0) {
             [typeArry addObject:@(3)];
@@ -725,6 +719,15 @@ static AnnouncementView *announcementView = nil;
             
         } else if (question.type ==2) {
             [typeArry addObject:@(2)];
+            
+        } else
+            break;
+        
+        if (question.quesionSelectArray != nil) {
+            [optionArray addObject:question.quesionSelectArray];
+            
+        } else {
+            [optionArray addObject:@[]];
         }
         
         if (question.isMustSelect) {

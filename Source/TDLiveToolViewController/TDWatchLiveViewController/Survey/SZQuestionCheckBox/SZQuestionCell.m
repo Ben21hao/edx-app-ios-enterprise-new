@@ -70,7 +70,7 @@
         type = @"(单选)";
     } else if (self.type == SZQuestionMultipleChoice) {
         type = @"(多选)";
-    } else if (self.type ==SZQuestionOpenQuestion) {
+    } else if (self.type == SZQuestionOpenQuestion) {
         type = @"(问答)";
     }
     NSString *title = self.configure.automaticAddLineNumber ? [NSString stringWithFormat:@"%zd、%@%@", self.questionNum, dict[@"title"],type] : dict[@"title"];
@@ -96,17 +96,15 @@
     [isMust setFont:[UIFont systemFontOfSize:12]];
     [self addSubview:isMust];
     
-    if ([[dict objectForKey:@"isMustSelect"] isEqualToString:@"1"])
-    {
-        isMust.hidden =NO;
-    }else
-    {
-        isMust.hidden =YES;
+    if ([[dict objectForKey:@"isMustSelect"] isEqualToString:@"1"]) {
+        isMust.hidden = NO;
+    } else {
+        isMust.hidden = YES;
     }
     
     
-    // 选项或回答框
-    if (self.type == SZQuestionOpenQuestion) {
+    
+    if (self.type == SZQuestionOpenQuestion) { // 选项或回答框
         
         if (self.configure.answerFrameUseTextView == NO) {
             
@@ -115,12 +113,13 @@
             textField.borderStyle = UITextBorderStyleRoundedRect;
             textField.textColor = self.configure.optionTextColor;
             textField.delegate = self;
+            
             if (dict[@"marked"] != nil) {
                 textField.text = dict[@"marked"];
             }
             [self addSubview: textField];
-        }
-        else {
+            
+        } else {
             
             UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(self.configure.optionSideMargin, height + self.configure.topDistance, width - self.configure.optionSideMargin * 2, fixedHeight - 5)];
             textView.font = [UIFont systemFontOfSize:self.configure.optionFont];
@@ -137,12 +136,14 @@
             }
             [self addSubview:textView];
         }
+        
     } else {
         
         UILabel *currentLabel;
         NSMutableArray *tempArray = [NSMutableArray array];
         NSArray *optionArray = dict[@"option"];
         NSArray *selectArray = dict[@"marked"];
+        
         BOOL isSingleChoice = (self.type == SZQuestionSingleChoice);
         for (int i = 0; i < optionArray.count; i++) {
             
@@ -168,8 +169,8 @@
                 [tempArray addObject:btn];
             
                 currentLabel = lbl;
-            }
-            else {
+                
+            } else {
                 UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(self.configure.optionSideMargin + self.configure.buttonSize + 5, CGRectGetMaxY(currentLabel.frame), optionWidth, option_height)];
                 lbl.numberOfLines = 0;
                 lbl.textColor = self.configure.optionTextColor;
@@ -291,8 +292,8 @@
             [tempArray addObject:@(btn.selected)];
         }
         dictM[@"marked"] = tempArray.copy;
-    }
-    else {
+        
+    } else {
         
         NSMutableArray *tempArray = [NSMutableArray array];
         for (UIButton *btn in self.buttonArray) {
@@ -320,3 +321,5 @@
 }
 
 @end
+
+

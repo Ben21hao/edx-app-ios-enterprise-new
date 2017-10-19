@@ -64,6 +64,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    
     NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig];
     [[session dataTaskWithRequest:request completionHandler:^(NSData* data, NSURLResponse* response, NSError* error) {
         
@@ -88,7 +89,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
                     completionBlock(data, httpResp, error);
                 });
             }
-        }]resume];
+        }] resume];
 }
 
 + (void)executePOSTRequestWithPath:(NSString*)path parameters:(NSDictionary*)parameters completion:(OEXURLRequestHandler)completion {
@@ -111,7 +112,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
 
 + (void)requestTokenWithProvider:(id <OEXExternalAuthProvider>)provider externalToken:(NSString *)token completion:(OEXURLRequestHandler)completionBlock {
     
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES]; //状态栏显示网络标志
     
     NSMutableDictionary* parameters = [[NSMutableDictionary alloc] init];
     [parameters safeSetObject:token forKey:@"access_token"];
@@ -137,6 +138,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
     }];
 }
 
+//通过 email 重置密码
 + (void)resetPasswordWithEmailId:(NSString*)email completionHandler:(OEXURLRequestHandler)completionBlock {
     NSMutableDictionary* parameters = [[NSMutableDictionary alloc] init];
     [parameters safeSetObject:email forKey:@"email"];
@@ -153,7 +155,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
     [arguments safeSetObject:@"password" forKey:@"grant_type"];
     [arguments safeSetObject:userName forKey:@"username"];
     [arguments safeSetObject:password forKey:@"password"];
-    [arguments safeSetObject:@"1" forKey:@"is_enterprise"];
+    [arguments safeSetObject:@"1" forKey:@"is_enterprise"]; //企业版
     
     return [arguments oex_stringByUsingFormEncoding];
 }
@@ -201,9 +203,9 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
     completionHandler([mutablerequest copy]);
 }
 
-#pragma mark Social Login Methods
+#pragma mark - Social Login Methods
 
-
+//登录成功
 + (void)handleSuccessfulLoginWithToken:(OEXAccessToken*)token completionHandler:(OEXURLRequestHandler)completionHandler {
     
     OEXAuthentication* auth = [[OEXAuthentication alloc] init];
@@ -230,15 +232,21 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
     }];
 }
 
+//注册用户
 + (void)registerUserWithParameters:(NSDictionary*)parameters completionHandler:(OEXURLRequestHandler)handler {
+    
+    //    默认配置使用的是持久化的硬盘缓存，存储证书到用户钥匙链。存储cookie到shareCookie。
     NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [OEXConfig sharedConfig].apiHostURL, SIGN_UP_URL]]];
     [request setHTTPMethod:@"POST"];
 
-    NSString* postString = [parameters oex_stringByUsingFormEncoding];
-    [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    NSString* postString = [parameters oex_stringByUsingFormEncoding]; //字典转字符串
+    [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]]; //转成二进制
+    
+    //    session也会遵循NSURLRequest的限定，但是如果configuration有更加严格的限定，仍以configuration为主。
     NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-    [[session dataTaskWithRequest:request completionHandler:OEXWrapURLCompletion(handler)]resume];
+    [[session dataTaskWithRequest:request completionHandler:OEXWrapURLCompletion(handler)] resume];
 }
 
 @end

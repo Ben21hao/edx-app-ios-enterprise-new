@@ -89,7 +89,7 @@ public class EnrollmentManager : NSObject {
         guard let companyId = userDetails.company_id else { return }
         let organizationCode = self.config.organizationCode()
         
-        let feed = freshFeedWithUsername(username, organizationCode: organizationCode ,companyId: companyId)
+        let feed = freshFeedWithUsername(username, organizationCode: organizationCode ,companyId: companyId) 
         enrollmentFeed.backWithFeed(feed.map {x in x})
         enrollmentFeed.refresh()
     }

@@ -28,10 +28,13 @@ typedef void (^ OEXURLRequestHandler)(NSData* _Nullable data, NSHTTPURLResponse*
 
 + (void)requestTokenWithProvider:(id <OEXExternalAuthProvider>)provider externalToken:(NSString*)token completion:(OEXURLRequestHandler)completionBlock;
 
+//返回认证头每个认证的WebService调用
 + (NSString*)authHeaderForApiAccess;
 
+//通过 email 重置密码
 + (void)resetPasswordWithEmailId:(NSString*)email completionHandler:(OEXURLRequestHandler)completionBlock;
 
+//注册用户
 + (void)registerUserWithParameters:(NSDictionary*)parameters completionHandler:(OEXURLRequestHandler)handler;
 
 @end
