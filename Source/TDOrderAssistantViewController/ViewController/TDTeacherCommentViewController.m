@@ -314,7 +314,7 @@
         
         TDTeacherCommentCell *cell = [[TDTeacherCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDTeacherCommentCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.username = self.userName;
+        cell.username = self.studentName;
         
         cell.clickPraiseButton = ^(NSString *praiseNum,BOOL isPraise){
             detailItem.praise_num = praiseNum;
