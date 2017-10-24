@@ -252,12 +252,12 @@
             [self.view makeToast:TDLocalizeSelect(@"NO_MORE_DATA", nil) duration:1.08 position:CSToastPositionCenter];
             
         } else if ([code intValue] == 404) { //该课程暂无此助教助教评论
-            [self.view makeToast:TDLocalizeSelect(@"NO_COMMENTS_YET", nil) duration:1.08 position:CSToastPositionCenter];
+//            [self.view makeToast:TDLocalizeSelect(@"NO_COMMENTS_YET", nil) duration:1.08 position:CSToastPositionCenter];
         } else {
-            [self.view makeToast:TDLocalizeSelect(@"NO_COMMENTS_YET", nil) duration:1.08 position:CSToastPositionCenter];
+//            [self.view makeToast:TDLocalizeSelect(@"NO_COMMENTS_YET", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
-        NSLog(@"评论 --- %@ = %@",code,responseObject[@"msg"]);
+//        NSLog(@"评论 --- %@ = %@",code,responseObject[@"msg"]);
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

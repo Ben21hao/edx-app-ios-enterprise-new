@@ -149,7 +149,6 @@
             
         } else if ([code intValue] == 404) { //该课程暂无助教
             self.nullLabel.hidden = NO;
-            [self.view makeToast:TDLocalizeSelect(@"CURRENTLY_NO_TA", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

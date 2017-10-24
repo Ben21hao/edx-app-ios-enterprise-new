@@ -130,6 +130,7 @@ public class CourseOutlineItemView: UIView {
     }
     
     private func addSubviews() {
+        
         addSubview(leadingImageButton)
         addSubview(trailingContainer)
         addSubview(titleLabel)

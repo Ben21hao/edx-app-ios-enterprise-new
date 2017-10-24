@@ -54,6 +54,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
 
 //This method gets called when user try to login with username password - 当用户尝试使用用户名口令登录时，该方法将被调用
 + (void)requestTokenWithUser:(NSString* )username password:(NSString* )password completionHandler:(OEXURLRequestHandler)completionBlock {
+    
     NSString* body = [self plainTextAuthorizationHeaderForUserName:username password:password];
     
     NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];

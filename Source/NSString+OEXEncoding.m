@@ -11,7 +11,7 @@
 @implementation NSString (OEXEncoding)
 
 - (NSString*)oex_stringByUsingFormEncoding {
-    NSMutableCharacterSet* characters = [NSCharacterSet alphanumericCharacterSet].mutableCopy;
+    NSMutableCharacterSet* characters = [NSCharacterSet alphanumericCharacterSet].mutableCopy; //所有的数字和字母
     [characters addCharactersInString:@" "];
     NSString* encoded = [self stringByAddingPercentEncodingWithAllowedCharacters:characters];
     NSString* result = [encoded stringByReplacingOccurrencesOfString:@" " withString:@"+"];

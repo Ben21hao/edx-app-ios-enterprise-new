@@ -82,6 +82,11 @@
         } else {
             [weakSelf.view makeToast:TDLocalizeSelect(@"PLEASE_SELECT_PERIOD", nil) duration:1.08 position:CSToastPositionCenter];
         }
+        
+        weakSelf.rightButton.userInteractionEnabled = NO;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.08 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            weakSelf.rightButton.userInteractionEnabled = YES;
+        });
     };
     
     self.addDay = 0;
@@ -159,7 +164,7 @@
                             model.typeNum = ++ self.typeNum;
                         }
                         
-                        NSLog(@"前后助教时间 -%@-->%@-- %@ == > %@ --- %ld",hadModel.time_slice,model.time_slice,str1,str2,(long)self.typeNum);
+//                        NSLog(@"前后助教时间 -%@-->%@-- %@ == > %@ --- %ld",hadModel.time_slice,model.time_slice,str1,str2,(long)self.typeNum);
                     }
                     if (model) {
                         [self.timeArray addObject:model];
@@ -183,7 +188,6 @@
             
             self.messageLabel.hidden = YES;
             [self.tableView reloadData];
-            [self.view makeToast:TDLocalizeSelect(@"NO_TA_COURSE_SCHEDULE", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

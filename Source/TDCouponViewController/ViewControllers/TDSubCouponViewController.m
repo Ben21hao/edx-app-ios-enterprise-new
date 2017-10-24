@@ -152,8 +152,6 @@
             self.page --;
             [self hideTableFooterView];
             
-            [self.view makeToast:TDLocalizeSelect(@"NO_MORE_DATA", nil) duration:1.08 position:CSToastPositionCenter];
-            
         } else if (code == 404) {
             [self judgeNumOfCoupons:0];
             
