@@ -131,9 +131,9 @@ class CourseSectionTableViewCell: UITableViewCell, CourseBlockContainerCell {
             }
             
             if allDownloading || isDownding {
-                return .Downloading
+                return .Downloading //正在下载
             } else if allCompleted {
-                return .Done
+                return .Done //已下载
             } else {
                 return .Available
             }

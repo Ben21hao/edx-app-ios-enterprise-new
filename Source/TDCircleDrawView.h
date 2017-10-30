@@ -1,5 +1,5 @@
 //
-//  TDCircleImageView.h
+//  TDCircleDrawView.h
 //  edX
 //
 //  Created by Elite Edu on 2017/10/30.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TDCircleImageView : UIImageView
+@interface TDCircleDrawView : UIView
 
 @property (nonatomic,assign) double progress;
 

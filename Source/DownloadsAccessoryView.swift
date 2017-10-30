@@ -180,7 +180,6 @@ class DownloadsAccessoryView : UIView {
         didSet {
             let progressNum = progress ?? 0
             downloadProgressView.progress = progressNum
-            downloadProgressView.setNeedsDisplay()
         }
     }
 }

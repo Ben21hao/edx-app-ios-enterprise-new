@@ -12,6 +12,4 @@
 
 @property (nonatomic,assign) double progress;
 
-@property (nonatomic,strong) UILabel *persentLabel;
-
 @end
