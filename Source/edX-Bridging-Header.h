@@ -119,4 +119,5 @@
 #import <UIImageView+WebCache.h>
 
 #import "LanguageChangeTool.h"
+#import "TDCircleProgressView.h"
 

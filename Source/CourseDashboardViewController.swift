@@ -93,7 +93,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         super.viewDidLoad()
         
         self.view.backgroundColor = OEXStyles.sharedStyles().neutralWhite()
-        self.setLeftButtonStyle()
+        self.setNavigationButtonStyle()
         self.setViewConstraint()
         
         /* 数据 */
@@ -159,7 +159,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         loadController.setupInController(self, contentView: containerView)
     }
     
-    func setLeftButtonStyle() {
+    func setNavigationButtonStyle() {
         
         self.titleLabel = UILabel(frame:CGRect(x:0, y:0, width:40, height:40))
         self.titleLabel?.font = UIFont(name:"OpenSans",size:18.0)
@@ -177,8 +177,9 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         let leftBarItem = UIBarButtonItem.init(customView: leftButton)
         self.navigationItem.leftBarButtonItem = leftBarItem
         
-        self.progressController.hideProgessView()
-        self.navigationItem.rightBarButtonItem = self.progressController.navigationItem()
+        //隐藏下载进度条
+//        self.progressController.hideProgessView()
+//        self.navigationItem.rightBarButtonItem = self.progressController.navigationItem()
     }
     
     func leftBarItemAction() {

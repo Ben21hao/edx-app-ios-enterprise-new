@@ -802,7 +802,7 @@ static OEXInterface* _sharedInterface = nil;
                 partiallyDownloaded++;
                 break;
             default:
-                video.isVideoDownloading = YES;
+                video.isVideoDownloading = NO;
                 video.downloadProgress = OEXMaxDownloadProgress;
                 video.completedDate = data.downloadCompleteDate;
                 downloadCompleted++;

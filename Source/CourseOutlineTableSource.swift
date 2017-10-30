@@ -9,10 +9,13 @@
 import UIKit
 
 protocol CourseOutlineTableControllerDelegate : class {
+    
     func outlineTableControllerSelectRow(controller : CourseOutlineTableController, choseBlock:CourseBlock, withParentID:CourseBlockID)
     func outlineTableControllerChooseDownloadVideo(controller : CourseOutlineTableController, choseDownloadVideos videos:[OEXHelperVideoDownload], rootedAtBlock block: CourseBlock)
     func outlineTableControllerChoseDownloadVideoForBlock(controller : CourseOutlineTableController, choseDownloadVideoForBlock block:CourseBlock)
     func outlineTableControllerChoseShowDownloads(controller : CourseOutlineTableController)
+    func outlineTableControllerCancelDownloadVideo(controller : CourseOutlineTableController, video : OEXHelperVideoDownload)
+    func outlineTableControllerCancelSectionDownloadVideo(controller : CourseOutlineTableController, videos : [OEXHelperVideoDownload]?)
 }
 
 class CourseOutlineTableController : UITableViewController, CourseVideoTableViewCellDelegate, CourseSectionTableViewCellDelegate {
@@ -168,20 +171,30 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
         self.delegate?.outlineTableControllerSelectRow(self, choseBlock: chosenBlock, withParentID: group.block.blockID)
     }
     
-    func videoCellChoseDownload(cell: CourseVideoTableViewCell, block : CourseBlock) {
+    //MARK: CourseVideoTableViewCellDelegate
+    func videoCellChoseDownload(cell: CourseVideoTableViewCell, block : CourseBlock) { //视频下载
         self.delegate?.outlineTableControllerChoseDownloadVideoForBlock(self, choseDownloadVideoForBlock: block)
     }
     
-    func videoCellChoseShowDownloads(cell: CourseVideoTableViewCell) {
+    func videoCellChoseShowDownloads(cell: CourseVideoTableViewCell) { //视频cell
         self.delegate?.outlineTableControllerChoseShowDownloads(self)
     }
     
-    func sectionCellChoseShowDownloads(cell: CourseSectionTableViewCell) {
-        self.delegate?.outlineTableControllerChoseShowDownloads(self)
+    func videoCellCancelDownloadVideo(cell: CourseVideoTableViewCell, video : OEXHelperVideoDownload) {
+        self.delegate?.outlineTableControllerCancelDownloadVideo(self, video: video)
     }
     
-    func sectionCellChoseDownload(cell: CourseSectionTableViewCell, videos: [OEXHelperVideoDownload], forBlock block : CourseBlock) {
+    //MARK: CourseSectionTableViewCellDelegate
+    func sectionCellChoseShowDownloads(cell: CourseSectionTableViewCell) { //章节cell
+        self.delegate?.outlineTableControllerChoseShowDownloads(self) //跳转到下载进度页面
+    }
+    
+    func sectionCellChoseDownload(cell: CourseSectionTableViewCell, videos: [OEXHelperVideoDownload], forBlock block : CourseBlock) { //章节视频下载
         self.delegate?.outlineTableControllerChooseDownloadVideo(self, choseDownloadVideos: videos, rootedAtBlock:block)
+    }
+    
+    func sectionCellCancelDownloadVideo(cell: CourseSectionTableViewCell, videos : [OEXHelperVideoDownload]?) {
+        self.delegate?.outlineTableControllerCancelSectionDownloadVideo(self, videos: videos)
     }
     
     func choseViewLastAccessedWithItem(item : CourseLastAccessed) {

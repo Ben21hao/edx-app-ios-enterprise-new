@@ -157,23 +157,23 @@
     self.selectAllButton.hidden = YES;
     [self.selectAllButton addTarget:self action:@selector(selectAllChanged:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.progressController = [[ProgressController alloc] initWithOwner:self router:self.environment.router dataInterface:self.environment.interface];
-    self.navigationItem.rightBarButtonItem = [self.progressController navigationItem];
-    [self.progressController hideProgessView];
+    //隐藏下载进度条
+//    self.progressController = [[ProgressController alloc] initWithOwner:self router:self.environment.router dataInterface:self.environment.interface];
+//    self.navigationItem.rightBarButtonItem = [self.progressController navigationItem];
+//    [self.progressController hideProgessView];
 }
 
-- (void)updateNavigationItemButtons {
+- (void)updateNavigationItemButtons { //更新导航栏
     
     NSMutableArray *barButtons = [[NSMutableArray alloc] init];
     if(self.isTableEditing) {
         [barButtons addObject:[[UIBarButtonItem alloc] initWithCustomView:self.selectAllButton]];
     }
-    if(![self.progressController progressView].hidden){
-        [barButtons addObject:[self.progressController navigationItem]];
-    }
-//    if(barButtons.count != self.navigationItem.rightBarButtonItems.count) {
-        self.navigationItem.rightBarButtonItems = barButtons;
+    //隐藏下载进度条
+//    if(![self.progressController progressView].hidden){
+//        [barButtons addObject:[self.progressController navigationItem]];
 //    }
+    self.navigationItem.rightBarButtonItems = barButtons;
 }
 
 - (void)selectAllChanged:(UIButton *)sender { //全选
@@ -270,7 +270,7 @@
         weakSelf.isTableEditing = isTableEditing;
         [weakSelf updateNavigationItemButtons];
     };
-    self.videoSubVC.hideEditeHandle = ^(BOOL isHidden){
+    self.videoSubVC.hideEditeHandle = ^(BOOL isHidden){ //隐藏全选按钮
         weakSelf.selectAllButton.hidden = isHidden;
     };
     self.videoSubVC.checkEditeHandle = ^(BOOL isChecked){

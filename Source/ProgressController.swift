@@ -62,7 +62,7 @@ public class ProgressController: NSObject {
             }, forEvents: .TouchUpInside)
         
         NSNotificationCenter.defaultCenter().oex_addObserver(self, name: OEXDownloadProgressChangedNotification) { (_, observer, _) -> Void in
-            observer.updateProgressDisplay()
+            observer.updateProgressDisplay() //更新下载进度条
         }
     }
     
@@ -83,12 +83,12 @@ public class ProgressController: NSObject {
         return circularProgressView
     }
     
-    func hideProgessView() {
+    func hideProgessView() { //隐藏进度条
         circularProgressView.hidden = true
         downloadButton.hidden = true
     }
     
-    func showProgessView() {
+    func showProgessView() { //显示进度条
         circularProgressView.hidden = false
         downloadButton.hidden = false
     }

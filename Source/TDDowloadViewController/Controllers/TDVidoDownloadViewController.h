@@ -28,6 +28,6 @@
 @property (nonatomic,copy) void(^hideEditeHandle)(BOOL isHidden);
 @property (nonatomic,copy) void(^checkEditeHandle)(BOOL isChecked);
 @property (nonatomic,copy) void(^reloadSubDataHandle)();
-@property (nonatomic,copy) void(^fullScreenHanle)(BOOL isFullScreen);
+@property (nonatomic,copy) void(^fullScreenHanle)(BOOL isFullScreen); //全屏
 
 @end

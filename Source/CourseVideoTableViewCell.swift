@@ -12,6 +12,7 @@ import UIKit
 protocol CourseVideoTableViewCellDelegate : class {
     func videoCellChoseDownload(cell : CourseVideoTableViewCell, block : CourseBlock)
     func videoCellChoseShowDownloads(cell : CourseVideoTableViewCell)
+    func videoCellCancelDownloadVideo(cell: CourseVideoTableViewCell, video : OEXHelperVideoDownload)
 }
 
 private let titleLabelCenterYOffset = -12
@@ -33,8 +34,14 @@ class CourseVideoTableViewCell: UITableViewCell, CourseBlockContainerCell {
     var localState : OEXHelperVideoDownload? {
         didSet {
             updateDownloadViewForVideoState()
+            updateDownLoadProgress()
+            
             if localState?.summary?.duration != nil {
                 content.setDetailText(OEXDateFormatting.formatSecondsAsVideoLength(Double((localState?.summary?.duration)!) ?? 0))
+            }
+            
+            if localState?.summary?.size != nil {
+                downloadView.videoSize = localState?.summary?.size?.doubleValue
             }
         }
     }
@@ -54,14 +61,20 @@ class CourseVideoTableViewCell: UITableViewCell, CourseBlockContainerCell {
         }
         
         for notification in [OEXDownloadProgressChangedNotification, OEXDownloadEndedNotification, OEXVideoStateChangedNotification] {
+            
             NSNotificationCenter.defaultCenter().oex_addObserver(self, name: notification) { (_, observer, _) -> Void in
-                observer.updateDownloadViewForVideoState()
+                observer.updateDownloadViewForVideoState() //更新下载状态
+                
+                if notification == OEXDownloadProgressChangedNotification {
+                    observer.updateDownLoadProgress() //更新下载进度
+                }
             }
         }
         let tapGesture = UITapGestureRecognizer()
         tapGesture.addAction {[weak self]_ in
             if let owner = self where owner.downloadState == .Downloading {
-                owner.delegate?.videoCellChoseShowDownloads(owner)
+//                owner.delegate?.videoCellChoseShowDownloads(owner) //跳转总的下载进度页面
+                owner.delegate?.videoCellCancelDownloadVideo(owner, video: owner.localState!) //取消下载
             }
         }
         downloadView.addGestureRecognizer(tapGesture)
@@ -113,5 +126,9 @@ class CourseVideoTableViewCell: UITableViewCell, CourseBlockContainerCell {
         
         content.trailingView = downloadView
         downloadView.state = downloadState
+    }
+    
+    func updateDownLoadProgress() { //更新章节的下载进度
+        self.downloadView.progress = localState?.downloadProgress
     }
 }

@@ -248,16 +248,20 @@
     NSIndexPath* indexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
 
     OEXInterface* edxInterface = [OEXInterface sharedInterface];
+    
     if(indexPath.row < [self.arr_downloadingVideo count]) {
+        
         OEXHelperVideoDownload* video = [self.arr_downloadingVideo objectAtIndex:indexPath.row];
 
         [self.table_Downloads beginUpdates];
         [self.table_Downloads deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
+        
         [self.arr_downloadingVideo removeObjectAtIndex:indexPath.row];
+        
         [self.table_Downloads endUpdates];
         [self.table_Downloads reloadData];
 
-        [edxInterface cancelDownloadForVideo:video completionHandler:^(BOOL success){
+        [edxInterface cancelDownloadForVideo:video completionHandler:^(BOOL success){ //取消下载
             dispatch_async(dispatch_get_main_queue(), ^{
                     video.downloadState = OEXDownloadStateNew;
                 });

@@ -18,9 +18,11 @@ class DownloadsAccessoryView : UIView {
     }
     
     private let downloadButton = UIButton(type: .System)
-    private let downloadSpinner = SpinnerView(size: .Medium, color: .Primary)
+//    private let downloadSpinner = SpinnerView(size: .Medium, color: .Primary)
+    private let downloadProgressView = TDCircleProgressView()
     private let iconFontSize : CGFloat = 15
     private let countLabel : UILabel = UILabel()
+    private let videoSizeLabel = UILabel()
     
     override init(frame : CGRect) {
         state = .Available
@@ -28,34 +30,42 @@ class DownloadsAccessoryView : UIView {
         
         super.init(frame: frame)
         
-//        downloadButton.tintColor = OEXStyles.sharedStyles().neutralBase()
-//        downloadButton.contentEdgeInsets = UIEdgeInsetsMake(15, 10, 15, 10)
-//        downloadButton.titleLabel?.font = UIFont.init(name: "FontAwesome", size: 20)
+        downloadButton.tintColor = OEXStyles.sharedStyles().baseColor8()
         downloadButton.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal)
-        countLabel.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal)
-        downloadSpinner.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal)
+//        countLabel.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal)
+        videoSizeLabel.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal)
+//        downloadSpinner.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal)
         
         self.addSubview(downloadButton)
-        self.addSubview(downloadSpinner)
+        self.addSubview(downloadProgressView)
+//        self.addSubview(downloadSpinner)
         self.addSubview(countLabel)
+        self.addSubview(videoSizeLabel)
+        
+        countLabel.font = UIFont.init(name: "OpenSans", size: 12)
+        countLabel.textColor = OEXStyles.sharedStyles().baseColor8()
+        
+        self.videoSizeLabel.font = UIFont.init(name: "OpenSans", size: 8)
+        self.videoSizeLabel.textColor = OEXStyles.sharedStyles().baseColor8()
         
         // This view is atomic from an accessibility point of view
         self.isAccessibilityElement = true
-        downloadSpinner.accessibilityTraits = UIAccessibilityTraitNotEnabled;
-        countLabel.accessibilityTraits = UIAccessibilityTraitNotEnabled;
-        downloadButton.accessibilityTraits = UIAccessibilityTraitNotEnabled;
+//        downloadSpinner.accessibilityTraits = UIAccessibilityTraitNotEnabled
+        countLabel.accessibilityTraits = UIAccessibilityTraitNotEnabled
+        videoSizeLabel.accessibilityTraits = UIAccessibilityTraitNotEnabled
+        downloadButton.accessibilityTraits = UIAccessibilityTraitNotEnabled
         
-        downloadSpinner.stopAnimating()
-        
-        downloadSpinner.snp_makeConstraints {make in
-            make.center.equalTo(self)
-        }
+//        downloadSpinner.stopAnimating()
+//        
+//        downloadSpinner.snp_makeConstraints {make in
+//            make.center.equalTo(self)
+//        }
         
         downloadButton.snp_makeConstraints {make in
             make.trailing.equalTo(self)
             make.top.equalTo(self)
             make.bottom.equalTo(self)
-            make.width.equalTo(39)
+            make.width.equalTo(38)
         }
         
         countLabel.snp_makeConstraints {make in
@@ -64,16 +74,21 @@ class DownloadsAccessoryView : UIView {
             make.trailing.equalTo(downloadButton.imageView!.snp_leading).offset(-6)
         }
         
+        downloadProgressView.snp_makeConstraints { (make) in
+            make.centerY.equalTo(self)
+            make.centerX.equalTo(self.downloadButton);
+            make.size.equalTo(CGSizeMake(38, 38))
+        }
+        
+        videoSizeLabel.snp_makeConstraints { (make) in
+            make.top.equalTo(downloadButton.snp_bottom)
+            make.centerX.equalTo(downloadButton.snp_centerX)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-//    private func useIcon(icon : Icon?) {
-//        downloadButton.setImage(icon?.imageWithFontSize(iconFontSize), forState:.Normal)
-////        downloadButton.setTitle("\u{0041}", forState: .Normal) //开始f0ed 云f299 圆f058
-//    }
     
     var downloadAction : (() -> Void)? = nil {
         didSet {
@@ -86,50 +101,68 @@ class DownloadsAccessoryView : UIView {
         didSet {
             let count = itemCount ?? 0
             let text = (count > 0 ? "\(count)" : "")
-            let styledText = CourseOutlineItemView.detailFontStyle.attributedStringWithText(text)
-            countLabel.attributedText = styledText
+//            let styledText = CourseOutlineItemView.detailFontStyle.attributedStringWithText(text)
+//            countLabel.attributedText = styledText
+            countLabel.text = text
         }
     }
+    
+    var videoSize : Double? {
+        didSet {
+            let size = videoSize ?? 0
+            if size == 0 {
+                return
+            }
+            videoSizeLabel.text = String(format: "%.0fMB",(size / 1024) / 1024)
+        }
+    }
+    
     
     var state : State {
         didSet {
             switch state {
             case .Available:
-//                useIcon(.CloudDownload)
                 downloadButton.setImage(UIImage.init(named: "no_download"), forState: .Normal)
-                downloadSpinner.hidden = true
+//                downloadButton.tintColor = OEXStyles.sharedStyles().baseColor1()
                 downloadButton.userInteractionEnabled = true
                 downloadButton.hidden = false
+                
+                downloadProgressView.hidden = true
+//                downloadSpinner.hidden = true
+//                countLabel.hidden = false
                 self.userInteractionEnabled = true
-                countLabel.hidden = false
+                
                 
                 if let count = itemCount {
                     let message = Strings.downloadManyVideos(videoCount: count)
                     self.accessibilityLabel = message
-                }
-                else {
+                } else {
                     self.accessibilityLabel = TDLocalizeSelectSwift("DOWNLOAD")
                 }
                 self.accessibilityTraits = UIAccessibilityTraitButton
+                
             case .Downloading:
-                downloadSpinner.startAnimating()
-                downloadSpinner.hidden = false
+//                downloadSpinner.startAnimating()
+//                downloadSpinner.hidden = false
+                downloadProgressView.hidden = false
+                
                 downloadButton.userInteractionEnabled = true
-                self.userInteractionEnabled = true
                 downloadButton.hidden = true
-                countLabel.hidden = true
+//                countLabel.hidden = true
+                self.userInteractionEnabled = true
+                
                 
                 self.accessibilityLabel = TDLocalizeSelectSwift("DOWNLOADING")
                 self.accessibilityTraits = UIAccessibilityTraitButton
             case .Done:
-//                useIcon(.CheckCircle)
                 downloadButton.setImage(UIImage.init(named: "had_download"), forState: .Normal)
-                downloadButton.tintColor = OEXStyles.sharedStyles().neutralBase()
-                
-                downloadSpinner.hidden = true
-                self.userInteractionEnabled = false
+//                downloadButton.tintColor = OEXStyles.sharedStyles().neutralBase()
                 downloadButton.hidden = false
-                countLabel.hidden = false
+                
+                downloadProgressView.hidden = true
+//                downloadSpinner.hidden = true
+//                countLabel.hidden = false
+                self.userInteractionEnabled = false
                 
                 if let count = itemCount {
                     let message = Strings.downloadManyVideos(videoCount: count)
@@ -140,6 +173,14 @@ class DownloadsAccessoryView : UIView {
                 }
                 self.accessibilityTraits = UIAccessibilityTraitStaticText
             }
+        }
+    }
+    
+    var progress : Double? {
+        didSet {
+            let progressNum = progress ?? 0
+            downloadProgressView.progress = progressNum
+            downloadProgressView.setNeedsDisplay()
         }
     }
 }

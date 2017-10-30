@@ -39,10 +39,13 @@ public class OEXCheckBox: UIButton {
     }
     
     private func updateState() {
+        
         let newIcon = checked ? Icon.CheckCircleO : Icon.CircleO
         let size = min(bounds.width, bounds.height)
         let image = newIcon.imageWithFontSize(size)
+        
         setImage(image, forState: .Normal)
+        
         accessibilityLabel = checked ? TDLocalizeSelectSwift("ACCESSIBILITY_CHECKBOX_CHECKED") : TDLocalizeSelectSwift("ACCESSIBILITY_CHECKBOX_UNCHECKED")
         accessibilityHint = checked ? TDLocalizeSelectSwift("ACCESSIBILITY_CHECKBOX_HINT_CHECKED") : TDLocalizeSelectSwift("ACCESSIBILITY_CHECKBOX_HINT_UNCHECKED")
     }

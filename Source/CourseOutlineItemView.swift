@@ -44,7 +44,8 @@ public class CourseOutlineItemView: UIView {
             return !checkmark.hidden
         }
         set {
-            checkmark.hidden = !(newValue!)
+            checkmark.hidden = true //隐藏
+//            checkmark.hidden = !(newValue!)
             setNeedsUpdateConstraints()
         }
     }

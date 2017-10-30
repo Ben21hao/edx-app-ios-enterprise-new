@@ -434,9 +434,11 @@
 		A409D1B21F676EE300F6BF74 /* TDLanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A409D1B11F676EE300F6BF74 /* TDLanguageViewController.m */; };
 		A409D1B61F677D0300F6BF74 /* TDSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A409D1B51F677D0300F6BF74 /* TDSettingCell.m */; };
 		A409D1BA1F677D8300F6BF74 /* LanguageChangeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = A409D1B91F677D8300F6BF74 /* LanguageChangeTool.m */; };
+		A40FE2E21FA3312800528771 /* TDCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A40FE2E11FA3312800528771 /* TDCircleProgressView.m */; };
 		A413A4AC1F580BEA008556C2 /* TDLiveQACell.m in Sources */ = {isa = PBXBuildFile; fileRef = A413A4AB1F580BEA008556C2 /* TDLiveQACell.m */; };
 		A417335E1F5D2BE6005554B1 /* TDLiveLotteryView.m in Sources */ = {isa = PBXBuildFile; fileRef = A417335D1F5D2BE6005554B1 /* TDLiveLotteryView.m */; };
 		A420E2511F3C55A200340683 /* TDBaseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A420E2501F3C55A200340683 /* TDBaseButton.m */; };
+		A44669AE1FA6C49900084563 /* TDCircleImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A44669AD1FA6C49900084563 /* TDCircleImageView.m */; };
 		A48B69B61F79F6A900160C61 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = A48B69B51F79F6A900160C61 /* FontAwesome.otf */; };
 		A4F456771F42DF1600C3F5B5 /* TDWebUrlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F456761F42DF1600C3F5B5 /* TDWebUrlViewController.m */; };
 		B4132C10195AAFBE00F50B46 /* OEXAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = B4132C0F195AAFBE00F50B46 /* OEXAuthentication.m */; };
@@ -1456,12 +1458,16 @@
 		A409D1B51F677D0300F6BF74 /* TDSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSettingCell.m; sourceTree = "<group>"; };
 		A409D1B81F677D8300F6BF74 /* LanguageChangeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageChangeTool.h; sourceTree = "<group>"; };
 		A409D1B91F677D8300F6BF74 /* LanguageChangeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageChangeTool.m; sourceTree = "<group>"; };
+		A40FE2E01FA3312800528771 /* TDCircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCircleProgressView.h; sourceTree = "<group>"; };
+		A40FE2E11FA3312800528771 /* TDCircleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCircleProgressView.m; sourceTree = "<group>"; };
 		A413A4AA1F580BEA008556C2 /* TDLiveQACell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDLiveQACell.h; sourceTree = "<group>"; };
 		A413A4AB1F580BEA008556C2 /* TDLiveQACell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDLiveQACell.m; sourceTree = "<group>"; };
 		A417335C1F5D2BE6005554B1 /* TDLiveLotteryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDLiveLotteryView.h; sourceTree = "<group>"; };
 		A417335D1F5D2BE6005554B1 /* TDLiveLotteryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDLiveLotteryView.m; sourceTree = "<group>"; };
 		A420E24F1F3C55A200340683 /* TDBaseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBaseButton.h; sourceTree = "<group>"; };
 		A420E2501F3C55A200340683 /* TDBaseButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBaseButton.m; sourceTree = "<group>"; };
+		A44669AC1FA6C49900084563 /* TDCircleImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCircleImageView.h; sourceTree = "<group>"; };
+		A44669AD1FA6C49900084563 /* TDCircleImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCircleImageView.m; sourceTree = "<group>"; };
 		A48B69B51F79F6A900160C61 /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
 		A4F456751F42DF1600C3F5B5 /* TDWebUrlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWebUrlViewController.h; sourceTree = "<group>"; };
 		A4F456761F42DF1600C3F5B5 /* TDWebUrlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWebUrlViewController.m; sourceTree = "<group>"; };
@@ -3005,6 +3011,10 @@
 				7784C68A1B03BA1E00529C7C /* LoadStateViewController.swift */,
 				770848B91B200C76002FEEEE /* ViewTopMessageController.swift */,
 				9EAB5BE81B564C2F00CA9F3C /* ProgressController.swift */,
+				A40FE2E01FA3312800528771 /* TDCircleProgressView.h */,
+				A40FE2E11FA3312800528771 /* TDCircleProgressView.m */,
+				A44669AC1FA6C49900084563 /* TDCircleImageView.h */,
+				A44669AD1FA6C49900084563 /* TDCircleImageView.m */,
 			);
 			name = "Controller Helpers";
 			sourceTree = "<group>";
@@ -6311,6 +6321,7 @@
 				B52E8CDE1F0B8D6300F3170D /* SZQuestionItem.m in Sources */,
 				B52E8D2B1F0B94E900F3170D /* BarrageDispatcher.m in Sources */,
 				775434861AD73D1900635A40 /* OEXParseConfig.m in Sources */,
+				A44669AE1FA6C49900084563 /* TDCircleImageView.m in Sources */,
 				1AE0A6C81BF4F68A00E14917 /* CourseCertificateCell.swift in Sources */,
 				770848BC1B209EF4002FEEEE /* BorderStyle.swift in Sources */,
 				19A1339419CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.m in Sources */,
@@ -6521,6 +6532,7 @@
 				B52E8D2E1F0B94E900F3170D /* BarrageLoader.m in Sources */,
 				1AB539F51BFDFBC10065501F /* DebugMenuViewController.swift in Sources */,
 				5D43B18A1B0C1F9200448B52 /* MenuOptionsViewController.swift in Sources */,
+				A40FE2E21FA3312800528771 /* TDCircleProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

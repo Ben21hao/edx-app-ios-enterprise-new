@@ -281,18 +281,20 @@ public class CourseOutlineViewController :
         )
     }
 
-    // MARK: Outline Table Delegate
-    func outlineTableControllerChoseShowDownloads(controller: CourseOutlineTableController) {
-        environment.router?.showDownloadsFromViewController(self)
-    }
-    
     private func canDownloadVideo() -> Bool {
         let hasWifi = environment.reachability.isReachableViaWiFi() ?? false
         let onlyOnWifi = environment.dataManager.interface?.shouldDownloadOnlyOnWifi ?? false
         return !onlyOnWifi || hasWifi
     }
     
+    // MARK: CourseOutlineTableControllerDelegate
+    func outlineTableControllerChoseShowDownloads(controller: CourseOutlineTableController) {
+        environment.router?.showDownloadsFromViewController(self) //跳转到视频下载进度页面
+    }
+    
+    //章节视频下载 - 几个视频
     func outlineTableControllerChooseDownloadVideo(controller: CourseOutlineTableController, choseDownloadVideos videos: [OEXHelperVideoDownload], rootedAtBlock block:CourseBlock) {
+        
         guard canDownloadVideo() else {
             self.showOverlayMessage(TDLocalizeSelectSwift("NO_WIFI_MESSAGE"))
             return
@@ -312,6 +314,7 @@ public class CourseOutlineViewController :
         )
     }
     
+    //视频下载 - 单独一个视频
     func outlineTableControllerChoseDownloadVideoForBlock(controller: CourseOutlineTableController, choseDownloadVideoForBlock block: CourseBlock) {
         
         guard canDownloadVideo() else {
@@ -325,6 +328,30 @@ public class CourseOutlineViewController :
     
     func outlineTableControllerSelectRow(controller: CourseOutlineTableController, choseBlock block: CourseBlock, withParentID parent : CourseBlockID) {
         self.environment.router?.showContainerForBlockWithID(block.blockID, type:block.displayType, parentID: parent, courseID: courseQuerier.courseID, fromController:self)
+    }
+    
+    //取消视频下载 - 单个视频
+    func outlineTableControllerCancelDownloadVideo(controller : CourseOutlineTableController, video : OEXHelperVideoDownload) {
+        
+//        self.environment.dataManager.interface?.cancelDownloadForVideo(video, completionHandler: { (success) in
+//            dispatch_async(dispatch_get_main_queue(), { 
+//                video.downloadState = .New
+//            })
+//        })
+        self.cancelVideoDownload(video)
+    }
+    
+    //取消视频下载 - 多个视频
+    func outlineTableControllerCancelSectionDownloadVideo(controller : CourseOutlineTableController, videos : [OEXHelperVideoDownload]?) {
+        
+        if let videos = videos where videos.count > 0 {
+            for video : OEXHelperVideoDownload in videos {
+                if video.downloadProgress == 100 {
+                    return
+                }
+                self.cancelVideoDownload(video)
+            }
+        }
     }
     
     //MARK: PullRefreshControllerDelegate
@@ -341,13 +368,21 @@ public class CourseOutlineViewController :
     
     //MARK: LastAccessedControllerDeleagte
     public func courseLastAccessedControllerDidFetchLastAccessedItem(item: CourseLastAccessed?) {
+        
         if let lastAccessedItem = item {
             self.tableController.showLastAccessedWithItem(lastAccessedItem)
-        }
-        else {
+            
+        } else {
             self.tableController.hideLastAccessed()
         }
-        
+    }
+    
+    func cancelVideoDownload(video : OEXHelperVideoDownload) { //取消视频下载
+        self.environment.dataManager.interface?.cancelDownloadForVideo(video, completionHandler: { (success) in
+            dispatch_async(dispatch_get_main_queue(), {
+                video.downloadState = .New
+            })
+        })
     }
     
     public func presentationControllerForOpenOnWebController(controller: OpenOnWebController) -> UIViewController {

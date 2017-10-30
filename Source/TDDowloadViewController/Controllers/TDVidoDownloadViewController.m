@@ -13,14 +13,15 @@
 #import "Logger+OEXObjC.h"
 #import "NSArray+OEXSafeAccess.h"
 
-typedef  enum OEXAlertType
-{
+typedef  enum OEXAlertType {
+    
     OEXAlertTypeNextVideoAlert,
     OEXAlertTypeDeleteConfirmationAlert,
     OEXAlertTypePlayBackErrorAlert,
     OEXAlertTypeCannotPlayVideo,
     OEXAlertTypeVideoTimeOutAlert,
     OEXAlertTypePlayBackContentUnAvailable
+    
 }OEXAlertType;
 
 #define RECENT_HEADER_HEIGHT 30.0
@@ -390,8 +391,8 @@ typedef  enum OEXAlertType
     [self disableDeleteButton];
 }
 
-- (void)buttonAddTarge {
-    // Show Custom editing View
+- (void)buttonAddTarge { // Show Custom editing View
+    
     [self.customEditing.btn_Edit addTarget:self action:@selector(editTableClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.customEditing.btn_Delete addTarget:self action:@selector(deleteTableClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.customEditing.btn_Cancel addTarget:self action:@selector(cancelTableClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -816,12 +817,14 @@ typedef  enum OEXAlertType
 
 #pragma mark - alert Delegate
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
     if(alertView.tag == 1001) {
         if(buttonIndex == 1) {
             [self playNextVideo];
         }
-    }
-    else if(alertView.tag == 1002) {
+        
+    } else if(alertView.tag == 1002) {
+        
         if(buttonIndex == 1) {
             NSInteger deleteCount = 0;
             
