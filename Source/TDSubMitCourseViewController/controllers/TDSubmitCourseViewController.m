@@ -91,7 +91,7 @@
     
     self.baseTool = [[TDBaseToolModel alloc] init];
     
-     [self setLoadDataView];
+    [self setLoadDataView];
     [self configData];
     [self setViewConstraint];
 }
@@ -338,7 +338,7 @@
                 self.aliPayModel = [TDAliPayModel mj_objectWithKeyValues:responDic[@"data"][@"data_url"]];
                 [self payByAliPay];
             }
-             [[NSNotificationCenter defaultCenter] postNotificationName:@"Course_Status_Handle" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"Course_Status_Handle" object:nil];
             
         } else {
             [self.view makeToast:TDLocalizeSelect(@"PAY_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
@@ -519,7 +519,7 @@
     
     self.couponStr = TDLocalizeSelect(@"SELECT_COUPON", nil);
     
-//    self.leftTielArray = self.hideShowPurchase ? @[TDLocalizeSelect(@"COUPON_PAPER", nil),TDLocalizeSelect(@"COINS_VALUE", nil)] : @[];
+    //    self.leftTielArray = self.hideShowPurchase ? @[TDLocalizeSelect(@"COUPON_PAPER", nil),TDLocalizeSelect(@"COINS_VALUE", nil)] : @[];
     
     
     int selectWX = [WXApi isWXAppInstalled] ? 0 : 1;
@@ -555,7 +555,7 @@
         return self.courseArray.count;
     }
     if (section == 1) {
-//        return self.leftTielArray.count;
+        //        return self.leftTielArray.count;
         return 1;
     }
     return self.payArray.count;
@@ -574,16 +574,16 @@
     } else if ([indexPath section] == 1){
         
         SubmiteSecondCell *cell = [[SubmiteSecondCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDSumiteSecondCell"];
-//        cell.leftLabel.text = self.leftTielArray[indexPath.row];
+        //        cell.leftLabel.text = self.leftTielArray[indexPath.row];
         cell.leftLabel.text = TDLocalizeSelect(@"COINS_VALUE", nil);
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-//        if (indexPath.row == 0) {
-//            cell.rightLabel.text = self.isNoCoupon ? TDLocalizeSelect(@"NO_CHOOSE_COUPON", nil) : self.couponStr;
-//        } else {
-            cell.rightLabel.text = self.baodianStr;
-//        }
+        //        if (indexPath.row == 0) {
+        //            cell.rightLabel.text = self.isNoCoupon ? TDLocalizeSelect(@"NO_CHOOSE_COUPON", nil) : self.couponStr;
+        //        } else {
+        cell.rightLabel.text = self.baodianStr;
+        //        }
         return cell;
         
     } else{
@@ -602,16 +602,16 @@
         
         [self inputAlertShow];
         
-//        if (indexPath.row == 0) {//优惠券
-//            self.hideShowPurchase ? [self gotoCoupon:indexPath] : [self inputAlertShow];
-//            
-//        } else if (indexPath.row == 1) {
-//            if (!self.isCampony) {
-//                [self inputAlertShow];
-//            } else {
-//                [self.view makeToast:TDLocalizeSelect(@"COUPON_NO_COINS", nil) duration:1.08 position:CSToastPositionCenter];
-//            }
-//        }
+        //        if (indexPath.row == 0) {//优惠券
+        //            self.hideShowPurchase ? [self gotoCoupon:indexPath] : [self inputAlertShow];
+        //
+        //        } else if (indexPath.row == 1) {
+        //            if (!self.isCampony) {
+        //                [self inputAlertShow];
+        //            } else {
+        //                [self.view makeToast:TDLocalizeSelect(@"COUPON_NO_COINS", nil) duration:1.08 position:CSToastPositionCenter];
+        //            }
+        //        }
     } else if (indexPath.section == 2) {
         
         TDSelectPayModel *model1 = self.payArray[indexPath.row];
@@ -769,7 +769,7 @@
         make.right.mas_equalTo(self.moneyLabel.mas_left).offset(-3);
         make.centerY.mas_equalTo(self.moneyLabel);
     }];
-
+    
 }
 
 - (void)didReceiveMemoryWarning {

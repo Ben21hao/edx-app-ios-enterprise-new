@@ -129,6 +129,7 @@ class CourseVideoTableViewCell: UITableViewCell, CourseBlockContainerCell {
     }
     
     func updateDownLoadProgress() { //更新章节的下载进度
+//        print("视频进度 ------->>> \(localState?.downloadProgress)")
         self.downloadView.progress = localState?.downloadProgress
     }
 }

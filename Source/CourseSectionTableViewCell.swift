@@ -63,11 +63,10 @@ class CourseSectionTableViewCell: UITableViewCell, CourseBlockContainerCell {
             NSNotificationCenter.defaultCenter().oex_addObserver(self, name: notification) { (_, observer, _) -> Void in
                 
                 if let state = observer.downloadStateForDownloads(observer.videosStream.value) { //更新章节下载状态
-                    observer.downloadView.state = state
                     
-                    if notification == OEXDownloadProgressChangedNotification {
-                        observer.updateDownLoadProgress(observer.videosStream.value) //更新章节几个视频的下载进度
-                    }
+                    observer.downloadView.state = state
+                    observer.updateDownLoadProgress(observer.videosStream.value) //更新章节几个视频的下载进度
+                    
                 } else {
                     observer.content.trailingView = nil
                 }
@@ -108,7 +107,7 @@ class CourseSectionTableViewCell: UITableViewCell, CourseBlockContainerCell {
             let allProgress = videos.reduce(0) { totals,video in
                 return totals + video.downloadProgress
             }
-//            print("进度 ------->>> \(allProgress) ------>> \(videos.count)")
+//            print("章节进度 ------->>> \(allProgress) ------>> \(videos.count)")
             self.downloadView.progress = allProgress / Double(videos.count)
         }
         

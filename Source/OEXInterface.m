@@ -371,7 +371,7 @@ static OEXInterface* _sharedInterface = nil;
     return YES;
 }
 
-- (BOOL)canDownloadVideos:(NSArray*)videos {
+- (BOOL)canDownloadVideos:(NSArray *)videos  type:(NSInteger)type {
     
     double totalSpaceRequired = 0;
     //Total space
@@ -379,11 +379,16 @@ static OEXInterface* _sharedInterface = nil;
         totalSpaceRequired += [video.summary.size doubleValue];
     }
     totalSpaceRequired = totalSpaceRequired / 1024 / 1024 / 1024;
+    
     OEXAppDelegate* appD = (OEXAppDelegate *)[[UIApplication sharedApplication] delegate];
     if([OEXInterface shouldDownloadOnlyOnWifi]) {
         if(![appD.reachability isReachableViaWiFi]) {
             return NO;
         }
+    }
+    
+    if (type == 1) {
+        return YES;
     }
     
     if(totalSpaceRequired > 1) {
@@ -403,8 +408,8 @@ static OEXInterface* _sharedInterface = nil;
     return YES;
 }
 
-- (NSInteger)downloadVideos:(NSArray<OEXHelperVideoDownload*>*)array {
-    BOOL isValid = [self canDownloadVideos:array];
+- (NSInteger)downloadVideos:(NSArray<OEXHelperVideoDownload*>*)array type:(NSInteger)type {
+    BOOL isValid = [self canDownloadVideos:array type:type];
     
     if(!isValid) {
         return 0;
@@ -435,7 +440,7 @@ static OEXInterface* _sharedInterface = nil;
 
 - (NSInteger)downloadVideosWithIDs:(NSArray*)videoIDs courseID:(NSString*)courseID {
     NSArray* videos = [self statesForVideosWithIDs:videoIDs courseID:courseID];
-    return [self downloadVideos:videos];
+    return [self downloadVideos:videos type:0];
 }
 
 - (NSData *)resourceDataForURLString:(NSString *)URLString downloadIfNotAvailable:(BOOL)shouldDownload {
@@ -1068,10 +1073,10 @@ static OEXInterface* _sharedInterface = nil;
 
 #pragma mark UIAlertView delegate
 
-- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     if(buttonIndex == 1) {
-        NSInteger count = [self downloadVideos:_multipleDownloadArray];
+        NSInteger count = [self downloadVideos:_multipleDownloadArray type:1];
         if(count > 0) {
             [[NSNotificationCenter defaultCenter] postNotificationName:FL_MESSAGE object:self
                                                               userInfo:@{FL_ARRAY: _multipleDownloadArray}];

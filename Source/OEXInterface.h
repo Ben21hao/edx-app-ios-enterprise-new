@@ -113,7 +113,7 @@ extern NSString* const OEXDownloadEndedNotification;
 - (void)startAllBackgroundDownloads;
 
 /// @param array An array of OEXHelperVideoDownload representing the videos to download
-- (NSInteger)downloadVideos:(NSArray<OEXHelperVideoDownload*>*)videos;
+- (NSInteger)downloadVideos:(NSArray<OEXHelperVideoDownload*>*)videos type:(NSInteger)type;
 
 /// @param array An array of video ids representing the videos to download
 - (NSInteger)downloadVideosWithIDs:(NSArray<NSString*>*)videoIDs courseID:(NSString*)courseID;

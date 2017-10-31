@@ -13,8 +13,8 @@ import UIKit
 
 //let ELITEU_URL = "http://demo.e-ducation.cn" //f版 - 测试
 //let ELITEU_URL = "http://enterprise.e-ducation.cn" //企业生产
-let ELITEU_URL = "https://enterprise.demo.e-ducation.cn" //测试   ca419066fd4dbc4c869d
-//let ELITEU_URL = "https://enterprise.e-ducation.cn" //https 企业生产 85b54494118c5738f6bf
+//let ELITEU_URL = "https://enterprise.demo.e-ducation.cn" //测试   ca419066fd4dbc4c869d
+let ELITEU_URL = "https://enterprise.e-ducation.cn" //https 企业生产 85b54494118c5738f6bf
 
 
 

@@ -300,7 +300,7 @@ public class CourseOutlineViewController :
             return
         }
         
-        self.environment.dataManager.interface?.downloadVideos(videos)
+        self.environment.dataManager.interface?.downloadVideos(videos, type: 0)
         
         let courseID = self.courseID
         let analytics = environment.analytics

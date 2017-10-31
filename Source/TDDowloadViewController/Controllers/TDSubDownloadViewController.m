@@ -72,7 +72,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 225;
+    if (TDWidth == 320) {
+        return 153;
+    } else if (TDWidth > 320 && TDWidth < 400) {
+        return 185;
+    }
+    return 215;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

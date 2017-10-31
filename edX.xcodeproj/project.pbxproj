@@ -3304,6 +3304,7 @@
 		9C9B7F701A8CC68D00A857B2 /* Course Enrollment */ = {
 			isa = PBXGroup;
 			children = (
+				A44669B21FA7127900084563 /* TDFinCourseViewControllers */,
 				B55209F91EB9C94000EC51C9 /* TDCourseCatalogDetailViewController */,
 				B5FAF73A1EB045C8000C2169 /* TDSubMitCourseViewController */,
 				B59238D01EADD0BE00C686D8 /* ChooseCourseViewController */,
@@ -3365,6 +3366,37 @@
 				A409D1B91F677D8300F6BF74 /* LanguageChangeTool.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		A44669B21FA7127900084563 /* TDFinCourseViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A44669B41FA7127900084563 /* viewcontrollers */,
+				A44669B31FA7127900084563 /* models */,
+				A44669B51FA7127900084563 /* views */,
+			);
+			path = TDFinCourseViewControllers;
+			sourceTree = "<group>";
+		};
+		A44669B31FA7127900084563 /* models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		A44669B41FA7127900084563 /* viewcontrollers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = viewcontrollers;
+			sourceTree = "<group>";
+		};
+		A44669B51FA7127900084563 /* views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = views;
 			sourceTree = "<group>";
 		};
 		B4132C0D195AAF7A00F50B46 /* Authentication */ = {

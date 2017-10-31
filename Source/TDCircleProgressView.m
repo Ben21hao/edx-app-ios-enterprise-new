@@ -31,7 +31,7 @@
     self.backgroundColor = [UIColor clearColor];
     
     self.circleImage = [[UIImageView alloc] init];
-    self.circleImage.image = [UIImage imageNamed:@"down_circel_image"];
+    self.circleImage.image = [UIImage imageNamed:@"down_waiting_image"];
     self.circleImage.tintColor = [UIColor colorWithHexString:colorHexStr8];
     [self addSubview:self.circleImage];
     
@@ -56,10 +56,19 @@
         make.center.equalTo(self.circleImage);
         make.size.mas_equalTo(CGSizeMake(22, 22));
     }];
+    
+    self.downLoadImage.hidden = YES;
 }
 
 - (void)setProgress:(double)progress {
     _progress = progress;
+    
+    if (progress == 0) {
+        return;
+    }
+    
+    self.downLoadImage.hidden = NO;
+    self.circleImage.image = [UIImage imageNamed:@"down_circel_image"];
     
     self.circleView.progress = progress;
     [self.circleView setNeedsDisplay];

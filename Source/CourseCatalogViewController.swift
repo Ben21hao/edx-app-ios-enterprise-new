@@ -121,7 +121,7 @@ class CourseCatalogViewController: UIViewController, CoursesTableViewControllerD
     
     func coursesTableChoseCourse(course: OEXCourse) {
         if (course.course_id != nil) {
-            self.environment.router?.showCourseCatalogDetail(course, fromController:self)
+            self.environment.router?.showCourseCatalogDetail(course, fromController:self) //课程详情
         }  else {
             return
         }
