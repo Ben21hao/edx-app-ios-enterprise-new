@@ -124,14 +124,14 @@ public struct CourseOutline {
 
 public enum CourseBlockType {
     case Unknown(String)
-    case Course
-    case Chapter // child of course
-    case Section // child of chapter
-    case Unit // child of section
-    case Video(OEXVideoSummary)
-    case Problem
-    case HTML
-    case Discussion(DiscussionModel)
+    case Course //课程
+    case Chapter // child of course 章
+    case Section // child of chapter 节
+    case Unit // child of section 单元
+    case Video(OEXVideoSummary) //视频
+    case Problem //习题
+    case HTML 
+    case Discussion(DiscussionModel) //讨论
     
     public var asVideo : OEXVideoSummary? {
         switch self {
@@ -214,6 +214,7 @@ public class CourseBlock {
         format : String? = nil,
         multiDevice : Bool,
         graded : Bool = false) {
+        
         self.type = type
         self.children = children
         self.name = name

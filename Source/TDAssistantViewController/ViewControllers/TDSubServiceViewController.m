@@ -76,7 +76,7 @@
     }
     self.title = title;
     
-     [self setViewConstraint];
+    [self setViewConstraint];
     self.isForgound = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pullDownRefresh) name:@"Cancel_Order_Deal" object:nil];

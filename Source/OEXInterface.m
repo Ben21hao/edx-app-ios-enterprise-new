@@ -830,7 +830,7 @@ static OEXInterface* _sharedInterface = nil;
     OEXCourse* course = [self courseWithID:courseID];
     NSMutableArray* videoDatas = [[_courseVideos objectForKey:course.video_outline] mutableCopy];
     
-    if(videoDatas == nil) { //数组为空 // we don't have any videos for this course yet ；so set it up
+    if(videoDatas == nil) { //数组为空 we don't have any videos for this course yet ；so set it up
         
         videoDatas = [[NSMutableArray alloc] init];
         [self.courseVideos safeSetObject:videoDatas forKey:course.video_outline];

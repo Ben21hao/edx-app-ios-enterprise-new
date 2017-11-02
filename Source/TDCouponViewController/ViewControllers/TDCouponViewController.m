@@ -43,6 +43,7 @@
     
     self.titleViewLabel.text = TDLocalizeSelect(@"COUPON_PAPER", nil);
     [self.rightButton setTitle:TDLocalizeSelect(@"EXCHANGE_TITLE", nil) forState:UIControlStateNormal];
+    self.rightButton.hidden = NO;
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
     self.toolModel = [[TDBaseToolModel alloc] init];
@@ -284,7 +285,7 @@
     
     CGFloat y = CGRectGetMaxY(self.titleView.frame);
     self.sepView = [[UIView alloc] init];
-    self.sepView.backgroundColor = [UIColor colorWithHexString:@"#E6E9ED"];
+    self.sepView.backgroundColor = [UIColor colorWithHexString:colorHexStr6];
     self.sepView.frame = CGRectMake(0, y, TDWidth, 1);
     [self.view addSubview:self.sepView];
 }

@@ -21,11 +21,11 @@ enum CourseHTMLBlockSubkind {
 
 enum CourseBlockDisplayType {
     case Unknown
-    case Outline
-    case Unit
-    case Video
+    case Outline //课件大纲
+    case Unit  //单元
+    case Video //视频
     case HTML(CourseHTMLBlockSubkind)
-    case Discussion(DiscussionModel)
+    case Discussion(DiscussionModel) //讨论
     
     var isUnknown : Bool {
         switch self {
@@ -39,14 +39,15 @@ extension CourseBlock {
     
     var displayType : CourseBlockDisplayType {
         switch self.type {
-        case .Unknown(_), .HTML: return multiDevice ? .HTML(.Base) : .Unknown
-        case .Problem: return multiDevice ? .HTML(.Problem) : .Unknown
-        case .Course: return .Outline
-        case .Chapter: return .Outline
-        case .Section: return .Outline
-        case .Unit: return .Unit
-        case let .Video(summary): return summary.onlyOnWeb ? .Unknown : .Video
-        case let .Discussion(discussionModel): return .Discussion(discussionModel)
+        case .Unknown(_), .HTML: return multiDevice ? .HTML(.Base) : .Unknown //不知的类型
+//        case .Unknown(_), .HTML: return .HTML(.Base)
+        case .Problem: return multiDevice ? .HTML(.Problem) : .Unknown //习题
+        case .Course: return .Outline  //课程
+        case .Chapter: return .Outline  //章
+        case .Section: return .Outline //节
+        case .Unit: return .Unit //单元
+        case let .Video(summary): return summary.onlyOnWeb ? .Unknown : .Video  //视频
+        case let .Discussion(discussionModel): return .Discussion(discussionModel) //讨论
         }
     }
 }
@@ -110,7 +111,7 @@ extension OEXRouter {
     }
     
     func controllerForBlock(block : CourseBlock, courseID : String) -> UIViewController {
-        return controllerForBlockWithID(block.blockID, type: block.displayType, courseID: courseID)
+        return controllerForBlockWithID(block.blockID, type: block.displayType, courseID: courseID) //.HTML(.Base)
     }
     
     @objc(showMyCoursesAnimated:pushingCourseWithID:) func showMyCourses(animated animated: Bool = true, pushingCourseWithID courseID: String? = nil) {
@@ -229,7 +230,8 @@ extension OEXRouter {
         case .Webview:
             controller = OEXFindCoursesViewController(bottomBar: bottomBar)
         case .Native, .None:
-            controller = CourseCatalogViewController(environment: self.environment)
+//            controller = CourseCatalogViewController(environment: self.environment)
+            controller = TDFindCourseViewController()
         }
         if revealController != nil {
             showContentStackWithRootController(controller, animated: true)

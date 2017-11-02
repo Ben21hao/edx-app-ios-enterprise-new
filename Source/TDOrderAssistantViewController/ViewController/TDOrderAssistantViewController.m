@@ -149,6 +149,7 @@
             
         } else if ([code intValue] == 404) { //该课程暂无助教
             self.nullLabel.hidden = NO;
+            [self hiddenFooterView];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

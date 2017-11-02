@@ -16,6 +16,7 @@ public struct CourseInfoAPI {
         return json["handouts_html"].string.toResult(NSError.oex_errorWithCode(.HandoutsEmpty, message: TDLocalizeSelectSwift("HANDOUTS_UNAVAILABLE")))
     }
     
+    //资料
     public static func getHandoutsForCourseWithID(courseID : String, overrideURL: String? = nil) -> NetworkRequest<String> {
         return NetworkRequest(
             method: HTTPMethod.GET,

@@ -1,32 +1,25 @@
 //
-//  TDAssistantServiceViewController.m
+//  TDPageingViewController.m
 //  edX
 //
-//  Created by Elite Edu on 17/2/10.
+//  Created by Elite Edu on 2017/11/1.
 //  Copyright © 2017年 edX. All rights reserved.
 //
 
-#import "TDAssistantServiceViewController.h"
-#import "TDSubServiceViewController.h"
-#import "TDBaseScrollView.h"
-
-#import "edX-Swift.h"
-#import "OEXRouter.h"
+#import "TDPageingViewController.h"
 
 #define TITLEVIEW_HEIGHT 45
 
-@interface TDAssistantServiceViewController () <UIScrollViewDelegate,UIGestureRecognizerDelegate>
+@interface TDPageingViewController () <UIScrollViewDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) UIScrollView *titleView;
-@property (nonatomic,strong) TDBaseScrollView *contentView;
+
 @property (nonatomic,strong) UIView *selectView;
 @property (nonatomic,strong) UIView *sepView; //分割线
 
-@property (nonatomic,strong) NSMutableArray *titleButtons;
-
 @end
 
-@implementation TDAssistantServiceViewController
+@implementation TDPageingViewController
 
 - (NSMutableArray *)titleButtons{
     if (_titleButtons == nil) {
@@ -35,21 +28,25 @@
     return _titleButtons;
 }
 
+- (NSMutableArray<UIViewController *> *)childVcArray {
+    if (_childVcArray == nil) {
+        _childVcArray = [[NSMutableArray alloc] init];
+    }
+    return _childVcArray;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setViewConstraint];
-    [self addAllChildrenVC];
-    [self setUpSubtitleButton]; //设置标题
-    [self setSepView];    //添加分割线
-    [self setSliView];    //设置指示view
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.titleViewLabel.text = TDLocalizeSelect(@"TA_SERVICE", nil);
-    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    [self setUpSubtitleButton]; //设置标题
+    [self setSepView];    //添加分割线
+    [self setSliView];    //设置指示view
 }
 
 #pragma mark - UI
@@ -59,7 +56,7 @@
     self.titleView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     self.titleView.frame = CGRectMake(0, 0, TDWidth, 45);
     [self.view addSubview:self.titleView];
-
+    
     self.contentView = [[TDBaseScrollView alloc] init];
     self.contentView.frame = CGRectMake(0, TITLEVIEW_HEIGHT, TDWidth, TDHeight - TITLEVIEW_HEIGHT - 60);
     self.contentView.pagingEnabled = YES;
@@ -69,29 +66,16 @@
     [self.view addSubview:self.contentView];
 }
 
-#pragma mark - 加入子控制器
-- (void)addAllChildrenVC {
-    
-    for (int i = 0; i < 3 ; i ++ ) {
-        TDSubServiceViewController *subViewController = [[TDSubServiceViewController alloc] init];
-        subViewController.whereFrom = i;
-        subViewController.username = self.username;
-        subViewController.company_id = self.company_id;
-        subViewController.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
-        [self addChildViewController:subViewController];
-    }
-}
-
 #pragma mark - 设置按钮标题
 - (void)setUpSubtitleButton {
     
-    NSInteger count = self.childViewControllers.count;
+    NSInteger count = self.childVcArray.count;
     CGFloat x = 0;
     CGFloat h = 46;
     CGFloat btnW = TDWidth / count;
     
     for (int i = 0; i < count; i++) {
-        UIViewController *vc = self.childViewControllers[i];
+        UIViewController *vc = self.childVcArray[i];
         
         UIButton *btn = [[UIButton alloc] init];
         btn.tag = i;
@@ -143,17 +127,6 @@
     }
 }
 
-#pragma mark - 选中按钮
-- (void)selectButton:(UIButton *)sender {
-    
-    for (int i = 0 ; i < self.titleButtons.count; i ++) {
-        UIButton *button = self.titleButtons[i];
-        NSString *colorStr = i == sender.tag ? colorHexStr1 : colorHexStr9;
-        [button setTitleColor:[UIColor colorWithHexString:colorStr] forState:UIControlStateNormal];
-    }
-    [self setSliView];
-}
-
 - (void)selView:(NSInteger)i {
     
     UIView *vc = self.sepView.subviews[i];
@@ -172,6 +145,31 @@
     self.contentView.contentOffset = CGPointMake(x, 0);
 }
 
+#pragma mark - 选中按钮
+- (void)selectButton:(UIButton *)sender {
+    
+    for (int i = 0 ; i < self.titleButtons.count; i ++) {
+        UIButton *button = self.titleButtons[i];
+        NSString *colorStr = i == sender.tag ? colorHexStr1 : colorHexStr9;
+        [button setTitleColor:[UIColor colorWithHexString:colorStr] forState:UIControlStateNormal];
+    }
+    [self setSliView];
+}
+
+/* 添加对应的子控制器 */
+- (void)setUpChildViewController:(NSInteger)index {
+    
+    [self selView:index];
+    
+    UIViewController *vc = self.childVcArray[index];
+    if (vc.view.superview) {
+        return;
+    }
+    CGFloat x = index * TDWidth;
+    vc.view.frame = CGRectMake(x, 0, TDWidth, self.contentView.bounds.size.height);
+    [self.contentView addSubview:vc.view];
+}
+
 #pragma mark - UIViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
@@ -188,26 +186,9 @@
     return NO;
 }
 
-/* 添加对应的子控制器 */
-- (void)setUpChildViewController:(NSInteger)index {
-    
-    [self selView:index];
-    
-    UIViewController *vc = self.childViewControllers[index];
-    if (vc.view.superview) {
-        return;
-    }
-    CGFloat x = index * TDWidth;
-    vc.view.frame = CGRectMake(x, 0, TDWidth, self.contentView.bounds.size.height);
-    [self.contentView addSubview:vc.view];
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 @end
-
-
-

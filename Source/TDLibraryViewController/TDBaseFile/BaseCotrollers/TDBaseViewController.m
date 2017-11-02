@@ -88,6 +88,9 @@
     self.rightButton.titleLabel.textAlignment = NSTextAlignmentRight;
     self.rightButton.showsTouchWhenHighlighted = YES;
     [self.rightButton addTarget:self action:@selector(rightButtonAciton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.rightButton.hidden = YES;
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightButton];
 
 }
@@ -111,7 +114,7 @@
     UILabel *loadLabel = [[UILabel alloc] init];
     loadLabel.textColor = [UIColor colorWithHexString:colorHexStr1];
     loadLabel.font = [UIFont fontWithName:@"FontAwesome" size:25];
-    [loadLabel setText: @"\U0000f110"];//\u{f110}
+    [loadLabel setText: @"\U0000f110"]; //\u{f110}
     [self.loadIngView addSubview:loadLabel];
     
     [loadLabel mas_makeConstraints:^(MASConstraintMaker *make) {

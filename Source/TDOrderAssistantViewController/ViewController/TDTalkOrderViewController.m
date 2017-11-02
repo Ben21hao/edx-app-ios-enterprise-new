@@ -30,6 +30,7 @@
     self.toolModel = [[TDBaseToolModel alloc] init];
     self.titleViewLabel.text = TDLocalizeSelect(@"INIT_INSTANT", nil);
     [self.rightButton setTitle:TDLocalizeSelect(@"SUBMIT", nil) forState:UIControlStateNormal];
+    self.rightButton.hidden = NO;
     WS(weakSelf);
     self.rightButtonHandle = ^{
         [weakSelf.inputView resignFirstResponder];

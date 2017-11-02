@@ -60,7 +60,7 @@
     
     self.titleViewLabel.text = TDLocalizeSelect(@"SELECT_PERIOD", nil);
     [self.rightButton setTitle:TDLocalizeSelect(@"SUBMIT_BUTTON_TEXT", nil) forState:UIControlStateNormal];
-    
+    self.rightButton.hidden = NO;
     WS(weakSelf);
     self.rightButtonHandle = ^(){ //确定
         

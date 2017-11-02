@@ -52,6 +52,7 @@
     self.titleViewLabel.text = TDLocalizeSelect(@"ADD_SUCCESS", nil);
     [self.rightButton setTitle:TDLocalizeSelect(@"GO_TO_STUDY", nil) forState:UIControlStateNormal];
     self.rightButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    self.rightButton.hidden = NO;
     WS(weakSelf);
     self.rightButtonHandle = ^(){
         [weakSelf gotoStudy];

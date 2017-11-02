@@ -36,6 +36,7 @@
     
     self.titleViewLabel.text = TDLocalizeSelect(@"STUDENT_COMMENT", nil);
     [self.rightButton setTitle:TDLocalizeSelect(@"SUBMIT", nil) forState:UIControlStateNormal];
+    self.rightButton.hidden = NO;
     WS(weakSelf);
     self.rightButtonHandle = ^{
         [weakSelf handinComment];

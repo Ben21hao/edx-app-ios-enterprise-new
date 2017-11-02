@@ -24,8 +24,8 @@
 #define URL_EXTENSION_VIDEOS @".mp4"
 #define URL_EXCHANGE_TOKEN @"/oauth2/exchange_access_token/{backend}/"
 #define URL_USER_DETAILS @"/api/mobile/v0.5/users"
-#define URL_COURSE_ENROLLMENTS @"/course_enrollments/"
-#define URL_VIDEO_SUMMARY @"/api/mobile/v0.5/video_outlines/courses/"
+#define URL_COURSE_ENROLLMENTS @"/course_enrollments/" //已下载课程
+#define URL_VIDEO_SUMMARY @"/api/mobile/v0.5/video_outlines/courses/" //课件列表summary
 #define URL_COURSE_HANDOUTS @"/handouts" //资料
 #define URL_COURSE_ANNOUNCEMENTS @"/updates" //公告
 #define URL_RESET_PASSWORD  @"/password_reset/" //通过Email找回密码接口
