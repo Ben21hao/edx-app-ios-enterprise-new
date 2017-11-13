@@ -34,8 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)downloadInBackground:(NSURL*)url;
 + (void)clearNetworkManager;
-- (void)invalidateNetworkManager;
-- (void)activate;
+- (void)invalidateNetworkManager; //删除 session
+- (void)activate; //初始化 session
 
 - (void)callAuthorizedWebServiceWithURLPath:(NSString*)urlPath method:(NSString*)method body:(NSData*)body completionHandler:(void (^)(NSData* data, NSURLResponse* response, NSError* error))completionHandle;
 

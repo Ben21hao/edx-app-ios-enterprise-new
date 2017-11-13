@@ -11,4 +11,9 @@
 
 @interface TDFindCourseViewController : TDPageingViewController
 
+- (instancetype)initWithUserName:(NSString *)username companyId:(NSString *)companyId;
+
+@property (nonatomic,strong) NSString *username;
+@property (nonatomic,strong) NSString *company_id;
+
 @end

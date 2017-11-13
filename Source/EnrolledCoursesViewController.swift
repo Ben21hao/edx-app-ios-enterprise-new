@@ -40,7 +40,7 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        LanguageChangeTool.initUserLanguage()//语言
+//        LanguageChangeTool.initUserLanguage()//语言
         TDNotificationCenter().addObserver(self, selector: #selector(LanguageChangeAction), name: "languageSelectedChange", object: nil)
         
         LanguageChangeAction()

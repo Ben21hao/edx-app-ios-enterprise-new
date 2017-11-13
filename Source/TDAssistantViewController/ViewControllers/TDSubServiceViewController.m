@@ -24,6 +24,8 @@
 
 @interface TDSubServiceViewController () <UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 
+@property (nonatomic,strong) AFHTTPSessionManager *manager;
+
 @property (nonatomic,strong) NSMutableArray *dataArray;
 @property (nonatomic,strong) NSMutableArray *tagsArray;
 @property (nonatomic,assign) NSInteger page;
@@ -57,6 +59,7 @@
     
     self.page = 1;
     self.toolModel = [[TDBaseToolModel alloc] init];
+    self.manager = [AFHTTPSessionManager manager];
     self.tableView.scrollsToTop = NO;
     
     NSString *title = TDLocalizeSelect(@"TA_PENDING", nil);
@@ -149,7 +152,7 @@
     if (![self.toolModel networkingState]) {
         
         self.tableView.mj_header.hidden = YES;
-        [self showNullData];
+        [self showOrHidNoDataLabel];
         return;
     }
     
@@ -165,8 +168,7 @@
     [dic setValue:self.company_id forKey:@"company_id"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/assistantserver/%@",ELITEU_URL,self.username];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"助教服务 -- %@",responseObject);
         
         if (self.page == 1) {
@@ -213,12 +215,12 @@
             [self endTableviewRefreshing];
             NSLog(@"助教服务数据请求错误 -- %@ -->> %@",code,responseDic[@"msg"]);
         }
-        [self showNullData];
+        [self showOrHidNoDataLabel];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         
-        [self showNullData];
+        [self showOrHidNoDataLabel];
         
         NSLog(@"助教服务数据出错 -- %ld",(long)error.code);
     }];
@@ -229,8 +231,7 @@
     
     if (![self.toolModel networkingState]) {
         self.tableView.mj_header.hidden = YES;
-        [self showNullData];
-        self.loadingView.hidden = YES;
+        [self showOrHidNoDataLabel];
         return;
     }
     
@@ -246,8 +247,7 @@
     [dic setValue:self.company_id forKey:@"company_id"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/assistantserverfinshed/%@",ELITEU_URL,self.username];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 //        NSLog(@"已完成的助教服务 -- %@",responseObject);
         
         if (self.page == 1) {
@@ -305,18 +305,18 @@
             NSLog(@"已完成的助教服务数据请求错误 -- %@ -->> %@",code,responseDic[@"msg"]);
         }
         
-        [self showNullData];
+        [self showOrHidNoDataLabel];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
 
-        [self showNullData];
+        [self showOrHidNoDataLabel];
         
         NSLog(@"已完成的助教服务数据出错 -- %ld",(long)error.code);
     }];
 }
 
-- (void)showNullData {
+- (void)showOrHidNoDataLabel {
     
     self.loadingView.hidden = YES;
     
@@ -569,8 +569,7 @@
     [dic setValue:model.id forKey:@"id"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/assistantservers/cancelorder/",ELITEU_URL];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager POST:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager POST:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSLog(@"取消订单 -- %@",responseObject);
         NSDictionary *responseDic = (NSDictionary *)responseObject;
@@ -648,8 +647,7 @@
     [dic setValue:orderId forKey:@"id"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/getcourseroomkey/",ELITEU_URL];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"获取classroom密码 -- %@",responseObject);
         
         NSDictionary *responseDic = (NSDictionary *)responseObject;

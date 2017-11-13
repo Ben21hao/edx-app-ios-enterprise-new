@@ -16,4 +16,6 @@
 @property (nonatomic,strong) TDBaseScrollView *contentView;
 @property (nonatomic,strong) NSMutableArray *titleButtons;
 
+- (void)setSubTitleConstraint; //子标题的布局
+
 @end

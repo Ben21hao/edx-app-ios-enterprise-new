@@ -9,6 +9,7 @@
 #import "TDPageingViewController.h"
 
 #define TITLEVIEW_HEIGHT 45
+#define TITLTE_BUTTON_WIDTH TDWidth / self.titleButtons.count
 
 @interface TDPageingViewController () <UIScrollViewDelegate,UIGestureRecognizerDelegate>
 
@@ -41,12 +42,13 @@
     [self setViewConstraint];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
+- (void)setSubTitleConstraint {
     [self setUpSubtitleButton]; //设置标题
     [self setSepView];    //添加分割线
-    [self setSliView];    //设置指示view
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 #pragma mark - UI
@@ -105,44 +107,25 @@
     self.sepView.backgroundColor = [UIColor colorWithHexString:colorHexStr6];
     self.sepView.frame = CGRectMake(0, y, TDWidth, 1);
     [self.view addSubview:self.sepView];
-}
-
-//设置指示view
-- (void)setSliView {
     
-    CGFloat x = TDWidth / self.titleButtons.count;
-    for (int i = 0; i < self.titleButtons.count; i++) {
-        
-        UIView *sliV = [[UIView alloc] init];
-        sliV.hidden = YES;
-        sliV.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
-        sliV.tag = i;
-        sliV.frame = CGRectMake(x * i, -1, x, 2);
-        
-        [self.sepView addSubview:sliV];
-        
-        if (i == 0) {
-            [self selView:i];
-        }
-    }
-}
-
-- (void)selView:(NSInteger)i {
-    
-    UIView *vc = self.sepView.subviews[i];
-    self.selectView.hidden = YES;
-    vc.hidden = NO;
-    self.selectView = vc;
+    self.selectView = [[UIView alloc] init];
+    self.selectView.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
+    self.selectView.frame = CGRectMake(0, -1, TITLTE_BUTTON_WIDTH, 2);
+    [self.sepView addSubview:self.selectView];
 }
 
 #pragma mark - 选中
-- (void)btnClick:(UIButton *)btn {
+- (void)btnClick:(UIButton *)sender {
     
-    [self selectButton:btn]; //让选中的标题颜色变蓝色
-    [self setUpChildViewController:btn.tag];//把对应的子控制器添加上去
+    [self dealWithButton:sender];
     
-    CGFloat x = btn.tag * TDWidth; //滚动到对应位置
+    CGFloat x = sender.tag * TDWidth; //滚动到对应位置
     self.contentView.contentOffset = CGPointMake(x, 0);
+}
+
+- (void)dealWithButton:(UIButton *)sender { //处理头部view
+    [self selectButton:sender]; //让选中的标题颜色变蓝色
+    [self setUpChildViewController:sender.tag];//把对应的子控制器添加上去
 }
 
 #pragma mark - 选中按钮
@@ -153,13 +136,15 @@
         NSString *colorStr = i == sender.tag ? colorHexStr1 : colorHexStr9;
         [button setTitleColor:[UIColor colorWithHexString:colorStr] forState:UIControlStateNormal];
     }
-    [self setSliView];
+    
+    WS(weakSelf);
+    [UIView animateWithDuration:0.5 animations:^{
+        weakSelf.selectView.frame = CGRectMake(TITLTE_BUTTON_WIDTH * sender.tag, -1, TITLTE_BUTTON_WIDTH, 2); //处理指示线的位置
+    }];
 }
 
 /* 添加对应的子控制器 */
 - (void)setUpChildViewController:(NSInteger)index {
-    
-    [self selView:index];
     
     UIViewController *vc = self.childVcArray[index];
     if (vc.view.superview) {
@@ -174,9 +159,16 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
     NSInteger page = scrollView.contentOffset.x / TDWidth;
-    UIButton *selButton = self.titleButtons[page];
-    [self selectButton:selButton];
-    [self setUpChildViewController:page];//添加子控制器的view
+    UIButton *seleButton = self.titleButtons[page];
+    
+    [self dealWithButton:seleButton];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    WS(weakSelf);
+    [UIView animateWithDuration:0.5 animations:^{
+        weakSelf.selectView.frame = CGRectMake(scrollView.contentOffset.x / 3, -1, TITLTE_BUTTON_WIDTH, 2);//处理指示线的位置
+    }];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {

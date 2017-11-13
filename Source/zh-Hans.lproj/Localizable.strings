@@ -1771,5 +1771,5 @@
 "REFRESHING_SUCESS_TEXT" = "刷新成功";
 /*刷新失败 Refresh failed*/
 "REFRESHING_FAILED_TEXT" = "刷新失败";
-/*加入失败 /*加入失败 Failed to add course*/*/
+/*加入失败 /*加入失败 Failed to add course*/
 "ADD_FAILED_TEXT" = "加入失败";

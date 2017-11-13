@@ -247,6 +247,7 @@ static OEXDBManager* _sharedManager = nil;
 #pragma mark - ResourceData Method
 
 - (void)updateData:(NSData*)data ForURLString:(NSString*)URLString {
+    
     //File path
     NSString* filePath = [OEXFileUtility filePathForRequestKey:URLString];
     //check if file already exists, delete it
@@ -342,7 +343,8 @@ static OEXDBManager* _sharedManager = nil;
     return [resourceData.downloadState intValue];
 }
 
-- (NSData *)dataForURLString:(NSString*)URLString {
+- (NSData *)dataForURLString:(NSString*)URLString { //从缓存中取出数据
+    
     NSString* filePath = [OEXFileUtility filePathForRequestKey:URLString];
 
     if([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {

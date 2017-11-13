@@ -11,8 +11,8 @@
 
 typedef NS_ENUM (NSUInteger, OEXDownloadState) {
     OEXDownloadStateNew = 0,
-    OEXDownloadStatePartial,
-    OEXDownloadStateComplete,
+    OEXDownloadStatePartial, //正在下载
+    OEXDownloadStateComplete, //下载完成
 };
 
 typedef NS_ENUM (NSUInteger, OEXPlayedState) {
@@ -123,11 +123,21 @@ typedef NS_ENUM(NSUInteger, OEXVideoSpeed) {
 #define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
 
-#define IS_IOS8 [[[UIDevice currentDevice] systemVersion] integerValue] >= 8
+#define IS_IOS8 [[[UIDevice currentDevice] systemVersion] integerValue] >= 8  //系统版本号
 
+//屏幕高度，判断是什么系统
 #define IS_IPHONE_4 ( [ [ UIScreen mainScreen ] bounds ].size.height == 480 )
 #define IS_IPHONE_5 ( [ [ UIScreen mainScreen ] bounds ].size.height == 568 )
 #define IS_IPHONE_6 ( [ [ UIScreen mainScreen ] bounds ].size.height == 667 )
 #define IS_IPHONE_6_PLUS ( [ [ UIScreen mainScreen ] bounds ].size.height == 736 )
 
+//接口汇总
+#define TD_FIND_COURSE_URL @"/api/mobile/enterprise/v0.5/getcoursesubject/"
+#define TD_SORT_COURSE_URL @"/api/mobile/enterprise/v0.5/getsubjectcourses/"
+
+
+
 #endif
+
+
+

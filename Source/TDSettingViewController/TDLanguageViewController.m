@@ -81,7 +81,7 @@
         //更新本地的缓存
         OEXSession* session = [OEXSession sharedSession];
         OEXUserDetails* userDetails = [[OEXUserDetails alloc] initWithUserDictionary:dic];
-        [[OEXSession sharedSession] saveAccessToken:session.token userDetails:userDetails];//保存登录信息
+        [session saveAccessToken:session.token userDetails:userDetails];//保存登录信息
         
         NSLog(@"更新语言 ---->>>> %@ ---- %@",respondDic[@"language"],userDetails);
         [SVProgressHUD dismiss];

@@ -12,8 +12,8 @@
 //NSNotification center constants
 #define DOWNLOAD_PROGRESS_NOTIFICATION @"downloadProgressNotification"
 #define DOWNLOAD_PROGRESS_NOTIFICATION_TASK @"downloadProgressNotificationTask"
-#define DOWNLOAD_PROGRESS_NOTIFICATION_TOTAL_BYTES_WRITTEN @"downloadProgressNotificationTotalBytesWritten"
-#define DOWNLOAD_PROGRESS_NOTIFICATION_TOTAL_BYTES_TO_WRITE @"downloadProgressNotificationTotalBytesToWrite"
+#define DOWNLOAD_PROGRESS_NOTIFICATION_TOTAL_BYTES_WRITTEN @"downloadProgressNotificationTotalBytesWritten"  //已下载的长度
+#define DOWNLOAD_PROGRESS_NOTIFICATION_TOTAL_BYTES_TO_WRITE @"downloadProgressNotificationTotalBytesToWrite"//下载总长度
 
 #define REQUEST_USER_DETAILS @"User details"
 #define REQUEST_COURSE_ENROLLMENTS @"Courses user has enrolled in"

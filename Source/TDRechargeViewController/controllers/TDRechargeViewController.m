@@ -38,6 +38,7 @@
 @property (nonatomic,strong) NSString *orderId; //订单ID
 
 @property (nonatomic,strong) TDBaseToolModel *baseTool;
+@property (nonatomic,strong) AFHTTPSessionManager *manager;
 @property (nonatomic,assign) BOOL isHidePurchase; //是否隐藏内购
 
 @property (nonatomic,strong) PurchaseManager *purchaseManager;//内购工具类
@@ -63,6 +64,7 @@
     [super viewDidLoad];
     
     self.isRecharge = NO;
+    self.manager = [AFHTTPSessionManager manager];
     
     [self getRechargeData];
 
@@ -176,12 +178,11 @@
     
     [self setLoadDataView];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"username"] = self.username;
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/finance/give_coin/",ELITEU_URL];
     
-    [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [self.loadIngView removeFromSuperview];
         
@@ -308,7 +309,6 @@
     
     [self.rechargeView.activityView startAnimating];
     self.view.userInteractionEnabled = NO;
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:self.username forKey:@"username"];
@@ -326,7 +326,7 @@
     }
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/finance/generate_prepaid_order_and_pay/",ELITEU_URL];
-    [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         self.view.userInteractionEnabled = YES;
         
@@ -563,7 +563,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

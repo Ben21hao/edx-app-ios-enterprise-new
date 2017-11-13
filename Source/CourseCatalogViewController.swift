@@ -62,7 +62,7 @@ class CourseCatalogViewController: UIViewController, CoursesTableViewControllerD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        LanguageChangeTool.initUserLanguage() //语言
+//        LanguageChangeTool.initUserLanguage() //语言
         
         self.view.accessibilityIdentifier = "course-catalog-screen";
         self.view.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()

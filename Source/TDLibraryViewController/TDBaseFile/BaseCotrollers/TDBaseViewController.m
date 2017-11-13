@@ -21,7 +21,7 @@
     [self setLeftNavigationBar];
     [self setRightNavigationBar];
 
-    [LanguageChangeTool initUserLanguage];//初始化应用语言
+//    [LanguageChangeTool initUserLanguage];//初始化应用语言
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChangeAction) name:@"languageSelectedChange" object:nil];
 }
 
@@ -139,8 +139,8 @@
     animate.keyTimes = timeArr;
     animate.values = directArr;
     
-    animate.repeatCount = 88;
-    animate.duration = 0.6;
+    animate.repeatCount = 188;
+    animate.duration = 0.8;
     animate.additive = YES;
     animate.calculationMode = kCAAnimationDiscrete;
     animate.beginTime = [self.view.layer convertTime:0 toLayer:self.view.layer];

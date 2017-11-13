@@ -84,7 +84,7 @@
     return obj_userdetails;
 }
 
-- (NSArray *)userCourseEnrollmentsWithData:(NSData*)receivedData {
+- (NSArray *)userCourseEnrollmentsWithData:(NSData*)receivedData { //返回我的课程数组
     
     NSError* error;
     NSArray* arrResponse = [NSJSONSerialization oex_JSONObjectWithData:receivedData error:&error];
@@ -98,8 +98,7 @@
         NSDictionary* dictResponse = [dict oex_replaceNullsWithEmptyStrings];
 
         UserCourseEnrollment* usercoruse = [[UserCourseEnrollment alloc] initWithDictionary:dictResponse];
-
-        NSLog(@"OEXDataParser ---->> %d",usercoruse.isActive);
+        
         // array populated with objects and returned
         if (usercoruse.isActive) {
             [arr_CourseEnrollmentObjetcs addObject:usercoruse];
@@ -120,6 +119,7 @@
         }
         NSDictionary* dictResponse = [dict oex_replaceNullsWithEmptyStrings]; //剔除空的字典
         OEXVideoSummary* summaryList = [[OEXVideoSummary alloc] initWithDictionary:dictResponse]; //课程summarry
+        
         if(summaryList.chapterPathEntry.entryID != nil && summaryList.sectionPathEntry.entryID != nil) {
             [arrSummary addObject:summaryList];
         }

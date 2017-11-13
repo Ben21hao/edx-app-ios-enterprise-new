@@ -114,6 +114,7 @@ extension OEXRouter {
         return controllerForBlockWithID(block.blockID, type: block.displayType, courseID: courseID) //.HTML(.Base)
     }
     
+    //我的课程
     @objc(showMyCoursesAnimated:pushingCourseWithID:) func showMyCourses(animated animated: Bool = true, pushingCourseWithID courseID: String? = nil) {
         let controller = EnrolledCoursesViewController(environment: self.environment)
         showContentStackWithRootController(controller, animated: animated)
@@ -231,7 +232,7 @@ extension OEXRouter {
             controller = OEXFindCoursesViewController(bottomBar: bottomBar)
         case .Native, .None:
 //            controller = CourseCatalogViewController(environment: self.environment)
-            controller = TDFindCourseViewController()
+            controller = TDFindCourseViewController.init(userName: self.environment.session.currentUser?.username, companyId: self.environment.session.currentUser?.company_id)
         }
         if revealController != nil {
             showContentStackWithRootController(controller, animated: true)
@@ -262,7 +263,8 @@ extension OEXRouter {
         presentViewController(navController, fromController:nil, completion: nil)
     }
 
-    func showCourseCatalogDetail(courseModel: OEXCourse, fromController: UIViewController) {
+    //课程详情 @objc()是为了桥接到 oc ，使用时，记得导入 edX-Swift.h 头文件
+    @objc(showCourseCatalogDetailCourseModel: fromController:) func showCourseCatalogDetail(courseModel: OEXCourse, fromController: UIViewController) {
         
         let detailController = TDCourseCatalogDetailViewController(environment: environment, courseModel: courseModel)
         fromController.navigationController?.pushViewController(detailController, animated: true)

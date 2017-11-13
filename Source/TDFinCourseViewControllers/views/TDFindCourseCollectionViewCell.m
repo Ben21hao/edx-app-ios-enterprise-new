@@ -51,8 +51,8 @@
         make.top.mas_equalTo(self.courseImage.mas_bottom).offset(8);
     }];
     
-    self.courseImage.image = [UIImage imageNamed:@"Group_Live"];
-    self.titleLabel.text = @"这是英荔教育的精心准备的课程，好好学习天天向上";
+    self.courseImage.image = [UIImage imageNamed:@"course_backGroud"];
+    self.titleLabel.text = @"课程";
 }
 
 @end

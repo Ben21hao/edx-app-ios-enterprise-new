@@ -296,9 +296,10 @@ static NSString* const OEXUserDetailsCompanyDomainNameKey = @"domain_name";//公
         return nil;
     }
 
-    //NSPropertyListSerialization 数据持久化数组或字典
+    
     NSError* error = nil;
-    NSData* data = [NSPropertyListSerialization dataWithPropertyList:dict format:NSPropertyListXMLFormat_v1_0 options:0 error:&error];//缓存
+    //NSPropertyListSerialization 将数组或字典转为 data
+    NSData* data = [NSPropertyListSerialization dataWithPropertyList:dict format:NSPropertyListXMLFormat_v1_0 options:0 error:&error];
     NSAssert(error == nil, @"UserDetails error => %@ ", [error description]);
     return data;
 }

@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TDSortCourseViewController : UIViewController
+@interface TDSortCourseViewController : TDBaseViewController
+
+@property (nonatomic,strong) NSString *company_id;
+@property (nonatomic,strong) NSString *username;
 
 @end

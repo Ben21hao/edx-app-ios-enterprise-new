@@ -54,7 +54,7 @@ class OEXRearTableViewController : UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        LanguageChangeTool.initUserLanguage()
+//        LanguageChangeTool.initUserLanguage()
         TDNotificationCenter().addObserver(self, selector: #selector(LanguageChangeAction), name: "languageSelectedChange", object: nil)
         
         setupProfileLoader()

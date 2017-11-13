@@ -79,7 +79,7 @@ OEXRegistrationViewControllerDelegate
     window.tintColor = [self.environment.styles primaryBaseColor];
     
     OEXUserDetails* currentUser = self.environment.session.currentUser;
-    if(currentUser == nil) {
+    if(currentUser == nil) { //没登录
         [self showSplash];
     } else {
         [self showLoggedInContent];
@@ -113,7 +113,7 @@ OEXRegistrationViewControllerDelegate
     
     self.revealController = [self.mainStoryboard instantiateViewControllerWithIdentifier:@"SideNavigationContainer"];
     self.revealController.delegate = self.revealController;
-    [self showMyCoursesAnimated:NO pushingCourseWithID:nil];
+    [self showMyCoursesAnimated:NO pushingCourseWithID:nil]; //显示我的课程界面
     
     UIViewController* rearController = [self.mainStoryboard instantiateViewControllerWithIdentifier:@"RearViewController"];
     [self.revealController setDrawerViewController:rearController animated:NO];

@@ -163,7 +163,7 @@
         if (self.courseDetailHandle && courseModel) {
             self.courseDetailHandle(courseModel);
         }
-        NSLog(@"获取试听课程详情 -- %@ -->> %@",responseDic,courseModel.trial_expire_at);
+//        NSLog(@"获取试听课程详情 -- %@ -->> %@",responseDic,courseModel.trial_expire_at);
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (self.requestErrorHandle) {
@@ -266,7 +266,7 @@
             [[NSUserDefaults standardUserDefaults] setValue:courseID forKey:@"Free_Course_CourseID"];
             [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:@"Free_Course_Has_Add"];
             
-            NSLog(@"加入试听课程的结果 ---  %ld -->> %@ - 目录 %@",(long)enrollment.trial_seconds,enrollment.trial_expire_at,enrollment.course.video_outline);
+//            NSLog(@"加入试听课程的结果 ---  %ld -->> %@ - 目录 %@",(long)enrollment.trial_seconds,enrollment.trial_expire_at,enrollment.course.video_outline);
             
         } else {
             

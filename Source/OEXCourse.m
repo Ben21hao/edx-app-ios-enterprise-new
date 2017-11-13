@@ -148,7 +148,7 @@ NSString* NSStringForOEXStartType(OEXStartType type) {
         self.trial_expire_at = [info objectForKey:@"trial_expire_at"];
         self.trial_seconds = [info objectForKey:@"trial_seconds"];
         
-        NSDictionary* mediaInfo = OEXSafeCastAsClass(info[@"media"], NSDictionary);
+        NSDictionary* mediaInfo = OEXSafeCastAsClass(info[@"media"], NSDictionary); //课程图片的信息
         
         NSMutableDictionary<NSString*, CourseMediaInfo*>* parsedMediaInfo = [[NSMutableDictionary alloc] init];
         [mediaInfo enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
@@ -159,7 +159,7 @@ NSString* NSStringForOEXStartType(OEXStartType type) {
         }];
         self.mediaInfo = parsedMediaInfo;
         
-        NSLog(@"OEXCourse -- 课程详情 ---->>> %@",info);
+//        NSLog(@"OEXCourse -- 课程详情 ---->>> %@",info);
 
     }
     return self;

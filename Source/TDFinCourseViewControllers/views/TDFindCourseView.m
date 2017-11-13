@@ -9,7 +9,12 @@
 #import "TDFindCourseView.h"
 #import "TDFindCourseCollectionViewCell.h"
 
+#import "OEXCourse.h"
+#import <UIImageView+WebCache.h>
+
 @interface TDFindCourseView () <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+
+@property (nonatomic,strong) TDBaseToolModel *toolModel;
 
 @end
 
@@ -19,22 +24,36 @@
     
     self = [super init];
     if (self) {
+        self.toolModel = [[TDBaseToolModel alloc] init];
         [self setViewConstraint];
     }
     return self;
 }
 
+- (void)setCourseArray:(NSArray *)courseArray {
+    _courseArray = courseArray;
+    [self.collectionView reloadData];
+}
+
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 3;
+    return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 5;
+    return self.courseArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    OEXCourse *courseModel = self.courseArray[indexPath.row];
+    NSString *imageStr = [self.toolModel dealwithImageStr:[NSString stringWithFormat:@"%@%@",ELITEU_URL,courseModel.courseImageURL]];
+    
+    
     TDFindCourseCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TDEliteCourseViewControllerCell" forIndexPath:indexPath];
+    cell.titleLabel.text = courseModel.name;
+    [cell.courseImage sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:@"course_backGroud"]];
+    
     return cell;
 }
 
@@ -87,6 +106,13 @@
 //    
 //    return headerView;
 //}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    
+    if (self.didSelectRow) {
+        self.didSelectRow(indexPath.row);
+    }
+}
 
 
 #pragma mark - UI
@@ -102,7 +128,7 @@
     self.collectionView.showsHorizontalScrollIndicator = NO;
     [self.collectionView registerClass:[TDFindCourseCollectionViewCell class] forCellWithReuseIdentifier:@"TDEliteCourseViewControllerCell"];
 //    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"UICollectionViewHeader"]; //注册头部视图
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.collectionView];
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {

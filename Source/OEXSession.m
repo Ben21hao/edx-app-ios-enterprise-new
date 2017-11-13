@@ -128,7 +128,7 @@ static NSString* OEXSessionClearedCache = @"OEXSessionClearedCache";
 }
 
 - (void)clearDeprecatedSessionTokenIfNecessary {
-    if(self.token.isDeprecatedSessionToken) {
+    if(self.token.isDeprecatedSessionToken) { //token长度为零
         [self closeAndClearSession];
     }
 }

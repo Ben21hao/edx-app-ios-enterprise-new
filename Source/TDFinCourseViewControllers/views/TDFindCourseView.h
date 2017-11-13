@@ -11,5 +11,8 @@
 @interface TDFindCourseView : UIView
 
 @property (nonatomic,strong) UICollectionView *collectionView;
+@property (nonatomic,strong) NSArray *courseArray;
+
+@property (nonatomic,copy) void(^didSelectRow)(NSInteger rowIndex);
 
 @end

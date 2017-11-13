@@ -28,6 +28,8 @@
 
 @interface TDWaitforPayViewController () <UITableViewDelegate,UITableViewDataSource>
 
+@property (nonatomic,strong) AFHTTPSessionManager *manager;
+
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) TDPaySheetView *sheetView;
 @property (nonatomic,strong) UILabel *nullLabel;
@@ -62,6 +64,7 @@
     self.titleViewLabel.text = TDLocalizeSelect(@"PREPARE_PAY", nil);
     
     self.baseTool = [[TDBaseToolModel alloc] init];
+    self.manager = [AFHTTPSessionManager manager];
     self.returnWay = 0;
     self.isInstallWechat = [WXApi isWXAppInstalled];
     self.payType = self.isInstallWechat ? 1 : 2;
@@ -103,12 +106,11 @@
         return;
     }
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:self.username forKey:@"username"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/get_wait_order_list/",ELITEU_URL];
-    [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *responseDic = (NSDictionary *)responseObject;
         id code = responseDic[@"code"];
@@ -175,14 +177,12 @@
             self.returnWay = 1;
         }
     }
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"username"] = _username;
     params[@"order_id"] = orderID;
     
     NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/cancel_wait_order/",ELITEU_URL];
-    [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSString *code = responseObject[@"code"];
         if ([code intValue] == 200){
@@ -277,8 +277,7 @@
 
     NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/get_pay_course_info/",ELITEU_URL];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager POST:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager POST:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *responseDic = (NSDictionary *)responseObject;
         id code = responseDic[@"code"];

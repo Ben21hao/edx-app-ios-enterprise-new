@@ -111,6 +111,7 @@
 #pragma mark - NetworkDelegate
 
 - (void)receivedData:(NSData*)data forTask:(NSURLSessionTask*)task {
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [_delegate returnedData:data forType:[self descriptionForURLString:task.originalRequest.URL.absoluteString]];
     });

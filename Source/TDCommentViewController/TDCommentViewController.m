@@ -57,7 +57,7 @@
     self.page = 1;
     self.selectedButton = [[UIButton alloc] init];
     
-    [self setLoadDataView]; //下载页面
+    [self setLoadDataView]; //加载页面
     
     [self requestTopData]; //获取数据
 }

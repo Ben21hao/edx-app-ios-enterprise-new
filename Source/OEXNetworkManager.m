@@ -74,13 +74,14 @@ static OEXNetworkManager* _sharedManager = nil;
 }
 
 - (void)downloadInBackground:(NSURL*)url {
+    
     if([OEXInterface isURLForVideo:url.absoluteString]) {
         return;
     }
     [self checkIfURLUnderProcess:url];
 }
 
-#pragma mark Functions
+#pragma mark - Functions
 - (void)URLAlreadyUnderProcess:(NSURL*)URL {
     [_delegate downloadAlreadyExistsForURL:URL];
 }
@@ -106,8 +107,8 @@ static OEXNetworkManager* _sharedManager = nil;
 }
 
 - (void)checkIfURLUnderProcess:(NSURL*)url {
-    //Check if null
-    if(!url || [url.absoluteString isEqualToString:@""]) {
+    
+    if(!url || [url.absoluteString isEqualToString:@""]) { //Check if null
         return;
     }
 
@@ -143,7 +144,7 @@ static OEXNetworkManager* _sharedManager = nil;
 #pragma mark Helpers
 
 - (NSURLSession*)sessionForRequest:(NSURL*)URL {
-    if([OEXInterface isURLForedXDomain:URL.absoluteString]) {
+    if([OEXInterface isURLForedXDomain:URL.absoluteString]) { //是否含有 Eliteu 的域名
         return _backgroundSession;
     }
     else {
@@ -167,14 +168,16 @@ static OEXNetworkManager* _sharedManager = nil;
     _sharedManager = nil;
 }
 
-- (void)invalidateNetworkManager {
+- (void)invalidateNetworkManager {//删除 session
+    
     [self.backgroundSession invalidateAndCancel];
     [self.foregroundSession invalidateAndCancel];
+    
     self.backgroundSession = nil;
     self.foregroundSession = nil;
 }
 
-- (void)activate {
+- (void)activate { //初始化 session
     [self initBackgroundSession];
     [self initForegroundSession];
 }
@@ -200,18 +203,19 @@ static OEXNetworkManager* _sharedManager = nil;
     }
 }
 
-#pragma mark NSURLSessionDownload delegate methods
-
-- (void)           URLSession:(NSURLSession*)session
-                 downloadTask:(NSURLSessionDownloadTask*)downloadTask
-    didFinishDownloadingToURL:(NSURL*)location {
+#pragma mark - NSURLSessionDownloadDelegate
+//下载完成
+- (void)URLSession:(NSURLSession*)session downloadTask:(NSURLSessionDownloadTask*)downloadTask didFinishDownloadingToURL:(NSURL*)location {
+    
     if(![self isValidSession:session]) {
         return;
     }
 
     NSData* data = [NSData dataWithContentsOfURL:location];
     NSString* fileUrl = [OEXFileUtility filePathForRequestKey:[downloadTask.originalRequest.URL absoluteString]];
-
+    
+    NSLog(@"NSURLSessionDownload 接收服务器数据------------->>>>  %@",[downloadTask.originalRequest.URL absoluteString]);
+    
     //Write data in main thread
     dispatch_async(dispatch_get_main_queue(), ^{
         if(fileUrl) {
@@ -220,13 +224,12 @@ static OEXNetworkManager* _sharedManager = nil;
                 [[NSNotificationCenter defaultCenter] postNotificationName:DL_COMPLETE
                                                                     object:self
                                                                   userInfo:@{DL_COMPLETE_N_TASK: downloadTask}];
+                
                 OEXLogInfo(@"NETWORK", @"Resource DATA SAVED : %@", [downloadTask.originalRequest.URL absoluteString]);
-            }
-            else {
+            } else {
                 OEXLogInfo(@"NETWORK", @"Data not saved");
             }
-        }
-        else {
+        } else {
             OEXLogInfo(@"NETWORK", @"Data meta data not found, not saved.");
         }
     });
@@ -235,26 +238,28 @@ static OEXNetworkManager* _sharedManager = nil;
     [self invokeBackgroundSessionCompletionHandlerForSession:session];
 }
 
+// 可在这里通过已写入的长度和总长度算出下载进度
 - (void)           URLSession:(NSURLSession*)session downloadTask:(NSURLSessionDownloadTask*)downloadTask
                  didWriteData:(int64_t)bytesWritten
             totalBytesWritten:(int64_t)totalBytesWritten
     totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
 }
 
+// 断点续传的
 - (void)    URLSession:(NSURLSession*)session downloadTask:(NSURLSessionDownloadTask*)downloadTask
      didResumeAtOffset:(int64_t)fileOffset
     expectedTotalBytes:(int64_t)expectedTotalBytes {
 }
 
-#pragma mark NSURLSessionTaskDelegate methods
+#pragma mark - NSURLSessionTaskDelegate methods
 
-- (void)      URLSession:(NSURLSession*)session
-                    task:(NSURLSessionTask*)task
-    didCompleteWithError:(NSError*)error {
+// 任务完成调用
+- (void)URLSession:(NSURLSession*)session task:(NSURLSessionTask*)task didCompleteWithError:(NSError*)error {
+    
     if(![self isValidSession:session]) {
         return;
     }
-    if(error) {
+    if(error) { //任务出错
         [_delegate receivedFailureforTask:task];
     }
 }
@@ -262,6 +267,7 @@ static OEXNetworkManager* _sharedManager = nil;
 #pragma mark NSURLDataTask Delegate
 
 - (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler {
+    
     NSURLCredential* credential = [[OEXConfig sharedConfig] URLCredentialForHost:challenge.protectionSpace.host];
     if(credential != nil) {
         completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
@@ -271,9 +277,10 @@ static OEXNetworkManager* _sharedManager = nil;
     }
 }
 
-- (void)URLSession:(NSURLSession*)session dataTask:(NSURLSessionDataTask*)dataTask
-    didReceiveResponse:(NSURLResponse*)response
+- (void)URLSession:(NSURLSession*)session dataTask:(NSURLSessionDataTask*)dataTask didReceiveResponse:(NSURLResponse*)response
+
      completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler {
+    
     if(![self isValidSession:session]) {
         return;
     }
@@ -287,10 +294,11 @@ static OEXNetworkManager* _sharedManager = nil;
         return;
     }
 
-    completionHandler(NSURLSessionResponseAllow);
+    completionHandler(NSURLSessionResponseAllow); //允许处理服务器的响应
 }
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
+    
     if(![self isValidSession:session]) {
         return;
     }
@@ -315,6 +323,7 @@ static OEXNetworkManager* _sharedManager = nil;
     willPerformHTTPRedirection:(NSHTTPURLResponse*)redirectResponse
                     newRequest:(NSURLRequest*)request
              completionHandler:(void (^)(NSURLRequest*))completionHandler {
+    
     if(![self isValidSession:session]) {
         return;
     }
@@ -330,6 +339,7 @@ static OEXNetworkManager* _sharedManager = nil;
 }
 
 - (void)callAuthorizedWebServiceWithURLPath:(NSString*)urlPath method:(NSString*)method body:(NSData*)body completionHandler:(void (^)(NSData* data, NSURLResponse* response, NSError* error))completionHandle {
+    
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [OEXConfig sharedConfig].apiHostURL, urlPath]];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:url];
 

@@ -12,4 +12,6 @@
 
 @property (nonatomic,strong) NSArray *tagArray;
 
+@property (nonatomic,copy) void(^selectTagButtonHandle)(NSString *subject_id);
+
 @end

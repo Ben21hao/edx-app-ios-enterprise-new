@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [LanguageChangeTool initUserLanguage];//初始化应用语言
+//    [LanguageChangeTool initUserLanguage];//初始化应用语言
     [TDNotificationCenter addObserver:self selector:@selector(languageChangeAction) name:@"languageSelectedChange" object:nil];
     
     [self setTableViewConstraint];

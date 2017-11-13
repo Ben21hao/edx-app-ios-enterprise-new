@@ -33,11 +33,10 @@ NSString* const OEXVideoEncodingFallback = @"fallback";
         self.name = name;
         self.URL = dictionary[@"url"];
         NSNumber *size = dictionary[@"file_size"];
+//        NSNumber *size = [NSNumber numberWithInt:88888888];
         if (size > 0) {
             self.size = size;
         }
-        
-        NSLog(@" OEXVideoEncoding -- 视频的file_size  %@------>>>  %@",self.size,size);
     }
     
     return self;
@@ -52,7 +51,6 @@ NSString* const OEXVideoEncodingFallback = @"fallback";
         if (size > 0) {
             self.size = size;
         }
-        NSLog(@"OEXVideoEncoding -- 视频的size %@------>>>  %@",self.size,size);
     }
     return self;
 }

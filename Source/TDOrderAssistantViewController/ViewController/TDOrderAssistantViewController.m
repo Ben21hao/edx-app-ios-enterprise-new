@@ -23,6 +23,7 @@
 @property (nonatomic,strong) UITableView *tableView;
 
 @property (nonatomic,strong) TDBaseToolModel *baseTool;
+@property (nonatomic,strong) AFHTTPSessionManager *manager;
 @property (nonatomic,assign) NSInteger page;
 
 @property (nonatomic,strong) NSMutableArray *teacherArray;
@@ -51,6 +52,7 @@
     [self setViewConstraint];
     
     self.baseTool = [[TDBaseToolModel alloc] init];
+    self.manager = [AFHTTPSessionManager manager];
     self.is_public_course = YES; //默认是付费的
     
     [self pullDownRefresh]; //数据
@@ -97,8 +99,7 @@
     [dic setValue:self.company_id forKey:@"company_id"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/assistants/",ELITEU_URL];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         self.loadingView.hidden = YES;
         [self.tableView.mj_header endRefreshing];
@@ -235,8 +236,7 @@
     }
 
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/assistant/realtime_status/%@",ELITEU_URL,assitantName];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"查询助教状态 --- %@",responseObject);
         
         NSDictionary *responseDic = (NSDictionary *)responseObject;

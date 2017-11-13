@@ -35,6 +35,8 @@
 
 @interface TDSubmitCourseViewController () <UITableViewDelegate,UITableViewDataSource,JHCouponsAlertViewDelegate,UIAlertViewDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate>
 
+@property (nonatomic,strong) AFHTTPSessionManager *manager;
+
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) UILabel *moneyLabel;
 @property (nonatomic,strong) UIButton *backButton;
@@ -90,6 +92,7 @@
     [super viewDidLoad];
     
     self.baseTool = [[TDBaseToolModel alloc] init];
+    self.manager = [AFHTTPSessionManager manager];
     
     [self setLoadDataView];
     [self configData];
@@ -137,8 +140,7 @@
     if (![self.baseTool networkingState]) {
         return;
     }
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"username"] = _username;
     params[@"apply_amount"] = @(self.payMoney);
@@ -146,7 +148,7 @@
     
     NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/get_user_coupon_info/",ELITEU_URL];
     
-    [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         self.remain_score = responseObject[@"data"][@"remain_score"]; //剩余宝典
         self.score_rate = responseObject[@"data"][@"score_rate"]; //购买课程最多使用宝典的比率
@@ -238,8 +240,6 @@
 
 - (void)buyByCoinAction { //用宝典购买
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setValue:self.username forKey:@"username"];
     [dic setValue:self.courseIds forKey:@"course_ids"];
@@ -247,7 +247,7 @@
     [dic setValue:[NSString stringWithFormat:@"%.2lf",self.payMoney] forKey:@"total_amount"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/finance/buy_course_by_coin/",ELITEU_URL];
-    [manager POST:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager POST:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"success--payParams%@",responseObject);
         
         NSDictionary *responDic = (NSDictionary *)responseObject;
@@ -292,8 +292,6 @@
     SVProgressHUD.defaultMaskType = SVProgressHUDMaskTypeBlack;
     SVProgressHUD.defaultStyle = SVProgressHUDAnimationTypeNative;
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setValue:self.username forKey:@"username"];
     [dic setValue:self.activity_id forKey:@"activity_id"];
@@ -319,7 +317,7 @@
     
     WS(weakSelf);
     NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/generate_prepaid_order_and_pay_for_course/",ELITEU_URL];
-    [manager POST:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager POST:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *responDic = (NSDictionary *)responseObject;
         id code = responDic[@"code"];

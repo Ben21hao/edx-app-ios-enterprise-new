@@ -51,6 +51,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     TDDownloadCell *cell = [[TDDownloadCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDPlayerCell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     CourseCardView *infoView = cell.infoView;
     __typeof(self) owner = self;

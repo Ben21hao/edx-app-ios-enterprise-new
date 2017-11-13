@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Generate a simple stub video summary. Used only for testing
 - (id)initWithVideoID:(NSString*)videoID name:(NSString*)name encodings:(NSDictionary<NSString*, OEXVideoEncoding *> *)encodings;
 
-@property (readonly, nonatomic, copy, nullable) NSString* sectionURL;     // used for OPEN IN BROWSER
+@property (readonly, nonatomic, copy, nullable) NSString* sectionURL;     // 网页的学习页面，用于在浏览器中打开
 
 @property (readonly, strong, nonatomic, nullable) OEXVideoPathEntry* chapterPathEntry;
 @property (readonly, strong, nonatomic, nullable) OEXVideoPathEntry* sectionPathEntry;
@@ -37,15 +37,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly, nonatomic, copy, nullable) NSString* category;
 // This property is deprecated. We should be reading it from the CourseBlock itself
-@property (readonly, nonatomic, copy, nullable) NSString* name;
+@property (readonly, nonatomic, copy, nullable) NSString* name; //视频名字
 @property (readonly, nonatomic, copy, nullable) NSString* videoURL;
 @property (readonly, nonatomic, copy, nullable) NSString* videoThumbnailURL;
 // TODO: Make this readonly again, once we completely migrate to the new API
-@property (nonatomic, strong) NSString *duration;
+@property (nonatomic, strong) NSString *duration;  //视频的时长
 @property (readonly, nonatomic, copy, nullable) NSString* videoID;
 @property (readonly, nonatomic, copy, nullable) NSNumber* size;   // in bytes
-@property (readonly, nonatomic, copy, nullable) NSString* unitURL;
-@property (readonly, nonatomic, assign) BOOL onlyOnWeb;
+@property (readonly, nonatomic, copy, nullable) NSString* unitURL;  //单元URL
+
+@property (readonly, nonatomic, assign) BOOL onlyOnWeb; //是否只在网页显示
 @property (readonly, nonatomic, assign) BOOL isYoutubeVideo;
 @property (readonly, nonatomic, assign) BOOL isSupportedVideo;
 @property (nonatomic, strong) NSDictionary* encodings;
@@ -58,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 // pt - Portuguese
 // fr - French
 
-@property (readonly, nonatomic, strong, nullable) NSDictionary* transcripts;
+@property (readonly, nonatomic, strong, nullable) NSDictionary* transcripts; //字幕下载地址
 
 
 @end

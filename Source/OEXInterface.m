@@ -101,13 +101,16 @@ static OEXInterface* _sharedInterface = nil;
     //网络变化通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange:) name:kReachabilityChangedNotification object:nil];
     
-    
-    [[NSNotificationCenter defaultCenter] oex_addObserver:self notification:OEXSessionStartedNotification action:^(NSNotification *notification, OEXInterface* observer, id<OEXRemovable> removable) { //用户登录成功通知
+    //用户登录成功通知
+    [[NSNotificationCenter defaultCenter] oex_addObserver:self notification:OEXSessionStartedNotification action:^(NSNotification *notification, OEXInterface* observer, id<OEXRemovable> removable) {
+        
+        NSLog(@" ----------->>>>>>> 用户登录成功通知");
         
         OEXUserDetails* user = notification.userInfo[OEXSessionStartedUserDetailsKey];
         [observer activateInterfaceForUser:user]; //重新设置默认设置
     }];
     
+    //退出登录
     [[NSNotificationCenter defaultCenter] oex_addObserver:self notification:OEXSessionEndedNotification action:^(NSNotification * _Nonnull notification, id  _Nonnull observer, id<OEXRemovable>  _Nonnull removable) {
         
         [observer deactivate];
@@ -120,7 +123,9 @@ static OEXInterface* _sharedInterface = nil;
 
 - (void)backgroundInit { //course details
     
+    /* TODO: 这里只拿到需要支付的课程  */
     self.courses = [self parsedObjectWithData:[self resourceDataForURLString:[_network URLStringForType:URL_COURSE_ENROLLMENTS] downloadIfNotAvailable:NO] forURLString:[_network URLStringForType:URL_COURSE_ENROLLMENTS]];
+    
     
     for(UserCourseEnrollment* courseEnrollment in _courses) { //videos
         OEXCourse* course = courseEnrollment.course;
@@ -128,6 +133,8 @@ static OEXInterface* _sharedInterface = nil;
         NSString* courseVideoDetails = course.video_outline; //course subsection
         NSArray* array = [self videosOfCourseWithURLString:courseVideoDetails];
         [self setVideos:array forURL:course.video_outline];
+        
+        NSLog(@"backgroundInit 存入字典 %@ -------\n %@",course.video_outline,array);
     }
 
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
@@ -135,9 +142,10 @@ static OEXInterface* _sharedInterface = nil;
     }];
 }
 
-#pragma mark common methods
+#pragma mark - common methods
 
-- (OEXCourse *)courseWithID:(NSString *)courseID {
+- (OEXCourse *)courseWithID:(NSString *)courseID { //拿到对应 course_id 课程详细信息
+    
     for(UserCourseEnrollment* enrollment in self.courses) {
         if([enrollment.course.course_id isEqual:courseID]) {
             return enrollment.course;
@@ -157,7 +165,7 @@ static OEXInterface* _sharedInterface = nil;
         return [self.parser userDetailsWithData:data];
         
     } else if([URLString isEqualToString:[self URLStringForType:URL_COURSE_ENROLLMENTS]]) {
-        return [self.parser userCourseEnrollmentsWithData:data];
+        return [self.parser userCourseEnrollmentsWithData:data]; //返回我的课程数组
         
     } else if([URLString rangeOfString:URL_VIDEO_SUMMARY].location != NSNotFound) {
         return [self processVideoSummaryList:data URLString:URLString];
@@ -204,7 +212,7 @@ static OEXInterface* _sharedInterface = nil;
 }
 
 + (BOOL)isURLForedXDomain:(NSString *)URLString {
-    if([URLString rangeOfString:[OEXConfig sharedConfig].apiHostURL.absoluteString].location != NSNotFound) {
+    if([URLString rangeOfString:[OEXConfig sharedConfig].apiHostURL.absoluteString].location != NSNotFound) { //NSNotFound 判断是否含有 eliteu 的域名
         return YES;
     }
     return NO;
@@ -532,7 +540,7 @@ static OEXInterface* _sharedInterface = nil;
             OEXCourse* course = courseEnrollment.course;
 
             if([courseID isEqualToString:course.course_id]) {
-                for(OEXHelperVideoDownload* video in [_courseVideos objectForKey : course.video_outline]) {
+                for(OEXHelperVideoDownload* video in [self.courseVideos objectForKey : course.video_outline]) {
                     OEXLogInfo(@"LAST ACCESSED", @"video.subSectionID : %@", video.summary.sectionPathEntry.entryID);
                     OEXLogInfo(@"LAST ACCESSED", @"lastAccessed.subsection_id : %@ \n *********************\n", lastAccessed.subsection_id);
 
@@ -549,8 +557,7 @@ static OEXInterface* _sharedInterface = nil;
 
 #pragma mark Update Storage
 
-- (void)updateWithData:(NSData*)data
-      forRequestString:(NSString*)URLString {
+- (void)updateWithData:(NSData*)data forRequestString:(NSString*)URLString {
     [_storage updateData:data ForURLString:URLString];
 }
 
@@ -594,17 +601,20 @@ static OEXInterface* _sharedInterface = nil;
 
 #pragma mark - notification methods
 
-- (void)downloadCompleteNotification:(NSNotification*)notification { //下载结束
+- (void)downloadCompleteNotification:(NSNotification*)notification { //课件数据下载结束
     NSDictionary* dict = notification.userInfo;
 
     NSURLSessionTask* task = [dict objectForKey:DL_COMPLETE_N_TASK];
     NSURL* url = task.originalRequest.URL;
 
     NSData* data = [self resourceDataForURLString:url.absoluteString downloadIfNotAvailable:NO];
+    
+    NSLog(@"下载结束通知 ---------->>> %@",url);
+    
     [self returnedData:data forType:url.absoluteString];
 }
 
-- (void)videoDownloadComplete:(NSNotification*)notification {
+- (void)videoDownloadComplete:(NSNotification*)notification { //视频下载结束
     NSDictionary* dict = notification.userInfo;
     NSURLSessionTask* task = [dict objectForKey:OEXDownloadEndedNotification];
     NSURL* url = task.originalRequest.URL;
@@ -618,7 +628,7 @@ static OEXInterface* _sharedInterface = nil;
     NSDictionary* dictProgress = (NSDictionary*)notification.userInfo;
 
     NSURLSessionTask* task = [dictProgress objectForKey:DOWNLOAD_PROGRESS_NOTIFICATION_TASK];
-    NSString* url = [task.originalRequest.URL absoluteString];
+    NSString* url = [task.originalRequest.URL absoluteString]; //完整url
     double totalBytesWritten = [[dictProgress objectForKey:DOWNLOAD_PROGRESS_NOTIFICATION_TOTAL_BYTES_WRITTEN] doubleValue];
     double totalBytesExpectedToWrite = [[dictProgress objectForKey:DOWNLOAD_PROGRESS_NOTIFICATION_TOTAL_BYTES_TO_WRITE] doubleValue];
 
@@ -648,8 +658,8 @@ static OEXInterface* _sharedInterface = nil;
 #pragma mark - NetworkInterface Delegate
 - (void)returnedData:(NSData*)data forType:(NSString*)URLString {
     
-    [self updateWithData:data forRequestString:URLString]; //Update Storage 更新存储
-
+    [self updateWithData:data forRequestString:URLString]; //Update Storage 更新缓存
+    
     [self processData:data forType:URLString usingOfflineCache:NO]; //Parse and return 解析并返回
 }
 
@@ -659,6 +669,7 @@ static OEXInterface* _sharedInterface = nil;
         
     } else {
         NSData* data = [_storage dataForURLString:URLString]; //look for cached response 寻找缓存响应
+        
         if(data) {
             [self processData:data forType:URLString usingOfflineCache:YES];
             
@@ -738,6 +749,8 @@ static OEXInterface* _sharedInterface = nil;
         } else if([OEXInterface isURLForVideoOutline:URLString]) {  //video outlines populate videos
             NSArray* array = [self videosOfCourseWithURLString:URLString];
             [self setVideos:array forURL:URLString];
+            
+            NSLog(@"processData 存入字典 %@ -------\n %@",URLString,array);
         }
 
         //If not using common download mode
@@ -820,15 +833,11 @@ static OEXInterface* _sharedInterface = nil;
 
 - (void)addVideos:(NSArray *)videos forCourseWithID:(NSString *)courseID {
     
-//    for (OEXVideoSummary* summary in videos) {
-//        NSLog(@"OEXInterface -- 课程id ---->> %@ 视频大小  %@ --->>时长 %@",courseID,summary.size,summary.duration);
-//    }
-    
     NSMutableSet* knownVideoIDs = [[NSMutableSet alloc] init];
     NSMutableDictionary* videosMap = [[NSMutableDictionary alloc] init];
     
     OEXCourse* course = [self courseWithID:courseID];
-    NSMutableArray* videoDatas = [[_courseVideos objectForKey:course.video_outline] mutableCopy];
+    NSMutableArray* videoDatas = [[self.courseVideos objectForKey:course.video_outline] mutableCopy];
     
     if(videoDatas == nil) { //数组为空 we don't have any videos for this course yet ；so set it up
         
@@ -852,6 +861,9 @@ static OEXInterface* _sharedInterface = nil;
             helper.summary = summary;
             helper.filePath = [OEXFileUtility filePathForRequestKey:summary.videoURL];
             [videoDatas addObject:helper];
+            
+            NSLog(@"2 - 遍历 ----->>>  %@",summary.size);
+            
             return helper;
             
         } else {
@@ -869,6 +881,8 @@ static OEXInterface* _sharedInterface = nil;
         }
     }];
     
+    NSLog(@"addVideos 存入字典 %@ -------\n %@",course.video_outline,videoDatas);
+    
     [self.courseVideos safeSetObject:videoDatas forKey:course.video_outline];
     
     [self makeRecordsForVideos:videoHelpers inCourse:course];
@@ -876,17 +890,18 @@ static OEXInterface* _sharedInterface = nil;
 
 - (void)setVideos:(NSArray *)videos forURL:(NSString *)URLString {
     
+    [self.courseVideos safeSetObject:videos forKey:URLString]; //以 URLString 为 key，将视频数组存入字典中
+    
     OEXCourse* course = nil;
     
     for(UserCourseEnrollment* courseEnroll in self.courses) {
         OEXCourse* currentCourse = courseEnroll.course;
-        if([currentCourse.video_outline isEqualToString:URLString]) {
+        
+        if([currentCourse.video_outline isEqualToString:URLString]) { //我的课程数组中存在
             course = currentCourse;
             break;
         }
     }
-
-    [_courseVideos safeSetObject:videos forKey:URLString];
     
     [self makeRecordsForVideos:videos inCourse:course];
 }
@@ -894,7 +909,7 @@ static OEXInterface* _sharedInterface = nil;
 - (NSMutableArray *)videosForChapterID:(NSString *)chapter sectionID:(NSString *)section URL:(NSString *)URLString {
     
     NSMutableArray* array = [[NSMutableArray alloc] init];
-    for(OEXHelperVideoDownload* video in [_courseVideos objectForKey:URLString]) {
+    for(OEXHelperVideoDownload* video in [self.courseVideos objectForKey:URLString]) {
         
         if([video.summary.chapterPathEntry.entryID isEqualToString:chapter]) {
             if(section) {
@@ -910,7 +925,7 @@ static OEXInterface* _sharedInterface = nil;
     return array;
 }
 
-- (NSMutableArray *)coursesAndVideosForDownloadState:(OEXDownloadState)state {
+- (NSMutableArray *)coursesAndVideosForDownloadState:(OEXDownloadState)state { //获取对应下载状态的视频
     
     NSMutableArray* mainArray = [[NSMutableArray alloc] init];
 
@@ -920,19 +935,22 @@ static OEXInterface* _sharedInterface = nil;
         
         NSMutableArray* videosArray = [[NSMutableArray alloc] init];  //Videos array
 
-        for(OEXHelperVideoDownload* video in [_courseVideos objectForKey : course.video_outline]) {
+        for(OEXHelperVideoDownload* video in [self.courseVideos objectForKey : course.video_outline]) {
             
-            if(video.downloadState == OEXDownloadStateComplete && state == OEXDownloadStateComplete) {//Complete
+            if(video.downloadState == OEXDownloadStateComplete && state == OEXDownloadStateComplete) { //Complete 已下载
                 [videosArray addObject:video];
                 
-            } else if(video.downloadState == OEXDownloadStatePartial && video.downloadProgress < OEXMaxDownloadProgress && state == OEXDownloadStatePartial) {//Partial
+            } else if(video.downloadState == OEXDownloadStatePartial && video.downloadProgress < OEXMaxDownloadProgress && state == OEXDownloadStatePartial) { //Partial 下载中
                 [videosArray addObject:video];
                 
             } else if(video.downloadState == OEXDownloadStateNew && OEXDownloadStateNew) {
-//                [videosArray addObject:video];
+                //                [videosArray addObject:video];
             }
         }
 
+        NSLog(@"取出下载已字典 %@ -------\n %@ ",course.video_outline,self.courseVideos);
+        NSLog(@"已下载视频 ------------ %@ ",videosArray);
+        
         if(videosArray.count > 0) {
             NSDictionary* dict = @{CAV_KEY_COURSE:course,
                                    CAV_KEY_VIDEOS:videosArray};
@@ -949,7 +967,7 @@ static OEXInterface* _sharedInterface = nil;
     for(UserCourseEnrollment* courseEnrollment in _courses) {
         OEXCourse* course = courseEnrollment.course;
 
-        for(OEXHelperVideoDownload* video in [_courseVideos objectForKey:course.video_outline]) {
+        for(OEXHelperVideoDownload* video in [self.courseVideos objectForKey:course.video_outline]) {
             [mainArray addObject:video];
         }
     }
@@ -961,7 +979,7 @@ static OEXInterface* _sharedInterface = nil;
     for(UserCourseEnrollment* courseEnrollment in _courses) {
         OEXCourse* course = courseEnrollment.course;
 
-        for(OEXHelperVideoDownload* video in [_courseVideos objectForKey:course.video_outline]) {
+        for(OEXHelperVideoDownload* video in [self.courseVideos objectForKey:course.video_outline]) {
             if([video.summary.sectionPathEntry.entryID isEqualToString:subsectionID]) {
                 return video;
             }
@@ -978,7 +996,7 @@ static OEXInterface* _sharedInterface = nil;
     for(UserCourseEnrollment* courseEnrollment in _courses) {
         OEXCourse* course = courseEnrollment.course;
 
-        for(OEXHelperVideoDownload* video in [_courseVideos objectForKey : course.video_outline]) {
+        for(OEXHelperVideoDownload* video in [self.courseVideos objectForKey : course.video_outline]) {
             
             if((video.downloadProgress == OEXMaxDownloadProgress) && (state == OEXDownloadStateComplete)) {//Complete
                 [mainArray addObject:video];
@@ -1050,7 +1068,7 @@ static OEXInterface* _sharedInterface = nil;
 - (NSString *)openInBrowserLinkForCourse:(OEXCourse *)course {
     
     NSString* str_link = [[NSString alloc] init];
-    for(OEXVideoSummary* objVideo in [self.videoSummaries objectForKey : course.video_outline]) {
+    for(OEXVideoSummary* objVideo in [self.videoSummaries objectForKey:course.video_outline]) {
         str_link = objVideo.sectionURL;
     }
 
@@ -1213,8 +1231,9 @@ static OEXInterface* _sharedInterface = nil;
     // Right now they actually need to be in an array since that is
     // how we decide their order in the UI.
     // But once we switch to the new course structure endpoint, that will no longer be the case
+    
     OEXCourse* course = [self courseWithID:courseID];
-    for(OEXHelperVideoDownload* video in [self.courseVideos objectForKey:course.video_outline]) {
+    for(OEXHelperVideoDownload* video in [self.courseVideos objectForKey:course.video_outline]) { //通过 video_outline 拿到对应的视频
         if([video.summary.videoID isEqual:videoID]) {
             return video;
         }
@@ -1445,8 +1464,8 @@ static OEXInterface* _sharedInterface = nil;
     }
 }
 
-#pragma mark deactivate user interface
-- (void)deactivate {
+#pragma mark - deactivate user interface
+- (void)deactivate { //退出登陆后调用
     
     [OEXInterface setCCSelectedLanguage:@""]; // Set the language to blank 语言设置置空
     
@@ -1473,15 +1492,17 @@ static OEXInterface* _sharedInterface = nil;
 - (void)activateInterfaceForUser:(OEXUserDetails *)user { // Reset Default Settings 重新设置默认设置
     
     self.storage = [OEXStorageFactory getInstance];
-    self.network = [[OEXNetworkInterface alloc] init];
+    
     self.downloadManger = [OEXDownloadManager sharedManager];
-    self.parser = [[OEXDataParser alloc] init];
     self.downloadManger.delegate = self;
-    self.network.delegate = self;
+    
+    self.parser = [[OEXDataParser alloc] init];
+    
     self.commonDownloadProgress = -1;
     // Used for CC
     _sharedInterface.selectedCCIndex = -1;
     _sharedInterface.selectedVideoSpeedIndex = -1;
+    
     self.courseVideos = [[NSMutableDictionary alloc] init];
 
     NSString* key = [NSString stringWithFormat:@"%@_numberOfRecentDownloads", user.username];
@@ -1489,7 +1510,10 @@ static OEXInterface* _sharedInterface = nil;
     //Downloads
     self.numberOfRecentDownloads = (int)recentDownloads;
 
+    self.network = [[OEXNetworkInterface alloc] init];
+    self.network.delegate = self;
     [_network activate];
+    
     [[OEXDownloadManager sharedManager] activateDownloadManager];
     [self backgroundInit];
 

@@ -46,7 +46,7 @@ OEXStartType OEXStartTypeForString(NSString* type);
 @property (readonly, nonatomic, strong) OEXCourseStartDisplayInfo* start_display_info;
 @property (readonly, nonatomic, copy, nullable) NSString* name;
 @property (readonly, nonatomic, copy, nullable) NSString* org;
-@property (readonly, nonatomic, copy, nullable) NSString* video_outline;
+@property (readonly, nonatomic, copy, nullable) NSString* video_outline; //课件列表数据接口
 @property (readonly, nonatomic, copy, nullable) NSString* effort;//学习时长（约60小时）
 @property (readonly, nonatomic, copy, nullable) NSString* course_id;
 @property (readonly, nonatomic, copy, nullable) NSString* root_block_usage_key;
@@ -59,11 +59,11 @@ OEXStartType OEXStartTypeForString(NSString* type);
 @property (readonly, nonatomic, copy, nullable) NSNumber* listen_count;//报名人数
 @property (readonly, nonatomic, copy, nullable) NSString* professor_username;//教授名字
 @property (readonly, nonatomic, copy, nullable) NSNumber *course_price;//价格
-@property (readonly, nonatomic, copy, nullable) NSString* course_updates;         //  ANNOUNCEMENTS URL
-@property (readonly, nonatomic, copy, nullable) NSString* course_handouts;        //  HANDOUTS URL
-@property (readonly, nonatomic, copy, nullable) NSString* course_about;           // COURSE INFO URL
+@property (readonly, nonatomic, copy, nullable) NSString* course_updates;         //  ANNOUNCEMENTS URL 公告网址
+@property (readonly, nonatomic, copy, nullable) NSString* course_handouts;        //  HANDOUTS URL 资料URL
+@property (readonly, nonatomic, copy, nullable) NSString* course_about;           // COURSE INFO URL 课程信息的URL
 @property (readonly, nonatomic, strong, nullable) OEXCoursewareAccess* courseware_access;
-@property (readonly, nonatomic, copy, nullable) NSString* discussionUrl;
+@property (readonly, nonatomic, copy, nullable) NSString* discussionUrl;   //讨论URL
 @property (readonly, nonatomic, copy, nullable) NSDictionary<NSString*, CourseMediaInfo*>* mediaInfo;
 @property (readonly, nonatomic, strong, nullable) CourseMediaInfo* courseImageMediaInfo;
 @property (readonly, nonatomic, strong, nullable) CourseMediaInfo* courseVideoMediaInfo;
@@ -71,7 +71,7 @@ OEXStartType OEXStartTypeForString(NSString* type);
 @property (readonly, nonatomic, assign) BOOL isStartDateOld;
 @property (readonly, nonatomic, assign) BOOL isEndDateOld;
 
-@property (readonly, nonatomic, strong, nullable) NSString* courseImageURL;
+@property (readonly, nonatomic, strong, nullable) NSString* courseImageURL; //课程图片
 
 @property (readonly, nonatomic, copy, nullable) NSNumber *give_coin; //购买课程赠送宝典
 @property (readonly, nonatomic, copy, nullable) NSString *begin_at; //购买课程赠送宝典开始时间

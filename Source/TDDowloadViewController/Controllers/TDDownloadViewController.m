@@ -61,7 +61,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [LanguageChangeTool initUserLanguage]; //语言
+//    [LanguageChangeTool initUserLanguage]; //语言
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     
     [self setTitleLabel];

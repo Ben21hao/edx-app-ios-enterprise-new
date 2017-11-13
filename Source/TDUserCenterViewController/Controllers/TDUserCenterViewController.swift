@@ -49,7 +49,7 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        LanguageChangeTool.initUserLanguage()
+//        LanguageChangeTool.initUserLanguage()
         TDNotificationCenter().addObserver(self, selector: #selector(languageChangeAction), name: "languageSelectedChange", object: nil)
         
         setUpViewConstraint()        

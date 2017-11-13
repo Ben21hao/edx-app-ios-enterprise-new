@@ -42,7 +42,9 @@ class CourseSectionTableViewCell: UITableViewCell, CourseBlockContainerCell {
         videosStream.listen(self) {[weak self] downloads in //数据
             
             if let downloads = downloads.value, state = self?.downloadStateForDownloads(downloads) {
+                
                 self?.downloadView.state = state
+                
                 self?.content.trailingView = self?.downloadView
                 self?.downloadView.itemCount = downloads.count
                 

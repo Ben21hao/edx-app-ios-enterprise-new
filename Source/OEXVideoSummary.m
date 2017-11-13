@@ -18,9 +18,9 @@
 
 @interface OEXVideoSummary ()
 
-@property (nonatomic, copy) NSString* sectionURL;       // used for OPEN IN BROWSER
+@property (nonatomic, copy) NSString* sectionURL;       // 网页的学习页面，用于在浏览器中打开
 
-@property (nonatomic, copy) NSArray* path; // path : OEXVideoPathEntry array
+@property (nonatomic, copy) NSArray* path; // 章节数组 OEXVideoPathEntry array
 @property (strong, nonatomic) OEXVideoPathEntry* chapterPathEntry;
 @property (strong, nonatomic) OEXVideoPathEntry* sectionPathEntry;
 
@@ -68,7 +68,6 @@
         NSString *timeStr = summary[@"duration"];
         if (![timeStr isEqual:[NSNull null]]) {
             self.duration = [OEXSafeCastAsClass([NSNumber numberWithDouble:[summary[@"duration"] doubleValue]], NSNumber) stringValue];
-            //            NSLog(@"timeStr +++++++  %@",timeStr);
         }
         
         self.onlyOnWeb = [[summary objectForKey:@"only_on_web"] boolValue];
@@ -80,14 +79,15 @@
         [rawEncodings enumerateKeysAndObjectsUsingBlock:^(NSString* name, NSDictionary* encodingInfo, BOOL *stop) {//遍历字典中中所有的key－value
             
             OEXVideoEncoding* encoding = [[OEXVideoEncoding alloc] initWithDictionary:encodingInfo name:name]; //将字典转为model
-            [encodings safeSetObject:encoding forKey:name]; 
+            [encodings safeSetObject:encoding forKey:name];
         }];
         self.encodings = encodings;
         
         if (_encodings.count <= 0) {
             _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
         }
-        NSLog(@"OEXVideoSummary 视频时长 %@ --- >>大小  %@ ---->> %@",self.duration,[summary objectForKey:@"size"],_defaultEncoding.size);
+        
+        NSLog(@"---------------------->>>>>>  %@",rawEncodings);
     }
 
     return self;
@@ -96,6 +96,9 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary videoID:(NSString *)videoID name:(NSString *)name {
     
     self = [self initWithDictionary:dictionary];
+    
+//    NSLog(@"---------------------->>>>>>  %@",dictionary);
+    
     if(self != nil) {
         self.videoID = videoID;
         self.name = name;

@@ -41,13 +41,13 @@ extern NSString* const OEXDownloadEndedNotification;
 @property (nonatomic, assign) NSInteger selectedCCIndex;
 @property (nonatomic, assign) NSInteger selectedVideoSpeedIndex;
 
-@property (nonatomic, strong, nullable) NSArray<UserCourseEnrollment*>* courses;
+@property (nonatomic, strong, nullable) NSArray<UserCourseEnrollment*>* courses; //我的课程列表 数组
 
 @property (nonatomic, weak, nullable) id <OEXStorageInterface>  storage;
 
 // [String(Course.video_outline) : OEXHelperVideoDownload]
-// TODO: Make this indexed by courseID instead of course.video_outline
-@property (nullable, nonatomic, strong) NSMutableDictionary* courseVideos;
+// TODO: Make this indexed by courseID instead of course.video_outline 让这courseid代替course.video_outline索引
+@property (nullable, nonatomic, strong) NSMutableDictionary* courseVideos; //视频数组
 
 //Reachability
 @property (nonatomic, assign) BOOL reachable;

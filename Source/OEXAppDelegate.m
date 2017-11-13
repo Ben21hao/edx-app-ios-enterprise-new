@@ -60,9 +60,10 @@
     [WXApi registerApp:APPID_Weixin]; //1.向微信注册
     
     [VHallApi registerApp:DEMO_AppKey SecretKey:DEMO_AppSecretKey]; //微吼直播
+    //    EnableVHallDebugModel(YES);//微吼打印debug信息的方法
     
 #if DEBUG
-    // Skip all this initialization if we're running the unit tests
+    // Skip all this initialization if we're running the unit tests 用于测试
     // So they can start from a clean state.
     // dispatch_async so that the XCTest bundle (where TestEnvironmentBuilder lives) has already loaded
     if([[NSProcessInfo processInfo].arguments containsObject:@"-UNIT_TEST"]) {
@@ -73,7 +74,6 @@
         });
         return YES;
     }
-    /* 判断是否已登录 */
     if([[NSProcessInfo processInfo].arguments containsObject:@"-END_TO_END_TEST"]) {
         [[[OEXSession alloc] init] closeAndClearSession];
         [OEXFileUtility nukeUserData];
@@ -85,16 +85,16 @@
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-//    EnableVHallDebugModel(YES);//微吼打印debug信息的方法
     [self.window makeKeyAndVisible];
 
     [self setupGlobalEnvironment];
-    [self.environment.session performMigrations];
+    [self.environment.session performMigrations]; //获取用户信息
 
-    [self.environment.router openInWindow:self.window];
+    [self.environment.router openInWindow:self.window]; //用户是否已登录，未登录：显示登录页面，已登录：显示我的课程
 
     [self judgeAppVersion];//判断版本是否更新
     
+    //FBSDKCoreKit 为第三方登录
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

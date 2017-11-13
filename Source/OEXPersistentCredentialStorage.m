@@ -33,10 +33,11 @@
 
 /* 保存用户token和信息 */
 - (void)saveAccessToken:(OEXAccessToken*)accessToken userDetails:(OEXUserDetails*)userDetails {
-    NSData* accessTokenData = [accessToken accessTokenData];
+    
+    NSData* accessTokenData = [accessToken accessTokenData]; 
     NSData* userDetailsData = [userDetails userDetailsData];
     NSDictionary* sessionDictionary = @{kAccessTokenKey:accessTokenData, kUserDetailsKey:userDetailsData};
-    [self saveService:kCredentialsService data:sessionDictionary];
+    [self saveService:kCredentialsService data:sessionDictionary]; //缓存
 }
 
 - (void)clear {//清除用户缓存 cookie
@@ -73,7 +74,8 @@
     }
 }
 
-- (void)saveService:(NSString*)service data:(id)data {
+- (void)saveService:(NSString*)service data:(id)data { //数据持久化
+    
     OSStatus result;
     NSMutableDictionary* keychainQuery = [self getKeychainQuery:service];
     SecItemDelete((__bridge CFDictionaryRef)keychainQuery);   //删除 Keychain 中符号查询条件的记录

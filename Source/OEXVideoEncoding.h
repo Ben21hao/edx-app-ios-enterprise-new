@@ -21,9 +21,9 @@ extern NSString* const OEXVideoEncodingMobileLow;
 - (id)initWithDictionary:(NSDictionary*)dictionary name:(NSString*)name;
 - (id)initWithName:(nullable NSString*)name URL:(NSString*)URL size:(NSNumber*)size;
 
-@property (readonly, nonatomic, copy, nullable) NSString* name;
-@property (readonly, nonatomic, copy, nullable) NSString* URL;
-@property (readonly, nonatomic, strong, nullable) NSNumber* size;
+@property (readonly, nonatomic, copy, nullable) NSString* name; //视频名字
+@property (readonly, nonatomic, copy, nullable) NSString* URL; //视频url
+@property (readonly, nonatomic, strong, nullable) NSNumber* size; //视频大小
 @property (readonly, nonatomic) BOOL isYoutube;
 
 /// [String], ordered by preference

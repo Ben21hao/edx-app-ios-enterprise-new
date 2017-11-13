@@ -7,6 +7,7 @@
 //
 
 #import "TDSortCourseCell.h"
+#import "TDCourseTagModel.h"
 
 @interface TDSortCourseCell ()
 
@@ -33,8 +34,11 @@
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.mas_equalTo(self);
     }];
+    
+}
 
-    self.tagArray = [NSArray arrayWithObjects:@"第一个tag  标签",@"第二个第tag   标签",@"第三个tag 标签", @"第四个第四个tag  标签",@"第五个第五个ttag   标签",@"第六个六个tagtag 标签",@"第七个第七个tagtag  标签",@"第八个第八个tag tag 标签",@"第九个第九个tag 标tag 标签",@"第10个第10个tag 标tag 标签 标tag 标签",@"第11个第11个tag 标tag 标签 标tag 标签 第11个",nil];
+- (void)setTagArray:(NSArray *)tagArray {
+    _tagArray = tagArray;
     
     [self setTagView];
 }
@@ -42,13 +46,15 @@
 - (void)setTagView {
     if (self.tagArray > 0) {
         
-        TDBaseToolModel *toolModel = [[TDBaseToolModel alloc] init];
         CGFloat leftWidth = 0;
         CGFloat topHeight = 0;
+        NSInteger row = 1;
         for (int i = 0; i < self.tagArray.count; i ++) {
             
-            NSString *titleStr = self.tagArray[i];
-            CGFloat width = [toolModel widthForString:titleStr font:12] + 28;
+            TDCourseTagModel *model = self.tagArray[i];
+            NSString *titleStr = [NSString stringWithFormat:@"%@  %@",model.subject_name,model.count];
+            
+            CGFloat width = [self getTagStrWidh:i];
             
             if (i == 0) {
                 topHeight = 13;
@@ -56,13 +62,14 @@
                 
             } else {
                 
-                NSString *lastTitle = self.tagArray[i - 1]; //前面一个
-                CGFloat lastWidth = [toolModel widthForString:lastTitle font:12] + 28;
+                CGFloat lastWidth = [self getTagStrWidh:i - 1]; //前面一个
+                
                 leftWidth = leftWidth + lastWidth + 13;
                 
                 if (leftWidth + width + 13 > TDWidth) {
                     leftWidth = 13;
                     topHeight = topHeight + 24 + 13;
+                    row ++ ;
                 }
             }
             
@@ -75,7 +82,19 @@
                 make.size.mas_equalTo(CGSizeMake(width, 24));
             }];
         }
+        
     }
+}
+
+- (CGFloat)getTagStrWidh:(NSInteger)index {
+    
+    TDCourseTagModel *model = self.tagArray[index];
+    NSString *titleStr = [NSString stringWithFormat:@"%@  %@",model.subject_name,model.count];
+    
+    TDBaseToolModel *toolModel = [[TDBaseToolModel alloc] init];
+    CGFloat width = [toolModel widthForString:titleStr font:12] + 28;
+    
+    return width;
 }
 
 - (UIButton *)setTagButton:(NSString *)titleStr ndex:(NSInteger)index {
@@ -98,7 +117,10 @@
 }
 
 - (void)buttonAction:(UIButton *)sender { //跳转
-    
+    if (self.selectTagButtonHandle) {
+        TDCourseTagModel *model = self.tagArray[sender.tag];
+        self.selectTagButtonHandle(model.subject_id);
+    }
 }
 
 

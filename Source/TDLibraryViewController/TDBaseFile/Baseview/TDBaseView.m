@@ -12,6 +12,7 @@
 
 #pragma mark - "————  标题  ————"
 - (instancetype)initWithTitle:(NSString *)title {
+    
     self = [super init];
     if (self) {
         
@@ -55,6 +56,7 @@
 
 #pragma mark - 请求数据转圈页面
 - (instancetype)initWithLoadingFrame:(CGRect)frame {
+    
     self = [super initWithFrame:frame];
     if (self) {
         
@@ -107,6 +109,7 @@
 
 #pragma mark - 无数据页面
 - (instancetype)initWithNullDataTitle:(NSString *)title withFrame:(CGRect)frame {
+    
     self = [super initWithFrame:frame];
     if (self) {
         UIView *nullView = [[UIView alloc] init];
@@ -134,6 +137,7 @@
 
 #pragma mark - 请求超时页面
 - (instancetype)initWithRequestErrorTitle:(NSString *)title withFrame:(CGRect)frame {
+    
     self = [super initWithFrame:frame];
     if (self) {
         UIView *view = [[UIView alloc] init];

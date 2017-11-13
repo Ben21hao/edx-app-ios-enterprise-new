@@ -14,13 +14,13 @@ public class UserCourseEnrollment : NSObject {
     
     let created: String?
     let mode: String?
-    let isActive: Bool
+    let isActive: Bool  //剩余试听时间；－2 代表未购买未试听；－1 代表已购买；0 代表试听已结束；其他正整数 试听中
     let course: OEXCourse
     let trial_expire_at: String?
     let trial_seconds: Int
 
     /** Url if the user has completed a certificate */
-    let certificateUrl: String?
+    let certificateUrl: String?  //证书
 
     init?(dictionary: [String: AnyObject]) {
         

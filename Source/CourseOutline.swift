@@ -17,14 +17,14 @@ public struct CourseOutline {
         case Root = "root"
         case Blocks = "blocks"
         case BlockCounts = "block_counts"
-        case BlockType = "type"
-        case Descendants = "descendants"
-        case DisplayName = "display_name"
+        case BlockType = "type" //类型
+        case Descendants = "descendants" //章节下视频习题 blockID 的数组
+        case DisplayName = "display_name" //名称
         case Format = "format"
         case Graded = "graded"
-        case LMSWebURL = "lms_web_url"
-        case StudentViewMultiDevice = "student_view_multi_device"
-        case StudentViewURL = "student_view_url"
+        case LMSWebURL = "lms_web_url" //学习界面 URL
+        case StudentViewMultiDevice = "student_view_multi_device" //学生视图多设备
+        case StudentViewURL = "student_view_url" //题目 URL
         case StudentViewData = "student_view_data"
         case Summary = "summary"
     }

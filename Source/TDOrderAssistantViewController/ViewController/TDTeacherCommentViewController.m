@@ -22,6 +22,7 @@
 @interface TDTeacherCommentViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) TDBaseToolModel *baseTool;
+@property (nonatomic,strong) AFHTTPSessionManager *manager;
 
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSMutableArray *topArry;//头部标签
@@ -61,6 +62,7 @@
     self.title = TDLocalizeSelect(@"COMMENTS", nil);
     
     self.baseTool = [[TDBaseToolModel alloc] init];
+    self.manager = [AFHTTPSessionManager manager];
     self.page = 1;
     self.selectedButton = [[UIButton alloc] init];
     
@@ -119,10 +121,9 @@
     if (![self.baseTool networkingState]) {
         return;
     }
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/assistant/comment_summary/%@",ELITEU_URL,self.userName];
-    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *responseDic = (NSDictionary *)responseObject;
         id code = responseDic[@"code"];
@@ -212,9 +213,7 @@
     }
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/assistant/comment/%@",ELITEU_URL,self.userName];
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];

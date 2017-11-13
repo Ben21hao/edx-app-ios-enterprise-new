@@ -107,7 +107,6 @@
 		6960892C1D53935500EE66DD /* courseCertificate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 696089291D53935500EE66DD /* courseCertificate@2x.png */; };
 		6960892D1D53935500EE66DD /* courseCertificate@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6960892A1D53935500EE66DD /* courseCertificate@3x.png */; };
 		697652261D9BA7C80031FF8B /* OEXColorsDataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697652251D9BA7C80031FF8B /* OEXColorsDataFactory.swift */; };
-		697B5A021D92DA17002C3ABD /* RegistrationAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775391831CA0600700FA959C /* RegistrationAPITests.swift */; };
 		697B5A031D92DA2F002C3ABD /* RegistrationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775391471C97A70700FA959C /* RegistrationAPI.swift */; };
 		697B5A091D92DB3F002C3ABD /* RegistrationFormAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697B5A081D92DB3F002C3ABD /* RegistrationFormAPI.swift */; };
 		6987A86D1D6C67DB00E9D183 /* colors.json in Resources */ = {isa = PBXBuildFile; fileRef = 6987A86C1D6C67DB00E9D183 /* colors.json */; };
@@ -227,7 +226,6 @@
 		7727EC351BBC73F300C9987F /* RevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7727EC341BBC73F300C9987F /* RevealViewController.swift */; };
 		772856DF1CADBFD100460E7C /* BadgesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772856DE1CADBFD100460E7C /* BadgesAPI.swift */; };
 		772856E11CADC5DB00460E7C /* RawStringExtractable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772856E01CADC5DB00460E7C /* RawStringExtractable.swift */; };
-		772856E31CADCE0900460E7C /* OEXDateFormattingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 772856E21CADCE0900460E7C /* OEXDateFormattingTests.m */; };
 		772856E71CADCEB200460E7C /* OEXDateFormatting.m in Sources */ = {isa = PBXBuildFile; fileRef = 772856E51CADCE2E00460E7C /* OEXDateFormatting.m */; };
 		772856E81CADCEB600460E7C /* OEXDateFormatting.h in Headers */ = {isa = PBXBuildFile; fileRef = 772856E41CADCE2E00460E7C /* OEXDateFormatting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		773181371B697644000CC050 /* DiscussionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773181361B697644000CC050 /* DiscussionDataManager.swift */; };
@@ -247,13 +245,9 @@
 		77509D941BE1710200B10CD3 /* TZStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77509D8F1BE1710200B10CD3 /* TZStackView.swift */; };
 		77509D981BE1916600B10CD3 /* UserProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77509D971BE1916600B10CD3 /* UserProfileManager.swift */; };
 		7753912A1C9234F300FA959C /* MockResponseCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E648A11C91EB4900B6740D /* MockResponseCache.swift */; };
-		7753913C1C97579000FA959C /* PersistentResponseCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7753913B1C97579000FA959C /* PersistentResponseCacheTests.swift */; };
-		7753913E1C9758A300FA959C /* Result+Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7753913D1C9758A300FA959C /* Result+Assertions.swift */; };
 		775391441C9760BD00FA959C /* NSString+OEXCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 775391421C9760BD00FA959C /* NSString+OEXCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		775391451C9760BD00FA959C /* NSString+OEXCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 775391431C9760BD00FA959C /* NSString+OEXCrypto.m */; };
 		77542CD61CB6A398006CA428 /* JSON+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77542CD51CB6A398006CA428 /* JSON+Formatting.swift */; };
-		77542CD81CB6A3AA006CA428 /* BadgesAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77542CD71CB6A3AA006CA428 /* BadgesAPITests.swift */; };
-		77542CDB1CB6A463006CA428 /* OEXMetaClassHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 77542CDA1CB6A463006CA428 /* OEXMetaClassHelpers.m */; };
 		775434831AD7394D00635A40 /* OEXPushNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 775434821AD7394D00635A40 /* OEXPushNotificationManager.m */; };
 		775434861AD73D1900635A40 /* OEXParseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 775434851AD73D1900635A40 /* OEXParseConfig.m */; };
 		775434891AD8121200635A40 /* OEXParsePushProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 775434881AD8121200635A40 /* OEXParsePushProvider.m */; };
@@ -345,7 +339,6 @@
 		77DCD23D1C2B434200CAEBB5 /* UIViewController+Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DCD23C1C2B434200CAEBB5 /* UIViewController+Overlay.swift */; };
 		77E00B711B82A06F00573622 /* GrowingTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E00B701B82A06F00573622 /* GrowingTextViewController.swift */; };
 		77E209851AF158190071316D /* CourseOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E209841AF158190071316D /* CourseOutline.swift */; };
-		77E647981C90C10300B6740D /* edXCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E6478E1C90C10300B6740D /* edXCore.framework */; };
 		77E647A31C90C10300B6740D /* edXCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E6478E1C90C10300B6740D /* edXCore.framework */; };
 		77E647C91C90C76C00B6740D /* NSString+OEXFormatting.h in Headers */ = {isa = PBXBuildFile; fileRef = 77E647C51C90C70600B6740D /* NSString+OEXFormatting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77E647CB1C90CA1400B6740D /* edXCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 77E6478E1C90C10300B6740D /* edXCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -355,7 +348,6 @@
 		77E648221C90DD6B00B6740D /* edXCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 77E648201C90DD6B00B6740D /* edXCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77E648261C90DE0200B6740D /* NSBundle+OEXConveniences.h in Headers */ = {isa = PBXBuildFile; fileRef = 77E648241C90DE0200B6740D /* NSBundle+OEXConveniences.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77E648271C90DE0200B6740D /* NSBundle+OEXConveniences.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E648251C90DE0200B6740D /* NSBundle+OEXConveniences.m */; };
-		77E6482A1C90DE5000B6740D /* NSString+OEXFormattingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E648291C90DE5000B6740D /* NSString+OEXFormattingTests.m */; };
 		77E648561C91137C00B6740D /* JSON+ReadFromFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EACF3291BE0C92C0019130E /* JSON+ReadFromFile.swift */; };
 		77E648591C91235A00B6740D /* OEXConfig+AppFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E648581C91235A00B6740D /* OEXConfig+AppFeatures.swift */; };
 		77E648601C91274700B6740D /* OEXConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 77E6485C1C91273F00B6740D /* OEXConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -369,9 +361,6 @@
 		77E648851C91385C00B6740D /* Array+Functional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E648841C91385C00B6740D /* Array+Functional.swift */; };
 		77E648941C91407B00B6740D /* NSObject+OEXDeallocAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 77E648901C91407B00B6740D /* NSObject+OEXDeallocAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77E648951C91407B00B6740D /* NSObject+OEXDeallocAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E648911C91407B00B6740D /* NSObject+OEXDeallocAction.m */; };
-		77E648991C91CC0700B6740D /* NSObject+OEXDeallocActionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E648981C91CC0700B6740D /* NSObject+OEXDeallocActionTests.m */; };
-		77E6489C1C91CC6700B6740D /* Array+FunctionalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E6489B1C91CC6700B6740D /* Array+FunctionalTests.swift */; };
-		77E648A21C91EB4900B6740D /* MockResponseCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E648A11C91EB4900B6740D /* MockResponseCache.swift */; };
 		77EA92261BB4590A00EC625A /* DownloadsAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA92251BB4590A00EC625A /* DownloadsAccessoryView.swift */; };
 		77EC889E1AB787630050F9CF /* OEXAnalyticsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EC889D1AB787630050F9CF /* OEXAnalyticsData.m */; };
 		77F76A6E1B0BD32A00ED3E39 /* OEXSession+Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F76A6D1B0BD32A00ED3E39 /* OEXSession+Authorization.swift */; };
@@ -439,15 +428,15 @@
 		A417335E1F5D2BE6005554B1 /* TDLiveLotteryView.m in Sources */ = {isa = PBXBuildFile; fileRef = A417335D1F5D2BE6005554B1 /* TDLiveLotteryView.m */; };
 		A420E2511F3C55A200340683 /* TDBaseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A420E2501F3C55A200340683 /* TDBaseButton.m */; };
 		A44669B11FA7078500084563 /* TDCircleDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = A44669B01FA7078400084563 /* TDCircleDrawView.m */; };
+		A44EE2731FB6DF54005273A3 /* TDCourseTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A44EE2721FB6DF54005273A3 /* TDCourseTagModel.m */; };
 		A48B69B61F79F6A900160C61 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = A48B69B51F79F6A900160C61 /* FontAwesome.otf */; };
 		A4DD5BB01FA95EA900E2CE35 /* TDFindCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4DD5BAF1FA95EA900E2CE35 /* TDFindCourseViewController.m */; };
-		A4DD5BB91FA95F3900E2CE35 /* TDInsideCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4DD5BB81FA95F3900E2CE35 /* TDInsideCourseViewController.m */; };
-		A4DD5BBC1FA95F4500E2CE35 /* TDEliteCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4DD5BBB1FA95F4500E2CE35 /* TDEliteCourseViewController.m */; };
 		A4DD5BBF1FA95F7C00E2CE35 /* TDSortCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4DD5BBE1FA95F7C00E2CE35 /* TDSortCourseViewController.m */; };
 		A4DD5BC21FA9665500E2CE35 /* TDPageingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4DD5BC11FA9665500E2CE35 /* TDPageingViewController.m */; };
 		A4DD5BC51FA99FBC00E2CE35 /* TDFindCourseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4DD5BC41FA99FBC00E2CE35 /* TDFindCourseCollectionViewCell.m */; };
 		A4DD5BCE1FA9B72200E2CE35 /* TDFindCourseView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4DD5BCD1FA9B72200E2CE35 /* TDFindCourseView.m */; };
 		A4DD5BD11FA9DF2000E2CE35 /* TDSortCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4DD5BD01FA9DF2000E2CE35 /* TDSortCourseCell.m */; };
+		A4EC2CDF1FB5471E0053AA59 /* TDCourseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EC2CDE1FB5471E0053AA59 /* TDCourseListViewController.m */; };
 		A4F456771F42DF1600C3F5B5 /* TDWebUrlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F456761F42DF1600C3F5B5 /* TDWebUrlViewController.m */; };
 		B4132C10195AAFBE00F50B46 /* OEXAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = B4132C0F195AAFBE00F50B46 /* OEXAuthentication.m */; };
 		B419295E1A8A3F1900448AD5 /* OEXNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B419295D1A8A3F1900448AD5 /* OEXNetworkManager.m */; };
@@ -909,13 +898,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		77E647991C90C10300B6740D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BECB7B031924C0C3009C77F1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 77E6478D1C90C10300B6740D;
-			remoteInfo = "edX-core";
-		};
 		77E647A11C90C10300B6740D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BECB7B031924C0C3009C77F1 /* Project object */;
@@ -1363,7 +1345,6 @@
 		77E00B701B82A06F00573622 /* GrowingTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrowingTextViewController.swift; sourceTree = "<group>"; };
 		77E209841AF158190071316D /* CourseOutline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseOutline.swift; sourceTree = "<group>"; };
 		77E6478E1C90C10300B6740D /* edXCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = edXCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		77E647971C90C10300B6740D /* edXCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = edXCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		77E647C51C90C70600B6740D /* NSString+OEXFormatting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+OEXFormatting.h"; path = "Source/Core/Code/NSString+OEXFormatting.h"; sourceTree = SOURCE_ROOT; };
 		77E647C61C90C70600B6740D /* NSString+OEXFormatting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+OEXFormatting.m"; path = "Source/Core/Code/NSString+OEXFormatting.m"; sourceTree = SOURCE_ROOT; };
 		77E648201C90DD6B00B6740D /* edXCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = edXCore.h; sourceTree = "<group>"; };
@@ -1476,13 +1457,11 @@
 		A420E2501F3C55A200340683 /* TDBaseButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBaseButton.m; sourceTree = "<group>"; };
 		A44669AF1FA7078400084563 /* TDCircleDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCircleDrawView.h; sourceTree = "<group>"; };
 		A44669B01FA7078400084563 /* TDCircleDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCircleDrawView.m; sourceTree = "<group>"; };
+		A44EE2711FB6DF54005273A3 /* TDCourseTagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCourseTagModel.h; sourceTree = "<group>"; };
+		A44EE2721FB6DF54005273A3 /* TDCourseTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCourseTagModel.m; sourceTree = "<group>"; };
 		A48B69B51F79F6A900160C61 /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
 		A4DD5BAE1FA95EA900E2CE35 /* TDFindCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDFindCourseViewController.h; sourceTree = "<group>"; };
 		A4DD5BAF1FA95EA900E2CE35 /* TDFindCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFindCourseViewController.m; sourceTree = "<group>"; };
-		A4DD5BB71FA95F3900E2CE35 /* TDInsideCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDInsideCourseViewController.h; sourceTree = "<group>"; };
-		A4DD5BB81FA95F3900E2CE35 /* TDInsideCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDInsideCourseViewController.m; sourceTree = "<group>"; };
-		A4DD5BBA1FA95F4500E2CE35 /* TDEliteCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDEliteCourseViewController.h; sourceTree = "<group>"; };
-		A4DD5BBB1FA95F4500E2CE35 /* TDEliteCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDEliteCourseViewController.m; sourceTree = "<group>"; };
 		A4DD5BBD1FA95F7C00E2CE35 /* TDSortCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSortCourseViewController.h; sourceTree = "<group>"; };
 		A4DD5BBE1FA95F7C00E2CE35 /* TDSortCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSortCourseViewController.m; sourceTree = "<group>"; };
 		A4DD5BC01FA9665500E2CE35 /* TDPageingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDPageingViewController.h; sourceTree = "<group>"; };
@@ -1493,6 +1472,8 @@
 		A4DD5BCD1FA9B72200E2CE35 /* TDFindCourseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFindCourseView.m; sourceTree = "<group>"; };
 		A4DD5BCF1FA9DF2000E2CE35 /* TDSortCourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSortCourseCell.h; sourceTree = "<group>"; };
 		A4DD5BD01FA9DF2000E2CE35 /* TDSortCourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSortCourseCell.m; sourceTree = "<group>"; };
+		A4EC2CDD1FB5471E0053AA59 /* TDCourseListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCourseListViewController.h; sourceTree = "<group>"; };
+		A4EC2CDE1FB5471E0053AA59 /* TDCourseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCourseListViewController.m; sourceTree = "<group>"; };
 		A4F456751F42DF1600C3F5B5 /* TDWebUrlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWebUrlViewController.h; sourceTree = "<group>"; };
 		A4F456761F42DF1600C3F5B5 /* TDWebUrlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWebUrlViewController.m; sourceTree = "<group>"; };
 		B1AF3BB032520841A93A174B /* Pods-edX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-edX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-edX/Pods-edX.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2328,14 +2309,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		77E647941C90C10300B6740D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				77E647981C90C10300B6740D /* edXCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3405,6 +3378,8 @@
 		A44669B31FA7127900084563 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				A44EE2711FB6DF54005273A3 /* TDCourseTagModel.h */,
+				A44EE2721FB6DF54005273A3 /* TDCourseTagModel.m */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -3414,10 +3389,8 @@
 			children = (
 				A4DD5BAE1FA95EA900E2CE35 /* TDFindCourseViewController.h */,
 				A4DD5BAF1FA95EA900E2CE35 /* TDFindCourseViewController.m */,
-				A4DD5BB71FA95F3900E2CE35 /* TDInsideCourseViewController.h */,
-				A4DD5BB81FA95F3900E2CE35 /* TDInsideCourseViewController.m */,
-				A4DD5BBA1FA95F4500E2CE35 /* TDEliteCourseViewController.h */,
-				A4DD5BBB1FA95F4500E2CE35 /* TDEliteCourseViewController.m */,
+				A4EC2CDD1FB5471E0053AA59 /* TDCourseListViewController.h */,
+				A4EC2CDE1FB5471E0053AA59 /* TDCourseListViewController.m */,
 				A4DD5BBD1FA95F7C00E2CE35 /* TDSortCourseViewController.h */,
 				A4DD5BBE1FA95F7C00E2CE35 /* TDSortCourseViewController.m */,
 			);
@@ -4692,14 +4665,6 @@
 			path = TDTextField;
 			sourceTree = "<group>";
 		};
-		B55207221EB9776100EC51C9 /* Test */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Test;
-			path = ../Test;
-			sourceTree = "<group>";
-		};
 		B55209F91EB9C94000EC51C9 /* TDCourseCatalogDetailViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -5220,7 +5185,6 @@
 			children = (
 				BECB7B0B1924C0C3009C77F1 /* edX.app */,
 				77E6478E1C90C10300B6740D /* edXCore.framework */,
-				77E647971C90C10300B6740D /* edXCoreTests.xctest */,
 				77E648301C91016300B6740D /* EndToEndTests.xctest */,
 			);
 			name = Products;
@@ -5301,7 +5265,6 @@
 				199B9B6419349DE800081A09 /* Videos */,
 				77ADF4A01AC1AD3500AC8955 /* XIB/Storyboard */,
 				BECB7B151924C0C3009C77F1 /* Supporting Files */,
-				B55207221EB9776100EC51C9 /* Test */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -5476,24 +5439,6 @@
 			productReference = 77E6478E1C90C10300B6740D /* edXCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		77E647961C90C10300B6740D /* edXCoreTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 77E647AD1C90C10400B6740D /* Build configuration list for PBXNativeTarget "edXCoreTests" */;
-			buildPhases = (
-				77E647931C90C10300B6740D /* Sources */,
-				77E647941C90C10300B6740D /* Frameworks */,
-				77E647951C90C10300B6740D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				77E6479A1C90C10300B6740D /* PBXTargetDependency */,
-			);
-			name = edXCoreTests;
-			productName = "edX-coreTests";
-			productReference = 77E647971C90C10300B6740D /* edXCoreTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		77E6482F1C91016300B6740D /* EndToEndTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 77E6483A1C91016300B6740D /* Build configuration list for PBXNativeTarget "EndToEndTests" */;
@@ -5553,11 +5498,6 @@
 						CreatedOnToolsVersion = 7.2.1;
 						LastSwiftMigration = 0800;
 					};
-					77E647961C90C10300B6740D = {
-						CreatedOnToolsVersion = 7.2.1;
-						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
-					};
 					77E6482F1C91016300B6740D = {
 						CreatedOnToolsVersion = 7.2.1;
 						LastSwiftMigration = 0800;
@@ -5597,7 +5537,6 @@
 			targets = (
 				BECB7B0A1924C0C3009C77F1 /* edX */,
 				77E6478D1C90C10300B6740D /* edXCore */,
-				77E647961C90C10300B6740D /* edXCoreTests */,
 				77E6482F1C91016300B6740D /* EndToEndTests */,
 			);
 		};
@@ -5605,13 +5544,6 @@
 
 /* Begin PBXResourcesBuildPhase section */
 		77E6478C1C90C10300B6740D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		77E647951C90C10300B6740D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -6004,23 +5936,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		77E647931C90C10300B6740D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				772856E31CADCE0900460E7C /* OEXDateFormattingTests.m in Sources */,
-				7753913C1C97579000FA959C /* PersistentResponseCacheTests.swift in Sources */,
-				77542CDB1CB6A463006CA428 /* OEXMetaClassHelpers.m in Sources */,
-				697B5A021D92DA17002C3ABD /* RegistrationAPITests.swift in Sources */,
-				77E648A21C91EB4900B6740D /* MockResponseCache.swift in Sources */,
-				77E648991C91CC0700B6740D /* NSObject+OEXDeallocActionTests.m in Sources */,
-				77E6489C1C91CC6700B6740D /* Array+FunctionalTests.swift in Sources */,
-				77E6482A1C90DE5000B6740D /* NSString+OEXFormattingTests.m in Sources */,
-				77542CD81CB6A3AA006CA428 /* BadgesAPITests.swift in Sources */,
-				7753913E1C9758A300FA959C /* Result+Assertions.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		77E6482C1C91016300B6740D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -6401,6 +6316,8 @@
 				1AE0A6C81BF4F68A00E14917 /* CourseCertificateCell.swift in Sources */,
 				770848BC1B209EF4002FEEEE /* BorderStyle.swift in Sources */,
 				19A1339419CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.m in Sources */,
+				A44EE2731FB6DF54005273A3 /* TDCourseTagModel.m in Sources */,
+				A4EC2CDF1FB5471E0053AA59 /* TDCourseListViewController.m in Sources */,
 				B4B6D6051A949EFC000F44E8 /* OEXRegistrationAgreement.m in Sources */,
 				7712732E1BA8F5C7008BA397 /* SegmentAnalyticsTracker.swift in Sources */,
 				776459821A09650C008404CC /* NSDictionary+OEXEncoding.m in Sources */,
@@ -6416,7 +6333,6 @@
 				775E5A811BE1C88A0046B26B /* LiveObjectCache.swift in Sources */,
 				B55637041F2B19F90079D298 /* TDOnlineCell.m in Sources */,
 				B52E8CF71F0B8DB500F3170D /* ITTXibView.m in Sources */,
-				A4DD5BBC1FA95F4500E2CE35 /* TDEliteCourseViewController.m in Sources */,
 				77DC295E1ABC9D4400FAD22C /* NSObject+OEXReplaceNull.m in Sources */,
 				B4B6D6031A949EFC000F44E8 /* OEXRegistrationOption.m in Sources */,
 				B52E8C9E1F0B8CB500F3170D /* UIImage+Tint.m in Sources */,
@@ -6596,7 +6512,6 @@
 				77B463911A30F6310083453A /* OEXAnnouncement.m in Sources */,
 				E055D53D1D25256500230CA4 /* NetworkManager+ResponseInterceptors.swift in Sources */,
 				1A1181E41BB462D700CFE52B /* RemoteImage.swift in Sources */,
-				A4DD5BB91FA95F3900E2CE35 /* TDInsideCourseViewController.m in Sources */,
 				B51AEEAF1F15DBBA00BB3B04 /* TDLectureLiveViewController.swift in Sources */,
 				B5D289BF1EFB71CB003581DC /* TDResetPasswordViewController.m in Sources */,
 				1AB539FA1BFE08DE0065501F /* DebugLogViewController.swift in Sources */,
@@ -6619,11 +6534,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		77E6479A1C90C10300B6740D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 77E6478D1C90C10300B6740D /* edXCore */;
-			targetProxy = 77E647991C90C10300B6740D /* PBXContainerItemProxy */;
-		};
 		77E647A21C90C10300B6740D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 77E6478D1C90C10300B6740D /* edXCore */;
@@ -6918,72 +6828,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Profile;
-		};
-		77E647A81C90C10400B6740D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = Source/Core/Test/SupportingFiles/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.edx.edXCoreTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Source/Core/Test/SupportingFiles/edXCoreTests-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
-			};
-			name = Debug;
-		};
-		77E647A91C90C10400B6740D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = Source/Core/Test/SupportingFiles/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = org.edx.edXCoreTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Source/Core/Test/SupportingFiles/edXCoreTests-Bridging-Header.h";
-				SWIFT_VERSION = 2.3;
-			};
-			name = Release;
-		};
-		77E647AA1C90C10400B6740D /* Profile */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = Source/Core/Test/SupportingFiles/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = org.edx.edXCoreTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Source/Core/Test/SupportingFiles/edXCoreTests-Bridging-Header.h";
-				SWIFT_VERSION = 2.3;
 			};
 			name = Profile;
 		};
@@ -7345,16 +7189,6 @@
 				77E647A51C90C10400B6740D /* Debug */,
 				77E647A61C90C10400B6740D /* Release */,
 				77E647A71C90C10400B6740D /* Profile */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		77E647AD1C90C10400B6740D /* Build configuration list for PBXNativeTarget "edXCoreTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				77E647A81C90C10400B6740D /* Debug */,
-				77E647A91C90C10400B6740D /* Release */,
-				77E647AA1C90C10400B6740D /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
