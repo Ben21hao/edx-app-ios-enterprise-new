@@ -22,13 +22,12 @@
 @property (nonatomic,strong) TDBaseTableview *tableView;
 
 @property (nonatomic,strong) UIView *topView;
-@property (nonatomic,strong) UIScrollView *titleView;
-@property (nonatomic,strong) UIScrollView *contentView;
-@property (nonatomic,strong) UIView *selectView;
+@property (nonatomic,strong) UIScrollView *titleView; //标题页
+@property (nonatomic,strong) UIScrollView *contentView; //内容页
+@property (nonatomic,strong) UIView *selectView; //指示线
 @property (nonatomic,strong) UIView *sepView; //分割线
 
 @property (nonatomic,strong) NSMutableArray *titleButtons;
-@property (nonatomic,strong) NSMutableArray *lineViewArray;
 
 @property (nonatomic,strong) TDTeacherMessageViewController *messageViewController;
 @property (nonatomic,strong) TDTeacherCommentViewController *commentViewController;
@@ -46,13 +45,6 @@
         _titleButtons = [NSMutableArray array];
     }
     return _titleButtons;
-}
-
-- (NSMutableArray *)lineViewArray {
-    if (_lineViewArray == nil) {
-        _lineViewArray = [[NSMutableArray alloc] init];
-    }
-    return _lineViewArray;
 }
 
 - (void)viewDidLoad {
@@ -150,15 +142,6 @@
         
         [self.titleButtons addObject:btn];
         
-        UIView *line = [[UIView alloc] init];
-        line.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
-        line.frame = CGRectMake(x + 10, h - 2, btnW - 20, 1);
-        line.tag = i;
-        [self.titleView addSubview:line];
-        
-        line.hidden = YES;
-        [self.lineViewArray addObject:line];
-        
         if (i == 0) {//默认选中第0个按钮
             [self btnClick:btn];
         }
@@ -189,7 +172,6 @@
     }
 }
 
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
 //    NSLog(@"上面的 ------ %f ===> %f",self.tableView.contentOffset.y,scrollView.contentOffset.y);
@@ -206,8 +188,8 @@
         
     } else {
         self.isTopIsCanNotMoveTabView = NO;//可以滑动
-        
     }
+    
     if (self.isTopIsCanNotMoveTabView != self.isTopIsCanNotMoveTabViewPre) {
         
         if (self.isTopIsCanNotMoveTabView && !self.isTopIsCanNotMoveTabViewPre) {//子视图控制器滑动到顶端
@@ -222,6 +204,14 @@
             }
         }
     }
+    
+    if ([scrollView isEqual:self.contentView]) {
+        [self dealWithSelectView:scrollView.contentOffset.x / self.childViewControllers.count + 10];
+    }
+}
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
+     return YES;
 }
 
 #pragma mark - notification
@@ -247,10 +237,16 @@
         UIButton *button = self.titleButtons[i];
         NSString *colorStr = i == sender.tag ? colorHexStr1 : colorHexStr9;
         [button setTitleColor:[UIColor colorWithHexString:colorStr] forState:UIControlStateNormal];
-        
-        UIView *line = self.lineViewArray[i];
-        line.hidden = i == sender.tag ? NO : YES;
     }
+    
+    [self dealWithSelectView:sender.tag * (TDWidth / 2 - 10) + 10];
+}
+
+- (void)dealWithSelectView:(CGFloat)x {
+    WS(weakSelf);
+    [UIView animateWithDuration:0.3 animations:^{
+        weakSelf.selectView.frame = CGRectMake(x, -1, TDWidth / 2 - 10, 2);
+    }];
 }
 
 #pragma mark - 加入子控制器
@@ -282,6 +278,10 @@
     self.sepView.backgroundColor = [UIColor colorWithHexString:colorHexStr6];
     self.sepView.frame = CGRectMake(0, y, TDWidth, 1);
     [self.titleView addSubview:self.sepView];
+    
+    self.selectView = [[UIView alloc] initWithFrame:CGRectMake(10, -1, TDWidth / 2 - 10, 2)];
+    self.selectView.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
+    [self.sepView addSubview:self.selectView];
 }
 
 #pragma mark - UI
@@ -395,7 +395,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

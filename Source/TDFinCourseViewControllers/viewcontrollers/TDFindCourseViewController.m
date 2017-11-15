@@ -40,7 +40,7 @@
         switch (i) {
             case 0: {
                 TDCourseListViewController *insideVC = [[TDCourseListViewController alloc] init];
-                insideVC.title = @"内部课程";
+                insideVC.title = TDLocalizeSelect(@"EXCLUSIVE_COURSES", nil);
                 insideVC.company_id = self.company_id;
                 insideVC.username = self.username;
                 insideVC.whereFrom = 0;
@@ -51,7 +51,7 @@
                 break;
             case 1: {
                 TDCourseListViewController *eliteuVC = [[TDCourseListViewController alloc] init];
-                eliteuVC.title = @"英荔课程";
+                eliteuVC.title = TDLocalizeSelect(@"ELITEU_COURSES", nil);
                 eliteuVC.username = self.username;
                 eliteuVC.whereFrom = 1;
                 
@@ -62,7 +62,7 @@
                 
             default: {
                 TDSortCourseViewController *sortVC = [[TDSortCourseViewController alloc] init];
-                sortVC.title = @"课程分类";
+                sortVC.title = TDLocalizeSelect(@"CATEGORIES", nil);
                 sortVC.company_id = self.company_id;
                 sortVC.username = self.username;
                 

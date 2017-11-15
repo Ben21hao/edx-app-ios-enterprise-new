@@ -286,6 +286,9 @@ class TDLectureSubViewController: UIViewController,UITableViewDelegate,UITableVi
         self.tableView.tableFooterView = UIView.init()
         self.tableView.backgroundColor = OEXStyles.sharedStyles().baseColor5()
         let header = MJRefreshNormalHeader.init(refreshingTarget: self, refreshingAction: #selector(refreshData))
+        header.setTitle(TDLocalizeSelectSwift("DROP_REFRESH_TEXT"), forState: .Idle)
+        header.setTitle(TDLocalizeSelectSwift("RELEASE_REFRESH_TEXT"), forState: .Pulling)
+        header.setTitle(TDLocalizeSelectSwift("REFRESHING_TEXT"), forState: .Refreshing)
         header.lastUpdatedTimeLabel.hidden = true
         self.tableView.mj_header = header
         

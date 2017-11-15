@@ -15,6 +15,8 @@
 #import "Logger+OEXObjC.h"
 #import "NSArray+OEXSafeAccess.h"
 
+#define TITLTE_BUTTON_WIDTH TDWidth / self.childViewControllers.count
+
 #define TitleView_Height 48
 
 @interface TDDownloadViewController () <UIScrollViewDelegate,UIGestureRecognizerDelegate>
@@ -25,11 +27,12 @@
 @property (nonatomic,strong) UILabel *titleLabel;
 @property (nonatomic,strong) UIScrollView *titleView;
 @property (nonatomic,strong) TDBaseScrollView *contentView;
+@property (nonatomic,strong) UIView *sepView; //分割线
+@property (nonatomic,strong) UIView *selectView;
 
 @property (nonatomic,strong) TDBaseView *loadingView;
 
 @property (nonatomic,strong) NSMutableArray *titleButtonArray;
-@property (nonatomic,strong) NSMutableArray *lineArray;
 
 @property (nonatomic, strong) OEXInterface *dataInterface;
 @property (nonatomic, strong) NSMutableArray *courseDataArray; //下载课程的数组
@@ -51,23 +54,16 @@
     return _titleButtonArray;
 }
 
-- (NSMutableArray *)lineArray {
-    if (!_lineArray) {
-        _lineArray = [[NSMutableArray alloc] init];
-    }
-    return _lineArray;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
 //    [LanguageChangeTool initUserLanguage]; //语言
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     
-    [self setTitleLabel];
     [self setViewConstraint];
     
     [self addAllChildViewController];
+    [self setSepView];
     [self addTopTitlebutton];
     
     [self setNavigationStyle];
@@ -151,6 +147,13 @@
 
 #pragma mark - 导航栏
 - (void)setNavigationStyle {
+    
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, TDWidth - 188, 44)];
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:18.0];
+    self.titleLabel.textColor = [UIColor whiteColor];
+    self.titleLabel.text = TDLocalizeSelect(@"MY_VIDEOS", nil);
+    self.navigationItem.titleView = self.titleLabel;
     
     self.selectAllButton = [[OEXCheckBox alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     self.selectAllButton.tintColor = [[OEXStyles sharedStyles] navigationItemTintColor];
@@ -240,7 +243,7 @@
 - (void)setViewConstraint {
     
     self.titleView = [[UIScrollView  alloc] initWithFrame:CGRectMake(0, 0, TDWidth, TitleView_Height)];
-    self.titleView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
+    self.titleView.backgroundColor = [UIColor colorWithHexString:colorHexStr13];
     [self.view addSubview:self.titleView];
     
     self.contentView = [[TDBaseScrollView alloc] init];
@@ -250,10 +253,22 @@
     self.contentView.frame = CGRectMake(0, TitleView_Height, TDWidth, TDHeight - TitleView_Height - 60);
     self.contentView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     [self.view addSubview:self.contentView];
+}
+
+//添加分割线
+- (void)setSepView {
     
-    UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, TitleView_Height - 1, TDWidth, 1)];
-    line.backgroundColor = [UIColor colorWithHexString:colorHexStr6];
-    [self.titleView addSubview:line];
+    CGFloat y = CGRectGetMaxY(self.titleView.frame);
+    self.sepView = [[UIView alloc] init];
+    self.sepView.backgroundColor = [UIColor colorWithHexString:colorHexStr6];
+    self.sepView.frame = CGRectMake(0, y, TDWidth, 1);
+    [self.view addSubview:self.sepView];
+    
+    self.selectView = [[UIView alloc] init];
+    self.selectView.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
+    self.selectView.frame = CGRectMake(0, -1, TITLTE_BUTTON_WIDTH, 2);
+    [self.sepView addSubview:self.selectView];
+
 }
 
 - (void)addAllChildViewController {
@@ -303,13 +318,6 @@
         
         [self.titleButtonArray addObject:titleButton];
         
-        UIView *sliView = [[UIView alloc] initWithFrame:CGRectMake(width * i, TitleView_Height - 2, width, 2)];
-        sliView.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
-        sliView.hidden = YES;
-        [self.titleView addSubview:sliView];
-        
-        [self.lineArray addObject:sliView];
-        
         if (i == 0) {
             [titleButton setTitle:TDLocalizeSelect(@"ALL_VIDEOS", nil) forState:UIControlStateNormal];
             [self titleButtonAction:titleButton];
@@ -341,20 +349,29 @@
         UIButton *button = self.titleButtonArray[i];
         NSString *colorStr = i == sender.tag ? colorHexStr1 : colorHexStr9;
         [button setTitleColor:[UIColor colorWithHexString:colorStr] forState:UIControlStateNormal];
-
-        UIView *sliView = self.lineArray[i];
-        sliView.hidden = i == sender.tag ? NO : YES;
     }
+    
+    [self setSelectViewFrame:sender.tag * TITLTE_BUTTON_WIDTH];
+}
+
+- (void)setSelectViewFrame:(CGFloat)x {
+    WS(weakSelf);
+    [UIView animateWithDuration:0.3 animations:^{
+        weakSelf.selectView.frame = CGRectMake(x, -1, TITLTE_BUTTON_WIDTH, 2); //处理指示线的位置
+    }];
 }
 
 #pragma mark - UIViewDelegate
-
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     
     NSInteger page = scrollView.contentOffset.x / TDWidth;
     UIButton *selButton = self.titleButtonArray[page];
     [self selectButton:selButton];
     [self setUpChildViewController:page];//添加子控制器的view
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self setSelectViewFrame:scrollView.contentOffset.x / self.childViewControllers.count];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
@@ -374,17 +391,6 @@
     CGFloat x = index * TDWidth;
     vc.view.frame = CGRectMake(x, 0, TDWidth, self.contentView.bounds.size.height);
     [self.contentView addSubview:vc.view];
-}
-
-#pragma mark - 导航栏标题
-- (void)setTitleLabel {
-    
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, TDWidth - 188, 44)];
-    self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:18.0];
-    self.titleLabel.textColor = [UIColor whiteColor];
-    self.titleLabel.text = TDLocalizeSelect(@"MY_VIDEOS", nil);
-    self.navigationItem.titleView = self.titleLabel;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

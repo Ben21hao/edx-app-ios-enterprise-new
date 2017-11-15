@@ -21,7 +21,6 @@
 - (void)setViewConstraint {
     
     self.bgView = [[UIView alloc] init];
-    self.bgView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     [self addSubview:self.bgView];
     
     self.courseImage = [[UIImageView alloc] init];
@@ -52,7 +51,6 @@
     }];
     
     self.courseImage.image = [UIImage imageNamed:@"course_backGroud"];
-    self.titleLabel.text = @"课程";
 }
 
 @end

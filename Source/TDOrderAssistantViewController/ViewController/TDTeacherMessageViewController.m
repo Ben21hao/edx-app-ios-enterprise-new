@@ -51,12 +51,9 @@
     }
 }
 
-
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-
 
 #pragma mark - 滚动
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -70,6 +67,10 @@
     if (offsetY < 0) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"childView_ScrollLeadTop" object:nil];
     }
+}
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
+    return YES;
 }
 
 #pragma mark - UI

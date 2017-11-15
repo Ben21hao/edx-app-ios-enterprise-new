@@ -9,9 +9,9 @@
 #import "TDPageingViewController.h"
 
 #define TITLEVIEW_HEIGHT 45
-#define TITLTE_BUTTON_WIDTH TDWidth / self.titleButtons.count
+#define TITLTE_BUTTON_WIDTH TDWidth / self.childViewControllers.count
 
-@interface TDPageingViewController () <UIScrollViewDelegate,UIGestureRecognizerDelegate>
+@interface TDPageingViewController () <UIScrollViewDelegate,UIGestureRecognizerDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) UIScrollView *titleView;
 
@@ -42,20 +42,44 @@
     [self setViewConstraint];
 }
 
-- (void)setSubTitleConstraint {
-    [self setUpSubtitleButton]; //设置标题
-    [self setSepView];    //添加分割线
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+}
+
+#pragma mark - 导航栏左边按钮
+- (void)setLeftNavigationBar {
+    
+    self.leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 48, 48)];
+    [self.leftButton setImage:[UIImage imageNamed:@"backImagee"] forState:UIControlStateNormal];
+    self.leftButton.showsTouchWhenHighlighted = YES;
+    self.leftButton.imageEdgeInsets = UIEdgeInsetsMake(0, -23, 0, 23);
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+        self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    }
+    
+    [self.leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.leftButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftButton];
+    
+}
+
+- (void)backButtonAction:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - 头部view
+- (void)setSubTitleConstraint {
+    [self setSepView];    //添加分割线
+    [self setUpSubtitleButton]; //设置标题
 }
 
 #pragma mark - UI
 - (void)setViewConstraint {
     
     self.titleView = [[UIScrollView alloc] init];
-    self.titleView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
+    self.titleView.backgroundColor = [UIColor colorWithHexString:colorHexStr13];
     self.titleView.frame = CGRectMake(0, 0, TDWidth, 45);
     [self.view addSubview:self.titleView];
     
@@ -136,10 +160,13 @@
         NSString *colorStr = i == sender.tag ? colorHexStr1 : colorHexStr9;
         [button setTitleColor:[UIColor colorWithHexString:colorStr] forState:UIControlStateNormal];
     }
-    
+    [self setSelectViewFrame:TITLTE_BUTTON_WIDTH * sender.tag];
+}
+
+- (void)setSelectViewFrame:(CGFloat)x {
     WS(weakSelf);
-    [UIView animateWithDuration:0.5 animations:^{
-        weakSelf.selectView.frame = CGRectMake(TITLTE_BUTTON_WIDTH * sender.tag, -1, TITLTE_BUTTON_WIDTH, 2); //处理指示线的位置
+    [UIView animateWithDuration:0.3 animations:^{
+        weakSelf.selectView.frame = CGRectMake(x, -1, TITLTE_BUTTON_WIDTH, 2); //处理指示线的位置
     }];
 }
 
@@ -165,10 +192,7 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    WS(weakSelf);
-    [UIView animateWithDuration:0.5 animations:^{
-        weakSelf.selectView.frame = CGRectMake(scrollView.contentOffset.x / 3, -1, TITLTE_BUTTON_WIDTH, 2);//处理指示线的位置
-    }];
+    [self setSelectViewFrame:scrollView.contentOffset.x / 3];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {

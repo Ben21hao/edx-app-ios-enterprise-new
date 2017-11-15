@@ -87,7 +87,7 @@
             _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
         }
         
-        NSLog(@"---------------------->>>>>>  %@",rawEncodings);
+//        NSLog(@"---------------------->>>>>>  %@",rawEncodings);
     }
 
     return self;

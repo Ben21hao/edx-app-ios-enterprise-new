@@ -12,6 +12,7 @@
 @interface TDSortCourseCell ()
 
 @property (nonatomic,strong) UIView *bgView;
+@property (nonatomic,strong) UILabel *noDataLabel;
 
 @end
 
@@ -35,14 +36,30 @@
         make.left.right.top.bottom.mas_equalTo(self);
     }];
     
+    self.noDataLabel = [[UILabel alloc] init];
+    self.noDataLabel.text = TDLocalizeSelect(@"NO_CATEGORIES", nil);
+    self.noDataLabel.textAlignment = NSTextAlignmentCenter;
+    self.noDataLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
+    self.noDataLabel.textColor = [UIColor colorWithHexString:colorHexStr9];
+    [self.bgView addSubview:self.noDataLabel];
+    
+    [self.noDataLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(self.bgView);
+    }];
+    self.noDataLabel.hidden = YES;
 }
 
 - (void)setTagArray:(NSArray *)tagArray {
     _tagArray = tagArray;
     
-    [self setTagView];
+    self.noDataLabel.hidden = tagArray.count > 0;
+    if (tagArray.count > 0) {
+        [self setTagView];
+    }
+   
 }
 
+#pragma mark - 标签布局
 - (void)setTagView {
     if (self.tagArray > 0) {
         
@@ -50,9 +67,6 @@
         CGFloat topHeight = 0;
         NSInteger row = 1;
         for (int i = 0; i < self.tagArray.count; i ++) {
-            
-            TDCourseTagModel *model = self.tagArray[i];
-            NSString *titleStr = [NSString stringWithFormat:@"%@  %@",model.subject_name,model.count];
             
             CGFloat width = [self getTagStrWidh:i];
             
@@ -73,7 +87,7 @@
                 }
             }
             
-            UIButton *tagButton = [self setTagButton:titleStr ndex:i];
+            UIButton *tagButton = [self setTagButtonIndex:i];
             [self.bgView addSubview:tagButton];
             
             [tagButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -97,7 +111,7 @@
     return width;
 }
 
-- (UIButton *)setTagButton:(NSString *)titleStr ndex:(NSInteger)index {
+- (UIButton *)setTagButtonIndex:(NSInteger)index {
     
     UIButton *button = [[UIButton alloc] init];
     button.layer.masksToBounds = YES;
@@ -110,8 +124,13 @@
     [button setTitleColor:[UIColor colorWithHexString:colorHexStr9] forState:UIControlStateNormal];
     
     button.tag = index;
-    [button setTitle:titleStr forState:UIControlStateNormal];
     [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    TDCourseTagModel *model = self.tagArray[index];
+    NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:model.subject_name attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr9]}];
+    NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"  %@",model.count] attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr1]}];
+    [str1 appendAttributedString:str2];
+    [button setAttributedTitle:str1 forState:UIControlStateNormal];
     
     return button;
 }
@@ -119,10 +138,9 @@
 - (void)buttonAction:(UIButton *)sender { //跳转
     if (self.selectTagButtonHandle) {
         TDCourseTagModel *model = self.tagArray[sender.tag];
-        self.selectTagButtonHandle(model.subject_id);
+        self.selectTagButtonHandle(model);
     }
 }
-
 
 @end
 

@@ -18,4 +18,8 @@
 
 - (void)setSubTitleConstraint; //子标题的布局
 
+@property (nonatomic,strong) UIButton *leftButton;
+- (void)setLeftNavigationBar; //设置左边导航
+- (void)backButtonAction:(UIButton *)sender; //返回
+
 @end

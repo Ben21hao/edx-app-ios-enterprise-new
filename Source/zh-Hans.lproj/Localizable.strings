@@ -1629,8 +1629,21 @@
 "PARTICIPATE_LIVE_TEXT" = "参与讲座直播";
 /*暂无讲座 No lecture yet.*/
 "NO_LIVE_LECTURE_TEXT" = "暂无讲座";
-/*企业暂未发布任何课程  Could not find any available courses*/
-"NO_COURSE_AVAILABLE_TEXT" = "企业暂未发布任何课程";
+/*暂无课程 No available courses yet*/
+"NO_COURSE_AVAILABLE_TEXT" = "暂无课程";
+
+/*专属课程 Exclusive Courses*/
+"EXCLUSIVE_COURSES" = "专属课程";
+/*英荔课程 EliteU Courses*/
+"ELITEU_COURSES" = "英荔课程";
+/*课程分类 Categories*/
+"CATEGORIES" = "课程分类";
+/*暂无分类 No categories yet*/
+"NO_CATEGORIES" = "暂无分类";
+/*共N门课 N courses in total*/
+"TOTAL_COURSE_COUNTS" = "共{count}门课";
+/*哎哟喂！当前页面一气之下，逃离服务器了。 Oops! This page has thrown a tantrum and threw itself out of the server.*/
+"SERVICE_FAILED" = "哎哟喂！当前页面一气之下，逃离服务器了";
 
 /*抽奖中Processing*/
 "PROCESSING_TIP_TEXT" = "抽奖中";

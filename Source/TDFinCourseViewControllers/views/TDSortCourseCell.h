@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TDCourseTagModel.h"
 
 @interface TDSortCourseCell : UITableViewCell
 
 @property (nonatomic,strong) NSArray *tagArray;
 
-@property (nonatomic,copy) void(^selectTagButtonHandle)(NSString *subject_id);
+@property (nonatomic,copy) void(^selectTagButtonHandle)(TDCourseTagModel *tagModel);
 
 @end

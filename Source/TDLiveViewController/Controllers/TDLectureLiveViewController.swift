@@ -25,7 +25,7 @@ class TDLectureLiveViewController: TDSwiftBaseViewController, UIScrollViewDelega
     private let titleView = UIScrollView()
     private let contentView = TDBaseScrollView()
     private let sepView = UIView()
-    private let sliV = UIView()
+    private let selectView = UIView()
     
     private let titleButtons = NSMutableArray()
     private let toolModel = TDBaseToolModel()
@@ -57,7 +57,7 @@ class TDLectureLiveViewController: TDSwiftBaseViewController, UIScrollViewDelega
     func setViewConstraint() {
         self.view.backgroundColor = OEXStyles.sharedStyles().baseColor5()
         
-        self.titleView.backgroundColor = OEXStyles.sharedStyles().baseColor5()
+        self.titleView.backgroundColor = OEXStyles.sharedStyles().baseColor13()
         self.titleView.frame = CGRectMake(0, 0, TDScreenWidth, viewHeight)
         self.view.addSubview(self.titleView)
         
@@ -65,7 +65,7 @@ class TDLectureLiveViewController: TDSwiftBaseViewController, UIScrollViewDelega
         self.contentView.bounces = false
         self.contentView.frame = CGRectMake(0, viewHeight, TDScreenWidth, TDScreenHeight - viewHeight - 60)
         self.contentView.delegate = self
-        self.contentView.backgroundColor = OEXStyles.sharedStyles().baseColor5()
+        self.contentView.backgroundColor = OEXStyles.sharedStyles().baseColor13()
         self.view.addSubview(self.contentView)
     }
     
@@ -78,9 +78,8 @@ class TDLectureLiveViewController: TDSwiftBaseViewController, UIScrollViewDelega
             self.addChildViewController(subVc)
         }
         
-        setUpSubtitle() //设置标题
         setSepView() //添加分割线
-        setSliView(0) //设置指示view
+        setUpSubtitle() //设置标题
     }
     
     //MARK: 设置按钮标题
@@ -124,15 +123,17 @@ class TDLectureLiveViewController: TDSwiftBaseViewController, UIScrollViewDelega
         self.sepView.frame = CGRectMake(0, y, TDScreenWidth, 1)
         self.view.addSubview(self.sepView)
         
-        self.sliV.backgroundColor = OEXStyles.sharedStyles().baseColor1()
-        self.sliV.frame = CGRectMake(0, y, TDScreenWidth / 2, 2)
-        self.view.addSubview(self.sliV)
+        self.selectView.backgroundColor = OEXStyles.sharedStyles().baseColor1()
+        self.selectView.frame = CGRectMake(0, -1, TDScreenWidth / CGFloat(self.childViewControllers.count), 2)
+        self.sepView.addSubview(self.selectView)
     }
     
     //MARK: 设置指示view
-    func setSliView(index: Int) {
-        let y = CGRectGetMaxY(self.titleView.frame)
-        self.sliV.frame = CGRectMake(CGFloat(index) * (TDScreenWidth / 2), y, TDScreenWidth / 2, 2)
+    func setselectViewFrame(x: CGFloat) {
+        
+        UIView.animateWithDuration(0.3) { 
+            self.selectView.frame = CGRectMake(x, -1, TDScreenWidth / CGFloat(self.childViewControllers.count), 2)
+        }
     }
     
     //MARK: 选中按钮
@@ -143,7 +144,7 @@ class TDLectureLiveViewController: TDSwiftBaseViewController, UIScrollViewDelega
             let button : UIButton = self.titleButtons[i] as! UIButton
             button.setTitleColor(i == sender.tag ? OEXStyles.sharedStyles().baseColor1() : OEXStyles.sharedStyles().baseColor9(), forState: .Normal)
         }
-        setSliView(sender.tag)
+        setselectViewFrame(CGFloat(sender.tag) * (TDScreenWidth / CGFloat(self.childViewControllers.count)))
     }
     
     //MARK: 选中
@@ -159,8 +160,6 @@ class TDLectureLiveViewController: TDSwiftBaseViewController, UIScrollViewDelega
 
     //MARK: 添加对应的子控制器
     func setUpChildViewController(index: Int) {
-        
-//        selView(index)
         
         let vc : UIViewController = self.childViewControllers[index]
         if (vc.view.superview != nil) {
@@ -179,6 +178,10 @@ class TDLectureLiveViewController: TDSwiftBaseViewController, UIScrollViewDelega
         let selButton : UIButton = self.titleButtons[page] as! UIButton
         selectButton(selButton)
         setUpChildViewController(page)
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        setselectViewFrame(scrollView.contentOffset.x / CGFloat(self.titleButtons.count));
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {

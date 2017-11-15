@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TDCourseTagModel.h"
 
 @interface TDCourseListViewController : TDBaseViewController
 
@@ -14,6 +15,8 @@
 
 @property (nonatomic,strong) NSString *username;
 @property (nonatomic,strong) NSString *company_id;
-@property (nonatomic,strong) NSString *subject_id; //选择的tag
+
+@property (nonatomic,strong) TDCourseTagModel *tagModel; //选择的tag
+
 
 @end

@@ -1629,8 +1629,21 @@
 "PARTICIPATE_LIVE_TEXT" = "Participate in a live lecture.";
 /*暂无讲座 No lecture yet.*/
 "NO_LIVE_LECTURE_TEXT" = "No lecture yet.";
-/*企业暂未发布任何课程  Could not find any available courses*/
-"NO_COURSE_AVAILABLE_TEXT" = "Could not find any available courses.";
+/*暂无课程 No available courses yet*/
+"NO_COURSE_AVAILABLE_TEXT" = "No available courses yet.";
+
+/*专属课程 Exclusive Courses*/
+"EXCLUSIVE_COURSES" = "Exclusives";
+/*英荔课程 EliteU Courses*/
+"ELITEU_COURSES" = "EliteU";
+/*课程分类 Categories*/
+"CATEGORIES" = "Categories";
+/*暂无分类 No categories yet*/
+"NO_CATEGORIES" = "No categories yet.";
+/*共N门课 N courses in total*/
+"TOTAL_COURSE_COUNTS" = "{count} courses in total";
+/*哎哟喂！当前页面一气之下，逃离服务器了。 Oops! This page has thrown a tantrum and threw itself out of the server.*/
+"SERVICE_FAILED" = "Oops! This page has thrown a tantrum and threw itself out of the server.";
 
 /*抽奖中Processing*/
 "PROCESSING_TIP_TEXT" = "Processing";

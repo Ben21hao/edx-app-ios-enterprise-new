@@ -49,7 +49,6 @@
     OEXCourse *courseModel = self.courseArray[indexPath.row];
     NSString *imageStr = [self.toolModel dealwithImageStr:[NSString stringWithFormat:@"%@%@",ELITEU_URL,courseModel.courseImageURL]];
     
-    
     TDFindCourseCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TDEliteCourseViewControllerCell" forIndexPath:indexPath];
     cell.titleLabel.text = courseModel.name;
     [cell.courseImage sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:@"course_backGroud"]];
@@ -60,7 +59,9 @@
 #pragma mark - UICollectionViewDelegateFlowLayout
 //设置每个Cell 的宽高
 - (CGSize)collectionView:(UICollectionView *)collectionView  layout:(nonnull UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    return CGSizeMake((TDWidth - 24) / 2, (TDWidth - 24) / 2 * 9 / 16 + 53);
+    
+    CGFloat height = [self dealWithHeightForItem:indexPath.row];
+    return CGSizeMake((TDWidth - 24) / 2, (TDWidth - 24) / 2 * 9 / 16 + 18 + height);
 }
 
 //设置每组的cell的边界，上左下右
@@ -75,7 +76,7 @@
 
 //cell的最小列间距，是由API自动计算的，只有当间距小于该值时，cell会进行换行
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 0;
+    return 8;
 }
 
 //返回头headerView的大小
@@ -114,6 +115,35 @@
     }
 }
 
+#pragma mark - 取相对高的高度
+- (CGFloat)dealWithHeightForItem:(NSInteger)row { //规则： 对比左右单元的高度，取大的那个
+    
+    CGFloat height1 = [self getHeithForString:row];;
+    
+    if (row % 2 == 0) { //row : 0 2 4 双数，左边
+        
+        if (row + 1 < self.courseArray.count) {
+            
+            CGFloat height2 = [self getHeithForString:row + 1];
+            return MAX(height1, height2);
+            
+        } else {
+            return height1;
+        }
+    } else { //右边
+        
+        CGFloat height2 = [self getHeithForString:row - 1];
+        return MAX(height1, height2);
+    }
+}
+
+- (CGFloat)getHeithForString:(NSInteger)row {
+    
+    OEXCourse *courseModel = self.courseArray[row];
+    CGFloat height = [self.toolModel heightForString:courseModel.name font:14 width:(TDWidth - 24) / 2];
+
+    return height > 39 ? 39 : height;
+}
 
 #pragma mark - UI
 - (void)setViewConstraint {
@@ -128,12 +158,25 @@
     self.collectionView.showsHorizontalScrollIndicator = NO;
     [self.collectionView registerClass:[TDFindCourseCollectionViewCell class] forCellWithReuseIdentifier:@"TDEliteCourseViewControllerCell"];
 //    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"UICollectionViewHeader"]; //注册头部视图
-    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.backgroundColor = [[UIColor colorWithHexString:colorHexStr13] colorWithAlphaComponent:0.4];
     [self addSubview:self.collectionView];
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.mas_equalTo(self);
     }];
+    
+    self.noDataLabel = [[UILabel alloc] init];
+    self.noDataLabel.textColor = [UIColor colorWithHexString:colorHexStr9];
+    self.noDataLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
+    self.noDataLabel.textAlignment = NSTextAlignmentCenter;
+    self.noDataLabel.text = TDLocalizeSelect(@"NO_COURSE_AVAILABLE_TEXT", nil);
+    [self.collectionView addSubview:self.noDataLabel];
+    
+    [self.noDataLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(self.collectionView);
+    }];
+    
+    self.noDataLabel.hidden = YES;
 }
 
 

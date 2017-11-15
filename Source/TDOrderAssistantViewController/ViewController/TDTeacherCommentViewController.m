@@ -15,7 +15,6 @@
 
 #import <MJRefresh/MJRefresh.h>
 #import <MJExtension/MJExtension.h>
-//#import "SDAutoLayout.h"
 
 #define TopView_Width 228
 
@@ -368,6 +367,9 @@
     return height;
 }
 
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
+    return YES;
+}
 
 #pragma mark - UI
 - (void)setviewConstraint {
@@ -481,7 +483,6 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

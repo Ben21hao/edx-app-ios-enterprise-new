@@ -12,6 +12,9 @@
 #import "TDCourseTagModel.h"
 
 #import <MJExtension/MJExtension.h>
+#import <MJRefresh/MJRefresh.h>
+
+#import "NSString+OEXFormatting.h"
 
 @interface TDSortCourseViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -68,6 +71,9 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
+        [self.companyArray removeAllObjects];
+        [self.eliteArray removeAllObjects];
+        
         NSDictionary *responseDic = (NSDictionary *)responseObject;
         id code = responseDic[@"code"];
         if ([code intValue] == 200) {
@@ -94,22 +100,32 @@
                     }
                 }
             }
-            [self.tableView reloadData];
-        } else {
             
+        } else {
+            NSLog(@"%@----------%@",code,responseDic[@"msg"]);
+            [self.view makeToast:TDLocalizeSelect(@"SERVICE_FAILED", nil) duration:1.08 position:CSToastPositionCenter];
         }
+        
+        [self.tableView reloadData];
         [self showOrHideNoDataLabel];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         [self showOrHideNoDataLabel];
+        
         NSLog(@"获取课程分类tag -- %ld",(long)error.code);
     }];
 }
 
 - (void)showOrHideNoDataLabel {
+    
     self.loadIngView.hidden = YES;
+    [self.tableView.mj_header endRefreshing];
+}
+
+- (void)headerRefresh {
+    [self getAllTagData];
 }
 
 #pragma mark - UITableViewDelegate
@@ -135,9 +151,10 @@
         cell.textLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
         cell.detailTextLabel.textColor = [UIColor colorWithHexString:colorHexStr9];
         
-        cell.textLabel.text = indexPath.section == 0 ? @"内部课程" : @"英荔课程";
+        cell.textLabel.text = indexPath.section == 0 ? TDLocalizeSelect(@"EXCLUSIVE_COURSES", nil) : TDLocalizeSelect(@"ELITEU_COURSES", nil);
         NSString *countStr = indexPath.section == 0 ? self.company_count : self.eliteu_count;
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"共%@门课",countStr];
+        NSString *count = countStr == nil ? @"0" : countStr;
+        cell.detailTextLabel.text = [TDLocalizeSelect(@"TOTAL_COURSE_COUNTS", nil) oex_formatWithParameters:@{@"count": count}]; //[NSString stringWithFormat:@"共%@门课",countStr];
         
         return cell;
         
@@ -149,8 +166,8 @@
         cell.tagArray = indexPath.section == 0 ? self.companyArray : self.eliteArray;
         
         WS(weakSelf);
-        cell.selectTagButtonHandle = ^(NSString *subject_id){
-            [weakSelf gotoSpecificSortVC:subject_id];
+        cell.selectTagButtonHandle = ^(TDCourseTagModel *tagModel){
+            [weakSelf gotoSpecificSortVC:tagModel];
         };
         
         return cell;
@@ -194,7 +211,7 @@
             }
         }
     }
-    return topHeight + 13 > 47 ? topHeight + 13 : 47;
+    return topHeight + 37 > 47 ? topHeight + 37 : 47;
 }
 
 - (CGFloat)getTagStrWidh:(NSArray *)tagArray index:(NSInteger)index {
@@ -208,12 +225,12 @@
 }
 
 #pragma mark - action
-- (void)gotoSpecificSortVC:(NSString *)subject_id {
+- (void)gotoSpecificSortVC:(TDCourseTagModel *)tagModel {
     
     TDCourseListViewController *courseListVc = [[TDCourseListViewController alloc] init];
     courseListVc.username = self.username;
     courseListVc.company_id = self.company_id;
-    courseListVc.subject_id = subject_id;
+    courseListVc.tagModel = tagModel;
     courseListVc.whereFrom = 2;
     [self.navigationController pushViewController:courseListVc animated:YES];
 }
@@ -221,12 +238,19 @@
 #pragma mark - UI
 - (void)setViewConstraint {
     
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+    header.lastUpdatedTimeLabel.hidden = YES; //隐藏时间
+    [header setTitle:TDLocalizeSelect(@"DROP_REFRESH_TEXT", nil) forState:MJRefreshStateIdle];
+    [header setTitle:TDLocalizeSelect(@"RELEASE_REFRESH_TEXT", nil) forState:MJRefreshStatePulling];
+    [header setTitle:TDLocalizeSelect(@"REFRESHING_TEXT", nil) forState:MJRefreshStateRefreshing];
+    
     self.tableView = [[UITableView alloc] init];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorInset = UIEdgeInsetsZero;
     self.tableView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
-    self.tableView.tableFooterView = [UIView new];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, 1)];
+    self.tableView.mj_header = header;
     [self.view addSubview:self.tableView];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

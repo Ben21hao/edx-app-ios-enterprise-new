@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TDBaseViewController.h"
+#import "TDPageingViewController.h"
 
-@interface TDAssistantServiceViewController : TDBaseViewController
+@interface TDAssistantServiceViewController : TDPageingViewController
 
 @property (nonatomic,strong) NSString *username;
 @property (nonatomic,strong) NSString *company_id;
