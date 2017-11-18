@@ -61,11 +61,12 @@
 
 #pragma mark - 标签布局
 - (void)setTagView {
+    
     if (self.tagArray > 0) {
         
         CGFloat leftWidth = 0;
         CGFloat topHeight = 0;
-        NSInteger row = 1;
+        
         for (int i = 0; i < self.tagArray.count; i ++) {
             
             CGFloat width = [self getTagStrWidh:i];
@@ -83,7 +84,6 @@
                 if (leftWidth + width + 13 > TDWidth) {
                     leftWidth = 13;
                     topHeight = topHeight + 24 + 13;
-                    row ++ ;
                 }
             }
             
@@ -108,6 +108,10 @@
     TDBaseToolModel *toolModel = [[TDBaseToolModel alloc] init];
     CGFloat width = [toolModel widthForString:titleStr font:12] + 28;
     
+    if (width + 26 > TDWidth) {
+        width = TDWidth - 26;
+    }
+    
     return width;
 }
 
@@ -121,10 +125,13 @@
     button.showsTouchWhenHighlighted = YES;
     button.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
     button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    button.titleLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
     [button setTitleColor:[UIColor colorWithHexString:colorHexStr9] forState:UIControlStateNormal];
     
     button.tag = index;
     [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    button.contentEdgeInsets = UIEdgeInsetsMake(0, 13, 0, 13);
     
     TDCourseTagModel *model = self.tagArray[index];
     NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:model.subject_name attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr9]}];

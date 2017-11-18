@@ -8,6 +8,7 @@
 
 #import "TDProfessorViewController.h"
 #import <UIImageView+WebCache.h>
+#import "NSObject+OEXReplaceNull.h"
 
 @interface TDProfessorViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -75,26 +76,29 @@
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/professor/?username=%@",ELITEU_URL,self.professorName];
     
     [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"success--%@",responseObject);
+        NSLog(@"success----->>> %@",responseObject);
         
         NSDictionary *responDic = (NSDictionary *)responseObject;
         id code = responDic[@"code"];
         
         if ([code intValue] == 200) {
-            self.imageUrl = responseObject[@"data"][@"avatar_url"];//头像
-            self.name = responseObject[@"data"][@"professor_name"];//姓名
-            self.college = responseObject[@"data"][@"college"];//毕业院校
-            self.major = responseObject[@"data"][@"specialty"];//专业
-            self.degrees = responseObject[@"data"][@"degrees"];//学位
-            self.motto = [responseObject[@"data"][@"slogan"] stringByReplacingOccurrencesOfString:@"</br>" withString:@"\n"];//个性语句
             
-            self.introduce = [[responseObject[@"data"][@"introduction"] stringByReplacingOccurrencesOfString:@"<i>" withString:@""]stringByReplacingOccurrencesOfString:@"</i>" withString:@""];//1 教授简介
-            self.achievement = [responseObject[@"data"][@"main_achievements"] stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];//2 主要成就
-            self.education = [responseObject[@"data"][@"education_experience"] stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];//3 教育背景
-            self.otherAchievement = [responseObject[@"data"][@"other_achievements"] stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];//4 其他成就
-            self.research = [responseObject[@"data"][@"research_fields"] stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];//5 研究领域
-            self.learning = [[responseObject[@"data"][@"research_papers"] stringByReplacingOccurrencesOfString:@"<i>" withString:@""]stringByReplacingOccurrencesOfString:@"</i>" withString:@""];//6 学术刊物文章
-            self.project = responseObject[@"data"][@"project_experience"];//7 管理咨询项目
+            NSDictionary *dataDic = [responDic[@"data"] oex_replaceNullsWithEmptyStrings];
+            
+            self.imageUrl = dataDic[@"avatar_url"];//头像
+            self.name = dataDic[@"professor_name"];//姓名
+            self.college = dataDic[@"college"];//毕业院校
+            self.major = dataDic[@"specialty"];//专业
+            self.degrees = dataDic[@"degrees"];//学位
+            self.motto = [dataDic[@"slogan"] stringByReplacingOccurrencesOfString:@"</br>" withString:@"\n"];//个性语句
+            
+            self.introduce = [[dataDic[@"introduction"] stringByReplacingOccurrencesOfString:@"<i>" withString:@""]stringByReplacingOccurrencesOfString:@"</i>" withString:@""];//1 教授简介
+            self.achievement = [dataDic[@"main_achievements"] stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];//2 主要成就
+            self.education = [dataDic[@"education_experience"] stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];//3 教育背景
+            self.otherAchievement = [dataDic[@"other_achievements"] stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];//4 其他成就
+            self.research = [dataDic[@"research_fields"] stringByReplacingOccurrencesOfString:@"<br />" withString:@"\n"];//5 研究领域
+            self.learning = [[dataDic[@"research_papers"] stringByReplacingOccurrencesOfString:@"<i>" withString:@""]stringByReplacingOccurrencesOfString:@"</i>" withString:@""];//6 学术刊物文章
+            self.project = dataDic[@"project_experience"];//7 管理咨询项目
             
             [self setUpView];
             [self.tableView reloadData];
@@ -114,7 +118,6 @@
         
     }];
 }
-
 
 #pragma mark - tableview Delegate 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

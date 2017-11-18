@@ -60,8 +60,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
-    self.page = 1;
+   
     self.isForgound = NO;
 }
 

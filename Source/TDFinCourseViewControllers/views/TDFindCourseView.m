@@ -147,6 +147,7 @@
 
 #pragma mark - UI
 - (void)setViewConstraint {
+    self.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     
     UICollectionViewFlowLayout *layout  = [[UICollectionViewFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;

@@ -45,8 +45,10 @@ static OEXFlowErrorViewController* _sharedInterface = nil;
 #pragma mark Public Actions
 
 - (void)showErrorWithTitle:(NSString*)title message:(NSString*)message onViewController:(UIView*)View shouldHide:(BOOL)hide {
+    
     //Remove previous instance and animation
     [self removeSelfFromSuperView];
+    
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
 
     //Set initial frame

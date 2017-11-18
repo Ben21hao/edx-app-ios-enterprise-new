@@ -16,9 +16,9 @@ protocol CourseDashboardItem {
     func decorateCell(cell: UITableViewCell)
 }
 
-struct StandardCourseDashboardItem : CourseDashboardItem {
+struct StandardCourseDashboardItem : CourseDashboardItem { //标准 cell 的item
     let identifier = CourseDashboardCell.identifier
-    let height:CGFloat = 85.0
+    let height:CGFloat = 83.0
 
     let title: String
     let detail: String
@@ -33,7 +33,7 @@ struct StandardCourseDashboardItem : CourseDashboardItem {
     }
 }
 
-struct CertificateDashboardItem: CourseDashboardItem {
+struct CertificateDashboardItem: CourseDashboardItem { //证书 cell 的item
     let identifier = CourseCertificateCell.identifier
     let height: CGFloat = 116.0
 
@@ -264,6 +264,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     
     public override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
+        
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRowAtIndexPath(indexPath, animated: false)
         }

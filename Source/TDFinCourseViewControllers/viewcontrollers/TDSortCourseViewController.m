@@ -217,9 +217,13 @@
 - (CGFloat)getTagStrWidh:(NSArray *)tagArray index:(NSInteger)index {
     
     TDCourseTagModel *model = tagArray[index];
-    NSString *titleStr = [NSString stringWithFormat:@"%@  %@",model.subject_name,model.count];
     
+    NSString *titleStr = [NSString stringWithFormat:@"%@  %@",model.subject_name,model.count];
     CGFloat width = [self.toolModel widthForString:titleStr font:12] + 28;
+    
+    if (width + 26 > TDWidth) {
+        width = TDWidth - 26;
+    }
     
     return width;
 }

@@ -299,7 +299,7 @@ static OEXStyles* sSharedStyles;
                                        size:size];
 }
 
-- (NSString*)styleHTMLContent:(NSString*)htmlString stylesheet:(NSString*)stylesheet {
+- (NSString*)styleHTMLContent:(NSString*)htmlString stylesheet:(NSString*)stylesheet { //用于加载 css
     NSString* path = [[NSBundle mainBundle] pathForResource:stylesheet ofType:@"css"];
     NSError* error = nil;
     NSMutableString* css = [NSMutableString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];

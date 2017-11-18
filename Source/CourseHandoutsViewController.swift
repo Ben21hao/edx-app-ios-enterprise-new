@@ -117,11 +117,12 @@ public class CourseHandoutsViewController: OfflineSupportViewController, UIWebVi
     private func addListener() {
         handouts.listen(self, success: { [weak self] courseHandouts in
             if let
-                displayHTML = OEXStyles.sharedStyles().styleHTMLContent(courseHandouts, stylesheet: "handouts-announcements"),
+                displayHTML = OEXStyles.sharedStyles().styleHTMLContent(courseHandouts, stylesheet: "handouts-announcements"),  //使用加载 css 的方法
                 apiHostUrl = OEXConfig.sharedConfig().apiHostURL()
             {
                 self?.webView.loadHTMLString(displayHTML, baseURL: apiHostUrl)
                 self?.loadController.state = .Loaded
+                
             } else {
                 self?.loadController.state = LoadState.failed()
             }
@@ -173,7 +174,7 @@ public class CourseHandoutsViewController: OfflineSupportViewController, UIWebVi
         self.loadController.state = .Loaded
     }
     
-    func gotoWebView(url: NSURL) {
+    func gotoWebView(url: NSURL) { //网页显示类
         let webViewController = TDWebUrlViewController()
         webViewController.url = url
         webViewController.titleStr = TDLocalizeSelectSwift("COURSE_HANDOUTS")

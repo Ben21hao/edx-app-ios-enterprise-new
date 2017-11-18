@@ -59,7 +59,7 @@
     
     [self setLoadDataView]; //加载页面
     
-    [self requestTopData]; //获取数据
+    [self requestConcurrentDataRequest];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -68,16 +68,36 @@
     self.titleViewLabel.text = TDLocalizeSelect(@"STUDENT_COMMENT", nil);
 }
 
-- (void)requestCommentData { //多并发网络请求
+- (void)requestConcurrentDataRequest { //多并发网络请求
     
+    if (![self.baseTool networkingState]) {//网络监测
+        [self.loadIngView removeFromSuperview];
+        return;
+    }
+    
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(2);
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    dispatch_group_async(group, queue, ^{
+       [self requestTopData]; //获取头部数据
+        dispatch_semaphore_signal(semaphore);
+    });
+    
+    dispatch_group_async(group, queue, ^{
+       [self requestCommentData:0]; //评论数据
+        dispatch_semaphore_signal(semaphore);
+    });
+    
+    dispatch_group_notify(group, queue, ^{
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    });
 }
 
 #pragma mark - 获取头部数据
 - (void)requestTopData {
-    if (![self.baseTool networkingState]) {
-        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
-        return;
-    }
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/social_contact/comment_summary/%@",ELITEU_URL,self.courseID];
@@ -101,8 +121,6 @@
             NSLog(@"%@",responseDic[@"msg"]);
         }
         
-        [self requestCommentData:1];
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"评论头部标签 error--%@",error);
     }];
@@ -116,7 +134,7 @@
 
 #pragma mark - 上拉加载
 - (void)topPullLoading { 
-    [self requestCommentData:2];
+    [self requestCommentData:1];
 }
 
 #pragma mark - 筛选
@@ -134,7 +152,7 @@
         topItem.isSelected = YES;
         self.selectId = topItem.tag_id;
         
-        [self requestCommentData:3];
+        [self requestCommentData:1];
         
     } else {
         self.selectedButton = nil;
@@ -145,16 +163,13 @@
 }
 
 #pragma mark- 获取评论数据
-/*
- type:
- 1 ： 下拉刷新或初次进来加载数据
- 2 ： 上拉加载更多数据
- 3 ： 点击标签筛选
- */
 - (void)requestCommentData:(NSInteger)type {
     
-    if (![self.baseTool networkingState]) {//网络监测
-        return;
+    if (type == 1) {
+        if (![self.baseTool networkingState]) {//网络监测
+            [self.tableView.mj_header endRefreshing];
+            return;
+        }
     }
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
