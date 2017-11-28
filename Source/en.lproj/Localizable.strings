@@ -1015,6 +1015,8 @@
 "NO_COURSE_ORDER" = "No pending orders yet";
 /*主讲教授*/
 "MAIN_PROFESSOR" = "Professors";
+/*授课老师 Instructor*/
+"COURSE_INSTRUCTOR" = "Instructor";
 /*课程大纲*/
 "COURSE_OUTLINE" = "Syllabus";
 /*暂时没有课程大纲*/
@@ -1786,3 +1788,10 @@
 "REFRESHING_FAILED_TEXT" = "Refresh failed";
 /*加入失败 Failed to add course*/
 "ADD_FAILED_TEXT" = "Failed to add course";
+
+/*没有账号？ No account yet?*/
+"NO_ACCOUNT_BUTTON_TEXT" = "No account?";
+/*您的组织先要在www.e-ducation.cn上完成平台搭建，分配账号给您后方可使用。 Your account should be allocated by your organization after setting up the platform on www.e-ducation.cn.*/
+"ORGANIZATION_SETTING_WEB" = "Your account should be allocated by your organization after setting up the platform on www.e-ducation.cn.";
+/*前往*/
+"GOTO_EDUCATION" = "Enter";

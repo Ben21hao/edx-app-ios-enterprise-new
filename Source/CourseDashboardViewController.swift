@@ -92,7 +92,6 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = OEXStyles.sharedStyles().neutralWhite()
         self.setNavigationButtonStyle()
         self.setViewConstraint()
         
@@ -116,20 +115,55 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
             }
         }
     }
+    
+    public override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        environment.analytics.trackScreenWithName(OEXAnalyticsScreenCourseDashboard, courseID: courseID, value: nil)
+    }
+    
+    public override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        }
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    override public func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.tableView.snp_updateConstraints{ make in
+            make.height.equalTo(tableView.contentSize.height)
+        }
+        containerView.contentSize = stackView.bounds.size
+    }
 
+    //MARK: UI
     func setViewConstraint() {
         
+        self.view.backgroundColor = OEXStyles.sharedStyles().baseColor5()
+    
+        containerView.backgroundColor = OEXStyles.sharedStyles().baseColor5()
         self.view.addSubview(containerView)
-        self.containerView.addSubview(stackView)
+        
+        containerView.snp_makeConstraints {make in
+            make.edges.equalTo(self.view)
+        }
         
         tableView.scrollEnabled = false
+        tableView.backgroundColor = OEXStyles.sharedStyles().baseColor5()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.backgroundColor = UIColor.clearColor()
-        self.view.addSubview(tableView)
-        
         tableView.registerClass(CourseDashboardCell.self, forCellReuseIdentifier: CourseDashboardCell.identifier)
         tableView.registerClass(CourseCertificateCell.self, forCellReuseIdentifier: CourseCertificateCell.identifier)
+        self.view.addSubview(tableView)
+        
+        stackView.addArrangedSubview(courseCard)
+        stackView.addArrangedSubview(tableView)
+        self.containerView.addSubview(stackView)
         
         stackView.snp_makeConstraints { make -> Void in
             make.top.equalTo(containerView)
@@ -138,18 +172,12 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         }
         stackView.alignment = .Fill
         
-        containerView.snp_makeConstraints {make in
-            make.edges.equalTo(view)
-        }
-        
 //        addShareButton(courseCard) //隐藏分享按钮
         
         stackView.axis = .Vertical
         
         let spacer = UIView()
-        stackView.addArrangedSubview(courseCard)
         stackView.addArrangedSubview(spacer)
-        stackView.addArrangedSubview(tableView)
         
         spacer.snp_makeConstraints {make in
             make.height.equalTo(spacerHeight)
@@ -236,6 +264,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     }
     
     private func addShareButton(courseView: CourseCardView) {
+        
         if environment.config.courseSharingEnabled {
             shareButton.setImage(UIImage(named: "share"), forState: .Normal)
             shareButton.tintColor = OEXStyles.sharedStyles().neutralDark()
@@ -254,22 +283,6 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         } else {
             loadController.state = .Loaded
         }
-    }
-    
-    public override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        environment.analytics.trackScreenWithName(OEXAnalyticsScreenCourseDashboard, courseID: courseID, value: nil)
-        
-    }
-    
-    public override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        if let indexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        }
-        
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     public func prepareTableViewData(enrollment: UserCourseEnrollment) {
@@ -311,11 +324,13 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         }
         cellItems.append(item)
         
-        /*班级*/
-        item = StandardCourseDashboardItem(title: TDLocalizeSelectSwift("CLASS_TITLE"), detail: TDLocalizeSelectSwift("ENTET_CLASS"), icon: .Group) {[weak self] () -> Void in
-            self?.showQRViewController()
+        if enrollment.course.is_public_course == true {
+            /*班级*/
+            item = StandardCourseDashboardItem(title: TDLocalizeSelectSwift("CLASS_TITLE"), detail: TDLocalizeSelectSwift("ENTET_CLASS"), icon: .Group) {[weak self] () -> Void in
+                self?.showQRViewController()
+            }
+            cellItems.append(item)
         }
-        cellItems.append(item)
     }
     
     
@@ -377,14 +392,6 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     private func showQRViewController() { //班级
         let vc = QRViewController();
         self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    override public func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.tableView.snp_updateConstraints{ make in
-            make.height.equalTo(tableView.contentSize.height)
-        }
-        containerView.contentSize = stackView.bounds.size
     }
     
     override public func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {

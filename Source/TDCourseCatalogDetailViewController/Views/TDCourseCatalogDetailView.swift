@@ -182,6 +182,7 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
             }
             
         } else {
+            
             let cell = TDCourseDataCell.init(style: .Default, reuseIdentifier: "TDCourseDataCell")
             cell.selectionStyle = .None
             cell.accessoryType = .DisclosureIndicator
@@ -189,7 +190,7 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
             switch indexPath.row {
             case 0:
                 cell.leftLabel.text = "\u{f19c}"
-                cell.titleLabel.text = TDLocalizeSelectSwift("MAIN_PROFESSOR")
+                cell.titleLabel.text = self.courseModel.is_public_course == true ? TDLocalizeSelectSwift("MAIN_PROFESSOR") : TDLocalizeSelectSwift("COURSE_INSTRUCTOR") //COURSE_INSTRUCTOR
             case 1:
                 cell.leftLabel.text = "\u{f0ca}"
                 cell.titleLabel.text = TDLocalizeSelectSwift("COURSE_OUTLINE")
@@ -197,8 +198,14 @@ class TDCourseCatalogDetailView: UIView,UITableViewDataSource {
                 cell.leftLabel.text = "\u{f040}"
                 cell.titleLabel.text = TDLocalizeSelectSwift("STUDENT_COMMENT")
             case 3:
-                cell.leftLabel.text = "\u{f0c0}"
-                cell.titleLabel.text = TDLocalizeSelectSwift("CLASS_TITLE")
+                if (self.courseModel.is_public_course == true) {
+                    cell.leftLabel.text = "\u{f0c0}"
+                    cell.titleLabel.text = TDLocalizeSelectSwift("CLASS_TITLE")
+                } else {
+                    cell.leftLabel.hidden = true
+                    cell.titleLabel.hidden = true
+                    cell.accessoryType = .None
+                }
             default:
                 cell.leftLabel.text = "\u{f19d}"
                 cell.titleLabel.text = TDLocalizeSelectSwift("TEACH_ASSISTANT")

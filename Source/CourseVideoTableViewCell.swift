@@ -48,11 +48,15 @@ class CourseVideoTableViewCell: UITableViewCell, CourseBlockContainerCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.exclusiveTouch = false
+        
+        content.setContentIcon(Icon.CourseVideoContent)
         contentView.addSubview(content)
+        
         content.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(contentView)
         }
-        content.setContentIcon(Icon.CourseVideoContent)
         
         downloadView.downloadAction = {[weak self] _ in
             if let owner = self, block = owner.block {

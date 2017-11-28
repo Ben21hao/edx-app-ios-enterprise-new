@@ -210,7 +210,7 @@
     
     TDBaseToolModel *toolModel = [[TDBaseToolModel alloc] init];
     self.lineImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, 2)];
-    self.lineImage.image = [toolModel drawLineByImageView:self.lineImage color:colorHexStr7];
+    self.lineImage.image = [toolModel drawLineByImageView:self.lineImage withColor:colorHexStr7];
     [self.bgView addSubview:self.lineImage];
     
     [self.enterButton setTitle:TDLocalizeSelect(@"ENTER_LIVE_BUTTON_TEXT", nil) forState:UIControlStateNormal];

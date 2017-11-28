@@ -506,18 +506,20 @@
 
 #pragma mark - 返回虚线image的方法
 - (UIImage *)drawLineByImageView:(UIImageView *)imageView withColor:(NSString *)colorStr {
-    UIGraphicsBeginImageContext(imageView.frame.size); //开始画线 划线的frame
-    [imageView.image drawInRect:CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height)];
-    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);//设置线条终点形状
     
-    CGFloat lengths[] = {5,1};// 5是每个虚线的长度 1是高度
-    CGContextRef line = UIGraphicsGetCurrentContext();
+    UIGraphicsBeginImageContext(imageView.frame.size); //创建一个基于位图的上下文,开始画线 划线的frame
+    [imageView.image drawInRect:CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height)];
+    
+    CGContextRef line = UIGraphicsGetCurrentContext();//获得处理的上下文
+    CGContextSetLineCap(line, kCGLineCapRound);//设置线条终点形状
+    
+    CGFloat lengths[] = {5,1};// 5是每个虚线的长度 1是高度 //设置虚线排列的宽度间隔:下面的arr中的数字表示先绘制3个点再绘制1个点
     
     CGContextSetStrokeColorWithColor(line, [UIColor colorWithHexString:colorStr].CGColor);// 设置颜色
-    CGContextSetLineDash(line, 0, lengths, 2); //画虚线
-    CGContextMoveToPoint(line, 0.0, 2.0); //开始画线
+    CGContextSetLineDash(line, 0, lengths, 2); //画虚线 下面最后一个参数“2”代表排列的个数。
+    CGContextMoveToPoint(line, 0.0, 2.0); //起始点设置为(0,0):注意这是上下文对应区域中的相对坐标
     CGContextAddLineToPoint(line, 450, 2.0);
-    CGContextStrokePath(line);
+    CGContextStrokePath(line);//连接上面定义的坐标点
     
     return UIGraphicsGetImageFromCurrentImageContext();// UIGraphicsGetImageFromCurrentImageContext()返回的就是image
 }
@@ -543,29 +545,9 @@
     return versionStr;
 }
 
-#pragma mark - 返回虚线image的方法
-- (UIImage *)drawLineByImageView:(UIImageView *)imageView color:(NSString *)colorStr {
-    
-    UIGraphicsBeginImageContext(imageView.frame.size); //开始画线 划线的frame
-    [imageView.image drawInRect:CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height)];
-    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);//设置线条终点形状
-    
-    CGFloat lengths[] = {5,1};// 5是每个虚线的长度 1是高度
-    CGContextRef line = UIGraphicsGetCurrentContext();
-    
-    CGContextSetStrokeColorWithColor(line, [UIColor colorWithHexString:colorStr].CGColor);// 设置颜色
-    CGContextSetLineDash(line, 0, lengths, 2); //画虚线
-    CGContextMoveToPoint(line, 0.0, 2.0); //开始画线
-    CGContextAddLineToPoint(line, 450, 2.0);
-    CGContextStrokePath(line);
-    
-    return UIGraphicsGetImageFromCurrentImageContext();// UIGraphicsGetImageFromCurrentImageContext()返回的就是image
-}
-
-
 /* 对图片链接中的 中文 和 空格进行处理，要不就显示不出来 */
 - (NSString *)dealwithImageStr:(NSString *)imageStr{
-    
+
     NSString *str = [imageStr stringByAddingPercentEncodingWithAllowedCharacters:[[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "] invertedSet]]; //对url中的空格，中文等进行处理
 //    NSString *str = [imageStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]; //直接编码
     return str;

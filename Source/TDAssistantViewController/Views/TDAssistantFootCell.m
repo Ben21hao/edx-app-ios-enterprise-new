@@ -22,13 +22,17 @@
 @property (nonatomic,assign) int timeNum;
 @property (nonatomic,assign) BOOL isCanClick;
 
+@property (nonatomic,strong) TDBaseToolModel *baseTool;
+
 @end
 
 @implementation TDAssistantFootCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.baseTool = [[TDBaseToolModel alloc] init];
         self.isCanClick = YES;
         [self configView];
         [self setViewConstraint];
@@ -216,6 +220,7 @@
 
 #pragma mark - UI
 - (void)configView {
+    
     self.bgView = [[UIView alloc] init];
     [self addSubview:self.bgView];
     
@@ -235,12 +240,13 @@
     [self.bgView addSubview:self.startView];
     
     self.lineImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, 2)];
-    self.lineImage.image = [self drawLineByImageView:self.lineImage];
+    self.lineImage.image = [self.baseTool drawLineByImageView:self.lineImage withColor:colorHexStr7];
     [self.bgView addSubview:self.lineImage];
     
 }
 
 - (UIButton *)setButtonConstraint:(NSString *)title backGroundColor:(NSString *)color1 titleColor:(NSString *)color2 {
+    
     UIButton *button   = [[UIButton alloc] init];
     button.backgroundColor = [UIColor colorWithHexString:color1];
     [button setTitle:title forState:UIControlStateNormal];
@@ -252,6 +258,7 @@
 }
 
 - (void)setViewConstraint {
+    
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.mas_equalTo(self);
     }];
@@ -281,24 +288,6 @@
     }];
 }
 
-#pragma mark - 返回虚线image的方法
-- (UIImage *)drawLineByImageView:(UIImageView *)imageView {
-    
-    UIGraphicsBeginImageContext(imageView.frame.size); //开始画线 划线的frame
-    [imageView.image drawInRect:CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height)];
-    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);//设置线条终点形状
-    
-    CGFloat lengths[] = {5,1};// 5是每个虚线的长度 1是高度
-    CGContextRef line = UIGraphicsGetCurrentContext();
-    
-    CGContextSetStrokeColorWithColor(line, [UIColor colorWithHexString:colorHexStr7].CGColor);// 设置颜色
-    CGContextSetLineDash(line, 0, lengths, 2); //画虚线
-    CGContextMoveToPoint(line, 0.0, 2.0); //开始画线
-    CGContextAddLineToPoint(line, 450, 2.0);
-    CGContextStrokePath(line);
-    
-    return UIGraphicsGetImageFromCurrentImageContext();// UIGraphicsGetImageFromCurrentImageContext()返回的就是image
-}
 
 @end
 

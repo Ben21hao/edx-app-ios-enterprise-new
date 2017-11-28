@@ -62,6 +62,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:self.username forKey:@"username"];
     [params setValue:self.emailTextField.text forKey:@"email"];
+//    [params setValue:@"1" forKey:@"is_company"];
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/account/bind_email/",ELITEU_URL];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];

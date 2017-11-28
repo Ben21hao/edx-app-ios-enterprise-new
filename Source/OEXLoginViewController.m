@@ -85,6 +85,7 @@
 
 @property (weak, nonatomic, nullable) IBOutlet UIButton* btn_TroubleLogging;
 @property (weak, nonatomic, nullable) IBOutlet UIButton* btn_Login;
+@property (weak, nonatomic) IBOutlet UIButton *accountButton;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 
 @property (weak, nonatomic, nullable) IBOutlet UIScrollView* scroll_Main;
@@ -206,6 +207,7 @@
 
 #pragma mark - 导航栏
 - (void)setNavigationBarStye {
+    
     self.navigationController.navigationBar.titleTextAttributes = @{
                                                                     NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:18]
                                                                     };
@@ -353,6 +355,7 @@
     self.seperatorRight.hidden = YES;
     self.lbl_OrSignIn.hidden = YES;
     
+    [self.accountButton setTitle:TDLocalizeSelect(@"NO_ACCOUNT_BUTTON_TEXT", nil) forState:UIControlStateNormal];
     [self setBottomButton];
 }
 
@@ -400,7 +403,7 @@
     
     TDWebViewController *webViewcontroller = [[TDWebViewController alloc] init];
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"stipulation" withExtension:@"htm"];
-//    NSURL *url = [NSURL URLWithString:@"http://enterprise.e-ducation.cn/xblock/block-v1:hnlg+cs01+2017+type@problem+block@05dff71a8b904ae599fed3c1fe360ff2"];
+//    NSURL *url = [NSURL URLWithString:@"https://course.e-ducation.cn/filecms/download/1509420552179267.pdf"];
     webViewcontroller.url = url;
     webViewcontroller.titleStr = TDLocalizeSelect(@"AGREEMENT", nil);
     [self.navigationController pushViewController:webViewcontroller animated:YES];
@@ -516,6 +519,27 @@
                                               message:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_MESSAGE_TROUBLE", nil)
                                      onViewController:self];
     }
+}
+- (IBAction)noAccountButtonAction:(UIButton *)sender { //还没账号
+    
+//    NSString *titleStr = TDLocalizeSelect(@"ORGANIZATION_SETTING_WEB", nil);
+//    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:titleStr];
+//    [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:colorHexStr1] range:[titleStr rangeOfString:@"https://www.e-ducation.cn"]];
+//
+//    UIAlertController *alertVC = [[UIAlertController alloc] showAlertWithTitle:@"" message:str.string cancelButtonTitle:nil onViewController:self];
+//    [alertVC setValue:str forKey:@"attributedMessage"];
+//    
+//    [alertVC addButtonWithTitle:TDLocalizeSelect(@"CANCEL", nil) style:UIAlertActionStyleCancel actionBlock:^(UIAlertAction * _Nonnull action) {
+//        
+//    }];
+//    
+//    [alertVC addButtonWithTitle:TDLocalizeSelect(@"OK", nil) actionBlock:^(UIAlertAction * _Nonnull action) {
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.e-ducation.cn"]];
+//    }];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:TDLocalizeSelect(@"ORGANIZATION_SETTING_WEB", nil) delegate:self cancelButtonTitle:TDLocalizeSelect(@"CANCEL", nil) otherButtonTitles:TDLocalizeSelect(@"GOTO_EDUCATION", nil), nil];
+    alertView.tag = 2002;
+    [alertView show];
 }
 
 #pragma mark - 注册
@@ -761,7 +785,7 @@
     [self tappedToDismiss];
 }
 
-- (void) showUpdateRequiredMessage {
+- (void)showUpdateRequiredMessage {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [self.activityIndicator stopAnimating];
     [self.btn_Login setTitle:[self signInButtonText] forState:UIControlStateNormal];
@@ -812,6 +836,7 @@
 
 #pragma mark - UIAlertView Delegate
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
     [self.view setUserInteractionEnabled:YES];
 
     if(alertView.tag == 1001) {
@@ -838,9 +863,12 @@
         if (buttonIndex == 1) {
             [self resendEmail];
         }
+    } else if (alertView.tag == 2002) {
+        if (buttonIndex == 1) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.e-ducation.cn"]];
+        }
     }
 }
-
 
 
 #pragma mark - 重发邮件

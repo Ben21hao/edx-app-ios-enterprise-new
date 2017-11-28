@@ -30,9 +30,11 @@ class DownloadsAccessoryView : UIView {
         
         super.init(frame: frame)
         
+        downloadButton.showsTouchWhenHighlighted = true
         downloadButton.tintColor = OEXStyles.sharedStyles().baseColor8()
-        downloadButton.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal)
-//        countLabel.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal)
+        downloadButton.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal) //抗被压缩
+        
+        countLabel.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal)
         videoSizeLabel.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal)
 //        downloadSpinner.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal)
         
@@ -81,7 +83,7 @@ class DownloadsAccessoryView : UIView {
         }
         
         videoSizeLabel.snp_makeConstraints { (make) in
-            make.top.equalTo(downloadButton.snp_bottom)
+            make.top.equalTo(downloadButton.snp_centerY).offset(13)
             make.centerX.equalTo(downloadButton.snp_centerX)
         }
     }

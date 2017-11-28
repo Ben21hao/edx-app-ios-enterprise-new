@@ -137,7 +137,7 @@
             
         } else {
             [self.view makeToast:TDLocalizeSelect(@"SERVICE_FAILED", nil) duration:1.08 position:CSToastPositionCenter];
-            NSLog(@"-------->>> %@",code);
+            NSLog(@"%@-------->>> %@",code,responseDic[@"msg"]);
         }
         
         [self showOrHideNoDataLabel];

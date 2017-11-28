@@ -41,6 +41,9 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "OpenCONSTS.h"
 
+#import "NSObject+OEXReplaceNull.h"
+#import "TDWelcomeView.h"
+
 @interface OEXAppDelegate () <UIApplicationDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary* dictCompletionHandler;
@@ -92,7 +95,14 @@
 
     [self.environment.router openInWindow:self.window]; //用户是否已登录，未登录：显示登录页面，已登录：显示我的课程
 
-    [self judgeAppVersion];//判断版本是否更新
+//    [self judgeAppVersion];//通过接口判断版本是否更新
+    [self judgeAppStoreVersion]; //通过 App Store 判断版本是否更新
+    
+    // 启动图片延时
+    [NSThread sleepForTimeInterval:2];
+//    [self showWelcomePage]; //自定义欢迎界面
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     //FBSDKCoreKit 为第三方登录
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
@@ -106,7 +116,14 @@
     return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
 }
 
-- (void)judgeAppVersion {
+- (void)showWelcomePage { //欢迎页
+    
+    TDWelcomeView *welcomeView = [[TDWelcomeView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, TDHeight)];
+    [welcomeView startShowWelcome];
+    [self.window addSubview:welcomeView];
+}
+
+- (void)judgeAppVersion { //通过接口判断版本是否更新
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/get_last_version",ELITEU_URL];
@@ -120,7 +137,13 @@
         id code = responseDic[@"code"];
         if ([code intValue] == 200) {
             
-            NSString *serviceStr = responseDic[@"data"][@"last_version"][@"version"];
+            NSDictionary *dataDic = [responseDic[@"data"][@"last_version"] oex_replaceNullsWithEmptyStrings];
+            NSString *serviceStr = dataDic[@"version"]; //服务器 App 版本
+//            BOOL is_audited_passed = [dataDic[@"is_audited_passed"] boolValue];
+            
+            NSString *infoFile = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
+            NSMutableDictionary *infodic = [[NSMutableDictionary alloc] initWithContentsOfFile:infoFile];
+            NSString *appVersionStr = infodic[@"CFBundleShortVersionString"];//本地 App 版本号
             
             NSString *loacalStr = [[NSUserDefaults standardUserDefaults] valueForKey:@"APP_Version_Service"]; //存储安装后，第一次提示更新的版本
             
@@ -128,10 +151,6 @@
                 return;
             }
             [[NSUserDefaults standardUserDefaults] setValue:serviceStr forKey:@"APP_Version_Service"];
-   
-            NSString *infoFile = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
-            NSMutableDictionary *infodic = [[NSMutableDictionary alloc] initWithContentsOfFile:infoFile];
-            NSString *appVersionStr = infodic[@"CFBundleShortVersionString"];//app版本号
             
             if ([serviceStr compare:appVersionStr options:NSNumericSearch] == NSOrderedDescending) {//降序 : 后台的版本 > app的版本
                 
@@ -148,6 +167,59 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
     }];
+}
+
+- (void)judgeAppStoreVersion{
+    
+    NSString *newVersionKey = @"App_New_Version";
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *appVersionStr = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]; //当前版本号
+    
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    NSString *path = @"https://itunes.apple.com/lookup?bundleId=cn.eliteu.enterprise.mobile.ios&country=cn";
+    
+    [manager GET:path parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *appInfo = (NSDictionary *)responseObject;
+        NSArray *infoArray = appInfo[@"results"];
+        
+        if (infoArray.count == 0) {
+            return;
+        }
+        
+        NSDictionary *versionDic = [infoArray[0] oex_replaceNullsWithEmptyStrings];
+        NSString *version = versionDic[@"version"];
+        
+        BOOL isDescending = [version compare:appVersionStr options:NSNumericSearch] == NSOrderedDescending; //是否是降序
+        if (!isDescending) { //App store 版本号 = 本地的版本号
+            return;
+        }
+        
+        NSString *cachVersion = [defaults valueForKey:newVersionKey]; //弹过一次框
+        BOOL isCachDescending = [version compare:cachVersion options:NSNumericSearch] == NSOrderedDescending;
+        if (!isCachDescending) {
+            return;
+        }
+        
+        /*App store 版本号 > 本地的版本号*/
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:TDLocalizeSelect(@"SYSTEM_WARING", nil)
+                                                            message:TDLocalizeSelect(@"NEW_VERSION_UPDATE", nil)
+                                                           delegate:self
+                                                  cancelButtonTitle:TDLocalizeSelect(@"CANCEL", nil)
+                                                  otherButtonTitles:TDLocalizeSelect(@"OK", nil), nil];
+        alertView.tag = 100;
+        [alertView show];
+        
+        [defaults setObject:version forKey:newVersionKey];//将需要升级版本号写入本地
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"查询iTunes应用信息错误：%@",error.description);
+        [defaults setObject:nil forKey:newVersionKey]; //将需要升级版本号写入本地
+    }];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 //2.微信

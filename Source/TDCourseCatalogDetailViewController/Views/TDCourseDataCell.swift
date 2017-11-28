@@ -28,7 +28,6 @@ class TDCourseDataCell: UITableViewCell {
         self.contentView.addSubview(bgView)
 
         leftLabel.font = UIFont.init(name: "FontAwesome", size: 20)
-        leftLabel.text = "\u{f0c0}"
         leftLabel.textAlignment = .Center
         leftLabel.textColor = UIColor.whiteColor()
         leftLabel.backgroundColor = OEXStyles.sharedStyles().baseColor1()

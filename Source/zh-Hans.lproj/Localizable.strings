@@ -1017,6 +1017,8 @@
 "NO_COURSE_ORDER" = "暂无待支付课单";
 /*主讲教授*/
 "MAIN_PROFESSOR" = "主讲教授";
+/*授课老师 Instructor*/
+"COURSE_INSTRUCTOR" = "授课老师";
 /*课程大纲*/
 "COURSE_OUTLINE" = "课程大纲";
 /*暂时没有课程大纲*/
@@ -1784,5 +1786,12 @@
 "REFRESHING_SUCESS_TEXT" = "刷新成功";
 /*刷新失败 Refresh failed*/
 "REFRESHING_FAILED_TEXT" = "刷新失败";
-/*加入失败 /*加入失败 Failed to add course*/
+/*加入失败 Failed to add course*/
 "ADD_FAILED_TEXT" = "加入失败";
+
+/*没有账号？ No account?*/
+"NO_ACCOUNT_BUTTON_TEXT" = "没有账号？";
+/*您的组织先要在www.e-ducation.cn上完成平台搭建，分配账号给您后方可使用。 Your account should be allocated by your organization after setting up the platform on www.e-ducation.cn.*/
+"ORGANIZATION_SETTING_WEB" = "您的组织需先在www.e-ducation.cn上开通平台服务，方可分配账号给您登录使用";
+/*前往E-ducation*/
+"GOTO_EDUCATION" = "前往";

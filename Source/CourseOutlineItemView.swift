@@ -154,6 +154,8 @@ public class CourseOutlineItemView: UIView {
         trailingContainer.snp_makeConstraints { (make) -> Void in
             make.trailing.equalTo(self.snp_trailing).offset(CellOffsetTrailing)
             make.centerY.equalTo(self)
+            make.height.equalTo(48);
+            make.width.equalTo(45);
         }
     }
     
@@ -163,7 +165,7 @@ public class CourseOutlineItemView: UIView {
             if let view = trailingView {
                 trailingContainer.addSubview(view)
                 view.snp_makeConstraints {make in
-                    // required to prevent long titles from compressing this
+                    // required to prevent long titles from compressing this 防止长标题压缩
                     make.edges.equalTo(trailingContainer).priorityRequired()
                 }
             }

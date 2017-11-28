@@ -129,7 +129,7 @@
 - (void)interfaceOrientation:(UIInterfaceOrientation)orientation;
 
 /*
- 返回虚线image的方法
+ 返回虚线image的方法 ------
  */
 - (UIImage *)drawLineByImageView:(UIImageView *)imageView withColor:(NSString *)colorStr;
 
@@ -144,12 +144,6 @@
  1  版本
  */
 - (NSString *)getAppVersionNum:(NSInteger)type;
-
-/*
- 返回虚线 ------
- */
-- (UIImage *)drawLineByImageView:(UIImageView *)imageView color:(NSString *)colorStr;
-
 
 /* 对图片链接中的 中文 和 空格进行处理，要不就显示不出来 */
 - (NSString *)dealwithImageStr:(NSString *)imageStr;

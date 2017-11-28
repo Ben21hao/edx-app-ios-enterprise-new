@@ -159,8 +159,13 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
                     }
                 }
             }
+        } else {
+            
+            if indexPath.row == 3 && self.courseModel.is_public_course != true {
+                return 0
+            }
+            return 60
         }
-        return 60
     }
     
     /* 通过label自适应来计算高度 */

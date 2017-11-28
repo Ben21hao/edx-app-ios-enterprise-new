@@ -103,6 +103,10 @@
             [self setUpView];
             [self.tableView reloadData];
             
+        } else if ([code intValue] == 406) {
+            [self setNullDataView:@"所查询教授不存在"];
+            [self.view makeToast:responDic[@"msg"] duration:1.08 position:CSToastPositionCenter];
+            
         } else {
             NSLog(@"请求错误 ==== %@",responDic[@"msg"]);
             [self.view makeToast:TDLocalizeSelect(@"NO_SUPPORT_WECHAT", nil) duration:1.08 position:CSToastPositionCenter];
@@ -284,9 +288,13 @@
 #pragma mark - 头部视图
 - (UIView *)setHeaderView {
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, 288)];
+    NSString *mottoStr = [self.motto stringByReplacingOccurrencesOfString:@" " withString:@""];
     
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, 288)];
+    CGFloat height = mottoStr.length > 0 ? 288 : 218;
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, height)];
+    
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, height)];
      bgView.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     [headerView addSubview:bgView];
     
@@ -300,13 +308,6 @@
     UILabel *nameLabel = [self setLabel];
     [headerView addSubview:nameLabel];
     
-    UIImageView *lineImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 203, TDWidth, 2)];
-    [headerView addSubview:lineImage];
-    
-    UILabel *mottoLabel = [self setLabel];
-    [headerView addSubview:mottoLabel];
-    
-    
     [headerImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(headerView.mas_top).offset(28);
         make.centerX.mas_equalTo(headerView.mas_centerX);
@@ -319,28 +320,30 @@
         make.right.mas_equalTo(headerView.mas_right).offset(-13);
     }];
     
-//    [lineImage mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.mas_equalTo(nameLabel.mas_bottom).offset(8);
-//        make.left.right.mas_equalTo(headerView);
-//        make.height.mas_equalTo(1);
-//    }];
-    
-    [mottoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(lineImage.mas_bottom).offset(0);
-        make.left.mas_equalTo(headerView.mas_left).offset(13);
-        make.right.mas_equalTo(headerView.mas_right).offset(-13);
-        make.bottom.mas_equalTo(headerView.mas_bottom).offset(0);
-    }];
-    
     //设置头像
     NSString *imageStr = [self.baseTool dealwithImageStr:[NSString stringWithFormat:@"%@%@",ELITEU_URL,self.imageUrl]];
     [headerImage sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:@"default_big"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     }];
     
     nameLabel.text = [NSString stringWithFormat:@"%@\n%@ %@ %@",self.name,self.college,self.major,self.degrees];
-    lineImage.image = [self drawLineByImageView:lineImage];//画虚线
     
-    mottoLabel.text = [NSString stringWithFormat:@"%@",self.motto];
+    if (mottoStr.length > 0) {
+        UIImageView *lineImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 203, TDWidth, 2)];
+        [headerView addSubview:lineImage];
+        
+        UILabel *mottoLabel = [self setLabel];
+        [headerView addSubview:mottoLabel];
+        
+        [mottoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(lineImage.mas_bottom).offset(0);
+            make.left.mas_equalTo(headerView.mas_left).offset(13);
+            make.right.mas_equalTo(headerView.mas_right).offset(-13);
+            make.bottom.mas_equalTo(headerView.mas_bottom).offset(0);
+        }];
+        
+        lineImage.image = [self.baseTool drawLineByImageView:lineImage withColor:colorHexStr13];
+        mottoLabel.text = [NSString stringWithFormat:@"%@",self.motto];
+    }
     
     return headerView;
 }
@@ -353,26 +356,6 @@
     label.numberOfLines  = 0;
     label.textAlignment = NSTextAlignmentCenter;
     return label;
-}
-
-#pragma mark - 返回虚线image的方法
-- (UIImage *)drawLineByImageView:(UIImageView *)imageView {
-    
-    UIGraphicsBeginImageContext(imageView.frame.size); //开始画线 划线的frame
-    [imageView.image drawInRect:CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height)];
-    
-    CGContextRef line = UIGraphicsGetCurrentContext();//获得处理的上下文
-    CGContextSetLineCap(line, kCGLineCapRound);//设置线条终点形状
-    
-    CGFloat lengths[] = {5,1};// 5是每个虚线的长度 1是高度 //设置虚线排列的宽度间隔:下面的arr中的数字表示先绘制3个点再绘制1个点
-    
-    CGContextSetStrokeColorWithColor(line, [UIColor colorWithRed:230 green:233 blue:237 alpha:0.7].CGColor); // 设置颜色
-    CGContextSetLineDash(line, 0, lengths, 2); //画虚线 //下面最后一个参数“2”代表排列的个数。
-    CGContextMoveToPoint(line, 0.0, 2.0); //起始点设置为(0,0):注意这是上下文对应区域中的相对坐标
-    CGContextAddLineToPoint(line, 450, 2.0);//设置下一个坐标点
-    CGContextStrokePath(line);//连接上面定义的坐标点
-    
-    return UIGraphicsGetImageFromCurrentImageContext();// UIGraphicsGetImageFromCurrentImageContext()返回的就是image
 }
 
 - (void)didReceiveMemoryWarning {

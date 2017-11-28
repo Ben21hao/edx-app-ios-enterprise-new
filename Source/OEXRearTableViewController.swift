@@ -66,11 +66,6 @@ class OEXRearTableViewController : UITableViewController {
         //        appVersionButton.setAttributedTitle(versionButtonStyle.attributedStringWithText(Strings.versionDisplay(number: appVersion, environment: environmentName)), forState:.Normal)
         //
         
-        let baseTool = TDBaseToolModel()
-        let versionStr = baseTool.getAppVersionNum(1)
-        appVersionButton.setTitle(versionStr , forState: .Normal)
-        appVersionButton.accessibilityTraits = UIAccessibilityTraitStaticText
-        
         self.view.backgroundColor = OEXStyles.sharedStyles().baseColor7()
         self.tableView.backgroundColor = OEXStyles.sharedStyles().baseColor7()
         
@@ -113,6 +108,12 @@ class OEXRearTableViewController : UITableViewController {
     }
     
     func LanguageChangeAction() {
+        
+        let baseTool = TDBaseToolModel()
+        let versionStr = baseTool.getAppVersionNum(1)
+        appVersionButton.setTitle(versionStr , forState: .Normal)
+        appVersionButton.accessibilityTraits = UIAccessibilityTraitStaticText
+
         coursesLabel.text = TDLocalizeSelectSwift("MY_COURSES")
         videosLabel.text = TDLocalizeSelectSwift("MY_VIDEOS")
         findCoursesLabel.text = TDLocalizeSelectSwift("FIND_COURSES")
