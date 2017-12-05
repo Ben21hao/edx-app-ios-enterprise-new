@@ -1792,6 +1792,6 @@
 /*没有账号？ No account?*/
 "NO_ACCOUNT_BUTTON_TEXT" = "没有账号？";
 /*您的组织先要在www.e-ducation.cn上完成平台搭建，分配账号给您后方可使用。 Your account should be allocated by your organization after setting up the platform on www.e-ducation.cn.*/
-"ORGANIZATION_SETTING_WEB" = "您的组织需先在www.e-ducation.cn上开通平台服务，方可分配账号给您登录使用";
+"ORGANIZATION_SETTING_WEB" = "您所属的组织在www.e-ducation.cn上开通平台服务后，方可为您分配登录账号";
 /*前往E-ducation*/
 "GOTO_EDUCATION" = "前往";

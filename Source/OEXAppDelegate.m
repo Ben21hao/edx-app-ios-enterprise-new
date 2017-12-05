@@ -100,9 +100,10 @@
     
     // 启动图片延时
     [NSThread sleepForTimeInterval:2];
-//    [self showWelcomePage]; //自定义欢迎界面
     
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"App-start-diagram"];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO]; //显示电池条
     
     //FBSDKCoreKit 为第三方登录
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
@@ -114,13 +115,6 @@
 //    return [topController supportedInterfaceOrientations];
     
     return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
-}
-
-- (void)showWelcomePage { //欢迎页
-    
-    TDWelcomeView *welcomeView = [[TDWelcomeView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, TDHeight)];
-    [welcomeView startShowWelcome];
-    [self.window addSubview:welcomeView];
 }
 
 - (void)judgeAppVersion { //通过接口判断版本是否更新
@@ -169,7 +163,7 @@
     }];
 }
 
-- (void)judgeAppStoreVersion{
+- (void)judgeAppStoreVersion { //铜鼓App Store来判断
     
     NSString *newVersionKey = @"App_New_Version";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -364,11 +358,19 @@
 /*前后台处理*/
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     NSLog(@"-------> =后台= <---------");
+    
+    //存储进入后台的时间
+    NSDate *now = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy-MM-dd hh:mm:ss";
+    NSString *nowStr = [formatter stringFromDate:now];
+    
+    [[NSUserDefaults standardUserDefaults] setValue:nowStr forKey:@"App-start-diagram"];
+//    NSLog(@"现在 ------>> %@ === %@",nowStr, now);
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     NSLog(@"-------> =前台= <---------");
-    
     
     NSString *secondStr = [[NSUserDefaults standardUserDefaults] valueForKey:@"Free_Course_Free_Time"];
     
@@ -377,6 +379,27 @@
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"App_EnterForeground_Get_Code" object:nil];
+    
+    TDBaseToolModel *toolModel = [[TDBaseToolModel alloc] init];
+    
+    //判断是否到时间显示广告页
+    NSString *dateStr = [[NSUserDefaults standardUserDefaults] valueForKey:@"App-start-diagram"];
+    NSTimeInterval interval = [toolModel intervalForTimeStr:dateStr];
+//    NSLog(@"--------->>>  %f",interval);
+    
+    if (-interval > 9 * 60) { //大于9分钟显示
+        [self showWelcomePage]; //自定义欢迎界面
+    }
+}
+- (void)showWelcomePage { //欢迎页
+    
+    TDWelcomeView *welcomeView = [[TDWelcomeView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, TDHeight)];
+    [welcomeView startShowWelcome];
+    [self.window addSubview:welcomeView];
+ 
+    [NSTimer scheduledTimerWithTimeInterval:2 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        [welcomeView removeFromSuperview];
+    }];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

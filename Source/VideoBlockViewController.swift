@@ -43,7 +43,7 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
         videoController.didMoveToParentViewController(self)
         videoController.delegate = self
         
-        addLoadListener()//获取数据
+        addLoadListener() //获取数据
     }
     
     var courseID : String {

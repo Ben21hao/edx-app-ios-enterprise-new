@@ -347,10 +347,12 @@
 - (BOOL)judgeDateOverDue:(NSString *)dateStr {
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyy-mm-dd";
+    formatter.dateFormat = @"yyyy-MM-dd hh:mm:ss";
     NSDate *date = [formatter dateFromString:dateStr];
+    
     NSDate *now = [NSDate date];
     NSComparisonResult result = [date compare:now];
+    
     switch (result) {
         case NSOrderedAscending: //升序
             return YES;
