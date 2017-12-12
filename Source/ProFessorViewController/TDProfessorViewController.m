@@ -38,7 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = TDLocalizeSelect(@"PROFESSOR_DETAIL", nil);
+    self.titleViewLabel.text = self.isEliteu ? TDLocalizeSelect(@"PROFESSOR_DETAIL", nil) : TDLocalizeSelect(@"TEACHER_DETAIL", nil);
     self.baseTool = [[TDBaseToolModel alloc] init];
     [self setLoadDataView];
     
@@ -76,7 +76,7 @@
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/professor/?username=%@",ELITEU_URL,self.professorName];
     
     [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"success----->>> %@",responseObject);
+//        NSLog(@"success----->>> %@",responseObject);
         
         NSDictionary *responDic = (NSDictionary *)responseObject;
         id code = responDic[@"code"];
@@ -104,8 +104,8 @@
             [self.tableView reloadData];
             
         } else if ([code intValue] == 406) {
-            [self setNullDataView:@"所查询教授不存在"];
-            [self.view makeToast:responDic[@"msg"] duration:1.08 position:CSToastPositionCenter];
+            [self setNullDataView:self.isEliteu ? TDLocalizeSelect(@"PROFESSOR_NOT_EXICT", nil) : TDLocalizeSelect(@"TEACHER_NOT_EXICT", nil)];
+//            [self.view makeToast:responDic[@"msg"] duration:1.08 position:CSToastPositionCenter];
             
         } else {
             NSLog(@"请求错误 ==== %@",responDic[@"msg"]);

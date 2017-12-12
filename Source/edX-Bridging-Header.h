@@ -110,6 +110,7 @@
 #import "WatchLiveViewController.h"
 #import "WatchPlayBackViewController.h"
 #import "TDWebUrlViewController.h"
+#import "TDFileWebViewController.h"
 
 #import "VHallApi.h"
 #import "MBProgressHUD.h"
@@ -121,3 +122,4 @@
 #import "LanguageChangeTool.h"
 #import "TDCircleProgressView.h"
 #import "TDFindCourseViewController.h"
+#import "TDFileModel.h"

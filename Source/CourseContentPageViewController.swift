@@ -347,6 +347,7 @@ public class CourseContentPageViewController : UIPageViewController, UIPageViewC
     }
     
     func controllerForCourseBlock(block : CourseBlock) -> UIViewController? {
+        
         let blockViewController : UIViewController?
         
         if let cachedViewController = self.cacheManager.getCachedViewControllerForBlockID(block.blockID) {
@@ -355,6 +356,7 @@ public class CourseContentPageViewController : UIPageViewController, UIPageViewC
         } else {
             // Instantiate a new VC from the router if not found in cache already
             if let viewController = self.environment.router?.controllerForBlock(block, courseID: courseQuerier.courseID) {
+                
                 if block.displayType.isCacheable {
                     cacheManager.addToCache(viewController, blockID: block.blockID)
                 }

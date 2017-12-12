@@ -58,7 +58,7 @@ public class UserProfile {
     var accountPrivacy: ProfilePrivacy?
     
     var hasUpdates: Bool { return updateDictionary.count > 0 }
-    var updateDictionary = [String: AnyObject]()
+    var updateDictionary = [String: AnyObject]() //需要更新的部分
     
     let statusCode : Int? //状态码 400 未认证，200 提交成功 ，201 已认证，202 认证失败
     let name : String?

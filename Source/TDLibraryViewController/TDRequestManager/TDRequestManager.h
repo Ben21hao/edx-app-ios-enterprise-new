@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TDFileModel.h"
 
 @interface TDRequestManager : NSObject
 

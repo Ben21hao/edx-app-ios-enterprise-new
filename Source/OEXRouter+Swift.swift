@@ -93,23 +93,30 @@ extension OEXRouter {
         case .Outline:
             let outlineController = CourseOutlineViewController(environment: self.environment, courseID: courseID, rootID: blockID)
             return outlineController
+        
         case .Unit:
             return unitControllerForCourseID(courseID, blockID: blockID, initialChildID: nil)
+        
         case .HTML:
             let controller = HTMLBlockViewController(blockID: blockID, courseID : courseID, environment : environment)
             return controller
+            
         case .Video:
             let controller = VideoBlockViewController(environment: environment, blockID: blockID, courseID: courseID)
             return controller
+            
         case .Unknown:
+            
+            //无法显示
             let controller = CourseUnknownBlockViewController(blockID: blockID, courseID : courseID, environment : environment)
             return controller
+            
         case let .Discussion(discussionModel):
             let controller = DiscussionBlockViewController(blockID: blockID, courseID: courseID, topicID: discussionModel.topicID, environment: environment)
             return controller
         }
     }
-    
+
     func controllerForBlock(block : CourseBlock, courseID : String) -> UIViewController {
         return controllerForBlockWithID(block.blockID, type: block.displayType, courseID: courseID) //.HTML(.Base)
     }

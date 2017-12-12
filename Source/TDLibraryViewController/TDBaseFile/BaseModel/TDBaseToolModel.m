@@ -550,7 +550,7 @@
 /* 对图片链接中的 中文 和 空格进行处理，要不就显示不出来 */
 - (NSString *)dealwithImageStr:(NSString *)imageStr{
 
-    NSString *str = [imageStr stringByAddingPercentEncodingWithAllowedCharacters:[[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "] invertedSet]]; //对url中的空格，中文等进行处理
+    NSString *str = [imageStr stringByAddingPercentEncodingWithAllowedCharacters:[[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> +"] invertedSet]]; //对url中的空格，中文等进行处理
 //    NSString *str = [imageStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]; //直接编码
     return str;
 }

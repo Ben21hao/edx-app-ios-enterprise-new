@@ -1061,6 +1061,8 @@
 "LOGIN_PASSWORD" = "Enter login password";
 /*教授详情*/
 "PROFESSOR_DETAIL" = "Details";
+/*老师详情*/
+"TEACHER_DETAIL" = "Details";
 /*暂无学员评价*/
 "NO_STUDENT_COMMENT" = "No comments";
 /*选课表*/
@@ -1566,6 +1568,10 @@
 "FAILED_GET_FREE" = "Operation failed, please try again.";
 /*教授简介Introduction*/
 "PROFESSOR_INTRODUCE" = "Introduction";
+/*教授不存在 Professors do not exist.*/
+"PROFESSOR_NOT_EXICT" = "Professors do not exist.";
+/*老师不存在 Teacher do not exist.*/
+"TEACHER_NOT_EXICT" = "Teacher do not exist.";
 /*主要成就Main Achievements*/
 "MAIN_ACHIECEMENT" = "Main Achievements";
 /*教育背景Educational Background*/

@@ -1063,6 +1063,8 @@
 "LOGIN_PASSWORD" = "请输入登录密码";
 /*教授详情*/
 "PROFESSOR_DETAIL" = "教授详情";
+/*老师详情*/
+"TEACHER_DETAIL" = "老师详情";
 /*暂无学员评价*/
 "NO_STUDENT_COMMENT" = "暂无学员评价";
 /*选课表*/
@@ -1319,6 +1321,10 @@
 
 /*教授简介Introduction*/
 "PROFESSOR_INTRODUCE" = "教授简介";
+/*教授不存在 Professors do not exist*/
+"PROFESSOR_NOT_EXICT" = "所查询教授不存在";
+/*老师不存在 Teacher do not exist*/
+"TEACHER_NOT_EXICT" = "所查询老师不存在";
 /*主要成就Main Achievements*/
 "MAIN_ACHIECEMENT" = "主要成就";
 /*教育背景Educational Background*/

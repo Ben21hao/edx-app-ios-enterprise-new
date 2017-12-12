@@ -10,6 +10,8 @@
 #import "TDBaseToolModel.h"
 #import "OEXAuthentication.h"
 
+#import <MJExtension/MJExtension.h>
+
 @interface TDRequestManager ()
 
 @property (nonatomic,strong) TDBaseToolModel *baseTool;
@@ -94,5 +96,6 @@
 }
 
 
-
 @end
+
+

@@ -428,6 +428,8 @@
 		A413A4AC1F580BEA008556C2 /* TDLiveQACell.m in Sources */ = {isa = PBXBuildFile; fileRef = A413A4AB1F580BEA008556C2 /* TDLiveQACell.m */; };
 		A417335E1F5D2BE6005554B1 /* TDLiveLotteryView.m in Sources */ = {isa = PBXBuildFile; fileRef = A417335D1F5D2BE6005554B1 /* TDLiveLotteryView.m */; };
 		A420E2511F3C55A200340683 /* TDBaseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A420E2501F3C55A200340683 /* TDBaseButton.m */; };
+		A43CC1F51FD6923900C71F07 /* TDFileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A43CC1F41FD6923900C71F07 /* TDFileWebViewController.m */; };
+		A43CC1F81FD6A17000C71F07 /* TDFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A43CC1F71FD6A17000C71F07 /* TDFileModel.m */; };
 		A44669B11FA7078500084563 /* TDCircleDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = A44669B01FA7078400084563 /* TDCircleDrawView.m */; };
 		A44EE2731FB6DF54005273A3 /* TDCourseTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A44EE2721FB6DF54005273A3 /* TDCourseTagModel.m */; };
 		A48B69B61F79F6A900160C61 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = A48B69B51F79F6A900160C61 /* FontAwesome.otf */; };
@@ -1458,6 +1460,10 @@
 		A417335D1F5D2BE6005554B1 /* TDLiveLotteryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDLiveLotteryView.m; sourceTree = "<group>"; };
 		A420E24F1F3C55A200340683 /* TDBaseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBaseButton.h; sourceTree = "<group>"; };
 		A420E2501F3C55A200340683 /* TDBaseButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBaseButton.m; sourceTree = "<group>"; };
+		A43CC1F31FD6923900C71F07 /* TDFileWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDFileWebViewController.h; sourceTree = "<group>"; };
+		A43CC1F41FD6923900C71F07 /* TDFileWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFileWebViewController.m; sourceTree = "<group>"; };
+		A43CC1F61FD6A17000C71F07 /* TDFileModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDFileModel.h; sourceTree = "<group>"; };
+		A43CC1F71FD6A17000C71F07 /* TDFileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFileModel.m; sourceTree = "<group>"; };
 		A44669AF1FA7078400084563 /* TDCircleDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCircleDrawView.h; sourceTree = "<group>"; };
 		A44669B01FA7078400084563 /* TDCircleDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCircleDrawView.m; sourceTree = "<group>"; };
 		A44EE2711FB6DF54005273A3 /* TDCourseTagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCourseTagModel.h; sourceTree = "<group>"; };
@@ -4885,6 +4891,10 @@
 				B5CF30621EB1A79E00F1BF6A /* TDWebViewController.m */,
 				A4F456751F42DF1600C3F5B5 /* TDWebUrlViewController.h */,
 				A4F456761F42DF1600C3F5B5 /* TDWebUrlViewController.m */,
+				A43CC1F31FD6923900C71F07 /* TDFileWebViewController.h */,
+				A43CC1F41FD6923900C71F07 /* TDFileWebViewController.m */,
+				A43CC1F61FD6A17000C71F07 /* TDFileModel.h */,
+				A43CC1F71FD6A17000C71F07 /* TDFileModel.m */,
 			);
 			path = TDWebViewController;
 			sourceTree = "<group>";
@@ -6187,6 +6197,7 @@
 				B55209FD1EB9C96300EC51C9 /* TDCourseCatalogDetailViewController.swift in Sources */,
 				B5FAF7531EB049B5000C2169 /* TDBuySuccessViewController.m in Sources */,
 				1918AFB11948359300F40345 /* OEXCourseDetailTableViewCell.m in Sources */,
+				A43CC1F81FD6A17000C71F07 /* TDFileModel.m in Sources */,
 				77AFD11C1C1B76D0001985FD /* NSObject+SafeKVO.swift in Sources */,
 				9EE684CB1B3D5FAB00C7B157 /* CourseHandoutsViewController.swift in Sources */,
 				7C2DD5511D4A790F006148E0 /* UserPreferenceAPI.swift in Sources */,
@@ -6218,6 +6229,7 @@
 				7713DFBF1AC3C16C005A1756 /* OEXRegisteringUserDetails.m in Sources */,
 				77FDF40F1AFBAE7700E8C639 /* OEXRouter+Swift.swift in Sources */,
 				77056C3E1B3F320800D9DB4A /* DetailToolbarButton.swift in Sources */,
+				A43CC1F51FD6923900C71F07 /* TDFileWebViewController.m in Sources */,
 				B52E8D331F0B94E900F3170D /* BarrageSpriteUtility.m in Sources */,
 				77691F9C1B3A0774003922F2 /* Result+JSON.swift in Sources */,
 				A413A4AC1F580BEA008556C2 /* TDLiveQACell.m in Sources */,

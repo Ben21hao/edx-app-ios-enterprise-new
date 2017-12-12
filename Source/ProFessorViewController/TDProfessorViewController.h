@@ -12,6 +12,7 @@
 @interface TDProfessorViewController : TDBaseViewController
 
 @property (nonatomic,strong) NSString *professorName;
+@property (nonatomic,assign) BOOL isEliteu;
 
 
 @end

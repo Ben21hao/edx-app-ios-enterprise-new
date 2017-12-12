@@ -49,11 +49,6 @@
     [self.loadIngView removeFromSuperview];
 }
 
-#pragma mark - action
-- (void)agreeButtonAction:(UIButton *)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 #pragma mark - UI
 - (void)configView {
     

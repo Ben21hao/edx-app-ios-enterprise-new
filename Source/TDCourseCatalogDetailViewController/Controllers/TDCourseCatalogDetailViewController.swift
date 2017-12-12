@@ -215,6 +215,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
         if courseModel.professor_username != nil {
             vc.professorName = courseModel.professor_username!//教授名字
         }
+        vc.isEliteu = self.courseModel.is_public_course == true
         self.navigationController?.pushViewController(vc, animated: true)
         
     }

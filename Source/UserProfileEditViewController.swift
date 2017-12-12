@@ -417,7 +417,7 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
             let emailVC = TDBindEmailViewController.init()
             emailVC.username = self.profile.username
             emailVC.bindEmailHandle = {(AnyObject) -> () in
-                print("绑定邮箱 --- \(AnyObject)")
+//                print("绑定邮箱 --- \(AnyObject)")
             }
             self.navigationController?.pushViewController(emailVC, animated: true)
             
@@ -436,7 +436,7 @@ class UserProfileEditViewController: UITableViewController,UIGestureRecognizerDe
                 //                        self.showToast("成功绑定")
                 //                    }
                 //                }
-                print("绑定手机号 --- \(AnyObject) \(self.profile.phone)")
+//                print("绑定手机号 --- \(AnyObject) \(self.profile.phone)")
             }
             self.navigationController?.pushViewController(phoneVc, animated: true)
         }

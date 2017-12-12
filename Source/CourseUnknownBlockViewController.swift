@@ -18,6 +18,8 @@ class CourseUnknownBlockViewController: UIViewController, CourseBlockViewControl
     let courseID : String
     let messageView : IconMessageView
     
+    let fileWebVC = TDFileWebViewController()
+    
     var loader : Stream<NSURL?>?
     init(blockID : CourseBlockID?, courseID : String, environment : Environment) {
         self.blockID = blockID
@@ -51,7 +53,12 @@ class CourseUnknownBlockViewController: UIViewController, CourseBlockViewControl
         self.view.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
         self.view.addSubview(messageView)
         
+        self.fileWebVC.couse_id = self.courseID
+        self.fileWebVC.block_id = self.blockID
+        self.fileWebVC.setViewData()
+        self.view.addSubview(fileWebVC.view);
     }
+
     
     override func updateViewConstraints() {
         
