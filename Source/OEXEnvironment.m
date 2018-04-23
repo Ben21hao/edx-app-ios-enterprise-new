@@ -44,6 +44,7 @@
 @implementation OEXEnvironment
 
 + (instancetype)shared {
+    
     static dispatch_once_t onceToken;
     static OEXEnvironment* shared = nil;
     dispatch_once(&onceToken, ^{
@@ -53,13 +54,16 @@
 }
 
 - (id)init {
+    
     self = [super init];
     if(self != nil) {
+        
         self.postSetupActions = [[NSMutableArray alloc] init];
         
         self.loggerBuilder = ^(OEXEnvironment* env) {
             return Logger.sharedLogger;
         };
+        
         
         self.analyticsBuilder = ^(OEXEnvironment* env){
             NSCAssert(env.config != nil, @"Config should be enabled before analytics are set up");
@@ -79,9 +83,13 @@
             }
             return analytics;
         };
+        
+        
         self.configBuilder = ^(OEXEnvironment* env){
             return [[OEXConfig alloc] initWithAppBundleData];
         };
+        
+        
         self.pushNotificationManagerBuilder = ^OEXPushNotificationManager*(OEXEnvironment* env) {
             NSCAssert(env.config != nil, @"Config should be enabled before analytics are set up");
             if(env.config.pushNotificationsEnabled) {
@@ -101,6 +109,8 @@
                 return nil;
             }
         };
+        
+        
         self.dataManagerBuilder = ^(OEXEnvironment* env) {
             OEXPushSettingsManager* pushSettingsManager = [[OEXPushSettingsManager alloc] init];
             EnrollmentManager* enrollmentManager =
@@ -128,6 +138,8 @@
                                             userPreferenceManager:userPreferenceManager
                     ];
         };
+        
+        
         self.networkManagerBuilder = ^(OEXEnvironment* env) {
             PersistentResponseCache* cache = [[PersistentResponseCache alloc] initWithProvider: [[SessionUsernameProvider alloc] initWithSession:env.session]];
             NetworkManager* manager = [[NetworkManager alloc]
@@ -142,6 +154,8 @@
             }];
             return manager;
         };
+        
+        
         self.routerBuilder = ^(OEXEnvironment* env) {
             RouterEnvironment* routerEnv = [[RouterEnvironment alloc]
                                             initWithAnalytics:env.analytics
@@ -154,12 +168,16 @@
                                             styles:env.styles
                                             ];
             return [[OEXRouter alloc] initWithEnvironment:routerEnv];
-            
         };
+        
+        
         self.stylesBuilder = ^(OEXEnvironment* env){
             return [[OEXStyles alloc] init];
         };
+        
+        
         self.sessionBuilder = ^(OEXEnvironment* env){
+            
             OEXSession* session = [[OEXSession alloc] init];
             [env.postSetupActions addObject: ^(OEXEnvironment* env) {
                 [env.session loadTokenFromStore];
@@ -171,6 +189,7 @@
 }
 
 - (void)setupEnvironment {
+    
     // TODO: automatically order by dependencies
     // For now, make sure this is the right order for dependencies
     self.logger = self.loggerBuilder(self);

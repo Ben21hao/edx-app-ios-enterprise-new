@@ -49,8 +49,7 @@ extern NSString* const OEXDownloadEndedNotification;
 // TODO: Make this indexed by courseID instead of course.video_outline 让这courseid代替course.video_outline索引
 @property (nullable, nonatomic, strong) NSMutableDictionary* courseVideos; //视频数组
 
-//Reachability
-@property (nonatomic, assign) BOOL reachable;
+@property (nonatomic, assign) BOOL reachable; //Reachability
 
 //Total progress
 @property (nonatomic, assign) float totalProgress;

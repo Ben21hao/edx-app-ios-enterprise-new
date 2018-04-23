@@ -29,22 +29,28 @@
 #import "OEXVideoSummary.h"
 
 @interface OEXDataParser ()
-@property (nonatomic, weak) OEXInterface* dataInterface;
+
+@property (nonatomic, weak) OEXInterface *dataInterface;
+
 @end
 
 @implementation OEXDataParser
-- (id)initWithDataInterface:(OEXInterface*)dataInterface {
+
+- (id)initWithDataInterface:(OEXInterface *)dataInterface {
+    
     self = [super init];
     self.dataInterface = dataInterface;
     return self;
 }
 
-- (NSArray*)announcementsWithData:(NSData*)receivedData {
-    NSError* error;
+- (NSArray *)announcementsWithData:(NSData *)receivedData {
+    
+    NSError *error;
     id array = [NSJSONSerialization oex_JSONObjectWithData:receivedData error:&error];
+    
     if([array isKindOfClass:[NSArray class]]) {
-        NSArray* announcements = [(NSArray*)array oex_replaceNullsWithEmptyStrings];
-        return [announcements oex_map:^(NSDictionary* object) {
+        NSArray *announcements = [(NSArray *)array oex_replaceNullsWithEmptyStrings];
+        return [announcements oex_map:^(NSDictionary *object) {
             return [[OEXAnnouncement alloc] initWithDictionary:object];
         }];
     }
@@ -53,28 +59,32 @@
     }
 }
 
-- (NSString*)handoutsWithData:(NSData*)receivedData {
-    NSError* error;
-    NSDictionary* dict = [NSJSONSerialization oex_JSONObjectWithData:receivedData error:&error];
-    NSDictionary* dictResponse = nil;
+- (NSString *)handoutsWithData:(NSData *)receivedData {
+    
+    NSError *error;
+    NSDictionary *dict = [NSJSONSerialization oex_JSONObjectWithData:receivedData error:&error];
+    NSDictionary *dictResponse = nil;
+    
     if([dict isKindOfClass:[NSDictionary class]]) {
         dictResponse = [dict oex_replaceNullsWithEmptyStrings];
     }
     if(!dictResponse || ![dictResponse objectForKey:@"handouts_html"]) {
         return @"<p>Sorry, There is currently no data available for this section</p>";;
     }
-    NSString* htmlString = [dictResponse objectForKey:@"handouts_html"];
+    NSString *htmlString = [dictResponse objectForKey:@"handouts_html"];
     return htmlString;
 }
 
-- (OEXUserDetails*)userDetailsWithData:(NSData*)receivedData {
-    NSError* error;
-    NSDictionary* dict = [NSJSONSerialization oex_JSONObjectWithData:receivedData error:&error];
+- (OEXUserDetails *)userDetailsWithData:(NSData *)receivedData {
+    
+    NSError *error;
+    NSDictionary *dict = [NSJSONSerialization oex_JSONObjectWithData:receivedData error:&error];
     if(![dict isKindOfClass:[NSDictionary class]]) {
         return nil;
     }
-    NSDictionary* dictResponse = [dict oex_replaceNullsWithEmptyStrings];
-    OEXUserDetails* obj_userdetails = [[OEXUserDetails alloc] init];
+    
+    NSDictionary *dictResponse = [dict oex_replaceNullsWithEmptyStrings];
+    OEXUserDetails *obj_userdetails = [[OEXUserDetails alloc] init];
     obj_userdetails.userId = [dictResponse objectForKey:@"id"];
     obj_userdetails.username = [dictResponse objectForKey:@"username"];
     obj_userdetails.email = [dictResponse objectForKey:@"email"];
@@ -84,20 +94,20 @@
     return obj_userdetails;
 }
 
-- (NSArray *)userCourseEnrollmentsWithData:(NSData*)receivedData { //返回我的课程数组
+- (NSArray *)userCourseEnrollmentsWithData:(NSData *)receivedData { //返回我的课程数组
     
-    NSError* error;
-    NSArray* arrResponse = [NSJSONSerialization oex_JSONObjectWithData:receivedData error:&error];
+    NSError *error;
+    NSArray *arrResponse = [NSJSONSerialization oex_JSONObjectWithData:receivedData error:&error];
     
-    NSMutableArray* arr_CourseEnrollmentObjetcs = [[NSMutableArray alloc] init];
-    for(NSDictionary* dict in arrResponse) {
+    NSMutableArray *arr_CourseEnrollmentObjetcs = [[NSMutableArray alloc] init];
+    for(NSDictionary *dict in arrResponse) {
         
         if(![dict isKindOfClass:[NSDictionary class]]) { // parse level - 1
             continue;
         }
-        NSDictionary* dictResponse = [dict oex_replaceNullsWithEmptyStrings];
+        NSDictionary *dictResponse = [dict oex_replaceNullsWithEmptyStrings];
 
-        UserCourseEnrollment* usercoruse = [[UserCourseEnrollment alloc] initWithDictionary:dictResponse];
+        UserCourseEnrollment *usercoruse = [[UserCourseEnrollment alloc] initWithDictionary:dictResponse];
         
         // array populated with objects and returned
         if (usercoruse.isActive) {
@@ -107,18 +117,18 @@
     return arr_CourseEnrollmentObjetcs;
 }
 
-- (NSArray *)videoSummaryListWithData:(NSData *)receivedData {
+- (NSArray *)videoSummaryListWithData:(NSData  *)receivedData {
     
-    NSMutableArray* arrSummary = [[NSMutableArray alloc] init];
-    NSError* error;
-    NSArray* arrResponse = [NSJSONSerialization oex_JSONObjectWithData:receivedData error:&error];
+    NSMutableArray *arrSummary = [[NSMutableArray alloc] init];
+    NSError *error;
+    NSArray *arrResponse = [NSJSONSerialization oex_JSONObjectWithData:receivedData error:&error];
     
-    for(NSDictionary* dict in arrResponse) {
+    for(NSDictionary *dict in arrResponse) {
         if(![dict isKindOfClass:[NSDictionary class]]) {
             continue;
         }
-        NSDictionary* dictResponse = [dict oex_replaceNullsWithEmptyStrings]; //剔除空的字典
-        OEXVideoSummary* summaryList = [[OEXVideoSummary alloc] initWithDictionary:dictResponse]; //课程summarry
+        NSDictionary *dictResponse = [dict oex_replaceNullsWithEmptyStrings]; //剔除空的字典
+        OEXVideoSummary *summaryList = [[OEXVideoSummary alloc] initWithDictionary:dictResponse]; //课程summarry
         
         if(summaryList.chapterPathEntry.entryID != nil && summaryList.sectionPathEntry.entryID != nil) {
             [arrSummary addObject:summaryList];
@@ -126,4 +136,5 @@
     }
     return arrSummary;
 }
+
 @end

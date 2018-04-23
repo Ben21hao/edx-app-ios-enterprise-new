@@ -77,11 +77,11 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
 @property (nonatomic, strong) UIView* activityBackgroundView;
 @property (nonatomic, strong) UIActivityIndicatorView* activityIndicator;
 
-@property (nonatomic, strong) CLMoviePlayerControlsBar* topBar;
-@property (nonatomic, strong) CLMoviePlayerControlsBar* bottomBar;
+@property (nonatomic, strong) CLMoviePlayerControlsBar* topBar; //顶部bar
+@property (nonatomic, strong) CLMoviePlayerControlsBar* bottomBar; //底部bar
 @property (nonatomic, strong) OEXCustomSlider* durationSlider;//进度条
 @property (nonatomic, strong) AccessibilityCLButton* playPauseButton;//播放暂停
-@property (nonatomic, strong) MPVolumeView* volumeView;
+//@property (nonatomic, strong) MPVolumeView* volumeView; //音量
 @property (nonatomic, strong) CLButton* fullscreenButton;//全屏
 @property (nonatomic, strong) UILabel* timeElapsedLabel;
 @property (nonatomic, strong) UILabel* timeRemainingLabel;
@@ -112,7 +112,7 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
 #pragma mark - Properties
 @property (strong, nonatomic) NSMutableArray* subtitlesParts;
 @property (strong, nonatomic) NSTimer* subtitleTimer;
-@property (strong, nonatomic) UILabel* subtitleLabel;
+@property (strong, nonatomic) UILabel* subtitleLabel; //字幕label
 @property (nonatomic, assign) BOOL subtitleActivated;
 
 #pragma mark - Private methods
@@ -160,25 +160,24 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
 #pragma mark Closed Captions
 
 - (void)activateSubTitles:(NSString*)URLString {
-    // Look up the transcript on disk and load if not present
-    
-    [self getClosedCaptioningFileAtURL:URLString
-                             completion:^(BOOL finished) {
-                                 // Activate subtitles
-                                 if (self.subtitleActivated) {
+    // Look up the transcript on disk and load if not present 查找磁盘上的记录并加载，如果不存在
+    [self getClosedCaptioningFileAtURL:URLString completion:^(BOOL finished) { //成功
+        
+                                 if (self.subtitleActivated) { // Activate subtitles 激活字幕
                                      [self showSubtitles];
-                                 }
-                                 else{
+                                 } else{
                                      [self hideSubtitles];
                                  }
-                                 // Analytics SHOW TRANSCRIPT
-                                 [self analyticsShowTranscript];
+        
+                                 [self analyticsShowTranscript]; // Analytics SHOW TRANSCRIPT 分析显示成绩单
+        
                              } failure:^(NSError* error) {
                              }];
 }
 
 
-- (void) downloadedTranscript:(NSNotification*)note {
+- (void)downloadedTranscript:(NSNotification *)note { //下载字幕
+    
     NSURLSessionDownloadTask* task = note.userInfo[DL_COMPLETE_N_TASK];
     NSURL* taskURL = task.response.URL;
     NSString* captionURL = self.video.summary.transcripts[[OEXInterface getCCSelectedLanguage]];
@@ -191,9 +190,10 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
     }
 }
 
-- (void) setCaption:(NSString*)language{
+- (void)setCaption:(NSString *)language {
+    
     [self hideTables];
-    [OEXInterface setCCSelectedLanguage:language];
+    [OEXInterface setCCSelectedLanguage:language]; //
     
     if ([language isEqualToString:@""]) {
         
@@ -207,6 +207,7 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
         _dataInterface.selectedCCIndex = -1;
         self.subtitlesParts = nil;
         [self hideSubtitles];
+        
         return;
     }
     
@@ -272,16 +273,11 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
     NSError* error = nil;
     NSString* subtitleString = @"";
 
-    // File to string
-    if([[NSFileManager defaultManager] fileExistsAtPath:localFile]) {
-        // File to string
-        subtitleString = [NSString stringWithContentsOfFile:localFile
-                                                   encoding:NSUTF8StringEncoding
-                                                      error:&error];
-
+    if([[NSFileManager defaultManager] fileExistsAtPath:localFile]) {// File to string 本地有文件
+        subtitleString = [NSString stringWithContentsOfFile:localFile encoding:NSUTF8StringEncoding error:&error];
         subtitleString = [subtitleString stringByReplacingOccurrencesOfString:@"\r" withString:@"\n"];
     }
-    else {
+    else { //没有就下载
         [_dataInterface downloadWithRequestString:URLString forceUpdate:NO];
     }
 
@@ -290,13 +286,13 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
         return;
     }
 
-    // Parse and show text
+    // Parse and show text 解析并显示文本
     [self readClosedCaptioningString:subtitleString completion:success failure:failure];
 }
 
 - (void)readClosedCaptioningString:(NSString*)srtString completion:(void (^)(BOOL finished))success failure:(void (^)(NSError* error))failure {
-    [self parseClosedCaptioningString:srtString
-                               parsed:^(BOOL parsed, NSError* error) {
+    [self parseClosedCaptioningString:srtString parsed:^(BOOL parsed, NSError* error) {
+        
         if(!error && success != NULL) {
             if(success != NULL) {
                 success(YES);
@@ -310,8 +306,8 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
     }];
 }
 
-- (void)showSubtitles:(BOOL)show {
-    // Hide label
+- (void)showSubtitles:(BOOL)show { // Hide label
+    
     self.subtitleLabel.hidden = !show;
 }
 
@@ -332,25 +328,23 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
     // Subtitles parts
     self.subtitlesParts = [NSMutableArray array];
 
-    // Search for members
-    while(!scanner.isAtEnd) {
+    // Search for members 寻找成员
+    while(!scanner.isAtEnd) { //遍历
+        
         // Variables
         NSString* indexString;
-        [scanner scanUpToCharactersFromSet:[NSCharacterSet newlineCharacterSet]
-                                intoString:&indexString];
+        [scanner scanUpToCharactersFromSet:[NSCharacterSet newlineCharacterSet] intoString:&indexString]; //newlineCharacterSet 换行符\n
 
         NSString* startString;
         [scanner scanUpToString:@" --> " intoString:&startString];
         [scanner scanString:@"-->" intoString:NULL];
 
         NSString* endString;
-        [scanner scanUpToCharactersFromSet:[NSCharacterSet newlineCharacterSet]
-                                intoString:&endString];
+        [scanner scanUpToCharactersFromSet:[NSCharacterSet newlineCharacterSet] intoString:&endString];
 
         NSString* textString;
-
         [scanner scanUpToString:@"\n\n" intoString:&textString];
-        textString = [textString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        textString = [textString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]; //去掉 whitespaceCharacterSet 空格
 
         //RAHUL
         if([textString rangeOfString:@" --> "].location != NSNotFound) {
@@ -480,7 +474,7 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
     // Start timer
 
     if(!self.subtitleTimer.isValid) {
-        self.subtitleTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+        self.subtitleTimer = [NSTimer scheduledTimerWithTimeInterval:0.8
                                                               target:self
                                                             selector:@selector(searchAndDisplaySubtitle)
                                                             userInfo:nil
@@ -500,9 +494,10 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
         self.subtitleLabel.layer.rasterizationScale = [[UIScreen mainScreen] scale];
         self.subtitleLabel.layer.cornerRadius = 5;
         [self addSubview:self.subtitleLabel];
+    
+        NSString *ccSelectedLanguage = [OEXInterface getCCSelectedLanguage]; //语言习惯
+        NSString* captionURL = self.video.summary.transcripts[ccSelectedLanguage]; //字幕链接
         
-        NSString *ccSelectedLanguage = [OEXInterface getCCSelectedLanguage];
-        NSString* captionURL = self.video.summary.transcripts[ccSelectedLanguage];
         if(ccSelectedLanguage && ![ccSelectedLanguage isEqualToString:@""] && captionURL) {
             self.subtitleActivated = YES;
             [self setCaption:ccSelectedLanguage];
@@ -1145,6 +1140,7 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
     return YES;
 }
 
+#pragma mark - ClButtonDelegate
 - (void)buttonTouchedDown:(UIButton*)button {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideControls:) object:nil];
 }
@@ -1292,6 +1288,7 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
         [self.topBar setNeedsDisplay];
         [self.bottomBar setNeedsDisplay];
         __weak CLVideoPlayerControls* weakself = self;
+        
         [UIView animateWithDuration:0.3 delay:0.0 options:0 animations:^{
             self.topBar.alpha = 1.f;
             self.playPauseButton.alpha = 1.f;
@@ -1326,8 +1323,11 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
 }
 
 - (void)hideControls:(void (^)(void))completion {
+    
     if(self.isShowing && !UIAccessibilityIsVoiceOverRunning()) {
+        
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideControls:) object:nil];
+        
         [UIView animateWithDuration:0.3 delay:0.0 options:0 animations:^{
             if(self.style == CLVideoPlayerControlsStyleFullscreen || (self.style == CLVideoPlayerControlsStyleDefault && self.moviePlayer.isFullscreen)) {
             }
@@ -1344,6 +1344,7 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
             // Hide tables with all the other control fades.
             [self hideTables];
             self.btnSettings.selected = NO;
+            
         } completion:^(BOOL finished) {
             _showing = NO;
             if(completion) {
@@ -1359,6 +1360,7 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
 }
 
 - (void)showLoadingIndicators {
+    
     [self addSubview:_activityBackgroundView];
     [self addSubview:_activityIndicator];
     [_activityIndicator startAnimating];
@@ -1440,7 +1442,8 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
     double secondaryProgress = floor(self.moviePlayer.playableDuration);
     double totalTime = floor(self.moviePlayer.duration);
     float time = secondaryProgress / totalTime;
-    if(isnan(time)) {
+    
+    if(isnan(time)) { //检验是否是一个非数值的数字
         if(self.moviePlayer.playbackState != MPMoviePlaybackStatePlaying) {
             [self stopBufferedTimer];
         }

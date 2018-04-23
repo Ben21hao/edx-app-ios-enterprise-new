@@ -48,6 +48,9 @@ class OEXRearTableViewController : UITableViewController {
     @IBOutlet weak var appVersionButton: UIButton!
     @IBOutlet var userContentView: UIView!
     
+    let redLabel = UILabel()
+    
+    
     lazy var environment = Environment()
     var profileFeed: Feed<UserProfile>?
     
@@ -122,6 +125,17 @@ class OEXRearTableViewController : UITableViewController {
         submitFeedbackLabel.text = TDLocalizeSelectSwift("SUBMIT_FEEDBACK.OPTION_TITLE")
         logoutButton.setTitle(TDLocalizeSelectSwift("LOGOUT"), forState: .Normal)
         loginButton.setTitle(TDLocalizeSelectSwift("SIGN_IN"), forState: .Normal)
+        
+        redLabel.backgroundColor = UIColor.redColor()
+        redLabel.layer.masksToBounds = true
+        redLabel.layer.cornerRadius = 3
+        assistantLabel.addSubview(redLabel)
+        
+        redLabel.snp_makeConstraints { (make) in
+            make.left.equalTo(assistantLabel.snp_left).offset(68)
+            make.centerY.equalTo(assistantLabel.snp_centerY)
+            make.size.equalTo(CGSizeMake(6, 6))
+        }
     }
     
     private func setupProfileLoader() {
@@ -137,7 +151,8 @@ class OEXRearTableViewController : UITableViewController {
                 
                 SDImageCache.sharedImageCache().cleanDisk()
                 
-                var companyImageStr = ELITEU_URL +  profile.logoUrl!
+                let apiHostUrl = OEXConfig.sharedConfig().apiHostURL()
+                var companyImageStr = (apiHostUrl?.absoluteString)! +  profile.logoUrl!
                 companyImageStr = companyImageStr.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.init(charactersInString: "`#%^{}\"[]|\\<> ").invertedSet)! //处理图片链接中的中文和空格
                 
                 let url = NSURL.init(string: companyImageStr)

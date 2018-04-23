@@ -22,15 +22,17 @@ extern NSString* const OEXSessionEndedNotification;
 @class OEXUserDetails;
 @protocol OEXCredentialStorage;
 
+
 @interface OEXSession : NSObject
+
+@property (readonly, nonatomic, strong, nullable) OEXAccessToken* token;
+@property (readonly, nonatomic, strong, nullable) OEXUserDetails* currentUser;
+
 
 + (nullable OEXSession*)sharedSession;
 + (void)setSharedSession:(OEXSession*)session;
 
 - (id)initWithCredentialStore:(id <OEXCredentialStorage>)storage;
-
-@property (readonly, nonatomic, strong, nullable) OEXAccessToken* token;
-@property (readonly, nonatomic, strong, nullable) OEXUserDetails* currentUser;
 
 - (void)loadTokenFromStore;
 - (void)saveAccessToken:(OEXAccessToken*)token userDetails:(OEXUserDetails*)userDetails;
@@ -39,6 +41,7 @@ extern NSString* const OEXSessionEndedNotification;
 - (void)performMigrations;
 
 @end
+
 
 @interface OEXSession (Testing)
 

@@ -30,7 +30,19 @@
     return self;
 }
 
+#pragma mark - textView delegate
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if ([text isEqualToString:@"\n"]) {
+        [self.inputTextView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    
     self.holderLabel.hidden = YES;
     if (self.inputViewResponderHandle) {
         self.inputViewResponderHandle(TDHeight > 568 ? NO : YES);
@@ -39,6 +51,7 @@
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
+    
     self.numLabel.text = [NSString stringWithFormat:@"%ld/500",(unsigned long)textView.text.length];
     if (textView.text.length > 500) {
         self.numLabel.textColor = [UIColor redColor];
@@ -46,8 +59,10 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
+    
     if (self.inputTextView.text.length > 0) {
         self.holderLabel.hidden = YES;
+        
     } else {
         self.holderLabel.hidden = NO;
     }
@@ -55,6 +70,7 @@
     if (self.inputViewResponderHandle) {
         self.inputViewResponderHandle(NO);
     }
+    
     if (self.inputStrHandle) {
         self.inputStrHandle(self.inputTextView.text);
     }
@@ -71,10 +87,12 @@
     [self.bgView addSubview:self.titleLabel];
     
     self.numLabel = [self setLabelConstraint:@"0/500"];
+    self.numLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
     [self.bgView addSubview:self.numLabel];
     
     self.inputTextView = [[UITextView alloc] init];
     self.inputTextView.delegate = self;
+    self.inputTextView.returnKeyType = UIReturnKeyDone;
     self.inputTextView.font = [UIFont fontWithName:@"OpenSans" size:14];
     self.inputTextView.textColor = [UIColor colorWithHexString:colorHexStr10];
     self.inputTextView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
@@ -95,21 +113,20 @@
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.bgView.mas_left).offset(11);
+        make.left.mas_equalTo(self.bgView.mas_left).offset(13);
         make.top.mas_equalTo(self.bgView.mas_top).offset(8);
         make.height.mas_equalTo(28);
     }];
     
     [self.numLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.bgView.mas_right).offset(-11);
-        make.top.mas_equalTo(self.bgView.mas_top).offset(8);
-        make.height.mas_equalTo(28);
+        make.right.mas_equalTo(self.bgView.mas_right).offset(-13);
+        make.centerY.mas_equalTo(self.titleLabel.mas_centerY);
     }];
     
     [self.inputTextView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(8);
-        make.left.mas_equalTo(self.bgView.mas_left).offset(18);
-        make.right.mas_equalTo(self.bgView.mas_right).offset(-18);
+        make.left.mas_equalTo(self.bgView.mas_left).offset(13);
+        make.right.mas_equalTo(self.bgView.mas_right).offset(-13);
         make.bottom.mas_equalTo(self.bgView.mas_bottom).offset(-11);
     }];
     
@@ -120,6 +137,7 @@
 }
 
 - (UILabel *)setLabelConstraint:(NSString *)title {
+    
     UILabel *label = [[UILabel alloc] init];
     label.font = [UIFont fontWithName:@"OpenSans" size:14];
     label.textColor = [UIColor colorWithHexString:colorHexStr10];

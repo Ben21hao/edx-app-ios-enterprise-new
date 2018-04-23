@@ -12,14 +12,19 @@
 @implementation NSDictionary (OEXEncoding)
 
 - (NSString*)oex_stringByUsingFormEncoding { //给字典排序，然后拼接成 key=value&key=value 的字符串
+    
     NSMutableString* result = [[NSMutableString alloc] init];
     __block NSUInteger remaining = self.count;
+    
     [self enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSString* value, BOOL* stop) {
+        
         NSAssert([key isKindOfClass:[NSString class]], @"Form keys should be strings");
         NSAssert([key isKindOfClass:[NSString class]], @"Form values should be strings");
+        
         [result appendString:key.oex_stringByUsingFormEncoding];
         [result appendString:@"="];
         [result appendString:value.oex_stringByUsingFormEncoding];
+        
         if(remaining > 1) {
             [result appendString:@"&"];
         }

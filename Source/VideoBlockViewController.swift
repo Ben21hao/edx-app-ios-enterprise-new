@@ -19,13 +19,15 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
     let courseQuerier : CourseOutlineQuerier
     let loader = BackedStream<CourseBlock>()
     
-    let loadController : LoadStateViewController
+    let loadController : LoadStateViewController //加载页
+    
     let videoController : OEXVideoPlayerInterface //播放章节的视频
     let videoPlayerVC : TDVideoUrlPlayController//用来播放url的
     var isUrlVideo = false
     
     var rotateDeviceMessageView : IconMessageView?
     var videoTranscriptView : VideoTranscript? //字幕tableView
+    
     var subtitleTimer = NSTimer()
     var contentView : UIView?
 
@@ -422,7 +424,7 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
             }
             else if videoController.shouldRotate && newCollection.verticalSizeClass == .Compact {
                 videoPlayer.setFullscreen(true, withOrientation: self.currentOrientation())
-                print("视频播放 --->>>>  ppppppppppppppp")
+//                print("视频播放 --->>>>  ppppppppppppppp")
             }
         }
     }
@@ -433,7 +435,7 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
         }
     }
     
-    func highlightSubtitle() {
+    func highlightSubtitle() { //传入视频的当前播放时间
         videoTranscriptView?.highlightSubtitleForTime(videoController.moviePlayerController?.controls?.moviePlayer?.currentPlaybackTime)
     }
     

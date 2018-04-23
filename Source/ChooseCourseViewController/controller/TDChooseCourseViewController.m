@@ -112,6 +112,11 @@
     [super viewWillAppear:animated];
     
     self.titleViewLabel.text = TDLocalizeSelect(@"COURSE_LIST", nil);
+
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
     if (self.whereFrom == TDChooseCourseFromFree) {
         if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
@@ -120,7 +125,17 @@
     }
 }
 
-- (void)backButtonAction:(UIButton *)sender {
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    if (self.whereFrom == TDChooseCourseFromFree) {
+        if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+            self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+        }
+    }
+}
+
+- (void)leftButtonAction:(UIButton *)sender {
     
     if (self.whereFrom == TDChooseCourseFromBuy) {
         [self.navigationController popViewControllerAnimated:YES];

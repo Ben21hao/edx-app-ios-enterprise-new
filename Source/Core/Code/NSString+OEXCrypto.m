@@ -13,7 +13,9 @@
 @implementation NSString (OEXCrypto)
 
 - (NSString*)oex_md5 {
+    
     NSData* data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    
     unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
     CC_MD5(data.bytes, (CC_LONG)data.length, md5Buffer);
     

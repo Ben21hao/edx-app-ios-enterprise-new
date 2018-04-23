@@ -9,6 +9,7 @@
 import UIKit
 
 @objc class RouterEnvironment: NSObject, OEXAnalyticsProvider, OEXConfigProvider, DataManagerProvider, OEXInterfaceProvider, NetworkManagerProvider, ReachabilityProvider, OEXRouterProvider, OEXSessionProvider, OEXStylesProvider {
+    
     let analytics: OEXAnalytics
     let config: OEXConfig
     let dataManager: DataManager

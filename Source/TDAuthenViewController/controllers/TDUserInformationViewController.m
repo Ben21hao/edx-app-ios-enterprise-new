@@ -44,7 +44,7 @@
     self.titleViewLabel.text = TDLocalizeSelect(@"AUTHENTICATION_MESSAGE", nil);
 }
 
-- (void)backButtonAction:(UIButton *)sender {
+- (void)leftButtonAction:(UIButton *)sender {
     if (self.isHandin == YES) {
         [self.view makeToast:TDLocalizeSelect(@"SUBMIT_ING", nil) duration:0.8 position:CSToastPositionCenter];
         return;
@@ -155,7 +155,7 @@
 - (NSString *)base64Code:(UIImage *)image {
     
 //    NSData *faceData = UIImagePNGRepresentation(image);
-    NSData *faceData = UIImageJPEGRepresentation(image, 1.0);
+    NSData *faceData = UIImageJPEGRepresentation(image, 0.5);
     NSString *faceStr = [faceData base64EncodedStringWithOptions:0];
     return faceStr;
 }

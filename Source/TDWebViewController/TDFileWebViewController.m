@@ -9,12 +9,16 @@
 #import "TDFileWebViewController.h"
 #import "edx-Swift.h"
 
-@interface TDFileWebViewController ()<WKUIDelegate,WKNavigationDelegate>
+#import "BCEDocumentReader.h"
+
+@interface TDFileWebViewController ()<BCEDocumentReaderDelegate, WKUIDelegate, WKNavigationDelegate>
 
 @property (nonatomic,strong) WKWebView *webview;
 @property (nonatomic,strong) UIButton *downloadButton;
 
 @property (nonatomic,strong) NSURL *url;
+
+@property (nonatomic,strong) BCEDocumentReader *reader;
 
 @end
 
@@ -24,7 +28,7 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
-    [self configView];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -65,7 +69,8 @@
             
             if (model) {
                 weakSelf.url = [NSURL URLWithString:model.file_url];
-                [weakSelf.webview loadRequest:[NSURLRequest requestWithURL:self.url]];
+                
+                [weakSelf judgeSetViewConstranitView:model];
                 [weakSelf dealWithView:[model.allow_download boolValue]];
             }
         }
@@ -74,6 +79,64 @@
         NSLog(@"文档 error ------>> %@",error);
     }];
 }
+
+- (void)loadBaiduDocument:(TDFileModel *)model {
+    
+    NSDictionary* parameters = @{
+                                 BDocPlayerSDKeyDocID: model.baidu_doc_id,
+                                 BDocPlayerSDKeyToken: @"token",
+                                 BDocPlayerSDKeyHost: @"BCEDOC",
+                                 BDocPlayerSDKeyDocType: @"doc",
+                                 BDocPlayerSDKeyTotalPageNum: @"1",
+                                 BDocPlayerSDKeyDocTitle: @"文档",
+                                 BDocPlayerSDKeyPageNumber : @(0)
+                                 };
+    
+    NSError* error;
+    [self.reader loadDoc:parameters error:&error];
+}
+
+- (void)docLoadingEnded:(NSError *)error {
+    NSLog(@"文档加载---->>> %@",error);
+    [self.loadIngView removeFromSuperview];
+}
+
+- (void)judgeSetViewConstranitView:(TDFileModel *)model {
+    
+    if (model.baidu_doc_id.length > 0) {
+        
+        self.reader = [[BCEDocumentReader alloc] init];
+        self.reader.delegate = self;
+        [self.view addSubview:self.reader];
+        
+        [self.reader mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(self.view);
+            make.top.mas_equalTo(self.view.mas_top).offset(0);
+            make.bottom.mas_equalTo(self.view.mas_bottom).offset(-43);
+        }];
+        
+        [self loadBaiduDocument:model];
+
+        
+    } else {
+        
+        self.webview = [[WKWebView alloc] init];
+        self.webview.navigationDelegate = self;
+        self.webview.UIDelegate = self;
+        self.webview.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:self.webview];
+        
+        [self.webview mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.mas_equalTo(self.view);
+            make.bottom.mas_equalTo(self.view.mas_bottom).offset(-43);
+        }];
+        
+         [self.webview loadRequest:[NSURLRequest requestWithURL:self.url]];
+    }
+    
+    [self addDownloadButton];
+}
+
 
 - (void)dealWithView:(BOOL)allow_download {
 
@@ -98,13 +161,7 @@
 }
 
 #pragma mark - UI
-- (void)configView {
-    
-    self.webview = [[WKWebView alloc] init];
-    self.webview.navigationDelegate = self;
-    self.webview.UIDelegate = self;
-    self.webview.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.webview];
+- (void)addDownloadButton {
     
     self.downloadButton = [[UIButton alloc] init];
     self.downloadButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
@@ -114,11 +171,6 @@
     [self.downloadButton setBackgroundImage:[UIImage imageNamed:@"download_file_image"] forState:UIControlStateNormal];
     [self.downloadButton addTarget:self action:@selector(downloadButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.downloadButton];
-    
-    [self.webview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.mas_equalTo(self.view);
-        make.bottom.mas_equalTo(self.view.mas_bottom).offset(-43);
-    }];
     
     [self.downloadButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.view.mas_right).offset(-8);

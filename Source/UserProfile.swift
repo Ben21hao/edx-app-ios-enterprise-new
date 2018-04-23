@@ -42,7 +42,8 @@ public class UserProfile {
         case companyDic = "company"//公司dic
         case logoUrl = "logo"//公司logo
         case company_id = "id" //公司id
-        case Language_Like = "language" //语言习惯
+        case Language_Like = "language" //语言习惯    
+        case consult_count = "unsolved_consult_length"//咨询条数
     }
     
     let hasProfileImage: Bool
@@ -72,6 +73,7 @@ public class UserProfile {
     let logoUrl: String?//公司logo
     let company_id: Int?
     let language_Like: String? //语言习惯
+    let consult_count: Int? //咨询
     
     public init?(json: JSON) {
         
@@ -108,12 +110,12 @@ public class UserProfile {
         remainscore = json[ProfileFields.Remainscore].double
         educationCode = json[ProfileFields.Education].string
         language_Like = json[ProfileFields.Language_Like].string
-        
+        consult_count = json[ProfileFields.consult_count].int
 //        print("json----->>>>> \(json)")
-//        print("语言 ---->>>> \(language_Like!)")
+        print("语言 ---->>>> \(consult_count!)")
     }
     
-    internal init(user_id : Int,company_id : Int, username : String, bio : String? = nil, parentalConsent : Bool? = false, countryCode : String? = nil, accountPrivacy : ProfilePrivacy? = nil,name : String, education : String? = nil,nickname : String, language_Like : String,remainscore : Double,phone : String,email : String,coupon : Double,order : Double) {
+    internal init(user_id : Int,company_id : Int, username : String, bio : String? = nil, parentalConsent : Bool? = false, countryCode : String? = nil, accountPrivacy : ProfilePrivacy? = nil,name : String, education : String? = nil,nickname : String, language_Like : String,remainscore : Double,phone : String,email : String,coupon : Double,order : Double,consult_count: Int) {
         
         self.accountPrivacy = accountPrivacy
         self.username = username
@@ -136,6 +138,7 @@ public class UserProfile {
         self.logoUrl = nil
         self.company_id = company_id
         self.language_Like = language_Like
+        self.consult_count = consult_count
     }
     
     var languageCode: String? {

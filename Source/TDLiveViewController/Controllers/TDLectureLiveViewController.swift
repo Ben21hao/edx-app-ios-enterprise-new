@@ -97,7 +97,7 @@ class TDLectureLiveViewController: TDSwiftBaseViewController, UIScrollViewDelega
             btn.tag = i
             x = CGFloat(i) * btnW
             btn.frame = CGRectMake(x, 0, btnW, h)
-            btn.titleLabel?.font = UIFont.init(name: "OpenSans", size: 16)
+            btn.titleLabel?.font = UIFont.init(name: "OpenSans", size: 14)
             btn.setTitleColor(OEXStyles.sharedStyles().baseColor9(), forState: .Normal)
             btn.setTitle(subVc.title, forState: .Normal)
             btn.addTarget(self, action: #selector(btnClick(_:)), forControlEvents: .TouchUpInside)

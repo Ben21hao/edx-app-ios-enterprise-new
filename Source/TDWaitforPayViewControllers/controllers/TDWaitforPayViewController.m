@@ -89,7 +89,7 @@
     [self tapGestureAction];
 }
 
-- (void)backButtonAction:(UIButton *)sender {
+- (void)leftButtonAction:(UIButton *)sender {
     
     if (self.whereFrom == 1 && self.returnWay == 1) {
         [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];

@@ -10,6 +10,6 @@
 
 @interface TDTextView : UITextView
 
-- (void)setBackPlaceholder:(NSString *)placeholder;
+@property (nonatomic,strong) UILabel *placeholderLabel;
 
 @end

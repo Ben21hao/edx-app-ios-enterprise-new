@@ -38,7 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = self.isEliteu ? TDLocalizeSelect(@"PROFESSOR_DETAIL", nil) : TDLocalizeSelect(@"TEACHER_DETAIL", nil);
+    self.titleViewLabel.text = self.isEliteu ? TDLocalizeSelect(@"PROFESSOR_DETAIL", nil) : TDLocalizeSelect(@"COURSE_INSTRUCTOR", nil);
     self.baseTool = [[TDBaseToolModel alloc] init];
     [self setLoadDataView];
     
@@ -172,7 +172,7 @@
     
     switch (indexPath.section) {
         case 0:
-            cell.textLabel.attributedText = [self setDetailTextAttribute:[NSString stringWithFormat:@"%@\n",TDLocalizeSelect(@"PROFESSOR_INTRODUCE", nil)] withDetail:[NSString stringWithFormat:@"%@", self.introduce]];
+            cell.textLabel.attributedText = [self setDetailTextAttribute:[NSString stringWithFormat:@"%@\n", self.isEliteu ? TDLocalizeSelect(@"PROFESSOR_INTRODUCE", nil) : TDLocalizeSelect(@"TEACHER_INTRODUCE", nil)] withDetail:[NSString stringWithFormat:@"%@", self.introduce]];
             break;
         case 1:
             cell.textLabel.attributedText = [self setDetailTextAttribute:[NSString stringWithFormat:@"%@\n",TDLocalizeSelect(@"MAIN_ACHIECEMENT", nil)] withDetail:[NSString stringWithFormat:@"%@", self.achievement]];

@@ -22,7 +22,8 @@ import Foundation
     }
 
     func logoutIfServerChanged(config config: OEXConfig, logoutAction : Void -> Void) {
-        if let lastURL = lastUsedAPIHostURL, currentURL = config.apiHostURL() where lastURL != currentURL {
+        
+        if let lastURL = lastUsedAPIHostURL, currentURL = config.apiHostURL() where lastURL != currentURL { //新的url和本地的不一样，执行退出登录
             logoutAction()
             OEXFileUtility.nukeUserData()
         }

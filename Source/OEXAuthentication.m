@@ -94,6 +94,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
 }
 
 + (void)executePOSTRequestWithPath:(NSString*)path parameters:(NSDictionary*)parameters completion:(OEXURLRequestHandler)completion {
+    
     NSURL* hostURL = [[OEXConfig sharedConfig] apiHostURL];
     NSURL* endpoint = [NSURL URLWithString:path relativeToURL:hostURL];
     
@@ -141,6 +142,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
 
 //通过 email 重置密码
 + (void)resetPasswordWithEmailId:(NSString*)email completionHandler:(OEXURLRequestHandler)completionBlock {
+    
     NSMutableDictionary* parameters = [[NSMutableDictionary alloc] init];
     [parameters safeSetObject:email forKey:@"email"];
     [parameters safeSetObject:@"1" forKey:@"is_company"]; //标明是企业版
@@ -149,6 +151,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
 
 // This retuns header for password authentication method - 这头返回密码验证的方法
 + (NSString*)plainTextAuthorizationHeaderForUserName:(NSString*)userName password:(NSString*)password {
+    
     NSString* clientID = [[OEXConfig sharedConfig] oauthClientID];
     
     NSMutableDictionary* arguments = [[NSMutableDictionary alloc] init];
@@ -230,6 +233,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
         dispatch_async(dispatch_get_main_queue(), ^{
                 OEXWrapURLCompletion(completionHandler)(userdata, userresponse, usererror);
             });
+
     }];
 }
 
@@ -249,5 +253,6 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
     NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     [[session dataTaskWithRequest:request completionHandler:OEXWrapURLCompletion(handler)] resume];
 }
+
 
 @end

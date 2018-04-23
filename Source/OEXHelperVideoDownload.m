@@ -14,7 +14,7 @@ double const OEXMaxDownloadProgress = 100;
 
 @implementation OEXHelperVideoDownload
 
-- (NSString*)description {
+- (NSString *)description {
     return [NSString stringWithFormat:@"<%@: %p, video_id=%@>", [self class], self, self.summary.videoID];
 }
 

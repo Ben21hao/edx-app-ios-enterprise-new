@@ -9,9 +9,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OEXCustomSlider : UISlider
+
 @property(nonatomic) CGFloat secondaryProgress;
+
 @property(nonatomic, strong ) UIImage* secondaryTrackImage;
 @property(nonatomic, strong ) UIColor* secondaryTrackColor;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -17,8 +17,8 @@ typedef NS_ENUM (NSUInteger, OEXDownloadState) {
 
 typedef NS_ENUM (NSUInteger, OEXPlayedState) {
     OEXPlayedStateUnwatched = 0,
-    OEXPlayedStatePartiallyWatched,
-    OEXPlayedStateWatched
+    OEXPlayedStatePartiallyWatched, //看了部分
+    OEXPlayedStateWatched //已经看完
 };
 
 typedef NS_ENUM (NSUInteger, OEXVideoState) {

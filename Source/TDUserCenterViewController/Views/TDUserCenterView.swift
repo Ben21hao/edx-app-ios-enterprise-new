@@ -16,6 +16,7 @@ class TDUserCenterView: UIView,UITableViewDataSource {
     internal var statusCode = Int() //认证状态 400 未认证，200 提交成功 ，201 已认证，202 认证失败
     internal var coupons = Double()//优惠券
     internal var orders = Double()//订单
+    internal var consult_count = Int() //咨询
     
     private let toolModel = TDBaseToolModel.init()
     private var isHidePuchase = true //默认隐藏内购
@@ -70,6 +71,7 @@ class TDUserCenterView: UIView,UITableViewDataSource {
         self.score = profile.remainscore! //学习宝典
         self.coupons = profile.coupon! //优惠券
         self.orders = profile.order! //未支付订单
+        self.consult_count = profile.consult_count!//咨询数量
         self.tableView.reloadData()
     }
     
@@ -81,14 +83,15 @@ class TDUserCenterView: UIView,UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
+            
         } else if section == 1 {
             if self.isHidePuchase == true {
-                return 3
+                return 2
             } else {
                 return 1
             }
         } else {
-           return 2
+           return 4
         }
     }
     
@@ -98,6 +101,7 @@ class TDUserCenterView: UIView,UITableViewDataSource {
         let baseTool = TDBaseToolModel.init()
         
         if indexPath.section == 0 {
+            
             let cell = TDUserMessageCell.init(style: .Default, reuseIdentifier: "UserMessageCell")
             cell.accessoryType = .DisclosureIndicator
             cell.selectionStyle = .None
@@ -149,6 +153,7 @@ class TDUserCenterView: UIView,UITableViewDataSource {
             return cell
             
         } else {
+            
             let cell = TDUserCeterCell.init(style: .Default, reuseIdentifier: "UserCenterCell")
             cell.accessoryType = .DisclosureIndicator
             
@@ -161,20 +166,18 @@ class TDUserCenterView: UIView,UITableViewDataSource {
                     titleStr = TDLocalizeSelectSwift("STUDY_COINS")
                     cell.messageLabel.attributedText = baseTool.setDetailString(TDLocalizeSelectSwift("NOW_HAVE").oex_formatWithParameters(["count" : String(format: "%.2f",score)]), withFont: 12, withColorStr: "#A7A4A4")
                     imageStr = "baodian"
+                    
                 case 1:
-                    titleStr = TDLocalizeSelectSwift("COUPON_PAPER")
-                    cell.messageLabel.text = TDLocalizeSelectSwift("COUPON_NUMBER").oex_formatWithParameters(["count" : String(format: "%.0f",coupons)])
-                    imageStr = "coupons"
-                    //隐藏优惠券
-                    cell.messageLabel.hidden = true
-                    cell.titleLabel.hidden = true
-                    cell.iconImageView.hidden = true
-                    cell.accessoryType = .None
-                default:
                     titleStr = TDLocalizeSelectSwift("COURSE_ORDER")
                     cell.messageLabel.text = TDLocalizeSelectSwift("ORDER_COUNT").oex_formatWithParameters(["count" : String(format: "%.0f",orders)])
                     imageStr = "Page"
+                    
+                default:
+                    titleStr = TDLocalizeSelectSwift("COUPON_PAPER")
+                    cell.messageLabel.text = TDLocalizeSelectSwift("COUPON_NUMBER").oex_formatWithParameters(["count" : String(format: "%.0f",coupons)])
+                    imageStr = "coupons"
                 }
+                
             } else {
                 switch indexPath.row {
                 case 0:
@@ -182,14 +185,22 @@ class TDUserCenterView: UIView,UITableViewDataSource {
                     cell.messageLabel.text = TDLocalizeSelectSwift("PARTICIPATE_LIVE_TEXT")
                     imageStr = "lecture_image"
                     
-//                    cell.messageLabel.hidden = true
-//                    cell.titleLabel.hidden = true
-//                    cell.iconImageView.hidden = true
-                    
-                default:
+                case 1:
                     titleStr = TDLocalizeSelectSwift("TA_SERVICE")
                     cell.messageLabel.text = TDLocalizeSelectSwift("VIEW_TA_SERVICE")
                     imageStr = "assistant_image"
+                    
+                case 2:
+                    titleStr = TDLocalizeSelectSwift("MY_QUETIONS")
+                    cell.messageLabel.text = TDLocalizeSelectSwift("QUETIONS_MESSAGE").oex_formatWithParameters(["count" : String(format: "%d",consult_count)])
+                    imageStr = "quetion_image"
+                    cell.redLabel.hidden = false
+                    
+                default:
+                    titleStr = "我的回答"
+                    cell.messageLabel.text = "有5个未回答问题"
+                    imageStr = "quetion_image"
+                    cell.redLabel.hidden = false
                 }
             }
             cell.titleLabel.text = titleStr

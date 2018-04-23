@@ -12,6 +12,4 @@
 
 @property (nonatomic,strong) UIActivityIndicatorView *activityView;
 
-- (instancetype)initWithFrame:(CGRect)frame colorStr:(NSString *)colorStr;
-
 @end

@@ -72,6 +72,7 @@
         
         self.onlyOnWeb = [[summary objectForKey:@"only_on_web"] boolValue];
         self.transcripts = [summary objectForKey:@"transcripts"];
+        NSLog(@"字幕链接 -- %@",self.transcripts);
         
         NSMutableDictionary* encodings = [[NSMutableDictionary alloc] init];
         NSDictionary* rawEncodings = OEXSafeCastAsClass(summary[@"encoded_videos"], NSDictionary);

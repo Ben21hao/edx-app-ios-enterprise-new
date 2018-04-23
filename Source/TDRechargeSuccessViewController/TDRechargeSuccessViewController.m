@@ -40,10 +40,22 @@
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(repeatAction) userInfo:nil repeats:YES];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
     [self timerIndivalde];
+    
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
 }
 
 - (void)repeatAction {
@@ -76,7 +88,7 @@
     [self requerestData];
 }
 
-- (void)backButtonAction:(UIButton *)sender {
+- (void)leftButtonAction:(UIButton *)sender { //返回
     
     if (self.successModel == nil) {
         [self.navigationController popToRootViewControllerAnimated:YES];

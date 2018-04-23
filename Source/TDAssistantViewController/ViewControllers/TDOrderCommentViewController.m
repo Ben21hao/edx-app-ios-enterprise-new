@@ -71,7 +71,7 @@
         return;
     }
     
-    [SVProgressHUD showWithStatus:@"正在提交评价..."];
+    [SVProgressHUD showWithStatus:TDLocalizeSelect(@"SUBMITTING_TEXT", nil)];
     SVProgressHUD.defaultMaskType = SVProgressHUDMaskTypeBlack;
     SVProgressHUD.defaultStyle = SVProgressHUDAnimationTypeNative;
     
@@ -166,9 +166,11 @@
     } else {
         TDInputResonCell *reasonCell = [[TDInputResonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDInputResonCell"];
         reasonCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        reasonCell.inputViewResponderHandle = ^(BOOL isResponder){
+        
+        reasonCell.inputViewResponderHandle = ^(BOOL isResponder){ //开始输入
             [weakSelf.tableView setContentOffset:CGPointMake(0, isResponder ? TDKeybordHeight : 0)];
         };
+        
         reasonCell.inputStrHandle = ^(NSString *reasonStr){
             weakSelf.reasonStr = reasonStr;
         };
@@ -197,6 +199,7 @@
     return 8;
 }
 
+
 #pragma mark - UI
 - (void)setViewConstraint {
     
@@ -213,6 +216,10 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
     [self.tableView addGestureRecognizer:tap];
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, 288)];
+    view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
+    self.tableView.tableFooterView = view;
 }
 
 - (void)tapAction {

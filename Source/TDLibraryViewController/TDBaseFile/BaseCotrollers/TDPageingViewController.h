@@ -20,6 +20,13 @@
 
 @property (nonatomic,strong) UIButton *leftButton;
 - (void)setLeftNavigationBar; //设置左边导航
-- (void)backButtonAction:(UIButton *)sender; //返回
+- (void)leftButtonAction:(UIButton *)sender; //返回
+
+@property (nonatomic,strong) UIButton *rightButton;;
+- (void)setRightNavigationBar;
+- (void)rightButtonAciton:(UIButton *)sender;
+
+- (void)btnClick:(UIButton *)sender; //选择
+
 
 @end

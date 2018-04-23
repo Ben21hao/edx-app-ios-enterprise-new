@@ -28,10 +28,12 @@ class VideoTranscriptTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         backgroundColor = UIColor.whiteColor()
         titleLabel.numberOfLines = 0
         titleLabel.preferredMaxLayoutWidth = CGRectGetWidth(bounds)
         self.addSubview(titleLabel)
+        
         titleLabel.snp_remakeConstraints { make in
             make.left.equalTo(self.snp_left).offset(20.0)
             make.right.equalTo(self.snp_right).offset(-20.0)

@@ -23,6 +23,7 @@
 @implementation OEXPersistentCredentialStorage
 
 + (instancetype)sharedKeychainAccess {
+    
     static dispatch_once_t onceToken;
     static OEXPersistentCredentialStorage* sharedKeychainAccess = nil;
     dispatch_once(&onceToken, ^{
@@ -41,6 +42,7 @@
 }
 
 - (void)clear {//清除用户缓存 cookie
+    
     [self deleteService:kCredentialsService];
     
     NSHTTPCookieStorage* cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
@@ -50,8 +52,10 @@
     
     NSURLCredentialStorage* credentialStorage = [NSURLCredentialStorage sharedCredentialStorage];
     NSDictionary* allCredentials = credentialStorage.allCredentials;
+    
     for(NSURLProtectionSpace* space in allCredentials.allKeys) {
         NSDictionary* spaceCredentials = allCredentials[space];
+        
         for(NSURLCredential* credential in spaceCredentials.allValues) {
             [credentialStorage removeCredential:credential forProtectionSpace:space];
         }
@@ -65,6 +69,7 @@
 }
 
 - (OEXUserDetails*)storedUserDetails {//获取已登录的用户信息
+    
     NSData* data = [[self loadService:kCredentialsService] objectForKey:kUserDetailsKey];
     if(data && [data isKindOfClass:[NSData class]]) {
         return [[OEXUserDetails alloc] initWithUserDetailsData:data];
@@ -74,7 +79,7 @@
     }
 }
 
-- (void)saveService:(NSString*)service data:(id)data { //数据持久化
+- (void)saveService:(NSString*)service data:(id)data { //往keychain中增加登录信息
     
     OSStatus result;
     NSMutableDictionary* keychainQuery = [self getKeychainQuery:service];
@@ -86,9 +91,11 @@
 #endif
 }
 
-- (id)loadService:(NSString*)service {
+- (id)loadService:(NSString*)service { //查询keychain中的登录信息
+    
     id ret = nil;
-    NSMutableDictionary* keychainQuery = [self getKeychainQuery:service];
+    NSMutableDictionary *keychainQuery = [self getKeychainQuery:service];
+    
     [keychainQuery setObject:(__bridge id)kCFBooleanTrue forKey:(__bridge id)kSecReturnData];
     [keychainQuery setObject:(__bridge id)kSecMatchLimitOne forKey:(__bridge id)kSecMatchLimit];
     CFDataRef keyData = NULL;
@@ -108,12 +115,14 @@
     return ret;
 }
 
-- (void)deleteService:(NSString*)service {
+- (void)deleteService:(NSString*)service { //删除keychain中的用户信息
+    
     NSMutableDictionary* keychainQuery = [self getKeychainQuery:service];
     SecItemDelete((__bridge CFDictionaryRef)keychainQuery); //删除 Keychain 中符号查询条件的记录
 }
 
-- (NSMutableDictionary*)getKeychainQuery:(NSString*)service {
+- (NSMutableDictionary*)getKeychainQuery:(NSString*)service { //
+    
     return [NSMutableDictionary dictionaryWithObjectsAndKeys:
             (__bridge id)kSecClassGenericPassword, (__bridge id)kSecClass,
             service, (__bridge id)kSecAttrService,
@@ -121,5 +130,15 @@
             (__bridge id)kSecAttrAccessibleAfterFirstUnlock, (__bridge id)kSecAttrAccessible,
             nil];
 }
+
+/*
+ kSecClassGenericPassword
+ kSecValueData
+ kSecClass
+ kSecAttrService 服务
+ kSecAttrAccount 账号
+ kSecAttrAccessibleAfterFirstUnlock
+ kSecAttrAccessible
+ */
 
 @end

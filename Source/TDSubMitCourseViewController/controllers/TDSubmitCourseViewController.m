@@ -39,7 +39,6 @@
 
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) UILabel *moneyLabel;
-@property (nonatomic,strong) UIButton *backButton;
 
 @property (nonatomic,strong) JHCouponsAlertView *inputAlert;
 
@@ -103,21 +102,25 @@
     [super viewWillAppear:animated];
     
     self.titleViewLabel.text = TDLocalizeSelect(@"BALANCE_BUY", nil);
-    self.leftButton.hidden = YES;
-    self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 48, 48)];
-    [self.backButton setImage:[UIImage imageNamed:@"backImagee"] forState:UIControlStateNormal];
-    self.backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -23, 0, 23);
-    
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-        self.navigationController.interactivePopGestureRecognizer.delegate = self;
-    }
-    
-    [self.backButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySuccess) name:@"aliPaySuccess" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backButtonNotiAction) name:@"aliPayFail" object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
 }
 
 - (void)dealloc {
@@ -126,6 +129,7 @@
 }
 
 - (void)paySuccess {
+    
     TDBuySuccessViewController *buySuccessVC = [[TDBuySuccessViewController alloc] init];
     buySuccessVC.orderId = self.orderId;
     NSLog(@"success %@ ",buySuccessVC.orderId);
@@ -364,7 +368,7 @@
 
 
 #pragma mark - 返回
-- (void)backButtonAction:(UIButton *)sender {
+- (void)leftButtonAction:(UIButton *)sender {
     if (self.hadCreateOrder) {
         [self backButtonNotiAction];
     } else {

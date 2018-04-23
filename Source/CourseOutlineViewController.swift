@@ -42,6 +42,9 @@ public class CourseOutlineViewController :
     private let modeController : CourseOutlineModeController
     private var lastAccessedController : CourseLastAccessedController
     
+    let rightView = TDRightSelectView()
+    let rightButton = UIButton.init(frame: CGRectMake(0, 0, 48, 48))
+    
     // Strictly a test variable used as a trigger flag. Not to be used out of the test scope
     private var t_hasTriggeredSetLastAccessed = false
     
@@ -101,6 +104,14 @@ public class CourseOutlineViewController :
         insetsController.addSource(tableController.refreshController)
         self.view.setNeedsUpdateConstraints()
         addListeners()
+        
+        self.rightView.titleArray = [TDLocalizeSelectSwift("TEACH_ASSISTANT"),TDLocalizeSelectSwift("NAVI_QUETIONS_RIGHT_TITLE")]
+        self.rightView.frame = CGRectMake(TDScreenWidth - 166, -91, 158, 91)
+        self.rightView.layer.masksToBounds = true
+        self.rightView.layer.cornerRadius = 5.0
+        self.rightView.layer.borderColor = OEXStyles.sharedStyles().baseColor6().CGColor
+        self.rightView.layer.borderWidth = 0.5
+        self.view.addSubview(rightView);
     }
     
     public override func viewWillAppear(animated: Bool) {
@@ -125,6 +136,16 @@ public class CourseOutlineViewController :
         )
     }
     
+    public override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.rightButton.selected = false
+        
+        UIView.animateWithDuration(0.8) {
+            self.rightView.frame = CGRectMake(TDScreenWidth - 166, -91, 158, 91)
+        }
+    }
+    
     func setNavigationStyle() {
         
         let leftButton = UIButton.init(frame: CGRectMake(0, 0, 48, 48))
@@ -142,24 +163,57 @@ public class CourseOutlineViewController :
 //        fixedSpace.width = barButtonFixedSpaceWidth
 //        navigationItem.rightBarButtonItems = [webController.barButtonItem,fixedSpace,modeController.barItem] //视频
         
-        let rightButton = UIButton.init(frame: CGRectMake(0, 0, 48, 48));
-        rightButton.setTitle( TDLocalizeSelectSwift("TEACH_ASSISTANT"), forState: .Normal)
-        rightButton.addTarget(self, action: #selector(rightButtonAction), forControlEvents: .TouchUpInside)
-        rightButton.titleLabel?.font = UIFont.init(name: "OpenSans", size: 16)
-        let ringhtBarItem = UIBarButtonItem.init(customView: rightButton);
+        self.rightButton.setImage(UIImage.init(named: "more_image"), forState: .Normal)
+        self.rightButton.imageEdgeInsets = UIEdgeInsetsMake(0, 13, 0, -13);
+        self.rightButton.addTarget(self, action: #selector(rightButtonAction(_:)), forControlEvents: .TouchUpInside)
+        let ringhtBarItem = UIBarButtonItem.init(customView: self.rightButton);
         self.navigationItem.rightBarButtonItem = ringhtBarItem;
+    
     }
     
     func leftBarItemAction() {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-    func rightButtonAction() {
+    func rightButtonAction(sender: UIButton) {
+        
+        sender.selected = !sender.selected;
+        
+        if sender.selected {
+            UIView.animateWithDuration(0.8) {
+                self.rightView.frame = CGRectMake(TDScreenWidth - 166, 0, 158, 91)
+                
+                self.rightView.didSelectHandle = { (row: NSInteger) in
+                    if row == 0 {
+                        self.gotoOrderAssistantVc()
+                        
+                    } else {
+                       self.gotoQuetionVc()
+                    }
+                }
+            }
+            
+        } else {
+            UIView.animateWithDuration(0.8) {
+                self.rightView.frame = CGRectMake(TDScreenWidth - 166, -91, 158, 91)
+            }
+        }
+    }
+    
+    func gotoOrderAssistantVc() { //助教列表
+        
         let vc = TDOrderAssistantViewController();
         vc.whereFrom = 1
         vc.courseId = self.courseID
         vc.myName = session.currentUser?.username
         vc.company_id = session.currentUser?.company_id
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func gotoQuetionVc() {//咨询
+        
+        let vc = TDMyQuentionViewController()
+        vc.username = session.currentUser?.username
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

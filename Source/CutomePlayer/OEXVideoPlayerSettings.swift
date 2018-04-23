@@ -11,6 +11,7 @@ import Foundation
 private let cellId = "CustomCell"
 
 private typealias RowType = (title: String, value: Any)
+
 private struct OEXVideoPlayerSetting {
     let title: String
     let rows: [RowType]
@@ -61,6 +62,7 @@ private func setupTable(table: UITableView) {
         }
         
         if let transcripts: [String: String] = self.delegate?.videoInfo().transcripts as? [String: String] {
+            
             var rows = [RowType]()
             for lang: String in transcripts.keys {
                 let locale = NSLocale(localeIdentifier: lang)
@@ -89,6 +91,7 @@ private func setupTable(table: UITableView) {
             return [speeds]
         }
     }()
+    
     weak var delegate: OEXVideoPlayerSettingsDelegate?
 
     func updateMargins() {

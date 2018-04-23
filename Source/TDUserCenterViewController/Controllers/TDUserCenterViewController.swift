@@ -141,14 +141,14 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
         self.navigationController?.pushViewController(userCouponVC1, animated: true)
     }
 
-    func gotoAssistantServiceVc() {
+    func gotoAssistantServiceVc() { //助教
         let assistantVc = TDAssistantServiceViewController()
         assistantVc.username = session.currentUser?.username
         assistantVc.company_id = session.currentUser?.company_id
         self.navigationController?.pushViewController(assistantVc, animated: true)
     }
     
-    func gotoLiveView() {
+    func gotoLiveView() { //直播
 //        let liviewVc = TDLiveViewController() //oc写的
 //        liviewVc.username = session.currentUser?.username
 //        self.navigationController?.pushViewController(liviewVc, animated: true)
@@ -158,17 +158,17 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
         self.navigationController?.pushViewController(liveView, animated: true)
     }
     
+    func gotoMyQuetionVc() {
+        let quetionVc = TDMyQuentionViewController()
+        quetionVc.username = session.currentUser?.username
+        self.navigationController?.pushViewController(quetionVc, animated: true)
+    }
+    
     //MARK: tableview Delegate
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return 98
         }
-        if indexPath.section == 1 && indexPath.row == 1 {
-            return 0
-        }
-//        else if indexPath.section == 2 && indexPath.row == 0 {
-//            return 0
-//        }
         return 75
     }
     
@@ -183,27 +183,40 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
             if editable {
                 self.environment.router?.showProfileEditorFromController(self)
             }
+            
         } else if indexPath.section == 1 {
             switch indexPath.row {
             case 0:
                 gotoRechargeCoinVc()
+                
             case 1:
-                gotoCouponVc()
-            default:
                 gotoWaiForPayVc()
+                
+            default:
+                gotoCouponVc()
+                
             }
         } else {
             if indexPath.row == 0 {
                 gotoLiveView()
-            } else {
+                
+            } else if indexPath.row == 1 {
                 gotoAssistantServiceVc()
+                
+            } else if indexPath.row == 2 {
+                gotoMyQuetionVc()
+                
+            } else {
+                
             }
         }
     }
     
     //MARK: UserProfilePresenterDelegate
     func presenter(presenter: UserProfilePresenter, choseShareURL url: NSURL) {
+        
         let message = TDLocalizeSelectSwift("ACCOMPLISHMENTS.SHARE_TEXT").oex_formatWithParameters(["platform_name" : self.environment.config.platformName()])
+        
         let controller = UIActivityViewController(
             activityItems: [message, url],
             applicationActivities: nil

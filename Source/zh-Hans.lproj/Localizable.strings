@@ -417,9 +417,9 @@
 /* Title of alert dialog shown when attempting an action without an internet connection */
 "NETWORK_NOT_AVAILABLE_TITLE"="网络连接出错";
 /* Button title for moving to the next block in the course */
-"NEXT" = "下一页";
+"NEXT" = "下一个";
 /* Button title for moving to the next unit in the course */
-"NEXT_UNIT" = "下一节";
+"NEXT_UNIT" = "下一个";
 /* Message shown when tapping on enroll courses when in app course enrollment is disabled */
 "NO_ENROLLMENT_INTERSTITIAL_BOTTOM_LABEL" = "在此期间，您可以通过我们的网站报名参加课程 - 您需要登录，注册，然后返回到应用程序时即可。";
 /* Message shown when tapping on enroll courses when in app course enrollment is disabled */
@@ -473,9 +473,9 @@
 /* Post question button title in Create a new post */
 "POST_QUESTION"="发问题贴";
 /* Button title for moving to the previous block in the course */
-"PREVIOUS" = "上一页";
+"PREVIOUS" = "上一个";
 /* Button title for moving to the next unit in the course */
-"PREVIOUS_UNIT" = "上一节";
+"PREVIOUS_UNIT" = "上一个";
 /* A10y hint for the change picture button. */
 "PROFILE.CHANGE_PICTURE_ACCESSIBILITY_HINT" = "上传新的图片资料。";
 /* Change picture button text on edit profile screen. */
@@ -813,8 +813,8 @@
 "SIGN_UP_AGREE" = "注册即表示我同意英荔教育的";
 /*登录即表示我已阅读并同意 Login means I've read and agreed*/
 "SIGN_IP_AGREE_TEXT" = "登录即表示我已阅读并同意";
-/*条款说明*/
-"AGREEMENT" = "条款说明";
+/*用户协议 User Agreement*/
+"AGREEMENT" = "用户协议";
 /*重置密码*/
 "RESET_PASSWORD" = "重置密码";
 /*请输入手机号码或邮箱,以重置您的密码*/
@@ -869,7 +869,7 @@
 "EMAIL_IS_REGISTERED" = "邮箱已存在";
 /*已发送验证邮件，请前往邮箱查看。*/
 "EMAIL_AREADY_SEND" = "已发送验证邮件，请前往邮箱查看。";
-/*验证邮件发送失败，请重试*/
+/*验证邮件发送失败，请重试*
 "EMAIL_SEND_ERROR" = "验证邮件发送失败，请重试";
 /*确定绑定*/
 "SURE_BIND" = "确定绑定";
@@ -1063,8 +1063,6 @@
 "LOGIN_PASSWORD" = "请输入登录密码";
 /*教授详情*/
 "PROFESSOR_DETAIL" = "教授详情";
-/*老师详情*/
-"TEACHER_DETAIL" = "老师详情";
 /*暂无学员评价*/
 "NO_STUDENT_COMMENT" = "暂无学员评价";
 /*选课表*/
@@ -1319,24 +1317,10 @@
 /*通过邮箱重置密码Reset password via mailbox*/
 "RESET_BY_EMAIL" = "通过邮箱重置密码";
 
-/*教授简介Introduction*/
-"PROFESSOR_INTRODUCE" = "教授简介";
 /*教授不存在 Professors do not exist*/
 "PROFESSOR_NOT_EXICT" = "所查询教授不存在";
 /*老师不存在 Teacher do not exist*/
 "TEACHER_NOT_EXICT" = "所查询老师不存在";
-/*主要成就Main Achievements*/
-"MAIN_ACHIECEMENT" = "主要成就";
-/*教育背景Educational Background*/
-"EDUCATIONNAL_BACKGROUND" = "教育背景";
-/*其他成就Others*/
-"OTHERS_ACHIEVEMENT" = "其他成就";
-/*研究领域Research Fields*/
-"RESEARCH_FIELD" = "研究领域";
-/*学术邗物文章Academic Essays*/
-"ACADEMIC_ESSAYS" = "学术邗物文章";
-/*管理咨询项目Management Consulting*/
-"MANAGEREMENT_CONSULTING" = "管理咨询项目";
 
 /*助教 Teaching Assistant*/
 "TEACH_ASSISTANT" = "助教";
@@ -1572,6 +1556,8 @@
 "FAILED_GET_FREE" = "操作失败，请重试";
 /*教授简介Introduction*/
 "PROFESSOR_INTRODUCE" = "教授简介";
+/*老师简介Introduction*/
+"TEACHER_INTRODUCE" = "老师简介";
 /*主要成就Main Achievements*/
 "MAIN_ACHIECEMENT" = "主要成就";
 /*教育背景Educational Background*/
@@ -1769,6 +1755,8 @@
 "ALLOW_USE_CAMERA_TEXT" = "暂未允许{name}访问您的相机，请前往设置";
 /*暂未允许{name}访问您的相机，请前往设置 Not allow app to access your album, please go to settings.*/
 "ALLOW_USE_ALBUM_TEXT" = "暂未允许{name}访问您的相册，请前往设置";
+/*暂未允许{name}使用麦克风，请前往设置 Not allow app to use your Microphone, please go to settings.*/
+"ALLOW_USE_MICROPHONE_TEXT" = "暂未允许{name}使用麦克风，请前往设置";
 
 /*正在刷新Refreshing*/
 "REFRESHING_TEXT" = "正在刷新...";
@@ -1801,3 +1789,91 @@
 "ORGANIZATION_SETTING_WEB" = "您所属的组织在www.e-ducation.cn上开通平台服务后，方可为您分配登录账号";
 /*前往E-ducation*/
 "GOTO_EDUCATION" = "前往";
+
+/*咨询中心*/
+"MY_QUETIONS" = "咨询中心";
+/*您有x条未解决的咨询   x unresolved consultations*/
+"QUETIONS_MESSAGE" = "您有{count}条未解决的咨询";
+/*咨询 Consult*/
+"NAVI_QUETIONS_RIGHT_TITLE" = "咨询";
+
+/*未解决     Unresolved*/
+"CONSULTATION_UNSOLVED" = "未解决";
+/*已解决     Resolved*/
+"CONSULTATION_RESOLVED" = "已解决";
+/*暂无咨询              No consultations.*/
+"NO_CONSULTATIONS" = "暂无咨询";
+/*学员未关联任何组织    Student not linked to any organization.*/
+"STUDENT_NO_LINKE_ORGANIZATION" = "学员未关联任何组织";
+/*咨询详情  Consultation Details*/
+"CONSULTAION_DETAIL" = "咨询详情";
+/*已解决[注释：按钮]    Resolved*/
+"RESOLVED_BUTTON_TITLE" = "已解决";
+/*追问[注释：按钮]      Follow-up*/
+"FURTHER_INQUIRY_BUTTON_TITLE" = "追问";
+/*xxx回复[注释：表示已过去的状态]   xxx replied*/
+"CONSULTATION_REPLIED" = "{name} 回复";
+/*xxx追问[注释：表示已过去的状态]   xxx's follow-up */
+"CONSULTATION_FURTHER_QUESTION" = "{name} 追问";
+/*我要回复[注释：按钮] Reply*/
+"REPLY_BUTTON_TITLE" = "我要回复";
+/*暂无回复 No reply.*/
+"NO_REPLY_TEXT" = "暂无回复";
+/*学员不存在 Not found.*/
+"NOT_FOUND_STUDENT" = "学员不存在";
+/*咨询不存在 Not found.*/
+"NO_FOUND_CONSULTATION" = "咨询不存在";
+/*已解决的问题将无法继续咨询        Cannot follow-up consult about resolved questions.*/
+"RESOLVED_CONSULT_CAN_NOT_QUETIONS" = "已解决的问题将无法继续咨询";
+/* x条未读消息 x unread message(s). */
+"UNREAD_MESSAGE_COUNT_TEXT" = "{count} 条未读消息";
+/* x条消息  x message(s). */
+"MESSAGE_COUNT_TEXT" = "{count} 条消息";
+/* 新增咨询  New Consultations*/
+"NEW_CONSULTATION_TEXT" = "新增咨询";
+/*输入咨询标题（必填） Enter consultation title (required).*/
+"ENTER_CONSULTATION_TITLE" = "输入咨询标题（必填）";
+/*输入咨询内容  Enter consultation content.*/
+"ENTER_CONSULTATION_CONTENT" = "输入咨询内容";
+/* 输入回复内容  Enter reply content. */
+"ENTER_REPLY_CONTENT" = "输入回复内容";
+/* 按住 录音  Hold to Record */
+"HOLD_TO_RECORD" = "按住 录音";
+/* 松开 保存  Release to Save */
+"RELEASE_TO_SAVE" = "松开 保存";
+/* 手指上滑 取消录音  Scroll up to cancel */
+"SCROLL_UP_TO_CANCEL" = "手指上滑 取消录音";
+/* 手指松开 取消保存  Release to cancel */
+"RELEASE_FINGER_TO_CANCEL" = "手指松开 取消保存";
+/* 最多支持1条录音 1 Recording At Max. */
+"MAX_ONE_RECORD" = "最多支持1条录音";
+/*录音时间不能少于2秒  Cannot be less than 2 seconds.*/
+"ENCH_RECOR_LESS_TWO_SECOND" = "录音时间不能少于2秒";
+/* 录音时间不能超过60秒  Cannot be more than 60 seconds. */
+"EACH_RECORD_MORE_SECOND" = "录音时间不能超过60秒";
+/* 删除录音  Delete recording  */
+"DELETE_RECORD_TEXT" = "删除录音";
+/* 删除图片  Delete photo */
+"DELETE_PHOTO_TEXT" = "删除图片";
+/* 预览  Preview */
+"PREVIEW_TITLE" = "预览";
+/* 全部图片  All Photos */
+"ALL_PHOTO_TITLE" = "全部图片";
+/*相册 Album*/
+"ALBUM_TITLE" = "相册";
+/* 图片预览  Photo Preview */
+"PHOTO_PREVIEW_TEXT" = "图片预览";
+/* 最多选择4张图片  4 photos at max. */
+"MAX_FOUR_PHOTOS" = "最多选择4张图片";
+/* 请输入标题  Please enter title. */
+"ENTER_TITLE_TEXT" = "请输入标题";
+/* 必须包含咨询内容、图片或录音其中一项      Must include consultation content or photo or recording. */
+"THREE_MUST_ONRE" = "必须包含咨询内容、图片或录音其中一项";
+/* 正在提交 Submitting... */
+"SUBMITTING_TEXT" = "正在提交...";
+/* 没有回复权限 No reply permission. */
+"NO_REPLY_PERMISSION" = "没有回复权限";
+/* 正在录音，请先结束录音  Recording, please wait.*/
+"RECORDING_LEAVE_FINISH" = "正在录音，请先结束录音";
+/* 正在提交，确定离开？ Submitting, sure you want to leave?*/
+"SUMITTING_SURE_LEAVE" = "正在提交，确定离开？";

@@ -13,5 +13,6 @@
 @property (nonatomic,strong) NSString *file_url; //文档url
 @property (nonatomic,strong) NSString *allow_download; //是否允许下载
 @property (nonatomic,strong) NSArray *file_image; //图片数组
+@property (nonatomic,strong) NSString *baidu_doc_id; //百度文档id
 
 @end

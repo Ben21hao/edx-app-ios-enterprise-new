@@ -708,20 +708,22 @@ static AnnouncementView *announcementView = nil;
     survey.questionArray =[survey.questionArray sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     
     for (VHallSurveyQuestion *question in survey.questionArray) {
+        
         [titleArray addObject:question.questionTitle];
         
         // 选项类型 （0问答 1单选 2多选）
         if (question.type == 0) {
             [typeArry addObject:@(3)];
             
-        } else if (question.type ==1) {
+        } else if (question.type == 1) {
             [typeArry addObject:@(1)];
             
-        } else if (question.type ==2) {
+        } else if (question.type == 2) {
             [typeArry addObject:@(2)];
             
-        } else
-            break;
+        } else {
+            [typeArry addObject:@(1)];
+        }
         
         if (question.quesionSelectArray != nil) {
             [optionArray addObject:question.quesionSelectArray];

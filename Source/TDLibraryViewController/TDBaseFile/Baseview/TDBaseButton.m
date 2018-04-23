@@ -10,7 +10,7 @@
 
 @implementation TDBaseButton
 
-- (instancetype)initWithFrame:(CGRect)frame colorStr:(NSString *)colorStr {
+- (instancetype)init { 
     self = [super init];
     if (self) {
         [self setViewConstrait];
@@ -19,6 +19,7 @@
 }
 
 - (void)setViewConstrait {
+    
     self.activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     [self.activityView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhite];
     [self addSubview:self.activityView];

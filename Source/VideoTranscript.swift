@@ -50,16 +50,17 @@ class VideoTranscript: NSObject, UITableViewDelegate, UITableViewDataSource{
         tableView.hidden = true
     }
     
-    //MARK: - UITableview methods
+    //MARK: - UITableview delegate
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return transcriptArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier(VideoTranscriptTableViewCell.cellIdentifier) as! VideoTranscriptTableViewCell
-        cell.applyStandardSeparatorInsets()
-        cell.setTranscriptText(transcriptArray[indexPath.row][CLVideoPlayerkText] as? String, highlighted: indexPath.row == highlightedIndex)
+        cell.applyStandardSeparatorInsets() //隐藏分割线
+        cell.setTranscriptText(transcriptArray[indexPath.row][CLVideoPlayerkText] as? String, highlighted: indexPath.row == highlightedIndex) //CLVideoPlayerkText 只拿其中的文本
         return cell
     }
     
@@ -69,9 +70,11 @@ class VideoTranscript: NSObject, UITableViewDelegate, UITableViewDataSource{
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         isTableDragged = true
+        
         draggingTimer.invalidate()
-        draggingTimer = NSTimer.scheduledTimerWithTimeInterval(dragDelay, target: self, selector: #selector(invalidateDragging), userInfo: nil, repeats: false)
+        draggingTimer = NSTimer.scheduledTimerWithTimeInterval(dragDelay, target: self, selector: #selector(invalidateDragging), userInfo: nil, repeats: false) //五秒执行一次
     }
+    
     
     func updateTranscript(transcript: [AnyObject]) {
         if transcript.count > 0 {
@@ -82,20 +85,25 @@ class VideoTranscript: NSObject, UITableViewDelegate, UITableViewDataSource{
     }
     
     func highlightSubtitleForTime(time: NSTimeInterval?) {
-        if let index = getTranscriptIndexForTime(time) where index != highlightedIndex{
+        
+        if let index = getTranscriptIndexForTime(time) where index != highlightedIndex {
+            
             highlightedIndex = index
             transcriptTableView.reloadData()
-            if !isTableDragged {
+            
+            if !isTableDragged { //tableview 没有在拖动
                 transcriptTableView.scrollToRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
             }
         }
     }
     
-    func getTranscriptIndexForTime(time: NSTimeInterval?) -> Int? {
+    func getTranscriptIndexForTime(time: NSTimeInterval?) -> Int? { //时间在 CLVideoPlayerkStart开始时间和 CLVideoPlayerkEnd 结束时间之间
         return transcriptArray.indexOf({ time >= $0[CLVideoPlayerkStart] as? Double && time <= $0[CLVideoPlayerkEnd] as? Double })
     }
     
-    func invalidateDragging(){
+    func invalidateDragging() {
         isTableDragged = false
     }
 }
+
+

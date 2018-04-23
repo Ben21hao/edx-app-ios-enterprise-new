@@ -112,7 +112,9 @@ static OEXNetworkManager* _sharedManager = nil;
         return;
     }
 
+    //后台下载
     [[self sessionForRequest:url] getTasksWithCompletionHandler:^(NSArray* dataTasks, NSArray* uploadTasks, NSArray* downloadTasks) {
+        
         //Check if already downloading
         BOOL alreadyInProgress = NO;
         for(int ii = 0; ii < [downloadTasks count]; ii++) {
@@ -243,6 +245,7 @@ static OEXNetworkManager* _sharedManager = nil;
                  didWriteData:(int64_t)bytesWritten
             totalBytesWritten:(int64_t)totalBytesWritten
     totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
+    
 }
 
 // 断点续传的
@@ -264,7 +267,7 @@ static OEXNetworkManager* _sharedManager = nil;
     }
 }
 
-#pragma mark NSURLDataTask Delegate
+#pragma mark - NSURLDataTask Delegate
 
 - (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler {
     

@@ -60,13 +60,32 @@
     }
     
     [self.leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.leftButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.leftButton addTarget:self action:@selector(leftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftButton];
     
 }
 
-- (void)backButtonAction:(UIButton *)sender {
+- (void)leftButtonAction:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - 导航栏右边按钮
+- (void)setRightNavigationBar {
+    
+    self.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 68, 48)];
+    [self.rightButton setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
+    self.rightButton.contentEdgeInsets = UIEdgeInsetsMake(0, 16, 0, -16);
+    self.rightButton.imageEdgeInsets = UIEdgeInsetsMake(0, 13, 0, -13);
+    self.rightButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:16.0];
+    self.rightButton.titleLabel.textAlignment = NSTextAlignmentRight;
+    self.rightButton.showsTouchWhenHighlighted = YES;
+    [self.rightButton addTarget:self action:@selector(rightButtonAciton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightButton];
+}
+
+- (void)rightButtonAciton:(UIButton *)sender {
+
 }
 
 #pragma mark - 头部view
@@ -107,7 +126,7 @@
         btn.tag = i;
         x = i * btnW;
         btn.frame = CGRectMake(x, 0, btnW, h);
-        btn.titleLabel.font = [UIFont systemFontOfSize:16];
+        btn.titleLabel.font = [UIFont systemFontOfSize:14];
         [btn setTitleColor:[UIColor colorWithHexString:colorHexStr9] forState:UIControlStateNormal];
         [btn setTitle:vc.title forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -192,7 +211,7 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self setSelectViewFrame:scrollView.contentOffset.x / 3];
+    [self setSelectViewFrame:scrollView.contentOffset.x / self.childViewControllers.count];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {

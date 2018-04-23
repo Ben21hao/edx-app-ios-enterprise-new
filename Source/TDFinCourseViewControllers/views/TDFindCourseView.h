@@ -16,4 +16,6 @@
 
 @property (nonatomic,copy) void(^didSelectRow)(NSInteger rowIndex);
 
+- (void)reloadCourseData;//刷新
+
 @end

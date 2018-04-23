@@ -69,12 +69,12 @@
     }
     
     [self.leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.leftButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.leftButton addTarget:self action:@selector(leftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftButton];
     
 }
 
-- (void)backButtonAction:(UIButton *)sender {
+- (void)leftButtonAction:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 

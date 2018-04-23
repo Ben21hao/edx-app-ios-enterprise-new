@@ -79,10 +79,6 @@ static const NSTimeInterval RewindTimeInterval = 30;
     [self stopDurationTimer];
 }
 
-- (void)backButtonAction:(UIButton *)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 /*
  播放时间
  */

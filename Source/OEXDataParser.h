@@ -16,17 +16,17 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OEXDataParser : NSObject
 
 /// @return Array of OEXVideoSummary
-- (NSArray*)videoSummaryListWithData:(NSData*)receivedData;
+- (NSArray *)videoSummaryListWithData:(NSData *)receivedData;
 
 /// @return Array of OEXAnnouncement
-- (NSArray*)announcementsWithData:(NSData*)receivedData;
+- (NSArray *)announcementsWithData:(NSData *)receivedData;
 
 /// @return Array of UserCourseEnrollment
-- (NSArray*)userCourseEnrollmentsWithData:(NSData*)receivedData;
+- (NSArray *)userCourseEnrollmentsWithData:(NSData *)receivedData;
 
-- (NSString*)handoutsWithData:(NSData*)receivedData;
+- (NSString *)handoutsWithData:(NSData *)receivedData;
 
-- (OEXUserDetails*)userDetailsWithData:(NSData*)receivedData;
+- (OEXUserDetails *)userDetailsWithData:(NSData *)receivedData;
 
 @end
 

@@ -16,7 +16,8 @@
 @property (nonatomic,strong) UIButton *rightButton;
 
 @property (nonatomic,copy) void(^rightButtonHandle)();
-- (void)backButtonAction:(UIButton *)sender;
+- (void)rightButtonAciton:(UIButton *)sender;
+- (void)leftButtonAction:(UIButton *)sender;
 
 /* 
  首次进入加载页面

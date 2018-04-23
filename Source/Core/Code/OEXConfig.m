@@ -41,6 +41,7 @@ static OEXConfig* sSharedConfig;
 }
 
 - (id)initWithBundle:(NSBundle*)bundle {
+    
     NSString* path = [bundle pathForResource:@"config" ofType:@"plist"];
     NSDictionary* dict = [[NSDictionary alloc] initWithContentsOfFile:path];
     NSAssert(dict, @"Unable to load config.");
@@ -58,6 +59,7 @@ static OEXConfig* sSharedConfig;
 }
 
 - (id)objectForKey:(NSString*)key {
+    
     if(getenv(key.UTF8String)) {
         NSString* value = @(getenv(key.UTF8String));
         NSError* error = nil;
@@ -73,6 +75,7 @@ static OEXConfig* sSharedConfig;
 }
 
 - (NSString*)stringForKey:(NSString*)key {
+    
     NSString* value = [self objectForKey:key];
     NSAssert(value == nil || [value isKindOfClass:[NSString class]], @"Expecting string key");
     return value;

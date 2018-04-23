@@ -64,10 +64,6 @@
     self.isForgound = NO;
 }
 
-- (void)backButtonAction:(UIButton *)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 #pragma mark - data
 - (void)getCourseListData:(NSInteger)type { //type : 0 第一页数据，1 其他页
 
@@ -127,7 +123,8 @@
                 [self dealWithPage];
             }
             
-        } else if ([code intValue] == 203) {
+        } else if ([code intValue] == 203) { //查询课程结果为空
+            NSLog(@"----%@",responseDic[@"msg"]);
             
         } else if ([code intValue] == 204) {
             [self dealWithPage];
@@ -140,6 +137,7 @@
             NSLog(@"%@-------->>> %@",code,responseDic[@"msg"]);
         }
         
+        [self.findCourseView reloadCourseData]; //刷新
         [self showOrHideNoDataLabel];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

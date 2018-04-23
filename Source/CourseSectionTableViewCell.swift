@@ -49,7 +49,8 @@ class CourseSectionTableViewCell: UITableViewCell, CourseBlockContainerCell {
                 self?.downloadView.itemCount = downloads.count
                 
                 let size = downloads.reduce(0) { totals,video in
-                    return totals + (video.summary?.size?.doubleValue)!
+                    
+                    return totals + (video.summary?.size == nil ? 0.0 : video.summary?.size?.doubleValue)!
                 }
                 self?.downloadView.videoSize = size
             

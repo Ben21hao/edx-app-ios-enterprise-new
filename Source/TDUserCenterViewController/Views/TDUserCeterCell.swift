@@ -14,6 +14,8 @@ class TDUserCeterCell: UITableViewCell {
     let iconImageView = UIImageView()
     let titleLabel = UILabel()
     let messageLabel = UILabel()
+    let redLabel = UILabel()
+    
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -28,6 +30,7 @@ class TDUserCeterCell: UITableViewCell {
     }
     
     func configView() {
+        
         bgView.backgroundColor = OEXStyles.sharedStyles().baseColor5()
         self.contentView.addSubview(bgView)
         
@@ -40,6 +43,13 @@ class TDUserCeterCell: UITableViewCell {
         messageLabel.textColor = OEXStyles.sharedStyles().baseColor8()
         messageLabel.font = UIFont.init(name: "OpenSans", size: 12)
         bgView.addSubview(messageLabel)
+        
+        redLabel.backgroundColor = UIColor.redColor()
+        redLabel.layer.masksToBounds = true
+        redLabel.layer.cornerRadius = 3
+        bgView.addSubview(redLabel)
+        
+        redLabel.hidden = true
     }
     
     func setViewConstraint() {
@@ -60,6 +70,12 @@ class TDUserCeterCell: UITableViewCell {
         messageLabel.snp_makeConstraints { (make) in
             make.left.equalTo(bgView.snp_left).offset(75)
             make.top.equalTo(bgView.snp_centerY).offset(3)
+        }
+        
+        redLabel.snp_makeConstraints { (make) in
+            make.left.equalTo(titleLabel.snp_right).offset(8)
+            make.centerY.equalTo(titleLabel.snp_centerY)
+            make.size.equalTo(CGSizeMake(6, 6))
         }
     }
     

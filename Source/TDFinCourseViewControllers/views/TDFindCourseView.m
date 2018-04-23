@@ -32,6 +32,10 @@
 
 - (void)setCourseArray:(NSArray *)courseArray {
     _courseArray = courseArray;
+    
+}
+
+- (void)reloadCourseData {
     [self.collectionView reloadData];
 }
 

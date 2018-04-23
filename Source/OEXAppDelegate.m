@@ -168,8 +168,6 @@
     NSString *newVersionKey = @"App_New_Version";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    NSString *appVersionStr = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]; //当前版本号
-    
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
     NSString *path = @"https://itunes.apple.com/lookup?bundleId=cn.eliteu.enterprise.mobile.ios&country=cn";
     
@@ -183,14 +181,15 @@
         }
         
         NSDictionary *versionDic = [infoArray[0] oex_replaceNullsWithEmptyStrings];
-        NSString *version = versionDic[@"version"];
+        NSString *version = versionDic[@"version"]; //线上版本号
         
+        NSString *appVersionStr = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]; //当前版本号
         BOOL isDescending = [version compare:appVersionStr options:NSNumericSearch] == NSOrderedDescending; //是否是降序
         if (!isDescending) { //App store 版本号 = 本地的版本号
             return;
         }
         
-        NSString *cachVersion = [defaults valueForKey:newVersionKey]; //弹过一次框
+        NSString *cachVersion = [defaults valueForKey:newVersionKey]; //本地存储的版本号
         BOOL isCachDescending = [version compare:cachVersion options:NSNumericSearch] == NSOrderedDescending;
         if (!isCachDescending) {
             return;

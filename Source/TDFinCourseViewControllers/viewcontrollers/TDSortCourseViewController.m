@@ -67,6 +67,7 @@
     NSString *url = [NSString stringWithFormat:@"%@%@",ELITEU_URL,TD_FIND_COURSE_URL];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setValue:self.company_id forKey:@"company_id"];
+    [dic setValue:self.username forKey:@"username"];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

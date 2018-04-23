@@ -18,15 +18,17 @@ const static NSString* OEXEmptyString = @"";
 
 @end
 
-@implementation NSArray (OEXReplaceNull)
+@implementation NSArray (OEXReplaceNull) //数组容错
 
 - (instancetype)oex_replaceNullsWithEmptyStrings {
+    
     NSMutableArray* result = [[NSMutableArray alloc] initWithCapacity:self.count];
+    
     for(id object in self) {
         if([object isKindOfClass:[NSNull class]]) {
             [result addObject:OEXEmptyString];
-        }
-        else {
+            
+        } else {
             [result addObject:[object oex_replaceNullsWithEmptyStrings]];
         }
     }
@@ -35,15 +37,18 @@ const static NSString* OEXEmptyString = @"";
 
 @end
 
-@implementation NSDictionary (OEXReplaceNull)
+@implementation NSDictionary (OEXReplaceNull) //字典容错
+
 - (NSDictionary*)oex_replaceNullsWithEmptyStrings {
+    
     NSMutableDictionary* result = [[NSMutableDictionary alloc] initWithCapacity:self.count];
 
-    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL* stop) {
+    [self enumerateKeysAndObjectsUsingBlock:^(id key, id object, BOOL* stop) { //快速遍历
+        
         if([object isKindOfClass:[NSNull class]]) {
             result[key] = OEXEmptyString;
-        }
-        else {
+            
+        } else {
             result[key] = [object oex_replaceNullsWithEmptyStrings];
         }
     }];

@@ -10,6 +10,22 @@
 
 @implementation TDBaseView
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self configeView];
+        [self setViewConstraint];
+    }
+    return self;
+}
+
+- (void)configeView {
+    
+}
+- (void)setViewConstraint {
+    
+}
+
 #pragma mark - "————  标题  ————"
 - (instancetype)initWithTitle:(NSString *)title {
     
@@ -170,6 +186,15 @@
         }];
     }
     return self;
+}
+
+
+- (UILabel *)setLabelStyleFont:(NSInteger)font color:(NSString *)colorStr {
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.font = [UIFont fontWithName:@"OpenSans" size:font];
+    label.textColor = [UIColor colorWithHexString:colorStr];
+    return label;
 }
 
 

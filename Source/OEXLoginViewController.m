@@ -308,6 +308,7 @@
     OEXExternalAuthOptionsView* externalAuthOptions = [[OEXExternalAuthOptionsView alloc] initWithFrame:self.externalAuthContainer.bounds providers:providers tapAction:^(id<OEXExternalAuthProvider> provider) {
         [owner externalLoginWithProvider:provider];
     }];
+    
     [self.externalAuthContainer addSubview:externalAuthOptions];
     [externalAuthOptions mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.externalAuthContainer);
@@ -700,6 +701,7 @@
 }
 
 - (void)externalLoginWithProvider:(id <OEXExternalAuthProvider>)provider {
+    
     self.authProvider = provider;
     if(!self.reachable) {
         [[UIAlertController alloc] showAlertWithTitle:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_TITLE", nil)

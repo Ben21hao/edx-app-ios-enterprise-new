@@ -13,16 +13,19 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol OEXDownloadManagerProtocol <NSObject>
 
 @optional
-- (void)downloadTaskDidComplete:(NSURLSessionDownloadTask*)task;
-- (void)downloadAlreadyInProgress:(NSURLSessionDownloadTask*)task;
-- (void)downloadTask:(NSURLSessionDownloadTask*)task didCOmpleteWithError:(NSError*)error;
+
+- (void)downloadTaskDidComplete:(NSURLSessionDownloadTask *)task;
+- (void)downloadAlreadyInProgress:(NSURLSessionDownloadTask *)task;
+- (void)downloadTask:(NSURLSessionDownloadTask *)task didCOmpleteWithError:(NSError *)error;
 //-(void)downloadTaskDidComplete:(NSURLSessionDownloadTask *)task tmpLocation:(NSString *)locatoin;
+
 @end
 
 @interface OEXDownloadManager : NSObject
+
 @property(nonatomic, weak, nullable) id <OEXDownloadManagerProtocol>delegate;
 
-+ (OEXDownloadManager*)sharedManager;
++ (OEXDownloadManager *)sharedManager;
 
 #pragma mark Background requests
 

@@ -74,7 +74,8 @@ OEXRegistrationViewControllerDelegate
     return [self initWithEnvironment:nil];
 }
 
-- (void)openInWindow:(UIWindow*)window {
+- (void)openInWindow:(UIWindow *)window {
+    
     window.rootViewController = self.containerViewController;
     window.tintColor = [self.environment.styles primaryBaseColor];
     

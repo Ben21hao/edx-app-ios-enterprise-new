@@ -10,7 +10,7 @@ pod 'Analytics', '~> 3.0.0'
 pod 'Segment-GoogleAnalytics', '~> 1.0.0'
 pod 'Crashlytics', '~> 3.2'
 pod 'DateTools', '~> 1.6.1'
-pod 'Fabric', '~> 1.5'/Users/Ben/Documents/EliteU/edx-app-ios-enterprise-new/Podfile
+pod 'Fabric', '~> 1.5'
 pod 'GoogleSignIn', '~> 2.4'
 pod 'Masonry', '~> 0.6'
 pod 'NewRelicAgent', '~> 4.1'

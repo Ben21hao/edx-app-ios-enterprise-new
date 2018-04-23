@@ -10,6 +10,9 @@
 
 @interface TDBaseView : UIView
 
+- (void)configeView;
+- (void)setViewConstraint;
+
 /*
  类似这样的一个页面；
  ————  标题  ————
@@ -30,5 +33,8 @@
  请求超时页面
  */
 - (instancetype)initWithRequestErrorTitle:(NSString *)title withFrame:(CGRect)frame;
+
+//label
+- (UILabel *)setLabelStyleFont:(NSInteger)font color:(NSString *)colorStr;
 
 @end

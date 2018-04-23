@@ -48,6 +48,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    
     _progressView.frame = CGRectMake(2, self.frame.size.height / 2 - 1, self.frame.size.width - 2, self.frame.size.height);
 }
 

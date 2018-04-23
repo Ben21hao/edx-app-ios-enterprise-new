@@ -169,14 +169,14 @@
 }
 
 //2.您已经领用了优惠券
-- (void)alreadyUsed{
+- (void)alreadyUsed {
     [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"EXCHANGE_FAIL", nil)
                                                             message:TDLocalizeSelect(@"HAD_EXCHANGE", nil)
                                                    onViewController:self.navigationController.view
                                                          shouldHide:YES];
 }
 //3.很抱歉，优惠券已经领用完了
-- (void)couponsUp{
+- (void)couponsUp {
     [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:TDLocalizeSelect(@"EXCHANGE_FAIL", nil)
                                                             message:TDLocalizeSelect(@"HAS_NO_COUPON", nil)
                                                    onViewController:self.navigationController.view

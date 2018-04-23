@@ -372,8 +372,10 @@ static const NSTimeInterval fullscreenAnimationDuration = 0.3;
 }
 
 - (void)resetMoviePlayer {
+    
     [self.controls resetControls];
     self.controls = nil;
+    
     [self stop];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self.movieBackgroundView removeFromSuperview];

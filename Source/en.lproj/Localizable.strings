@@ -387,7 +387,7 @@
 /* Overlay error shown when logging in with an invalid email address */
 "INVALID_EMAIL_MESSAGE"="Please make sure your e-mail address is formatted correctly and try again.";
 /* Overlay error shown when logging in with an invalid username or password */
-"INVALID_USERNAME_PASSWORD"="Please make sure that your user name or e-mail address and password are correct and try again.";
+"INVALID_USERNAME_PASSWORD"="Please make sure that your account and password are correct and try again.";
 /* Alert dialog text asking whether it's okay to download large videos */
 "LARGE_DOWNLOAD_MESSAGE"="The videos you've selected are larger than 1 GB. Do you want to download these videos?";
 /* Alert dialog title when asking whether it's okay to download large videos */
@@ -811,8 +811,8 @@
 "SIGN_UP_AGREE" = "By signing up, I agree to Elite Education's.";
 /*登录即表示我已阅读并同意 Login means I've read and agreed*/
 "SIGN_IP_AGREE_TEXT" = "Login means I've read and agreed.";
-/*条款说明*/
-"AGREEMENT" = "Terms and Conditions";
+/*用户协议 User Agreement*/
+"AGREEMENT" = "User Agreement";
 /*重置密码*/
 "RESET_PASSWORD" = "Reset Password";
 /*请输入手机号码或邮箱,以重置您的密码*/
@@ -1061,8 +1061,6 @@
 "LOGIN_PASSWORD" = "Enter login password";
 /*教授详情*/
 "PROFESSOR_DETAIL" = "Details";
-/*老师详情*/
-"TEACHER_DETAIL" = "Details";
 /*暂无学员评价*/
 "NO_STUDENT_COMMENT" = "No comments";
 /*选课表*/
@@ -1319,21 +1317,6 @@
 /*通过邮箱重置密码*/
 "RESET_BY_EMAIL" = "Reset password via mailbox.";
 
-/*教授简介Introduction*/
-"PROFESSOR_INTRODUCE" = "Introduction";
-/*主要成就Main Achievements*/
-"MAIN_ACHIECEMENT" = "Main Achievements";
-/*教育背景Educational Background*/
-"EDUCATIONNAL_BACKGROUND" = "Educational Background";
-/*其他成就Others*/
-"OTHERS_ACHIEVEMENT" = "Others";
-/*研究领域Research Fields*/
-"RESEARCH_FIELD" = "Research Fields";
-/*学术邗物文章Academic Essays*/
-"ACADEMIC_ESSAYS" = "Academic Essays";
-/*管理咨询项目Management Consulting*/
-"MANAGEREMENT_CONSULTING" = "Management Consulting";
-
 /*助教 Teaching Assistant*/
 "TEACH_ASSISTANT" = "Tutor";
 /*助教详情 Details*/
@@ -1567,7 +1550,9 @@
 /*获取试听资格失败Failure to get free course*/
 "FAILED_GET_FREE" = "Operation failed, please try again.";
 /*教授简介Introduction*/
-"PROFESSOR_INTRODUCE" = "Introduction";
+"PROFESSOR_INTRODUCE" = "Instructor Profile";
+/*老师简介Instructor Profile*/
+"TEACHER_INTRODUCE" = "Instructor Profile";
 /*教授不存在 Professors do not exist.*/
 "PROFESSOR_NOT_EXICT" = "Professors do not exist.";
 /*老师不存在 Teacher do not exist.*/
@@ -1769,6 +1754,8 @@
 "ALLOW_USE_CAMERA_TEXT" = "Not allow {name} to access your camera, please go to settings.";
 /*暂未允许{name}访问您的相机，请前往设置 Not allow app to access your album, please go to settings.*/
 "ALLOW_USE_ALBUM_TEXT" = "Not allow {name} to access your album, please go to settings.";
+/*暂未允许{name}使用麦克风，请前往设置 Not allow app to use your Microphone, please go to settings.*/
+"ALLOW_USE_MICROPHONE_TEXT" = "Not allow app to use your Microphone, please go to settings.";
 
 /*正在刷新Refreshing*/
 "REFRESHING_TEXT" = "Refreshing...";
@@ -1781,7 +1768,7 @@
 /*已加载全部Loaded all*/
 "LOADED_ALL_TEXT" = "Loaded all";
 /*点击或上拉加载更多数据Click or pull to load more data*/
-"CLICK_PULL_LOAD_MORE" = "点击或上拉加载更多数据";
+"CLICK_PULL_LOAD_MORE" = "Load more data by clicking or pullup";
 /*检测到有版本更新，是否更新？ New version detected. Update now?*/
 "NEW_VERSION_UPDATE" = "New version detected. Update now?";
 /*取消订单失败 Failure to cancel order*/
@@ -1801,3 +1788,93 @@
 "ORGANIZATION_SETTING_WEB" = "Your account should be allocated by your organization after setting up the platform on www.e-ducation.cn.";
 /*前往*/
 "GOTO_EDUCATION" = "Enter";
+
+/*咨询中心 Consulting Center*/
+"MY_QUETIONS" = "Consulting Center";
+/*您有x条未解决的咨询   x unresolved consultation(s).*/
+"QUETIONS_MESSAGE" = "{count} unresolved consultation(s).";
+/*咨询   Consultation*/
+"NAVI_QUETIONS_RIGHT_TITLE" = "Consultation";
+
+
+/*未解决     Unresolved*/
+"CONSULTATION_UNSOLVED" = "Unresolved";
+/*已解决     Resolved*/
+"CONSULTATION_RESOLVED" = "Resolved";
+/*暂无咨询              No consultations.*/
+"NO_CONSULTATIONS" = "No consultations.";
+/*学员未关联任何组织    Student not linked to any organization.*/
+"STUDENT_NO_LINKE_ORGANIZATION" = "Student not linked to any organization.";
+/*咨询详情              Consultation Details*/
+"CONSULTAION_DETAIL" = "Consultation Details";
+/*已解决[注释：按钮]    Resolved*/
+"RESOLVED_BUTTON_TITLE" = "Resolved";
+/*追问[注释：按钮]      Follow-up*/
+"FURTHER_INQUIRY_BUTTON_TITLE" = "Follow-up";
+/*xxx回复[注释：表示已过去的状态]   xxx replied*/
+"CONSULTATION_REPLIED" = "{name} replied";
+/*xxx追问[注释：表示已过去的状态]   xxx's follow-up */
+"CONSULTATION_FURTHER_QUESTION" = "{name}'s follow-up";
+/*我要回复[注释：按钮]              Reply*/
+"REPLY_BUTTON_TITLE" = "Reply";
+/*暂无回复                          No reply.*/
+"NO_REPLY_TEXT" = "No reply.";
+/*学员不存在                        Not found.*/
+"NOT_FOUND_STUDENT" = "Not found.";
+/*咨询不存在                        Not found.*/
+"NO_FOUND_CONSULTATION" = "Not found.";
+/*已解决的问题将无法继续咨询        Cannot follow-up consult about resolved questions.*/
+"RESOLVED_CONSULT_CAN_NOT_QUETIONS" = "Cannot follow-up consult about resolved questions.";
+/* x条未读消息                       x unread message(s). */
+"UNREAD_MESSAGE_COUNT_TEXT" = "{count} unread message(s).";
+/* x条消息                           x message(s). */
+"MESSAGE_COUNT_TEXT" = "{count} message(s).";
+/* 新增咨询                          New Consultations*/
+"NEW_CONSULTATION_TEXT" = "New Consultations";
+/*输入咨询标题（必填）              Enter consultation title (required).*/
+"ENTER_CONSULTATION_TITLE" = "Enter consultation title (required).";
+/*输入咨询内容                      Enter consultation content.*/
+"ENTER_CONSULTATION_CONTENT" = "Enter consultation content.";
+/* 输入回复内容                      Enter reply content. */
+"ENTER_REPLY_CONTENT" = "Enter reply content.";
+/* 按住 录音                         Hold to Record */
+"HOLD_TO_RECORD" = "Hold to Record";
+/* 松开 保存                         Release to Save */
+"RELEASE_TO_SAVE" = "Release to Save";
+/* 手指上滑 取消录音                 Scroll up to cancel */
+"SCROLL_UP_TO_CANCEL" = "Scroll up to cancel";
+/* 手指松开 取消保存                 Release to cancel */
+"RELEASE_FINGER_TO_CANCEL" = "Release to cancel";
+/* 最多支持1条录音                   1 Recording At Max. */
+"MAX_ONE_RECORD" = "1 Recording At Max.";
+/*录音时间不能少于2秒               Cannot be less than 2 seconds.*/
+"ENCH_RECOR_LESS_TWO_SECOND" = "No less than 2 secs.";
+/* 录音时间不能超过60秒              Cannot be more than 60 seconds. */
+"EACH_RECORD_MORE_SECOND" = "No more than 60 secs. ";
+/* 删除录音                          Delete recording  */
+"DELETE_RECORD_TEXT" = "Delete recording";
+/* 删除图片                          Delete photo */
+"DELETE_PHOTO_TEXT" = "Delete photo";
+/* 预览                              Preview */
+"PREVIEW_TITLE" = "Preview";
+/* 全部图片                          All Photos */
+"ALL_PHOTO_TITLE" = "All Photos";
+/*相册 Album*/
+"ALBUM_TITLE" = "Album";
+/* 图片预览                          Photo Preview */
+"PHOTO_PREVIEW_TEXT" = "Photo Preview";
+/* 最多选择4张图片                   4 photos at max. */
+"MAX_FOUR_PHOTOS" = "4 photos at max.";
+/* 请输入标题                        Please enter title. */
+"ENTER_TITLE_TEXT" = "Please enter title.";
+/* 必须包含咨询内容、图片或录音其中一项      Must include consultation content or photo or recording. */
+"THREE_MUST_ONRE" = "Must include consultation content or photo or recording.";
+/* 正在提交                          Submitting... */
+"SUBMITTING_TEXT" = "Submitting...";
+/* 没有回复权限                      No reply permission. */
+"NO_REPLY_PERMISSION" = "No reply permission.";
+/* 正在录音，请先结束录音  Recording, please wait.*/
+"RECORDING_LEAVE_FINISH" = "Recording, please wait.";
+/* 正在提交，确定离开？ Submitting, sure you want to leave? */
+"SUMITTING_SURE_LEAVE" = "Submitting, sure you want to leave?";
+

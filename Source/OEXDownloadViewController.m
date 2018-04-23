@@ -188,12 +188,13 @@
 
 #pragma mark - notification
 - (void)downloadProgressNotification:(NSNotification*)notification {
+    
     NSDictionary* progress = (NSDictionary*)notification.userInfo;
     NSURLSessionTask* task = [progress objectForKey:DOWNLOAD_PROGRESS_NOTIFICATION_TASK];
     NSString* url = [task.originalRequest.URL absoluteString];
+    
     for(OEXHelperVideoDownload* video in _arr_downloadingVideo) {
         if([video.summary.videoURL isEqualToString:url]) {
-//            //NSLog(@"progress for video  %@   id  %@ download  %f", video.name , video.str_VideoTitle , video.DownloadProgress);
             [self updateProgressForVisibleRows];
             break;
         }
@@ -212,6 +213,7 @@
 /// Update progress for visible rows
 
 - (NSString *)downloadStatusAccessibilityLabelForVideoName:(NSString *)video percentComplete:(double)percentage {
+    
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterPercentStyle;
     NSString *formatted = [formatter stringFromNumber:@(percentage)];
@@ -219,16 +221,19 @@
 }
 
 - (void)updateProgressForVisibleRows {
+    
     NSArray* array = [self.table_Downloads visibleCells];
-
     BOOL needReload = NO;
 
     if(![self.table_Downloads isDecelerating] || ![self.table_Downloads isDragging]) {
+        
         for(OEXDownloadTableCell* cell in array) {
+            
             NSIndexPath* indexPath = [self.table_Downloads indexPathForCell:cell];
             OEXHelperVideoDownload* video = [self.arr_downloadingVideo objectAtIndex:indexPath.row];
             float progress = video.downloadProgress;
             cell.progressView.progress = progress / OEXMaxDownloadProgress;
+            
             if(progress == OEXMaxDownloadProgress) {
                 needReload = YES;
             }
@@ -246,7 +251,6 @@
 - (void)btnCancelPressed:(UIButton *)button { //取消按钮
     
     NSIndexPath* indexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
-
     OEXInterface* edxInterface = [OEXInterface sharedInterface];
     
     if(indexPath.row < [self.arr_downloadingVideo count]) {
