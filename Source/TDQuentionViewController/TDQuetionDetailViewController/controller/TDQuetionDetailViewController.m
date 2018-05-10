@@ -8,8 +8,6 @@
 
 #import "TDQuetionDetailViewController.h"
 #import "TDQuetionDetailCell.h"
-#import "TDQuetionVoiceCell.h"
-#import "TDQuetionImageCell.h"
 #import "TDPublishTimeCell.h"
 #import "TDBaseButton.h"
 
@@ -371,7 +369,7 @@
     
     if (indexPath.row == 0) {
         
-        TDQuetionDetailCell *cell = [[TDQuetionDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDQuentionMessageCell"];
+        TDQuetionDetailCell *cell = [[TDQuetionDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDQuetionDetailCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         cell.quetionTitle.text = self.detailModel.title;
@@ -400,7 +398,7 @@
         return cell;
     
     } else {
-        TDPublishTimeCell *cell = [[TDPublishTimeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDQuetionImageCell"];
+        TDPublishTimeCell *cell = [[TDPublishTimeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDPublishTimeCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
   
         if (indexPath.section == 0) {

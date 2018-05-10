@@ -44,6 +44,12 @@ public class UserProfile {
         case company_id = "id" //公司id
         case Language_Like = "language" //语言习惯    
         case consult_count = "unsolved_consult_length"//咨询条数
+        case consult_info = "consult_info" //咨询字典
+        case is_receiver = "is_receiver" // 是否是企业联系人
+        case unreplied_count = "unreplied_count"//未回答问题条数
+        case unsolved_count = "unsolved_count"//未解决咨询条数
+        case unsolved_msg_count = "unsolved_msg_count"//我的咨询未读消息条数
+        
     }
     
     let hasProfileImage: Bool
@@ -73,7 +79,10 @@ public class UserProfile {
     let logoUrl: String?//公司logo
     let company_id: Int?
     let language_Like: String? //语言习惯
-    let consult_count: Int? //咨询
+    let is_receiver : Bool? //企业联系人
+    let unreplied_count : Int? //回答
+    let unsolved_count : Int? //咨询
+    let unsolved_msg_count : Int? //未读咨询消息
     
     public init?(json: JSON) {
         
@@ -110,12 +119,17 @@ public class UserProfile {
         remainscore = json[ProfileFields.Remainscore].double
         educationCode = json[ProfileFields.Education].string
         language_Like = json[ProfileFields.Language_Like].string
-        consult_count = json[ProfileFields.consult_count].int
+        
+        let consultInfo = json[ProfileFields.consult_info]
+        is_receiver = consultInfo[ProfileFields.is_receiver].bool
+        unreplied_count = consultInfo[ProfileFields.unreplied_count].int
+        unsolved_count = consultInfo[ProfileFields.unsolved_count].int
+        unsolved_msg_count = consultInfo[ProfileFields.unsolved_msg_count].int
+        
 //        print("json----->>>>> \(json)")
-        print("语言 ---->>>> \(consult_count!)")
     }
     
-    internal init(user_id : Int,company_id : Int, username : String, bio : String? = nil, parentalConsent : Bool? = false, countryCode : String? = nil, accountPrivacy : ProfilePrivacy? = nil,name : String, education : String? = nil,nickname : String, language_Like : String,remainscore : Double,phone : String,email : String,coupon : Double,order : Double,consult_count: Int) {
+    internal init(user_id:Int, company_id:Int, username:String, bio:String? = nil, parentalConsent:Bool? = false, countryCode:String? = nil, accountPrivacy:ProfilePrivacy? = nil, name:String, education:String? = nil, nickname:String, language_Like:String, remainscore:Double,phone:String, email:String, coupon:Double, order:Double, is_receiver:Bool, unreplied_count:Int, unsolved_count:Int, unsolved_msg_count: Int) {
         
         self.accountPrivacy = accountPrivacy
         self.username = username
@@ -138,7 +152,10 @@ public class UserProfile {
         self.logoUrl = nil
         self.company_id = company_id
         self.language_Like = language_Like
-        self.consult_count = consult_count
+        self.is_receiver = is_receiver
+        self.unreplied_count = unreplied_count
+        self.unsolved_count = unsolved_count
+        self.unsolved_msg_count = unsolved_msg_count
     }
     
     var languageCode: String? {

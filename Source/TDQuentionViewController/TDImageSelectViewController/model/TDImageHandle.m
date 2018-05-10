@@ -7,6 +7,7 @@
 //
 
 #import "TDImageHandle.h"
+
 static CGFloat const kDefaultThumbnailWidth = 100;
 
 @interface TDImageHandle ()
@@ -29,25 +30,27 @@ static CGFloat const kDefaultThumbnailWidth = 100;
  * @brief result 的元素类型为 PHAssetCollection
  */
 - (void)enumeratePHAssetCollectionsWithResultHandler:(void(^)(NSArray <PHAssetCollection *>*result))resultHandler {
-    // 照片群组数组
-    NSMutableArray *groups = [NSMutableArray array];
+    
+    NSMutableArray *groups = [NSMutableArray array];// 照片群组数组
     
     dispatch_sync(self.concurrentQueue, ^{
+        
         // 获取系统相册
         PHFetchResult <PHAssetCollection *>*systemAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
         
         for (PHAssetCollection *collection in systemAlbums) {
-            // 过滤照片数量为0的相册
-            if ([collection numberOfAssets] > 0) {
+            
+            if ([collection numberOfAssets] > 0) {// 过滤照片数量为0的相册
                 [groups addObject:collection];
             }
         }
         
         // 获取用户自定义相册
         PHFetchResult <PHAssetCollection *>*userAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil];
+        
         for (PHAssetCollection *collection in userAlbums) {
-            // 过滤照片数量为0的相册
-            if ([collection numberOfAssets] > 0) {
+            
+            if ([collection numberOfAssets] > 0) { // 过滤照片数量为0的相册
                 [groups addObject:collection];
             }
         }
@@ -63,20 +66,24 @@ static CGFloat const kDefaultThumbnailWidth = 100;
     });
 }
 
-/** 获取所有在assetCollection中的asset(iOS8以上)
+/* 每个相册中所有的图片
+ * 获取所有在assetCollection中的asset(iOS8以上)
  *  assetCollection: 照片群组
  */
 - (void)enumerateAssetsInAssetCollection:(PHAssetCollection *)collection finishBlock:(void(^)(NSArray <PHAsset *>*result))finishBlock {
     
     __block NSMutableArray <PHAsset *>*results = [NSMutableArray array];
     dispatch_async(self.concurrentQueue, ^{
+        
         // 获取collection这个相册中的所有资源
         PHFetchResult <PHAsset *>*assets = [PHAsset fetchAssetsInAssetCollection:collection options:nil];
         [assets enumerateObjectsUsingBlock:^(PHAsset * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (obj.mediaType == PHAssetMediaTypeImage) {
+            
+            if (obj.mediaType == PHAssetMediaTypeImage || obj.mediaType == PHAssetMediaTypeVideo) {//视频和图片
                 [results addObject:obj];
             }
         }];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             finishBlock(results);
         });
@@ -97,10 +104,12 @@ static CGFloat const kDefaultThumbnailWidth = 100;
     if (fetchResult.count > 0) { } else {
         return;
     }
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         PHAsset *asset = fetchResult.lastObject;
         CGFloat scale = [UIScreen mainScreen].scale;
         CGSize size = CGSizeMake(targetSize.width * scale, targetSize.height * scale);
+        
         [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeDefault options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 Block_exe(resultHandler, result, info);
@@ -110,10 +119,18 @@ static CGFloat const kDefaultThumbnailWidth = 100;
 }
 
 - (NSInteger)numberOfAssets {
-    PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
-    // 注意 %zd 这里不识别，直接导致崩溃
-    fetchOptions.predicate = [NSPredicate predicateWithFormat:@"mediaType == %d", PHAssetMediaTypeImage];
+    
+    PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init]; //图片索引
+    
+    NSPredicate *imagePredicate = [NSPredicate predicateWithFormat:@"mediaType == %d", PHAssetMediaTypeVideo]; //视频
+    NSPredicate *videoPredicate = [NSPredicate predicateWithFormat:@"mediaType == %d", PHAssetMediaTypeImage]; //相片
+    NSCompoundPredicate *predicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[imagePredicate,videoPredicate]];
+    fetchOptions.predicate = predicate;
+    
+//    fetchOptions.predicate = [NSPredicate predicateWithFormat:@"mediaType == %d", PHAssetMediaTypeVideo];// 注意 %zd 这里不识别，直接导致崩溃
+    
     PHFetchResult<PHAsset *> *result = [PHAsset fetchAssetsInAssetCollection:self options:fetchOptions];
+    
     return result.count;
 }
 
@@ -148,6 +165,7 @@ static CGFloat const kDefaultThumbnailWidth = 100;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
         option.synchronous = YES;
+        
         [[PHImageManager defaultManager] requestImageForAsset:self targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeDefault options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 Block_exe(resultHandler, result, info);

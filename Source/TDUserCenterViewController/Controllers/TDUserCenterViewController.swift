@@ -70,6 +70,7 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     }
     
     private func addProfileListener() {
+        
         let editable = self.editable
         let networkManager = environment.networkManager
         
@@ -104,6 +105,7 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     }
     
     func gotoAuthenVc() {//身份验证
+        
         if contentView.statusCode == 400  { // 400 未认证
             let photoViewController = TDTakePictureViewController()
             photoViewController.username = session.currentUser?.username
@@ -164,6 +166,12 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
         self.navigationController?.pushViewController(quetionVc, animated: true)
     }
     
+    func gotoMyAnswerVc() {
+        let answerVc = TDMyAnswerViewController()
+        answerVc.username = session.currentUser?.username
+        self.navigationController?.pushViewController(answerVc, animated: true)
+    }
+    
     //MARK: tableview Delegate
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
@@ -207,7 +215,7 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
                 gotoMyQuetionVc()
                 
             } else {
-                
+                gotoMyAnswerVc()
             }
         }
     }

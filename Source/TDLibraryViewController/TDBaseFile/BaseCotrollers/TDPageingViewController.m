@@ -10,6 +10,7 @@
 
 #define TITLEVIEW_HEIGHT 45
 #define TITLTE_BUTTON_WIDTH TDWidth / self.childViewControllers.count
+#define TITLTE_LINE_LENGTH 88
 
 @interface TDPageingViewController () <UIScrollViewDelegate,UIGestureRecognizerDelegate,UIGestureRecognizerDelegate>
 
@@ -17,6 +18,7 @@
 
 @property (nonatomic,strong) UIView *selectView;
 @property (nonatomic,strong) UIView *sepView; //分割线
+@property (nonatomic,assign) CGFloat spaceLength;
 
 @end
 
@@ -145,6 +147,8 @@
 //添加分割线
 - (void)setSepView {
     
+    self.spaceLength = (TITLTE_BUTTON_WIDTH - TITLTE_LINE_LENGTH) / 2;
+    
     CGFloat y = CGRectGetMaxY(self.titleView.frame);
     self.sepView = [[UIView alloc] init];
     self.sepView.backgroundColor = [UIColor colorWithHexString:colorHexStr6];
@@ -153,7 +157,7 @@
     
     self.selectView = [[UIView alloc] init];
     self.selectView.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
-    self.selectView.frame = CGRectMake(0, -1, TITLTE_BUTTON_WIDTH, 2);
+    self.selectView.frame = CGRectMake(self.spaceLength, 0, TITLTE_LINE_LENGTH, 2);
     [self.sepView addSubview:self.selectView];
 }
 
@@ -185,7 +189,7 @@
 - (void)setSelectViewFrame:(CGFloat)x {
     WS(weakSelf);
     [UIView animateWithDuration:0.3 animations:^{
-        weakSelf.selectView.frame = CGRectMake(x, -1, TITLTE_BUTTON_WIDTH, 2); //处理指示线的位置
+        weakSelf.selectView.frame = CGRectMake(x + self.spaceLength, 0, TITLTE_LINE_LENGTH, 2); //处理指示线的位置
     }];
 }
 

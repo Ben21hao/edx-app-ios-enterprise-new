@@ -76,9 +76,9 @@
 #define TDLocalizeSelect(key, comment) [[LanguageChangeTool bundle] localizedStringForKey:key value:nil table:@"Localizable"] //手动选择APP显示语言
 #define TDNotificationCenter [NSNotificationCenter defaultCenter]   //通知中心
 
-#define BAR_ALL_HEIHT ([[UIApplication sharedApplication] statusBarFrame].size.height + self.navigationController.navigationBar.frame.size.height) //状态栏 + 导航栏
+#define BAR_ALL_HEIHT ([[UIApplication sharedApplication] statusBarFrame].size.height + [[UINavigationController alloc] init].navigationBar.frame.size.height) //状态栏 + 导航栏
 #define STATUSBAR_HEIGHT [[UIApplication sharedApplication] statusBarFrame].size.height //状态栏高度
-#define NAVIGATIONBAR_HEIGHT self.navigationController.navigationBar.frame.size.height //导航栏高度
+#define NAVIGATIONBAR_HEIGHT [[UINavigationController alloc] init].navigationBar.frame.size.height //导航栏高度
 
 ////* 微吼直播相关 */////
 

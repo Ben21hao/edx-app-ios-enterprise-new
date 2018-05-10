@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger,TDSubQuetionFrom) {
 @interface TDSubMyQuentionViewController : TDBaseViewController
 
 @property (nonatomic,strong) NSString *username;
-@property (nonatomic,assign) NSInteger whereFrom;
+@property (nonatomic,assign) TDSubQuetionFrom whereFrom;
 
 
 @end

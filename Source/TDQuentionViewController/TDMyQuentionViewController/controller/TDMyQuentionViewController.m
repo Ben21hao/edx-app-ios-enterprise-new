@@ -8,9 +8,18 @@
 
 #import "TDMyQuentionViewController.h"
 #import "TDSubMyQuentionViewController.h"
-#import "TDQuetionInputViewController.h"
+#import "TDConsultDetailViewController.h"
+
+#import "TDCallCameraViewConstroller.h"
+#import "TDImageGroupViewController.h"
+
+#import "TDNavigationViewController.h"
+
+#import "TDConsultGuidView.h"
 
 @interface TDMyQuentionViewController ()
+
+@property (nonatomic,strong) TDConsultGuidView *guidView;
 
 @end
 
@@ -22,18 +31,20 @@
     self.navigationItem.title = TDLocalizeSelect(@"MY_QUETIONS", nil);
     [self setLeftNavigationBar];
     [self setRightNavigationBar];
-    [self.rightButton setImage:[UIImage imageNamed:@"add_white_image"] forState:UIControlStateNormal];
+    [self.rightButton setTitle:@"新增" forState:UIControlStateNormal];
     
     [self addChileVC];
     [self setSubTitleConstraint];
+    
+    [self addGuidView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(quetuonSureSolved:) name:@"quetion_sure_solved_notification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newQuetionHandin:) name:@"new_quetion_handin_notification" object:nil];
 }
 
+
+#pragma mark - 通知
 - (void)quetuonSureSolved:(NSNotification *)notifi {
-    
-    
     
     UIButton *seleButton = self.titleButtons[1];
     [self btnClick:seleButton];
@@ -44,13 +55,26 @@
     [self btnClick:seleButton];
 }
 
+#pragma mark - 按钮
 - (void)rightButtonAciton:(UIButton *)sender {
     
-    TDQuetionInputViewController *inputVc = [[TDQuetionInputViewController alloc] init];
-    inputVc.whereFrom = TDQuetionInputFromNewQuetion;
-    inputVc.username = self.username;
-    inputVc.titleStr = TDLocalizeSelect(@"NEW_CONSULTATION_TEXT", nil);
-    [self.navigationController pushViewController:inputVc animated:YES];
+//    TDCallCameraViewConstroller *cameraVc = [[TDCallCameraViewConstroller alloc] init];
+//    [self presentViewController:cameraVc animated:YES completion:nil];
+
+    TDConsultDetailViewController *consultVc = [[TDConsultDetailViewController alloc] init];
+    consultVc.whereFrom = TDConsultDetailFromNewConsult;
+    consultVc.username = self.username;
+    [self.navigationController pushViewController:consultVc animated:YES];
+    
+//    [self gotoPhotoSelectVc];
+}
+
+- (void)gotoPhotoSelectVc { //图片选择页
+    
+    TDImageGroupViewController *imageGroupVc = [[TDImageGroupViewController alloc] init];
+    
+    TDNavigationViewController *naviController = [[TDNavigationViewController alloc] initWithRootViewController:imageGroupVc];
+    [self presentViewController:naviController animated:YES completion:nil];
 }
 
 #pragma mark - 加入子视图
@@ -76,6 +100,22 @@
     }
 }
 
+- (void)addGuidView {
+    
+    NSInteger count = [[NSUserDefaults standardUserDefaults] integerForKey:@"Consult_GuidView_ShowCount"];
+    if (count == 0) {
+    
+        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"Consult_GuidView_ShowCount"];
+        
+        self.guidView = [[TDConsultGuidView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, TDHeight)];
+        [self.guidView.tapButton addTarget:self action:@selector(tapButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:self.guidView];
+    }
+}
+
+- (void)tapButtonAction:(UIButton *)sender {
+    [self.guidView removeFromSuperview];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

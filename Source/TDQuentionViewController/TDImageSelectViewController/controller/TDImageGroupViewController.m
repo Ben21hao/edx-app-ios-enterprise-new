@@ -56,15 +56,15 @@
     self.imageHandle = [[TDImageHandle alloc] init];
 }
 
-- (void)loadingPhotos {
+- (void)loadingPhotos { //加载相册
     WS(weakSelf);
     [self.imageHandle enumeratePHAssetCollectionsWithResultHandler:^(NSArray<PHAssetCollection *> *result) {
 
         weakSelf.groupArray = [NSMutableArray arrayWithArray:result]; //相册
         [weakSelf.tableView reloadData];
-
-        if (weakSelf.groupArray.count > 2) {
-            [weakSelf gotoSelectImageVc:2 animated:NO];
+        
+        if (weakSelf.groupArray.count > 3) {
+            [weakSelf gotoSelectImageVc:3 animated:NO];
         } else {
             [weakSelf gotoSelectImageVc:0 animated:NO];
         }
@@ -100,6 +100,7 @@
     [self gotoSelectImageVc:indexPath.row animated:YES];
 }
 
+#pragma mark - 显示图片
 - (void)gotoSelectImageVc:(NSInteger)index animated:(BOOL)animate {
     
     if (self.groupArray.count <= 0) {

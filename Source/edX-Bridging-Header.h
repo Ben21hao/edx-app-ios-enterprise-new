@@ -124,4 +124,5 @@
 #import "TDFindCourseViewController.h"
 #import "TDFileModel.h"
 #import "TDMyQuentionViewController.h"
+#import "TDMyAnswerViewController.h"
 #import "TDRightSelectView.h"

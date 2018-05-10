@@ -12,8 +12,10 @@
 
 @interface TDSelectImageModel : NSObject
 
-@property (nonatomic,strong) UIImage *image;
 @property (nonatomic,strong) PHAsset *asset;
+@property (nonatomic,strong) UIImage *image;
+@property (nonatomic,strong) NSString *videoUrl; //视频url
+
 @property (nonatomic,assign) BOOL selected;
 
 @end

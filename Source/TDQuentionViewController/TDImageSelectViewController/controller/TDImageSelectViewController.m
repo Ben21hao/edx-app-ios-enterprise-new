@@ -14,8 +14,10 @@
 #import "TDSelectImageModel.h"
 
 #import "TDImageHandle.h"
+#import "SRUtil.h"
 
 #import "TDPreViewImageViewController.h"
+#import "TDPreviewVideoViewController.h"
 
 #define collectionCell_Width (TDWidth - 16)/4
 
@@ -23,7 +25,8 @@
 
 @property (nonatomic,strong) TDBaseCollectionView *collectionView;
 @property (nonatomic,strong) TDSelectBottomView *bottomView;
-@property (nonatomic,strong) NSMutableArray *imageArray;
+
+@property (nonatomic,strong) NSMutableArray *assetArray;
 @property (nonatomic,strong) NSMutableArray *selectImageArray;
 
 @property (nonatomic,strong) TDImageHandle *imageHandle;
@@ -32,11 +35,11 @@
 
 @implementation TDImageSelectViewController
 
-- (NSMutableArray *)imageArray {
-    if (!_imageArray) {
-        _imageArray = [[NSMutableArray alloc] init];
+- (NSMutableArray *)assetArray {
+    if (!_assetArray) {
+        _assetArray = [[NSMutableArray alloc] init];
     }
-    return _imageArray;
+    return _assetArray;
 }
 
 - (NSMutableArray *)selectImageArray {
@@ -49,7 +52,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = TDLocalizeSelect(@"ALL_PHOTO_TITLE", nil);
+    self.titleViewLabel.text = self.assetCollection.localizedTitle;
     self.rightButton.hidden = NO;
     [self.rightButton setTitle:TDLocalizeSelect(@"CANCEL", nil) forState:UIControlStateNormal];
     WS(weakSelf);
@@ -57,22 +60,25 @@
         [weakSelf.navigationController dismissViewControllerAnimated:YES completion:nil];
     };
     
-    [self setViewConstraint];
+    [self setSelectViewConstraint];
     
     self.imageHandle = [[TDImageHandle alloc] init];
     [self loadingPhotos];
-    
 }
 
-- (void)selectImageSureButtonAciton:(UIButton *)sender { //确定
-
-//     NSLog(@"---->> 所有图片 == 确定按钮");
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"user_had_selectImage" object:nil userInfo:@{@"selectImageArray" : self.selectImageArray}];
+#pragma mark - 确定
+- (void)sureButtonAciton:(UIButton *)sender {
+    if (sender.selected) {
+        return;
+    }
+    sender.selected = YES;
+     NSLog(@"---->> 所有图片 == 确定按钮");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"User_Had_SelectImage" object:nil userInfo:@{@"selectImageArray" : self.selectImageArray}];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)previewButtonAction:(UIButton *)sender { //预览已选择的图片
+#pragma mark - 预览图片
+- (void)previewButtonAction:(UIButton *)sender { //预览
     [self gotoPreviewVC:YES index:0];
 }
 
@@ -81,7 +87,7 @@
     TDPreViewImageViewController *previewVc = [[TDPreViewImageViewController alloc] init];
     previewVc.index = index;
     previewVc.whereFrom = isSelected ? TDPreviewImageFromPreviewSelectImage : TDPreviewImageFromPreviewAllImage;
-    previewVc.imageArray = isSelected ? self.selectImageArray : self.imageArray;
+    previewVc.imageArray = isSelected ? self.selectImageArray : self.assetArray;
     
     if (isSelected == NO) {
         previewVc.hadSelectImageArray = self.selectImageArray;
@@ -91,13 +97,104 @@
     WS(weakSelf);
     previewVc.previewSelectHandle = ^(NSInteger index,BOOL isSelect) {
         
-        TDSelectImageModel *model = weakSelf.imageArray[index];
+        TDSelectImageModel *model = weakSelf.assetArray[index];
         [weakSelf dealWithImageSelect:isSelect imageModel:model shouldReload:YES];
     };
     
     [self.navigationController pushViewController:previewVc animated:YES];
 }
 
+#pragma mark - 视频预览
+- (void)gotoPreviewVideo:(TDSelectImageModel *)model {
+    
+    TDPreviewVideoViewController *previewVideoVC = [[TDPreviewVideoViewController alloc] init];
+    previewVideoVC.isWebVideo = NO;
+    [self.navigationController pushViewController:previewVideoVC animated:YES];
+    
+//    PHVideoRequestOptions *options = [[PHVideoRequestOptions alloc] init];
+//    options.version = PHImageRequestOptionsVersionCurrent;
+//    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+//    
+////    WS(weakSelf);
+//    [[PHImageManager defaultManager] requestAVAssetForVideo:model.asset options:options resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
+//        
+//        NSString *sanboxPath = info[@"PHImageFileSandboxExtensionTokenKey"];
+//        NSArray *array = [sanboxPath componentsSeparatedByString:@";"];
+//        NSString *videoPath = array[array.count - 1];
+//        
+//        if (![[NSFileManager defaultManager] fileExistsAtPath:videoPath]) {
+//            NSLog(@"videopath ----->> %@",videoPath);
+//        }
+//        
+//        NSString *path = [array[array.count - 1] substringFromIndex:9];
+//        if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+//            NSLog(@"path ----->> %@",path);
+//        }
+//        
+//        AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:videoPath] options:nil];
+//        AVURLAsset *avAsset1 = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:path] options:nil];
+//        NSLog(@"videopath %@----->> path %@",avAsset ,avAsset1);
+//
+//        NSArray *compatiblePresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:avAsset1];
+//        if ([compatiblePresets containsObject:AVAssetExportPresetHighestQuality]) {
+//            
+//            AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:avAsset presetName:AVAssetExportPresetHighestQuality];
+//            
+//            NSString *resultPath = [self getVideoSaveFilePathString];
+//            if (![[NSFileManager defaultManager] fileExistsAtPath:resultPath]) {
+//                NSLog(@"resultPath ----->> %@",resultPath);
+//            }
+//            NSLog(@"resultPath = %@",resultPath);
+//            
+//            exportSession.outputURL = [NSURL fileURLWithPath:resultPath];
+//            exportSession.outputFileType = AVFileTypeMPEG4;
+//            exportSession.shouldOptimizeForNetworkUse = YES;
+//            
+//            [exportSession exportAsynchronouslyWithCompletionHandler:^(void) {
+//                 if (exportSession.status == AVAssetExportSessionStatusCompleted) {
+//                     
+//                     NSData *data = [NSData dataWithContentsOfFile:resultPath];
+//                     
+//                     float memorySize = (float)data.length / 1024 / 1024;
+//                     NSLog(@"视频压缩后大小 %f", memorySize);
+//                     
+////                     [self playVideowithUrl:[NSURL fileURLWithPath:resultPath]];
+//                     
+//                     
+//                 } else {
+//                     NSLog(@"压缩失败");
+//                 }
+//                 
+//             }];
+//        }
+//        
+////        dispatch_async(dispatch_get_main_queue(), ^{
+////            TDPreviewVideoViewController *previewVideoVC = [[TDPreviewVideoViewController alloc] init];
+////            previewVideoVC.videoPath = [NSString stringWithFormat:@"%@",videoPath];//file://
+////            previewVideoVC.isWebVideo = NO;
+////            [weakSelf.navigationController pushViewController:previewVideoVC animated:YES];
+////        });
+//    }];
+//    
+////            PHImageFileSandboxExtensionTokenKey = "8f71358aa52f24bddc2fd536abff93d933825f5a;00000000;00000000;000000000000001b;com.apple.avasset.read-only;00000001;01000002;00000001005e20b6;/private/var/mobile/Media/DCIM/100APPLE/IMG_0601.MOV";
+////            PHImageResultDeliveredImageFormatKey = 20000;
+////            PHImageResultIsInCloudKey = 0;
+////            PHImageResultWantedImageFormatKey = 20002;
+}
+
+- (NSString *)getVideoSaveFilePathString {//录制保存的时候要保存为 mov
+    
+    NSString *nowTimeStr = [NSString stringWithFormat:@"%lld",[SRUtil getNowTimeStamp]];
+    NSString *videoName = [NSString stringWithFormat:@"%@.mov",nowTimeStr];
+    
+    NSString *path = [SRUtil getVideoCachePath:videoName];
+    
+    NSLog(@"wov 存储位置拼接 -- %@",path);
+    
+    return path;
+}
+
+#pragma mark - 获取照片
 - (void)loadingPhotos {
     
     WS(weakSelf);
@@ -108,10 +205,16 @@
             model.selected = NO;
             model.asset = asset;
             
+//            if (asset.mediaType == PHAssetMediaTypeVideo) {
+//                AVURLAsset *urlAsset = (AVURLAsset *)asset;
+//                model.videoUrl = urlAsset.URL.path;
+//            }
+            
             if (model) {
-                [self.imageArray addObject:model];
+                [self.assetArray addObject:model];
             }
         }
+        
         [weakSelf.collectionView reloadData];
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -129,16 +232,17 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.imageArray.count;
+    return self.assetArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    TDSelectImageModel *model = self.imageArray[indexPath.row];
+    TDSelectImageModel *model = self.assetArray[indexPath.row];
     
     TDImageSelectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TDImageSelectCell" forIndexPath:indexPath];
     [cell setSelectCell];
     cell.model = model;
+    
     cell.selectButton.tag = indexPath.row;
     [cell.selectButton addTarget:self action:@selector(selectButtonAction:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -147,6 +251,13 @@
     if (self.selectImageArray.count + self.hadImageArray.count == 4) {
         cell.shadowView.hidden = model.selected;
     } else {
+        cell.shadowView.hidden = YES;
+    }
+    
+    if (self.selectImageArray.count + self.hadImageArray.count > 0 && model.asset.mediaType == PHAssetMediaTypeVideo) {
+        cell.shadowView.hidden = NO;
+        
+    } else if (self.selectImageArray.count + self.hadImageArray.count == 0) {
         cell.shadowView.hidden = YES;
     }
     
@@ -171,13 +282,26 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [self gotoPreviewVC:NO index:indexPath.row];
+    
+    TDSelectImageModel *model = self.assetArray[indexPath.row];
+    
+    if (model.asset.mediaType == PHAssetMediaTypeVideo) { //点击视频
+        if (self.selectImageArray.count + self.hadImageArray.count > 0) {
+            return;
+        }
+        
+        [self gotoPreviewVideo:model];//视频预览
+    }
+    else { //点击图片
+        [self gotoPreviewVC:NO index:indexPath.row]; //图片预览
+    }
 }
 
+#pragma mark - 选择按钮
 - (void)selectButtonAction:(UIButton *)sender {
     sender.selected = !sender.selected;
     
-    TDSelectImageModel *model = self.imageArray[sender.tag];
+    TDSelectImageModel *model = self.assetArray[sender.tag];
     [self dealWithImageSelect:sender.selected imageModel:model shouldReload:NO];
 }
 
@@ -194,11 +318,15 @@
             });
         }
         
-        if (self.selectImageArray.count + self.hadImageArray.count == 4) {
+        if (self.selectImageArray.count + self.hadImageArray.count == 4) { //选够四张图片
             [[NSNotificationCenter defaultCenter] postNotificationName:@"cell_showShadow" object:nil];
         }
         
-    } else {
+        if (model.asset.mediaType == PHAssetMediaTypeImage && self.selectImageArray.count + self.hadImageArray.count == 1) {//如果第一张选择的是图片，视频不可选
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"cell_video_showShadow" object:nil];
+        }
+    }
+    else {
         NSArray *copyArray = [self.selectImageArray copy];
         
         if ([self.selectImageArray containsObject:model]) {
@@ -211,16 +339,23 @@
             });
         }
         
-        if (copyArray.count + self.hadImageArray.count == 4) {
+        if (copyArray.count + self.hadImageArray.count == 4) { //变成3张
             [[NSNotificationCenter defaultCenter] postNotificationName:@"cell_hiddenShadow" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"cell_video_showShadow" object:nil];
+        }
+        
+        
+        if (model.asset.mediaType == PHAssetMediaTypeImage && self.selectImageArray.count + self.hadImageArray.count == 0) {//如果第一张选择的是图片，视频不可选
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"cell_video_hiddenShadow" object:nil];
         }
     }
     
     self.bottomView.selectNum = self.selectImageArray.count;
 }
 
+
 #pragma mark - UI
-- (void)setViewConstraint {
+- (void)setSelectViewConstraint {
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     
@@ -239,7 +374,7 @@
     
     self.bottomView = [[TDSelectBottomView alloc] init];
     self.bottomView.isPreView = NO;
-    [self.bottomView.sureButton addTarget:self action:@selector(selectImageSureButtonAciton:) forControlEvents:UIControlEventAllEvents];
+    [self.bottomView.sureButton addTarget:self action:@selector(sureButtonAciton:) forControlEvents:UIControlEventAllEvents];
     [self.bottomView.previewButton addTarget:self action:@selector(previewButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.bottomView];
     

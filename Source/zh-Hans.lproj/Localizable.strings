@@ -1791,7 +1791,7 @@
 "GOTO_EDUCATION" = "前往";
 
 /*咨询中心*/
-"MY_QUETIONS" = "咨询中心";
+"MY_QUETIONS" = "我的咨询";
 /*您有x条未解决的咨询   x unresolved consultations*/
 "QUETIONS_MESSAGE" = "您有{count}条未解决的咨询";
 /*咨询 Consult*/

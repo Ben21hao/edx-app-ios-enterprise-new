@@ -611,7 +611,7 @@ static OEXInterface *_sharedInterface = nil;
 
     NSData *data = [self resourceDataForURLString:url.absoluteString downloadIfNotAvailable:NO];
     
-    NSLog(@"下载结束通知 ---------->>> %@",url);
+//    NSLog(@"下载结束通知 ---------->>> %@",url);
     
     [self returnedData:data forType:url.absoluteString];
 }

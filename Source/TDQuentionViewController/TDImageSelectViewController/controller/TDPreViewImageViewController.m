@@ -42,6 +42,12 @@
     self.imageIndex = self.index;
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    self.navigationController.navigationBar.translucent = NO;
+}
+
 - (void)leftButtonAction:(UIButton *)sender { //返回
     
     if (self.whereFrom == TDPreviewImageFromQuedionInputView) {
@@ -79,8 +85,12 @@
 }
 
 - (void)previewSureButtonAciton:(UIButton *)sender { //确定
-//    NSLog(@"---->> 预览 == 确定按钮");
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"user_had_selectImage" object:nil userInfo:@{@"selectImageArray" : self.selectImageArray}];
+
+    if (sender.selected) {
+        return;
+    }
+    sender.selected = YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"User_Had_SelectImage" object:nil userInfo:@{@"selectImageArray" : self.selectImageArray}];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -101,7 +111,7 @@
     [cell setPreviewImageCell];
     cell.model = model;
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
     [cell addGestureRecognizer:tap];
     
     return cell;
@@ -116,38 +126,41 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(TDWidth, TDHeight - BAR_ALL_HEIHT);
+    return CGSizeMake(TDWidth, TDHeight);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
-- (void)tap { //点击
+- (void)tapAction:(UITapGestureRecognizer *)tap { //点击
     
     self.isHideBottom = !self.isHideBottom;
     
-    if (self.isHideBottom) {
-        [UIView animateWithDuration:0.3 animations:^{
-            self.bottomView.frame = CGRectMake(0, TDHeight - BAR_ALL_HEIHT, TDWidth, 48);
-        }];
-
-        
-    } else {
-        [UIView animateWithDuration:0.3 animations:^{
-            self.bottomView.frame = CGRectMake(0, TDHeight - BAR_ALL_HEIHT - 48, TDWidth, 48);
-        }];
-    }
+    BOOL isHidden = self.navigationController.navigationBar.isHidden;
     
+    [[UIApplication sharedApplication] setStatusBarHidden:!isHidden withAnimation:UIStatusBarAnimationFade];
+    [self.navigationController setNavigationBarHidden:!isHidden animated:YES];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(self.view);
+            make.bottom.mas_equalTo(self.view.mas_bottom).offset(isHidden ? 0 : 48);
+            make.height.mas_equalTo(48);
+        }];
+    }];
 }
 
 #pragma mark - UI
 - (void)setViewConstraint {
     
+    self.navigationController.navigationBar.translucent = YES;
+    
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
-    self.collectionView = [[TDHorizonCollectionView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, TDHeight - BAR_ALL_HEIHT) collectionViewLayout:layout];
+    self.collectionView = [[TDHorizonCollectionView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, TDHeight) collectionViewLayout:layout];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.collectionView.bounces = NO;

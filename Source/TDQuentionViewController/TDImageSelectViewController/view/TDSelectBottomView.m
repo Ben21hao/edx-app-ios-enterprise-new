@@ -48,7 +48,7 @@
     self.sureButton = [[TDShadowButton alloc] init];
     self.sureButton.layer.masksToBounds = YES;
     self.sureButton.layer.cornerRadius = 5.0;
-    self.sureButton.backgroundColor = [UIColor colorWithHexString:@"#32CD32"];
+    self.sureButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.sureButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     [self.sureButton setTitleColor:[UIColor colorWithHexString:colorHexStr8] forState:UIControlStateNormal];
     [self.sureButton setTitle:TDLocalizeSelect(@"OK", nil) forState:UIControlStateNormal];

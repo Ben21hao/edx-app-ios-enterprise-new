@@ -13,4 +13,6 @@
 @property (nonatomic,strong) UIImageView *imageView;
 @property (nonatomic,strong) UILabel *remindLabel;
 
+@property (nonatomic,strong) UILabel *countDownLabel;
+
 @end

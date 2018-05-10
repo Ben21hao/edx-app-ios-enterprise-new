@@ -21,7 +21,6 @@
     [self setLeftNavigationBar];
     [self setRightNavigationBar];
 
-//    [LanguageChangeTool initUserLanguage];//初始化应用语言
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(languageChangeAction) name:@"languageSelectedChange" object:nil];
 }
 
@@ -172,13 +171,35 @@
     }];
 }
 
+- (void)setNullLabelOnView:(UIView *)view title:(NSString *)title {
+    
+    self.nullView = [[UIView alloc] init];
+    self.nullView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
+    [view addSubview:self.nullView];
+    
+    UILabel *nullLabel = [[UILabel alloc] init];
+    nullLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
+    nullLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
+    nullLabel.textAlignment = NSTextAlignmentCenter;
+    nullLabel.text = title;
+    [self.nullView addSubview:nullLabel];
+    
+    [self.nullView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.bottom.mas_equalTo(view);
+    }];
+    
+    [nullLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.nullView.mas_centerX);
+        make.centerY.mas_equalTo(self.nullView.mas_centerY).offset(-8);
+    }];
+}
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

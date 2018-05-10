@@ -30,6 +30,7 @@
  */
 @property (nonatomic,strong) UIView *nullView;
 - (void)setNullDataView:(NSString *)title;
+- (void)setNullLabelOnView:(UIView *)view title:(NSString *)title;
 
 /*
  选择语言发生改变

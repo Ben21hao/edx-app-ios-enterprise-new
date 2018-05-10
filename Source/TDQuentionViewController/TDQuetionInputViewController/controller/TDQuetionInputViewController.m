@@ -7,6 +7,7 @@
 //
 
 #import "TDQuetionInputViewController.h"
+
 #import "TDRecordView.h"
 #import "TDQuetionInputView.h"
 
@@ -15,9 +16,10 @@
 
 #import "TDImageGroupViewController.h"
 #import "TDPreViewImageViewController.h"
+
 #import "NSString+OEXFormatting.h"
 
-#define Limite_Record_Time 60.0
+#define Limite_Record_Time 60
 
 @interface TDQuetionInputViewController () <AVAudioRecorderDelegate,AVAudioPlayerDelegate>
 
@@ -28,6 +30,7 @@
 @property (nonatomic,strong) AVAudioSession *audioSession;
 @property (nonatomic,strong) NSString *recordUrl;//存储路径
 @property (nonatomic,strong) NSString *mp3FilePath;//mp3路径
+
 @property (nonatomic,strong) NSTimer *recordTimer;
 @property (nonatomic,strong) NSTimer *recordCountTimer;
 @property (nonatomic,assign) NSInteger recordTimeNum;
@@ -42,8 +45,10 @@
 @property (nonatomic,strong) NSString *recordKeyStr; //录音的唯一标识
 
 @property (nonatomic,strong) NSMutableArray *imageArray;
-@property (nonatomic,strong) TDBaseToolModel *baseTool;
 @property (nonatomic,assign) BOOL isHanding;
+
+@property (nonatomic,strong) TDBaseToolModel *baseTool;
+
 
 @end
 
@@ -72,7 +77,7 @@
     self.isHanding = NO;
     [self initAvAudio];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageSelectNoti:) name:@"user_had_selectImage" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageSelectNoti:) name:@"User_Had_SelectImage" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -448,6 +453,7 @@
 - (void)inalidateTimer { //取消
     [self.recordTimer invalidate];
     [self.recordCountTimer invalidate];
+    
 //    self.recordTimeNum = 0;
 }
 

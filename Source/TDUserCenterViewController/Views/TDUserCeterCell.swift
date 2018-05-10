@@ -14,7 +14,7 @@ class TDUserCeterCell: UITableViewCell {
     let iconImageView = UIImageView()
     let titleLabel = UILabel()
     let messageLabel = UILabel()
-    let redLabel = UILabel()
+    let redImageView = UIImageView()
     
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -44,12 +44,12 @@ class TDUserCeterCell: UITableViewCell {
         messageLabel.font = UIFont.init(name: "OpenSans", size: 12)
         bgView.addSubview(messageLabel)
         
-        redLabel.backgroundColor = UIColor.redColor()
-        redLabel.layer.masksToBounds = true
-        redLabel.layer.cornerRadius = 3
-        bgView.addSubview(redLabel)
+        redImageView.image = UIImage(named: "redcolor_oval")
+        redImageView.layer.masksToBounds = true
+        redImageView.layer.cornerRadius = 3
+        bgView.addSubview(redImageView)
         
-        redLabel.hidden = true
+        redImageView.hidden = true
     }
     
     func setViewConstraint() {
@@ -72,7 +72,7 @@ class TDUserCeterCell: UITableViewCell {
             make.top.equalTo(bgView.snp_centerY).offset(3)
         }
         
-        redLabel.snp_makeConstraints { (make) in
+        redImageView.snp_makeConstraints { (make) in
             make.left.equalTo(titleLabel.snp_right).offset(8)
             make.centerY.equalTo(titleLabel.snp_centerY)
             make.size.equalTo(CGSizeMake(6, 6))

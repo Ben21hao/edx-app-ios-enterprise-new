@@ -47,9 +47,8 @@ class OEXRearTableViewController : UITableViewController {
     @IBOutlet var userProfilePicture: UIImageView!
     @IBOutlet weak var appVersionButton: UIButton!
     @IBOutlet var userContentView: UIView!
-    
-    let redLabel = UILabel()
-    
+    @IBOutlet weak var redImageView: UIImageView!
+//    let redImageView = UIImageView()
     
     lazy var environment = Environment()
     var profileFeed: Feed<UserProfile>?
@@ -125,17 +124,6 @@ class OEXRearTableViewController : UITableViewController {
         submitFeedbackLabel.text = TDLocalizeSelectSwift("SUBMIT_FEEDBACK.OPTION_TITLE")
         logoutButton.setTitle(TDLocalizeSelectSwift("LOGOUT"), forState: .Normal)
         loginButton.setTitle(TDLocalizeSelectSwift("SIGN_IN"), forState: .Normal)
-        
-        redLabel.backgroundColor = UIColor.redColor()
-        redLabel.layer.masksToBounds = true
-        redLabel.layer.cornerRadius = 3
-        assistantLabel.addSubview(redLabel)
-        
-        redLabel.snp_makeConstraints { (make) in
-            make.left.equalTo(assistantLabel.snp_left).offset(68)
-            make.centerY.equalTo(assistantLabel.snp_centerY)
-            make.size.equalTo(CGSizeMake(6, 6))
-        }
     }
     
     private func setupProfileLoader() {
@@ -180,7 +168,13 @@ class OEXRearTableViewController : UITableViewController {
             if profile.phone == nil{//如果手机为空,显示邮箱
                 self.userEmailLabel.text = baseTool.setEmailStyle(profile.email)
             }
-
+            
+            if profile.is_receiver == true {
+                self.redImageView.hidden = profile.unreplied_count == 0 && profile.unsolved_msg_count == 0
+            } else{
+                self.redImageView.hidden = profile.unsolved_msg_count == 0;
+            }
+            
             }, failure : { _ in
                 Logger.logError("Profiles", "Unable to fetch profile")
         })

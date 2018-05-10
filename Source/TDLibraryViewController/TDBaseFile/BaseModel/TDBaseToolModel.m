@@ -9,6 +9,7 @@
 #import "TDBaseToolModel.h"
 #import "OEXAppDelegate.h"
 #import "edX-Swift.h"
+
 #import "OEXFlowErrorViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
@@ -379,6 +380,11 @@
 
 #pragma mark - 时间转换2013-11-17T11:59:22+08:00 ->> 2013-11-17 11:59:22
 - (NSString *)changeStypeForTime:(NSString *)timeStr {
+    
+    if (timeStr.length == 0) {
+        return @"";
+    }
+    
     if (timeStr.length < 19) {
         return timeStr;
     }

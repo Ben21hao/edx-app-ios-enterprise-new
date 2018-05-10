@@ -7,10 +7,10 @@
 //
 
 #import "TDSubMyQuentionViewController.h"
-#import "TDQuentionMessageCell.h"
+#import "TDConsultCell.h"
 
-#import "TDMyQuetionModel.h"
-#import "TDQuetionDetailViewController.h"
+#import "TDMyConsultModel.h"
+#import "TDConsultDetailViewController.h"
 
 #import <MJRefresh/MJRefresh.h>
 #import <MJExtension/MJExtension.h>
@@ -97,7 +97,7 @@
     [params setValue:@"8" forKey:@"pagesize"];
 
     
-    NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/get_consultmessage/",ELITEU_URL];
+    NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/get_myconsultmessage/",ELITEU_URL];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -133,8 +133,11 @@
                 for (int i = 0; i < dataArray.count; i ++) {
                     
                     NSDictionary *itemDic = dataArray[i];
-                    TDMyQuetionModel *model = [TDMyQuetionModel mj_objectWithKeyValues:itemDic];
+                    TDMyConsultModel *model = [TDMyConsultModel mj_objectWithKeyValues:itemDic];
                     if (model) {
+//                        if (self.whereFrom == TDSubQuetionFromSolved) {
+//                            model.status.consult_status = @"5";
+//                        }
                         [self.quetionArray addObject:model];
                     }
                 }
@@ -143,7 +146,9 @@
                 
             }
             
-            self.nullLabel.hidden = YES;
+            if (self.page == 1) {
+                [self showNullLabel:TDLocalizeSelect(@"NO_CONSULTATIONS", nil)];
+            }
             [self.tableView reloadData];
             
         } else if (code == 311) { //暂无咨询
@@ -169,7 +174,7 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"咨询中心 ---->>> %@",error);
+        NSLog(@"我的咨询 ---->>> %@",error);
         [self.loadIngView removeFromSuperview];
         [self showNullLabel:TDLocalizeSelect(@"QUERY_FAILED", nil)];
     }];
@@ -196,11 +201,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    TDMyConsultModel *model = self.quetionArray[indexPath.section];
+    TDConsultCell *cell = [[TDConsultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDConsultCell"];
     
-    TDMyQuetionModel *model = self.quetionArray[indexPath.section];
+    cell.consultModel = model;
+    cell.whereFrom = self.whereFrom == TDSubQuetionFromUnsolved ? 0 : 1;
     
-    TDQuentionMessageCell *cell = [[TDQuentionMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDQuentionMessageCell"];
-    cell.model = model;
     return cell;
 }
 
@@ -209,30 +216,23 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    TDMyQuetionModel *model = self.quetionArray[indexPath.section];
-    return [model.is_company_reveiver boolValue] ? 118 : 88;
+    return 73;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    TDMyQuetionModel *model = self.quetionArray[indexPath.section];
-    if ([model.reply_info.is_not_readed_length intValue] > 0) {
-        model.reply_info.is_not_readed_length = @"0";
-    }
-    [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationNone];
-    
+    TDMyConsultModel *model = self.quetionArray[indexPath.section];
     [self gotoDetailVc:model];
 }
 
-- (void)gotoDetailVc:(TDMyQuetionModel *)model {
+- (void)gotoDetailVc:(TDMyConsultModel *)model {
     
-    TDQuetionDetailViewController *detailVc = [[TDQuetionDetailViewController alloc] init];
-    detailVc.whereFrom = self.whereFrom;
-    detailVc.username = self.username;
-    detailVc.quetionModel = model;
-    [self.navigationController pushViewController:detailVc animated:YES];
+    TDConsultDetailViewController *consultVc = [[TDConsultDetailViewController alloc] init];
+    consultVc.whereFrom = self.whereFrom == TDSubQuetionFromUnsolved ? TDConsultDetailFromUserUnSolve : TDConsultDetailFromUserSolve;
+    consultVc.consultID = model.consult_id;
+    consultVc.username = self.username;
+    [self.navigationController pushViewController:consultVc animated:YES];
 }
 
 #pragma mark - UI

@@ -16,7 +16,10 @@ class TDUserCenterView: UIView,UITableViewDataSource {
     internal var statusCode = Int() //认证状态 400 未认证，200 提交成功 ，201 已认证，202 认证失败
     internal var coupons = Double()//优惠券
     internal var orders = Double()//订单
-    internal var consult_count = Int() //咨询
+    internal var is_receiver = Bool() //是否是咨询人
+    internal var unreplied_count = Int() //咨询
+    internal var unsolved_count = Int() //咨询
+    internal var unsolved_msg_count = Int() //咨询
     
     private let toolModel = TDBaseToolModel.init()
     private var isHidePuchase = true //默认隐藏内购
@@ -55,9 +58,10 @@ class TDUserCenterView: UIView,UITableViewDataSource {
             make.left.right.top.bottom.equalTo(self)
         }
         
-        let footView = UIView.init(frame: CGRectMake(0, 0, TDScreenWidth, 1))
-        footView.backgroundColor = OEXStyles.sharedStyles().baseColor5()
-        self.tableView.tableFooterView = footView;
+        self.tableView.tableFooterView = UIView()
+//        let footView = UIView.init(frame: CGRectMake(0, 0, TDScreenWidth, 1))
+//        footView.backgroundColor = OEXStyles.sharedStyles().baseColor5()
+//        self.tableView.tableFooterView = footView;
     }
     
     func populateFields(profile: UserProfile, editable : Bool, networkManager : NetworkManager) {
@@ -71,7 +75,15 @@ class TDUserCenterView: UIView,UITableViewDataSource {
         self.score = profile.remainscore! //学习宝典
         self.coupons = profile.coupon! //优惠券
         self.orders = profile.order! //未支付订单
-        self.consult_count = profile.consult_count!//咨询数量
+        
+        self.is_receiver = profile.is_receiver!
+        self.unsolved_count = profile.unsolved_count!//咨询数量
+        self.unsolved_msg_count = profile.unsolved_msg_count!
+        
+        if self.is_receiver {
+            self.unreplied_count = profile.unreplied_count!
+        }
+        
         self.tableView.reloadData()
     }
     
@@ -91,7 +103,7 @@ class TDUserCenterView: UIView,UITableViewDataSource {
                 return 1
             }
         } else {
-           return 4
+            return self.is_receiver ? 4 : 3
         }
     }
     
@@ -192,15 +204,15 @@ class TDUserCenterView: UIView,UITableViewDataSource {
                     
                 case 2:
                     titleStr = TDLocalizeSelectSwift("MY_QUETIONS")
-                    cell.messageLabel.text = TDLocalizeSelectSwift("QUETIONS_MESSAGE").oex_formatWithParameters(["count" : String(format: "%d",consult_count)])
+                    cell.messageLabel.text = TDLocalizeSelectSwift("QUETIONS_MESSAGE").oex_formatWithParameters(["count" : String(format: "%d",unsolved_count)])
                     imageStr = "quetion_image"
-                    cell.redLabel.hidden = false
+                    cell.redImageView.hidden = self.unsolved_msg_count == 0 ? true : false
                     
                 default:
                     titleStr = "我的回答"
-                    cell.messageLabel.text = "有5个未回答问题"
-                    imageStr = "quetion_image"
-                    cell.redLabel.hidden = false
+                    cell.messageLabel.text = TDLocalizeSelectSwift("QUETIONS_MESSAGE").oex_formatWithParameters(["count" : String(format: "%d",unreplied_count)])
+                    imageStr = "anser_image"
+                    cell.redImageView.hidden = self.unreplied_count == 0 ? true : false
                 }
             }
             cell.titleLabel.text = titleStr

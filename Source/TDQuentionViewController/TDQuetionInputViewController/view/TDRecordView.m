@@ -17,7 +17,6 @@
 @implementation TDRecordView
 
 - (void)configeView {
-//    self.backgroundColor = [UIColor colorWithHexString:colorHexStr3];
     
     self.bgView = [[UIView alloc] init];
     self.bgView.backgroundColor = [UIColor colorWithHexString:colorHexStr2];
@@ -34,11 +33,20 @@
     self.imageView = [[UIImageView alloc] init];
     [self.bgView addSubview:self.imageView];
     
+    self.countDownLabel = [[UILabel alloc] init];
+    self.countDownLabel.font = [UIFont fontWithName:@"OpenSans" size:48];
+    self.countDownLabel.textColor = [UIColor whiteColor];
+    self.countDownLabel.textAlignment = NSTextAlignmentCenter;
+    [self.bgView addSubview:self.countDownLabel];
+    
     self.remindLabel.text = TDLocalizeSelect(@"SCROLL_UP_TO_CANCEL", nil);
     self.imageView.image = [UIImage imageNamed:@"record_white_image"];
+    
+    self.countDownLabel.hidden = YES;
 }
 
 - (void)setViewConstraint {
+    
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.mas_centerX);
         make.centerY.mas_equalTo(self.mas_centerY);
@@ -55,6 +63,12 @@
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.bgView.mas_centerX);
         make.centerY.mas_equalTo(self.bgView.mas_centerY).offset(-18);
+    }];
+    
+    [self.countDownLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.bgView.mas_centerX);
+        make.centerY.mas_equalTo(self.bgView.mas_centerY).offset(-18);
+        make.size.mas_equalTo(CGSizeMake(118, 118));
     }];
 }
 
