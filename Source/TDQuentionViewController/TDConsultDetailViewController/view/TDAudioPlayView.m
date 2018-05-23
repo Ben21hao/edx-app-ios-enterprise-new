@@ -31,8 +31,6 @@
     
     self.timeLabel = [self setLabelStyleFont:12 color:colorHexStr8];
     [self.bgView addSubview:self.timeLabel];
-    
-    self.timeLabel.text = @"48‘";
 
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
     longPress.minimumPressDuration = 0.3;

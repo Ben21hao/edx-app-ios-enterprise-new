@@ -11,6 +11,8 @@
 @interface TDPreviewVideoViewController : TDBaseViewController
 
 @property (nonatomic,strong) NSString *videoPath;
+@property (nonatomic,assign) CGFloat videoTime;
+@property (nonatomic,strong) UIImage *thumbImage;
 @property (nonatomic,assign) BOOL isWebVideo;
 
 @end

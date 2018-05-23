@@ -335,7 +335,7 @@
             case AVPlayerStatusUnknown: {
                 NSLog(@"未知转态");
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"voice_play_endTime_notificatiion" object:nil];
-                [self.view makeToast:@"音频加载失败" duration:0.8 position:CSToastPositionCenter];
+                [self.view makeToast:TDLocalizeSelect(@"FAILED_LOAD_AUDIO", nil) duration:0.8 position:CSToastPositionCenter];
             }
                 break;
             case AVPlayerStatusReadyToPlay: { //准备播放
@@ -345,7 +345,7 @@
             case AVPlayerStatusFailed: {
                 NSLog(@"加载失败");
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"voice_play_endTime_notificatiion" object:nil];
-                [self.view makeToast:@"音频加载失败" duration:0.8 position:CSToastPositionCenter];
+                [self.view makeToast:TDLocalizeSelect(@"FAILED_LOAD_AUDIO", nil) duration:0.8 position:CSToastPositionCenter];
             }
                 break;
                 

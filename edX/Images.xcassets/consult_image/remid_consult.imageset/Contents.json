@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "remid_consult.png",
+      "filename" : "remid_consult@1x.png",
       "scale" : "1x"
     },
     {
@@ -12,7 +12,7 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "remid_consult@3x.png",
+      "filename" : "remid_consult@32x.png",
       "scale" : "3x"
     }
   ],

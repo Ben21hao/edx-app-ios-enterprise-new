@@ -157,6 +157,13 @@
     return reachable;
 }
 
+- (BOOL)getNetworkingState {
+    
+    OEXAppDelegate* appD = (OEXAppDelegate *)[[UIApplication sharedApplication] delegate];
+    BOOL reachable = [appD.reachability isReachable];
+    return reachable;
+}
+
 #pragma mark - 小数点后面.00变小
 /*
  无颜色设置
@@ -398,7 +405,7 @@
 #pragma mark - 两个时间差
 - (NSTimeInterval)intervalForTimeStr:(NSString *)timeStr { //timeStr 为0区时间串
     
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *endDate =[dateFormat dateFromString:timeStr];
     

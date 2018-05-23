@@ -9,7 +9,6 @@
 #import "OEXSession.h"
 
 #import "OEXAccessToken.h"
-#import "OEXFBSocial.h"
 #import "OEXGoogleSocial.h"
 #import "OEXFileUtility.h"
 #import "OEXPersistentCredentialStorage.h"

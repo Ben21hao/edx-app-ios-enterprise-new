@@ -49,7 +49,6 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        LanguageChangeTool.initUserLanguage()
         TDNotificationCenter().addObserver(self, selector: #selector(languageChangeAction), name: "languageSelectedChange", object: nil)
         
         setUpViewConstraint()        
@@ -169,6 +168,7 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
     func gotoMyAnswerVc() {
         let answerVc = TDMyAnswerViewController()
         answerVc.username = session.currentUser?.username
+        answerVc.userId = session.currentUser?.userId?.stringValue
         self.navigationController?.pushViewController(answerVc, animated: true)
     }
     
@@ -204,14 +204,17 @@ class TDUserCenterViewController: OfflineSupportViewController,UITableViewDelega
                 gotoCouponVc()
                 
             }
-        } else {
+        }
+        else if indexPath.section == 2 {
             if indexPath.row == 0 {
                 gotoLiveView()
                 
-            } else if indexPath.row == 1 {
+            } else {
                 gotoAssistantServiceVc()
-                
-            } else if indexPath.row == 2 {
+            }
+        }
+        else {
+            if indexPath.row == 0 {
                 gotoMyQuetionVc()
                 
             } else {

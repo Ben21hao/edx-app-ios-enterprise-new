@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger,TDSubAnswerFrom) {
 @interface TDSubMyAnswerViewController : TDBaseViewController
 
 @property (nonatomic,strong) NSString *username;
+@property (nonatomic,strong) NSString *userId;
 @property (nonatomic,assign) TDSubAnswerFrom whereFrom;
 
 @end

@@ -124,6 +124,7 @@ class OEXRearTableViewController : UITableViewController {
         submitFeedbackLabel.text = TDLocalizeSelectSwift("SUBMIT_FEEDBACK.OPTION_TITLE")
         logoutButton.setTitle(TDLocalizeSelectSwift("LOGOUT"), forState: .Normal)
         loginButton.setTitle(TDLocalizeSelectSwift("SIGN_IN"), forState: .Normal)
+        redImageView.hidden = true
     }
     
     private func setupProfileLoader() {
@@ -137,16 +138,20 @@ class OEXRearTableViewController : UITableViewController {
             self.companyImage.contentMode = .ScaleAspectFit
             if profile.logoUrl != nil {
                 
-                SDImageCache.sharedImageCache().cleanDisk()
-                
-                let apiHostUrl = OEXConfig.sharedConfig().apiHostURL()
-                var companyImageStr = (apiHostUrl?.absoluteString)! +  profile.logoUrl!
-                companyImageStr = companyImageStr.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.init(charactersInString: "`#%^{}\"[]|\\<> ").invertedSet)! //处理图片链接中的中文和空格
-                
-                let url = NSURL.init(string: companyImageStr)
-                self.companyImage.sd_setImageWithURL(url, placeholderImage: UIImage.init(named: "logobg"))
+                if profile.logoUrl?.characters.count == 0 {
+                    self.companyImage.image = UIImage.init(named: "E_Logo_Enterprise")
+                }
+                else {
+                    SDImageCache.sharedImageCache().cleanDisk()
+                    let apiHostUrl = OEXConfig.sharedConfig().apiHostURL()
+                    var companyImageStr = (apiHostUrl?.absoluteString)! +  profile.logoUrl!
+                    companyImageStr = companyImageStr.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.init(charactersInString: "`#%^{}\"[]|\\<> ").invertedSet)! //处理图片链接中的中文和空格
+                    
+                    let url = NSURL.init(string: companyImageStr)
+                    self.companyImage.sd_setImageWithURL(url, placeholderImage: UIImage.init(named: "logobg"))
+                }
             } else {
-                self.companyImage.image = UIImage.init(named: "logobg")
+                self.companyImage.image = UIImage.init(named: "E_Logo_Enterprise")
             }
             
             if (profile.nickname != nil) == true {//如果昵称不为空,显示昵称

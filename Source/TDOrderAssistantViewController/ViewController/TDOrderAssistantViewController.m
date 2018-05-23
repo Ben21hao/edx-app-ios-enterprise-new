@@ -257,7 +257,7 @@
             }
             
         } else {
-            [self.view makeToast:TDLocalizeSelect(@"SYSTEM_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"QUERY_FAILED", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
         NSLog(@"查询助教状态 --- %@%@",code ,responseDic[@"msg"]);

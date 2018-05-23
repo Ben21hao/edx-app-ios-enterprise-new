@@ -13,11 +13,13 @@
 
 #import "TDSelectImageModel.h"
 
+#import <Photos/Photos.h>
 #import "TDImageHandle.h"
 #import "SRUtil.h"
 
 #import "TDPreViewImageViewController.h"
 #import "TDPreviewVideoViewController.h"
+
 
 #define collectionCell_Width (TDWidth - 16)/4
 
@@ -71,14 +73,23 @@
     if (sender.selected) {
         return;
     }
+    
+    if (![[[TDBaseToolModel alloc] init] getNetworkingState]) { //没有网络
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_MESSAGE_TROUBLE", nil) duration:0.8 position:CSToastPositionCenter];
+        return;
+    }
+    
     sender.selected = YES;
-     NSLog(@"---->> 所有图片 == 确定按钮");
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"User_Had_SelectImage" object:nil userInfo:@{@"selectImageArray" : self.selectImageArray}];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - 预览图片
 - (void)previewButtonAction:(UIButton *)sender { //预览
+    if (self.selectImageArray.count == 0) {
+        return;
+    }
     [self gotoPreviewVC:YES index:0];
 }
 
@@ -106,80 +117,43 @@
 
 #pragma mark - 视频预览
 - (void)gotoPreviewVideo:(TDSelectImageModel *)model {
+
+    PHVideoRequestOptions *options2 = [[PHVideoRequestOptions alloc] init];
+    options2.deliveryMode = PHVideoRequestOptionsDeliveryModeAutomatic;
     
-    TDPreviewVideoViewController *previewVideoVC = [[TDPreviewVideoViewController alloc] init];
-    previewVideoVC.isWebVideo = NO;
-    [self.navigationController pushViewController:previewVideoVC animated:YES];
+    WS(weakSelf);
+    [[PHImageManager defaultManager] requestAVAssetForVideo:model.asset options:options2 resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
+        
+        //video路径获取
+        if (asset && [asset isKindOfClass:[AVURLAsset class]] && [NSString stringWithFormat:@"%@",((AVURLAsset *)asset).URL].length > 0) {
+            
+            NSString *videoURLStr = [NSString stringWithFormat:@"%@",((AVURLAsset *)asset).URL];
+            NSLog(@"--->>> %@ -- %@",info,videoURLStr);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                TDPreviewVideoViewController *previewVideoVC = [[TDPreviewVideoViewController alloc] init];
+                previewVideoVC.isWebVideo = NO;
+                previewVideoVC.videoPath = videoURLStr;
+                previewVideoVC.videoTime = CMTimeGetSeconds(asset.duration);
+                previewVideoVC.thumbImage = model.image;
+                [weakSelf.navigationController pushViewController:previewVideoVC animated:YES];
+            });
+        }
+    }];
     
-//    PHVideoRequestOptions *options = [[PHVideoRequestOptions alloc] init];
-//    options.version = PHImageRequestOptionsVersionCurrent;
-//    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-//    
-////    WS(weakSelf);
-//    [[PHImageManager defaultManager] requestAVAssetForVideo:model.asset options:options resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
-//        
-//        NSString *sanboxPath = info[@"PHImageFileSandboxExtensionTokenKey"];
-//        NSArray *array = [sanboxPath componentsSeparatedByString:@";"];
-//        NSString *videoPath = array[array.count - 1];
-//        
-//        if (![[NSFileManager defaultManager] fileExistsAtPath:videoPath]) {
-//            NSLog(@"videopath ----->> %@",videoPath);
-//        }
-//        
-//        NSString *path = [array[array.count - 1] substringFromIndex:9];
-//        if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
-//            NSLog(@"path ----->> %@",path);
-//        }
-//        
-//        AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:videoPath] options:nil];
-//        AVURLAsset *avAsset1 = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:path] options:nil];
-//        NSLog(@"videopath %@----->> path %@",avAsset ,avAsset1);
-//
-//        NSArray *compatiblePresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:avAsset1];
-//        if ([compatiblePresets containsObject:AVAssetExportPresetHighestQuality]) {
+//    PHFetchResult *assetsResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeVideo options:nil];
+//    for(PHAsset *a in assetsResult) {
+//        [[PHImageManager defaultManager] requestAVAssetForVideo:a options:options2 resultHandler:^(AVAsset *_Nullable asset,AVAudioMix *_Nullable audioMix,NSDictionary*_Nullable info) {
 //            
-//            AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:avAsset presetName:AVAssetExportPresetHighestQuality];
-//            
-//            NSString *resultPath = [self getVideoSaveFilePathString];
-//            if (![[NSFileManager defaultManager] fileExistsAtPath:resultPath]) {
-//                NSLog(@"resultPath ----->> %@",resultPath);
+//            //video路径获取
+//            if (asset && [asset isKindOfClass:[AVURLAsset class]] && [NSString stringWithFormat:@"%@",((AVURLAsset *)asset).URL].length > 0) {
+//                NSString *videoURLStr = [NSString stringWithFormat:@"%@",((AVURLAsset *)asset).URL];
+////                videoPath = ((AVURLAsset *)asset).URL.path;
+//                NSLog(@"--->>> %@ -- %@",info,videoURLStr);
 //            }
-//            NSLog(@"resultPath = %@",resultPath);
-//            
-//            exportSession.outputURL = [NSURL fileURLWithPath:resultPath];
-//            exportSession.outputFileType = AVFileTypeMPEG4;
-//            exportSession.shouldOptimizeForNetworkUse = YES;
-//            
-//            [exportSession exportAsynchronouslyWithCompletionHandler:^(void) {
-//                 if (exportSession.status == AVAssetExportSessionStatusCompleted) {
-//                     
-//                     NSData *data = [NSData dataWithContentsOfFile:resultPath];
-//                     
-//                     float memorySize = (float)data.length / 1024 / 1024;
-//                     NSLog(@"视频压缩后大小 %f", memorySize);
-//                     
-////                     [self playVideowithUrl:[NSURL fileURLWithPath:resultPath]];
-//                     
-//                     
-//                 } else {
-//                     NSLog(@"压缩失败");
-//                 }
-//                 
-//             }];
-//        }
-//        
-////        dispatch_async(dispatch_get_main_queue(), ^{
-////            TDPreviewVideoViewController *previewVideoVC = [[TDPreviewVideoViewController alloc] init];
-////            previewVideoVC.videoPath = [NSString stringWithFormat:@"%@",videoPath];//file://
-////            previewVideoVC.isWebVideo = NO;
-////            [weakSelf.navigationController pushViewController:previewVideoVC animated:YES];
-////        });
-//    }];
-//    
-////            PHImageFileSandboxExtensionTokenKey = "8f71358aa52f24bddc2fd536abff93d933825f5a;00000000;00000000;000000000000001b;com.apple.avasset.read-only;00000001;01000002;00000001005e20b6;/private/var/mobile/Media/DCIM/100APPLE/IMG_0601.MOV";
-////            PHImageResultDeliveredImageFormatKey = 20000;
-////            PHImageResultIsInCloudKey = 0;
-////            PHImageResultWantedImageFormatKey = 20002;
+//        }];
+//    }
+    
 }
 
 - (NSString *)getVideoSaveFilePathString {//录制保存的时候要保存为 mov
@@ -204,11 +178,6 @@
             TDSelectImageModel *model = [[TDSelectImageModel alloc] init];
             model.selected = NO;
             model.asset = asset;
-            
-//            if (asset.mediaType == PHAssetMediaTypeVideo) {
-//                AVURLAsset *urlAsset = (AVURLAsset *)asset;
-//                model.videoUrl = urlAsset.URL.path;
-//            }
             
             if (model) {
                 [self.assetArray addObject:model];
@@ -310,6 +279,7 @@
     model.selected = isSelect;
     
     if (isSelect) {
+        [self getBigImage:model];
         [self.selectImageArray addObject:model];
         
         if (reload) {
@@ -353,6 +323,16 @@
     self.bottomView.selectNum = self.selectImageArray.count;
 }
 
+- (void)getBigImage:(TDSelectImageModel *)model { //拿到原图图
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [model.asset original:^(UIImage *result, NSDictionary *info) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                model.image = result;
+            });
+        }];
+    });
+}
 
 #pragma mark - UI
 - (void)setSelectViewConstraint {

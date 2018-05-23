@@ -9,7 +9,6 @@
 @import edXCore;
 #import <Crashlytics/Crashlytics.h>
 #import <Fabric/Fabric.h>
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <GoogleSignIn/GoogleSignIn.h>
 #import <NewRelicAgent/NewRelic.h>
 #import <SEGAnalytics.h>
@@ -105,8 +104,7 @@
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO]; //显示电池条
     
-    //FBSDKCoreKit 为第三方登录
-    return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+    return YES;
 }
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{
@@ -321,12 +319,6 @@
 
 - (BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation {
     BOOL handled = false;
-    if (self.environment.config.facebookConfig.enabled) {
-        handled = [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
-        if(handled) {
-            return handled;
-        }
-    }
     
     if (self.environment.config.googleConfig.enabled){
         handled = [[GIDSignIn sharedInstance] handleURL:url sourceApplication:sourceApplication annotation:annotation];

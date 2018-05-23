@@ -38,7 +38,6 @@
     self.rightLine.backgroundColor = [UIColor colorWithHexString:colorHexStr7];
     [self addSubview:self.rightLine];
     
-    self.timeLabel.text = @"2017-05-19  12:34";
 }
 
 - (void)setViewConstraint {

@@ -30,11 +30,19 @@
     return thumb;
 }
 
-+ (UIImage *)getWebUrlVideoThumbnailImage:(NSString *)videoUrl {
++ (UIImage *)getVideoThumbnailImage:(NSString *)videoUrl isLoacal:(BOOL)isLocal {
     
-    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL URLWithString:videoUrl] options:nil];
+    NSURL *url;
+    if (isLocal) {
+        url = [NSURL fileURLWithPath:videoUrl];
+    }
+    else {
+        url = [NSURL URLWithString:videoUrl];
+    }
+    
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:url options:nil];
     NSParameterAssert(asset);
-    AVAssetImageGenerator *assetImageGenerator =[[AVAssetImageGenerator alloc] initWithAsset:asset];
+    AVAssetImageGenerator *assetImageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
     assetImageGenerator.appliesPreferredTrackTransform = YES;
     assetImageGenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
     
@@ -47,7 +55,7 @@
     if(!thumbnailImageRef)
         NSLog(@"thumbnailImageGenerationError %@",thumbnailImageGenerationError);
     
-    UIImage *thumbnailImage = thumbnailImageRef ? [[UIImage alloc]initWithCGImage:thumbnailImageRef] : [UIImage imageNamed:@"video_sending_image"];
+    UIImage *thumbnailImage = thumbnailImageRef ? [[UIImage alloc]initWithCGImage:thumbnailImageRef] : [UIImage imageNamed:@""];
     
     CGImageRelease(thumbnailImageRef);
     return thumbnailImage;

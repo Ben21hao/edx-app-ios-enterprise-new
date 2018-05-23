@@ -1,1 +1,1 @@
-../../../Parse/Parse/Internal/User/AuthenticationProviders/Controller/PFUserAuthenticationController.h
+../../../Parse/Parse/Parse/Internal/User/AuthenticationProviders/Controller/PFUserAuthenticationController.h

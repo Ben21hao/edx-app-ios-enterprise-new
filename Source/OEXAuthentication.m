@@ -18,7 +18,6 @@
 #import "OEXConfig.h"
 #import "OEXExternalAuthProvider.h"
 #import "OEXFacebookAuthProvider.h"
-#import "OEXFBSocial.h"
 #import "OEXGoogleAuthProvider.h"
 #import "OEXGoogleSocial.h"
 #import "OEXHTTPStatusCodes.h"

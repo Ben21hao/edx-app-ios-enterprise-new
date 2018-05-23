@@ -34,7 +34,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.7</string>
+	<string>1.0.9</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSpokenName</key>
@@ -112,11 +112,11 @@
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>for bluetooth</string>
 	<key>NSCameraUsageDescription</key>
-	<string>so you can take a picture for a profile image</string>
+	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>so you can Microphone</string>
+	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>so you can select a profile image</string>
+	<string></string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome.otf</string>

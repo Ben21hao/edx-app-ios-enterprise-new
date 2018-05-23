@@ -47,6 +47,12 @@
     self.inputTextView.font = [UIFont fontWithName:@"OpenSans" size:14];
     [self addSubview:self.inputTextView];
     
+    self.placeLabel = [[UILabel alloc] init];
+    self.placeLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
+    self.placeLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
+    self.placeLabel.text = TDLocalizeSelect(@"ENTER_CONSULTATION", nil);
+    [self addSubview:self.placeLabel];
+    
     self.recordButton = [[UIButton alloc] init];
     self.recordButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     self.recordButton.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
@@ -87,6 +93,11 @@
         make.right.mas_equalTo(self.imageButton.mas_left).offset(-8);
         make.top.mas_equalTo(self.mas_top).offset(9);
         make.bottom.mas_equalTo(self.mas_bottom).offset(-9);
+    }];
+    
+    [self.placeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.inputTextView.mas_left).offset(8);
+        make.centerY.mas_equalTo(self.inputTextView.mas_centerY);
     }];
     
     [self.recordButton  mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -1,1 +1,1 @@
-../../../Parse/Parse/Internal/Query/PFQueryPrivate.h
+../../../Parse/Parse/Parse/Internal/Query/PFQueryPrivate.h

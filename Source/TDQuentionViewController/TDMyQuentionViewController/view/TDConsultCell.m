@@ -44,56 +44,59 @@
             self.contentLabel.text = consultModel.content;
             break;
         case 2:
-            self.contentLabel.text = @"【语音】";
+            self.contentLabel.text = TDLocalizeSelect(@"AUDIO_CONTENT", nil);
             break;
         case 3:
-            self.contentLabel.text = @"【图片】";
+            self.contentLabel.text = TDLocalizeSelect(@"PHOTO_CONTENT", nil);
             break;
         case 4:
-            self.contentLabel.text = @"【视频】";
+            self.contentLabel.text = TDLocalizeSelect(@"VIDEO_CONTENT", nil);
             break;
             
         default:
             break;
     }
 
+    self.timeLabel.text = [self.toolModel changeStypeForTime:consultModel.created_at]; //时间
+    
     int status = [consultModel.status.consult_status intValue];
-    switch (status) {
+    switch (status) { 
         case 1:  {//等待回复
             self.statusLabel.hidden = YES;
             self.numLabel.hidden = YES;
         }
             break;
             
-        case 2:
+        case 2://x条未读信息;
             self.statusLabel.hidden = YES;
             self.numLabel.hidden = NO;
             self.numLabel.text = [NSString stringWithFormat:@"%@",consultModel.status.num_of_unread];
             break;
             
-        case 3:
-            self.statusLabel.text = @"追问中";
+        case 3://正在追问，等待回复
+            self.statusLabel.text = TDLocalizeSelect(@"FOLLOWING_UP", nil);
             self.statusLabel.hidden = NO;
             self.numLabel.hidden = YES;
             break;
             
-        case 4:
-            self.statusLabel.text = @"已回复";
+        case 4://已回复
+            self.statusLabel.text = TDLocalizeSelect(@"ANSWERED_TEXT", nil);
             self.statusLabel.hidden = NO;
             self.numLabel.hidden = YES;
             break;
             
-        case 5:
-            self.statusLabel.text = @"已解决";
+        case 5://已解决
+            self.statusLabel.text = TDLocalizeSelect(@"CONSULTATION_RESOLVED", nil);
             self.statusLabel.hidden = NO;
             self.numLabel.hidden = YES;
+            self.timeLabel.text = [self.toolModel changeStypeForTime:consultModel.updated_at]; //已解决的时间
             break;
             
         default:
             break;
     }
     
-    self.timeLabel.text = [self.toolModel changeStypeForTime:consultModel.created_at]; //时间
+    
 
 }
 
@@ -132,13 +135,6 @@
     
     self.statusLabel = [self setLabelStyle:12 color:colorHexStr7];
     [self.bgView addSubview:self.statusLabel];
-    
-    self.numLabel.text = @"88";
-//    self.timeLabel.text = @"2017-12-30 18:19";
-//    self.statusLabel.text = @"追问中";
-//    self.contentLabel.text = @"时间很紧时间时间时间速度速度速度时间很紧时间时间时间速度速度速度时间很紧时间时间时间速度速度速度时间很紧时间时间时间速度速度速度";
-    
-//    self.numLabel.hidden = YES;
 }
 
 - (void)setViewConstraint {

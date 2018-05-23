@@ -12,5 +12,6 @@
 @interface TDMyAnswerViewController : TDPageingViewController
 
 @property (nonatomic,strong) NSString *username;
+@property (nonatomic,strong) NSString *userId;
 
 @end

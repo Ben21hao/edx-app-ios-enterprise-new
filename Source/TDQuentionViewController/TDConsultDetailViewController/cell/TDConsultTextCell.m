@@ -9,6 +9,7 @@
 #import "TDConsultTextCell.h"
 #import "TDRoundHeadImageView.h"
 #import <UIImageView+WebCache.h>
+#import "NSString+OEXFormatting.h"
 
 @interface TDConsultTextCell ()
 
@@ -26,19 +27,7 @@
 
 - (void)dealWithCellData {
     
-    self.timeView.timeLabel.text = self.detailModel.created_at;
-    self.nameLabel.text = self.detailModel.username;
     self.quetionLabel.text = self.detailModel.content;
-    
-    NSURL *headerUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ELITEU_URL,self.detailModel.userprofile_image]];
-    [self.headerImage sd_setImageWithURL:headerUrl placeholderImage:[UIImage imageNamed:@"default_dark_image"]];
-    
-    [self updateCellConstraint];
-    
-    self.detailModel.isSending ? [self.activityView startAnimating] : [self.activityView stopAnimating];
-}
-
-- (void)updateCellConstraint {
     
     BOOL isShow = [self.detailModel.is_show_time boolValue];
     
@@ -59,6 +48,37 @@
         self.headerImage.hidden = YES;
         self.nameLabel.hidden = YES;
     }
+    else {
+        self.timeView.timeLabel.text = self.detailModel.created_at;
+        if ([self.detailModel.is_reply boolValue]) {
+            if ([self.detailModel.user_id isEqualToString:self.userId]) {
+                self.nameLabel.attributedText = [self setDetailString:TDLocalizeSelect(@"ANSWERED_BY_ME", nil) name:TDLocalizeSelect(@"ME", nil)];
+            } else {
+                self.nameLabel.attributedText = [self setDetailString:[TDLocalizeSelect(@"CONSULTATION_REPLIED", nil) oex_formatWithParameters:@{@"name" : self.detailModel.username}] name:self.detailModel.username];
+            }
+        }
+        else {
+            self.nameLabel.text = self.detailModel.username;
+        }
+        
+        NSURL *headerUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ELITEU_URL,self.detailModel.userprofile_image]];
+        [self.headerImage sd_setImageWithURL:headerUrl placeholderImage:[UIImage imageNamed:@"default_dark_image"]];
+    }
+    self.detailModel.isSending ? [self.activityView startAnimating] : [self.activityView stopAnimating];
+    self.statusButton.hidden = !self.detailModel.sendFailed;
+}
+
+- (NSMutableAttributedString *)setDetailString:(NSString *)titleStr name:(NSString *)nameStr {
+    
+    NSRange range = [titleStr rangeOfString:nameStr];//空格
+    NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:titleStr
+                                                                             attributes:@{                                                                                          NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr9]
+                                                                                                                                                                                    }];
+    NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:nameStr
+                                                                             attributes:@{                                                                                          NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr8]
+                                                                                                                                                                                    }];
+    [str1 replaceCharactersInRange:range withAttributedString:str2];
+    return str1;
 }
 
 #pragma mark - UI

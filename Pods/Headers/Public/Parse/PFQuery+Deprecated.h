@@ -1,1 +1,1 @@
-../../../Parse/Parse/PFQuery+Deprecated.h
+../../../Parse/Parse/Parse/PFQuery+Deprecated.h

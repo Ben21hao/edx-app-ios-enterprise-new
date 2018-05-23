@@ -80,9 +80,9 @@ public class UserProfile {
     let company_id: Int?
     let language_Like: String? //语言习惯
     let is_receiver : Bool? //企业联系人
-    let unreplied_count : Int? //回答
-    let unsolved_count : Int? //咨询
-    let unsolved_msg_count : Int? //未读咨询消息
+    var unreplied_count : Int? //回答
+    var unsolved_count : Int? //咨询
+    var unsolved_msg_count : Int? //未读咨询消息
     
     public init?(json: JSON) {
         

@@ -76,12 +76,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hiddenVideoShadow) name:@"cell_video_hiddenShadow" object:nil];
     
     self.bgView = [[UIView alloc] init];
-    self.bgView.backgroundColor = [UIColor redColor];
+    self.bgView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     [self addSubview:self.bgView];
     
     self.imageView = [[UIImageView alloc] init];
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.imageView.clipsToBounds = YES;
+    self.imageView.image = [UIImage imageNamed:@"image_loading"];
     [self.bgView addSubview:self.imageView];
     
     self.selectButton = [[UIButton alloc] init];
@@ -129,8 +130,6 @@
     [self.shadowView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.mas_equalTo(self.bgView);
     }];
-    
-    self.imageView.image = [UIImage imageNamed:@"default_big"];
     
     self.durationLabel.hidden = YES;
     self.videoImage.hidden = YES;

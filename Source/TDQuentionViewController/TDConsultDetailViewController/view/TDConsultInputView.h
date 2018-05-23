@@ -13,6 +13,7 @@
 @property (nonatomic,strong) UIButton *inputTypeButton;
 @property (nonatomic,strong) UIButton *imageButton;
 @property (nonatomic,strong) UITextView *inputTextView;
+@property (nonatomic,strong) UILabel *placeLabel;
 
 @property (nonatomic,strong) UIButton *recordButton;
 

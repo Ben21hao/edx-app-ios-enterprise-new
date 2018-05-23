@@ -123,16 +123,18 @@ class TDLectureLiveViewController: TDSwiftBaseViewController, UIScrollViewDelega
         self.sepView.frame = CGRectMake(0, y, TDScreenWidth, 1)
         self.view.addSubview(self.sepView)
         
+        let width = TDScreenWidth / 4;
         self.selectView.backgroundColor = OEXStyles.sharedStyles().baseColor1()
-        self.selectView.frame = CGRectMake(0, -1, TDScreenWidth / CGFloat(self.childViewControllers.count), 2)
+        self.selectView.frame = CGRectMake(width/2, -1, width, 2)
         self.sepView.addSubview(self.selectView)
     }
     
     //MARK: 设置指示view
     func setselectViewFrame(x: CGFloat) {
         
+        let width = TDScreenWidth / 4;
         UIView.animateWithDuration(0.3) { 
-            self.selectView.frame = CGRectMake(x, -1, TDScreenWidth / CGFloat(self.childViewControllers.count), 2)
+            self.selectView.frame = CGRectMake(x + width/2, -1, width, 2)
         }
     }
     

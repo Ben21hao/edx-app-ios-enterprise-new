@@ -12,5 +12,6 @@
 @interface TDMyQuentionViewController : TDPageingViewController
 
 @property (nonatomic,strong) NSString *username;
+@property (nonatomic,assign) NSInteger unreadNum;
 
 @end

@@ -1487,8 +1487,6 @@
 "HAVE_COMMNET" = "您已经评论过了";
 /*评论成功 Comment submitted. */
 "COMMENT_SUBMITTED" = "评论成功";
-/*查询失败 System error. */
-"SYSTEM_ERROR" = "查询失败";
 /*该助教状态为忙碌 The status of TA is busy. */
 "TA_BUSY" = "该助教状态为忙碌";
 /*该助教状态为离线 The status of TA is offline. */
@@ -1774,7 +1772,7 @@
 "NEW_VERSION_UPDATE" = "检测到有版本更新，是否更新？";
 /*取消订单失败 Failure to cancel order*/
 "FAIL_CANCEL_ORDER" = "取消订单失败";
-/*查询失败 Query failed*/
+/*查询失败 Failed to enquire.*/
 "QUERY_FAILED" = "查询失败";
 /*刷新成功 Refresh success*/
 "REFRESHING_SUCESS_TEXT" = "刷新成功";
@@ -1791,37 +1789,61 @@
 "GOTO_EDUCATION" = "前往";
 
 /*咨询中心*/
-"MY_QUETIONS" = "我的咨询";
-/*您有x条未解决的咨询   x unresolved consultations*/
-"QUETIONS_MESSAGE" = "您有{count}条未解决的咨询";
+"MY_CONSULTTATIONS_TEXT" = "我的咨询";
+/*我的咨询 My Consultations*/
+"MY_CONSULTTATIONS_NAVI" = "我的咨询";
+/*我的回答   Answers*/
+"MY_ANSWERS_TEXT" = "我的回答";
+/*我的回答   My Answers*/
+"MY_ANSWERS_NAVI" = "我的回答";
+
+/*有1个问题未回答  {count} unanswered consultation */
+"ANSWERS_MESSAGE" = "有{count}个问题未回答";
+/*有x个问题未回答 {count} unanswered consultations*/
+"ANSWERS_MESSAGE_S" = "有{count}个问题未回答";
+
+/*您有1条未解决咨询   x unresolved consultation*/
+"QUETIONS_MESSAGE" = "您有{count}条未解决咨询";
+/*您有x条未解决咨询   x unresolved consultations*/
+"QUETIONS_MESSAGE_S" = "您有{count}条未解决咨询";
 /*咨询 Consult*/
 "NAVI_QUETIONS_RIGHT_TITLE" = "咨询";
 
+/* 新增 Consult*/
+"NEW_CONSULT" = "新增";
 /*未解决     Unresolved*/
 "CONSULTATION_UNSOLVED" = "未解决";
-/*已解决     Resolved*/
+/*已解决     Solved*/
 "CONSULTATION_RESOLVED" = "已解决";
 /*暂无咨询              No consultations.*/
 "NO_CONSULTATIONS" = "暂无咨询";
-/*学员未关联任何组织    Student not linked to any organization.*/
-"STUDENT_NO_LINKE_ORGANIZATION" = "学员未关联任何组织";
+/*用户未关联任何组织    User not linked to any organization.*/
+"STUDENT_NO_LINKE_ORGANIZATION" = "用户未关联任何组织";
+
 /*咨询详情  Consultation Details*/
 "CONSULTAION_DETAIL" = "咨询详情";
 /*已解决[注释：按钮]    Resolved*/
 "RESOLVED_BUTTON_TITLE" = "已解决";
+/* 温馨提示：/n请描述咨询内容，您的联系人会尽快进行答复。 Tips:\nPlease describe your consultation, your consultant will answer it ASAP.*/
+"REMIND_TIPS" = "温馨提示：\n请描述咨询内容，您的联系人会尽快进行答复。";
+/* 拍摄   Take Photo*/
+"TAKE_PHOTO" = "拍摄";
+/*从相册选择 Album*/
+"ALBUM_TITLE" = "从相册选择";
+
 /*追问[注释：按钮]      Follow-up*/
 "FURTHER_INQUIRY_BUTTON_TITLE" = "追问";
-/*xxx回复[注释：表示已过去的状态]   xxx replied*/
+/*xxx 回复  Answered by {name}*/
 "CONSULTATION_REPLIED" = "{name} 回复";
-/*xxx追问[注释：表示已过去的状态]   xxx's follow-up */
+/*xxx 追问   xxx's follow-up */
 "CONSULTATION_FURTHER_QUESTION" = "{name} 追问";
-/*我要回复[注释：按钮] Reply*/
-"REPLY_BUTTON_TITLE" = "我要回复";
-/*暂无回复 No reply.*/
-"NO_REPLY_TEXT" = "暂无回复";
-/*学员不存在 Not found.*/
+/*我要回答[注释：按钮] Reply*/
+"REPLY_BUTTON_TITLE" = "我要回答";
+/*暂无回答 No reply.*/
+"NO_REPLY_TEXT" = "暂无回答";
+/*学员不存在 Learner does not exist.*/
 "NOT_FOUND_STUDENT" = "学员不存在";
-/*咨询不存在 Not found.*/
+/*咨询不存在 Consultation does not exist.*/
 "NO_FOUND_CONSULTATION" = "咨询不存在";
 /*已解决的问题将无法继续咨询        Cannot follow-up consult about resolved questions.*/
 "RESOLVED_CONSULT_CAN_NOT_QUETIONS" = "已解决的问题将无法继续咨询";
@@ -1836,21 +1858,21 @@
 /*输入咨询内容  Enter consultation content.*/
 "ENTER_CONSULTATION_CONTENT" = "输入咨询内容";
 /* 输入回复内容  Enter reply content. */
-"ENTER_REPLY_CONTENT" = "输入回复内容";
+"ENTER_REPLY_CONTENT" = "输入回答内容";
 /* 按住 录音  Hold to Record */
 "HOLD_TO_RECORD" = "按住 录音";
-/* 松开 保存  Release to Save */
-"RELEASE_TO_SAVE" = "松开 保存";
+/* 松开 发送  Release to Save */
+"RELEASE_TO_SAVE" = "松开 发送";
 /* 手指上滑 取消录音  Scroll up to cancel */
 "SCROLL_UP_TO_CANCEL" = "手指上滑 取消录音";
-/* 手指松开 取消保存  Release to cancel */
-"RELEASE_FINGER_TO_CANCEL" = "手指松开 取消保存";
+/* 手指松开 取消发送  Release to cancel */
+"RELEASE_FINGER_TO_CANCEL" = "手指松开 取消发送";
 /* 最多支持1条录音 1 Recording At Max. */
 "MAX_ONE_RECORD" = "最多支持1条录音";
 /*录音时间不能少于2秒  Cannot be less than 2 seconds.*/
 "ENCH_RECOR_LESS_TWO_SECOND" = "录音时间不能少于2秒";
-/* 录音时间不能超过60秒  Cannot be more than 60 seconds. */
-"EACH_RECORD_MORE_SECOND" = "录音时间不能超过60秒";
+/* 录音时间不能超过30秒  Cannot be more than 30 seconds. */
+"EACH_RECORD_MORE_SECOND" = "录音时间不能超过30秒";
 /* 删除录音  Delete recording  */
 "DELETE_RECORD_TEXT" = "删除录音";
 /* 删除图片  Delete photo */
@@ -1859,8 +1881,6 @@
 "PREVIEW_TITLE" = "预览";
 /* 全部图片  All Photos */
 "ALL_PHOTO_TITLE" = "全部图片";
-/*相册 Album*/
-"ALBUM_TITLE" = "相册";
 /* 图片预览  Photo Preview */
 "PHOTO_PREVIEW_TEXT" = "图片预览";
 /* 最多选择4张图片  4 photos at max. */
@@ -1871,9 +1891,96 @@
 "THREE_MUST_ONRE" = "必须包含咨询内容、图片或录音其中一项";
 /* 正在提交 Submitting... */
 "SUBMITTING_TEXT" = "正在提交...";
-/* 没有回复权限 No reply permission. */
-"NO_REPLY_PERMISSION" = "没有回复权限";
+/* 没有回答权限 No reply permission. */
+"NO_REPLY_PERMISSION" = "没有回答权限";
 /* 正在录音，请先结束录音  Recording, please wait.*/
 "RECORDING_LEAVE_FINISH" = "正在录音，请先结束录音";
 /* 正在提交，确定离开？ Submitting, sure you want to leave?*/
 "SUMITTING_SURE_LEAVE" = "正在提交，确定离开？";
+
+/*已解决的问题将无法继续咨询 Confirm this consultation has been solved? You won’t be able to follow-up consult about it. */
+"REMIND_CONSULTTATION_SOLVED" = "已解决的问题将无法继续咨询";
+/* [图片]  [Photo] */
+"PHOTO_CONTENT" = "[图片]";
+/*[语音]  [Audio] */
+"AUDIO_CONTENT" = "[语音]";
+/*[视频]  [Video]*/
+"VIDEO_CONTENT" = "[视频]";
+/* 待回复 Unanswered*/
+"UNANSWERED_TEXT" = "待回复";
+/* 待回复(追问) Answered (follow-up)*/
+"FOLLOW_UP_TEXT" = "待回复(追问)";
+/*已回复 Answered*/
+"ANSWERED_TEXT" = "已回复";
+
+/*请输入消息 Please enter your consultation */
+"ENTER_CONSULTATION" = "请输入消息";
+/*发送失败，请重新发送 Failed to send, please resend.*/
+"REREND_MIND_TEXT" = "发送失败，请重新发送";
+/*重发 Resend*/
+"RESEND_BUTTON_TEXT" = "重发";
+/* 正在发送消息，确定离开？发送将被中断 Sending will be interrupted, confirm to leave?*/
+"SENDING_LEAVING_TEXT" = "正在发送消息，确定离开？发送将被中断";
+/*视频超过60秒，请重新选择 Video duration exceeds 60 seconds, please re-select.*/
+"VIDEO_SECOND_TEXT" = "视频超过60秒，请重新选择";
+/*轻触拍照，按住摄像 Tab to take photo. Hold to take video*/
+"TAP_TAKE_PHOTO" = "轻触拍照，按住摄像";
+
+/*放弃  Give up*/
+"GIVE_UP_NAVI" = "放弃";
+/*视频播放 Video*/
+"VIDEO_PLAY" = "视频播放";
+/*回答问题  Answer*/
+"ANSER_BUTTON_TEXT" = "回答问题";
+/*{name} 正在回答 {name} Answering*/
+"ANSWERING_TEXT" = "{name} 正在回复";
+/*用户放弃提问 Cancelled by User*/
+"USER_CANCELED" = "用户放弃提问";
+
+/*追问中   Following up*/
+"FOLLOWING_UP" = "追问中";
+/*当前没有进行中的咨询    No unsolved consultations.*/
+"NO_UNSOLVED_CONSULTS" = "当前没有进行中的咨询";
+/*还没有已解决的咨询      No solved consultations.*/
+"NO_SOLVED_CONSULTS" = "还没有已解决的咨询";
+/*{name} 已回答               Answered by {name}*/
+"ANSWERED_BY" = "{name} 已回复";
+/*xxx 已解决               Solved by xxx*/
+"SOLEVED_BY" = "{name} 已解决";
+/*问题已解决              Solved*/
+"SOLVED_CONSULTS" = "问题已解决";
+/*正在回复                Answering*/
+"ANSWERING_CONSULTS" = "正在回复";
+/*请输入内容              Please enter your consultation*/
+"ENTER_CONSULT_TEXT" = "请输入内容";
+/*内容不多于500字        No more than 500 characters.*/
+"CONCULST_MORE_TEXT" = "内容不多于500字";
+/*确定放弃回答此问题？    Sure you want to give up?*/
+"WANT_GIVE_UP" = "确定放弃回答此问题？";
+/*否                      No*/
+"NO" = "否";
+/*我 回复  Answered by Me*/
+"ANSWERED_BY_ME" = "我 回复";
+/*我   Me*/
+"ME" = "我";
+/*语音加载失败 Failed to load audio.*/
+"FAILED_LOAD_AUDIO" = "语音加载失败";
+/*视频加载失败           Failed to load video.*/
+"FAILED_LOAD_VIDEO" = "视频加载失败";
+/*正在转码...              Transcoding…*/
+"TRANSCODEING_TEXT" = "正在转码...";
+/*视频转码失败           Failed to transcode.*/
+"FAILED_TRANSCOD" = "视频转码失败";
+/*视频正在转码           Video is transcoding.*/
+"VIDEO_TRANSCODING" = "视频正在转码";
+/*学员未关联企业         Learner not linked to any enterprise.*/
+"NO_LINKE_ENTERPRISE" = "学员未关联企业";
+/*用户没有权限查看       This user has no access to view.*/
+"NO_ACCESS_VIEW" = "用户没有权限查看";
+/*用户非企业咨询联系人   This user is not a consultant of your organization.*/
+"NO_CONSULTANT_ORGANIZATION" = "用户非企业咨询联系人";
+/*发送(n)                Send (n)*/
+"SEND_BUTTON_NUM" = "发送({count})";
+/*点击，添加一个新的咨询    Tab here to consult.*/
+"TAB_CONSTULT_NEW" = "点击，添加一个新的咨询";
+

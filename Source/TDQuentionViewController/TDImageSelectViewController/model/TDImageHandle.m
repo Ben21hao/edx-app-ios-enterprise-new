@@ -154,6 +154,7 @@ static CGFloat const kDefaultThumbnailWidth = 100;
         options.synchronous = YES;
         
         [[PHImageManager defaultManager] requestImageForAsset:self targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 Block_exe(resultHandler, result, info);
             });
@@ -195,10 +196,10 @@ static CGFloat const kDefaultThumbnailWidth = 100;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
-        option.resizeMode = PHImageRequestOptionsResizeModeNone;
+        option.resizeMode = PHImageRequestOptionsResizeModeNone; //保持原size
         option.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-        option.version = PHImageRequestOptionsVersionOriginal;
-        option.synchronous = YES;
+        option.version = PHImageRequestOptionsVersionOriginal; //原始图片
+        option.synchronous = YES; //同步
         [[PHImageManager defaultManager] requestImageDataForAsset:self options:option resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
             
             unsigned long size = imageData.length / 1024;

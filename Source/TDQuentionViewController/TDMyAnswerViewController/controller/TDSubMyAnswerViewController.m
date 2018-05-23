@@ -8,7 +8,6 @@
 
 #import "TDSubMyAnswerViewController.h"
 
-#import "TDQuetionDetailViewController.h"
 #import "TDConsultDetailViewController.h"
 
 #import "TDQuentionMessageCell.h"
@@ -48,9 +47,6 @@
     self.baseTool = [[TDBaseToolModel alloc] init];
     
     [self setViewContraint];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(quetionDataReload:) name:@"quetion_sure_solved_notification" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(quetionDataReload:) name:@"new_quetion_handin_notification" object:nil];
 
 }
 
@@ -66,13 +62,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    self.page = 1;
     self.isForgound = NO;
-}
-
-- (void)quetionDataReload:(NSNotification *)notifi { //刷新数据
-    
-    [self headerRefreshData];
 }
 
 - (void)headerRefreshData { //下拉刷新
@@ -87,10 +77,13 @@
 - (void)getSubQuetionData { //数据
     
     if (![self.baseTool networkingState]) {//网络监测
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView.mj_footer endRefreshing];
+        [self hiddenFooterView];
+        [self endRefresh];
+        [self showNullLabel:TDLocalizeSelect(@"QUERY_FAILED", nil)];
         return;
     }
+    
+    self.nullLabel.hidden = YES;
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setValue:self.username forKey:@"username"];
@@ -105,9 +98,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        [self.loadIngView removeFromSuperview];
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView.mj_footer endRefreshing];
+        [self endRefresh];
         
         if (self.page == 1) {
             [self.quetionArray removeAllObjects];
@@ -143,39 +134,48 @@
                 }
                 
             } else {
-                
+                if (self.page > 1) {
+                    [self.view makeToast:TDLocalizeSelect(@"NO_MORE_DATA", nil) duration:0.8 position:CSToastPositionCenter];
+                }
             }
             
             if (self.page == 1) {
-                [self showNullLabel:TDLocalizeSelect(@"NO_CONSULTATIONS", nil)];
+                [self showNullLabel:self.whereFrom == 0 ? TDLocalizeSelect(@"NO_UNSOLVED_CONSULTS", nil) : TDLocalizeSelect(@"NO_SOLVED_CONSULTS", nil)];
             }
             [self.tableView reloadData];
             
-        } else if (code == 311) { //暂无咨询
-            
+        }
+        else if (code == 311) { //用户未关联企业
             [self hiddenFooterView];
+            [self showNullLabel:TDLocalizeSelect(@"STUDENT_NO_LINKE_ORGANIZATION", nil)];
             
-            if (self.page == 1) {
-                [self showNullLabel:TDLocalizeSelect(@"NO_CONSULTATIONS", nil)];
-            }
-            
-        } else if (code == 312) { //没有更多数据
-            [self.view makeToast:TDLocalizeSelect(@"NO_MORE_DATA", nil) duration:0.8 position:CSToastPositionCenter];
+        }
+        else if (code == 312) { //用户不存在
             [self hiddenFooterView];
+            [self showNullLabel:TDLocalizeSelect(@"NO_EXIST_USER", nil)];
             
-        } else if (code == 313) { //学员不属于任何一家企业
+        }
+        else if (code == 313) { //用户不属于任何公司
             
             [self hiddenFooterView];
             [self showNullLabel:TDLocalizeSelect(@"STUDENT_NO_LINKE_ORGANIZATION", nil)];
             
-        } else {
+        }
+        else if (code == 313) { //用户不属于任何公司
+            
+            [self hiddenFooterView];
+            [self showNullLabel:TDLocalizeSelect(@"STUDENT_NO_LINKE_ORGANIZATION", nil)];
+            
+        }
+        else {
             [self hiddenFooterView];
             [self showNullLabel:TDLocalizeSelect(@"QUERY_FAILED", nil)];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"我的回答 ---->>> %@",error);
-        [self.loadIngView removeFromSuperview];
+        [self hiddenFooterView];
+        [self endRefresh];
         [self showNullLabel:TDLocalizeSelect(@"QUERY_FAILED", nil)];
     }];
 }
@@ -183,6 +183,13 @@
 - (void)hiddenFooterView {
     self.tableView.mj_footer.hidden = YES;
     [self.tableView.mj_footer endRefreshingWithNoMoreData];
+}
+
+- (void)endRefresh {
+    [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
+    
+    [self.loadIngView removeFromSuperview];
 }
 
 - (void)showNullLabel:(NSString *)titleStr {
@@ -220,11 +227,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    TDMyAnswerModel *model = self.quetionArray[indexPath.section];
-    [self gotoDetailVc:model];
+    
+    [self gotoDetailVc:indexPath.section];
 }
 
-- (void)gotoDetailVc:(TDMyAnswerModel *)model {
+- (void)gotoDetailVc:(NSInteger)section {
+    
+    TDMyAnswerModel *model = self.quetionArray[section];
     
     int status = [model.status.consult_status intValue];
     TDContactConsultStatus consultStatus = TDContactConsultStatusWaitReply;
@@ -253,8 +262,12 @@
     consultVc.consultStatus = consultStatus;
     consultVc.consultID = model.consult_id;
     consultVc.username = self.username;
-//    consultVc.whereFrom = TDConsultDetailFromContactSolve;
-//    consultVc.consultStatus = TDContactConsultStatusUserGiveUp;
+    consultVc.userId = self.userId;
+    WS(weakSelf);
+    consultVc.reloadUserConsultStatus = ^(NSString *consult_status){
+        model.status.consult_status = consult_status;
+        [weakSelf.tableView reloadSections:[NSIndexSet  indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
+    };
     
     [self.navigationController pushViewController:consultVc animated:YES];
 }

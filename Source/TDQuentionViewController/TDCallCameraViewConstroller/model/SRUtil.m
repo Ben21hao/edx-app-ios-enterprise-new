@@ -188,7 +188,7 @@
     }
     else
     {
-        UIAlertAction *defult = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+        UIAlertAction *defult = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"OK", nil) style:UIAlertActionStyleDefault handler:nil];
         [alertView addAction:defult];
     }
     

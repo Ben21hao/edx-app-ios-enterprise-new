@@ -21,6 +21,9 @@ NSString* const OEXErrorDomain = @"org.edx.error";
 @implementation NSError (OEXKnownErrors)
 
 + (NSError*)oex_errorWithCode:(OEXErrorCode)code message:(nonnull NSString *)message {
+    if (message.length == 0) {
+        message = @" ";
+    }
     return [self errorWithDomain:OEXErrorDomain code:code userInfo:@{
                                                                      NSLocalizedDescriptionKey: message
                                                                      }];
@@ -35,7 +38,8 @@ NSString* const OEXErrorDomain = @"org.edx.error";
 }
 
 + (NSError*)oex_unknownError {
-    return [self oex_errorWithCode:OEXErrorCodeUnknown message:TDLocalizeSelect(@"UNABLE_TO_LOAD_COURSE_CONTENT", nil)];
+    NSString *str = TDLocalizeSelect(@"COUPON_NUMBER", nil);
+    return [self oex_errorWithCode:OEXErrorCodeUnknown message:str];
 }
 
 @end

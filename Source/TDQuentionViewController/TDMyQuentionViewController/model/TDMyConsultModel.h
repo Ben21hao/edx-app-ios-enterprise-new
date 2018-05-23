@@ -22,6 +22,7 @@
 @property (nonatomic,strong) NSString *consult_id;
 @property (nonatomic,strong) NSString *content;
 @property (nonatomic,strong) NSString *created_at;
+@property (nonatomic,strong) NSString *updated_at;
 @property (nonatomic,strong) NSString *content_type;//1:内容，2:语音,3:图片,4:视频
 
 @property (nonatomic,strong) TDConsultStatus *status;

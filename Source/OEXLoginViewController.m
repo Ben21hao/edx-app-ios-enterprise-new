@@ -23,7 +23,6 @@
 #import "OEXCustomButton.h"
 #import "OEXCustomLabel.h"
 #import "OEXAuthentication.h"
-#import "OEXFBSocial.h"
 #import "OEXExternalAuthOptionsView.h"
 #import "OEXFacebookAuthProvider.h"
 #import "OEXFacebookConfig.h"
@@ -105,8 +104,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-//    [LanguageChangeTool initUserLanguage];  //语言偏好
     
     [self setNavigationBarStye];  //导航栏样式
     [self setViewConstrainStye];  //页面样式
@@ -200,8 +197,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange:) name:kReachabilityChangedNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setSignInToDefaultState:) name:UIApplicationDidBecomeActiveNotification object:nil];
 
 }
 
@@ -266,32 +261,6 @@
 
 - (NSString *)signInButtonText {
     return TDLocalizeSelect(@"SIGN_IN", nil);
-}
-
-- (void)handleActivationDuringLogin {
-    if(self.authProvider != nil) {
-        [self.btn_Login setTitle:[self signInButtonText] forState:UIControlStateNormal];
-        
-        [self.activityIndicator stopAnimating];
-        [self.view setUserInteractionEnabled:YES];
-
-        self.authProvider = nil;
-    }
-}
-
-- (void)setSignInToDefaultState:(NSNotification*)notification {
-    OEXFBSocial *facebookManager = [[OEXFBSocial alloc]init];
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    if([self.authProvider isKindOfClass:[OEXGoogleAuthProvider class]] && ![[OEXGoogleSocial sharedInstance] handledOpenUrl]) {
-        [[OEXGoogleSocial sharedInstance] clearHandler];
-        [self handleActivationDuringLogin];
-    }
-    else if(![facebookManager isLogin] && [self.authProvider isKindOfClass:[OEXFacebookAuthProvider class]]) {
-        [self handleActivationDuringLogin];
-    }
-
-    self.authProvider = nil;
-    [[OEXGoogleSocial sharedInstance] setHandledOpenUrl:NO];
 }
 
 - (void)setViewConstrainStye {

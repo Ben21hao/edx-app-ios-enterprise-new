@@ -32,10 +32,14 @@
 #import <AVFoundation/AVFoundation.h>
 #import "lame.h"
 
-#define IMAGE_WIDTH_CELL (TDWidth - 95) / 4
-#define Limite_Record_Time 15
+#import "OSSConstants.h"
+#import "OssService.h"
+#import "TDSelectImageModel.h"
 
-@interface TDConsultDetailViewController () <UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,AVAudioRecorderDelegate,AVAudioPlayerDelegate>
+#define IMAGE_WIDTH_CELL (TDWidth - 95) / 4
+#define Limite_Record_Time 30
+
+@interface TDConsultDetailViewController () <UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,AVAudioRecorderDelegate,AVAudioPlayerDelegate,TDOssPutFileDelegate>
 
 @property (nonatomic,strong) TDBaseToolModel *toolModel;
 @property (nonatomic,strong) TDPermissionModel *permissionModel;
@@ -44,6 +48,7 @@
 @property (nonatomic,strong) TDConsultRemidView *remindView;
 @property (nonatomic,strong) TDConsultInputView *inputView;
 @property (nonatomic,strong) UIButton *answerButton;
+@property (nonatomic,strong) UILabel *nullLabel;
 
 @property (nonatomic,strong) TDConsultContetModel *contentModel;
 @property (nonatomic,strong) NSMutableArray *dataArray;
@@ -55,19 +60,29 @@
 @property (nonatomic,strong) AVAudioSession *audioSession;
 @property (nonatomic,strong) NSString *recordUrl;//存储路径
 @property (nonatomic,strong) NSString *mp3FilePath;//mp3路径
+@property (nonatomic,strong) NSString *recordKeyStr; //录音的唯一标识
 
 @property (nonatomic,strong) NSTimer *recordTimer;
 @property (nonatomic,strong) NSTimer *recordCountTimer;
-@property (nonatomic,assign) NSInteger recordTimeNum;
+@property (nonatomic,assign) int recordTimeNum;
 @property (nonatomic,assign) int mp3TimeNum;
 @property (nonatomic,assign) BOOL isSwipe;
-
-@property (nonatomic,strong) AVAudioPlayer *audioPlayer;
-@property (nonatomic,strong) NSTimer *playTimer;
-@property (nonatomic,assign) NSInteger playImageNum;
 @property (nonatomic,assign) BOOL isOverTime;
 
-@property (nonatomic,strong) NSString *recordKeyStr; //录音的唯一标识
+@property (nonatomic,strong) AVPlayer *avPlayer; //语音播放
+
+@property (nonatomic,strong) OssService *service;
+@property (nonatomic,strong) NSMutableArray *contentArray; //阿里返回的fid
+@property (nonatomic,assign) NSInteger putOssNum;//
+@property (nonatomic,strong) NSArray *imageArray;//本地图片的
+@property (nonatomic,strong) NSString *videoPath; //正在发送的语音，视频的路径
+@property (nonatomic,assign) int videoTime;//视频时长
+
+@property (nonatomic,strong) TDConsultDetailModel *sendingModel;//正在发送的消息model
+@property (nonatomic,assign) BOOL hadShowAlert;//已经显示重新发送
+@property (nonatomic,assign) BOOL isConsultSending;
+@property (nonatomic,strong) NSMutableArray *consultImageArray;
+@property (nonatomic,strong) NSString *lastId;
 
 @end
 
@@ -80,13 +95,37 @@
     return _dataArray;
 }
 
+- (NSMutableArray *)contentArray {
+    if (!_contentArray) {
+        _contentArray = [[NSMutableArray alloc] init];
+    }
+    return _contentArray;
+}
+
+- (NSMutableArray *)consultImageArray {
+    if (!_consultImageArray) {
+        _consultImageArray = [[NSMutableArray alloc] init];
+    }
+    return _consultImageArray;
+}
+
+- (AVPlayer *)avPlayer {
+    if (!_avPlayer) {
+        AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:@""]];
+        _avPlayer = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+    }
+    return _avPlayer;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = @"咨询详情";
+    self.titleViewLabel.text = TDLocalizeSelect(@"CONSULTAION_DETAIL", nil);
     
     self.toolModel = [[TDBaseToolModel alloc] init];
     self.permissionModel = [[TDPermissionModel alloc] init];
+    self.sendingModel = [[TDConsultDetailModel alloc] init];
+    self.isConsultSending = NO;
     
     self.inputViewHeight = 48;
     self.bottomHeight = 0;
@@ -95,7 +134,7 @@
     self.mp3TimeNum = 0;
     self.recordKeyStr = @"selfRecord";
     [self initAvAudio];
-
+    
     [self addNotificationObaser];
     
     if (self.whereFrom != TDConsultDetailFromNewConsult) {
@@ -103,9 +142,22 @@
     }
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-//    [self removeNotificationObser];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
+    
+    [self stopPalyingAudio];
 }
 
 #pragma mark - 数据
@@ -136,29 +188,50 @@
             if (self.contentModel) {
                 
                 if (self.contentModel.consult_details.count > 0) {
-                    self.dataArray = [TDConsultDetailModel mj_objectArrayWithKeyValuesArray:self.contentModel.consult_details];
-//                    NSArray *detailArray = [TDConsultDetailModel mj_objectArrayWithKeyValuesArray:self.contentModel.consult_details];
-//                    if (detailArray.count > 0) {
-//                        self.contentModel.consult_details = detailArray;
-//                    }
-                }
-                [self.tableView reloadData];
-                
-                if ([self.contentModel.consult_status intValue] == 2) {
-                    self.rightButton.hidden = YES;
-                }
-                else {
-                    if (self.whereFrom == TDConsultDetailFromContactUnSolve && self.consultStatus == TDContactConsultStatusReplying) {
-                        self.rightButton.hidden = NO;
+//                    self.dataArray = [TDConsultDetailModel mj_objectArrayWithKeyValuesArray:self.contentModel.consult_details];
+                    
+                    for (int i = 0; i < self.contentModel.consult_details.count; i ++) {
+                        TDConsultDetailModel *model = [TDConsultDetailModel mj_objectWithKeyValues:self.contentModel.consult_details[i]];
+                        if (model) {
+                            [self.dataArray addObject:model];
+                            if ([model.content_type intValue] == 3) { //图片类型
+                                NSArray *array = [model.content componentsSeparatedByString:@","];
+                                [self.consultImageArray addObjectsFromArray:array];
+                            }
+                            
+                            if ([model.is_reply boolValue] == NO) {
+                                self.lastId = model.id;
+                            }
+                        }
                     }
                 }
+                [self.tableView reloadData];
             }
-        }
-        else if ([code intValue] == 313) {//咨询不存在
+            
+            if (self.reloadUserConsultStatus && self.hasNoRead) {
+                self.hasNoRead = NO;
+                self.reloadUserConsultStatus(@"4");
+            }
+            [self dealWithConsultButtonStatus]; //按钮状态处理
             
         }
-        else {
-            
+        else if ([code intValue] == 313) { //313 咨询不存在
+            [self showNullLabel:TDLocalizeSelect(@"NO_FOUND_CONSULTATION", nil)];
+        }
+        else if ([code intValue] == 311) { //311 学员未关联企业
+            [self showNullLabel:TDLocalizeSelect(@"NO_LINKE_ENTERPRISE", nil)];
+        }
+        else if ([code intValue] == 312) { //312 学员不存在
+            [self showNullLabel:TDLocalizeSelect(@"NOT_FOUND_STUDENT", nil)];
+        }
+        else if ([code intValue] == 313) { //314 用户没有权限查看
+            [self showNullLabel:TDLocalizeSelect(@"NO_ACCESS_VIEW", nil)];
+        }
+        else if ([code intValue] == 403) { //403 用户非企业咨询联系人
+            [self showNullLabel:TDLocalizeSelect(@"NO_CONSULTANT_ORGANIZATION", nil)];
+        }
+        else { //500 查询失败;
+          [self showNullLabel:TDLocalizeSelect(@"QUERY_FAILED", nil)];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -170,19 +243,24 @@
 
 - (void)postNewConsultMessage:(NSInteger)type { //新增咨询: 1:文字； 2:语音; 3:图片; 4:视频
 
-    if (![self.toolModel networkingState]) { return; }
+    if (![self.toolModel getNetworkingState]) {
+        [self showSendFailedAlertView:type isOssFailed:NO];
+        return;
+    }
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setValue:self.username forKey:@"username"];
-
-    NSString *content = [self dealwithPostMessageType:type];
-    [dict setValue:content forKey:@"content"];
+    
+    [dict setValue:type == 1 ? self.sendingModel.content : [self.contentArray componentsJoinedByString:@","] forKey:@"content"];
     
     [dict setValue:@(type) forKey:@"content_type"];//类型
-    if (type == 2 || type == 4) {
-        [dict setValue:@(88) forKey:@"content_duration"];//语音，视频的时长
+    if (type == 2) {
+        [dict setValue:@(self.mp3TimeNum) forKey:@"content_duration"];//语音时长
+    }
+    else if (type == 4) {
+        [dict setValue:@(self.videoTime) forKey:@"content_duration"];//视频时长
     }
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/add_consult_message/",ELITEU_URL];
@@ -194,6 +272,7 @@
         
         if ([code intValue] == 200) {
             self.rightButton.hidden = NO;
+            [self removeSendingLastObject:NO];
             
             NSDictionary *dataDic = responseDic[@"data"];
             self.consultID = [NSString stringWithFormat:@"%@",dataDic[@"consult_id"]];
@@ -203,28 +282,37 @@
                 model.isSending = NO;
                 model.is_show_time = @"1";
                 model.username = self.username;
+                model.videoImage = self.sendingModel.videoImage;
                 [self.dataArray addObject:model];
+                
+                if ([model.content_type intValue] == 3) {
+                    NSArray *array = [model.content componentsSeparatedByString:@","];
+                    [self.consultImageArray addObjectsFromArray:array];
+                }
                 
                 self.whereFrom = TDConsultDetailFromUserUnSolve;
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"new_quetion_handin_notification" object:nil];
             }
-            [self.tableView reloadData];
+            [self reloadTableviewData];
         }
-        else {
-            
+        else {//311 学员未关联企业；312 学员不存在；319 文字内容超过300字，发送失败；320 类型错误，请重新发送；500 创建咨询失败；
+            [self showSendFailedAlertView:type isOssFailed:NO];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self showSendFailedAlertView:type isOssFailed:NO];
         NSLog(@"新增咨询 -- %ld",(long)error.code);
     }];
 }
 
 - (void)appendConsultMessage:(NSInteger)type { //追问: 1:文字； 2:语音; 3:图片; 4:视频
     
-    if (![self.toolModel networkingState]) { return; }
-    
-    [self addSendingConsultMessage];
+    if (![self.toolModel getNetworkingState]) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self showSendFailedAlertView:type isOssFailed:NO];
+        });
+        return;
+    }
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
@@ -232,12 +320,14 @@
     [dict setValue:self.username forKey:@"username"];
     [dict setValue:self.consultID forKey:@"consult_id"];//咨询的 ID
     
-    NSString *content = [self dealwithPostMessageType:type];
-    [dict setValue:content forKey:@"content"];
+    [dict setValue:type == 1 ? self.sendingModel.content : [self.contentArray componentsJoinedByString:@","] forKey:@"content"];
     
     [dict setValue:@(type) forKey:@"content_type"]; //类型
-    if (type == 2 || type == 4) {
-        [dict setValue:@(88) forKey:@"content_duration"]; //语音，视频的时长
+    if (type == 2) {
+        [dict setValue:@(self.mp3TimeNum) forKey:@"content_duration"];//语音时长
+    }
+    else if (type == 4) {
+        [dict setValue:@(self.videoTime) forKey:@"content_duration"];//视频时长
     }
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/superadd_consult_message/",ELITEU_URL];
@@ -248,46 +338,85 @@
         id code = responseDic[@"code"];
         
         if ([code intValue] == 200) {
-            [self.dataArray removeLastObject];
+            
+            [self removeSendingLastObject:NO];
             
             NSDictionary *dataDic = responseDic[@"data"];
+            
+            NSArray *unreadList = dataDic[@"this_session_unread_reply_list"];
+            if (unreadList.count > 0) {
+                for (NSDictionary *unreadDic in unreadList) {
+                    
+                    TDConsultDetailModel *unreadModel = [TDConsultDetailModel mj_objectWithKeyValues:unreadDic];
+                    if (unreadModel) {
+                        unreadModel.created_at = unreadDic[@"reply_at"];
+                        unreadModel.username = unreadDic[@"reply_by"];
+                        unreadModel.userprofile_image = unreadDic[@"reply_by_img"];
+                        [self.dataArray addObject:unreadModel];
+                        
+                        if ([unreadModel.content_type intValue] == 3) {
+                            NSArray *array = [unreadModel.content componentsSeparatedByString:@","];
+                            [self.consultImageArray addObjectsFromArray:array];
+                        }
+                    }
+                }
+            }
+            
             TDConsultDetailModel *model = [TDConsultDetailModel mj_objectWithKeyValues:dataDic];
             if (model) {
                 model.isSending = NO;
                 model.username = self.username;
+                model.videoImage = self.sendingModel.videoImage;
                 [self.dataArray addObject:model];
+                
+                if ([model.content_type intValue] == 3) {
+                    NSArray *array = [model.content componentsSeparatedByString:@","];
+                    [self.consultImageArray addObjectsFromArray:array];
+                }
             }
-            [self.tableView reloadData];
+            [self reloadTableviewData];
+            
+            if (self.reloadUserConsultStatus) {
+                self.reloadUserConsultStatus(@"3");
+            }
         }
         else {
-            
+            [self showSendFailedAlertView:type isOssFailed:NO];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
-        NSLog(@"新增咨询 -- %ld",(long)error.code);
+        [self showSendFailedAlertView:type isOssFailed:NO];
+//        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        NSLog(@"追问 -- %ld",(long)error.code);
     }];
 }
 
 - (void)replyUserConsult:(NSInteger)type {//回复咨询: 1:文字； 2:语音; 3:图片; 4:视频
     
-    if (![self.toolModel networkingState]) { return; }
+    if (![self.toolModel getNetworkingState]) {
+        [self showSendFailedAlertView:type isOssFailed:NO];
+        return;
+    }
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setValue:self.username forKey:@"username"];
     [dict setValue:self.consultID forKey:@"feedback_id"];//咨询的 ID
-    
-    [dict setValue:self.inputView.inputTextView.text forKey:@"filename"]; //阿里云返回的文件 key
+
+    [dict setValue:type == 1 ? self.sendingModel.content : [self.contentArray componentsJoinedByString:@","] forKey:@"filename"]; //阿里云返回的文件 key
     
     [dict setValue:@(type) forKey:@"mimeType"];
-    if (type == 2 || type == 4) {
-        [dict setValue:@(88) forKey:@"content_duration"];
+    if (type == 2) {
+        [dict setValue:@(self.mp3TimeNum) forKey:@"content_duration"];//语音时长
+    }
+    else if (type == 4) {
+        [dict setValue:@(self.videoTime) forKey:@"content_duration"];//视频时长
     }
     
-    TDConsultDetailModel *model = self.dataArray.lastObject;
-    [dict setValue:model.id forKey:@"last_id"];
+    if (self.lastId.length > 0) {
+        [dict setValue:self.lastId forKey:@"last_id"];
+    }
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/consults/",ELITEU_URL];
     
@@ -299,22 +428,60 @@
         if ([code intValue] == 200) {
             self.rightButton.hidden = YES;
             
+            [self removeSendingLastObject:NO];
+            
             NSDictionary *dataDic = responseDic[@"data"];
-            TDConsultDetailModel *model = [TDConsultDetailModel mj_objectWithKeyValues:dataDic];
-            if (model) {
-                model.isSending = NO;
-                model.username = self.username;
-                [self.dataArray addObject:model];
+            
+            NSArray *unreadList = dataDic[@"return_list"];
+            if (unreadList.count > 0) {
+                for (NSDictionary *unreadDic in unreadList) {
+                    
+                    TDConsultDetailModel *unreadModel = [TDConsultDetailModel mj_objectWithKeyValues:unreadDic];
+                    if (unreadModel) {
+                        unreadModel.created_at = unreadDic[@"created_at"];
+                        unreadModel.username = unreadDic[@"created_by"];
+                        unreadModel.userprofile_image = unreadDic[@"created_by_img"];
+                        [self.dataArray addObject:unreadModel];
+                        
+                        if ([unreadModel.content_type intValue] == 3) {//图片
+                            NSArray *array = [unreadModel.content componentsSeparatedByString:@","];
+                            [self.consultImageArray addObjectsFromArray:array];
+                        }
+                        
+                        if ([unreadModel.is_reply boolValue] == NO) {
+                            self.lastId = unreadModel.id;
+                        }
+                    }
+                }
             }
             
-            [self.tableView reloadData];
+            TDConsultDetailModel *model = [TDConsultDetailModel mj_objectWithKeyValues:dataDic];
+            if (model) {
+                model.user_id = self.userId;
+                model.isSending = NO;
+                model.username = self.username;
+                model.videoImage = self.sendingModel.videoImage;
+                [self.dataArray addObject:model];
+                
+                if ([model.content_type intValue] == 3) {
+                    NSArray *array = [model.content componentsSeparatedByString:@","];
+                    [self.consultImageArray addObjectsFromArray:array];
+                }
+            }
+            
+            [self reloadTableviewData];
+            
+            if (self.reloadUserConsultStatus) {
+                self.reloadUserConsultStatus(@"7");
+            }
         }
         else {
-            
+            [self showSendFailedAlertView:type isOssFailed:NO];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        [self showSendFailedAlertView:type isOssFailed:NO];
+//        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"回复失败 -- %ld",(long)error.code);
     }];
 }
@@ -353,28 +520,7 @@
     }];
 }
 
-- (NSString *)dealwithPostMessageType:(NSInteger)type { //1:文字； 2:语音; 3:图片; 4:视频
-    switch (type) {
-        case 1:
-            return self.inputView.inputTextView.text;
-            break;
-        case 2:
-            return @"语音";
-            break;
-        case 3:
-            return @"/oss_media/080beb52-519b-11e8-9c53-52540059267e,/oss_media/6fd419e0-5109-11e8-9c53-52540059267e,/oss_media/322f1aaa-4f6e-11e8-9c53-52540059267e";
-            break;
-        default:
-            return @"/oss_media/oss_media/e80397a8-5198-11e8-9c53-52540059267e";
-            break;
-    }
-}
-
 - (void)dealWithConsultStatus:(NSInteger)type { //4 领取任务;5 放弃回答;6 已解决
-    
-    if (type == 6) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"quetion_sure_solved_notification" object:nil];
-    }
 
     self.bottomHeight = 0;
     
@@ -384,6 +530,10 @@
         self.inputView.hidden = NO;
         
         self.inputViewHeight = 48;
+        
+        if (self.reloadUserConsultStatus) {
+            self.reloadUserConsultStatus(@"2");
+        }
     }
     else if (type == 5) {
         
@@ -392,6 +542,10 @@
         self.inputView.hidden = YES;
         
         self.inputViewHeight = 48;
+        
+        if (self.reloadUserConsultStatus) {
+            self.reloadUserConsultStatus(@"1");
+        }
     }
     else {
         self.rightButton.hidden = YES;
@@ -401,10 +555,9 @@
         
         self.inputViewHeight = 0;
         
-        [self.remindView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.right.top.mas_equalTo(self.view);
-            make.height.mas_equalTo(0);
-        }];
+        [self showRemindView:NO];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"quetion_sure_solved_notification" object:nil];
         
         self.whereFrom = TDConsultDetailFromUserSolve;
         self.contentModel.is_slove = @"1";
@@ -414,24 +567,146 @@
     [self updateInputViewConstraint];
 }
 
-- (void)showLoadingStatus:(NSString *)titleStr {
+- (void)dealWithConsultButtonStatus { //按钮状态处理
+    
+    int status = [self.contentModel.consult_status intValue];
+    
+    if ([self.contentModel.is_slove boolValue]) { //已解决
+        
+        self.rightButton.hidden = YES;
+        [self showRemindView:NO];
+        [self showInputView:NO showAnswerButton:NO];
+    }
+    else { //未解决
+        if (self.whereFrom == TDConsultDetailFromUserUnSolve) { //咨询人
+            
+            if (status == 1 || status == 2 || status == 3 || status == 4 || status == 5) {
+                self.rightButton.hidden = NO;
+            }
+            else {
+                self.rightButton.hidden = YES;
+            }
+            
+            [self showRemindView:YES];
+            [self showInputView:YES showAnswerButton:NO];
+        }
+        else { //公司联系人
+            
+            [self showRemindView:NO];
+            
+            if ([self.contentModel.is_claim_by_other boolValue]) { //被他人领取
+                self.rightButton.hidden = YES;
+                [self showInputView:NO showAnswerButton:NO];
+                
+            } else { //没有被他人领取
+                if (status == 3 || status == 4) {
+                    self.rightButton.hidden = NO;
+                }
+                else {
+                    self.rightButton.hidden = YES;
+                }
+                
+                if (status == 1 || status == 5) {
+                    [self showInputView:NO showAnswerButton:YES];
+                }
+                else {
+                    [self showInputView:YES showAnswerButton:NO];
+                }
+            }
+        }
+    }
+    
+}
+
+- (void)showInputView:(BOOL)showInput showAnswerButton:(BOOL)showAnswer {
+    
+    self.answerButton.hidden = !showAnswer;
+    self.inputView.hidden = !showInput;
+    [self.inputView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.mas_equalTo(self.view);
+        make.height.mas_equalTo(showInput || showAnswer ? 48 : 0);
+    }];
+}
+
+- (void)showRemindView:(BOOL)isShow {
+    
+    self.remindView.hidden = !isShow;
+    [self.remindView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.mas_equalTo(self.view);
+        make.height.mas_equalTo(isShow ? 58 : 0);
+    }];
+}
+
+- (void)showLoadingStatus:(NSString *)titleStr { //加载
     
     [SVProgressHUD showWithStatus:titleStr];
     SVProgressHUD.defaultMaskType = SVProgressHUDMaskTypeBlack;
     SVProgressHUD.defaultStyle = SVProgressHUDAnimationTypeNative;
 }
 
-- (void)addSendingConsultMessage {
+- (void)localConsultSendFailed:(BOOL)failed type:(NSInteger)type { //发送失败消息
     
-    TDConsultDetailModel *model = [[TDConsultDetailModel alloc] init];
-    model.username = self.username;
-    model.content = self.inputView.inputTextView.text;
-    model.is_show_time = @"0";
-    model.isSending = YES;
-    model.content_type = @"1";
-    
-    [self.dataArray addObject:model];
+    self.sendingModel.sendFailed = failed;
+    self.sendingModel.isSending = !failed;
+    self.sendingModel.content_type = [NSString stringWithFormat:@"%ld",(long)type];
+
     [self.tableView reloadData];
+}
+
+- (void)addSendingConsultMessage:(NSInteger)type { //构建发送中的消息；1:文字； 2:语音; 3:图片; 4:视频
+    
+    if (self.isConsultSending) {
+        return;
+    }
+    self.isConsultSending = YES;
+    
+    self.sendingModel.is_show_time = @"0";
+    self.sendingModel.isSending = YES;
+    self.sendingModel.content_type = [NSString stringWithFormat:@"%ld",(long)type];
+    
+    switch (type) {
+        case 1:
+            self.sendingModel.content = self.inputView.inputTextView.text;
+            break;
+        case 2:
+            self.sendingModel.content_duration = [NSString stringWithFormat:@"%d",self.mp3TimeNum];
+            break;
+        case 3:
+            self.sendingModel.imageArray = self.imageArray;
+            break;
+        case 4:
+            self.sendingModel.content_duration = [NSString stringWithFormat:@"%d",self.videoTime];
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self.dataArray addObject:self.sendingModel];
+    [self reloadTableviewData];
+}
+
+- (void)reloadTableviewData { //主线程刷新数据
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    });
+}
+
+- (void)showNullLabel:(NSString *)titleStr { //没有数据
+    self.nullLabel.hidden = self.dataArray.count > 0;
+    self.nullLabel.text = titleStr;
+}
+
+- (void)removeSendingLastObject:(BOOL)isReloadTable {
+    
+    self.isConsultSending = NO;
+    self.sendingModel.isSending = NO;
+    [self.dataArray removeLastObject];//先移除正在发送中的消息
+    
+    if (isReloadTable) {
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - tableview Delegate
@@ -441,8 +716,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if ([self.contentModel.is_slove boolValue] == YES || [self.contentModel.is_claim_by_other boolValue] == YES) {
+    if ([self.contentModel.is_slove boolValue] == YES) {
         return self.dataArray.count + 1;
+    }
+    else {
+        if ([self.contentModel.is_claim_by_other boolValue] == YES) {
+            if (self.whereFrom == TDConsultDetailFromUserUnSolve) {
+                return self.dataArray.count;
+            }
+            else {
+                return self.dataArray.count + 1;
+            }
+        }
     }
     return self.dataArray.count;
 }
@@ -452,13 +737,14 @@
     if (indexPath.row < self.dataArray.count) {
         TDConsultDetailModel *detailModel = self.dataArray[indexPath.row];
         
+        WS(weakSelf);
         switch ([detailModel.content_type intValue]) {//1:文字; 2:语音; 3:图片; 4:视频
             case 1: {
                 TDConsultTextCell *cell = [[TDConsultTextCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDConsultTextCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.statusButton.tag = indexPath.row;
+                cell.userId = self.userId;
                 cell.detailModel = detailModel;
-                [cell.statusButton addTarget:self action:@selector(statusButtonAction:) forControlEvents:UIControlEventTouchUpInside];
                 
                 return cell;
             }
@@ -468,8 +754,13 @@
                 TDConsultAudioCell *cell = [[TDConsultAudioCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDConsultAudioCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.statusButton.tag = indexPath.row;
+                cell.userId = self.userId;
                 cell.detailModel = detailModel;
-                [cell.statusButton addTarget:self action:@selector(statusButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+                
+                cell.index = indexPath.row;
+                cell.tapVoiceViewHandle = ^(BOOL isPlay){ //语音
+                    [weakSelf playVoiceAction:detailModel index:indexPath.row play:isPlay];
+                };
                 
                 return cell;
             }
@@ -479,10 +770,9 @@
                 TDConsultImageCell *cell = [[TDConsultImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDConsultImageCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.statusButton.tag = indexPath.row;
+                cell.userId = self.userId;
                 cell.detailModel = detailModel;
-                [cell.statusButton addTarget:self action:@selector(statusButtonAction:) forControlEvents:UIControlEventTouchUpInside];
                 
-                WS(weakSelf);
                 cell.tapImageHandle = ^(NSArray *imageArray,NSInteger tag) {
                     [weakSelf gotoWebViewPreview:imageArray index:tag];
                 };
@@ -494,13 +784,11 @@
             default: {
                 TDConsultVideoCell *cell = [[TDConsultVideoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDConsultVideoCell"];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                
+                cell.userId = self.userId;
                 cell.detailModel = detailModel;
-                
                 cell.statusButton.tag = indexPath.row;
                 cell.videoButton.tag = indexPath.row;
                 [cell.videoButton addTarget:self action:@selector(videoButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-                [cell.statusButton addTarget:self action:@selector(statusButtonAction:) forControlEvents:UIControlEventTouchUpInside];
                 
                 return cell;
             }
@@ -512,32 +800,22 @@
         TDConsultStatusCell *cell = [[TDConsultStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDConsultStatusCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        switch (self.whereFrom) {
-            case TDConsultDetailFromUserSolve:
-                cell.statusLabel.text = @"问题已解决";
-                cell.secondLabel.text = self.contentModel.last_update_time;
-                break;
-                
-            case TDConsultDetailFromContactUnSolve:
-                if (self.consultStatus == TDContactConsultStatusOtherReplying) {
-                    cell.statusLabel.text = @"正在回复";
-                    cell.secondLabel.text = self.contentModel.name;
-                }
-                else {
-                    cell.statusLabel.text = @"问题已解决";
-                    cell.secondLabel.text = self.contentModel.last_update_time;
-                }
-                break;
-                
-            case TDConsultDetailFromContactSolve:
-                cell.statusLabel.text = self.consultStatus == TDContactConsultStatusUserGiveUp ? @"用户放弃提问" : @"问题已解决";
-                cell.secondLabel.text = self.contentModel.last_update_time;
-                break;
-                
-            default:
-                break;
-        }
         
+        if ([self.contentModel.is_slove boolValue] == YES) { //已解决
+            if (self.whereFrom == TDConsultDetailFromUserSolve) { //我的咨询已解决
+                cell.statusLabel.text = TDLocalizeSelect(@"SOLVED_CONSULTS", nil);
+            } else {
+                cell.statusLabel.text = [self.contentModel.consult_status intValue] == 7 ? TDLocalizeSelect(@"USER_CANCELED", nil) : TDLocalizeSelect(@"SOLVED_CONSULTS", nil);
+            }
+            cell.secondLabel.text = self.contentModel.last_update_time;
+        }
+        else {//未解决
+            if ([self.contentModel.is_claim_by_other boolValue] == YES) {
+                
+                cell.statusLabel.text = TDLocalizeSelect(@"ANSWERING_CONSULTS", nil);
+                cell.secondLabel.text = self.contentModel.name;
+            }
+        }
         return cell;
     }
 }
@@ -588,12 +866,20 @@
     [self.inputView.inputTextView endEditing:YES];
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.inputView.inputTextView endEditing:YES];
+}
+
+#pragma mark - 预览
 - (void)gotoWebViewPreview:(NSArray *)imageArray index:(NSInteger)index { //图片浏览
+    
+    NSString *clickObject = imageArray[index];
+    NSInteger clickIndex = [self.consultImageArray indexOfObject:clickObject];
     
     TDWebImagePreviewViewController *previewVc = [[TDWebImagePreviewViewController alloc] init];
     previewVc.modalPresentationStyle = UIModalPresentationFullScreen;
-    previewVc.index = index;
-    previewVc.picUrlArray = imageArray;
+    previewVc.index = clickIndex;
+    previewVc.picUrlArray = self.consultImageArray;
     [self presentViewController:previewVc animated:YES completion:nil];
 }
 
@@ -601,14 +887,14 @@
     
     TDConsultDetailModel *detailModel = self.dataArray[sender.tag];
     
+    if (detailModel.isSending) {
+        return;
+    }
+    
     TDPreviewVideoViewController *previewVideoVC = [[TDPreviewVideoViewController alloc] init];
     previewVideoVC.videoPath = [NSString stringWithFormat:@"%@",detailModel.content];
     previewVideoVC.isWebVideo = YES;
     [self.navigationController pushViewController:previewVideoVC animated:YES];
-}
-
-- (void)statusButtonAction:(UIButton *)sender { //重发
-    
 }
 
 #pragma mark - 键盘
@@ -630,6 +916,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TD_User_Allow_PHPhotoLibrary" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TD_User_Allow_AVCaptureDevice" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"User_Had_SelectImage" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"User_Had_SelectVideo" object:nil];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {//当键盘出现或改变时调用
@@ -647,38 +934,126 @@
     [self updateInputViewConstraint];
 }
 
+#pragma mark - 发送语音，图片，视频
 - (void)imageSelectNoti:(NSNotification *)notification { //发送图片
-//    NSDictionary *dic = notification.userInfo;
-//    NSArray *infoArray = dic[@"selectImageArray"];
-//    if (infoArray.count > 0) {
-//        for (TDSelectImageModel *model in infoArray) {
-//            if (![self.imageArray containsObject:model]) {
-//                [self.imageArray addObject:model];
-//            }
-//        }
-//    }
-    if (self.whereFrom == TDConsultDetailFromContactUnSolve) { //回复
-        [self replyUserConsult:3];
-    }
-    else if (self.whereFrom == TDConsultDetailFromNewConsult) { //新建
-        [self postNewConsultMessage:3];
-    }
-    else {//追问
-        [self appendConsultMessage:3];
+    
+    NSDictionary *dic = notification.userInfo;
+    self.imageArray = dic[@"selectImageArray"];
+    
+    [self addSendingConsultMessage:3];
+    
+    [self sendImageToOss];
+}
+
+- (void)sendImageToOss {
+    
+    [self contentArrayInitial:self.imageArray.count > 1];
+    self.service.type = TDOssFileTypeImage;
+    
+    if (self.imageArray.count > 0) {
+        for (int i = 0; i < self.imageArray.count; i++) {
+            TDSelectImageModel *model = self.imageArray[i];
+            NSString *path = [self.service saveImage:model.image withName:[NSString stringWithFormat:@"image%d",i]]; //保存图片到本地
+            NSString *objectKey = [self.service dealDateFormatter:self.username type:@".png"];
+            [self.service asyncPutImage:objectKey localFilePath:path inturn:i+1 total:self.imageArray.count]; //将图片推上阿里oss
+        }
     }
 }
 
-- (void)videoSelectNoti:(NSNotification *)notification {
+- (void)videoSelectNoti:(NSNotification *)notification { //发送视频
+    
+    NSDictionary *dic = notification.userInfo;
+    self.videoPath = dic[@"selectVideoPath"];
+    self.videoTime = [dic[@"selectVideoTime"] intValue];
+    UIImage *videoImage = dic[@"videoThumbImage"];
+    
+    [self addSendingConsultMessage:4];
+    self.sendingModel.videoImage = videoImage;
+  
+    [self sendVideoToOss];
+}
+
+- (void)sendVideoToOss {
+    
+    [self contentArrayInitial:NO];
+    self.service.type = TDOssFileTypeVideo;
+    
+    NSString *objectKey = [self.service dealDateFormatter:self.username type:@".mp4"];
+    [self.service asyncPutImage:objectKey localFilePath:self.videoPath inturn:1 total:1]; //将图片推上阿里oss
+}
+
+- (void)sendAudioToOss { //发送语音
+    
+    [self addSendingConsultMessage:2];
+    
+    [self contentArrayInitial:NO];
+    self.service.type = TDOssFileTypeAudio;
+    
+    NSString *objectKey = [self.service dealDateFormatter:self.username type:@".mp3"];
+    [self.service asyncPutImage:objectKey localFilePath:self.recordUrl inturn:1 total:1]; //将图片推上阿里oss
+}
+
+#pragma mark - OSS 初始化
+- (void)ossServiceInitial {
+    if (self.service) {
+        self.service = nil;
+    }
+    
+    self.service = [[OssService alloc] initWithViewController:self];
+    self.service.delegate = self;
+}
+
+- (void)contentArrayInitial:(BOOL)moreThanOne {
+    
+    [self.contentArray removeAllObjects];
+    self.putOssNum = 0;
+    
+    if (moreThanOne) {
+        self.contentArray = [NSMutableArray arrayWithArray:self.imageArray];
+    }
+}
+
+#pragma mark - TDOssPutFileDelegate
+- (void)putFileToOssSucessDomain:(NSString *)domain fid:(NSString *)fid type:(TDOssFileType)type inturn:(NSInteger)turn total:(NSInteger)total {
+    
+    self.putOssNum ++;
+    
+    if (total > 1) {
+        [self.contentArray replaceObjectAtIndex:turn - 1 withObject:fid];
+        
+    } else {
+        [self.contentArray addObject:fid];
+    }
+    NSLog(@"成功 --- %@ - %ld",self.contentArray,turn);
+    
+    if (self.putOssNum != total) { return; } //返回的数量和总数一样
     
     if (self.whereFrom == TDConsultDetailFromContactUnSolve) { //回复
-        [self replyUserConsult:4];
+        [self replyUserConsult:type];
     }
     else if (self.whereFrom == TDConsultDetailFromNewConsult) { //新建
-        [self postNewConsultMessage:4];
+        [self postNewConsultMessage:type];
     }
     else {//追问
-        [self appendConsultMessage:4];
+        [self appendConsultMessage:type];
     }
+}
+
+- (void)putFileToOssFailed:(NSString *)reason type:(TDOssFileType)type {
+    
+    [self showSendFailedAlertView:type isOssFailed:YES];
+    NSLog(@"失败 ----->> %@ - %ld",reason, type);
+}
+
+- (void)showSendFailedAlertView:(NSInteger)type isOssFailed:(BOOL)ossFailed {
+    
+    self.isConsultSending = NO;
+    [self localConsultSendFailed:YES type:type];
+    
+    if (self.hadShowAlert) { //已经有弹框，就不再弹框
+        return;
+    }
+    [self resendConsultFailedMessageSend:type isOssFailed:ossFailed];
 }
 
 #pragma mark - textView Delegate
@@ -687,27 +1062,48 @@
     if ([text isEqualToString:@"\n"]) { //发送消息
         NSLog(@"------>> 发送消息");
         
-        if (self.whereFrom == TDConsultDetailFromContactUnSolve) { //回复
-            [self replyUserConsult:1];
+        if (textView.text.length == 0) {
+            [self.view makeToast:TDLocalizeSelect(@"ENTER_CONSULT_TEXT", nil) duration:0.8 position:CSToastPositionTop];
+            
+        }
+        else if (textView.text.length > 500) {
+           [self.view makeToast:TDLocalizeSelect(@"CONCULST_MORE_TEXT", nil) duration:0.8 position:CSToastPositionTop];
+            
         }
         else {
-           self.consultID.length == 0 ? [self postNewConsultMessage:1] : [self appendConsultMessage:1];
+            
+            if (![self.toolModel networkingState]) {
+                return NO;
+            }
+            
+            [self addSendingConsultMessage:1]; //构建发送中消息
+            
+            if (self.whereFrom == TDConsultDetailFromContactUnSolve) { //回复
+                [self replyUserConsult:1];
+            }
+            else {
+                self.consultID.length == 0 ? [self postNewConsultMessage:1] : [self appendConsultMessage:1];
+            }
+            textView.text = @"";
+            self.inputViewHeight = 48;
+            [self updateInputViewConstraint];
         }
-        textView.text = @"";
-        self.inputViewHeight = 48;
-        [self updateInputViewConstraint];
         
         return NO;
     }
     else {
-        if (textView.text.length > 100) { return NO; }
+        if (textView.text.length > 500) {//限制500字
+            textView.text = [textView.text substringToIndex:500];
+            return NO;
+        }
         
+        //输入框高度
         CGFloat textHeight = [self.toolModel heightForString:self.inputView.inputTextView.text font:14 width:TDWidth - 122];
         if (textHeight < 30) {
             self.inputViewHeight = 48;
         }
-        else if (textHeight > 70) {
-            self.inputViewHeight = 88;
+        else if (textHeight > 105) {
+            self.inputViewHeight = 123;
         }
         else {
             self.inputViewHeight = textHeight + 18;
@@ -716,6 +1112,24 @@
     }
     
     return YES;
+}
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    if (self.isConsultSending) {
+        return NO;
+    }
+    else {
+        [self ossServiceInitial];//先获取token
+        return YES;
+    }
+}
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    self.inputView.placeLabel.hidden = YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if (textView.text.length == 0) {
+        self.inputView.placeLabel.hidden = NO;
+    }
 }
 
 - (void)updateInputViewConstraint { //输入框高度的处理
@@ -730,10 +1144,7 @@
 - (void)cancelButtonAction:(UIButton *)sender { //取消提示
     [self.inputView resignFirstResponder];
     
-    [self.remindView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(0);
-    }];
+    [self showRemindView:NO];
 }
 
 - (void)answerButtonAction:(UIButton *)sender { //回答问题
@@ -767,14 +1178,23 @@
     self.inputView.recordButton.hidden = !sender.selected;
 }
 
-- (void)imageButtonAction:(UIButton *)sender { //拍摄图片
+- (void)imageButtonAction:(UIButton *)sender { //拍摄和图片
+    [self.inputView.inputTextView resignFirstResponder];
     
-    [self.inputView resignFirstResponder];
+    if (self.isConsultSending) {
+        return;
+    }
+    
+    if (![self.toolModel networkingState]) {
+        return;
+    }
+    
+    [self ossServiceInitial];
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     WS(weakSelf);
-    UIAlertAction *photoAction = [UIAlertAction actionWithTitle:@"拍摄" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *photoAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"TAKE_PHOTO", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [weakSelf gotoCallCameraVc];
     }];
     
@@ -795,9 +1215,13 @@
 - (void)rightButtonAciton:(UIButton *)sender { //已解决或者放弃
     [self.inputView.inputTextView resignFirstResponder];
     
-    NSString *messageStr = self.whereFrom == TDConsultDetailFromUserUnSolve ? @"已解决的问题将无法继续咨询" : @"确定放弃回答此问题？"; //@"已解决的问题将无法继续咨询"
-    NSString *cancelStr = self.whereFrom == TDConsultDetailFromUserUnSolve ? TDLocalizeSelect(@"CANCEL", nil) : @"否";
-    NSString *sureStr = self.whereFrom == TDConsultDetailFromUserUnSolve ? TDLocalizeSelect(@"OK", nil) : @"是";
+    if (self.isConsultSending) {
+        return;
+    }
+    
+    NSString *messageStr = self.whereFrom == TDConsultDetailFromUserUnSolve ? TDLocalizeSelect(@"REMIND_CONSULTTATION_SOLVED", nil) : TDLocalizeSelect(@"WANT_GIVE_UP", nil); 
+    NSString *cancelStr = self.whereFrom == TDConsultDetailFromUserUnSolve ? TDLocalizeSelect(@"CANCEL", nil) : TDLocalizeSelect(@"NO", nil);
+    NSString *sureStr = self.whereFrom == TDConsultDetailFromUserUnSolve ? TDLocalizeSelect(@"OK", nil) : TDLocalizeSelect(@"YES", nil);
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:messageStr preferredStyle:UIAlertControllerStyleAlert];
     
@@ -807,7 +1231,6 @@
     }];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelStr style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
     }];
     
     [alertController addAction:cancelAction];
@@ -816,15 +1239,29 @@
     [self.navigationController presentViewController:alertController animated:YES completion:nil];
 }
 
+- (void)leftButtonAction:(UIButton *)sender {
+    if (self.isConsultSending) { //正在发送
+        [self leaveWhenConsultMessageSend];
+    }
+    else {
+        [self userClickBack];
+    }
+}
+
+- (void)userClickBack {
+    [self removeNotificationObser];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)leaveWhenConsultMessageSend { //正在发送消息，确定离开
-    
     [self.inputView resignFirstResponder];
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"正在发送消息，确定离开？发送将被中断。" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:TDLocalizeSelect(@"SENDING_LEAVING_TEXT", nil) preferredStyle:UIAlertControllerStyleAlert];
     
     WS(weakSelf);
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"OK", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [weakSelf.navigationController popViewControllerAnimated:YES];
+        [weakSelf.service normalRequestCancel];
+        [weakSelf userClickBack];
     }];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"CANCEL", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -835,21 +1272,55 @@
     [alertController addAction:sureAction];
     
     [self.navigationController presentViewController:alertController animated:YES completion:nil];
-    
 }
 
-- (void)consultMessageSendFailed { //发送失败，请重新发送。
-    
+- (void)resendConsultFailedMessageSend:(TDOssFileType)type isOssFailed:(BOOL)ossFailed { //发送失败，请重新发送。
     [self.inputView resignFirstResponder];
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"发送失败，请重新发送。" preferredStyle:UIAlertControllerStyleAlert];
-//    WS(weakSelf);
-    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"重发" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [self ossServiceInitial];//重新获取阿里云SDK的token
+    
+    self.hadShowAlert = YES;
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:TDLocalizeSelect(@"REREND_MIND_TEXT", nil) preferredStyle:UIAlertControllerStyleAlert];
+    WS(weakSelf);
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"RESEND_BUTTON_TEXT", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-    }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        weakSelf.isConsultSending = YES;
+        weakSelf.hadShowAlert = NO;
+        [weakSelf localConsultSendFailed:NO type:type];
         
+        if (ossFailed) { //oss上传失败
+            
+            if (type == TDOssFileTypeAudio) { //语音
+                [weakSelf sendAudioToOss];
+            }
+            else if (type == TDOssFileTypeImage) { //图片
+                [weakSelf sendImageToOss];
+            }
+            else {//视频
+                [weakSelf sendVideoToOss];
+            }
+            
+        } else { //访问接口失败
+            if (weakSelf.whereFrom == TDConsultDetailFromContactUnSolve) { //回复
+                [weakSelf replyUserConsult:type];
+            }
+            else if (self.whereFrom == TDConsultDetailFromNewConsult) { //新建
+                [weakSelf postNewConsultMessage:type];
+            }
+            else {//追问
+                [weakSelf appendConsultMessage:type];
+            }
+        }
     }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"DELETE", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        weakSelf.hadShowAlert = NO;
+        [weakSelf localConsultSendFailed:NO type:type];
+        [weakSelf removeSendingLastObject:YES];
+    }];
+    
     [alertController addAction:cancelAction];
     [alertController addAction:sureAction];
     [self.navigationController presentViewController:alertController animated:YES completion:nil];
@@ -868,7 +1339,7 @@
     [self presentViewController:naviController animated:YES completion:nil];
 }
 
-- (void)allowPHPhotoLibrary:(NSNotification *)notifi {
+- (void)allowPHPhotoLibrary:(NSNotification *)notifi { //允许访问相册通知
     [self gotoSelectImageAction];
 }
 
@@ -887,7 +1358,7 @@
     [self presentViewController:cameraVc animated:YES completion:nil];
 }
 
-- (void)allowAVCaptureDevice:(NSNotification *)notifi {
+- (void)allowAVCaptureDevice:(NSNotification *)notifi {//允许访问相机通知
     [self gotoCallCameraVc];
 }
 
@@ -918,74 +1389,6 @@
 
     [self deleteFile];
 }
-
-- (void)deleteFile { //删除已保存的语音
-    
-    [self deleteRecordAuadio];
-    
-    NSString *strUrl = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *fileUrl = [NSString stringWithFormat:@"%@/%@.mp3",strUrl,self.recordKeyStr];
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager removeItemAtPath:fileUrl error:nil];
-    
-    self.recordUrl = [NSString stringWithFormat:@"%@/%@.lpcm",strUrl,self.recordKeyStr];
-}
-
-- (void)longPress:(UILongPressGestureRecognizer *)gestureRecognizer {
-    
-    if (![self.permissionModel requestAVMediaTypePermissionInController:self type:1]) {
-        return;
-    }
-    
-    CGPoint point = [gestureRecognizer locationInView:self.inputView.recordButton];
-    
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"长按开始");
-        
-        self.recordView.hidden = NO;
-        [self startRecord];
-        [self updateRecordButton:TDLocalizeSelect(@"RELEASE_TO_SAVE", nil) imageStr:@"record_black_image" enable:YES];
-        
-    } else if(gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        NSLog(@"长按结束");
-        
-        if (self.isOverTime) {
-            self.isOverTime = NO;
-            return;
-        }
-        
-        self.recordView.hidden = YES;
-        
-        if (point.y > -35) {
-            [self recordFinish];
-            
-        } else {
-//            self.inputView.audioPlayView.hidden = YES;
-            [self updateRecordButton:TDLocalizeSelect(@"HOLD_TO_RECORD", nil) imageStr:@"record_not_image" enable:YES];
-            [self updateRecordView:NO];
-            [self cancelRecord];
-        }
-        
-    } else if(gestureRecognizer.state == UIGestureRecognizerStateChanged) {
-        NSLog(@"长按中");
-        
-        if (self.isOverTime) {
-            return;
-        }
-        
-        [self updateRecordButton:TDLocalizeSelect(@"RELEASE_TO_SAVE", nil) imageStr:@"record_black_image" enable:YES];
-        if (point.y > -35) {
-            [self updateRecordView:NO];
-            
-        } else {
-            [self updateRecordView:YES];
-        }
-    }
-    
-    //    NSLog(@"y轴移动-------->>> %lf",point.y);
-}
-
 
 - (void)startRecord { //开始录音
 
@@ -1038,39 +1441,44 @@
 
     if (self.mp3TimeNum > 2) { //如果录制时间<2不发送
         [NSThread detachNewThreadSelector:@selector(transformVAFToMP3) toTarget:self withObject:nil];
-        [self updateAvButtonConstraint];
-        [self updateRecordButton:TDLocalizeSelect(@"MAX_ONE_RECORD", nil) imageStr:@"record_not_image" enable:NO];
 
     } else {
         [self.audioRecorder deleteRecording];
-        [self updateRecordButton:TDLocalizeSelect(@"HOLD_TO_RECORD", nil) imageStr:@"record_not_image" enable:YES];
         [self.view makeToast:TDLocalizeSelect(@"ENCH_RECOR_LESS_TWO_SECOND", nil) duration:0.8 position:CSToastPositionCenter];
     }
+    [self updateRecordButton:TDLocalizeSelect(@"HOLD_TO_RECORD", nil) imageStr:@"record_not_image" enable:YES];
 
     [self stopRecord];
 }
 
 - (void)deleteRecordAuadio { //删除录音文件
-
-    if (self.audioPlayer.playing) {
-        [self.audioPlayer stop];
-        [self stopPlayMp3Constraint];
-    }
-
     [self.audioRecorder deleteRecording];
 }
 
-- (void)detectionVoice { //音量大小
+- (void)deleteFile { //删除已保存的语音
+    
+    [self deleteRecordAuadio];
+    
+    NSString *strUrl = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *fileUrl = [NSString stringWithFormat:@"%@/%@.mp3",strUrl,self.recordKeyStr];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:fileUrl error:nil];
+    
+    self.recordUrl = [NSString stringWithFormat:@"%@/%@.lpcm",strUrl,self.recordKeyStr];
+}
 
+- (void)detectionVoice { //音量大小
+    
     if (self.isSwipe) {
         return;
     }
-
+    
     [self.audioRecorder updateMeters]; //刷新音量数据
-
+    
     //    [self.audioRecorder averagePowerForChannel:0]; //获取音量的平均值
     //    [self.audioRecorder peakPowerForChannel:0]; //音量的最大值
-
+    
     double lowPassResults = pow(10, ([self.audioRecorder peakPowerForChannel:0] * 0.05));
     //    NSLog(@"音量最大值----->>>%lf",lowPassResults);
     if (lowPassResults < 0) {
@@ -1097,7 +1505,7 @@
     if (self.audioRecorder.currentTime >= Limite_Record_Time - 10) {
         self.recordView.imageView.hidden = YES;
         self.recordView.countDownLabel.hidden = NO;
-        self.recordView.countDownLabel.text = [NSString stringWithFormat:@"%ld",Limite_Record_Time - self.recordTimeNum];
+        self.recordView.countDownLabel.text = [NSString stringWithFormat:@"%d",Limite_Record_Time - self.recordTimeNum];
     }
     
     if (ceil(self.audioRecorder.currentTime) >= Limite_Record_Time) {
@@ -1151,8 +1559,10 @@
     }
     @finally {
         NSLog(@"MP3生成成功: %@",self.mp3FilePath);
+        
         self.recordUrl = self.mp3FilePath;
-
+        [self sendAudioToOss];
+        
         //MP3时间
         //        AVURLAsset* audioAsset =[AVURLAsset URLAssetWithURL:[NSURL fileURLWithPath:self.mp3FilePath] options:nil];
         //        CMTime audioDuration = audioAsset.duration;
@@ -1184,7 +1594,67 @@
         return -1;
     }
 }
+#pragma mark - 长按录音
+- (UIRectEdge)preferredScreenEdgesDeferringSystemGestures {
+    return UIRectEdgeNone;
+}
 
+- (void)longPress:(UILongPressGestureRecognizer *)gestureRecognizer {
+    
+    if (self.isConsultSending) {
+        return;
+    }
+    if (![self.permissionModel requestAVMediaTypePermissionInController:self type:1]) {
+        return;
+    }
+    
+    CGPoint point = [gestureRecognizer locationInView:self.inputView.recordButton];
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"长按开始");
+        
+        [self ossServiceInitial];//先获取token
+        
+        self.recordView.hidden = NO;
+        [self startRecord];
+        [self updateRecordButton:TDLocalizeSelect(@"RELEASE_TO_SAVE", nil) imageStr:@"record_black_image" enable:YES];
+        
+    } else if(gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        NSLog(@"长按结束");
+        
+        if (self.isOverTime) {
+            self.isOverTime = NO;
+            return;
+        }
+        
+        self.recordView.hidden = YES;
+        
+        if (point.y > -35) { //在范围内
+            [self recordFinish];
+            
+        } else {//出了范围，取消
+            [self updateRecordButton:TDLocalizeSelect(@"HOLD_TO_RECORD", nil) imageStr:@"record_not_image" enable:YES];
+            [self updateRecordView:NO];
+            [self cancelRecord];
+        }
+        
+    } else if(gestureRecognizer.state == UIGestureRecognizerStateChanged) {
+        NSLog(@"长按中");
+        
+        if (self.isOverTime) {
+            return;
+        }
+        
+        [self updateRecordButton:TDLocalizeSelect(@"RELEASE_TO_SAVE", nil) imageStr:@"record_black_image" enable:YES];
+        if (point.y > -35) {
+            [self updateRecordView:NO];
+            
+        } else {
+            [self updateRecordView:YES];
+        }
+    }
+    
+    //    NSLog(@"y轴移动-------->>> %lf",point.y);
+}
 
 - (void)updateRecordView:(BOOL)isSwipe {
 
@@ -1204,69 +1674,107 @@
 //    self.inputView.recordButton.userInteractionEnabled = enable;
 }
 
-- (void)updateAvButtonConstraint { //更新语音的布局
-
-//    self.inputView.audioPlayView.hidden = NO;
-
-//    self.inputView.audioPlayView.timeLabel.text = [NSString stringWithFormat:@"%d“",self.mp3TimeNum];
-//    float width = (TDWidth - 88) * (self.mp3TimeNum / Limite_Record_Time);
-//
-//    [self.inputView.audioPlayView mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(self.view.mas_left).offset(13);
-//        make.bottom.mas_equalTo(self.inputView.imageView.mas_top).offset(-18);
-//        make.height.mas_equalTo(30);
-//        make.width.mas_equalTo(width > 88 ? width : 88);
-//    }];
-}
-
-#pragma mark - 播放录音
-- (void)playAvAudio { //点击时候播放与暂停
-
-    if (self.audioPlayer.playing) {
-        [self.audioPlayer stop];
-        [self stopPlayMp3Constraint];
-        return;
+#pragma mark - 播放语音
+- (void)playVoiceAction:(TDConsultDetailModel *)detailModel index:(NSInteger)index play:(BOOL)isplay {
+    
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [[AVAudioSession sharedInstance] setActive:YES error:nil];
+    
+    if (isplay == NO) { //停止
+        
+        detailModel.isPlaying = NO;
+        [self.avPlayer pause];
+        
+    } else { //播放
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"user_tap_other_voiceView" object:nil userInfo:@{@"row_user_tap": [NSString stringWithFormat:@"%ld",(long)index]}];
+        
+        [self playConsultDetailVoice:detailModel];
     }
-
-
-    [self.audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
-    [self.audioSession setActive:YES error:nil];
-
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:self.recordUrl] error:nil];
-    self.audioPlayer.delegate = self;
-    [self.audioPlayer prepareToPlay];
-    [self.audioPlayer play];
-
-    self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(playTimerAction) userInfo:nil repeats:YES];
-
-    //    NSLog(@"播放时间 ---->> %f",audioPlayer);
 }
 
-- (void)playTimerAction {
-
-    self.playImageNum ++;
-//    switch (self.playImageNum % 3) {
-//        case 0:
-//            self.inputView.audioPlayView.imageView.image = [UIImage imageNamed:@"player_three_image"];
-//            break;
-//        case 1:
-//            self.inputView.audioPlayView.imageView.image = [UIImage imageNamed:@"player_one_image"];
-//            break;
-//        default:
-//            self.inputView.audioPlayView.imageView.image = [UIImage imageNamed:@"player_two_image"];
-//            break;
-//    }
+- (void)playConsultDetailVoice:(TDConsultDetailModel *)detailModel {
+    
+    detailModel.isPlaying = YES;
+    
+    //网络url
+    AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:detailModel.content]];
+    [self.avPlayer replaceCurrentItemWithPlayerItem:playerItem];
+    
+    [self addNSNotificationForPlayMusicFinish:playerItem];
+    
+    [self.avPlayer play];
+    
 }
 
-// AVAudioPlayerDelegate
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag { //播放结束
-
-    [self stopPlayMp3Constraint];
+- (void)addNSNotificationForPlayMusicFinish:(AVPlayerItem *)playerItem { //加入通知
+    //播放结束
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+//    [playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
 }
 
-- (void)stopPlayMp3Constraint {
-//    self.inputView.audioPlayView.imageView.image = [UIImage imageNamed:@"player_black_image"];
-    [self.playTimer invalidate];
+- (void)playFinished:(NSNotification *)notifi {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    NSLog(@"音频播放结束----------------");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"voice_play_endTime_notificatiion" object:nil];
+    
+}
+
+//- (void)removePlayStatus { //移除监听播放器状态
+//    NSLog(@"移除播放状态监听----------------");
+//    [self.avPlayer.currentItem removeObserver:self forKeyPath:@"status"];
+//}
+
+//观察者回调
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    
+    if ([keyPath isEqualToString:@"status"]) {
+        
+        switch (self.avPlayer.status) {
+            case AVPlayerStatusUnknown: {
+                NSLog(@"未知转态");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"voice_play_endTime_notificatiion" object:nil];
+                [self.view makeToast:TDLocalizeSelect(@"FAILED_LOAD_AUDIO", nil) duration:0.8 position:CSToastPositionCenter];
+            }
+                break;
+            case AVPlayerStatusReadyToPlay: { //准备播放
+                NSLog(@"准备播放");
+            }
+                break;
+            case AVPlayerStatusFailed: {
+                NSLog(@"加载失败");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"voice_play_endTime_notificatiion" object:nil];
+                [self.view makeToast:TDLocalizeSelect(@"FAILED_LOAD_AUDIO", nil) duration:0.8 position:CSToastPositionCenter];
+            }
+                break;
+                
+            default:
+                break;
+        }
+        
+    }
+}
+
+- (void)deleteVoiceFile { //删除保存在本地的录音文件，防止占用手机存储空间
+    
+    if (self.avPlayer) {
+        [self.avPlayer pause];
+    }
+    [self.audioRecorder deleteRecording];
+    
+    NSString *strUrl = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *fileUrl = [NSString stringWithFormat:@"%@/%@.mp3",strUrl,self.recordKeyStr];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:fileUrl error:nil];
+}
+
+- (void)stopPalyingAudio {
+    if (self.avPlayer) {
+        [self.avPlayer pause];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"user_leave_voiceView" object:nil];
 }
 
 #pragma mark - UI
@@ -1295,16 +1803,16 @@
     self.answerButton = [[UIButton alloc] init];
     self.answerButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.answerButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
-    [self.answerButton setTitle:@"回答问题" forState:UIControlStateNormal];
+    [self.answerButton setTitle:TDLocalizeSelect(@"ANSER_BUTTON_TEXT", nil) forState:UIControlStateNormal];
     [self.answerButton setTitleColor:[UIColor colorWithHexString:colorHexStr13] forState:UIControlStateNormal];
     [self.answerButton addTarget:self action:@selector(answerButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     self.answerButton.layer.masksToBounds = YES;
     self.answerButton.layer.cornerRadius = 4.0;
     [self.view addSubview:self.answerButton];
     
-    NSString *rightStr = @"已解决";
+    NSString *rightStr = TDLocalizeSelect(@"RESOLVED_BUTTON_TITLE", nil);
     if (self.whereFrom == TDConsultDetailFromContactUnSolve) {
-        rightStr = @"放弃";
+        rightStr = TDLocalizeSelect(@"GIVE_UP_NAVI", nil);
     }
     [self.rightButton setTitle:rightStr forState:UIControlStateNormal];
     
@@ -1398,6 +1906,18 @@
     [self.view addSubview:self.recordView];
     
     self.recordView.hidden = YES;
+    
+    self.nullLabel = [[UILabel alloc] init];
+    self.nullLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
+    self.nullLabel.textAlignment = NSTextAlignmentCenter;
+    self.nullLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
+    [self.tableView addSubview:self.nullLabel];
+    
+    [self.nullLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(self.tableView);
+    }];
+    
+    self.nullLabel.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {

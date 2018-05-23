@@ -1,1 +1,1 @@
-../../../Parse/Parse/ParseClientConfiguration.h
+../../../Parse/Parse/Parse/ParseClientConfiguration.h

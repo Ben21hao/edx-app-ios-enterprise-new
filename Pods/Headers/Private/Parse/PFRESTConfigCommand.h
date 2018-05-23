@@ -1,1 +1,1 @@
-../../../Parse/Parse/Internal/Commands/PFRESTConfigCommand.h
+../../../Parse/Parse/Parse/Internal/Commands/PFRESTConfigCommand.h

@@ -90,8 +90,7 @@
     CFShow((__bridge CFTypeRef)(infoDic));
     NSString *appName = infoDic[@"CFBundleDisplayName"];
     
-    NSString *messageStr = [TDLocalizeSelect(@"ALLOW_USE_CAMERA_TEXT", nil) oex_formatWithParameters:@{@"name": appName}];
-    
+    NSString *messageStr;
     switch (type) {
         case 0:
             messageStr = [TDLocalizeSelect(@"ALLOW_USE_CAMERA_TEXT", nil) oex_formatWithParameters:@{@"name": appName}];

@@ -14,6 +14,7 @@
 @interface TDQuentionMessageCell : TDBaseNormalCell
 
 @property (nonatomic,strong) TDMyAnswerModel *model;
+@property (nonatomic,assign) NSInteger whereFrom;
 
 @property (nonatomic,strong) TDRoundHeadImageView *headerImage;
 @property (nonatomic,strong) UILabel *nameLabel;

@@ -7,8 +7,11 @@
 //
 
 #import "TDConsultImageCell.h"
+
 #import "TDRoundHeadImageView.h"
 #import <UIImageView+WebCache.h>
+#import "TDSelectImageModel.h"
+#import "NSString+OEXFormatting.h"
 
 #define IMAGE_WIDTH (TDWidth - 95) / 4
 
@@ -29,24 +32,20 @@
     
     [self dealWithCellData];
     
-    if (detailModel.content.length > 0) {
-        self.imageArray = [detailModel.content componentsSeparatedByString:@","];
-        [self setImageViewConstraint:self.imageArray];
+    if (detailModel.isSending || detailModel.sendFailed) { //正在发送的用本地图片，后台数据网络图片
+        if (detailModel.imageArray.count > 0) {
+            self.imageArray = detailModel.imageArray;
+        }
     }
+    else {
+        if (detailModel.content.length > 0) {
+            self.imageArray = [detailModel.content componentsSeparatedByString:@","];
+        }
+    }
+    [self setImageViewConstraint:self.imageArray];
 }
 
 - (void)dealWithCellData {
-    
-    self.timeView.timeLabel.text = self.detailModel.created_at;
-    self.nameLabel.text = self.detailModel.username;
-    
-    NSURL *headerUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ELITEU_URL,self.detailModel.userprofile_image]];
-    [self.headerImage sd_setImageWithURL:headerUrl placeholderImage:[UIImage imageNamed:@"default_dark_image"]];
-    
-    [self updateCellConstraint];
-}
-
-- (void)updateCellConstraint {
     
     BOOL isShow = [self.detailModel.is_show_time boolValue];
     
@@ -67,6 +66,25 @@
         self.headerImage.hidden = YES;
         self.nameLabel.hidden = YES;
     }
+    else {
+        self.timeView.timeLabel.text = self.detailModel.created_at;
+        if ([self.detailModel.is_reply boolValue]) {
+            if ([self.detailModel.user_id isEqualToString:self.userId]) {
+                self.nameLabel.attributedText = [self setDetailString:TDLocalizeSelect(@"ANSWERED_BY_ME", nil) name:TDLocalizeSelect(@"ME", nil)];
+            } else {
+                self.nameLabel.attributedText = [self setDetailString:[TDLocalizeSelect(@"CONSULTATION_REPLIED", nil) oex_formatWithParameters:@{@"name" : self.detailModel.username}] name:self.detailModel.username];
+            }
+        }
+        else {
+            self.nameLabel.text = self.detailModel.username;
+        }
+        
+        NSURL *headerUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ELITEU_URL,self.detailModel.userprofile_image]];
+        [self.headerImage sd_setImageWithURL:headerUrl placeholderImage:[UIImage imageNamed:@"default_dark_image"]];
+    }
+    
+    self.detailModel.isSending ? [self.activityView startAnimating] : [self.activityView stopAnimating];
+    self.statusButton.hidden = !self.detailModel.sendFailed;
 }
 
 - (void)setImageViewConstraint:(NSArray *)imageArray {
@@ -85,11 +103,17 @@
                 make.left.mas_equalTo(self.photoView.mas_left).offset(i * IMAGE_WIDTH);
             }];
             
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",imageArray[i]]];
-            [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"image_loading"]];
-            
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-            [imageView addGestureRecognizer:tap];
+            if (self.detailModel.isSending || self.detailModel.sendFailed) { //本地的图片
+                TDSelectImageModel *model = imageArray[i];
+                imageView.image = model.image;
+            }
+            else {
+                NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",imageArray[i]]];
+                [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"image_loading"]];
+                
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+                [imageView addGestureRecognizer:tap];
+            }
         }
         
         [self.photoView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -105,6 +129,19 @@
     if (self.tapImageHandle) {
         self.tapImageHandle(self.imageArray,tap.view.tag);
     }
+}
+
+- (NSMutableAttributedString *)setDetailString:(NSString *)titleStr name:(NSString *)nameStr {
+    
+    NSRange range = [titleStr rangeOfString:nameStr];//空格
+    NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:titleStr
+                                                                             attributes:@{                                                                                          NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr9]
+                                                                                                                                                                                    }];
+    NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:nameStr
+                                                                             attributes:@{                                                                                          NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr8]
+                                                                                                                                                                                    }];
+    [str1 replaceCharactersInRange:range withAttributedString:str2];
+    return str1;
 }
 
 #pragma mark - UI

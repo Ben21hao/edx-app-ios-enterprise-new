@@ -1,1 +1,1 @@
-../../../Parse/Parse/Internal/Installation/CurrentInstallationController/PFCurrentInstallationController.h
+../../../Parse/Parse/Parse/Internal/Installation/CurrentInstallationController/PFCurrentInstallationController.h

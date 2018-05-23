@@ -12,6 +12,7 @@
 
 #import "TDPreviewImageCell.h"
 #import "TDSelectBottomView.h"
+#import "TDImageHandle.h"
 
 @interface TDPreViewImageViewController () <UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,UIScrollViewDelegate>
 
@@ -70,6 +71,7 @@
     model.selected = sender.selected;
     
     if (sender.selected) {
+        [self getBigImage:model];
         [self.selectImageArray addObject:model];
         
     } else {
@@ -89,7 +91,14 @@
     if (sender.selected) {
         return;
     }
+    
+    if (![[[TDBaseToolModel alloc] init] getNetworkingState]) { //没有网络
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_NOT_AVAILABLE_MESSAGE_TROUBLE", nil) duration:0.8 position:CSToastPositionCenter];
+        return;
+    }
+    
     sender.selected = YES;
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"User_Had_SelectImage" object:nil userInfo:@{@"selectImageArray" : self.selectImageArray}];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
@@ -142,20 +151,29 @@
     [[UIApplication sharedApplication] setStatusBarHidden:!isHidden withAnimation:UIStatusBarAnimationFade];
     [self.navigationController setNavigationBarHidden:!isHidden animated:YES];
     
-    [UIView animateWithDuration:0.3 animations:^{
-        
-        [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(self.view);
-            make.bottom.mas_equalTo(self.view.mas_bottom).offset(isHidden ? 0 : 48);
-            make.height.mas_equalTo(48);
-        }];
+    [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.view.mas_bottom).offset(isHidden ? 0 : 48);
+        make.height.mas_equalTo(48);
     }];
+}
+
+- (void)getBigImage:(TDSelectImageModel *)model { //拿到大的缩略图
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [model.asset original:^(UIImage *result, NSDictionary *info) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                model.image = result;
+            });
+        }];
+    });
 }
 
 #pragma mark - UI
 - (void)setViewConstraint {
     
     self.navigationController.navigationBar.translucent = YES;
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
@@ -170,6 +188,12 @@
     [self.view addSubview:self.collectionView];
     
     [self.collectionView registerClass:[TDPreviewImageCell class] forCellWithReuseIdentifier:@"TDPreviewImageCell"];
+    
+    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view.mas_top);
+        make.bottom.mas_equalTo(self.view.mas_bottom);
+    }];
     
     self.bottomView = [[TDSelectBottomView alloc] init];
     self.bottomView.isPreView = YES;
@@ -187,7 +211,6 @@
     self.bottomView.hidden = self.whereFrom != TDPreviewImageFromPreviewAllImage;
     
     if (self.whereFrom == TDPreviewImageFromPreviewAllImage) {
-        
         TDSelectImageModel *model = self.imageArray[self.index];
         self.bottomView.previewButton.selected = model.selected;
     }

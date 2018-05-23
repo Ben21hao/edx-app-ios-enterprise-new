@@ -93,7 +93,7 @@ class TDLectureSubViewController: UIViewController,UITableViewDelegate,UITableVi
         dic.setValue(self.username, forKey: "username")
         dic.setValue((self.whereFrom + 1), forKey: "status")
         
-        let apiHostUrl = OEXConfig.sharedConfig().apiHostURL()
+        let apiHostUrl = OEXConfig.sharedConfig().apiHostURL()! //注意解包
         let url = "\(apiHostUrl)/api/mobile/enterprise/v0.5/live/\(self.username)"
         let manager = AFHTTPSessionManager()
         manager.GET(url, parameters: dic, progress: nil, success: { (task, responseObject) in

@@ -7,6 +7,7 @@
 //
 
 #import "TDSelectBottomView.h"
+#import "NSString+OEXFormatting.h"
 
 @implementation TDSelectBottomView
 
@@ -22,7 +23,7 @@
     self.sureButton.userInteractionEnabled = isEnable;
     self.previewButton.userInteractionEnabled = self.isPreView ? YES : isEnable;
     
-    NSString *selectStr = selectNum == 0 ? TDLocalizeSelect(@"OK", nil) : [NSString stringWithFormat:@"%@(%ld)",TDLocalizeSelect(@"OK", nil),(long)selectNum];
+    NSString *selectStr = selectNum == 0 ? TDLocalizeSelect(@"SEND_MESSAGE_BUTTON", nil) : [TDLocalizeSelect(@"SEND_BUTTON_NUM", nil) oex_formatWithParameters:@{@"count":[NSString stringWithFormat:@"%ld",(long)selectNum]}];
     [self.sureButton setTitle:selectStr forState:UIControlStateNormal];
 }
 
@@ -51,7 +52,7 @@
     self.sureButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.sureButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     [self.sureButton setTitleColor:[UIColor colorWithHexString:colorHexStr8] forState:UIControlStateNormal];
-    [self.sureButton setTitle:TDLocalizeSelect(@"OK", nil) forState:UIControlStateNormal];
+    [self.sureButton setTitle:TDLocalizeSelect(@"SEND_MESSAGE_BUTTON", nil) forState:UIControlStateNormal];
     [self addSubview:self.sureButton];
 
 }

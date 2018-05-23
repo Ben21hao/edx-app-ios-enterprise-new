@@ -1,1 +1,1 @@
-../../../Parse/Parse/Internal/Analytics/Controller/PFAnalyticsController.h
+../../../Parse/Parse/Parse/Internal/Analytics/Controller/PFAnalyticsController.h

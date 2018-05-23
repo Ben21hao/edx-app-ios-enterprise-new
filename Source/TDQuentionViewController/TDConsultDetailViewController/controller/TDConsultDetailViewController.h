@@ -27,10 +27,13 @@ typedef NS_ENUM(NSInteger, TDContactConsultStatus) { //我的回答 -- 咨询状
 @interface TDConsultDetailViewController : TDBaseViewController
 
 @property (nonatomic,assign) TDConsultDetailFrom whereFrom;
-
-@property (nonatomic,strong) NSString *username;
-@property (nonatomic,strong) NSString *consultID;
 @property (nonatomic,assign) TDContactConsultStatus consultStatus;
 
+@property (nonatomic,strong) NSString *username;
+@property (nonatomic,strong) NSString *userId;
+@property (nonatomic,strong) NSString *consultID;
+@property (nonatomic,assign) BOOL hasNoRead;
+
+@property (nonatomic,copy) void(^reloadUserConsultStatus)(NSString *consult_status);
 
 @end

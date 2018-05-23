@@ -10,7 +10,7 @@
 
 @interface TDWebThumbImageModel : NSObject
 
-+ (UIImage *)getThumbnailImage:(NSString *)videoPath;
-+ (UIImage *)getWebUrlVideoThumbnailImage:(NSString *)videoUrl;
++ (UIImage *)getThumbnailImage:(NSString *)videoPath; //本地视频缩略图
++ (UIImage *)getVideoThumbnailImage:(NSString *)videoUrl isLoacal:(BOOL)isLocal; //isLocal 是否是本地视频
 
 @end

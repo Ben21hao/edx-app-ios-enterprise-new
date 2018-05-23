@@ -46,6 +46,7 @@
  网络监测 Yes 有网络, No 网络连接出错
  */
 - (BOOL)networkingState;
+- (BOOL)getNetworkingState;
 
 /*
  数字小数点后面显示小一点

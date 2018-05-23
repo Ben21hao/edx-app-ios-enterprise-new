@@ -382,7 +382,6 @@
 		8F562F8C1A1F44FC00320DB3 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F562F8B1A1F44FC00320DB3 /* AddressBook.framework */; };
 		8F562F8E1A1F450A00320DB3 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F562F8D1A1F450A00320DB3 /* AssetsLibrary.framework */; };
 		8F562F901A1F451600320DB3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F562F8F1A1F451600320DB3 /* CoreMotion.framework */; };
-		8FE04B4D1A1E2637007F88B8 /* OEXFBSocial.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE04B4C1A1E2637007F88B8 /* OEXFBSocial.m */; };
 		9C9B7F6C1A8CC68400A857B2 /* OEXFindCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B7F641A8CC68400A857B2 /* OEXFindCoursesViewController.m */; };
 		9C9B7F6D1A8CC68400A857B2 /* OEXCourseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B7F661A8CC68400A857B2 /* OEXCourseInfoViewController.m */; };
 		9C9B7F731A8CC80E00A857B2 /* OEXURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9B7F721A8CC80E00A857B2 /* OEXURLSessionManager.m */; };
@@ -462,10 +461,7 @@
 		A4595674209AB07200706DB7 /* TDPreviewImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4595670209AB07200706DB7 /* TDPreviewImageCell.m */; };
 		A4595675209AB07200706DB7 /* TDImageGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4595671209AB07200706DB7 /* TDImageGroupCell.m */; };
 		A4595676209AB07200706DB7 /* TDImageSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4595672209AB07200706DB7 /* TDImageSelectCell.m */; };
-		A4595678209AF19700706DB7 /* 1525328780.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A4595677209AF19700706DB7 /* 1525328780.mp4 */; };
 		A459567B209AF4D900706DB7 /* TDNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A459567A209AF4D900706DB7 /* TDNavigationViewController.m */; };
-		A4595681209B0D9C00706DB7 /* 1525339605.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A4595680209B0D9C00706DB7 /* 1525339605.mp4 */; };
-		A4595683209B10F300706DB7 /* 1525340380.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A4595682209B10F300706DB7 /* 1525340380.mp4 */; };
 		A46B92CE200A11CA003EB4E4 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46B92CD200A11CA003EB4E4 /* libmp3lame.a */; };
 		A46B92D2200A1288003EB4E4 /* TDRoundHeadImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A46B92D1200A1288003EB4E4 /* TDRoundHeadImageView.m */; };
 		A46B92D5200A13C1003EB4E4 /* TDBaseCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A46B92D4200A13C1003EB4E4 /* TDBaseCollectionView.m */; };
@@ -493,6 +489,8 @@
 		A49EA324200A0F9B00CD6CF1 /* TDImageSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = A49EA307200A0F9B00CD6CF1 /* TDImageSelectView.m */; };
 		A49EA325200A0F9B00CD6CF1 /* TDQuetionInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = A49EA309200A0F9B00CD6CF1 /* TDQuetionInputView.m */; };
 		A49EA326200A0F9B00CD6CF1 /* TDRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = A49EA30B200A0F9B00CD6CF1 /* TDRecordView.m */; };
+		A4AEE9FB20A43B7900C3D835 /* OSSConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AEE9F720A43B7800C3D835 /* OSSConstants.m */; };
+		A4AEE9FC20A43B7900C3D835 /* OssService.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AEE9F820A43B7800C3D835 /* OssService.m */; };
 		A4D1184B2091DC9D00D84235 /* SRUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D1184A2091DC9D00D84235 /* SRUtil.m */; };
 		A4D53DAF209C4D850014E723 /* TDAvPlayerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D53DAE209C4D850014E723 /* TDAvPlayerOperation.m */; };
 		A4D75E5B2015C50C006CC542 /* TDWebImagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D75E5A2015C50C006CC542 /* TDWebImagePreviewCell.m */; };
@@ -1464,8 +1462,6 @@
 		8F562F8B1A1F44FC00320DB3 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		8F562F8D1A1F450A00320DB3 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		8F562F8F1A1F451600320DB3 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		8FE04B4B1A1E2637007F88B8 /* OEXFBSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXFBSocial.h; sourceTree = "<group>"; };
-		8FE04B4C1A1E2637007F88B8 /* OEXFBSocial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXFBSocial.m; sourceTree = "<group>"; };
 		9C9B7F631A8CC68400A857B2 /* OEXFindCoursesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXFindCoursesViewController.h; sourceTree = "<group>"; };
 		9C9B7F641A8CC68400A857B2 /* OEXFindCoursesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXFindCoursesViewController.m; sourceTree = "<group>"; };
 		9C9B7F651A8CC68400A857B2 /* OEXCourseInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXCourseInfoViewController.h; sourceTree = "<group>"; };
@@ -1592,11 +1588,8 @@
 		A4595671209AB07200706DB7 /* TDImageGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDImageGroupCell.m; sourceTree = "<group>"; };
 		A4595672209AB07200706DB7 /* TDImageSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDImageSelectCell.m; sourceTree = "<group>"; };
 		A4595673209AB07200706DB7 /* TDPreviewImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDPreviewImageCell.h; sourceTree = "<group>"; };
-		A4595677209AF19700706DB7 /* 1525328780.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1525328780.mp4; sourceTree = "<group>"; };
 		A4595679209AF4D900706DB7 /* TDNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDNavigationViewController.h; sourceTree = "<group>"; };
 		A459567A209AF4D900706DB7 /* TDNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDNavigationViewController.m; sourceTree = "<group>"; };
-		A4595680209B0D9C00706DB7 /* 1525339605.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1525339605.mp4; sourceTree = "<group>"; };
-		A4595682209B10F300706DB7 /* 1525340380.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1525340380.mp4; sourceTree = "<group>"; };
 		A46B92CB200A11CA003EB4E4 /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
 		A46B92CD200A11CA003EB4E4 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
 		A46B92D0200A1288003EB4E4 /* TDRoundHeadImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDRoundHeadImageView.h; sourceTree = "<group>"; };
@@ -1647,6 +1640,10 @@
 		A49EA309200A0F9B00CD6CF1 /* TDQuetionInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDQuetionInputView.m; sourceTree = "<group>"; };
 		A49EA30A200A0F9B00CD6CF1 /* TDRecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDRecordView.h; sourceTree = "<group>"; };
 		A49EA30B200A0F9B00CD6CF1 /* TDRecordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRecordView.m; sourceTree = "<group>"; };
+		A4AEE9F720A43B7800C3D835 /* OSSConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSSConstants.m; sourceTree = "<group>"; };
+		A4AEE9F820A43B7800C3D835 /* OssService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OssService.m; sourceTree = "<group>"; };
+		A4AEE9F920A43B7900C3D835 /* OSSConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSSConstants.h; sourceTree = "<group>"; };
+		A4AEE9FA20A43B7900C3D835 /* OssService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OssService.h; sourceTree = "<group>"; };
 		A4D118492091DC9D00D84235 /* SRUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRUtil.h; sourceTree = "<group>"; };
 		A4D1184A2091DC9D00D84235 /* SRUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRUtil.m; sourceTree = "<group>"; };
 		A4D53DAD209C4D850014E723 /* TDAvPlayerOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAvPlayerOperation.h; sourceTree = "<group>"; };
@@ -2472,9 +2469,7 @@
 		BECB7B591924D760009C77F1 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		BECB7B671924EE11009C77F1 /* OEXLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXLoginViewController.h; sourceTree = "<group>"; };
 		BECB7B681924EE11009C77F1 /* OEXLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXLoginViewController.m; sourceTree = "<group>"; };
-		C1061FFC436565270CDA40E3 /* Pods-edXTests.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-edXTests.profile.xcconfig"; path = "Pods/Target Support Files/Pods-edXTests/Pods-edXTests.profile.xcconfig"; sourceTree = "<group>"; };
 		C7C088336C8983E1C003D89D /* libPods-edX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-edX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D403B266ACE25A256FD75605 /* Pods-edXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-edXTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-edXTests/Pods-edXTests.release.xcconfig"; sourceTree = "<group>"; };
 		E00523421CF81D9800B7F5C3 /* DiscussionBlockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionBlockViewController.swift; sourceTree = "<group>"; };
 		E01591F11D533F3B00201B15 /* UIViewController+CommonAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+CommonAdditions.swift"; sourceTree = "<group>"; };
 		E01F45661E03D04100B9D7DC /* FirebaseAnalyticsTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsTracker.swift; sourceTree = "<group>"; };
@@ -2493,7 +2488,6 @@
 		E0AF4E8D1BFB19CC0083753C /* PassthroughView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
 		E0C6EF961BFF4B9900B315E3 /* UIButton+TintColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+TintColor.swift"; sourceTree = "<group>"; };
 		E0ED96E61D6EED1C00B48B64 /* OEXCourseInfoViewController+Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OEXCourseInfoViewController+Swift.swift"; sourceTree = "<group>"; };
-		E638C306F51AA4045D332D34 /* Pods-edXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-edXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-edXTests/Pods-edXTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Authenticators.swift"; sourceTree = "<group>"; };
 		F22A0ABC1CE660B300D50DFF /* LoginApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginApi.swift; sourceTree = SOURCE_ROOT; };
 		FFF07B872500B8140F91FB08 /* Pods-edX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-edX.release.xcconfig"; path = "Pods/Target Support Files/Pods-edX/Pods-edX.release.xcconfig"; sourceTree = "<group>"; };
@@ -2576,9 +2570,6 @@
 				B1AF3BB032520841A93A174B /* Pods-edX.debug.xcconfig */,
 				FFF07B872500B8140F91FB08 /* Pods-edX.release.xcconfig */,
 				6C5AB6D484316B1D809C5BC7 /* Pods-edX.profile.xcconfig */,
-				E638C306F51AA4045D332D34 /* Pods-edXTests.debug.xcconfig */,
-				D403B266ACE25A256FD75605 /* Pods-edXTests.release.xcconfig */,
-				C1061FFC436565270CDA40E3 /* Pods-edXTests.profile.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -2751,6 +2742,7 @@
 		1A6B23CE1BAB4A5100FD7309 /* User Profiles */ = {
 			isa = PBXGroup;
 			children = (
+				A4AEE9F620A43B7800C3D835 /* TDAliyun */,
 				A4891501200DE4D100DDA75D /* BaiduBCEReader */,
 				A49EA2B5200A0F9B00CD6CF1 /* TDQuentionViewController */,
 				B52E8BF41F0B7AFD00F3170D /* TDLiveToolViewController */,
@@ -3494,8 +3486,6 @@
 				1AB539F61BFDFBCD0065501F /* Debug */,
 				8F562F861A1F2D2C00320DB3 /* OEXGoogleSocial.h */,
 				8F562F871A1F2D2C00320DB3 /* OEXGoogleSocial.m */,
-				8FE04B4B1A1E2637007F88B8 /* OEXFBSocial.h */,
-				8FE04B4C1A1E2637007F88B8 /* OEXFBSocial.m */,
 			);
 			name = SocialLogin;
 			sourceTree = "<group>";
@@ -3892,9 +3882,6 @@
 				A459566B209AAFF200706DB7 /* TDPreviewVideoViewController.m */,
 				A4595679209AF4D900706DB7 /* TDNavigationViewController.h */,
 				A459567A209AF4D900706DB7 /* TDNavigationViewController.m */,
-				A4595677209AF19700706DB7 /* 1525328780.mp4 */,
-				A4595680209B0D9C00706DB7 /* 1525339605.mp4 */,
-				A4595682209B10F300706DB7 /* 1525340380.mp4 */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -4054,6 +4041,17 @@
 				A49EA30B200A0F9B00CD6CF1 /* TDRecordView.m */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		A4AEE9F620A43B7800C3D835 /* TDAliyun */ = {
+			isa = PBXGroup;
+			children = (
+				A4AEE9F920A43B7900C3D835 /* OSSConstants.h */,
+				A4AEE9F720A43B7800C3D835 /* OSSConstants.m */,
+				A4AEE9FA20A43B7900C3D835 /* OssService.h */,
+				A4AEE9F820A43B7800C3D835 /* OssService.m */,
+			);
+			path = TDAliyun;
 			sourceTree = "<group>";
 		};
 		B4132C0D195AAF7A00F50B46 /* Authentication */ = {
@@ -6125,7 +6123,6 @@
 				77BDD65E1A44BD7300EA2A9C /* Process Config */,
 				77B4BAF31A52152A00B14C39 /* Upload Debugging Symbols */,
 				77E647AC1C90C10400B6740D /* Embed Frameworks */,
-				945763D7D42BB9F3F81F0156 /* [CP] Embed Pods Frameworks */,
 				A5227C8DDB2ED6310729C274 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -6228,7 +6225,6 @@
 				B52E8DE01F0B951700F3170D /* Expression_68@2x.png in Resources */,
 				B51B77EA1F27410500AECD99 /* Icon-60@3x.png in Resources */,
 				B52E8DE81F0B951700F3170D /* Expression_75@2x.png in Resources */,
-				A4595683209B10F300706DB7 /* 1525340380.mp4 in Resources */,
 				69ECC60F1D50D1170030CF87 /* arrow_next@2x.png in Resources */,
 				69ECC6451D50D1170030CF87 /* separator.png in Resources */,
 				B51B77E21F27410500AECD99 /* Icon-29.png in Resources */,
@@ -6287,13 +6283,11 @@
 				69ECC6191D50D1170030CF87 /* bt_grey_deactive.png in Resources */,
 				B52E8DC01F0B951700F3170D /* Expression_39@2x.png in Resources */,
 				B51B77E41F27410500AECD99 /* Icon-29@3x.png in Resources */,
-				A4595678209AF19700706DB7 /* 1525328780.mp4 in Resources */,
 				B52E8DB41F0B951700F3170D /* Expression_28@2x.png in Resources */,
 				B525916E1EB348C2003A950D /* AlipaySDK.bundle in Resources */,
 				B52E8DFA1F0B951700F3170D /* Expression_9@2x.png in Resources */,
 				B52E8DC91F0B951700F3170D /* Expression_47@2x.png in Resources */,
 				B52E8DCE1F0B951700F3170D /* Expression_51@2x.png in Resources */,
-				A4595681209B0D9C00706DB7 /* 1525339605.mp4 in Resources */,
 				B52E8C921F0B8CB500F3170D /* live_keyboard@2x.png in Resources */,
 				B52E8C9A1F0B8CB500F3170D /* loadingout@3x.png in Resources */,
 				B52E8DB21F0B951700F3170D /* Expression_26@2x.png in Resources */,
@@ -6460,13 +6454,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-edX-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7753912C1C9397CE00FA959C /* Copy config */ = {
@@ -6528,30 +6525,26 @@
 			shellPath = /bin/sh;
 			shellScript = "rm -f \"${BUILT_PRODUCTS_DIR}/Strings.swift\"\n\"${SRCROOT}/script/Localizations.swift\" \"${SRCROOT}/Source/en.lproj/Localizable.strings\" \"${BUILT_PRODUCTS_DIR}/Strings.swift\"\nchmod -w \"${BUILT_PRODUCTS_DIR}/Strings.swift\"\n";
 		};
-		945763D7D42BB9F3F81F0156 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-edX/Pods-edX-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A5227C8DDB2ED6310729C274 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-edX/Pods-edX-resources.sh",
+				"${PODS_ROOT}/DateTools/DateTools/DateTools.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/Parse/Parse.bundle",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DateTools.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Parse.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -6643,6 +6636,7 @@
 				B5FAF7441EB045C8000C2169 /* SubmiteSecondCell.m in Sources */,
 				7706AAC11BCFEEBF00728432 /* NSAttributedString+Formatting.swift in Sources */,
 				A41084C2208EDF7000C6A0E1 /* TDConsultCell.m in Sources */,
+				A4AEE9FB20A43B7900C3D835 /* OSSConstants.m in Sources */,
 				778D53351B3D96E900441A98 /* ListCursor.swift in Sources */,
 				E0C6EF971BFF4B9900B315E3 /* UIButton+TintColor.swift in Sources */,
 				B498405919753C6C00019D1F /* CLVideoPlayer.m in Sources */,
@@ -6877,7 +6871,6 @@
 				BE45DA8F192623F4003BD39B /* OEXTabBarItemsCell.m in Sources */,
 				A409D1BA1F677D8300F6BF74 /* LanguageChangeTool.m in Sources */,
 				775EB3AC1B1FC37C009526A8 /* SpinnerView.swift in Sources */,
-				8FE04B4D1A1E2637007F88B8 /* OEXFBSocial.m in Sources */,
 				9EDB10B41B0C732300C760C6 /* CourseGenericBlockTableViewCell.swift in Sources */,
 				B4D5C7EC1A6FBAA300427D1D /* OEXPersistentCredentialStorage.m in Sources */,
 				7713DFBF1AC3C16C005A1756 /* OEXRegisteringUserDetails.m in Sources */,
@@ -6989,6 +6982,7 @@
 				77C182AA1CD2E46900AE1474 /* TablePaginationManipulator.swift in Sources */,
 				B4B6D6431A95335C000F44E8 /* OEXRegistrationAgreementController.m in Sources */,
 				0B1212221B4F089A002EE96C /* OEXCoursewareAccess.m in Sources */,
+				A4AEE9FC20A43B7900C3D835 /* OssService.m in Sources */,
 				B5520A031EB9D4C800EC51C9 /* TDCourseMessageCell.swift in Sources */,
 				77DCD2391C2B13AA00CAEBB5 /* EnrolledCoursesFooterView.swift in Sources */,
 				A4252AC5209997C500E367CE /* TDPermissionModel.m in Sources */,
@@ -7386,6 +7380,7 @@
 					"$(PROJECT_DIR)/Libraries/",
 					"$(PROJECT_DIR)/Source/TDPaymentTool/TDAlipayManager/aliPay",
 					"$(PROJECT_DIR)/Source/BaiduBCEReader",
+					"$(PROJECT_DIR)/Source/Aliyun",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -7430,6 +7425,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
 					"\"${PODS_ROOT}/Headers/Public/Segment-GoogleAnalytics\"",
 					"\"${PODS_ROOT}/Headers/Public/Smartling.i18n\"",
+					"\"${PODS_ROOT}/Headers/Public/AliyunOSSiOS\"",
 					"$(PROJECT_DIR)/Source/TDPaymentTool/TDAlipayManager/aliPay",
 					"$(PROJECT_DIR)/Source/BaiduBCEReader/BCEDocumentReader.framework/Headers",
 				);
@@ -7453,6 +7449,12 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
+					"-l\"AliyunOSSiOS\"",
+					"-l\"resolv\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"SystemConfiguration\"",
 					"-framework",
 					"\"BCEDocumentReader\"",
 				);
@@ -7757,6 +7759,7 @@
 					"$(PROJECT_DIR)/Libraries/",
 					"$(PROJECT_DIR)/Source/TDPaymentTool/TDAlipayManager/aliPay",
 					"$(PROJECT_DIR)/Source/BaiduBCEReader",
+					"$(PROJECT_DIR)/Source/Aliyun",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Source/edX-Prefix.pch";
@@ -7800,6 +7803,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
 					"\"${PODS_ROOT}/Headers/Public/Segment-GoogleAnalytics\"",
 					"\"${PODS_ROOT}/Headers/Public/Smartling.i18n\"",
+					"\"${PODS_ROOT}/Headers/Public/AliyunOSSiOS\"",
 					"$(PROJECT_DIR)/Source/TDPaymentTool/TDAlipayManager/aliPay",
 					"$(PROJECT_DIR)/Source/BaiduBCEReader/BCEDocumentReader.framework/Headers",
 				);
@@ -7824,6 +7828,12 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
+					"-l\"AliyunOSSiOS\"",
+					"-l\"resolv\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"SystemConfiguration\"",
 					"-framework",
 					"\"BCEDocumentReader\"",
 				);
@@ -7863,6 +7873,7 @@
 					"$(PROJECT_DIR)/Libraries/",
 					"$(PROJECT_DIR)/Source/TDPaymentTool/TDAlipayManager/aliPay",
 					"$(PROJECT_DIR)/Source/BaiduBCEReader",
+					"$(PROJECT_DIR)/Source/Aliyun",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -7907,6 +7918,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
 					"\"${PODS_ROOT}/Headers/Public/Segment-GoogleAnalytics\"",
 					"\"${PODS_ROOT}/Headers/Public/Smartling.i18n\"",
+					"\"${PODS_ROOT}/Headers/Public/AliyunOSSiOS\"",
 					"$(PROJECT_DIR)/Source/TDPaymentTool/TDAlipayManager/aliPay",
 					"$(PROJECT_DIR)/Source/BaiduBCEReader/BCEDocumentReader.framework/Headers",
 				);
@@ -7930,6 +7942,12 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
+					"-l\"AliyunOSSiOS\"",
+					"-l\"resolv\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"SystemConfiguration\"",
 					"-framework",
 					"\"BCEDocumentReader\"",
 				);

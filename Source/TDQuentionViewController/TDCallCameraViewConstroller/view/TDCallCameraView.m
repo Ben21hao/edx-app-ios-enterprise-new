@@ -139,7 +139,7 @@
     self.mindLabel = [[UILabel alloc] init];
     self.mindLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
     self.mindLabel.textColor = [UIColor whiteColor];
-    self.mindLabel.text = @"轻按拍摄 按住摄像";
+    self.mindLabel.text = TDLocalizeSelect(@"TAP_TAKE_PHOTO", nil);
     [self addSubview:self.mindLabel];
     
     self.discarButton = [self setButtonStyleWithImage:@"back_cicle_round" cornerRadius:41];

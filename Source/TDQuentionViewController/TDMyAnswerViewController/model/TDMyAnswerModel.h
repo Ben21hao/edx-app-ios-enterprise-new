@@ -23,6 +23,7 @@
 @property (nonatomic,strong) NSString *created_by_pic;//头像
 @property (nonatomic,strong) NSString *created_by; //创建人
 @property (nonatomic,strong) NSString *created_at; //创建时间
+@property (nonatomic,strong) NSString *updated_at; //最后更新的时间，已解决为解决时间
 @property (nonatomic,strong) NSString *content_type;//1:内容，2:语音,3:图片,4:视频
 @property (nonatomic,strong) NSString *content; //内容
 

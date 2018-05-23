@@ -122,6 +122,7 @@
     if (self.picUrlArray.count <= 1) {
         self.pageControl.hidden = YES;
     }
+    self.pageControl.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -129,6 +130,12 @@
     
 }
 
+- (BOOL)shouldAutorotate {
+    return NO;
+}
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
 
 @end

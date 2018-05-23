@@ -9,15 +9,18 @@
 
 #import "TDConsultAudioCell.h"
 #import "TDRoundHeadImageView.h"
-#import "TDAudioPlayView.h"
 #import <UIImageView+WebCache.h>
+
+#import "NSString+OEXFormatting.h"
 
 @interface TDConsultAudioCell ()
 
 @property (nonatomic,strong) TDRoundHeadImageView *headerImage;
 @property (nonatomic,strong) UILabel *nameLabel;
 
-@property (nonatomic,strong) TDAudioPlayView *audioPlayView;
+@property (nonatomic,strong) NSTimer *playTimer;
+@property (nonatomic,assign) NSInteger voiceDuration;
+@property (nonatomic,assign) NSInteger playImageNum;
 
 @end
 
@@ -30,25 +33,6 @@
 }
 
 - (void)dealWithCellData {
-    
-    self.timeView.timeLabel.text = self.detailModel.created_at;
-    self.nameLabel.text = self.detailModel.username;
-    
-    NSURL *headerUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ELITEU_URL,self.detailModel.userprofile_image]];
-    [self.headerImage sd_setImageWithURL:headerUrl placeholderImage:[UIImage imageNamed:@"default_dark_image"]];
-    
-    CGFloat rate = [self.detailModel.content_duration floatValue] / 60;
-    CGFloat width = rate * (TDWidth - 95);
-    [self.timeView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.nameLabel.mas_left);
-        make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(3);
-        make.size.mas_equalTo(CGSizeMake(width, 30));
-    }];
-    
-    [self updateCellConstraint];
-}
-
-- (void)updateCellConstraint {
     
     BOOL isShow = [self.detailModel.is_show_time boolValue];
     
@@ -69,6 +53,161 @@
         self.headerImage.hidden = YES;
         self.nameLabel.hidden = YES;
     }
+    else {
+        self.timeView.timeLabel.text = self.detailModel.created_at;
+        if ([self.detailModel.is_reply boolValue]) {
+            if ([self.detailModel.user_id isEqualToString:self.userId]) {
+                self.nameLabel.attributedText = [self setDetailString:TDLocalizeSelect(@"ANSWERED_BY_ME", nil) name:TDLocalizeSelect(@"ME", nil)];
+            } else {
+                self.nameLabel.attributedText = [self setDetailString:[TDLocalizeSelect(@"CONSULTATION_REPLIED", nil) oex_formatWithParameters:@{@"name" : self.detailModel.username}] name:self.detailModel.username];
+            }
+        }
+        else {
+            self.nameLabel.text = self.detailModel.username;
+        }
+        
+        NSURL *headerUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",ELITEU_URL,self.detailModel.userprofile_image]];
+        [self.headerImage sd_setImageWithURL:headerUrl placeholderImage:[UIImage imageNamed:@"default_dark_image"]];
+    }
+    
+    self.audioPlayView.timeLabel.text = [NSString stringWithFormat:@"%@”",self.detailModel.content_duration];
+    CGFloat rate = [self.detailModel.content_duration floatValue] / 30;
+    CGFloat width = rate * (TDWidth - 95);
+    CGFloat audioWith = width > (TDWidth - 95) ? (TDWidth - 95) : width;
+    [self.audioPlayView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.nameLabel.mas_left);
+        make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(3);
+        make.size.mas_equalTo(CGSizeMake(audioWith > 68 ? audioWith : 68, 30));
+    }];
+    
+    if (self.detailModel.isPlaying) {
+        [self voicePlaying:self.detailModel.content_duration];
+    }
+    
+    self.detailModel.isSending ? [self.activityView startAnimating] : [self.activityView stopAnimating];
+    self.statusButton.hidden = !self.detailModel.sendFailed;
+    
+    if (self.detailModel.isSending || self.detailModel.sendFailed) {
+        return;
+    }
+    WS(weakSelf);
+    self.audioPlayView.tapAction = ^(){
+        [weakSelf playAudioWithVoiceUrl:weakSelf.detailModel.content duration:weakSelf.detailModel.content_duration];
+    };
+}
+
+- (NSMutableAttributedString *)setDetailString:(NSString *)titleStr name:(NSString *)nameStr {
+    
+    NSRange range = [titleStr rangeOfString:nameStr];//空格
+    NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:titleStr
+                                                                             attributes:@{                                                                                          NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr9]
+                                                                                          }];
+    NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:nameStr
+                                                                             attributes:@{                                                                                          NSForegroundColorAttributeName : [UIColor colorWithHexString:colorHexStr8]
+                                                                                          }];
+    [str1 replaceCharactersInRange:range withAttributedString:str2];
+    return str1;
+}
+
+#pragma mark - 播放语音
+- (void)playAudioWithVoiceUrl:(NSString *)voice_url duration:(NSString *)duration {
+    
+    if (self.playTimer) {
+        [self invalidatePlayTimer:YES];
+        return;
+    }
+    
+    if (self.tapVoiceViewHandle) {
+        self.tapVoiceViewHandle(YES);
+    }
+    
+    self.voiceDuration = [duration integerValue] * 2 + 1;
+    self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(playTimerAction) userInfo:nil repeats:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(leaveVoiceNotifi:) name:@"user_leave_voiceView" object:nil];
+}
+
+- (void)voicePlaying:(NSString *)duration { //tableview 上下滑动，cell复用的动画处理
+    
+    if (self.playTimer) {
+        [self invalidatePlayTimer:YES];
+        return;
+    }
+    
+    self.voiceDuration = [duration integerValue] * 2 + 1; //四舍五入少了1
+    self.playTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(playTimerAction) userInfo:nil repeats:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playToEndTime:) name:@"voice_play_endTime_notificatiion" object:nil];
+}
+
+- (void)playToEndTime:(NSNotification *)notifi {
+    self.voiceDuration = 0;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"voice_play_endTime_notificatiion" object:nil];
+}
+
+- (void)leaveVoiceNotifi:(NSNotification *)notifi {
+    if (self.playTimer) {
+        [self invalidatePlayTimer:YES];
+    }
+}
+
+- (void)playTimerAction { //开始
+    
+    if (self.voiceDuration <= 0) {
+        [self invalidatePlayTimer:NO];
+        return;
+    }
+    
+    self.voiceDuration --;
+    self.playImageNum ++;
+    
+    switch (self.playImageNum % 3) {
+        case 0:
+            self.audioPlayView.imageView.image = [UIImage imageNamed:@"player_three_image"];
+            break;
+        case 1:
+            self.audioPlayView.imageView.image = [UIImage imageNamed:@"player_one_image"];
+            break;
+        default:
+            self.audioPlayView.imageView.image = [UIImage imageNamed:@"player_two_image"];
+            break;
+    }
+    
+}
+
+- (void)invalidatePlayTimer:(BOOL)stopVoice { //停止
+    
+    if (self.tapVoiceViewHandle) {
+        self.tapVoiceViewHandle(NO);
+    }
+    
+    [self.playTimer invalidate];
+    self.playTimer = nil;
+    
+    self.audioPlayView.imageView.image = [UIImage imageNamed:@"player_black_image"];
+}
+
+- (void)setIndex:(NSInteger)index {
+    _index = index;
+    
+    //用户点击其他的语音时
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tapVoiceNotifi:) name:@"user_tap_other_voiceView" object:nil];
+}
+
+- (void)tapVoiceNotifi:(NSNotification *)notifi {
+    
+    NSString *indexStr = notifi.userInfo[@"row_user_tap"];
+    if ([indexStr integerValue] != self.index) { //用户点击其他行的语音时，停止当前行的语音
+        
+        if (self.playTimer) {
+            [self invalidatePlayTimer:YES];
+            return;
+        }
+    }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - UI
@@ -96,7 +235,6 @@
     [self.activityView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
     [self.bgView addSubview:self.activityView];
     
-//    [self.activityView startAnimating];
     self.statusButton.hidden = YES;
 }
 

@@ -11,7 +11,6 @@
 #import "edX-Swift.h"
 
 #import "OEXExternalAuthProviderButton.h"
-#import "OEXFBSocial.h"
 #import "OEXRegisteringUserDetails.h"
 
 @implementation OEXFacebookAuthProvider
@@ -37,30 +36,30 @@
 }
 
 - (void)authorizeServiceFromController:(UIViewController *)controller requestingUserDetails:(BOOL)loadUserDetails withCompletion:(void (^)(NSString *, OEXRegisteringUserDetails *, NSError *))completion {
-    OEXFBSocial* facebookManager = [[OEXFBSocial alloc] init]; //could be named facebookHelper.
-    [facebookManager loginFromController:controller completion:^(NSString *accessToken, NSError *error) {
-        if(error) {
-            if([error.domain isEqual:FBSDKErrorDomain] && error.code == FBSDKNetworkErrorCode) {
-                // Hide FB specific errors inside this abstraction barrier
-                error = [NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorNetworkConnectionLost userInfo:error.userInfo];
-            }
-            completion(accessToken, nil, error);
-            return;
-        }
-        if(loadUserDetails) {
-            [facebookManager requestUserProfileInfoWithCompletion:^(NSDictionary *userInfo, NSError *error) {
-                // userInfo is a facebook user object
-                OEXRegisteringUserDetails* profile = [[OEXRegisteringUserDetails alloc] init];
-                profile.email = userInfo[@"email"];
-                profile.name = userInfo[@"name"];
-                completion(accessToken, profile, error);
-            }];
-        }
-        else {
-            completion(accessToken, nil, error);
-        }
-        
-    }];
+//    OEXFBSocial* facebookManager = [[OEXFBSocial alloc] init]; //could be named facebookHelper.
+//    [facebookManager loginFromController:controller completion:^(NSString *accessToken, NSError *error) {
+//        if(error) {
+//            if([error.domain isEqual:FBSDKErrorDomain] && error.code == FBSDKNetworkErrorCode) {
+//                // Hide FB specific errors inside this abstraction barrier
+//                error = [NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorNetworkConnectionLost userInfo:error.userInfo];
+//            }
+//            completion(accessToken, nil, error);
+//            return;
+//        }
+//        if(loadUserDetails) {
+//            [facebookManager requestUserProfileInfoWithCompletion:^(NSDictionary *userInfo, NSError *error) {
+//                // userInfo is a facebook user object
+//                OEXRegisteringUserDetails* profile = [[OEXRegisteringUserDetails alloc] init];
+//                profile.email = userInfo[@"email"];
+//                profile.name = userInfo[@"name"];
+//                completion(accessToken, profile, error);
+//            }];
+//        }
+//        else {
+//            completion(accessToken, nil, error);
+//        }
+//        
+//    }];
 }
 
 @end

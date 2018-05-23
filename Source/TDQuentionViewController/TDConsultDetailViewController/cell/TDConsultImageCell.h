@@ -17,6 +17,7 @@
 @property (nonatomic,strong) UIActivityIndicatorView *activityView;
 
 @property (nonatomic,strong) TDConsultDetailModel *detailModel;
+@property (nonatomic,strong) NSString *userId;
 @property (nonatomic,copy) void(^tapImageHandle)(NSArray *imageArray,NSInteger tag);
 
 @end

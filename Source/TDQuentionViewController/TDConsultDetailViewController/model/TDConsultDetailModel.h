@@ -11,6 +11,7 @@
 @interface TDConsultDetailModel : NSObject
 
 @property (nonatomic,strong) NSString *id;//这条消息的id
+@property (nonatomic,strong) NSString *is_reply;//是否是回复
 @property (nonatomic,strong) NSString *user_id;//用户id
 @property (nonatomic,strong) NSString *username;//用户名
 @property (nonatomic,strong) NSString *userprofile_image;//用户图像
@@ -22,8 +23,12 @@
 @property (nonatomic,strong) NSString *created_at;//咨询创建时间
 @property (nonatomic,strong) NSString *is_show_time; //是否显示时间
 
+@property (nonatomic,strong) NSArray *imageArray;
 @property (nonatomic,strong) UIImage *videoImage; //视频缩略图
 @property (nonatomic,assign) BOOL isSending; //是否是正在发送的消息
+@property (nonatomic,assign) BOOL sendFailed;//是否发送失败
+
+@property (nonatomic,assign) BOOL isPlaying;//正在播放语音
 
 @end
 

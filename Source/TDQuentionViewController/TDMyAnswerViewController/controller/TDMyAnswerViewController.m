@@ -19,27 +19,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"我的回答";
+    self.navigationItem.title = TDLocalizeSelect(@"MY_ANSWERS_NAVI", nil);
     [self setLeftNavigationBar];
     
     [self addChileVC];
     [self setSubTitleConstraint];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(quetuonSureSolved:) name:@"quetion_sure_solved_notification" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newQuetionHandin:) name:@"new_quetion_handin_notification" object:nil];
-    
-}
-
-
-- (void)quetuonSureSolved:(NSNotification *)notifi {
-    
-    UIButton *seleButton = self.titleButtons[1];
-    [self btnClick:seleButton];
-}
-
-- (void)newQuetionHandin:(NSNotification *)notifi {
-    UIButton *seleButton = self.titleButtons[0];
-    [self btnClick:seleButton];
 }
 
 - (void)rightButtonAciton:(UIButton *)sender {
@@ -58,6 +43,7 @@
         
         TDSubMyAnswerViewController *subViewController = [[TDSubMyAnswerViewController alloc] init];
         subViewController.username = self.username;
+        subViewController.userId = self.userId;
         subViewController.whereFrom = i == 0 ? TDSubAnswerFromUnsolved : TDSubAnswerFromSolved;
         subViewController.view.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
         [self addChildViewController:subViewController];
@@ -73,7 +59,6 @@
         }
     }
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

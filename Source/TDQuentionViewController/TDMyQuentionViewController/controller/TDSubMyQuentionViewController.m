@@ -14,6 +14,7 @@
 
 #import <MJRefresh/MJRefresh.h>
 #import <MJExtension/MJExtension.h>
+#import "NSString+OEXFormatting.h"
 
 @interface TDSubMyQuentionViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -25,6 +26,7 @@
 @property (nonatomic,assign) NSInteger page;
 
 @property (nonatomic,strong) TDBaseToolModel *baseTool;
+@property (nonatomic,assign) NSInteger noReadNum;
 
 @end
 
@@ -63,7 +65,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    self.page = 1;
     self.isForgound = NO;
 }
 
@@ -84,10 +85,13 @@
 - (void)getSubQuetionData { //数据
     
     if (![self.baseTool networkingState]) {//网络监测
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView.mj_footer endRefreshing];
+        [self hiddenFooterView];
+        [self endRefresh];
+        [self showNullLabel:TDLocalizeSelect(@"QUERY_FAILED", nil)];
         return;
     }
+    
+    self.nullLabel.hidden = YES;
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setValue:self.username forKey:@"username"];
@@ -102,9 +106,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        [self.loadIngView removeFromSuperview];
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView.mj_footer endRefreshing];
+        [self endRefresh];
         
         if (self.page == 1) {
             [self.quetionArray removeAllObjects];
@@ -143,39 +145,39 @@
                 }
                 
             } else {
-                
+                if (self.page > 1) {
+                    [self.view makeToast:TDLocalizeSelect(@"NO_MORE_DATA", nil) duration:0.8 position:CSToastPositionCenter];
+                }
             }
             
+            self.noReadNum = [responseDic[@"extra_data"][@"not_read_num"] integerValue];
+            
             if (self.page == 1) {
-                [self showNullLabel:TDLocalizeSelect(@"NO_CONSULTATIONS", nil)];
+                [self showNullLabel:self.whereFrom == 0 ?  TDLocalizeSelect(@"NO_UNSOLVED_CONSULTS", nil) : TDLocalizeSelect(@"NO_SOLVED_CONSULTS", nil)];
             }
             [self.tableView reloadData];
             
-        } else if (code == 311) { //暂无咨询
-            
-            [self hiddenFooterView];
-            
-            if (self.page == 1) {
-                [self showNullLabel:TDLocalizeSelect(@"NO_CONSULTATIONS", nil)];
-            }
-            
-        } else if (code == 312) { //没有更多数据
-            [self.view makeToast:TDLocalizeSelect(@"NO_MORE_DATA", nil) duration:0.8 position:CSToastPositionCenter];
-            [self hiddenFooterView];
-            
-        } else if (code == 313) { //学员不属于任何一家企业
-            
+        } else if (code == 311) { //用户未关联企业
             [self hiddenFooterView];
             [self showNullLabel:TDLocalizeSelect(@"STUDENT_NO_LINKE_ORGANIZATION", nil)];
             
-        } else {
+        } else if (code == 312) { //用户不存在
+            [self hiddenFooterView];
+            [self showNullLabel:TDLocalizeSelect(@"NO_EXIST_USER", nil)];
+            
+        } else if (code == 313) { //用户不属于任何公司
+            [self hiddenFooterView];
+            [self showNullLabel:TDLocalizeSelect(@"STUDENT_NO_LINKE_ORGANIZATION", nil)];
+            
+        } else { //查询失败
             [self hiddenFooterView];
             [self showNullLabel:TDLocalizeSelect(@"QUERY_FAILED", nil)];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"我的咨询 ---->>> %@",error);
-        [self.loadIngView removeFromSuperview];
+        [self endRefresh];
+        [self hiddenFooterView];
         [self showNullLabel:TDLocalizeSelect(@"QUERY_FAILED", nil)];
     }];
 }
@@ -183,6 +185,13 @@
 - (void)hiddenFooterView {
     self.tableView.mj_footer.hidden = YES;
     [self.tableView.mj_footer endRefreshingWithNoMoreData];
+}
+
+- (void)endRefresh {
+    [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
+    
+    [self.loadIngView removeFromSuperview];
 }
 
 - (void)showNullLabel:(NSString *)titleStr {
@@ -222,16 +231,41 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    TDMyConsultModel *model = self.quetionArray[indexPath.section];
-    [self gotoDetailVc:model];
+    
+
+    [self gotoDetailVc:indexPath.section];
 }
 
-- (void)gotoDetailVc:(TDMyConsultModel *)model {
+- (void)gotoDetailVc:(NSInteger)section  {
+    
+    TDMyConsultModel *model = self.quetionArray[section];
+    
+    BOOL hasNoRead = NO;
+    NSInteger noreadNum = [model.status.num_of_unread integerValue];
+    if ([model.status.num_of_unread integerValue] > 0) {
+        self.noReadNum -= noreadNum;
+        
+        if (self.noReadNum <= 0) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"Consult_Data_Change" object:nil]; //刷新个人资料
+        }
+        hasNoRead = YES;
+    }
     
     TDConsultDetailViewController *consultVc = [[TDConsultDetailViewController alloc] init];
     consultVc.whereFrom = self.whereFrom == TDSubQuetionFromUnsolved ? TDConsultDetailFromUserUnSolve : TDConsultDetailFromUserSolve;
     consultVc.consultID = model.consult_id;
     consultVc.username = self.username;
+    consultVc.hasNoRead = hasNoRead;
+    
+    if ([model.status.consult_status intValue] == 2 || [model.status.consult_status intValue] == 4) { //2 xx条未读消息，4 已回复
+        WS(weakSelf);
+        consultVc.reloadUserConsultStatus = ^(NSString *consult_status){
+            model.status.consult_status = consult_status;
+            model.status.num_of_unread = @"0";
+            [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
+        };
+    }
+    
     [self.navigationController pushViewController:consultVc animated:YES];
 }
 

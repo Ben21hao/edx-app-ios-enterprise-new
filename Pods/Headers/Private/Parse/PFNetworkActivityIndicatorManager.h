@@ -1,1 +1,1 @@
-../../../Parse/Parse/PFNetworkActivityIndicatorManager.h
+../../../Parse/Parse/Parse/PFNetworkActivityIndicatorManager.h

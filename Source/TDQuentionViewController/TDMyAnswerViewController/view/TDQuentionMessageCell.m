@@ -35,13 +35,13 @@
             self.quetionLabel.text = model.content;
             break;
         case 2:
-            self.quetionLabel.text = @"【语音】";
+            self.quetionLabel.text = TDLocalizeSelect(@"AUDIO_CONTENT", nil);
             break;
         case 3:
-            self.quetionLabel.text = @"【图片】";
+            self.quetionLabel.text = TDLocalizeSelect(@"PHOTO_CONTENT", nil);
             break;
         case 4:
-            self.quetionLabel.text = @"【视频】";
+            self.quetionLabel.text = TDLocalizeSelect(@"VIDEO_CONTENT", nil);
             break;
             
         default:
@@ -52,39 +52,39 @@
         case 1: //待回复 -- ① 还没有人领取的问题② 别人放弃回答的问题
 //            break;
         case 2: //待回复 -- 我点击了“马上回答”
-            self.statusLabel.text = @"待回复";
+            self.statusLabel.text = TDLocalizeSelect(@"UNANSWERED_TEXT", nil);
             self.statusLabel.textColor = [UIColor colorWithHexString:colorHexStr1];
             break;
         case 3://待回复(追问) -- 已经回答过，用户追问之后，领取人放弃回答。
 //            break;
         case 4://待回复(追问) -- 我已回答，用户发起追问
-            self.statusLabel.text = @"待回复(追问)";
+            self.statusLabel.text = TDLocalizeSelect(@"FOLLOW_UP_TEXT", nil);
             self.statusLabel.textColor = [UIColor colorWithHexString:colorHexStr1];
             break;
         case 5: //xxx 正在回复 -- 已经有别人点击了“马上回答”
 //            break;
         case 6://xxx 正在回复 -- 问题已经被回答，用户发起追问
-            self.statusLabel.text = [NSString stringWithFormat:@"%@ 正在回复",model.status.claim_by];
+        self.statusLabel.text = [TDLocalizeSelect(@"ANSWERING_TEXT", nil) oex_formatWithParameters:@{@"name":model.status.claim_by}];
             break;
         case 7: //已回复 -- 我已经回复了问题或者追问
-            self.statusLabel.text = @"已回复";
+            self.statusLabel.text = TDLocalizeSelect(@"ANSWERED_TEXT", nil);
             [self showReplyTime:model.status.time];
             break;
         case 8: //xxx 已回复--- 别人已经回复了问题或者追问
-            self.statusLabel.text = [NSString stringWithFormat:@"%@ 已回复",model.status.claim_by];
+            self.statusLabel.text = [TDLocalizeSelect(@"ANSWERED_BY", nil) oex_formatWithParameters:@{@"name":model.status.claim_by}];
             [self showReplyTime:model.status.time];
             break;
         case 9: //已解决 -- 用户点击“已解决”，确认解决问题
-            self.statusLabel.text = @"已解决";
-            [self showReplyTime:model.status.time];
+            self.statusLabel.text = TDLocalizeSelect(@"CONSULTATION_RESOLVED", nil);
+            [self showReplyTime:model.updated_at];
             break;
         case 10://xxx 已解决 -- 用户点击“已解决”，确认解决问题
-            self.statusLabel.text = @"已解决";//[NSString stringWithFormat:@"%@ 已解决",model.status.claim_by];
-            [self showReplyTime:model.status.time];
+            self.statusLabel.text = [TDLocalizeSelect(@"SOLEVED_BY", nil) oex_formatWithParameters:@{@"name":model.status.claim_by}];
+            [self showReplyTime:model.updated_at];
             break;
         case 11: //用户放弃提问--问题未被回答，但是用户点击了“已解决”
-            self.statusLabel.text = @"已解决";//用户放弃提问
-            [self showReplyTime:model.status.time];
+            self.statusLabel.text = TDLocalizeSelect(@"CONSULTATION_RESOLVED", nil);//用户放弃提问
+            [self showReplyTime:model.updated_at];
             break;
         default:
             break;

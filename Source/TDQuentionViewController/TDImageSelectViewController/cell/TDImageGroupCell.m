@@ -28,6 +28,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         WS(weakSelf);
         [assetCollection posterImage:CGSizeMake(58, 58) resultHandler:^(UIImage *result, NSDictionary *info) {
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 weakSelf.groupImageView.image = result;
             });

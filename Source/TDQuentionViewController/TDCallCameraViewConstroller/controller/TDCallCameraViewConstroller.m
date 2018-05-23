@@ -9,6 +9,8 @@
 #import "TDCallCameraViewConstroller.h"
 #import "TDCallCameraView.h"
 #import "SRUtil.h"
+#import "TDSelectImageModel.h"
+#import "TDWebThumbImageModel.h"
 
 #import <AVFoundation/AVFoundation.h>
 #import <MobileCoreServices/MobileCoreServices.h>
@@ -35,9 +37,8 @@
 
 @property (nonatomic,assign) BOOL isflashOn;
 
-@property (nonatomic,assign) CGFloat currentVideoDur;//持续时间
-@property (nonatomic,strong) NSURL *currentFileURL;
-@property (nonatomic, retain) NSString *videoSaveFilePath;
+@property (nonatomic,strong) NSURL *videoMovUrl;
+@property (nonatomic,strong) NSString *videoPath;
 
 @property (strong, nonatomic) AVPlayer *player;
 @property (strong, nonatomic) AVPlayerLayer *playerLayer;
@@ -49,6 +50,9 @@
 @property (nonatomic,strong) CAShapeLayer *shapeLayer;
 @property (nonatomic,strong) NSTimer *recordTimer;
 @property (nonatomic,assign) CGFloat recordTimeNum;
+
+@property (nonatomic,strong) UIImage *cameraImage;
+@property (nonatomic,strong) UIImage *videoThumbImage;
 
 @end
 
@@ -67,10 +71,15 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self releaseVideoPlayer];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+}
+
 #pragma mark - action
 - (void)dismissButtonAction:(UIButton *)sender { //返回
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
-    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -98,16 +107,32 @@
 
 - (void)selectButtonAction:(UIButton *)sender {//选择
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (sender.selected) {
+        return;
+    }
+    sender.selected = YES;
     
     if (self.cameraType == 1) { //图片
-        if (self.handleCameraImage) {
-            self.handleCameraImage(self.imageView.image);
-        }
+        
+        [self saveImageToPhotoAlbum:self.cameraImage]; //保存图片
+        
+        TDSelectImageModel *model = [[TDSelectImageModel alloc] init];
+        model.image = self.cameraImage;
+        NSArray *imageArray = [NSArray arrayWithObject:model];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"User_Had_SelectImage" object:nil userInfo:@{@"selectImageArray" : imageArray}];
     }
     else {
         
+        //保存视频到相册
+        ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
+        [assetsLibrary writeVideoAtPathToSavedPhotosAlbum:self.videoMovUrl completionBlock:^(NSURL *assetURL, NSError *error) {
+            [self removeMovFile]; //移除mov视频文件
+            [self removeMP4File];//移除mp4文件
+        }];
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"User_Had_SelectVideo" object:nil userInfo:@{@"selectVideoPath":self.videoPath, @"selectVideoTime": [NSString stringWithFormat:@"%lf",self.recordTimeNum],@"videoThumbImage": self.videoThumbImage}];
     }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)exchangeButtonAction:(UIButton *)sender {//切换前后镜头
@@ -250,7 +275,7 @@
         
         [self.captureSession stopRunning]; //会话层关闭
         
-        [self saveImageToPhotoAlbum:image]; //保存图片
+        self.cameraImage = image;
         
         self.imageView = [[UIImageView alloc] initWithFrame:self.previewLayer.frame];
         self.imageView.image = image;
@@ -350,13 +375,13 @@
 // 指定回调方法
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
     
-    NSString *msg = nil ;
-    if(error != NULL){
-        msg = @"保存图片失败" ;
-    } else {
-        msg = @"保存图片成功" ;
-    }
-    [self.view makeToast:msg duration:0.8 position:CSToastPositionCenter];
+//    NSString *msg = nil ;
+//    if(error != NULL){
+//        msg = @"保存图片失败" ;
+//    } else {
+//        msg = @"保存图片成功" ;
+//    }
+//    [self.view makeToast:msg duration:0.8 position:CSToastPositionCenter];
 }
 
 #pragma mark - 视频录制
@@ -391,7 +416,6 @@
 
 - (void)stopRecordVideo {
     
-    self.recordTimeNum = 0;
     [self.movieFileOutput stopRecording]; //停止录制
     
     [self.recordTimer invalidate];
@@ -399,6 +423,7 @@
 }
 
 - (void)addProgressShapeLayer { //动画
+    self.recordTimeNum = 0;
     [self.callCameraView updateCameraButtonConstraint:NO];
     
     self.recordTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(animationTimerAction) userInfo:nil repeats:YES];
@@ -468,14 +493,12 @@
         [self.previewLayer removeFromSuperlayer];
         self.previewLayer = nil;
     }
-    self.currentFileURL = nil;
 }
 
 //AVCaptureFileOutputRecordingDelegate
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections {
     
-    self.videoSaveFilePath = [fileURL absoluteString];
-    self.currentFileURL = fileURL;
+    self.videoMovUrl = fileURL;
     
     NSLog(@"录制开始 -- %@",[fileURL absoluteString]);
 }
@@ -484,18 +507,12 @@
 
     [self mergeAndExportVideoAtFileURLs:[NSArray arrayWithObjects:outputFileURL, nil]];
     NSLog(@"录制结束 -- %@",outputFileURL.absoluteString);
-    
-//    //保存视频到相册
-//    ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
-//    [assetsLibrary writeVideoAtPathToSavedPhotosAlbum:outputFileURL completionBlock:nil];
-//
-//    [self.view makeToast:@"视频保存成功" duration:0.8 position:CSToastPositionCenter];
 }
 
 //合成并导出视频
 - (void)mergeAndExportVideoAtFileURLs:(NSArray *)fileURLArray {
     
-    [SVProgressHUD showWithStatus:@"正在转码..."];
+    [SVProgressHUD showWithStatus:TDLocalizeSelect(@"TRANSCODEING_TEXT", nil)];
     SVProgressHUD.defaultMaskType = SVProgressHUDMaskTypeBlack;
     SVProgressHUD.defaultStyle = SVProgressHUDAnimationTypeNative;
     
@@ -559,7 +576,7 @@
         
         CGAffineTransform layerTransform = CGAffineTransformMake(assetTrack.preferredTransform.a, assetTrack.preferredTransform.b, assetTrack.preferredTransform.c, assetTrack.preferredTransform.d, assetTrack.preferredTransform.tx * rate, assetTrack.preferredTransform.ty * rate);
 //        layerTransform = CGAffineTransformConcat(layerTransform, CGAffineTransformMake(1, 0, 0, 1, 0, -(assetTrack.naturalSize.width - assetTrack.naturalSize.height) / 2.0));//向上移动取中部影相
-        layerTransform = CGAffineTransformConcat(layerTransform, CGAffineTransformMake(1, 0, 0, 1, 0, 0)); //向上移动取中部影相
+        layerTransform = CGAffineTransformConcat(layerTransform, CGAffineTransformMake(1, 0, 0, 1, 0, 0)); 
         layerTransform = CGAffineTransformScale(layerTransform, rate, rate); //放缩，解决前后摄像结果大小不对称
         
         [layerInstrucition setTransform:layerTransform atTime:kCMTimeZero];
@@ -593,42 +610,65 @@
         
          if ([exporter status] == AVAssetExportSessionStatusCompleted) {
              NSLog(@"----- 转码成功");
+             
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 
+                 self.videoPath = [[mergeFileURL absoluteString] stringByReplacingOccurrencesOfString:@"file://" withString:@""];//视频路径，注意不带file://
+                 [self playVideoWithPath:self.videoPath]; //播放MP4文件
+                 [self finishDealWithButtonStatus:2];
+                 
+                 self.videoThumbImage = [TDWebThumbImageModel getVideoThumbnailImage:self.videoPath isLoacal:YES];
+                 
+                 //            NSInteger kb = [self getFileSize:[mergeFileURL absoluteString]];
+                 //            NSLog(@"mp4 视频大小 == > %ld kb",(long)kb);
+                 //            NSLog(@"mp4转换结束 %@",mergeFileURL);
+             });
          }
          else if ([exporter status] == AVAssetExportSessionStatusWaiting) {
              NSLog(@"----- 正在转码");
-         }
-         else if ([exporter status] == AVAssetExportSessionStatusFailed) {
-             NSLog(@"----- 转码失败；失败信息---- %@",exporter.error);
+             [self.view makeToast:TDLocalizeSelect(@"VIDEO_TRANSCODING", nil) duration:0.8 position:CSToastPositionCenter];
          }
          else {
-              NSLog(@"----- 000 %ld",(long)[exporter status]);
+             NSLog(@"-----%ld 转码失败；失败信息---- %@ ",(long)[exporter status],exporter.error);
+             [self.view makeToast:TDLocalizeSelect(@"FAILED_TRANSCOD", nil) duration:0.8 position:CSToastPositionCenter];
          }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self playVideoWithPath:[mergeFileURL absoluteString]]; //播放MP4文件
-            [self removeMovFile]; //移除mov文件
-            [self finishDealWithButtonStatus:2];
-            
-            NSInteger kb = [self getFileSize:[mergeFileURL absoluteString]];
-            NSLog(@"mp4 视频大小 == > %ld kb",(long)kb);
-            NSLog(@"mp4转换结束 %@",mergeFileURL);
-            //            NSLog(@"本段视频的时间: %f", _currentVideoDur);
-        });
     }];
 }
 
 //移除 mov 格式的视频文件
 - (void)removeMovFile {
     
-    if (self.videoSaveFilePath) {
+    if (self.videoMovUrl) {
         
-        NSString *path = self.videoSaveFilePath;
+        NSString *path = [self.videoMovUrl absoluteString];
         path = [path stringByReplacingOccurrencesOfString:@"file://" withString:@""];
         
         if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
             
-            NSInteger kb = [self getFileSize:path];
-            NSLog(@"mov 视频大小 -- %ld kb",(long)kb);
+//            NSInteger kb = [self getFileSize:path];
+//            NSLog(@"mov 视频大小 -- %ld kb",(long)kb);
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSError *error;
+                [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+                if (error) {
+                    NSLog(@"mov file remove error: %@",error);
+                }
+            });
+        }
+    } else {
+        NSLog(@"不存在 -- Mov");
+    }
+}
+
+//移除 mp4 格式的视频文件
+- (void)removeMP4File {
+    
+    if (self.videoPath) {
+        
+        NSString *path = [self.videoPath stringByReplacingOccurrencesOfString:@"file://" withString:@""];
+        
+        if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 NSError *error;
@@ -689,7 +729,6 @@
 #pragma mark - 播放视频
 - (void)playVideoWithPath:(NSString *)pathStr {
     
-    pathStr = [pathStr stringByReplacingOccurrencesOfString:@"file://" withString:@""];
     if (![[NSFileManager defaultManager] fileExistsAtPath:pathStr]) {
         return;
     }

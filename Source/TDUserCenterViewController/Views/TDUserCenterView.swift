@@ -77,11 +77,11 @@ class TDUserCenterView: UIView,UITableViewDataSource {
         self.orders = profile.order! //未支付订单
         
         self.is_receiver = profile.is_receiver!
-        self.unsolved_count = profile.unsolved_count!//咨询数量
-        self.unsolved_msg_count = profile.unsolved_msg_count!
+        self.unsolved_count = profile.unsolved_count == nil ? 0 : profile.unsolved_count!//咨询数量
+        self.unsolved_msg_count = profile.unsolved_msg_count == nil ? 0 : profile.unsolved_msg_count!
         
         if self.is_receiver {
-            self.unreplied_count = profile.unreplied_count!
+            self.unreplied_count = profile.unreplied_count == nil ? 0 : profile.unreplied_count!
         }
         
         self.tableView.reloadData()
@@ -89,7 +89,7 @@ class TDUserCenterView: UIView,UITableViewDataSource {
     
     //MARK: tableview Datasource
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -102,8 +102,12 @@ class TDUserCenterView: UIView,UITableViewDataSource {
             } else {
                 return 1
             }
-        } else {
-            return self.is_receiver ? 4 : 3
+        }
+        else if section == 2   {
+            return 2
+        }
+        else {
+            return self.is_receiver ? 2 : 1
         }
     }
     
@@ -190,27 +194,30 @@ class TDUserCenterView: UIView,UITableViewDataSource {
                     imageStr = "coupons"
                 }
                 
-            } else {
+            }
+            else if indexPath.section == 2 {
                 switch indexPath.row {
                 case 0:
                     titleStr = TDLocalizeSelectSwift("LIVE_LECTURE_TEXT")
                     cell.messageLabel.text = TDLocalizeSelectSwift("PARTICIPATE_LIVE_TEXT")
                     imageStr = "lecture_image"
-                    
-                case 1:
+                default:
                     titleStr = TDLocalizeSelectSwift("TA_SERVICE")
                     cell.messageLabel.text = TDLocalizeSelectSwift("VIEW_TA_SERVICE")
                     imageStr = "assistant_image"
-                    
-                case 2:
-                    titleStr = TDLocalizeSelectSwift("MY_QUETIONS")
-                    cell.messageLabel.text = TDLocalizeSelectSwift("QUETIONS_MESSAGE").oex_formatWithParameters(["count" : String(format: "%d",unsolved_count)])
+                }
+            }
+            else {
+                switch indexPath.row {
+                case 0:
+                    titleStr = TDLocalizeSelectSwift("MY_CONSULTTATIONS_TEXT")
+                    cell.messageLabel.text = unsolved_count < 2 ? TDLocalizeSelectSwift("QUETIONS_MESSAGE").oex_formatWithParameters(["count" : String(format: "%d",unsolved_count)]) : TDLocalizeSelectSwift("QUETIONS_MESSAGE_S").oex_formatWithParameters(["count" : String(format: "%d",unsolved_count)])
                     imageStr = "quetion_image"
                     cell.redImageView.hidden = self.unsolved_msg_count == 0 ? true : false
                     
                 default:
-                    titleStr = "我的回答"
-                    cell.messageLabel.text = TDLocalizeSelectSwift("QUETIONS_MESSAGE").oex_formatWithParameters(["count" : String(format: "%d",unreplied_count)])
+                    titleStr = TDLocalizeSelectSwift("MY_ANSWERS_TEXT")
+                    cell.messageLabel.text = unreplied_count < 2 ? TDLocalizeSelectSwift("ANSWERS_MESSAGE").oex_formatWithParameters(["count" : String(format: "%d",unreplied_count)]) : TDLocalizeSelectSwift("ANSWERS_MESSAGE_S").oex_formatWithParameters(["count" : String(format: "%d",unreplied_count)])
                     imageStr = "anser_image"
                     cell.redImageView.hidden = self.unreplied_count == 0 ? true : false
                 }
