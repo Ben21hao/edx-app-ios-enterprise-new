@@ -79,7 +79,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.0</string>
+	<string>1.0.5</string>
 	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
 	<false/>
 	<key>FacebookDisplayName</key>
@@ -112,11 +112,11 @@
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>for bluetooth</string>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>允许访问相机</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string></string>
+	<string>允许访问麦克风</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+	<string>允许访问相册</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome.otf</string>

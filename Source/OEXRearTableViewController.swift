@@ -62,12 +62,6 @@ class OEXRearTableViewController : UITableViewController {
         setupProfileLoader()
         updateUIWithUserInfo()
         
-        
-        //        let environmentName = self.environment.config.environmentName()
-        //        let appVersion = NSBundle.mainBundle().oex_buildVersionString()
-        //        appVersionButton.setAttributedTitle(versionButtonStyle.attributedStringWithText(Strings.versionDisplay(number: appVersion, environment: environmentName)), forState:.Normal)
-        //
-        
         self.view.backgroundColor = OEXStyles.sharedStyles().baseColor7()
         self.tableView.backgroundColor = OEXStyles.sharedStyles().baseColor7()
         
@@ -110,6 +104,11 @@ class OEXRearTableViewController : UITableViewController {
     }
     
     func LanguageChangeAction() {
+        
+        //        let environmentName = self.environment.config.environmentName()
+        //        let appVersion = NSBundle.mainBundle().oex_buildVersionString()
+        //        appVersionButton.setAttributedTitle(versionButtonStyle.attributedStringWithText(Strings.versionDisplay(number: appVersion, environment: environmentName)), forState:.Normal)
+        //
         
         let baseTool = TDBaseToolModel()
         let versionStr = baseTool.getAppVersionNum(1)

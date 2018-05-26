@@ -331,6 +331,12 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
             }
             cellItems.append(item)
         }
+        
+        /*成绩*/
+        item = StandardCourseDashboardItem(title: "成绩", detail: "查看本课程的成绩", icon: .Handouts) {[weak self] () -> Void in
+            self?.showScoreViewController()
+        }
+        cellItems.append(item)
     }
     
     
@@ -391,6 +397,14 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     
     private func showQRViewController() { //班级
         let vc = QRViewController();
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func showScoreViewController() {
+        let vc = TDScoreViewController()
+        vc.username = OEXRouter.sharedRouter().environment.session.currentUser?.username
+        vc.course_id = courseID
+        vc.courseTitle = self.titleLabel?.text
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

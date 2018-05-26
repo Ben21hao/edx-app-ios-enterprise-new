@@ -465,6 +465,16 @@
 		A46B92CE200A11CA003EB4E4 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A46B92CD200A11CA003EB4E4 /* libmp3lame.a */; };
 		A46B92D2200A1288003EB4E4 /* TDRoundHeadImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A46B92D1200A1288003EB4E4 /* TDRoundHeadImageView.m */; };
 		A46B92D5200A13C1003EB4E4 /* TDBaseCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A46B92D4200A13C1003EB4E4 /* TDBaseCollectionView.m */; };
+		A4704F0820B8FCD800CC1230 /* TDMsmVerticateLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4704EFC20B8FCD800CC1230 /* TDMsmVerticateLoginViewController.m */; };
+		A4704F0920B8FCD800CC1230 /* TDMsmCodeLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4704EFF20B8FCD800CC1230 /* TDMsmCodeLoginViewController.m */; };
+		A4704F0A20B8FCD800CC1230 /* TDLoginMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4704F0320B8FCD800CC1230 /* TDLoginMessageView.m */; };
+		A4704F0B20B8FCD800CC1230 /* TDLoginVerticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4704F0420B8FCD800CC1230 /* TDLoginVerticationView.m */; };
+		A4704F0C20B8FCD800CC1230 /* TDMessgeLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4704F0620B8FCD800CC1230 /* TDMessgeLoginView.m */; };
+		A4704F1B20B8FD1600CC1230 /* TDScoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4704F0F20B8FD1500CC1230 /* TDScoreViewController.m */; };
+		A4704F1C20B8FD1600CC1230 /* TDCourseScoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4704F1220B8FD1500CC1230 /* TDCourseScoreModel.m */; };
+		A4704F1D20B8FD1600CC1230 /* TDScoreCellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4704F1620B8FD1600CC1230 /* TDScoreCellCell.m */; };
+		A4704F1E20B8FD1600CC1230 /* TDScoreSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4704F1720B8FD1600CC1230 /* TDScoreSectionView.m */; };
+		A4704F1F20B8FD1600CC1230 /* TDScoreHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4704F1920B8FD1600CC1230 /* TDScoreHeaderView.m */; };
 		A4710AE820A13E0B00AC9D60 /* TDWebThumbImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4710AE720A13E0B00AC9D60 /* TDWebThumbImageModel.m */; };
 		A47C7D362091B52C001BD620 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A47C7D352091B52C001BD620 /* MobileCoreServices.framework */; };
 		A4891503200DE4D100DDA75D /* BCEDocumentReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4891502200DE4D100DDA75D /* BCEDocumentReader.framework */; };
@@ -1596,6 +1606,26 @@
 		A46B92D1200A1288003EB4E4 /* TDRoundHeadImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDRoundHeadImageView.m; sourceTree = "<group>"; };
 		A46B92D3200A13C1003EB4E4 /* TDBaseCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBaseCollectionView.h; sourceTree = "<group>"; };
 		A46B92D4200A13C1003EB4E4 /* TDBaseCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBaseCollectionView.m; sourceTree = "<group>"; };
+		A4704EFC20B8FCD800CC1230 /* TDMsmVerticateLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDMsmVerticateLoginViewController.m; sourceTree = "<group>"; };
+		A4704EFD20B8FCD800CC1230 /* TDMsmCodeLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDMsmCodeLoginViewController.h; sourceTree = "<group>"; };
+		A4704EFE20B8FCD800CC1230 /* TDMsmVerticateLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDMsmVerticateLoginViewController.h; sourceTree = "<group>"; };
+		A4704EFF20B8FCD800CC1230 /* TDMsmCodeLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDMsmCodeLoginViewController.m; sourceTree = "<group>"; };
+		A4704F0220B8FCD800CC1230 /* TDMessgeLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDMessgeLoginView.h; sourceTree = "<group>"; };
+		A4704F0320B8FCD800CC1230 /* TDLoginMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDLoginMessageView.m; sourceTree = "<group>"; };
+		A4704F0420B8FCD800CC1230 /* TDLoginVerticationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDLoginVerticationView.m; sourceTree = "<group>"; };
+		A4704F0520B8FCD800CC1230 /* TDLoginVerticationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDLoginVerticationView.h; sourceTree = "<group>"; };
+		A4704F0620B8FCD800CC1230 /* TDMessgeLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDMessgeLoginView.m; sourceTree = "<group>"; };
+		A4704F0720B8FCD800CC1230 /* TDLoginMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDLoginMessageView.h; sourceTree = "<group>"; };
+		A4704F0F20B8FD1500CC1230 /* TDScoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDScoreViewController.m; sourceTree = "<group>"; };
+		A4704F1020B8FD1500CC1230 /* TDScoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDScoreViewController.h; sourceTree = "<group>"; };
+		A4704F1220B8FD1500CC1230 /* TDCourseScoreModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCourseScoreModel.m; sourceTree = "<group>"; };
+		A4704F1320B8FD1600CC1230 /* TDCourseScoreModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCourseScoreModel.h; sourceTree = "<group>"; };
+		A4704F1520B8FD1600CC1230 /* TDScoreHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDScoreHeaderView.h; sourceTree = "<group>"; };
+		A4704F1620B8FD1600CC1230 /* TDScoreCellCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDScoreCellCell.m; sourceTree = "<group>"; };
+		A4704F1720B8FD1600CC1230 /* TDScoreSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDScoreSectionView.m; sourceTree = "<group>"; };
+		A4704F1820B8FD1600CC1230 /* TDScoreCellCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDScoreCellCell.h; sourceTree = "<group>"; };
+		A4704F1920B8FD1600CC1230 /* TDScoreHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDScoreHeaderView.m; sourceTree = "<group>"; };
+		A4704F1A20B8FD1600CC1230 /* TDScoreSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDScoreSectionView.h; sourceTree = "<group>"; };
 		A4710AE620A13E0B00AC9D60 /* TDWebThumbImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWebThumbImageModel.h; sourceTree = "<group>"; };
 		A4710AE720A13E0B00AC9D60 /* TDWebThumbImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWebThumbImageModel.m; sourceTree = "<group>"; };
 		A47C7D352091B52C001BD620 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -3170,6 +3200,7 @@
 		7769071F1AD5EED600F5E7EB /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				A4704EFA20B8FCD800CC1230 /* TDMessageLoginViewController */,
 				B5D289B31EFB71CB003581DC /* TDResetPasswordViewController */,
 				B5CF30601EB1A79E00F1BF6A /* TDWebViewController */,
 				B4B6D5E31A9490E9000F44E8 /* OEXLoginSplashViewController.h */,
@@ -3832,6 +3863,88 @@
 				A46B92D1200A1288003EB4E4 /* TDRoundHeadImageView.m */,
 			);
 			path = TDHeaderImageView;
+			sourceTree = "<group>";
+		};
+		A4704EFA20B8FCD800CC1230 /* TDMessageLoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A4704EFB20B8FCD800CC1230 /* controller */,
+				A4704F0020B8FCD800CC1230 /* model */,
+				A4704F0120B8FCD800CC1230 /* view */,
+			);
+			path = TDMessageLoginViewController;
+			sourceTree = "<group>";
+		};
+		A4704EFB20B8FCD800CC1230 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				A4704EFE20B8FCD800CC1230 /* TDMsmVerticateLoginViewController.h */,
+				A4704EFC20B8FCD800CC1230 /* TDMsmVerticateLoginViewController.m */,
+				A4704EFD20B8FCD800CC1230 /* TDMsmCodeLoginViewController.h */,
+				A4704EFF20B8FCD800CC1230 /* TDMsmCodeLoginViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		A4704F0020B8FCD800CC1230 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		A4704F0120B8FCD800CC1230 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				A4704F0220B8FCD800CC1230 /* TDMessgeLoginView.h */,
+				A4704F0320B8FCD800CC1230 /* TDLoginMessageView.m */,
+				A4704F0420B8FCD800CC1230 /* TDLoginVerticationView.m */,
+				A4704F0520B8FCD800CC1230 /* TDLoginVerticationView.h */,
+				A4704F0620B8FCD800CC1230 /* TDMessgeLoginView.m */,
+				A4704F0720B8FCD800CC1230 /* TDLoginMessageView.h */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		A4704F0D20B8FD1500CC1230 /* TDScoreViewConstroller */ = {
+			isa = PBXGroup;
+			children = (
+				A4704F0E20B8FD1500CC1230 /* controller */,
+				A4704F1120B8FD1500CC1230 /* model */,
+				A4704F1420B8FD1600CC1230 /* view */,
+			);
+			path = TDScoreViewConstroller;
+			sourceTree = "<group>";
+		};
+		A4704F0E20B8FD1500CC1230 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				A4704F1020B8FD1500CC1230 /* TDScoreViewController.h */,
+				A4704F0F20B8FD1500CC1230 /* TDScoreViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		A4704F1120B8FD1500CC1230 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				A4704F1320B8FD1600CC1230 /* TDCourseScoreModel.h */,
+				A4704F1220B8FD1500CC1230 /* TDCourseScoreModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		A4704F1420B8FD1600CC1230 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				A4704F1520B8FD1600CC1230 /* TDScoreHeaderView.h */,
+				A4704F1920B8FD1600CC1230 /* TDScoreHeaderView.m */,
+				A4704F1A20B8FD1600CC1230 /* TDScoreSectionView.h */,
+				A4704F1720B8FD1600CC1230 /* TDScoreSectionView.m */,
+				A4704F1820B8FD1600CC1230 /* TDScoreCellCell.h */,
+				A4704F1620B8FD1600CC1230 /* TDScoreCellCell.m */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		A4891501200DE4D100DDA75D /* BaiduBCEReader */ = {
@@ -5765,6 +5878,7 @@
 		BE45DA86192605E7003BD39B /* Course */ = {
 			isa = PBXGroup;
 			children = (
+				A4704F0D20B8FD1500CC1230 /* TDScoreViewConstroller */,
 				778F17791C0D125A0099BF93 /* CoursesTableViewController.swift */,
 				77EA92251BB4590A00EC625A /* DownloadsAccessoryView.swift */,
 				77056C3D1B3F320800D9DB4A /* DetailToolbarButton.swift */,
@@ -6651,6 +6765,7 @@
 				B4B285E21A9A497A00DD603A /* OEXSegmentConfig.m in Sources */,
 				7772BEA31AFA68330081CA7A /* ConstraintAttributes.swift in Sources */,
 				B52E8D2F1F0B94E900F3170D /* BarrageFloatImageSprite.m in Sources */,
+				A4704F0920B8FCD800CC1230 /* TDMsmCodeLoginViewController.m in Sources */,
 				773A04801AF2E6DA0076532C /* CourseOutlineTableSource.swift in Sources */,
 				B59B6C3B1F0CC6DB008D6690 /* TDLiveModel.m in Sources */,
 				B52590E21EB2E222003A950D /* OpenOnWebController.swift in Sources */,
@@ -6748,6 +6863,7 @@
 				B59238E81EADD0BE00C686D8 /* TDActivityViewController.m in Sources */,
 				191A002E19405E97004F7902 /* OEXLatestUpdates.m in Sources */,
 				B52590FB1EB32D86003A950D /* WeChatPay.m in Sources */,
+				A4704F0A20B8FCD800CC1230 /* TDLoginMessageView.m in Sources */,
 				1AFEB1B61BBD5B95004C471D /* ProfilePictureTaker.swift in Sources */,
 				198826F1195D6979005D4D8A /* OEXMyVideosViewController.m in Sources */,
 				77E647CE1C90CAB800B6740D /* NSAttributedString+OEXFormatting.m in Sources */,
@@ -6762,6 +6878,7 @@
 				BE0D454A192DD4F800D720D6 /* OEXNetworkInterface.m in Sources */,
 				B419295E1A8A3F1900448AD5 /* OEXNetworkManager.m in Sources */,
 				B50211A21EA852B7001DE1E2 /* TDAboutWeViewController.m in Sources */,
+				A4704F1E20B8FD1600CC1230 /* TDScoreSectionView.m in Sources */,
 				890D027F1967343A002CE7EC /* OEXCourseInfoCell.m in Sources */,
 				B50211FE1EA85818001DE1E2 /* ClipImg.m in Sources */,
 				B5A3A0F61EC0764D00C48573 /* TDRequestManager.m in Sources */,
@@ -6957,6 +7074,7 @@
 				1A373E911C45807D00E3AAAA /* NSError+JSON.swift in Sources */,
 				A49EA31B200A0F9B00CD6CF1 /* TDQuetionDetailViewController.m in Sources */,
 				697B5A091D92DB3F002C3ABD /* RegistrationFormAPI.swift in Sources */,
+				A4704F0C20B8FCD800CC1230 /* TDMessgeLoginView.m in Sources */,
 				77D6A9A41C28F32900E67CCF /* CoursesAPI.swift in Sources */,
 				778B40D91C2F62520009F33E /* EnrollmentManager.swift in Sources */,
 				BECB7B5A1924D760009C77F1 /* SWRevealViewController.m in Sources */,
@@ -6978,6 +7096,7 @@
 				77EA92261BB4590A00EC625A /* DownloadsAccessoryView.swift in Sources */,
 				B52E8D361F0B94E900F3170D /* BarrageWalkSprite.m in Sources */,
 				A420E2511F3C55A200340683 /* TDBaseButton.m in Sources */,
+				A4704F1D20B8FD1600CC1230 /* TDScoreCellCell.m in Sources */,
 				77ADF4A61AC1B35000AC8955 /* OEXExternalAuthProviderButton.m in Sources */,
 				77C182AA1CD2E46900AE1474 /* TablePaginationManipulator.swift in Sources */,
 				B4B6D6431A95335C000F44E8 /* OEXRegistrationAgreementController.m in Sources */,
@@ -7014,6 +7133,7 @@
 				699FF8541E5AE74300AD98A5 /* EmailTemplates.swift in Sources */,
 				199627A71945D95D0022C489 /* OEXFrontTableViewCell.m in Sources */,
 				9EB9C5251BAFEE9F00300E55 /* OEXDateFormatting+Swift.swift in Sources */,
+				A4704F1F20B8FD1600CC1230 /* TDScoreHeaderView.m in Sources */,
 				1913DD3D194B267000573977 /* OEXDownloadViewController.m in Sources */,
 				7764597F1A096339008404CC /* NSString+OEXEncoding.m in Sources */,
 				77BC3E691AE0091400E51529 /* OEXPushNotificationProcessor.m in Sources */,
@@ -7097,8 +7217,10 @@
 				B52591791EB348C3003A950D /* openssl_wrapper.m in Sources */,
 				B5520A011EB9CC7700EC51C9 /* TDCourseIntroduceCell.swift in Sources */,
 				B4B6D62E1A949F1B000F44E8 /* OEXRegistrationFieldTextAreaController.m in Sources */,
+				A4704F1C20B8FD1600CC1230 /* TDCourseScoreModel.m in Sources */,
 				B4B285E51A9A49FF00DD603A /* OEXFabricConfig.m in Sources */,
 				B5168B761EB832A000C80436 /* TDWaitforPayCell.m in Sources */,
+				A4704F0B20B8FCD800CC1230 /* TDLoginVerticationView.m in Sources */,
 				A4DD5BCE1FA9B72200E2CE35 /* TDFindCourseView.m in Sources */,
 				B518BE6E1EA9DD950027569D /* TDUserCenterViewController.swift in Sources */,
 				1A81971B1C060FA50030254D /* ShareHelper.swift in Sources */,
@@ -7108,6 +7230,7 @@
 				A41084BF208ED9D300C6A0E1 /* TDSubMyAnswerViewController.m in Sources */,
 				A459566C209AAFF200706DB7 /* TDPreviewVideoViewController.m in Sources */,
 				A49EA326200A0F9B00CD6CF1 /* TDRecordView.m in Sources */,
+				A4704F1B20B8FD1600CC1230 /* TDScoreViewController.m in Sources */,
 				B52E8C261F0B88C700F3170D /* VHStystemSetting.m in Sources */,
 				9E0CC1031BA9574E00A1CFDB /* SpinnerButton.swift in Sources */,
 				A41084DD208F110700C6A0E1 /* TDConsultTextCell.m in Sources */,
@@ -7227,6 +7350,7 @@
 				B59238A01EADB59A00C686D8 /* TDProfessorViewController.m in Sources */,
 				A49EA321200A0F9B00CD6CF1 /* TDLongPressGestureRecognizer.m in Sources */,
 				B518BEC11EA9E6F00027569D /* TDTalkModel.m in Sources */,
+				A4704F0820B8FCD800CC1230 /* TDMsmVerticateLoginViewController.m in Sources */,
 				77B463971A30F65E0083453A /* OEXStyles.m in Sources */,
 				A46B92D2200A1288003EB4E4 /* TDRoundHeadImageView.m in Sources */,
 				A41084BC208ED98A00C6A0E1 /* TDMyAnswerViewController.m in Sources */,

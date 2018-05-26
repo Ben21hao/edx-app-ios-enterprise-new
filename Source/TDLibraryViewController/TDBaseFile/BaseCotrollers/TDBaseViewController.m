@@ -150,6 +150,7 @@
 
 #pragma mark - 无数据处理
 - (void)setNullDataView:(NSString *)title {
+    
     self.nullView = [[UIView alloc] init];
     self.nullView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     [self.view addSubview:self.nullView];

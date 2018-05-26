@@ -718,8 +718,6 @@
 "SIGN_UP_ELITEU" = "Sign up for EliteU";
 /*忘记密码*/
 "FORGET_PASSWORD" = "Forgot your password?";
-/*还没有账号*/
-"NO_ACCOUNT" = "No account yet?";
 /*登录*/
 "SIGN_IN" = "Sign in";
 /*手机号或邮箱地址*/

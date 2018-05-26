@@ -126,3 +126,4 @@
 #import "TDMyQuentionViewController.h"
 #import "TDMyAnswerViewController.h"
 #import "TDRightSelectView.h"
+#import "TDScoreViewController.h"

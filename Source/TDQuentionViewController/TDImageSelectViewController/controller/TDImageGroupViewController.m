@@ -63,11 +63,19 @@
         weakSelf.groupArray = [NSMutableArray arrayWithArray:result]; //相册
         [weakSelf.tableView reloadData];
         
-        if (weakSelf.groupArray.count > 3) {
-            [weakSelf gotoSelectImageVc:3 animated:NO];
-        } else {
-            [weakSelf gotoSelectImageVc:0 animated:NO];
+        for (int i = 0; i < result.count; i ++) {
+            PHAssetCollection *assetCollection = result[i];
+            if (assetCollection.assetCollectionSubtype == PHAssetCollectionSubtypeSmartAlbumUserLibrary) {
+                [weakSelf gotoSelectImageVc:i animated:NO];
+                return;
+            }
         }
+        
+//        if (weakSelf.groupArray.count > 3) {
+//            [weakSelf gotoSelectImageVc:3 animated:NO];
+//        } else {
+//            [weakSelf gotoSelectImageVc:0 animated:NO];
+//        }
     }];
 }
 

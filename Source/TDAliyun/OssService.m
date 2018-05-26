@@ -182,7 +182,7 @@
     }];
 }
 
-- (NSString *)dealDateFormatter:(NSString *)username type:(NSString *)typeStr { // beta/lms/userid/时间戳文件名字
+- (NSString *)dealDateFormatter:(NSString *)username type:(NSString *)typeStr { // beta/lms/userid/时间戳文件名字 (prod：生产服务器)
     
     NSDate *date = [NSDate date];
     
@@ -190,7 +190,7 @@
     [formatter setDateFormat:@"yyyyMMddHHmmss"];
     NSString *dateStr = [formatter stringFromDate:date];
     int ar4 = arc4random() % 10000;
-    NSString *fileName = [NSString stringWithFormat:@"beta/lms/%@/%@%d%@",username,dateStr,ar4,typeStr];
+    NSString *fileName = [NSString stringWithFormat:@"prod/lms/%@/%@%d%@",username,dateStr,ar4,typeStr];
     
     return fileName;
 }

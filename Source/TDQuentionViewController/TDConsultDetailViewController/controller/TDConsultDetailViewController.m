@@ -802,11 +802,7 @@
         
         
         if ([self.contentModel.is_slove boolValue] == YES) { //已解决
-            if (self.whereFrom == TDConsultDetailFromUserSolve) { //我的咨询已解决
-                cell.statusLabel.text = TDLocalizeSelect(@"SOLVED_CONSULTS", nil);
-            } else {
-                cell.statusLabel.text = [self.contentModel.consult_status intValue] == 7 ? TDLocalizeSelect(@"USER_CANCELED", nil) : TDLocalizeSelect(@"SOLVED_CONSULTS", nil);
-            }
+            cell.statusLabel.text = TDLocalizeSelect(@"SOLVED_CONSULTS", nil);
             cell.secondLabel.text = self.contentModel.last_update_time;
         }
         else {//未解决

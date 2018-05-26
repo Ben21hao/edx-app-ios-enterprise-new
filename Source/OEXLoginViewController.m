@@ -34,16 +34,15 @@
 #import "OEXNetworkUtility.h"
 #import "OEXSession.h"
 #import "OEXUserDetails.h"
-#import "OEXUserLicenseAgreementViewController.h"
 #import "Reachability.h"
 #import "OEXStyles.h"
 #import "TDWebViewController.h"
+#import "TDMsmVerticateLoginViewController.h"
 
 #define USER_LOGIN_NAME @"User_Login_Name_Enterprise"
 #define USER_LOGIN_PASSWORD @"User_Login_Password_Enterprise"
 
-@interface OEXLoginViewController () <UIAlertViewDelegate>
-{
+@interface OEXLoginViewController () <UIAlertViewDelegate> {
     CGPoint originalOffset;     // store the offset of the scrollview.
     UITextField* activeField;   // assign textfield object which is in active state.
 
@@ -52,28 +51,14 @@
 @property (nonatomic, strong) NSString* signInID;
 @property (nonatomic, strong) NSString* signInPassword;
 @property (nonatomic, assign) BOOL reachable;
-@property (weak, nonatomic, nullable) IBOutlet UIWebView* webview_EULA;
+
 @property (weak, nonatomic, nullable) IBOutlet UIButton* btn_OpenEULA;
-@property (weak, nonatomic, nullable) IBOutlet UIImageView* img_SeparatorEULA;
-@property (strong, nonatomic) IBOutlet UIView* externalAuthContainer;
-@property (weak, nonatomic, nullable) IBOutlet OEXCustomLabel* lbl_OrSignIn;
-@property(nonatomic, strong) IBOutlet UIImageView* seperatorLeft;
-@property(nonatomic, strong) IBOutlet UIImageView* seperatorRight;
-// For Login Design change
-// Manage on Constraints
+// For Login Design change,Manage on Constraints
 @property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_MapTop;
 @property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_UsernameTop;
 @property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_PasswordTop;
-@property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_ForgotTop;
-@property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_SignInTop;
-@property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_SignTop;
-@property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_separatorTop;
-@property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_BySigningTop;
-@property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_EULATop;
 @property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_UserGreyTop;
 @property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_PassGreyTop;
-@property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_LeftSepTop;
-@property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_RightSepTop;
 @property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_ActivityIndTop;
 
 @property (weak, nonatomic, nullable) IBOutlet UITextField* tf_EmailID;
@@ -90,11 +75,9 @@
 @property (weak, nonatomic, nullable) IBOutlet UIScrollView* scroll_Main;
 @property (weak, nonatomic, nullable) IBOutlet UIImageView* img_Map;
 @property (weak, nonatomic, nullable) IBOutlet UIImageView* img_Logo;
-@property (weak, nonatomic, nullable) IBOutlet UILabel* lbl_Redirect;
 @property (weak, nonatomic, nullable) IBOutlet UIActivityIndicatorView* activityIndicator;
-@property (strong, nonatomic) IBOutlet UILabel *versionLabel;
 
-@property (nonatomic,strong) UIButton *bottomButton;
+@property (nonatomic,strong) UIButton *bottomButton; //用户协议
 
 @property (nonatomic, assign) id <OEXExternalAuthProvider> authProvider;
 
@@ -118,9 +101,6 @@
     OEXAppDelegate* appD = (OEXAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.reachable = [appD.reachability isReachable];
     
-    //EULA
-    [self hideEULA:YES];
-    
     [self addNotificationCenter];
     
     //Tap to dismiss keyboard
@@ -132,6 +112,7 @@
     //To set all the components tot default property
     [self layoutSubviews];
     [self setToDefaultProperties];
+    [self hidAppPuchase];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -149,23 +130,8 @@
         self.constraint_UserGreyTop.constant = 20;
         self.constraint_PasswordTop.constant = 8;
         self.constraint_PassGreyTop.constant = 8;
-        self.constraint_ForgotTop.constant = 8;
-        self.constraint_SignInTop.constant = 13;
         self.constraint_ActivityIndTop.constant = 43;
-        self.constraint_SignTop.constant = 9;
         
-        if([self isGoogleEnabled] || [self isFacebookEnabled]) {
-            self.constraint_LeftSepTop.constant = 18;
-            self.constraint_RightSepTop.constant = 18;
-            self.constraint_BySigningTop.constant = 69;
-            self.constraint_EULATop.constant = 73;
-        }
-        else {
-            self.constraint_LeftSepTop.constant = 18;
-            self.constraint_RightSepTop.constant = 18;
-            self.constraint_BySigningTop.constant = 18;
-            self.constraint_EULATop.constant = 23;
-        }
     }
     else {
         self.constraint_MapTop.constant = 90;
@@ -173,19 +139,7 @@
         self.constraint_UserGreyTop.constant = 25;
         self.constraint_PasswordTop.constant = 12;
         self.constraint_PassGreyTop.constant = 12;
-        self.constraint_SignInTop.constant = 20;
         self.constraint_ActivityIndTop.constant = 55;
-        self.constraint_SignTop.constant = 15;
-        if([self isGoogleEnabled] || [self isFacebookEnabled]) {
-            self.constraint_LeftSepTop.constant = 25;
-            self.constraint_RightSepTop.constant = 25;
-            self.constraint_BySigningTop.constant = 85;
-            self.constraint_EULATop.constant = 88;
-        }
-        else {
-            self.constraint_BySigningTop.constant = 25;
-            self.constraint_EULATop.constant = 30;
-        }
     }
 }
 
@@ -228,7 +182,7 @@
 }
 
 - (void)rightButtonAciton:(UIButton *)sender {
-    [self.delegate loginViewControllerDidLogin:self];
+    [self userDidLogin];
 }
 
 //- (void)navigateBack {
@@ -252,13 +206,6 @@
     self.view.exclusiveTouch = YES;
 }
 
-- (void)hideEULA:(BOOL)hide {
-    //EULA
-    [self.webview_EULA.scrollView setContentOffset:CGPointMake(0, 0)];
-    self.webview_EULA.hidden = hide;
-    self.img_SeparatorEULA.hidden = hide;
-}
-
 - (NSString *)signInButtonText {
     return TDLocalizeSelect(@"SIGN_IN", nil);
 }
@@ -273,19 +220,6 @@
         [providers addObject:[[OEXFacebookAuthProvider alloc] init]];
     }
     
-    __weak __typeof(self) owner = self;
-    OEXExternalAuthOptionsView* externalAuthOptions = [[OEXExternalAuthOptionsView alloc] initWithFrame:self.externalAuthContainer.bounds providers:providers tapAction:^(id<OEXExternalAuthProvider> provider) {
-        [owner externalLoginWithProvider:provider];
-    }];
-    
-    [self.externalAuthContainer addSubview:externalAuthOptions];
-    [externalAuthOptions mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.externalAuthContainer);
-    }];
-    
-    [self.lbl_OrSignIn setText:TDLocalizeSelect(@"NO_ACCOUNT", nil)];
-    [self.lbl_OrSignIn setTextColor:[UIColor colorWithHexString:colorHexStr8]];
-    
     [self setExclusiveTouch];
     
     if ([self isRTL]) {
@@ -294,17 +228,6 @@
     
     self.img_Logo.isAccessibilityElement = YES;
     self.img_Logo.accessibilityLabel = [[OEXConfig sharedConfig] platformName];
-    
-//    NSString* environmentName = self.environment.config.environmentName;
-//    if(environmentName.length > 0) {
-//        NSString* appVersion = [NSBundle mainBundle].oex_buildVersionString;
-//        self.versionLabel.text = [Strings versionDisplayWithNumber:appVersion environment:environmentName];
-//    } else {
-//        self.versionLabel.text = @"";
-//    }
-    
-    NSString* appVersion = [NSBundle mainBundle].oex_buildVersionString;
-    self.versionLabel.text = [TDLocalizeSelect(@"VERSION_DISPLAY", nil) oex_formatWithParameters:@{@"number" : appVersion}];
     
     self.eyesButton.titleLabel.font = [UIFont fontWithName:@"FontAwesome" size:20.0];
     [self.eyesButton setTitle:@"\U0000f070" forState:UIControlStateNormal];
@@ -321,15 +244,22 @@
     
     /* 隐藏注册 */
     self.registerButton.hidden = YES;
-    self.seperatorLeft.hidden = YES;
-    self.seperatorRight.hidden = YES;
-    self.lbl_OrSignIn.hidden = YES;
     
     [self.accountButton setTitle:TDLocalizeSelect(@"NO_ACCOUNT_BUTTON_TEXT", nil) forState:UIControlStateNormal];
     [self setBottomButton];
 }
 
-- (void)setBottomButton {
+- (void)hidAppPuchase { //审核中，隐藏<没有账号？>按钮
+    
+    TDBaseToolModel *baseTool = [[TDBaseToolModel alloc] init];
+    [baseTool showPurchase];
+    WS(weakSelf);
+    baseTool.judHidePurchseHandle = ^(BOOL isHidePurchase){
+        weakSelf.accountButton.hidden = !isHidePurchase;
+    };
+}
+
+- (void)setBottomButton { //用户协议按钮
     
     self.bottomButton = [[UIButton alloc] init];
     self.bottomButton.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -402,21 +332,12 @@
 - (void)setToDefaultProperties {
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-
-    self.lbl_Redirect.text = TDLocalizeSelect(@"REDIRECT_TEXT", nil);
-    self.lbl_Redirect.isAccessibilityElement = NO;
     
     [self.btn_TroubleLogging setTitle:TDLocalizeSelect(@"TROUBLE_IN_LOGIN_BUTTON", nil) forState:UIControlStateNormal];
     [self.btn_TroubleLogging setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
     
     [self.btn_OpenEULA setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
-
-    NSString *termsText = [TDLocalizeSelect(@"REGISTRATION_AGREEMENT_BUTTON_TITLE", nil) oex_formatWithParameters:@{@"platform_name" : self.environment.config.platformName}];
-    [self.btn_OpenEULA setTitle:termsText forState:UIControlStateNormal];
-    self.btn_OpenEULA.titleLabel.adjustsFontSizeToFitWidth = YES;
-
-    self.btn_OpenEULA.accessibilityTraits = UIAccessibilityTraitLink;
-    self.btn_OpenEULA.accessibilityLabel = [NSString stringWithFormat:@"%@,%@",TDLocalizeSelect(@"REDIRECT_TEXT", nil), termsText];
+    [self.btn_OpenEULA setTitle:@"验证码登录" forState:UIControlStateNormal];
     
     [self.btn_Login setTitle:[self signInButtonText] forState:UIControlStateNormal];
     [self.activityIndicator stopAnimating];
@@ -447,11 +368,15 @@
     }
 }
 
-#pragma mark IBActions
+#pragma mark - 验证码登录
 - (IBAction)openEULA:(id)sender {
-    NSURL* url = [[NSBundle mainBundle] URLForResource:@"Terms-and-Services" withExtension:@"htm"];
-    OEXUserLicenseAgreementViewController* viewController = [[OEXUserLicenseAgreementViewController alloc] initWithContentURL:url];
-    [self presentViewController:viewController animated:YES completion:nil];
+    
+    TDMsmVerticateLoginViewController *messageVc = [[TDMsmVerticateLoginViewController alloc] init];
+    WS(weakSelf);
+    messageVc.loginActionHandle = ^(){
+        [weakSelf userDidLogin];
+    };
+    [self.navigationController pushViewController:messageVc animated:YES];
 }
 
 #pragma mark - 忘记密码
@@ -792,10 +717,10 @@
     [self.activityIndicator stopAnimating];
 
     //Launch next view
-    [self didLogin];
+    [self userDidLogin];
 }
 
-- (void)didLogin {
+- (void)userDidLogin {
     [self.delegate loginViewControllerDidLogin:self];
 }
 
@@ -906,8 +831,7 @@
 }
 
 #pragma mark TextField Delegate
-- (BOOL)textFieldShouldReturn:(UITextField*)textField;
-{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField; {
     if(textField == self.tf_EmailID) {
         [self.tf_Password becomeFirstResponder];
     }
@@ -943,9 +867,8 @@
 }
 
 #pragma mark - Scolling on Keyboard Hide/Show
-
-// Called when the UIKeyboardDidShowNotification is sent.
-- (void)keyboardWasShown:(NSNotification*)aNotification {
+// 键盘弹出
+- (void)keyboardWasShown:(NSNotification *)aNotification {
     // Calculating the height of the keyboard and the scrolling offset of the textfield
     // And scrolling on the calculated offset to make it visible
 
@@ -967,16 +890,16 @@
     }
 }
 
-// Called when the UIKeyboardWillHideNotification is sent
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+// 键盘收起
+- (void)keyboardWillBeHidden:(NSNotification *)aNotification {
+    
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
     self.scroll_Main.contentInset = contentInsets;
     self.scroll_Main.scrollIndicatorInsets = contentInsets;
     [self.scroll_Main setContentOffset:originalOffset animated:YES];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView*)scrollView;
-{
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if(scrollView == self.scroll_Main) {
         originalOffset = scrollView.contentOffset;
     }
@@ -989,6 +912,7 @@
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return [OEXStyles sharedStyles].standardStatusBarStyle;
 }
+
 
 - (BOOL)shouldAutorotate {
     return NO;
