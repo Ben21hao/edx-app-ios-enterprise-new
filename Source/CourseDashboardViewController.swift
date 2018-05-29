@@ -61,7 +61,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     
     private let tableView: UITableView = UITableView()
     private let stackView: TZStackView = TZStackView()
-    private let containerView: UIScrollView = UIScrollView()
+//    private let containerView: UIScrollView = UIScrollView()
     private let shareButton = UIButton(type: .System)
     
     private var cellItems: [CourseDashboardItem] = []
@@ -132,28 +132,28 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    override public func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        self.tableView.snp_updateConstraints{ make in
-            make.height.equalTo(tableView.contentSize.height)
-        }
-        containerView.contentSize = stackView.bounds.size
-    }
+//    override public func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+    
+//        self.tableView.snp_updateConstraints{ make in
+//            make.height.equalTo(tableView.contentSize.height)
+//        }
+//        containerView.contentSize = stackView.bounds.size
+//    }
 
     //MARK: UI
     func setViewConstraint() {
         
         self.view.backgroundColor = OEXStyles.sharedStyles().baseColor5()
     
-        containerView.backgroundColor = OEXStyles.sharedStyles().baseColor5()
-        self.view.addSubview(containerView)
+//        containerView.backgroundColor = OEXStyles.sharedStyles().baseColor5()
+//        self.view.addSubview(containerView)
+//        
+//        containerView.snp_makeConstraints {make in
+//            make.edges.equalTo(self.view)
+//        }
         
-        containerView.snp_makeConstraints {make in
-            make.edges.equalTo(self.view)
-        }
-        
-        tableView.scrollEnabled = false
+//        tableView.scrollEnabled = false
         tableView.backgroundColor = OEXStyles.sharedStyles().baseColor5()
         tableView.dataSource = self
         tableView.delegate = self
@@ -161,15 +161,23 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         tableView.registerClass(CourseCertificateCell.self, forCellReuseIdentifier: CourseCertificateCell.identifier)
         self.view.addSubview(tableView)
         
-        stackView.addArrangedSubview(courseCard)
-        stackView.addArrangedSubview(tableView)
-        self.containerView.addSubview(stackView)
-        
-        stackView.snp_makeConstraints { make -> Void in
-            make.top.equalTo(containerView)
-            make.trailing.equalTo(containerView)
-            make.leading.equalTo(containerView)
+        tableView.snp_makeConstraints { (make) in
+            make.edges.equalTo(self.view)
         }
+        
+        stackView.addArrangedSubview(courseCard)
+//        stackView.addArrangedSubview(tableView)
+        
+//        self.containerView.addSubview(stackView)
+        let rate : CGFloat = 9/16;
+        stackView.frame = CGRectMake(0, 0, TDScreenWidth, TDScreenWidth * rate)
+        tableView.tableHeaderView = stackView;
+        
+//        stackView.snp_makeConstraints { make -> Void in
+//            make.top.equalTo(containerView)
+//            make.trailing.equalTo(containerView)
+//            make.leading.equalTo(containerView)
+//        }
         stackView.alignment = .Fill
         
 //        addShareButton(courseCard) //隐藏分享按钮
@@ -181,10 +189,10 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         
         spacer.snp_makeConstraints {make in
             make.height.equalTo(spacerHeight)
-            make.width.equalTo(self.containerView)
+            make.width.equalTo(self.stackView)
         }
         
-        loadController.setupInController(self, contentView: containerView)
+        loadController.setupInController(self, contentView: self.view)
     }
     
     func setNavigationButtonStyle() {
@@ -333,7 +341,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         }
         
         /*成绩*/
-        item = StandardCourseDashboardItem(title: "成绩", detail: "查看本课程的成绩", icon: .Handouts) {[weak self] () -> Void in
+        item = StandardCourseDashboardItem(title: TDLocalizeSelectSwift("COURSE_GRADES"), detail: TDLocalizeSelectSwift("VIEW_COURSE_GRANDES"), icon: .BarChart) {[weak self] () -> Void in
             self?.showScoreViewController()
         }
         cellItems.append(item)

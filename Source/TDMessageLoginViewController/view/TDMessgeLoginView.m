@@ -10,7 +10,6 @@
 
 @interface TDMessgeLoginView ()
 
-@property (nonatomic,strong) UIScrollView *scrollView;
 @property (nonatomic,strong) UIImageView *mapImageView;
 @property (nonatomic,strong) UIImageView *logoImageView;
 
@@ -32,7 +31,9 @@
     
     self.backgroundColor = [UIColor colorWithHexString:colorHexStr13];
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, TDWidth, TDHeight)];
+    self.scrollView = [[UIScrollView alloc] init];
+    self.scrollView.contentSize = CGSizeMake(TDWidth, TDHeight - BAR_ALL_HEIHT);
+    self.scrollView.showsVerticalScrollIndicator = NO;
     [self addSubview:self.scrollView];
     
     self.mapImageView = [[UIImageView alloc] init];
@@ -56,7 +57,7 @@
     self.passwordButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.passwordButton.showsTouchWhenHighlighted = YES;
     [self.passwordButton setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
-    [self.passwordButton setTitle:@"账号密码登录" forState:UIControlStateNormal];
+    [self.passwordButton setTitle:TDLocalizeSelect(@"TD_LOGIN_ACCOUNT_BUTTON", nil) forState:UIControlStateNormal];
     [self.scrollView addSubview:self.passwordButton];
     
     self.bottomButton = [[UIButton alloc] init];
@@ -76,15 +77,15 @@
 - (void)setViewConstraint:(TDLoginMessageViewType)type {
     
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.mas_equalTo(self);
+        make.left.top.bottom.mas_equalTo(self);
+        make.width.mas_equalTo(TDWidth);
     }];
     
     [self.mapImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.mas_left).offset(35);
-        make.right.mas_equalTo(self.mas_right).offset(-35);
-        make.top.mas_equalTo(self.mas_top).offset(18);
-        make.height.mas_equalTo(151);
-        make.bottom.mas_equalTo(self.scrollView.mas_bottom).offset(-(TDHeight - 169));
+        make.left.mas_equalTo(self.scrollView.mas_left).offset(35);
+        make.top.mas_equalTo(self.scrollView.mas_top).offset(10);
+        make.size.mas_equalTo(CGSizeMake(TDWidth - 70, 151));
+        make.bottom.mas_equalTo(self.scrollView.mas_bottom).offset(-(TDHeight - 161 - BAR_ALL_HEIHT));
     }];
     
     [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -95,9 +96,9 @@
     if (type == TDLoginMessageViewTypeVertication) {
         
         [self.verticationView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(self);
+            make.left.mas_equalTo(self.scrollView);
             make.top.mas_equalTo(self.mapImageView.mas_bottom).offset(0);
-            make.height.mas_equalTo(118);
+            make.size.mas_equalTo(CGSizeMake(TDWidth, 118));
         }];
         
         [self.passwordButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -108,9 +109,9 @@
     }
     else {
         [self.messageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(self);
+            make.left.mas_equalTo(self.scrollView);
             make.top.mas_equalTo(self.mapImageView.mas_bottom).offset(0);
-            make.height.mas_equalTo(177);
+            make.size.mas_equalTo(CGSizeMake(TDWidth ,177));
         }];
         
         [self.passwordButton mas_makeConstraints:^(MASConstraintMaker *make) {

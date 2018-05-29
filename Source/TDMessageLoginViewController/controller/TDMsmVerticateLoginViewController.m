@@ -19,6 +19,8 @@
 @property (nonatomic,strong) TDBaseToolModel *baseTool;
 @property (nonatomic,strong) NSString *messageStr;
 
+@property (nonatomic,assign) BOOL isRequesting;
+
 @end
 
 @implementation TDMsmVerticateLoginViewController
@@ -27,8 +29,11 @@
     [super viewDidLoad];
     
     self.titleViewLabel.text = TDLocalizeSelect(@"SIGN_IN_TEXT", nil);
+    self.leftButton.hidden = YES;
     self.baseTool = [[TDBaseToolModel alloc] init];
     [self setViewConstraint];
+    
+    self.isRequesting = NO;
 }
 
 #pragma mark - Action
@@ -54,27 +59,31 @@
 - (void)sendButtonAction:(UIButton *)sender { //发送验证码
     [self.view endEditing:YES];
     
-    if (![self.baseTool networkingState]) {
-        return;
-    }
+//    if (![self.baseTool networkingState]) {
+//        return;
+//    }
+//    
+//    NSString *phoneStr = self.loginView.verticationView.phoneTextFied.text;
+//    if (phoneStr.length == 0) {
+//        [self showAlertView:TDLocalizeSelect(@"ENTER_PHONE_OR_EMAIL", nil)];
+//        return;
+//    }
+//    else if (![self.baseTool isValidateMobile:phoneStr] && ![self.baseTool isValidateEmail:phoneStr]) { //不是手机/邮箱
+//        [self showAlertView:TDLocalizeSelect(@"ENTER_RIGHT_PHONE_OR_EMAIL", nil)];
+//        return;
+//    }
+//    
+//    [self getLoginMessage:phoneStr];
     
-    NSString *phoneStr = self.loginView.verticationView.phoneTextFied.text;
-    if (phoneStr.length == 0) {
-        [self showAlertView:TDLocalizeSelect(@"ENTER_EMAIL", nil)];
-        return;
-    }
-    else if (![self.baseTool isValidateMobile:phoneStr] && ![self.baseTool isValidateEmail:phoneStr]) { //不是手机/邮箱
-        [self showAlertView:TDLocalizeSelect(@"ENTER_RIGHT_PHONE_OR_EMAIL", nil)];
-        return;
-    }
-    
-    [self getLoginMessage:phoneStr];
-    
-//    [self gotoCodeViewController];
+    [self gotoCodeViewController];
 }
 
 #pragma mark - 获取验证码
 - (void)getLoginMessage:(NSString *)phoneStr {
+    
+    if (self.isRequesting) {
+        return;
+    }
     
     [self activityViewStart:YES];
     
@@ -92,7 +101,7 @@
         id code = responseDic[@"code"];
         
         if ([code intValue] == 200) {
-            [self.view makeToast:@"验证码已发送，请注意查收" duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"TD_CODE_SENT_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.08 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 self.messageStr = responseDic[@"msg"];
@@ -100,10 +109,10 @@
             });
         }
         else if ([code intValue] == 400) {
-            [self showAlertView:@"账号不存在，请重新输入"];
+            [self showAlertView:TDLocalizeSelect(@"TD_ACCOUNT_NOEXIST_TEXT", nil)];
         }
         else {
-            [self.view makeToast:@"发送验证码失败" duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"CODE_SEND_FAILED", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -114,6 +123,7 @@
 }
 
 - (void)activityViewStart:(BOOL)isStart {
+    self.isRequesting = isStart;
     if (isStart) {
         [self.loginView.verticationView.sendButton.activityView startAnimating];
     } else {

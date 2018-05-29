@@ -399,7 +399,7 @@
 /* Prompt leading user to sign in screen */
 "LOGIN_SPLASH_SIGN_IN"="Already have an account? Sign in";
 /* Button title to log out the current user */
-"LOGOUT"="Logout";
+"LOGOUT"="Sign out";
 /* Option to sort discussion post list by most activity */
 "MOST_ACTIVITY"="Most Activity";
 /* Option to sort discussion post list by most votes */
@@ -720,8 +720,6 @@
 "FORGET_PASSWORD" = "Forgot your password?";
 /*登录*/
 "SIGN_IN" = "Sign in";
-/*手机号或邮箱地址*/
-"PHONE_OR_EMAIL" = "Mobile or email";
 /*密码*/
 "PASSWORD" = "Password";
 /*密码重置邮件已发送*/
@@ -735,7 +733,7 @@
 /*密码重置验证码已发送*/
 "PASSWORD_RESET_AUTHENTICATION_SENT" = "Password reset authentication code has been sent.";
 /*密码重置验证码已发送*/
-"PASSWORD_RESET_AUTHENTICATION_SENT" = "Password reset authentication code has been sent.";
+"AUTHENTICATION_CODE_SENT" = "Password reset authentication code has been sent.";
 /*发送失败*/
 "SEND_FAILED" = "Send failed";
 /*该手机号码未注册*/
@@ -783,8 +781,6 @@
 "REGISTRATION_SUCCESS" = "Account created successfully.";
 /*请登录*/
 "PLEASE_SIGN_IN" = "Please sign in";
-/*验证码错误，请重新输入*/
-"VERIFICATION_ERROR" = "Verification code error.";
 /*密码长度大于30位数,请重新输入*/
 "PASSWORD_LENGTH_IS_MORE_THAN_30" = "Password should be no more than 30 characters.";
 /*请输入正确的手机号码、验证码和密码*/
@@ -793,9 +789,9 @@
 "USE_PHONE_REGISTER" = "Sign up with mobile";
 /*请输入手机号码*/
 "PLEASE_ENTER_PHONE_NUMBER" = "Mobile";
-/*请输入手机验证码*/
+/*请输入手机验证码 PLEASE_ENTER_VERI*/
 "PLEASE_ENTER_VERI" = "Verification code";
-/*请输入验证码*/
+/*请输入验证码 Verification code*/
 "ENTER_VERI_HOLDER" = "Verification code";
 /*请输入密码*/
 "PLEASE_ENTER_PASSWORD" = "Please enter the new password";
@@ -840,7 +836,7 @@
 /*播放速度*/
 "VIDEO_SPEED" = "Video Speed";
 /*请输入您的手机号码或邮箱*/
-"ENTER_PHONE_OR_EMAIL" = "Please enter mobile number or email address.";
+"ENTER_PHONE_OR_EMAIL" = "Please enter mobile number or e-mail address.";
 /*请输入正确的手机号码或邮箱*/
 "ENTER_RIGHT_PHONE_OR_EMAIL" = "Please enter correct mobile number or email address.";
 /*仅Wi-fi下载*/
@@ -1581,8 +1577,6 @@
 "COUPON_DEDUCTION" = "Deduction";
 /*有效期*/
 "COUPON_PERIOD" = "Period of Validity: {startDate} to {endDate}";
-/*账号不存在*/
-"ACOUNT_NO_EXIST" = "Account does not exis.";
 /*密码错误*/
 "PASSWORD_MISS" = "Password incorrect.";
 /*企业免费报课名额已满，您可支付学费以加入课程。Free enrollment quota is full. You can enroll in the course by paying tuition.*/
@@ -1931,8 +1925,6 @@
 "ANSER_BUTTON_TEXT" = "Answer";
 /*{name} 正在回复 {name} Answering*/
 "ANSWERING_TEXT" = "{name} Answering";
-/*用户放弃提问 Cancelled by User*/
-"USER_CANCELED" = "Cancelled by User";
 
 /*追问中   Following up*/
 "FOLLOWING_UP" = "Following up";
@@ -1980,3 +1972,38 @@
 "SEND_BUTTON_NUM" = "Send({count})";
 /*点击，添加一个新的咨询    Tab here to consult.*/
 "TAB_CONSTULT_NEW" = "Tab here to consult.";
+
+/*验证码登录  Other login methods*/
+"TD_OTHER_LOGIN_BUTTON" = "Other login methods";
+/*发送验证码 Verify*/
+"TD_VERIFY_BUTTON" = "Verify";
+/*账号密码登录    Log in via account*/
+"TD_LOGIN_ACCOUNT_BUTTON" = "Log in via account";
+/*账号不存在，请重新输入   Account does not exist, please re-enter.*/
+"TD_ACCOUNT_NOEXIST_TEXT" = "Account does not exist, please re-enter.";
+/*验证码已发送，请注意查收  Verification code has been sent, please check.*/
+"TD_CODE_SENT_SUCCESS" = "Verification code has been sent, please check.";
+/*请输入验证码  Please enter verification code.*/
+"PLEASE_ENTER_CODE" = "Please enter verification code.";
+/*验证码错误，请重新输入 Incorrect verification code, please re-enter.*/
+"ERROR_CODE_RE_ENTER" = "Incorrect verification code, please re-enter.";
+/*成绩 Grades*/
+"COURSE_GRADES" = "Grades";
+/*查看本课程的成绩 View my grades of this course.*/
+"VIEW_COURSE_GRANDES" = "View my grades of this course.";
+/*课程进行中  In Progress*/
+"COURSE_IN_PROGRESS" = "In Progress";
+/*恭喜！您已成功通过课程！ Congrats! You have passed this course.*/
+"PASSED_COURSE_TEXT" = "Congrats! You have passed this course.";
+/*课程得分   Grades*/
+"SEPECIAL_COURSE_GRADES" = "Grades";
+/*及格线 PASS*/
+"PASS_LINE" = "PASS";
+/*很遗憾！您未能通过此课程！  Sorry, you failed this course.*/
+"FAILED_COURSE_TEXT" = "Sorry, you failed this course.";
+/*尚未发布习题哦！  No published exercises yet!*/
+"NO_COURSE_EXERCISSES" = "No published exercises yet!";
+/*未提交 Unsubmitted*/
+"COURSE_UM_SUBMITED" = "Unsubmitted";
+/*发送验证码失败 Failed to send verification code.*/
+"CODE_SEND_FAILED" = "Failed to send verification code.";

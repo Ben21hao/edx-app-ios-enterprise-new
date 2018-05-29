@@ -24,7 +24,15 @@
     _unitScoreModel = unitScoreModel;
     
     self.titleLabel.text = unitScoreModel.problem_display_name;
-    self.scoreLabel.attributedText = [self setScoreLabelTextColor:unitScoreModel.earned allScore:[NSString stringWithFormat:@"/%@",unitScoreModel.possible]];
+    
+    if ([self.unitScoreModel.attempted boolValue]) {
+            self.scoreLabel.attributedText = [self setScoreLabelTextColor:unitScoreModel.earned allScore:[NSString stringWithFormat:@"/%@",unitScoreModel.possible]];
+    }
+    else {
+        self.scoreLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
+        self.scoreLabel.text = TDLocalizeSelect(@"COURSE_UM_SUBMITED", nil);
+    }
+
 }
 
 #pragma mark - UI

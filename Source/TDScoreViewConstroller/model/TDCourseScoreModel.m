@@ -19,7 +19,3 @@
 @implementation TDUnitScoreModel
 
 @end
-
-//@implementation TDSectionScoreModel
-//
-//@end

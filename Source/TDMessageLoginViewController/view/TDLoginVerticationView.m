@@ -25,7 +25,7 @@
     self.phoneTextFied = [[UITextField alloc] init];
     self.phoneTextFied.placeholder = TDLocalizeSelect(@"PHONE_OR_EMAIL", nil);
     self.phoneTextFied.textColor = [UIColor colorWithHexString:colorHexStr10];
-    self.phoneTextFied.font = [UIFont fontWithName:@"OpenSans" size:15];
+    self.phoneTextFied.font = [UIFont fontWithName:@"OpenSans" size:14];
     self.phoneTextFied.borderStyle = UITextBorderStyleRoundedRect;
     self.phoneTextFied.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     [self addSubview:self.phoneTextFied];
@@ -36,7 +36,7 @@
     self.sendButton.layer.cornerRadius = 4.0;
         self.sendButton.showsTouchWhenHighlighted = YES;
     [self.sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.sendButton setTitle:@"发送验证码" forState:UIControlStateNormal];
+    [self.sendButton setTitle:TDLocalizeSelect(@"TD_VERIFY_BUTTON", nil) forState:UIControlStateNormal];
     [self addSubview:self.sendButton];
     
 }

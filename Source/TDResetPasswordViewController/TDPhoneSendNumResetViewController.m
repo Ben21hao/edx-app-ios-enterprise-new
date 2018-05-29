@@ -206,7 +206,7 @@
         [self.activityView startAnimating];
         
     } else {
-        [self.view makeToast:TDLocalizeSelect(@"VERIFICATION_ERROR", nil) duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"ERROR_CODE_RE_ENTER", nil) duration:1.08 position:CSToastPositionCenter];
     }
 }
 

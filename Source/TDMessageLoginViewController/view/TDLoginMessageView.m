@@ -31,7 +31,7 @@
     [self addSubview:self.phoneTextFied];
     
     self.codeTextFied = [[UITextField alloc] init];
-    self.codeTextFied.placeholder = TDLocalizeSelect(@"PLEASE_ENTER_VERI", nil);
+    self.codeTextFied.placeholder = TDLocalizeSelect(@"ENTER_VERI_HOLDER", nil);
     self.codeTextFied.textColor = [UIColor colorWithHexString:colorHexStr10];
     self.codeTextFied.font = [UIFont fontWithName:@"OpenSans" size:14];
     self.codeTextFied.borderStyle = UITextBorderStyleRoundedRect;
@@ -53,7 +53,7 @@
     self.loginButton.layer.masksToBounds = YES;
     self.loginButton.layer.cornerRadius = 4.0;
     self.loginButton.showsTouchWhenHighlighted = YES;
-    [self.loginButton setTitle:TDLocalizeSelect(@"SIGN_IN_BUTTON_TEXT", nil) forState:UIControlStateNormal];
+    [self.loginButton setTitle:TDLocalizeSelect(@"SIGN_IN", nil) forState:UIControlStateNormal];
     [self addSubview:self.loginButton];
     
     self.codeActivitView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];

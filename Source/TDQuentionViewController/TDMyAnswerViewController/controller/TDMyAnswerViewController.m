@@ -8,7 +8,6 @@
 
 #import "TDMyAnswerViewController.h"
 #import "TDSubMyAnswerViewController.h"
-#import "TDQuetionInputViewController.h"
 
 @interface TDMyAnswerViewController ()
 
@@ -25,15 +24,6 @@
     [self addChileVC];
     [self setSubTitleConstraint];
     
-}
-
-- (void)rightButtonAciton:(UIButton *)sender {
-    
-    TDQuetionInputViewController *inputVc = [[TDQuetionInputViewController alloc] init];
-    inputVc.whereFrom = TDQuetionInputFromNewQuetion;
-    inputVc.username = self.username;
-    inputVc.titleStr = TDLocalizeSelect(@"NEW_CONSULTATION_TEXT", nil);
-    [self.navigationController pushViewController:inputVc animated:YES];
 }
 
 #pragma mark - 加入子视图

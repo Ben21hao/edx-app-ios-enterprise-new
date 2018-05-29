@@ -53,14 +53,17 @@
     
     CGFloat height = (TDHeight - TDWidth)/2.0;
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, height ,TDWidth,TDWidth)];
+    
     self.scrollView.bouncesZoom = YES;
     self.scrollView.minimumZoomScale = 1;
     self.scrollView.maximumZoomScale = 3;
     self.scrollView.zoomScale = 1;
     self.scrollView.delegate = self;
-    self.scrollView.layer.masksToBounds = NO;
+    
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
+    
+    self.scrollView.layer.masksToBounds = NO;
     self.scrollView.layer.borderWidth = 1.5;
     self.scrollView.layer.borderColor = [UIColor whiteColor].CGColor;
     

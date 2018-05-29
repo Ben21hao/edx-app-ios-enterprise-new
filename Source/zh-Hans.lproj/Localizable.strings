@@ -601,8 +601,6 @@
 "SHARE_A_COURSE"="我正在{platform_name}上课! 看看这个:";
 /* Sign in screen title and button initiating login process after user enters credentials like username and password */
 "SIGN_IN_TEXT"="登录";
-/* Button initiating login process after user enters credentials like username and password */
-"SIGN_IN_BUTTON_TEXT"="登录";
 /* Message shown while user waits for response to a sign in request */
 "SIGN_IN_BUTTON_TEXT_ON_SIGN_IN"="正在登录";
 /*Sign up screen title and button initiating sign up process on the main screen */
@@ -723,8 +721,6 @@
 "FORGET_PASSWORD" = "忘记密码？";
 /*登录*/
 "SIGN_IN" = "登录";
-/*手机号码或邮箱地址*/
-"PHONE_OR_EMAIL" = "手机号码或邮箱";
 /*密码*/
 "PASSWORD" = "密码";
 /*密码重置邮件已发送*/
@@ -785,8 +781,6 @@
 "REGISTRATION_SUCCESS" = "注册成功";
 /*请登录*/
 "PLEASE_SIGN_IN" = "请登录";
-/*验证码错误，请重新输入*/
-"VERIFICATION_ERROR" = "验证码错误";
 /*密码长度大于30位数,请重新输入*/
 "PASSWORD_LENGTH_IS_MORE_THAN_30" = "密码不超过30位字符。";
 /*请输入正确的手机号码、验证码和密码*/
@@ -795,10 +789,10 @@
 "USE_PHONE_REGISTER" = "使用手机注册";
 /*请输入手机号码*/
 "PLEASE_ENTER_PHONE_NUMBER" = "请输入手机号码";
-/*请输入手机验证码*/
+/*请输入手机验证码 PLEASE_ENTER_VERI*/
 "PLEASE_ENTER_VERI" = "请输入手机验证码";
-/*请输入验证码*/
-"ENTER_VERI_HOLDER" = "请输入验证码";
+/*验证码 Verification code*/
+"ENTER_VERI_HOLDER" = "验证码";
 /*请输入密码*/
 "PLEASE_ENTER_PASSWORD" = "请输入新密码";
 /*获取验证码*/
@@ -841,7 +835,7 @@
 "CLOSED_CAPTIONS" = "字幕";
 /*播放速度*/
 "VIDEO_SPEED" = "播放速度";
-/*请输入您的手机号码或邮箱*/
+/*请输入手机号码或邮箱*/
 "ENTER_PHONE_OR_EMAIL" = "请输入手机号码或邮箱";
 /*请输入正确的手机号码或邮箱*/
 "ENTER_RIGHT_PHONE_OR_EMAIL" = "请输入正确的手机号码或邮箱";
@@ -1582,8 +1576,6 @@
 "COUPON_DEDUCTION" = "满减券";
 /*有效期*/
 "COUPON_PERIOD" = "有效期:{startDate}至{endDate}";
-/*账号不存在*/
-"ACOUNT_NO_EXIST" = "账号不存在";
 /*密码错误*/
 "PASSWORD_MISS" = "密码错误";
 /*企业免费报课名额已满，您可支付学费以加入课程。Free enrollment quota is full. You can enroll in the course by paying tuition.*/
@@ -1932,8 +1924,6 @@
 "ANSER_BUTTON_TEXT" = "回答问题";
 /*{name} 正在回答 {name} Answering*/
 "ANSWERING_TEXT" = "{name} 正在回复";
-/*用户放弃提问 Cancelled by User*/
-"USER_CANCELED" = "用户放弃提问";
 
 /*追问中   Following up*/
 "FOLLOWING_UP" = "追问中";
@@ -1981,4 +1971,39 @@
 "SEND_BUTTON_NUM" = "发送({count})";
 /*点击，添加一个新的咨询    Tab here to consult.*/
 "TAB_CONSTULT_NEW" = "点击，添加一个新的咨询";
+
+/*验证码登录  Other login methods*/
+"TD_OTHER_LOGIN_BUTTON" = "验证码登录";
+/*发送验证码 Verify*/
+"TD_VERIFY_BUTTON" = "发送验证码";
+/*账号密码登录  Log in via account*/
+"TD_LOGIN_ACCOUNT_BUTTON" = "账号密码登录";
+/*账号不存在，请重新输入   Account does not exist, please re-enter.*/
+"TD_ACCOUNT_NOEXIST_TEXT" = "账号不存在，请重新输入";
+/*验证码已发送，请注意查收  Verification code has been sent, please check.*/
+"TD_CODE_SENT_SUCCESS" = "验证码已发送，请注意查收";
+/*请输入验证码  Please enter verification code.*/
+"PLEASE_ENTER_CODE" = "请输入验证码";
+/*验证码错误，请重新输入 Incorrect verification code, please re-enter.*/
+"ERROR_CODE_RE_ENTER" = "验证码错误，请重新输入";
+/*成绩 Grades*/
+"COURSE_GRADES" = "成绩";
+/*查看本课程的成绩 View my grades of this course.*/
+"VIEW_COURSE_GRANDES" = "查看本课程的成绩";
+/*课程进行中  In Progress*/
+"COURSE_IN_PROGRESS" = "课程进行中";
+/*恭喜！您已成功通过课程！ Congrats! You have passed this course.*/
+"PASSED_COURSE_TEXT" = "恭喜！您已成功通过此课程!";
+/*课程得分   Grades*/
+"SEPECIAL_COURSE_GRADES" = "课程得分";
+/*及格线 PASS*/
+"PASS_LINE" = "及格线";
+/*很遗憾！您未能通过此课程！  Sorry, you failed this course.*/
+"FAILED_COURSE_TEXT" = "很遗憾！您未能通过此课程！";
+/*尚未发布习题哦！  No published exercises yet!*/
+"NO_COURSE_EXERCISSES" = "尚未发布习题哦！";
+/*未提交 Unsubmitted*/
+"COURSE_UM_SUBMITED" = "未提交";
+/*发送验证码失败 Failed to send verification code.*/
+"CODE_SEND_FAILED" = "发送验证码失败";
 

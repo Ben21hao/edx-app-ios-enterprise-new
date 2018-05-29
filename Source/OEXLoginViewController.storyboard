@@ -189,10 +189,10 @@
                                         </variation>
                                     </activityIndicatorView>
                                     <button opaque="NO" tag="106" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYz-SW-wBv">
-                                        <rect key="frame" x="148" y="375" width="88" height="33"/>
+                                        <rect key="frame" x="128" y="360" width="128" height="39"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="33" id="FFH-LG-Rhl"/>
-                                            <constraint firstAttribute="width" constant="88" id="Vkh-Fw-Ui0"/>
+                                            <constraint firstAttribute="height" constant="39" id="FFH-LG-Rhl"/>
+                                            <constraint firstAttribute="width" constant="128" id="Vkh-Fw-Ui0"/>
                                             <constraint firstAttribute="width" constant="191" id="jbK-Ay-hDf"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
@@ -255,7 +255,7 @@
                                     <constraint firstAttribute="trailing" secondItem="hfa-gq-20d" secondAttribute="trailing" constant="35" id="LXJ-sW-Z9Z"/>
                                     <constraint firstAttribute="centerX" secondItem="TTs-EL-Jso" secondAttribute="centerX" constant="-4.5" id="Ogo-10-kPE"/>
                                     <constraint firstItem="hfa-gq-20d" firstAttribute="top" secondItem="XeO-S4-8zQ" secondAttribute="top" constant="10" id="P9C-uk-42e"/>
-                                    <constraint firstItem="cYz-SW-wBv" firstAttribute="top" secondItem="gKO-wT-mn0" secondAttribute="bottom" constant="33" id="P9E-tG-1Qn"/>
+                                    <constraint firstItem="cYz-SW-wBv" firstAttribute="top" secondItem="gKO-wT-mn0" secondAttribute="bottom" constant="18" id="P9E-tG-1Qn"/>
                                     <constraint firstItem="TTs-EL-Jso" firstAttribute="top" secondItem="XeO-S4-8zQ" secondAttribute="top" constant="58" id="QMK-RP-Dwj"/>
                                     <constraint firstItem="5Ki-dQ-Zuc" firstAttribute="top" secondItem="dcW-Go-srk" secondAttribute="bottom" constant="43" id="RNV-2E-14V"/>
                                     <constraint firstItem="Tp9-tH-kdk" firstAttribute="top" secondItem="dcW-Go-srk" secondAttribute="bottom" id="U6j-LS-IP1"/>

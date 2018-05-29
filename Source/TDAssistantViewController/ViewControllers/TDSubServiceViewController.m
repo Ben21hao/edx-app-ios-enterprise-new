@@ -377,7 +377,7 @@
     }];
     
     self.nullLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, (TDHeight - 128) / 2, TDWidth - 60, 39)];
-    self.nullLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
+    self.nullLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     self.nullLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     self.nullLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.nullLabel];

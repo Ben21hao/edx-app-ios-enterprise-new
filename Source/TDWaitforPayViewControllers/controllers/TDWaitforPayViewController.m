@@ -465,7 +465,7 @@
     self.nullLabel = [[UILabel alloc] init];
     self.nullLabel.text = TDLocalizeSelect(@"NO_COURSE_ORDER", nil);
     self.nullLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
-    self.nullLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
+    self.nullLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     [self.tableView addSubview:self.nullLabel];
     
     [self.nullLabel mas_makeConstraints:^(MASConstraintMaker *make) {

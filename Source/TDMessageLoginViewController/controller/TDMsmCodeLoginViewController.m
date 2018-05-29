@@ -15,13 +15,15 @@
 
 #define USER_LOGIN_NAME @"User_Login_Name_Enterprise"
 
-@interface TDMsmCodeLoginViewController ()
+@interface TDMsmCodeLoginViewController () <UITextFieldDelegate>
 
 @property (nonatomic,strong) TDMessgeLoginView *loginView;
 @property (nonatomic,strong) TDBaseToolModel *baseTool;
 
 @property (nonatomic,assign) int timeNum;
 @property (nonatomic,strong) NSTimer *timer;//定时器
+
+@property (nonatomic,assign) BOOL isRequesting;
 
 @end
 
@@ -35,6 +37,7 @@
     
     self.baseTool = [[TDBaseToolModel alloc] init];
     self.timeNum = 0;
+    self.isRequesting = NO;
     
     [self cutDownTime];
     
@@ -89,7 +92,7 @@
     
     NSString *codeStr = self.loginView.messageView.codeTextFied.text;
     if (codeStr.length == 0) {
-        [self showAlertView:@"请输入验证码" isLogin:YES];
+        [self showAlertView:TDLocalizeSelect(@"PLEASE_ENTER_CODE", nil) isLogin:YES];
         return;
     }
     
@@ -115,15 +118,15 @@
         if ([code intValue] == 200) {
             [self cutDownTime];
             self.messageStr = responseDic[@"msg"];
-            [self.view makeToast:@"验证码已发送，请注意查收" duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"TD_CODE_SENT_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
         }
         else if ([code intValue] == 400) {
             [self handleResendButton:YES];
-            [self showAlertView:@"账号不存在，请重新输入" isLogin:YES];
+            [self showAlertView:TDLocalizeSelect(@"TD_ACCOUNT_NOEXIST_TEXT", nil) isLogin:YES];
         }
         else {
             [self handleResendButton:YES];
-            [self.view makeToast:@"发送验证码失败" duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"CODE_SEND_FAILED", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -183,9 +186,10 @@
 #pragma mark - 登录
 - (void)loginByMessageCode:(NSString *)codeStr {
     
+    if (self.isRequesting) {
+        return;
+    }
     [self activityViewStart:YES];
-    
-    self.messageStr = @"8y6rlm5u8xe5xp1gj20ns9f1cprpu4ur";
     
     NSString *clientID = [[OEXConfig sharedConfig] oauthClientID];
     
@@ -220,10 +224,10 @@
                 [self showAlertView:TDLocalizeSelect(@"STUDENT_NO_LINKE_ORGANIZATION", nil) isLogin:YES];
             }
             else if ([code intValue] == 404) {//账号不存在
-                [self showAlertView:TDLocalizeSelect(@"ACOUNT_NO_EXIST", nil) isLogin:YES];
+                [self showAlertView:TDLocalizeSelect(@"TD_ACCOUNT_NOEXIST_TEXT", nil) isLogin:YES];
             }
             else if ([code intValue] == 405) {//验证码已过期或不正确
-                [self showAlertView:@"验证码错误，请重新输入" isLogin:YES];
+                [self showAlertView:TDLocalizeSelect(@"ERROR_CODE_RE_ENTER", nil) isLogin:YES];
             }
             else if ([code intValue] == 406) {//账号已不可用
                 [self showAlertView:TDLocalizeSelect(@"ACCOUNT_DISABLE", nil) isLogin:YES];
@@ -332,7 +336,7 @@
 }
 
 - (void)activityViewStart:(BOOL)isStart {
-    
+    self.isRequesting = isStart;
     if (isStart) {
         [self.loginView.messageView.loginButton.activityView startAnimating];
     } else {
@@ -357,11 +361,25 @@
     [self.navigationController presentViewController:alertController animated:YES completion:nil];
 }
 
+#pragma mark - textField Delegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (TDHeight < 667) {
+        self.loginView.scrollView.contentSize = CGSizeMake(TDWidth, TDHeight - BAR_ALL_HEIHT + 88);
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (TDHeight < 667) {
+        self.loginView.scrollView.contentSize = CGSizeMake(TDWidth, TDHeight - BAR_ALL_HEIHT);
+    }
+}
+
 #pragma mark - UI
 - (void)setViewConstraint {
     
     self.loginView = [[TDMessgeLoginView alloc] initWithType:TDLoginMessageViewTypeSendCode];
     self.loginView.messageView.phoneTextFied.text = self.phoneStr;
+    self.loginView.messageView.codeTextFied.delegate = self;
     [self.view addSubview:self.loginView];
     
     [self.loginView mas_makeConstraints:^(MASConstraintMaker *make) {

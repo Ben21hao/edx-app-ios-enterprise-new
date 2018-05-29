@@ -336,8 +336,9 @@
     [self.btn_TroubleLogging setTitle:TDLocalizeSelect(@"TROUBLE_IN_LOGIN_BUTTON", nil) forState:UIControlStateNormal];
     [self.btn_TroubleLogging setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
     
+    self.btn_OpenEULA.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
     [self.btn_OpenEULA setTitleColor:[UIColor colorWithHexString:colorHexStr1] forState:UIControlStateNormal];
-    [self.btn_OpenEULA setTitle:@"验证码登录" forState:UIControlStateNormal];
+    [self.btn_OpenEULA setTitle:TDLocalizeSelect(@"TD_OTHER_LOGIN_BUTTON", nil) forState:UIControlStateNormal];
     
     [self.btn_Login setTitle:[self signInButtonText] forState:UIControlStateNormal];
     [self.activityIndicator stopAnimating];
@@ -560,7 +561,7 @@
                 errorStr = TDLocalizeSelect(@"PASSWORD_MISS", nil);
                 
             } else if ([code intValue] == 404){
-                errorStr = TDLocalizeSelect(@"ACOUNT_NO_EXIST", nil);
+                errorStr = TDLocalizeSelect(@"TD_ACCOUNT_NOEXIST_TEXT", nil);
             } else if ([code intValue] == 405) {
                  errorStr = TDLocalizeSelect(@"ACCOUNT_DISABLE", nil);
             }
@@ -869,15 +870,15 @@
 #pragma mark - Scolling on Keyboard Hide/Show
 // 键盘弹出
 - (void)keyboardWasShown:(NSNotification *)aNotification {
-    // Calculating the height of the keyboard and the scrolling offset of the textfield
-    // And scrolling on the calculated offset to make it visible
 
     NSDictionary* info = [aNotification userInfo];
     CGRect kbRect = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     kbRect = [self.view convertRect:kbRect toView:nil];
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbRect.size.height, 0.0);
+    
     self.scroll_Main.contentInset = contentInsets;
     self.scroll_Main.scrollIndicatorInsets = contentInsets;
+    
     CGRect aRect = self.view.frame;
     aRect.size.height -= kbRect.size.height;
     aRect.size.height -= activeField.frame.size.height;
@@ -885,6 +886,7 @@
     fieldOrigin.y -= self.scroll_Main.contentOffset.y;
     fieldOrigin = [self.view convertPoint:fieldOrigin toView:self.view.superview];
     originalOffset = self.scroll_Main.contentOffset;
+    
     if(!CGRectContainsPoint(aRect, fieldOrigin) ) {
         [self.scroll_Main scrollRectToVisible:CGRectMake(activeField.frame.origin.x, activeField.frame.origin.y, activeField.frame.size.width, activeField.frame.size.height) animated:YES];
     }

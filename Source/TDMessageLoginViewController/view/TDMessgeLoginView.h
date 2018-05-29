@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger, TDLoginMessageViewType) {
 
 - (instancetype)initWithType:(TDLoginMessageViewType)type;
 
+@property (nonatomic,strong) UIScrollView *scrollView;
 @property (nonatomic,strong) TDLoginVerticationView *verticationView;
 @property (nonatomic,strong) TDLoginMessageView *messageView;
 @property (nonatomic,strong) TDBaseButton *passwordButton;

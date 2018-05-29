@@ -146,6 +146,7 @@ public enum Icon {
     case Group
     case CloudDownload
     case CheckCircle
+    case BarChart
     
     private var renderer : IconRenderer {
         switch self {
@@ -267,6 +268,8 @@ public enum Icon {
             return FontAwesomeRenderer(icon: .CloudDownload)
         case .CheckCircle:
             return FontAwesomeRenderer(icon: .CheckCircle)
+        case .BarChart:
+            return FontAwesomeRenderer(icon: .BarChart)
         }
     }
     

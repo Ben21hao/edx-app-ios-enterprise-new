@@ -27,6 +27,7 @@
 #import "OEXCourse.h"
 #import "SWRevealViewController.h"
 #import "TDDownloadViewController.h"
+#import "TDNavigationViewController.h"
 
 static OEXRouter* sSharedRouter;
 
@@ -126,10 +127,11 @@ OEXRegistrationViewControllerDelegate
 }
 
 - (UINavigationController *)showLoginViewController {
+    
     OEXLoginViewController* loginController = [[UIStoryboard storyboardWithName:@"OEXLoginViewController" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginView"];
     loginController.delegate = self;
     loginController.environment = self.environment;
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginController];
+    TDNavigationViewController *navController = [[TDNavigationViewController alloc] initWithRootViewController:loginController];
     
     return navController;
 }

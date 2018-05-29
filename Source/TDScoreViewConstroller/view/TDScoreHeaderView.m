@@ -22,16 +22,33 @@
 - (void)setScoreModel:(TDCourseScoreModel *)scoreModel {
     _scoreModel = scoreModel;
     
-    self.statusLabel.text = @"课程进行中";
+    self.statusLabel.text = TDLocalizeSelect(@"COURSE_IN_PROGRESS", nil);
     if ([scoreModel.course_status intValue] == 1) {
-        self.statusLabel.text = @"恭喜！您已成功通过此课程!";
+        self.statusLabel.text = TDLocalizeSelect(@"PASSED_COURSE_TEXT", nil);
     }
     else if ([scoreModel.course_status intValue] == 3) {
-        self.statusLabel.text = @"很遗憾！您未能通过此课程！";
+        self.statusLabel.text = TDLocalizeSelect(@"FAILED_COURSE_TEXT", nil);
     }
     
-    self.scoreLabel.text = [NSString stringWithFormat:@"%.0lf%%",[scoreModel.current_grade floatValue]*100];
-    self.progressView.progress = [scoreModel.current_grade floatValue];
+    CGFloat grade = [scoreModel.current_grade floatValue];
+    self.scoreLabel.text = [NSString stringWithFormat:@"%.0lf%%",grade*100];
+    switch ([scoreModel.course_status intValue]) {//1: 通过课程，已完成 2：课程进行中 3，未完成课程
+        case 1:
+            self.scoreLabel.textColor = [UIColor colorWithHexString:@"#0692E1"];
+            break;
+            
+        case 2:
+            self.scoreLabel.textColor = [UIColor colorWithHexString:@"#8FC31F"];
+            break;
+            
+        default:
+            self.scoreLabel.textColor = [UIColor colorWithHexString:@"#E60012"];
+            break;
+    }
+    self.progressView.progress = grade;
+    if (grade == 1) {
+        self.rightImageView.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
+    }
     
     self.percentLabel.text = [NSString stringWithFormat:@"%.0lf%%",[scoreModel.course_passed_grade floatValue]*100];
     
@@ -59,7 +76,7 @@
     [self addSubview:self.scoreLabel];
     
     self.showLabel = [self setLabelStyleFont:12 color:colorHexStr9];
-    self.showLabel.text = @"课程得分";
+    self.showLabel.text = TDLocalizeSelect(@"SEPECIAL_COURSE_GRADES", nil);
     [self addSubview:self.showLabel];
     
     self.bgImageView = [self setImageViewStyle:7 color:colorHexStr6];
@@ -81,7 +98,7 @@
     [self addSubview:self.passImageView];
     
     self.passLabel = [self setLabelStyleFont:10 color:colorHexStr9];
-    self.passLabel.text = @"及格线";
+    self.passLabel.text = TDLocalizeSelect(@"PASS_LINE", nil);
     [self addSubview:self.passLabel];
     
     self.percentLabel = [self setLabelStyleFont:8 color:colorHexStr13];

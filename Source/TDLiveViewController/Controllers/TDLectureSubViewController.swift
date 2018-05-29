@@ -299,7 +299,7 @@ class TDLectureSubViewController: UIViewController,UITableViewDelegate,UITableVi
             make.left.right.top.bottom.equalTo(self.view)
         }
         
-        self.nonDataLabel.font = UIFont.init(name: "OpenSans", size: 16)
+        self.nonDataLabel.font = UIFont.init(name: "OpenSans", size: 14)
         self.nonDataLabel.textColor = OEXStyles.sharedStyles().baseColor8()
         self.nonDataLabel.textAlignment = .Center
         self.nonDataLabel.text = TDLocalizeSelectSwift("NO_LIVE_LECTURE_TEXT")

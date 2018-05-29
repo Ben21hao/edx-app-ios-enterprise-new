@@ -8,15 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-//@interface TDSectionScoreModel : NSObject
-//
-//@property (nonatomic,strong) NSString *attempted;//该问题是否提交
-//@property (nonatomic,strong) NSString *problem_display_name;//题型
-//@property (nonatomic,strong) NSString *possible;//这题的总分
-//@property (nonatomic,strong) NSString *earned;//当前提交的后的得分
-//@property (nonatomic,assign) BOOL isUnit; //是否是子章节
-//@end
-
 @interface TDUnitScoreModel : NSObject
 
 @property (nonatomic,strong) NSString *subsection_display_name;//子章节名称

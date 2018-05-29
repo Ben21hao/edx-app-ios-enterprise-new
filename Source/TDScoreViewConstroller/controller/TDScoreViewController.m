@@ -100,7 +100,6 @@
                 self.scoreModel.courseware_summary = chapterArray;//节数组
             }
             
-//            self.scoreModel.course_problem_public = @"0";
             if ([self.scoreModel.course_problem_public boolValue] == YES) { //已发布习题
                 [self setViewConstraint];
                 self.headerView.scoreModel = self.scoreModel;
@@ -111,10 +110,10 @@
             }
         }
         else if ([code intValue] == 500) {
-            [self setNullDataView:@"查询失败"];
+            [self setNullDataView:TDLocalizeSelect(@"QUERY_FAILED", nil)];
         }
         else {
-            [self setNullDataView:@"查询失败"];
+            [self setNullDataView:TDLocalizeSelect(@"QUERY_FAILED", nil)];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -122,7 +121,6 @@
         [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"发送登录验证码 -- %ld",(long)error.code);
     }];
-    
 }
 
 #pragma mark - tableview Delegate
@@ -241,7 +239,7 @@
     self.noExampleLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     self.noExampleLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
     self.noExampleLabel.textAlignment = NSTextAlignmentCenter;
-    self.noExampleLabel.text = @"尚未发布习题哦！";
+    self.noExampleLabel.text = TDLocalizeSelect(@"NO_COURSE_EXERCISSES", nil);
     [self.view addSubview:self.noExampleLabel];
     
     [self.noExampleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
