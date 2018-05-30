@@ -47,7 +47,7 @@
 @property (nonatomic,assign) NSInteger cameraType;//1 拍照；2 摄像
 @property (nonatomic,assign) BOOL isFinish;//是否操作结束
 
-@property (nonatomic,strong) CAShapeLayer *shapeLayer;
+@property (nonatomic,strong) CAShapeLayer *shapeLayer;//画进度条
 @property (nonatomic,strong) NSTimer *recordTimer;
 @property (nonatomic,assign) CGFloat recordTimeNum;
 
@@ -184,10 +184,11 @@
     }
 }
 
+#pragma makr - 初始化摄像头
 - (void)customCamera {
     
     self.captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    self.videoDeviceInput = [[AVCaptureDeviceInput alloc]initWithDevice:self.captureDevice error:nil]; //使用设备初始化输入
+    self.videoDeviceInput = [[AVCaptureDeviceInput alloc] initWithDevice:self.captureDevice error:nil]; //获取摄像头device
     self.captureSession = [[AVCaptureSession alloc] init]; //生成会话，用来结合输入输出
 //    self.metadataOutput = [[AVCaptureMetadataOutput alloc] init];//生成输出对象
     
@@ -212,7 +213,7 @@
         [self.captureSession addOutput:self.movieFileOutput];
     }
     
-    if ([self.captureSession canSetSessionPreset:AVCaptureSessionPreset1280x720]) {
+    if ([self.captureSession canSetSessionPreset:AVCaptureSessionPreset1280x720]) { //输出流的画面质量
         self.captureSession.sessionPreset = AVCaptureSessionPreset1280x720;
     }
     
@@ -226,7 +227,7 @@
     
     
     if ([self.captureDevice lockForConfiguration:nil]) {
-        if ([self.captureDevice isFlashModeSupported:AVCaptureFlashModeAuto]) {
+        if ([self.captureDevice isFlashModeSupported:AVCaptureFlashModeAuto]) { //闪光灯自动
             [self.captureDevice setFlashMode:AVCaptureFlashModeAuto];
         }
         
@@ -254,8 +255,7 @@
 #pragma mark - 拍照
 - (void)tapAction:(UITapGestureRecognizer *)tap {
     
-    
-    AVCaptureConnection * videoConnection = [self.imageOutPut connectionWithMediaType:AVMediaTypeVideo];
+    AVCaptureConnection *videoConnection = [self.imageOutPut connectionWithMediaType:AVMediaTypeVideo];
     if (!videoConnection) {
         NSLog(@"take photo failed!");
         return;

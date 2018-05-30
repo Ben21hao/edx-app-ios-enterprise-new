@@ -59,23 +59,21 @@
 - (void)sendButtonAction:(UIButton *)sender { //发送验证码
     [self.view endEditing:YES];
     
-//    if (![self.baseTool networkingState]) {
-//        return;
-//    }
-//    
-//    NSString *phoneStr = self.loginView.verticationView.phoneTextFied.text;
-//    if (phoneStr.length == 0) {
-//        [self showAlertView:TDLocalizeSelect(@"ENTER_PHONE_OR_EMAIL", nil)];
-//        return;
-//    }
-//    else if (![self.baseTool isValidateMobile:phoneStr] && ![self.baseTool isValidateEmail:phoneStr]) { //不是手机/邮箱
-//        [self showAlertView:TDLocalizeSelect(@"ENTER_RIGHT_PHONE_OR_EMAIL", nil)];
-//        return;
-//    }
-//    
-//    [self getLoginMessage:phoneStr];
+    if (![self.baseTool networkingState]) {
+        return;
+    }
     
-    [self gotoCodeViewController];
+    NSString *phoneStr = self.loginView.verticationView.phoneTextFied.text;
+    if (phoneStr.length == 0) {
+        [self showAlertView:TDLocalizeSelect(@"ENTER_PHONE_OR_EMAIL", nil)];
+        return;
+    }
+    else if (![self.baseTool isValidateMobile:phoneStr] && ![self.baseTool isValidateEmail:phoneStr]) { //不是手机/邮箱
+        [self showAlertView:TDLocalizeSelect(@"ENTER_RIGHT_PHONE_OR_EMAIL", nil)];
+        return;
+    }
+    
+    [self getLoginMessage:phoneStr];
 }
 
 #pragma mark - 获取验证码

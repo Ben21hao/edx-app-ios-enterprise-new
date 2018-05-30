@@ -338,8 +338,10 @@
 - (void)activityViewStart:(BOOL)isStart {
     self.isRequesting = isStart;
     if (isStart) {
+        [self.loginView.messageView.loginButton setTitle:TDLocalizeSelect(@"SIGN_IN_BUTTON_TEXT_ON_SIGN_IN", nil) forState:UIControlStateNormal];
         [self.loginView.messageView.loginButton.activityView startAnimating];
     } else {
+        [self.loginView.messageView.loginButton setTitle:TDLocalizeSelect(@"SIGN_IN", nil) forState:UIControlStateNormal];
         [self.loginView.messageView.loginButton.activityView stopAnimating];
     }
     
