@@ -74,7 +74,7 @@ static NSString *ID = @"cell";
 #pragma mark - requestData
 - (void)requestNewData {
 
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"username"] = _username;
     params[@"apply_amount"] = @(_apply_amount);

@@ -148,7 +148,7 @@
 #pragma mark - 数据
 - (void)requestData {
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setValue:self.username forKey:@"username"];
     [dict setValue:self.company_id forKey:@"company_id"];

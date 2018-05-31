@@ -61,7 +61,7 @@
     self.title = TDLocalizeSelect(@"COMMENTS", nil);
     
     self.baseTool = [[TDBaseToolModel alloc] init];
-    self.manager = [AFHTTPSessionManager manager];
+    self.manager = [AFHTTPSessionManager shareManager];
     self.page = 1;
     self.selectedButton = [[UIButton alloc] init];
     

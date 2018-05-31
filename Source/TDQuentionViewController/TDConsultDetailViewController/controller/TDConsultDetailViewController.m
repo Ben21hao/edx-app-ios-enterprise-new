@@ -167,7 +167,7 @@
     
     [self setLoadDataView];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setValue:self.username forKey:@"username"];
@@ -248,7 +248,7 @@
         return;
     }
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setValue:self.username forKey:@"username"];
@@ -314,7 +314,7 @@
         return;
     }
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setValue:self.username forKey:@"username"];
@@ -398,7 +398,7 @@
         return;
     }
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setValue:self.username forKey:@"username"];
@@ -497,7 +497,7 @@
     [dict setValue:@(type) forKey:@"status"];
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/consults/%@/status/",ELITEU_URL,self.consultID];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     [manager PATCH:url parameters:dict success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [SVProgressHUD dismiss];
         
@@ -1020,7 +1020,7 @@
     } else {
         [self.contentArray addObject:fid];
     }
-    NSLog(@"成功 --- %@ - %ld",self.contentArray,turn);
+    NSLog(@"成功 --- %@ - %ld",self.contentArray,(long)turn);
     
     if (self.putOssNum != total) { return; } //返回的数量和总数一样
     
@@ -1038,7 +1038,7 @@
 - (void)putFileToOssFailed:(NSString *)reason type:(TDOssFileType)type {
     
     [self showSendFailedAlertView:type isOssFailed:YES];
-    NSLog(@"失败 ----->> %@ - %ld",reason, type);
+    NSLog(@"失败 ----->> %@ - %ld",reason, (long)type);
 }
 
 - (void)showSendFailedAlertView:(NSInteger)type isOssFailed:(BOOL)ossFailed {

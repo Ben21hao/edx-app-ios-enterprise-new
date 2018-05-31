@@ -102,7 +102,7 @@
     NSString *randomNumber = [NSString stringWithFormat:@"%.6d", num];
     self.randomNumber = randomNumber;
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     NSString *message = [NSString stringWithFormat:@"您正在重置密码，验证码为%@，5分钟内有效，请勿泄露。",self.randomNumber];
     params[@"msg"] = message;

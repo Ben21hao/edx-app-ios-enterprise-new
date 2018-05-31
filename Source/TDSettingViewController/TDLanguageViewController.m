@@ -63,7 +63,7 @@
     [params setValue:languageStr forKey:@"language"];
     NSString *url = [NSString stringWithFormat:@"%@/api/user/v1/accounts/%@",ELITEU_URL,self.username];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer]; // 返回的格式 JSON
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html",@"text/json",@"text/javascript", nil];// 可接受的文本参数规格
     manager.requestSerializer = [AFJSONRequestSerializer serializer]; //先讲请求设置为json

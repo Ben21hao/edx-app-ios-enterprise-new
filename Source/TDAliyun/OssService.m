@@ -42,7 +42,7 @@
     [dict setValue:ACCESS_KEY_SECRET forKey:@"access_key_secret"];
     
     WS(weakSelf);
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     [manager GET:STS_AUTH_URL parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSDictionary *responseDic = (NSDictionary *)responseObject;
@@ -90,7 +90,7 @@
  */
 - (void)asyncPutImage:(NSString *)objectKey localFilePath:(NSString *)filePath inturn:(NSInteger)turn total:(NSInteger)total {
     
-    NSLog(@"第几个 -- %ld",turn);
+    NSLog(@"第几个 -- %ld",(long)turn);
     
     if (objectKey.length == 0) {
         [self.delegate putFileToOssFailed:@"文件名不能为空" type:self.type];

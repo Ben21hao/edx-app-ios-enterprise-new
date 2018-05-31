@@ -72,7 +72,7 @@
         return;
     }
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/professor/?username=%@",ELITEU_URL,self.professorName];
     
     [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

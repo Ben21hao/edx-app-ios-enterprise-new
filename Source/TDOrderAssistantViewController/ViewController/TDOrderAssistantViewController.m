@@ -52,7 +52,7 @@
     [self setViewConstraint];
     
     self.baseTool = [[TDBaseToolModel alloc] init];
-    self.manager = [AFHTTPSessionManager manager];
+    self.manager = [AFHTTPSessionManager shareManager];
     self.is_public_course = YES; //默认是付费的
     
     [self pullDownRefresh]; //数据

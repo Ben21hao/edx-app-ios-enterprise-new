@@ -96,7 +96,7 @@
 
 - (void)resetPhonePassWord {
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"mobile"] = self.acountStr;
     params[@"password"] = self.passwordTextField.text;

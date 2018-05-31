@@ -130,7 +130,7 @@
     [dic setValue:self.dateStr forKey:@"plan_date"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/assistant/service_plans/%@",ELITEU_URL,self.assistantName];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     [manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         if (self.timeArray.count > 0) {

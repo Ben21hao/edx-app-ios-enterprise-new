@@ -22,7 +22,7 @@
 #pragma mark - 是否显示内购
 - (void)showPurchase {
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:@"iOS_enterprise" forKey:@"platform"];
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/get_last_version/",ELITEU_URL];
@@ -122,7 +122,7 @@
     [params setValue:password forKey:@"password"];
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/account/check_password/",ELITEU_URL];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *respondDic = (NSDictionary *)responseObject;
         id code = respondDic[@"code"];
@@ -291,7 +291,7 @@
     [dic setValue:nickname forKey:@"nick_name"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/users/is_keyword/",ELITEU_URL];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     
     [manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 

@@ -87,7 +87,7 @@
         return;
     }
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"username"] = _username;
     params[@"code"] = self.exchangeAlertView.text.text;

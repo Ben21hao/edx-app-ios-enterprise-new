@@ -26,7 +26,7 @@
 #pragma mark - 身份验证-有些接口需要身份验证才能访问
 - (AFHTTPSessionManager *)getUserIdentify {
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html",@"text/json",@"text/javascript", nil];// 可接受的文本参数规格
     manager.responseSerializer = [AFJSONResponseSerializer serializer]; // 返回的格式 JSON
     manager.requestSerializer = [AFJSONRequestSerializer serializer]; //先讲请求设置为json
@@ -46,7 +46,7 @@
     [params setValue:phoneStr forKey:@"mobile"];
     [params setValue:msgStr forKey:@"msg"];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/account/send_captcha_message_for_register/",ELITEU_URL];
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -183,7 +183,7 @@
         return;
     }
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/get_wait_order_list/?username=%@",ELITEU_URL,username];
     [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -238,7 +238,7 @@
     [params setValue:username forKey:@"username"];
     [params setValue:courseID forKey:@"course_id"];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/add_course_to_listening_courses/",ELITEU_URL];
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -301,7 +301,7 @@
 //重新获取试听课程信息
 - (void)getMyFreeCourseDetail:(NSString *)username courseID:(NSString *)courseID {
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setValue:username forKey:@"username"];

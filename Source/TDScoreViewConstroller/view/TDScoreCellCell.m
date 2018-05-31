@@ -26,12 +26,26 @@
     self.titleLabel.text = unitScoreModel.problem_display_name;
     
     if ([self.unitScoreModel.attempted boolValue]) {
-            self.scoreLabel.attributedText = [self setScoreLabelTextColor:unitScoreModel.earned allScore:[NSString stringWithFormat:@"/%@",unitScoreModel.possible]];
+        
+        NSString *str1 = [NSString stringWithFormat:@"%.2f",unitScoreModel.earned.floatValue];
+        NSString *str2 = [NSString stringWithFormat:@"%.2f",unitScoreModel.possible.floatValue];
+        NSString *enrnGrade = [NSString stringWithFormat:@"%@",@(str1.floatValue)];
+        NSString *allGrade = [NSString stringWithFormat:@"/%@",@(str2.floatValue)];
+        self.scoreLabel.attributedText = [self setScoreLabelTextColor:enrnGrade allScore:allGrade];
     }
     else {
         self.scoreLabel.textColor = [UIColor colorWithHexString:colorHexStr8];
         self.scoreLabel.text = TDLocalizeSelect(@"COURSE_UM_SUBMITED", nil);
     }
+    
+    TDBaseToolModel *toolModel = [[TDBaseToolModel alloc] init];
+    CGFloat width = [toolModel widthForString:self.scoreLabel.text font:12];
+    
+    [self.scoreLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.bgView.mas_right).offset(-18);
+        make.centerY.mas_equalTo(self.bgView.mas_centerY);
+        make.width.mas_equalTo(width);
+    }];
 
 }
 
@@ -55,6 +69,8 @@
     
     self.scoreLabel = [[UILabel alloc] init];
     self.scoreLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
+    self.scoreLabel.text = TDLocalizeSelect(@"COURSE_UM_SUBMITED", nil);
+//    self.scoreLabel.textAlignment = NSTextAlignmentRight;
     [self.bgView addSubview:self.scoreLabel];
     
     self.line = [[UILabel alloc] init];
@@ -64,6 +80,7 @@
 }
 
 - (void)setViewConstraint {
+    
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self);
     }];
@@ -73,16 +90,22 @@
         make.left.mas_equalTo(self.bgView.mas_left).offset(28);
     }];
     
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.bgView.mas_centerY);
-        make.left.mas_equalTo(self.leftLabel.mas_right).offset(8);
-    }];
+    TDBaseToolModel *toolModel = [[TDBaseToolModel alloc] init];
+    CGFloat width = [toolModel widthForString:self.scoreLabel.text font:12];
     
     [self.scoreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.bgView.mas_right).offset(-18);
         make.centerY.mas_equalTo(self.bgView.mas_centerY);
+        make.width.mas_equalTo(width);
     }];
     
+
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.bgView.mas_centerY);
+        make.left.mas_equalTo(self.bgView.mas_left).offset(48);
+        make.right.mas_equalTo(self.scoreLabel.mas_left).offset(-8);
+    }];
+
     [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.bgView.mas_left).offset(18);
         make.right.mas_equalTo(self.bgView.mas_right).offset(-18);
@@ -92,6 +115,7 @@
 }
 
 - (NSMutableAttributedString *)setScoreLabelTextColor:(NSString *)scoreStr allScore:(NSString *)allScoreStr {
+    
     NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:scoreStr
                                                                              attributes:@{
                                                                                           NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#8FC31F"]

@@ -95,7 +95,8 @@ class TDLectureSubViewController: UIViewController,UITableViewDelegate,UITableVi
         
         let apiHostUrl = OEXConfig.sharedConfig().apiHostURL()! //注意解包
         let url = "\(apiHostUrl)/api/mobile/enterprise/v0.5/live/\(self.username)"
-        let manager = AFHTTPSessionManager()
+        
+        let manager = AFHTTPSessionManager.shareManager()
         manager.GET(url, parameters: dic, progress: nil, success: { (task, responseObject) in
             
             if self.dataArray.count != 0 {

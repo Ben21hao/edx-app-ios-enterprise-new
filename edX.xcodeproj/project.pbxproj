@@ -453,6 +453,7 @@
 		A43CC1F51FD6923900C71F07 /* TDFileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A43CC1F41FD6923900C71F07 /* TDFileWebViewController.m */; };
 		A43CC1F81FD6A17000C71F07 /* TDFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A43CC1F71FD6A17000C71F07 /* TDFileModel.m */; };
 		A44669B11FA7078500084563 /* TDCircleDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = A44669B01FA7078400084563 /* TDCircleDrawView.m */; };
+		A446948A20BF895100B380B8 /* AFHTTPSessionManager+TDHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A446948920BF895000B380B8 /* AFHTTPSessionManager+TDHTTPSessionManager.m */; };
 		A448639C2094079D00B03891 /* TDMyAnswerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A448639B2094079D00B03891 /* TDMyAnswerModel.m */; };
 		A44EE2731FB6DF54005273A3 /* TDCourseTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A44EE2721FB6DF54005273A3 /* TDCourseTagModel.m */; };
 		A450D05420BB9DF200E6E4CC /* TDRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = A450D05320BB9DF200E6E4CC /* TDRecordView.m */; };
@@ -1572,6 +1573,8 @@
 		A43CC1F71FD6A17000C71F07 /* TDFileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFileModel.m; sourceTree = "<group>"; };
 		A44669AF1FA7078400084563 /* TDCircleDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCircleDrawView.h; sourceTree = "<group>"; };
 		A44669B01FA7078400084563 /* TDCircleDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDCircleDrawView.m; sourceTree = "<group>"; };
+		A446948820BF895000B380B8 /* AFHTTPSessionManager+TDHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFHTTPSessionManager+TDHTTPSessionManager.h"; sourceTree = "<group>"; };
+		A446948920BF895000B380B8 /* AFHTTPSessionManager+TDHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFHTTPSessionManager+TDHTTPSessionManager.m"; sourceTree = "<group>"; };
 		A448639A2094079D00B03891 /* TDMyAnswerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDMyAnswerModel.h; sourceTree = "<group>"; };
 		A448639B2094079D00B03891 /* TDMyAnswerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDMyAnswerModel.m; sourceTree = "<group>"; };
 		A44EE2711FB6DF54005273A3 /* TDCourseTagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCourseTagModel.h; sourceTree = "<group>"; };
@@ -3782,6 +3785,15 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		A446948120BF862E00B380B8 /* TDHTTPSessionManager */ = {
+			isa = PBXGroup;
+			children = (
+				A446948820BF895000B380B8 /* AFHTTPSessionManager+TDHTTPSessionManager.h */,
+				A446948920BF895000B380B8 /* AFHTTPSessionManager+TDHTTPSessionManager.m */,
+			);
+			path = TDHTTPSessionManager;
+			sourceTree = "<group>";
+		};
 		A450D05520BBA17300E6E4CC /* TDWebImagePreviewViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -4308,6 +4320,7 @@
 		B50211CD1EA85490001DE1E2 /* TDLibraryViewController */ = {
 			isa = PBXGroup;
 			children = (
+				A446948120BF862E00B380B8 /* TDHTTPSessionManager */,
 				A46B92CF200A1288003EB4E4 /* TDHeaderImageView */,
 				A46B92C8200A11CA003EB4E4 /* fat-lame */,
 				B5A3A0F31EC072D000C48573 /* TDRequestManager */,
@@ -6637,6 +6650,7 @@
 				7742F8DD1C3C979D009E555A /* EnrollmentConfig.swift in Sources */,
 				9E71B73F1B1D9DBD009C81E2 /* OEXStyles+Swift.swift in Sources */,
 				B5FAF7641EB0515D000C2169 /* TDTakePictureViewController.m in Sources */,
+				A446948A20BF895100B380B8 /* AFHTTPSessionManager+TDHTTPSessionManager.m in Sources */,
 				B52590EF1EB32C9B003A950D /* weChatParamsItem.m in Sources */,
 				1AB539FC1C0396770065501F /* OEXAnayltics+Certificates.swift in Sources */,
 				1A6E86241BB9C6500039A216 /* OEXStyles+Profile.swift in Sources */,

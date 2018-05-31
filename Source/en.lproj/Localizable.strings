@@ -1973,8 +1973,8 @@
 /*点击，添加一个新的咨询    Tab here to consult.*/
 "TAB_CONSTULT_NEW" = "Tab here to consult.";
 
-/*验证码登录  Other login methods*/
-"TD_OTHER_LOGIN_BUTTON" = "Other login methods";
+/*验证码登录  Verification code login*/
+"TD_OTHER_LOGIN_BUTTON" = "Verification code login";
 /*发送验证码 Verify*/
 "TD_VERIFY_BUTTON" = "Verify";
 /*账号密码登录    Log in via account*/

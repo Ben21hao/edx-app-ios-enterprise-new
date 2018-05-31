@@ -147,7 +147,7 @@
         return;
     }
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setValue:self.detailItem.id forKey:@"comment_id"];
     [dic setValue:self.username forKey:@"username"];

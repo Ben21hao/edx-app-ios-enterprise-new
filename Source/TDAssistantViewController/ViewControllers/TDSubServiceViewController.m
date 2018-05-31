@@ -59,7 +59,7 @@
     
     self.page = 1;
     self.toolModel = [[TDBaseToolModel alloc] init];
-    self.manager = [AFHTTPSessionManager manager];
+    self.manager = [AFHTTPSessionManager shareManager];
     self.tableView.scrollsToTop = NO;
     
     NSString *title = TDLocalizeSelect(@"TA_PENDING", nil);

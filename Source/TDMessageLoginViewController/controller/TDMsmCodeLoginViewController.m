@@ -104,7 +104,7 @@
     
     [self handleResendButton:NO];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSString *url = [NSString stringWithFormat:@"%@/oauth2/signin_validate_code",ELITEU_URL];
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
@@ -193,7 +193,7 @@
     
     NSString *clientID = [[OEXConfig sharedConfig] oauthClientID];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSString *url = [NSString stringWithFormat:@"%@/oauth2/access_token_by_code",ELITEU_URL];
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
@@ -319,7 +319,7 @@
 #pragma mark - 重发邮件
 - (void)resendEmail {
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setValue:self.phoneStr forKey:@"email"];

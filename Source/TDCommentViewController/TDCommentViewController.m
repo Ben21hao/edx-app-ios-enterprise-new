@@ -98,7 +98,7 @@
 #pragma mark - 获取头部数据
 - (void)requestTopData {
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/social_contact/comment_summary/%@",ELITEU_URL,self.courseID];
     [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -184,7 +184,7 @@
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/social_contact/comment_detail/%@",ELITEU_URL,self.courseID];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [self.loadIngView removeFromSuperview];

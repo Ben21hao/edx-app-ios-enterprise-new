@@ -95,7 +95,7 @@
         [dic setValue:self.tagModel.subject_id forKey:@"subject_id"]; //选择的标签
     }
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     [manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [self dealWithHeaderAndFooterView];

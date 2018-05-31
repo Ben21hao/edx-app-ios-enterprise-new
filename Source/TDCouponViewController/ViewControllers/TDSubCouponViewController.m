@@ -101,7 +101,7 @@
         return;
     }
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     dic[@"username"] = self.username;
     dic[@"status"] = @(self.whereFrom);

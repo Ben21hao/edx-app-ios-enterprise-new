@@ -33,7 +33,7 @@
     [dic setValue:username forKey:@"username"];
     [dic setValue:company_id forKey:@"company_id"];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/companyjoincourses/",ELITEU_URL];
     [manager POST:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -72,7 +72,7 @@
     
     NSString *url = [NSString stringWithFormat:@"%@/api/user/v1/accounts/%@",ELITEU_URL,username];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer]; // 返回的格式 JSON
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html",@"text/json",@"text/javascript", nil];// 可接受的文本参数规格
     manager.requestSerializer = [AFJSONRequestSerializer serializer]; //先讲请求设置为json

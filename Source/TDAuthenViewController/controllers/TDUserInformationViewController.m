@@ -81,7 +81,7 @@
     [dic setValue:self.birthDate forKey:@"birthdate"];
     [dic setValue:[self.sexStr isEqualToString:TDLocalizeSelect(@"TD_MAN", nil)] ? @"m" : @"f" forKey:@"gender"];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/users/authentication/handin_message/",ELITEU_URL];
     
     [manager POST:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

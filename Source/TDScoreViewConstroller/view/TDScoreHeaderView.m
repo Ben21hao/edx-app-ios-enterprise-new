@@ -59,7 +59,7 @@
     
     [self.passImageView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.progressView.mas_centerY);
-        make.centerX.mas_equalTo(self.progressView.mas_left).offset((TDWidth - 36) * [self.scoreModel.course_passed_grade floatValue]);
+        make.centerX.mas_equalTo(self.progressView.mas_left).offset((TDWidth - 52) * [self.scoreModel.course_passed_grade floatValue]);
     }];
     
     self.leftImageView.backgroundColor = [UIColor colorWithHexString: [self.scoreModel.current_grade floatValue] <= 0 ? colorHexStr7 : colorHexStr1];
@@ -141,8 +141,8 @@
     }];
     
     [self.progressView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.leftImageView.mas_right).offset(0);
-        make.right.mas_equalTo(self.rightImageView.mas_left).offset(0);
+        make.left.mas_equalTo(self.leftImageView.mas_right).offset(-3);
+        make.right.mas_equalTo(self.rightImageView.mas_left).offset(3);
         make.centerY.mas_equalTo(self.bgImageView.mas_centerY);
         make.height.mas_equalTo(2);
     }];

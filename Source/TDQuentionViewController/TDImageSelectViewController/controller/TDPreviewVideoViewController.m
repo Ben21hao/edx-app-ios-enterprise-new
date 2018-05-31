@@ -232,7 +232,7 @@
     }else if(t.a == -1.0 && t.b == 0 && t.c == 0 && t.d == -1.0){
         degress = 180;// LandscapeLeft
     }
-    NSLog(@"CGAffineTransform - %lf - %lf - %lf - %lf - %ld",t.a,t.b,t.c,t.d,degress);
+    NSLog(@"CGAffineTransform - %lf - %lf - %lf - %lf - %ld",t.a,t.b,t.c,t.d,(unsigned long)degress);
     
     if (assetTrack.naturalSize.height > assetTrack.naturalSize.width) {
         degress = 90;
@@ -250,7 +250,7 @@
         renderSize = CGSizeMake(TDWidth, TDHeight);
     }
     
-    NSLog(@"renderSize--->> %lf --- %lf -- %ld",renderSize.width,renderSize.height,degress);
+    NSLog(@"renderSize--->> %lf --- %lf -- %ld",renderSize.width,renderSize.height,(unsigned long)degress);
     NSLog(@"视频naturalSize --->>%lf -- %lf --- %lf -- %lf",assetTrack.naturalSize.width,assetTrack.naturalSize.height,TDWidth,TDHeight);
     
     CMTime totalDuration = kCMTimeZero;

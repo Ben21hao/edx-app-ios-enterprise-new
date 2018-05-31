@@ -47,7 +47,7 @@
     
     [self setLoadDataView];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/getcoursescores/",ELITEU_URL];
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
@@ -225,14 +225,12 @@
 - (void)setNoExampleData { //未发布习题
     
     self.imageView = [[UIImageView alloc] init];
-    self.imageView.image = [UIImage imageNamed:@"score_left_Image"];
+    self.imageView.image = [UIImage imageNamed:@"report_Image"];
     [self.view addSubview:self.imageView];
     
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.bottom.mas_equalTo(self.view.mas_centerY).offset(-28);
-        make.size.mas_equalTo(CGSizeMake(72, 93));
-        
     }];
     
     self.noExampleLabel = [[UILabel alloc] init];

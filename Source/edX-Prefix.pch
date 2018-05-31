@@ -39,6 +39,7 @@
 #import "TDBaseView.h"
 #import "TDBaseViewController.h"
 #import "LanguageChangeTool.h"
+#import "AFHTTPSessionManager+TDHTTPSessionManager.h"
 
 #import "MBHUDHelper.h"
 #import "VHallApi.h"

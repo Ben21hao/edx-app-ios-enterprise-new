@@ -91,7 +91,7 @@
     [super viewDidLoad];
     
     self.baseTool = [[TDBaseToolModel alloc] init];
-    self.manager = [AFHTTPSessionManager manager];
+    self.manager = [AFHTTPSessionManager shareManager];
     
     [self setLoadDataView];
     [self configData];

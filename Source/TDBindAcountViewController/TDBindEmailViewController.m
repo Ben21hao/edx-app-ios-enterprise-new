@@ -65,7 +65,7 @@
 //    [params setValue:@"1" forKey:@"is_company"];
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/account/bind_email/",ELITEU_URL];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [self.activityView stopAnimating];

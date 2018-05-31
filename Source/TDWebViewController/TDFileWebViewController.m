@@ -55,7 +55,7 @@
     [params setValue:self.couse_id forKey:@"course_id"];
     [params setValue:self.block_id forKey:@"block_id"];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSString *url = [NSString stringWithFormat:@"%@/api/courses/vyingli/course_block/",ELITEU_URL];
     
     WS(weakSelf);

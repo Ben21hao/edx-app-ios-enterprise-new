@@ -64,7 +64,7 @@
     self.titleViewLabel.text = TDLocalizeSelect(@"PREPARE_PAY", nil);
     
     self.baseTool = [[TDBaseToolModel alloc] init];
-    self.manager = [AFHTTPSessionManager manager];
+    self.manager = [AFHTTPSessionManager shareManager];
     self.returnWay = 0;
     self.isInstallWechat = [WXApi isWXAppInstalled];
     self.payType = self.isInstallWechat ? 1 : 2;

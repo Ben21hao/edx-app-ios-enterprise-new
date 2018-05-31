@@ -69,7 +69,7 @@
     [dic setValue:self.company_id forKey:@"company_id"];
     [dic setValue:self.username forKey:@"username"];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     [manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [self.companyArray removeAllObjects];

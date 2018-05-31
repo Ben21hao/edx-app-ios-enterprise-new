@@ -267,7 +267,7 @@ const CGFloat contentLabelFontSize = 14;
     
     self.praiseButton.userInteractionEnabled = NO;
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setValue:self.detailItem.comment_id forKey:@"comment_id"];
     [dic setValue:self.username forKey:@"username"];

@@ -43,7 +43,7 @@
     NSString *path = type == 1 ? @"/api/mobile/v0.5/finance/apple_pay_receipt_verify/" : @"/api/courses/v1/apple_pay_receipt_verify/";
     NSString *urlStr = [NSString stringWithFormat:@"%@%@",ELITEU_URL,path];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     [manager POST:urlStr parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         //状态返回200为成功
         NSDictionary *responDic = (NSDictionary *)responseObject;

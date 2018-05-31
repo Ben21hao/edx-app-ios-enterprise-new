@@ -95,7 +95,7 @@
     
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/enterprise/v0.5/get_consultmessage/",ELITEU_URL];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [self endRefresh];

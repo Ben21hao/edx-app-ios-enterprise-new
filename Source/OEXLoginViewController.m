@@ -181,9 +181,9 @@
     //    }
 }
 
-- (void)rightButtonAciton:(UIButton *)sender {
-    [self userDidLogin];
-}
+//- (void)rightButtonAciton:(UIButton *)sender {
+//    [self userDidLogin];
+//}
 
 //- (void)navigateBack {
 //    [self dismissViewControllerAnimated:YES completion:nil];
@@ -704,12 +704,12 @@
     //set global auth
 
     if([_tf_EmailID.text length] > 0) {
-        // Set the language to blank
-        [OEXInterface setCCSelectedLanguage:@""];
+        
+        [OEXInterface setCCSelectedLanguage:@""];// Set the language to blank
         [[NSUserDefaults standardUserDefaults] setObject:_tf_EmailID.text forKey:USER_LOGIN_NAME];
-        // Analytics User Login
-        [[OEXAnalytics sharedAnalytics] trackUserLogin:[self.authProvider backendName] ?: @"Password"];
+        [[OEXAnalytics sharedAnalytics] trackUserLogin:[self.authProvider backendName] ?: @"Password"]; // Analytics User Login
     }
+    
     if (self.tf_Password.text.length > 0) {
         [[NSUserDefaults standardUserDefaults] setObject:self.tf_Password.text forKey:USER_LOGIN_PASSWORD]; //登录密码
     }
@@ -717,8 +717,7 @@
     [self tappedToDismiss];
     [self.activityIndicator stopAnimating];
 
-    //Launch next view
-    [self userDidLogin];
+    [self userDidLogin]; //Launch next view
 }
 
 - (void)userDidLogin {
@@ -771,7 +770,7 @@
 #pragma mark - 重发邮件
 - (void)resendEmail {
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setValue:self.tf_EmailID.text forKey:@"email"];

@@ -49,7 +49,7 @@
 #pragma mark - 数据
 - (void)getOutLineData {
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSString *url = [NSString stringWithFormat:@"%@/api/courses/v1/courses_outline/%@",ELITEU_URL,self.courseID];
     
     [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

@@ -64,7 +64,7 @@
     [super viewDidLoad];
     
     self.isRecharge = NO;
-    self.manager = [AFHTTPSessionManager manager];
+    self.manager = [AFHTTPSessionManager shareManager];
     
     [self getRechargeData];
 

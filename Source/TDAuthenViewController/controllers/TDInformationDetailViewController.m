@@ -92,7 +92,7 @@ typedef NS_ENUM(NSInteger,TDMessageShow) {
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic  setValue:self.username forKey:@"username"];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/users/authentication/get_authent_message/",ELITEU_URL];
     
     [manager GET:url parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

@@ -117,7 +117,7 @@
 
 - (void)judgeAppVersion { //通过接口判断版本是否更新
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0.5/get_last_version",ELITEU_URL];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -166,7 +166,7 @@
     NSString *newVersionKey = @"App_New_Version";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager shareManager];
     NSString *path = @"https://itunes.apple.com/lookup?bundleId=cn.eliteu.enterprise.mobile.ios&country=cn";
     
     [manager GET:path parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

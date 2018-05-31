@@ -85,7 +85,7 @@
     
     [self activityViewStart:YES];
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
     NSString *url = [NSString stringWithFormat:@"%@/oauth2/signin_validate_code",ELITEU_URL];
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
@@ -93,8 +93,6 @@
     
     [manager POST:url parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
        
-        [self activityViewStart:NO];
-        
         NSDictionary *responseDic = (NSDictionary *)responseObject;
         id code = responseDic[@"code"];
         
@@ -102,14 +100,18 @@
             [self.view makeToast:TDLocalizeSelect(@"TD_CODE_SENT_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.08 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [self activityViewStart:NO];
                 self.messageStr = responseDic[@"msg"];
                 [self gotoCodeViewController];
             });
         }
         else if ([code intValue] == 400) {
+            [self activityViewStart:NO];
             [self showAlertView:TDLocalizeSelect(@"TD_ACCOUNT_NOEXIST_TEXT", nil)];
         }
         else {
+            [self activityViewStart:NO];
             [self.view makeToast:TDLocalizeSelect(@"CODE_SEND_FAILED", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
