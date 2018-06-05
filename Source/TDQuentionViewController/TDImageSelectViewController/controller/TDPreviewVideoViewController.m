@@ -38,6 +38,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(avplayerDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
@@ -147,8 +155,7 @@
     
     BOOL isHidden = self.navigationController.navigationBar.isHidden;
 
-    [[UIApplication sharedApplication] setStatusBarHidden:!isHidden withAnimation:UIStatusBarAnimationFade];
-    [self.navigationController setNavigationBarHidden:!isHidden animated:YES];
+    [self navigationBarHidden:isHidden];
     
     [self.bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(self.view);
@@ -159,6 +166,12 @@
     self.playImageView.hidden = !isHidden;
     
     isHidden ? [self.player pause] : [self.player play];
+}
+
+- (void)navigationBarHidden:(BOOL)isHidden {
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:!isHidden withAnimation:UIStatusBarAnimationFade];
+    [self.navigationController setNavigationBarHidden:!isHidden animated:YES];
 }
 
 - (void)setnilForPaleyer { //移除播放器

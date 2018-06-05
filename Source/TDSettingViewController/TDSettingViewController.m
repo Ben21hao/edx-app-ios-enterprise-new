@@ -16,6 +16,7 @@
 #import "WYAlertView.h"
 
 #import "TDRequestManager.h"
+#import "NSObject+OEXReplaceNull.h"
 
 @interface TDSettingViewController () <UITableViewDataSource, UITableViewDelegate,WYAlertViewDelegate>
 
@@ -30,7 +31,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [LanguageChangeTool initUserLanguage];//初始化应用语言
     [TDNotificationCenter addObserver:self selector:@selector(languageChangeAction) name:@"languageSelectedChange" object:nil];
     
     [self setTableViewConstraint];
@@ -77,7 +77,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 4;
 }
 
 -  (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -91,6 +91,7 @@
         return cell; 
         
     } else {
+        
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"settingCell"];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"settingCell"];
@@ -101,7 +102,15 @@
         cell.textLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
         cell.textLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
         
-        cell.textLabel.text = indexPath.row == 2 ? TDLocalizeSelect(@"ABOUT_APP", nil) : TDLocalizeSelect(@"LANGUAGE_TEXT", nil);
+        if (indexPath.row == 1) {
+            cell.textLabel.text = TDLocalizeSelect(@"APP_VERSION_UPDATE", nil);
+        }
+        else if (indexPath.row == 2) {
+            cell.textLabel.text = TDLocalizeSelect(@"LANGUAGE_TEXT", nil);
+        }
+        else {
+            cell.textLabel.text = TDLocalizeSelect(@"ABOUT_APP", nil);
+        }
         
         return cell;
     } 
@@ -118,25 +127,95 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    if (indexPath.row == 2) {
-        [self gotoAboutViewController];
-        
-    } else if (indexPath.row == 1) {
+    if (indexPath.row == 1) {
+        [self judgeAppStoreVersion];
+    }
+    else if (indexPath.row == 2) {
         [self gotoLanguageViewController];
+        
+    } else if (indexPath.row == 3) {
+        [self gotoAboutViewController];
     }
 }
 
-#pragma mark - 关于
-- (void)gotoAboutViewController {
+#pragma mark - action
+- (void)gotoAboutViewController {//关于
     TDAboutWeViewController *aboutVc = [[TDAboutWeViewController alloc] init];
     [self.navigationController pushViewController:aboutVc animated:YES];
 }
 
-- (void)gotoLanguageViewController {
+- (void)gotoLanguageViewController { //多语言
     TDLanguageViewController *languageVc = [[TDLanguageViewController alloc] init];
     languageVc.username = self.username;
     [self.navigationController pushViewController:languageVc animated:YES];
 }
+
+- (void)judgeAppStoreVersion { //通过App Store来判断
+    
+    TDBaseToolModel *model = [[TDBaseToolModel alloc] init];
+    if (![model networkingState]) {
+        return;
+    }
+    
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager shareManager];
+    NSString *path = @"https://itunes.apple.com/lookup?bundleId=cn.eliteu.enterprise.mobile.ios&country=cn";
+    
+    [manager GET:path parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *appInfo = (NSDictionary *)responseObject;
+        NSArray *infoArray = appInfo[@"results"];
+        
+        if (infoArray.count == 0) {
+            return;
+        }
+        
+        NSDictionary *versionDic = [infoArray[0] oex_replaceNullsWithEmptyStrings];
+        NSString *version = versionDic[@"version"]; //线上版本号
+        
+        NSString *appVersionStr = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]; //当前版本号
+        BOOL isDescending = [version compare:appVersionStr options:NSNumericSearch] == NSOrderedDescending; //是否是降序
+        if (!isDescending) { //App store 版本号 <= 本地的版本号
+            [self lastVersionAlertView];
+            
+        }
+        else {
+            [self updateAlertView];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"查询iTunes应用信息错误：%@",error.description);
+    }];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)updateAlertView {
+    /*App store 版本号 > 本地的版本号*/
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:TDLocalizeSelect(@"SYSTEM_WARING", nil) message:TDLocalizeSelect(@"NEW_VERSION_UPDATE", nil) preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"OK", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/e-ducation-%E4%B8%AA%E6%80%A7%E5%8C%96%E5%9C%A8%E7%BA%BF%E5%AD%A6%E4%B9%A0%E5%9F%B9%E8%AE%AD%E5%B9%B3%E5%8F%B0/id1208911496?mt=8"]];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"CANCEL", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:sureAction];
+    
+    [self.navigationController presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)lastVersionAlertView {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:TDLocalizeSelect(@"SYSTEM_WARING", nil) message:TDLocalizeSelect(@"LASTEST_VERSION", nil) preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"OK", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alertController addAction:sureAction];
+    
+    [self.navigationController presentViewController:alertController animated:YES completion:nil];
+}
+
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return [OEXStyles sharedStyles].standardStatusBarStyle;

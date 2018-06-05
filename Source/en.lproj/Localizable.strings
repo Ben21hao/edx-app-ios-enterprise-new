@@ -1761,6 +1761,10 @@
 "CLICK_PULL_LOAD_MORE" = "Load more data by clicking or pullup";
 /*检测到有版本更新，是否更新？ New version detected. Update now?*/
 "NEW_VERSION_UPDATE" = "New version detected. Update now?";
+/*当前版本已是最新，无需升级。Current version is already the latest, no update is available.*/
+"LASTEST_VERSION" = "Current version is already the latest, no update is available.";
+/*检查更新 Update*/
+"APP_VERSION_UPDATE" = "Update";
 /*取消订单失败 Failure to cancel order*/
 "FAIL_CANCEL_ORDER" = "Failure to cancel order";
 /*查询失败 Query failed*/

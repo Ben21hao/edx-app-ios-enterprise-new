@@ -19,7 +19,8 @@ func shareHashtaggedTextAndALink(textBuilder: (hashtagOrPlatform: String) -> Str
     return controllerWithItems(items, analyticsCallback: analyticsCallback)
 }
 
-private func controllerWithItems(items: [AnyObject], analyticsCallback:(String -> Void)?) -> UIActivityViewController{
+private func controllerWithItems(items: [AnyObject], analyticsCallback:(String -> Void)?) -> UIActivityViewController {
+    
     let controller = UIActivityViewController(activityItems: items, applicationActivities: nil)
     controller.excludedActivityTypes = [UIActivityTypeAssignToContact, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll]
     controller.completionWithItemsHandler = {activityType, completed, _, error in
@@ -42,6 +43,7 @@ private func controllerWithItems(items: [AnyObject], analyticsCallback:(String -
 
 
 private class PlatformHashTag: NSObject, UIActivityItemSource {
+    
     var config: OEXConfig { return OEXConfig.sharedConfig() }
     var platformName : String { return config.platformName() }
 
@@ -57,7 +59,6 @@ private class PlatformHashTag: NSObject, UIActivityItemSource {
     }
 
     //If this is going to Twitter and the hashtag has been defined in the configuration, use it otherwise use the platform name
-
     @objc private func activityViewController(activityViewController: UIActivityViewController, itemForActivityType activityType: String) -> AnyObject? {
         var item = platformName
         if let hashTag = config.twitterConfiguration?.hashTag where activityType == UIActivityTypePostToTwitter {
