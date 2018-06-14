@@ -8,21 +8,21 @@
 
 #import "TDSettingViewController.h"
 #import "TDSettingCell.h"
+#import "TDSettingOtherCell.h"
 
 #import "TDAboutWeViewController.h"
 #import "TDLanguageViewController.h"
 
 #import "edX-Swift.h"
-#import "WYAlertView.h"
 
 #import "TDRequestManager.h"
 #import "NSObject+OEXReplaceNull.h"
 
-@interface TDSettingViewController () <UITableViewDataSource, UITableViewDelegate,WYAlertViewDelegate>
+@interface TDSettingViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) UILabel *titleLabel;//自定义标题
 @property (nonatomic,strong) UITableView *tableView;
-@property(nonatomic,strong) NSString *download_url;
+@property (nonatomic,strong) UIButton *logoutButton;
 
 @end
 
@@ -51,6 +51,8 @@
     
     self.titleLabel.text = TDLocalizeSelect(@"ACCESSIBILITY_SETTINGS", nil);
     [self.tableView reloadData];
+    
+    [self.logoutButton setTitle:TDLocalizeSelect(@"LOGOUT", nil) forState:UIControlStateNormal];
 }
 
 #pragma mark - UI
@@ -66,10 +68,30 @@
     [self.view addSubview:self.tableView];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.mas_equalTo(self.view);
+        make.left.right.top.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.view.mas_bottom).offset(-68);
+    }];
+    
+    self.logoutButton = [[UIButton alloc] init];
+    self.logoutButton.backgroundColor = [UIColor colorWithHexString:colorHexStr7];
+    self.logoutButton.layer.masksToBounds = YES;
+    self.logoutButton.layer.cornerRadius = 4.0;
+    self.logoutButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
+    [self.logoutButton setTitleColor:[UIColor colorWithHexString:colorHexStr9] forState:UIControlStateNormal];
+    [self.logoutButton setTitle:TDLocalizeSelect(@"LOGOUT", nil) forState:UIControlStateNormal];
+    [self.logoutButton addTarget:self action:@selector(logoutButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.logoutButton];
+    
+    [self.logoutButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.view.mas_bottom).offset(-28);
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake((TDWidth / 3) * 2, 39));
     }];
 }
 
+- (void)logoutButtonAction:(UIButton *)sender {
+    [[OEXRouter sharedRouter] logoutAction];
+}
 
 #pragma mark - tableview Delegate 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -92,24 +114,20 @@
         
     } else {
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"settingCell"];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"settingCell"];
-        }
+        TDSettingOtherCell *cell = [[TDSettingOtherCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"settingCell"];
+
         cell.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
-        cell.textLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
         
         if (indexPath.row == 1) {
-            cell.textLabel.text = TDLocalizeSelect(@"APP_VERSION_UPDATE", nil);
+            cell.titleLabel.text = TDLocalizeSelect(@"APP_VERSION_UPDATE", nil);
         }
         else if (indexPath.row == 2) {
-            cell.textLabel.text = TDLocalizeSelect(@"LANGUAGE_TEXT", nil);
+            cell.titleLabel.text = TDLocalizeSelect(@"LANGUAGE_TEXT", nil);
         }
         else {
-            cell.textLabel.text = TDLocalizeSelect(@"ABOUT_APP", nil);
+            cell.titleLabel.text = TDLocalizeSelect(@"ABOUT_APP", nil);
         }
         
         return cell;
@@ -219,11 +237,6 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return [OEXStyles sharedStyles].standardStatusBarStyle;
-}
-
-#pragma mark --WYAlertViewDelegate
-- (void)beginDownLoad{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.download_url]];
 }
 
 - (void)didReceiveMemoryWarning {

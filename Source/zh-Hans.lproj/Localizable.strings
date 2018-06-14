@@ -399,7 +399,7 @@
 /* Prompt leading user to sign in screen */
 "LOGIN_SPLASH_SIGN_IN"="已经有一个帐户？登录";
 /* Button title to log out the current user */
-"LOGOUT"="退出";
+"LOGOUT"="退出登录";
 /* Option to sort discussion post list by most activity */
 "MOST_ACTIVITY"="活跃度";
 /* Option to sort discussion post list by most votes */
@@ -2011,3 +2011,5 @@
 /*发送验证码失败 Failed to send verification code.*/
 "CODE_SEND_FAILED" = "发送验证码失败";
 
+/* 企业网盘 Enterprise SkyDrive*/
+"ENTERPRISE_SKYDRIVE"="企业网盘";

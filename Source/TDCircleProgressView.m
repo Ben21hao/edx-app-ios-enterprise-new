@@ -35,22 +35,22 @@
     self.circleImage.tintColor = [UIColor colorWithHexString:colorHexStr8];
     [self addSubview:self.circleImage];
     
+    self.downLoadImage = [[UIImageView alloc] init];
+    self.downLoadImage.image = [UIImage imageNamed:@"downing_imgae"];
+    [self addSubview:self.downLoadImage];
+    
+    self.circleView = [[TDCircleDrawView alloc] init];
+    self.circleView.backgroundColor = [UIColor clearColor];
+    [self addSubview:self.circleView];
+    
     [self.circleImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.mas_centerX);
         make.centerY.mas_equalTo(self.mas_centerY);
     }];
     
-    self.downLoadImage = [[UIImageView alloc] init];
-    self.downLoadImage.image = [UIImage imageNamed:@"downing_imgae"];
-    [self addSubview:self.downLoadImage];
-    
     [self.downLoadImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.circleImage);
     }];
-    
-    self.circleView = [[TDCircleDrawView alloc] init];
-    self.circleView.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.circleView];
     
     [self.circleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.circleImage);

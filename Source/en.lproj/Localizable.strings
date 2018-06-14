@@ -2011,3 +2011,6 @@
 "COURSE_UM_SUBMITED" = "Unsubmitted";
 /*发送验证码失败 Failed to send verification code.*/
 "CODE_SEND_FAILED" = "Failed to send verification code.";
+
+/* 企业网盘 Enterprise SkyDrive*/
+"ENTERPRISE_SKYDRIVE"="Enterprise SkyDrive";

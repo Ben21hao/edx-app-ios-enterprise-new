@@ -95,7 +95,7 @@ class JSONFormBuilder {
         
         func applyData(field: JSONFormBuilder.Field, data: FormData) {
             
-            let titleStyle = OEXTextStyle(weight: .Normal, size: .Base, color: OEXStyles.sharedStyles().neutralBlackT())
+            let titleStyle = OEXTextStyle(weight: .Normal, size: .Base, color: OEXStyles.sharedStyles().baseColor10())
             let descriptionStyle = OEXMutableTextStyle(weight: .Light, size: .XSmall, color: OEXStyles.sharedStyles().neutralDark())
             descriptionStyle.lineBreakMode = .ByTruncatingTail
             

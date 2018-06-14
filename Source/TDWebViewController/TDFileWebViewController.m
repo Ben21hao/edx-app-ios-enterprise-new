@@ -14,7 +14,7 @@
 @interface TDFileWebViewController ()<BCEDocumentReaderDelegate, WKUIDelegate, WKNavigationDelegate>
 
 @property (nonatomic,strong) WKWebView *webview;
-@property (nonatomic,strong) UIButton *downloadButton;
+@property (nonatomic,strong) UIButton *downloadButton; //浏览器显示
 
 @property (nonatomic,strong) NSURL *url;
 

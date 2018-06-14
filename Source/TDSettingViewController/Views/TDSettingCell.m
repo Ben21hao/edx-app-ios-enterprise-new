@@ -30,14 +30,14 @@ typedef NS_ENUM(NSUInteger, OEXMySettingsAlertTag) {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        [self config];
+        [self configView];
         [self setConstrait];
-        
     }
     return self;
 }
 
-- (void)config {
+- (void)configView {
+    
     self.bgView = [[UIView alloc] init];
     self.bgView.backgroundColor = [UIColor colorWithHexString:colorHexStr5];
     [self addSubview:self.bgView];
@@ -75,7 +75,7 @@ typedef NS_ENUM(NSUInteger, OEXMySettingsAlertTag) {
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.bgView.mas_left).offset(18);
+        make.left.mas_equalTo(self.bgView.mas_left).offset(16);
         make.bottom.mas_equalTo(self.bgView.mas_centerY);
     }];
     
@@ -104,6 +104,7 @@ typedef NS_ENUM(NSUInteger, OEXMySettingsAlertTag) {
 }
 
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
     if (buttonIndex == OEXMySettingsAlertTagWifiOnly) {
         [self.wifiSwicth setOn:YES animated:YES];
     } else {

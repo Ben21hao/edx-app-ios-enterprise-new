@@ -7,7 +7,7 @@
 //
 
 #import "TDPreviewVideoViewController.h"
-#import "TDAvPlayerOperation.h"
+//#import "TDAvPlayerOperation.h"
 #import "SRUtil.h"
 
 @interface TDPreviewVideoViewController ()
@@ -31,6 +31,7 @@
     
     self.titleViewLabel.text = TDLocalizeSelect(@"VIDEO_PLAY", nil);
     [self setViewConstraint];
+    
     if (!self.isWebVideo) {
         [self addGesture];
     }
@@ -176,7 +177,6 @@
 
 - (void)setnilForPaleyer { //移除播放器
     
-    //TODO: 这里会导致崩溃
     [self.playerItem removeObserver:self forKeyPath:@"status"];
     [self.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
     [self.playerItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];

@@ -207,6 +207,7 @@ static const NSTimeInterval RewindTimeInterval = 30;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackstateDidChange:) name:MPMoviePlayerPlaybackStateDidChangeNotification object:nil];
     //2 - 媒体播放完成或用户手动退出，具体完成原因可以通过通知userInfo中的key为MPMoviePlayerPlaybackDidFinishReasonUserInfoKey的对象获取
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exitFullScreenMode:) name:MPMoviePlayerDidExitFullscreenNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterFullScreenMode:) name:MPMoviePlayerDidEnterFullscreenNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
@@ -243,14 +244,6 @@ static const NSTimeInterval RewindTimeInterval = 30;
     return self.isHalfScreen;
 }
 
-//- (BOOL)shouldAutorotate {
-//    return YES;
-//}
-
-//- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-//    return UIInterfaceOrientationMaskPortrait;
-//}
-
 - (void)orientationChange:(BOOL)hiddenBar type:(NSInteger)type {
     
     if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
@@ -258,6 +251,9 @@ static const NSTimeInterval RewindTimeInterval = 30;
         [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
     }
     
+    UIView *statusBar = [[UIApplication sharedApplication]valueForKey:@"statusBar"];
+    statusBar.alpha = self.isHalfScreen ? 0.0f : 1.0f;
+//    [[UIApplication sharedApplication] setStatusBarHidden:self.isHalfScreen withAnimation:UIStatusBarAnimationFade];
     [self.navigationController setNavigationBarHidden:hiddenBar animated:YES];//隐藏导航栏
     
     if (hiddenBar) {
@@ -265,7 +261,6 @@ static const NSTimeInterval RewindTimeInterval = 30;
         
         [UIView animateWithDuration:0.3f animations:^{
             self.view.transform = CGAffineTransformMakeRotation(type == UIDeviceOrientationLandscapeLeft ? M_PI_2 : - M_PI_2);//左右边
-//            self.view.bounds = CGRectMake(0, 0, TDHeight, TDHeight);
             [self remarkViewConstraint:1];
         }];
         
@@ -274,7 +269,6 @@ static const NSTimeInterval RewindTimeInterval = 30;
         
         [UIView animateWithDuration:0.3f animations:^{
             self.view.transform = CGAffineTransformMakeRotation(0);
-//            self.view.bounds = CGRectMake(0, 0, TDWidth, TDHeight);
             [self remarkViewConstraint:0];
         }];
         
@@ -402,7 +396,6 @@ static const NSTimeInterval RewindTimeInterval = 30;
 
 /*确定了媒体播放时长后*/
 - (void)movieDurationAvailable:(NSNotification *)notification {
-    
     
     [self setTimeLabelText];
     

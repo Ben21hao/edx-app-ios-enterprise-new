@@ -229,8 +229,44 @@
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <accessibility key="accessibilityConfiguration" identifier="find-courses-cell"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellFindCourses" rowHeight="50" id="oKs-qL-9vu">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellFindCourses" rowHeight="50" id="MGV-aE-Gw4">
                                         <rect key="frame" x="0.0" y="291" width="320" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MGV-aE-Gw4" id="MoI-Wg-bIv">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A8T-48-NQv">
+                                                    <rect key="frame" x="21" y="49" width="211" height="1"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.082753638700000007" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="PFS-Yb-IiV"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="204" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FIND COURSES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drC-1y-GLS" customClass="OEXCustomLabel">
+                                                    <rect key="frame" x="21" y="0.0" width="108" height="50"/>
+                                                    <accessibility key="accessibilityConfiguration" label="">
+                                                        <accessibilityTraits key="traits" button="YES" staticText="YES"/>
+                                                    </accessibility>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="drC-1y-GLS" firstAttribute="leading" secondItem="MoI-Wg-bIv" secondAttribute="leadingMargin" constant="13" id="2Rp-9x-Iax"/>
+                                                <constraint firstItem="drC-1y-GLS" firstAttribute="top" secondItem="MoI-Wg-bIv" secondAttribute="top" id="6Et-PT-V0C"/>
+                                                <constraint firstItem="drC-1y-GLS" firstAttribute="leading" secondItem="A8T-48-NQv" secondAttribute="leading" id="DRK-mY-eZ1"/>
+                                                <constraint firstAttribute="bottom" secondItem="drC-1y-GLS" secondAttribute="bottom" id="DbA-RM-Hyy"/>
+                                                <constraint firstItem="drC-1y-GLS" firstAttribute="bottom" secondItem="A8T-48-NQv" secondAttribute="bottom" id="GDE-FI-7Sg"/>
+                                                <constraint firstAttribute="trailing" secondItem="A8T-48-NQv" secondAttribute="trailing" constant="88" id="JaM-M1-IwS"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="find-courses-cell"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellFindCourses" rowHeight="50" id="oKs-qL-9vu">
+                                        <rect key="frame" x="0.0" y="341" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oKs-qL-9vu" id="3yf-UT-hdT">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
@@ -275,7 +311,7 @@
                                         <accessibility key="accessibilityConfiguration" identifier="find-courses-cell"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellSetting" rowHeight="50" id="Hmd-TD-4eC">
-                                        <rect key="frame" x="0.0" y="341" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="391" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hmd-TD-4eC" id="4ma-P0-sml">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
@@ -310,7 +346,7 @@
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellSubmitFeedback" rowHeight="50" id="F82-OQ-3cW">
-                                        <rect key="frame" x="0.0" y="391" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="441" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F82-OQ-3cW" id="f85-Z4-zfs">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
@@ -345,7 +381,7 @@
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellDebug" rowHeight="50" id="lzd-ss-mgn">
-                                        <rect key="frame" x="0.0" y="441" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="491" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lzd-ss-mgn" id="IyX-WK-94J">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
@@ -380,7 +416,7 @@
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellLogout" rowHeight="130" id="eNT-vL-DdU">
-                                        <rect key="frame" x="0.0" y="491" width="320" height="130"/>
+                                        <rect key="frame" x="0.0" y="541" width="320" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eNT-vL-DdU" id="YJL-Mz-nNW">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
@@ -444,6 +480,7 @@
                         <outlet property="logoutButton" destination="Jag-qX-pQo" id="hNY-j6-mlg"/>
                         <outlet property="redImageView" destination="hvZ-R6-mT7" id="Ucs-6Z-HUK"/>
                         <outlet property="settingsLabel" destination="5Et-PU-vDe" id="czN-ft-Uht"/>
+                        <outlet property="skyDriveLabel" destination="drC-1y-GLS" id="tsl-k7-hsv"/>
                         <outlet property="submitFeedbackLabel" destination="koV-6t-sw8" id="lBC-hL-hYc"/>
                         <outlet property="userContentView" destination="F3L-Q6-zd3" id="Wa0-bN-yn0"/>
                         <outlet property="userEmailLabel" destination="o3n-qF-MxO" id="Qul-S1-8Gb"/>

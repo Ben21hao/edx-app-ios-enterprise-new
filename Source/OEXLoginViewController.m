@@ -380,25 +380,6 @@
     [self.navigationController pushViewController:messageVc animated:YES];
 }
 
-//- (void)systemActivity {
-//    
-//    UIImage *image = [UIImage imageNamed:@"tubiao"];
-//    NSURL *url = [NSURL URLWithString:@"https://www.jianshu.com/p/d500fb72a079"];
-//    
-//    NSArray *itemArray = @[@"分享标题",image,url];
-//    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:itemArray applicationActivities:nil];
-//    activityController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll];
-//    activityController.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError){
-//        if (completed) {//成功
-//            
-//        }
-//        else {
-//            
-//        }
-//    };
-//    [self presentViewController:activityController animated:YES completion:nil];
-//}
-
 #pragma mark - 忘记密码
 - (IBAction)troubleLoggingClicked:(id)sender {
     

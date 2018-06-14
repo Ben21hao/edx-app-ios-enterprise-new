@@ -42,7 +42,7 @@ class TDUserMessageCell: UITableViewCell {
         bgView.addSubview(headerImageView)
         
         nameLabel.textColor = OEXStyles.sharedStyles().baseColor10()
-        nameLabel.font = UIFont.init(name: "OpenSans", size: 14)
+        nameLabel.font = UIFont.init(name: "OpenSans", size: 15)
         bgView.addSubview(nameLabel)
         
         acountLabel.textColor = OEXStyles.sharedStyles().baseColor8()
@@ -58,7 +58,6 @@ class TDUserMessageCell: UITableViewCell {
         bgView.addSubview(statusLabel)
         
         headerImageView.image = UIImage.init(named: "people")
-  
     }
     
     func setViewConstraint() {
@@ -68,7 +67,7 @@ class TDUserMessageCell: UITableViewCell {
         
         headerImageView.snp_makeConstraints { (make) in
             make.left.equalTo(bgView.snp_left).offset(18)
-            make.centerY.equalTo(bgView.snp_centerY)
+            make.centerY.equalTo(bgView.snp_centerY).offset(-2.5)
             make.size.equalTo(CGSizeMake(imageWidth, imageWidth))
         }
         
@@ -79,8 +78,8 @@ class TDUserMessageCell: UITableViewCell {
         }
         
         acountLabel.snp_makeConstraints { (make) in
-            make.left.equalTo(headerImageView.snp_right).offset(18)
-            make.top.equalTo(bgView.snp_centerY).offset(3)
+            make.left.equalTo(nameLabel.snp_left)
+            make.top.equalTo(nameLabel.snp_bottom).offset(1)
         }
         
         statusLabel.snp_makeConstraints { (make) in

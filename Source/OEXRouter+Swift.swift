@@ -313,7 +313,7 @@ extension OEXRouter {
         makeContentControllerCurrent(splashController)
     }
 
-    public func logout() {
+    public func logoutAction() {
         invalidateToken()
         environment.session.closeAndClearSession()
         showLoggedOutScreen()

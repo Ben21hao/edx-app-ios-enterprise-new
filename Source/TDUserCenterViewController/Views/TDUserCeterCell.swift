@@ -37,7 +37,7 @@ class TDUserCeterCell: UITableViewCell {
         bgView.addSubview(iconImageView)
         
         titleLabel.textColor = OEXStyles.sharedStyles().baseColor10()
-        titleLabel.font = UIFont.init(name: "OpenSans", size: 14)
+        titleLabel.font = UIFont.init(name: "OpenSans", size: 15)
         bgView.addSubview(titleLabel)
         
         messageLabel.textColor = OEXStyles.sharedStyles().baseColor8()
@@ -58,18 +58,18 @@ class TDUserCeterCell: UITableViewCell {
         }
         
         iconImageView.snp_makeConstraints { (make) in
-            make.left.equalTo(bgView.snp_left).offset(18)
+            make.centerX.equalTo(bgView.snp_left).offset(33)
             make.centerY.equalTo(bgView)
         }
         
         titleLabel.snp_makeConstraints { (make) in
-            make.left.equalTo(bgView.snp_left).offset(75)
-            make.bottom.equalTo(bgView.snp_centerY).offset(-3)
+            make.left.equalTo(iconImageView.snp_centerX).offset(33)
+            make.bottom.equalTo(bgView.snp_centerY).offset(-1)
         }
         
         messageLabel.snp_makeConstraints { (make) in
-            make.left.equalTo(bgView.snp_left).offset(75)
-            make.top.equalTo(bgView.snp_centerY).offset(3)
+            make.left.equalTo(titleLabel.snp_left)
+            make.top.equalTo(titleLabel.snp_bottom).offset(1)
         }
         
         redImageView.snp_makeConstraints { (make) in

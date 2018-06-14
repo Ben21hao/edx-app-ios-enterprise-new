@@ -58,7 +58,7 @@ extension NetworkManager {
 
 private func logout(router:OEXRouter?) -> AuthenticationAction {
     dispatch_async(dispatch_get_main_queue()) {
-        router?.logout()
+        router?.logoutAction()
     }
     return AuthenticationAction.Proceed
 }

@@ -12,7 +12,7 @@ import MessageUI
 import edXCore
 
 private enum OEXRearViewOptions: Int {
-    case UserProfile, MyCourse, MyVideos, FindCourses, UserCenter , MySettings, SubmitFeedback, Debug, Logout
+    case UserProfile, MyCourse, MyVideos, FindCourses, SkyDrive, UserCenter , MySettings, SubmitFeedback, Debug, Logout
 }
 
 private let LogoutCellDefaultHeight: CGFloat = 130.0
@@ -34,6 +34,7 @@ class OEXRearTableViewController : UITableViewController {
     @IBOutlet var coursesLabel: UILabel!
     @IBOutlet var videosLabel: UILabel!
     @IBOutlet var findCoursesLabel: UILabel!
+    @IBOutlet weak var skyDriveLabel: UILabel!
     @IBOutlet var assistantLabel: UILabel!
     @IBOutlet var settingsLabel: UILabel!
     @IBOutlet var submitFeedbackLabel: UILabel!
@@ -118,6 +119,7 @@ class OEXRearTableViewController : UITableViewController {
         coursesLabel.text = TDLocalizeSelectSwift("MY_COURSES")
         videosLabel.text = TDLocalizeSelectSwift("MY_VIDEOS")
         findCoursesLabel.text = TDLocalizeSelectSwift("FIND_COURSES")
+        skyDriveLabel.text = TDLocalizeSelectSwift("ENTERPRISE_SKYDRIVE")
         assistantLabel.text = TDLocalizeSelectSwift("USER_CENTER")
         settingsLabel.text = TDLocalizeSelectSwift("MY_SETTINGS")
         submitFeedbackLabel.text = TDLocalizeSelectSwift("SUBMIT_FEEDBACK.OPTION_TITLE")
@@ -233,13 +235,16 @@ class OEXRearTableViewController : UITableViewController {
         userEmailLabel.hidden = true
         userProfilePicture.hidden = true
         
-        logoutButton.hidden = !isHidden
+//        logoutButton.hidden = !isHidden
+        logoutButton.hidden = true
+        appVersionButton.hidden = true
     }
     
     private func setNaturalTextAlignment() {
         coursesLabel.textAlignment = .Natural
         videosLabel.textAlignment = .Natural
         findCoursesLabel.textAlignment = .Natural
+        skyDriveLabel.textAlignment = .Natural
         settingsLabel.textAlignment = .Natural
         submitFeedbackLabel.textAlignment = .Natural
         userNameLabel.textAlignment = .Natural
@@ -253,6 +258,7 @@ class OEXRearTableViewController : UITableViewController {
         coursesLabel.accessibilityLabel = coursesLabel.text
         videosLabel.accessibilityLabel = videosLabel.text
         findCoursesLabel.accessibilityLabel = findCoursesLabel.text
+        skyDriveLabel.accessibilityLabel = skyDriveLabel.text
         settingsLabel.accessibilityLabel = settingsLabel.text
         submitFeedbackLabel.accessibilityLabel = submitFeedbackLabel.text
         logoutButton.accessibilityLabel = logoutButton.titleLabel!.text
@@ -294,23 +300,33 @@ class OEXRearTableViewController : UITableViewController {
             case .MyCourse:
                 tableView.userInteractionEnabled = false
                 environment.router?.showMyCourses()
+                
             case .MyVideos:
                 tableView.userInteractionEnabled = false
                 environment.router?.showMyVideos()
+                
             case .FindCourses:
                 tableView.userInteractionEnabled = false
                 environment.router?.showCourseCatalog(nil)
                 environment.analytics.trackUserFindsCourses()
+                
+            case .SkyDrive:
+                tableView.userInteractionEnabled = false
+                environment.router?.showEnterpriseSkydrive()
+                
             case .UserCenter:
                 guard environment.config.profilesEnabled else { break }
                 guard let currentUserName = environment.session.currentUser?.username else { return }
                 tableView.userInteractionEnabled = false
                 environment.router?.showProfileForUsername(username: currentUserName)
+                
             case .MySettings:
                 tableView.userInteractionEnabled = false
                 environment.router?.showMySettings()
+                
             case .SubmitFeedback:
                 launchEmailComposer()
+                
             case .Debug:
                 environment.router?.showDebugPane()
             case .Logout:
@@ -334,10 +350,10 @@ class OEXRearTableViewController : UITableViewController {
             return 0
         }
         else if indexPath.row == OEXRearViewOptions.Logout.rawValue {
-            let screenHeight = UIScreen.mainScreen().bounds.height
-//            let tableviewHeight = tableView.contentSize.height
-            let tableviewHeight : CGFloat = 518 + (TDScreenWidth - 320) * 5/6 * 0.53
-            return max((screenHeight - tableviewHeight) + LogoutCellDefaultHeight, LogoutCellDefaultHeight)
+//            let screenHeight = UIScreen.mainScreen().bounds.height
+//            let tableviewHeight : CGFloat = 518 + (TDScreenWidth - 320) * 5/6 * 0.53
+//            return max((screenHeight - tableviewHeight) + LogoutCellDefaultHeight, LogoutCellDefaultHeight)
+            return 0
         }
         else if indexPath.row == OEXRearViewOptions.UserProfile.rawValue {
             remarkCompayConstraint()
@@ -350,23 +366,18 @@ class OEXRearTableViewController : UITableViewController {
     func remarkCompayConstraint() {
         self.tableView.backgroundColor = OEXStyles.sharedStyles().baseColor6()
         self.userContentView.backgroundColor = OEXStyles.sharedStyles().baseColor6()
-//        self.companyImage.backgroundColor = OEXStyles.sharedStyles().baseColor3()
+//        self.companyImage.backgroundColor = OEXStyles.sharedStyles().baseColor1()
         
         self.companyImage.snp_remakeConstraints { (make) in
-            make.left.greaterThanOrEqualTo(self.userContentView.snp_left).offset(39)
-            make.right.lessThanOrEqualTo(self.userContentView.snp_right).offset(-39)
-            make.top.greaterThanOrEqualTo(self.userContentView.snp_top).offset(39)
-            make.bottom.lessThanOrEqualTo(self.userContentView.snp_bottom).offset(-39)
+//            make.left.greaterThanOrEqualTo(self.userContentView.snp_left).offset(39)
+//            make.right.lessThanOrEqualTo(self.userContentView.snp_right).offset(-39)
+//            make.top.greaterThanOrEqualTo(self.userContentView.snp_top).offset(39)
+//            make.bottom.lessThanOrEqualTo(self.userContentView.snp_bottom).offset(-39)
             
             make.left.lessThanOrEqualTo(self.userContentView.snp_left).offset(48)
             make.right.greaterThanOrEqualTo(self.userContentView.snp_right).offset(-48)
             make.top.lessThanOrEqualTo(self.userContentView.snp_top).offset(48)
             make.bottom.greaterThanOrEqualTo(self.userContentView.snp_bottom).offset(-48)
-            
-//            make.left.equalTo(self.userContentView.snp_left).offset(39)
-//            make.right.equalTo(self.userContentView.snp_right).offset(-39)
-//            make.top.equalTo(self.userContentView.snp_top).offset(39)
-//            make.bottom.equalTo(self.userContentView.snp_bottom).offset(-39)
         }
     }
     
@@ -380,8 +391,8 @@ class OEXRearTableViewController : UITableViewController {
     }
     
     func logoutAction() {
-        OEXFileUtility.nukeUserPIIData()
-        self.environment.router?.logout()
+//        OEXFileUtility.nukeUserPIIData()
+        self.environment.router?.logoutAction()
     }
     
     func dataAvailable(notification: NSNotification) {

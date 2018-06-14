@@ -82,7 +82,7 @@
     
     self.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 68, 48)];
     [self.rightButton setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
-    self.rightButton.contentEdgeInsets = UIEdgeInsetsMake(0, 16, 0, -16);
+    self.rightButton.contentEdgeInsets = UIEdgeInsetsMake(0, 28, 0, -28);
     self.rightButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:16.0];
     self.rightButton.titleLabel.textAlignment = NSTextAlignmentRight;
     self.rightButton.showsTouchWhenHighlighted = YES;

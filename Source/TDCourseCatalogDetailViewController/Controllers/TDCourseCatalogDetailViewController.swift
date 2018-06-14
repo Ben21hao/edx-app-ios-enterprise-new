@@ -503,7 +503,7 @@ class TDCourseCatalogDetailViewController: TDSwiftBaseViewController,UITableView
     
     func logoutCurrentUser() {
         OEXFileUtility.nukeUserPIIData()
-        self.environment.router?.logout()
+        self.environment.router?.logoutAction()
     }
     
     func coursesTableChoseCourse(enrollment: UserCourseEnrollment) { //跳转到试听课的商务统计

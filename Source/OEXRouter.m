@@ -28,6 +28,7 @@
 #import "SWRevealViewController.h"
 #import "TDDownloadViewController.h"
 #import "TDNavigationViewController.h"
+#import "TDEnterpriseSkydriveViewController.h"
 
 static OEXRouter* sSharedRouter;
 
@@ -225,6 +226,13 @@ OEXRegistrationViewControllerDelegate
 - (void)showMySettings { //设置
     
     TDSettingViewController *controller = [[TDSettingViewController alloc] init];
+    controller.username = self.environment.session.currentUser.username;
+    [self showContentStackWithRootController:controller animated:YES];
+}
+
+- (void)showEnterpriseSkydrive { //企业网盘
+    
+    TDEnterpriseSkydriveViewController *controller = [[TDEnterpriseSkydriveViewController alloc] init];
     controller.username = self.environment.session.currentUser.username;
     [self showContentStackWithRootController:controller animated:YES];
 }

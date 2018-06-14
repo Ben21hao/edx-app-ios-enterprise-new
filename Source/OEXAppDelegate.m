@@ -416,14 +416,14 @@
     [self.environment.pushNotificationManager didFailToRegisterForRemoteNotificationsWithError:error];
 }
 
-#pragma mark Background Downloading
+#pragma mark - Background Downloading 在应用处于后台，且后台任务下载完成时回调
 
 - (void)application:(UIApplication*)application handleEventsForBackgroundURLSession:(NSString*)identifier completionHandler:(void (^)())completionHandler {
     [OEXDownloadManager sharedManager];
     [self addCompletionHandler:completionHandler forSession:identifier];
 }
 
-- (void)addCompletionHandler:(void (^)())handler forSession:(NSString*)identifier {
+- (void)addCompletionHandler:(void (^)())handler forSession:(NSString *)identifier {
     if(!_dictCompletionHandler) {
         _dictCompletionHandler = [[NSMutableDictionary alloc] init];
     }
@@ -434,7 +434,7 @@
 }
 
 - (void)callCompletionHandlerForSession:(NSString*)identifier {
-    dispatch_block_t handler = [self.dictCompletionHandler objectForKey: identifier];
+    dispatch_block_t handler = [self.dictCompletionHandler objectForKey:identifier];
     if(handler) {
         [self.dictCompletionHandler removeObjectForKey: identifier];
         OEXLogInfo(@"DOWNLOADS", @"Calling completion handler for session %@", identifier);

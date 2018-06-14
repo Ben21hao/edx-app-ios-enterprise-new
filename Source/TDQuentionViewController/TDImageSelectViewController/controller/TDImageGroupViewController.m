@@ -70,12 +70,6 @@
                 return;
             }
         }
-        
-//        if (weakSelf.groupArray.count > 3) {
-//            [weakSelf gotoSelectImageVc:3 animated:NO];
-//        } else {
-//            [weakSelf gotoSelectImageVc:0 animated:NO];
-//        }
     }];
 }
 

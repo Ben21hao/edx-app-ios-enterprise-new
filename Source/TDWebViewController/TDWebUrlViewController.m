@@ -49,6 +49,10 @@
     [self.loadIngView removeFromSuperview];
 }
 
+- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
+    NSLog(@"crash ----- %@",webView.URL.absoluteString);
+}
+
 #pragma mark - UI
 - (void)configView {
     
