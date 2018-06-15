@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TDSkydrveFileModel.h"
 
 @interface TDSkydriveFolderCell : UITableViewCell
 
 @property (nonatomic,strong) UIImageView *leftImageView;
 @property (nonatomic,strong) UILabel *titleLabel;
 @property (nonatomic,strong) UILabel *timeLabel;
+
+@property (nonatomic,strong) TDSkydrveFileModel *fileModel;
 
 @end

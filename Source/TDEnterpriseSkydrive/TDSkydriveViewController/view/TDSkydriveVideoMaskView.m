@@ -37,7 +37,7 @@
     
     [self addSubview:self.centerButton];
     
-    self.topBarView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+    self.topBarView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.0];
     self.bottomBarView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     
     self.progressView.progress = 0.0;
@@ -76,7 +76,7 @@
         make.centerX.mas_equalTo(self.topBarView.mas_centerX);
         make.left.mas_greaterThanOrEqualTo(self.returnButton.mas_right);
     }];
-    
+
     [self.bottomBarView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(self);
         make.height.mas_equalTo(43);
@@ -149,11 +149,10 @@
 - (UIButton *)returnButton {
     if (!_returnButton) {
         _returnButton = [[UIButton alloc] init];
-        [_returnButton setImage:[UIImage imageNamed:@"backImagee"] forState:UIControlStateNormal];
+        [_returnButton setImage:[UIImage imageNamed:@"shadow_white_back_image"] forState:UIControlStateNormal];
     }
     return _returnButton;
 }
-
 - (UIView *)bottomBarView {
     if (!_bottomBarView) {
         _bottomBarView = [[UIView alloc] init];

@@ -14,7 +14,10 @@
 @property (nonatomic,strong) UILabel *titleLabel;
 @property (nonatomic,strong) UILabel *sizeLabel;
 @property (nonatomic,strong) UILabel *statusLabel;
-@property (nonatomic,strong) UIButton *downloadButton;
-@property (nonatomic,strong) UIButton *selectButton;
+
+@property (nonatomic,strong) UIButton *downloadButton; //下载
+@property (nonatomic,strong) UIButton *selectButton; //选择
+
+@property (nonatomic,assign) BOOL isEditing;//是否正在编辑
 
 @end

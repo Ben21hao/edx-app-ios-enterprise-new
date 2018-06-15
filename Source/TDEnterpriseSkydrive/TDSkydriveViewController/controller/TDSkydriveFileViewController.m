@@ -11,12 +11,20 @@
 #import "TDSkydriveVideoViewController.h"
 #import "TDSkydriveAudioViewController.h"
 #import "TDSkydrveLoacalViewController.h"
-#import "OEXAuthentication.h"
+#import "TDSkydriveNoSupportViewController.h"
 
 #import "TDNodataView.h"
 #import "TDSkydriveAlertView.h"
 #import "TDSkydriveFolderCell.h"
 #import "TDSkydriveFileCell.h"
+
+#import "TDSkydrveFileModel.h"
+
+#import "OEXAuthentication.h"
+#import "edX-Swift.h"
+
+#import <MJExtension/MJExtension.h>
+#import <MJRefresh/MJRefresh.h>
 
 @interface TDSkydriveFileViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -24,9 +32,20 @@
 @property (nonatomic,strong) TDNodataView *noDataView;
 @property (nonatomic,strong) TDSkydriveAlertView *alertView;
 
+@property (nonatomic,strong) TDBaseToolModel *toolModel;
+
+@property (nonatomic,strong) NSMutableArray *dataArray;
+
 @end
 
 @implementation TDSkydriveFileViewController
+
+- (NSMutableArray *)dataArray {
+    if (!_dataArray) {
+        _dataArray = [[NSMutableArray alloc] init];
+    }
+    return _dataArray;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,12 +54,99 @@
     self.rightButton.hidden = NO;
     [self.rightButton setImage:[UIImage imageNamed:@"file_download_image"] forState:UIControlStateNormal];
     
+    self.toolModel = [[TDBaseToolModel alloc] init];
+    
     [self setViewConstraint];
+    [self setLoadDataView];
+    [self requestData];
 }
 
 - (void)rightButtonAciton:(UIButton *)sender {
-    
     [self gotoLocalVc];
+}
+
+#pragma mark - data
+- (void)requestData {
+    
+    if (![self.toolModel networkingState]) {
+        [self endRequestHandle];
+        return;
+    }
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
+    NSString *authenStr = [OEXAuthentication authHeaderForApiAccess];
+    [manager.requestSerializer setValue:authenStr forHTTPHeaderField:@"Authorization"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0/netdisk/cloud_file/",ELITEU_URL];
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setValue:self.username forKey:@"username"];
+    [params setValue:self.folderID forKey:@"parent_id"];
+    
+    [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [self endRequestHandle];
+        NSDictionary *responseDic = (NSDictionary *)responseObject;
+        NSLog(@"------>> %@",responseDic);
+        
+        id code = responseDic[@"code"];
+        if ([code intValue] == 200) {
+            
+            self.noDataView.hidden = YES;
+            if (self.dataArray.count > 0) { //只有下拉加载，访问成功后，删除原有数据
+                [self.dataArray removeAllObjects];
+            }
+            
+            NSArray *dataArray = responseDic[@"data"];
+            if (dataArray.count > 0) {
+                
+                for (int i = 0; i < dataArray.count; i ++) {
+                    TDSkydrveFileModel *model = [TDSkydrveFileModel mj_objectWithKeyValues:dataArray[i]];
+                    if (model) {
+                        [self.dataArray addObject:model];
+                    }
+                }
+            }
+            else {
+                [self nodataViewReason:@"该网盘暂无文件"];
+            }
+            [self.tableView reloadData];
+        }
+        else if ([code intValue] == 203) {//没有用户
+            [self accountInvalidUser];
+        }
+        else {
+            [self nodataViewReason:@"请求失败，下拉重新加载"];
+        }
+
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self endRequestHandle];
+        [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
+        NSLog(@"网盘文件夹错误----->> %@",error);
+    }];
+}
+
+- (void)endRequestHandle {
+    [self.loadIngView removeFromSuperview];
+    [self.tableView.mj_header endRefreshing];
+}
+
+- (void)nodataViewReason:(NSString *)reasonStr {
+    self.noDataView.hidden = NO;
+    self.noDataView.messageLabel.text = reasonStr;
+}
+
+- (void)accountInvalidUser {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:TDLocalizeSelect(@"SYSTEM_WARING", nil) message:@"账号异常，请联系管理员" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"退出登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[OEXRouter sharedRouter] logoutAction];
+    }];
+    
+    [alertController addAction:sureAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - tableView Delegate
@@ -50,31 +156,32 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 8;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == 0) {
+    TDSkydrveFileModel *model = self.dataArray[indexPath.row];
+    
+    if ([model.type intValue] == 0) { //文件夹
         TDSkydriveFolderCell *cell = [[TDSkydriveFolderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SkydriveFolderCell"];
         
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
-        cell.timeLabel.text = @"2018-01-18 18:28";
-        cell.titleLabel.text = @"二级文件夹二级文件夹二级文件夹二级文件夹二级文件夹二级文件夹二级文件夹二级文件夹二级文件夹二级文件夹二级文件夹";
+        cell.fileModel = model;
         
         return cell;
     }
     else {
+        
         TDSkydriveFileCell *cell = [[TDSkydriveFileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SkydriveFileCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.downloadButton.tag = indexPath.row;
+        cell.shareButton.tag = indexPath.row;
         
         [cell.downloadButton addTarget:self action:@selector(downloadButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [cell.shareButton addTarget:self action:@selector(shareButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         
-        cell.titleLabel.text = @"技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部.pdf";
-        cell.timeLabel.text = @"2018-01-18 18:28";
-        cell.sizeLabel.text = @"200MB";
+        cell.fileModel = model;
         
         return cell;
     }
@@ -87,13 +194,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row == 0) {
+    TDSkydrveFileModel *model = self.dataArray[indexPath.row];
+    if ([model.type intValue] == 0) {
         [self gotoFileVc]; //下一级目录
     }
     else {
-        [self systemActivity];
+        [self gotoNoSupportVc];
     }
-    
 }
 
 #pragma mark - Action
@@ -115,20 +222,26 @@
 }
 
 - (void)cancelButtonAction:(UIButton *)sender { //公开
-    [self createShereUrlType:1];
+    [self createShereUrlType:1 index:sender.tag];
 }
 
 - (void)sureButtonAction:(UIButton *)sender { //加密
-    [self createShereUrlType:0];
+    [self createShereUrlType:0 index:sender.tag];
 }
 
-- (void)createShereUrlType:(int)type { //创建分享链接
+- (void)createShereUrlType:(int)type index:(NSInteger)index { //创建分享链接
+    
+    [self.alertView removeFromSuperview];
     
     TDBaseToolModel *toolModel = [[TDBaseToolModel alloc] init];
     if (![toolModel networkingState]) {
         [self.alertView removeFromSuperview];
         return;
     }
+    
+    [SVProgressHUD showWithStatus:@"创建中"];
+    SVProgressHUD.defaultMaskType = SVProgressHUDMaskTypeBlack;
+    SVProgressHUD.defaultStyle = SVProgressHUDAnimationTypeNative;
     
     NSString *expireStr = @"0";
     if (self.alertView.timeType == TDSkydriveShareTimeOneDay) {
@@ -138,28 +251,37 @@
         expireStr = @"7";
     }
     
+    TDSkydrveFileModel *model = self.dataArray[index];
+    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setValue:expireStr forKey:@"expire_at"];//分享文件的时长。有7，1，0
-    [params setValue:@"1" forKey:@"cloud_file"];//分享文件的id
-    [params setValue:@"0" forKey:@"type"];//0 加密，1 公开
+    [params setValue:model.id forKey:@"cloud_file"];//分享文件的id
+    [params setValue:[NSString stringWithFormat:@"%d",type] forKey:@"type"];//0 加密，1 公开
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
-//    NSString *authValue = [NSString stringWithFormat:@"%@", [OEXAuthentication authHeaderForApiAccess]];
-    NSString *authValue = @"Bearer 78d6cba9078f91bfe8ee7c3146154b475d7a6c78";
+    NSString *authValue = [NSString stringWithFormat:@"%@", [OEXAuthentication authHeaderForApiAccess]];
     [manager.requestSerializer setValue:authValue forHTTPHeaderField:@"Authorization"];//安全验证
     
-    NSString *url = @"http://sodaling.ngrok.elitemc.cn:8000/api/mobile/v0/sharefile/";
+    NSString *url = [NSString stringWithFormat:@"%@/api/mobile/v0/netdisk/sharefile/",ELITEU_URL];
     
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        [self.alertView removeFromSuperview];
+        
+        [SVProgressHUD dismiss];
         
         NSDictionary *responDic = (NSDictionary *)responseObject;
         NSLog(@"----->> %@",responDic);
         
-        [self copyShareLink:@"www.baidu.com" password:@"123456"];
-        
+        id code = responDic[@"code"];
+        if ([code intValue] == 200) {
+            NSString *shareUrl = responDic[@"share_url"];
+            NSString *password = responDic[@"password"];
+            [self copyShareLink:shareUrl password:password];
+        }
+        else {
+            [self.view makeToast:@"链接创建失败" duration:1.08 position:CSToastPositionCenter];
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.alertView removeFromSuperview];
+        [SVProgressHUD dismiss];
         [self.view makeToast:TDLocalizeSelect(@"NETWORK_CONNET_FAIL", nil) duration:1.08 position:CSToastPositionCenter];
         NSLog(@"分享链接创建失败----->> %@",error);
     }];
@@ -168,9 +290,14 @@
 - (void)copyShareLink:(NSString *)linkStr password:(NSString *)passwordStr { //赋值分享链接
     
     UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
-    pasteBoard.string = [NSString stringWithFormat:@"链接：%@\n密码：%@",linkStr,passwordStr];
+    if (passwordStr.length > 0) {
+        pasteBoard.string = [NSString stringWithFormat:@"链接：%@\n密码：%@",linkStr,passwordStr];
+    }
+    else {
+        pasteBoard.string = [NSString stringWithFormat:@"链接：%@",linkStr];
+    }
     
-    [self.view makeToast:@"外链地址已经复制到剪切板中！" duration:0.8 position:CSToastPositionCenter];
+    [self.view makeToast:@"外链地址已经复制到剪切板中！" duration:1.08 position:CSToastPositionCenter];
 }
 
 #pragma makr - 文件浏览/播放
@@ -208,27 +335,17 @@
 - (void)gotoFileVc { //下一级目录
     
     TDSkydriveFileViewController *fileVc = [[TDSkydriveFileViewController alloc] init];
+    fileVc.username = self.username;
+    fileVc.folderName = self.folderName;
+    fileVc.folderID = self.folderID;
     [self.navigationController pushViewController:fileVc animated:YES];
 }
 
-- (void)systemActivity { //系统分享
+- (void)gotoNoSupportVc { //不支持预览
     
-//    UIImage *image = [UIImage imageNamed:@"tubiao"];
-    NSURL *url = [NSURL URLWithString:@"https://www.jianshu.com/p/d500fb72a079"];
-    
-    NSArray *itemArray = @[@"文件分享",@"文件名字",url];
-    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:itemArray applicationActivities:nil];
-    activityController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll];
-    activityController.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
-        
-        if (completed) {//成功
-            NSLog(@"---->> 分享成功");
-        }
-        else {
-            NSLog(@"---->> 分享失败");
-        }
-    };
-    [self presentViewController:activityController animated:YES completion:nil];
+    TDSkydriveNoSupportViewController *noSupportVc = [[TDSkydriveNoSupportViewController alloc] init];
+    noSupportVc.titleStr = @"不支持预览";
+    [self.navigationController pushViewController:noSupportVc animated:YES];
 }
 
 #pragma mark - UI
@@ -258,6 +375,13 @@
     }];
     
     self.noDataView.hidden = YES;
+    
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
+    header.lastUpdatedTimeLabel.hidden = YES; //隐藏时间
+    [header setTitle:TDLocalizeSelect(@"DROP_REFRESH_TEXT", nil) forState:MJRefreshStateIdle];
+    [header setTitle:TDLocalizeSelect(@"RELEASE_REFRESH_TEXT", nil) forState:MJRefreshStatePulling];
+    [header setTitle:TDLocalizeSelect(@"REFRESHING_TEXT", nil) forState:MJRefreshStateRefreshing];
+    self.tableView.mj_header = header;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -265,5 +389,6 @@
     
 }
 
-
 @end
+
+

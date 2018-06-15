@@ -10,6 +10,8 @@
 
 @interface TDSkydriveFileViewController : TDBaseViewController
 
+@property (nonatomic,strong) NSString *username;
+@property (nonatomic,strong) NSString *folderID;
 @property (nonatomic,strong) NSString *folderName;
 
 @end

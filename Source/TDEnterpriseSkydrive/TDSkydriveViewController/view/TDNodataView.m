@@ -47,7 +47,7 @@
     
     [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.imageView.mas_centerX);
-        make.top.mas_equalTo(self.imageView.mas_bottom).offset(11);
+        make.top.mas_equalTo(self.imageView.mas_bottom).offset(18);
     }];
 
 }

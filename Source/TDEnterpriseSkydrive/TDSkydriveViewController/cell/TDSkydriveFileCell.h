@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TDSkydrveFileModel.h"
 
 @interface TDSkydriveFileCell : UITableViewCell
 
@@ -16,5 +17,7 @@
 @property (nonatomic,strong) UILabel *sizeLabel;
 @property (nonatomic,strong) UIButton *downloadButton;
 @property (nonatomic,strong) UIButton *shareButton;
+
+@property (nonatomic,strong) TDSkydrveFileModel *fileModel;
 
 @end

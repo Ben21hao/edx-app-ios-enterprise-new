@@ -26,6 +26,58 @@
     return self;
 }
 
+- (void)setFileModel:(TDSkydrveFileModel *)fileModel {
+    _fileModel = fileModel;
+    
+    self.titleLabel.text = fileModel.name;
+    self.timeLabel.text = fileModel.created_at;
+    self.sizeLabel.text = fileModel.file_size;
+    
+    NSString *imageName = @"file_unkown_type_image";
+    if ([fileModel.file_type isEqualToString:@"png"] || [fileModel.file_type isEqualToString:@"PNG"]) { //图片
+        imageName = @"file_pic_image";
+    }
+    else if ([fileModel.file_type isEqualToString:@"jpg"] || [fileModel.file_type isEqualToString:@"JPG"]) { //音频
+        imageName = @"file_MP3_image";
+    }
+    else if ([fileModel.file_type isEqualToString:@"jpeg"] || [fileModel.file_type isEqualToString:@"JPEG"]) { //视频
+        imageName = @"file_video_image";
+    }
+    else if ([fileModel.file_type isEqualToString:@"bmp"] || [fileModel.file_type isEqualToString:@"bmp"]) { //压缩包
+        imageName = @"file_package_image";
+    }
+    else if ([fileModel.file_type isEqualToString:@"gif"] || [fileModel.file_type isEqualToString:@"GIF"]) { //其他类型
+        imageName = @"file_unkown_type_image";
+    }
+    else if ([fileModel.file_type isEqualToString:@"tif"] || [fileModel.file_type isEqualToString:@"TIF"]) {
+        
+    }
+    
+    else if ([fileModel.file_type isEqualToString:@"doc"] || [fileModel.file_type isEqualToString:@"docx"]) {
+        imageName = @"file_word_image";
+    }
+    else if ([fileModel.file_type isEqualToString:@"xls"] || [fileModel.file_type isEqualToString:@"xlsx"]) {
+        imageName = @"file_excel_image";
+    }
+    else if ([fileModel.file_type isEqualToString:@"pdf"] || [fileModel.file_type isEqualToString:@"PDF"]) {
+        imageName = @"file_pdf_image";
+    }
+    else if ([fileModel.file_type isEqualToString:@"ppt"] || [fileModel.file_type isEqualToString:@"pptx"]) {
+        imageName = @"file_PPT_image";
+    }
+    else if ([fileModel.file_type isEqualToString:@"rtf"] || [fileModel.file_type isEqualToString:@"RTF"]) {
+        imageName = @"file_rtf_image";
+    }
+    else if ([fileModel.file_type isEqualToString:@"txt"] || [fileModel.file_type isEqualToString:@"TXT"]) {
+        imageName = @"file_txt_image";
+    }
+
+    self.leftImageView.image = [UIImage imageNamed:imageName];
+}
+
+//- (void)
+
+#pragma mark - UI
 - (void)configeView {
     
     self.bgView = [[UIView alloc] init];

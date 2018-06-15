@@ -26,6 +26,14 @@
     return self;
 }
 
+- (void)setFileModel:(TDSkydrveFileModel *)fileModel {
+    _fileModel = fileModel;
+    
+    self.titleLabel.text = fileModel.name;
+    self.timeLabel.text = fileModel.created_at;
+}
+
+#pragma mark - UI
 - (void)configeView {
     
     self.bgView = [[UIView alloc] init];

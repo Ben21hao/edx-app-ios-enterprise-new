@@ -742,7 +742,7 @@ typedef NS_ENUM(NSInteger, TDPanGestureDeriction) {
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandle:)];
         [_videoMaskView addGestureRecognizer:tapGesture];
         
-        _videoMaskView.titleLabel.text = @"视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放";
+        _videoMaskView.titleLabel.attributedText = [self setTitleAttrButeText:@"视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放" fontSize:15];
     }
     return _videoMaskView;
 }
@@ -757,6 +757,25 @@ typedef NS_ENUM(NSInteger, TDPanGestureDeriction) {
             break;
         }
     }
+}
+
+- (NSMutableAttributedString *)setTitleAttrButeText:(NSString *)text fontSize:(NSInteger)font { //黑边空心文字
+    
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowBlurRadius = 1.0;
+    shadow.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+    shadow.shadowOffset = CGSizeMake(1, 1);
+    
+    NSDictionary *attributeDic = @{
+                                   NSForegroundColorAttributeName : [UIColor whiteColor],
+                                   //                                   NSStrokeWidthAttributeName : @-3.0,
+                                   //                                   NSStrokeColorAttributeName : [UIColor blackColor],
+                                   NSVerticalGlyphFormAttributeName : @(0),
+                                   NSShadowAttributeName : shadow,
+                                   NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:font]
+                                   };
+    NSMutableAttributedString *attributeText = [[NSMutableAttributedString alloc] initWithString:text attributes:attributeDic];
+    return  attributeText;
 }
 
 //- (NSTimeInterval)getTimeFromString:(NSString*)timeString {

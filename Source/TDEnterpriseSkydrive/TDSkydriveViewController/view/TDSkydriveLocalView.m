@@ -55,12 +55,17 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
+    cell.downloadButton.tag = indexPath.row;
+    cell.selectButton.tag = indexPath.row;
+    
     [cell.downloadButton addTarget:self action:@selector(downloadButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.selectButton addTarget:self action:@selector(selectButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
     cell.titleLabel.text = @"技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf";
     cell.sizeLabel.text = @"300M";
     cell.statusLabel.text = @"等待下载";
     
-    
+    cell.isEditing = self.isEditing;
     if (self.isAllSelect) {
         cell.selectButton.selected = YES;
     }
@@ -93,6 +98,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (self.isEditing) { //选择
+        TDSkydriveLocalFileCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell.selectButton.selected = !cell.selectButton.selected;
         
         [self.delegate userSelectFileRowAtIndexpath:indexPath];
     }
@@ -108,13 +115,20 @@
     
 }
 
-- (void)userEditingFile:(BOOL)editing {
+- (void)selectButtonAction:(UIButton *)sender { //选择
+    sender.selected = !sender.selected;
+    
+}
+
+- (void)userEditingFile:(BOOL)editing { //是否编辑
     
     self.isEditing = editing;
     
     self.editeButton.hidden = editing;
     self.cancelButton.hidden = !editing;
     self.deleteButton.hidden = !editing;
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - UI

@@ -10,6 +10,7 @@
 #import "TDLocalFileWebViewController.h"
 #import "TDSkydriveVideoViewController.h"
 #import "TDSkydriveAudioViewController.h"
+#import "TDSkydriveNoSupportViewController.h"
 
 #import "TDSkydriveLocalView.h"
 
@@ -26,7 +27,6 @@
     [super viewDidLoad];
     
     self.titleViewLabel.text = @"文件管理";
-    self.rightButton.hidden = NO;
     [self.rightButton setImage:[UIImage imageNamed:@"select_white_circle"] forState:UIControlStateNormal];
     [self.rightButton setImage:[UIImage imageNamed:@"select_blue_white_circle"] forState:UIControlStateSelected];
     [self setViewConstraint];
@@ -40,10 +40,12 @@
 
 #pragma mark - 底部按钮
 - (void)editeButtonAction:(UIButton *)sender { //编辑
+    self.rightButton.hidden = NO;
     [self.localView userEditingFile:YES];
 }
 
 - (void)cancelButtonAction:(UIButton *)sender {//取消
+    self.rightButton.hidden = YES;
     [self.localView userEditingFile:NO];
 }
 
@@ -61,6 +63,7 @@
     
     WS(weakSelf);
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        weakSelf.rightButton.hidden = YES;
         [weakSelf.localView userEditingFile:NO];
     }];
     
@@ -81,7 +84,7 @@
     NSLog(@"预览--row %ld",indexPath.row);
     
     if (indexPath.section == 1) {
-        [self systemActivity];//不支持预览的文件
+        [self gotoNoSupportVc];//不支持预览的文件
     }
 }
 
@@ -110,26 +113,11 @@
     [self.navigationController pushViewController:webVc animated:YES];
 }
 
-- (void)systemActivity { //系统分享
+- (void)gotoNoSupportVc {
     
-    UIImage *image = [UIImage imageNamed:@"tubiao"];
-    NSURL *url = [NSURL URLWithString:@"https://www.jianshu.com/p/d500fb72a079"];
-    
-    NSArray *itemArray = @[@"分享标题",image,url];
-    
-    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:itemArray applicationActivities:nil];
-    activityController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll];
-    
-    activityController.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError){
-        
-        if (completed) {//成功
-            NSLog(@"---->> 分享成功");
-        }
-        else {
-            NSLog(@"---->> 分享失败");
-        }
-    };
-    [self presentViewController:activityController animated:YES completion:nil];
+    TDSkydriveNoSupportViewController *noSupportVc = [[TDSkydriveNoSupportViewController alloc] init];
+    noSupportVc.titleStr = @"不支持预览";
+    [self.navigationController pushViewController:noSupportVc animated:YES];
 }
 
 #pragma mark - UI

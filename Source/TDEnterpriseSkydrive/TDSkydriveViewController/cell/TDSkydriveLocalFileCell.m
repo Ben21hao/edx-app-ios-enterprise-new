@@ -26,6 +26,19 @@
     return self;
 }
 
+- (void)setIsEditing:(BOOL)isEditing { //是否正在编辑
+    _isEditing = isEditing;
+    
+    [self userEditing:isEditing];
+}
+
+- (void)userEditing:(BOOL)isEditing {
+    
+    self.selectButton.hidden = !isEditing;
+    self.downloadButton.hidden = isEditing;
+}
+
+#pragma mark - UI
 - (void)configeView {
     
     self.bgView = [[UIView alloc] init];
@@ -63,7 +76,7 @@
     self.leftImageView.image = [UIImage imageNamed:@"file_MP3_image"];
     [self.downloadButton setImage:[UIImage imageNamed:@"down_load_finish"] forState:UIControlStateNormal];
     
-    self.downloadButton.hidden = YES;
+    [self userEditing:NO];
 }
 
 - (void)setViewConstraint {
