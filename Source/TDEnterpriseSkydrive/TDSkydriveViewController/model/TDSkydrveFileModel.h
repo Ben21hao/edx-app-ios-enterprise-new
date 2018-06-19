@@ -15,6 +15,7 @@
 @property (nonatomic,strong) NSString *type;//0：文件夹; 1：文件
 @property (nonatomic,strong) NSString *file_size;//文件大小 单位：KB，M, GB
 @property (nonatomic,strong) NSString *file_type;//文件类型
+@property (nonatomic,strong) NSString *file_type_format;//文件分类，图片，文档，音频，视频，压缩包，其他
 @property (nonatomic,strong) NSString *resources_url;//文件下载地址
 @property (nonatomic,strong) NSString *is_shareable;//True:分享 False:不分享
 @property (nonatomic,strong) NSString *created_at;//创建时间

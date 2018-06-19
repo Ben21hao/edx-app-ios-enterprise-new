@@ -84,7 +84,7 @@
     NSLog(@"预览--row %ld",indexPath.row);
     
     if (indexPath.section == 1) {
-        [self gotoNoSupportVc];//不支持预览的文件
+        [self gotoNoSupportVc:@"不支持文件的预览" path:@"user/12345678.otf"];//不支持预览的文件
     }
 }
 
@@ -113,10 +113,11 @@
     [self.navigationController pushViewController:webVc animated:YES];
 }
 
-- (void)gotoNoSupportVc {
+- (void)gotoNoSupportVc:(NSString *)titleStr path:(NSString *)pathStr {
     
     TDSkydriveNoSupportViewController *noSupportVc = [[TDSkydriveNoSupportViewController alloc] init];
-    noSupportVc.titleStr = @"不支持预览";
+    noSupportVc.titleStr = titleStr;
+    noSupportVc.filePath = pathStr;
     [self.navigationController pushViewController:noSupportVc animated:YES];
 }
 

@@ -50,6 +50,10 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+- (void)deleteFile { //删除该文件
+    
+}
+
 - (void)systemActivity { //系统分享
     
     //    UIImage *image = [UIImage imageNamed:@"tubiao"];
@@ -70,10 +74,6 @@
         }
     };
     [self presentViewController:activityController animated:YES completion:nil];
-}
-
-- (void)deleteFile { //删除该文件
-    
 }
 
 #pragma mark - UI

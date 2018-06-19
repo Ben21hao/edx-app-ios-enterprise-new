@@ -87,10 +87,9 @@
         
         [self endRequestHandle];
         NSDictionary *responseDic = (NSDictionary *)responseObject;
-        NSLog(@"------>> %@",responseDic);
         
         id code = responseDic[@"code"];
-        if ([code intValue] == 200) {
+        if ([code intValue] == 20000) {
             
             self.noDataView.hidden = YES;
             if (self.dataArray.count > 0) { //只有下拉加载，访问成功后，删除原有数据
@@ -199,7 +198,7 @@
         [self gotoFileVc]; //下一级目录
     }
     else {
-        [self gotoNoSupportVc];
+        [self gotoNoSupportVc:@"不支持预览文件显示" path:@"user/12345666.otf"];
     }
 }
 
@@ -341,10 +340,11 @@
     [self.navigationController pushViewController:fileVc animated:YES];
 }
 
-- (void)gotoNoSupportVc { //不支持预览
+- (void)gotoNoSupportVc:(NSString *)titleStr path:(NSString *)pathStr { //不支持预览
     
     TDSkydriveNoSupportViewController *noSupportVc = [[TDSkydriveNoSupportViewController alloc] init];
-    noSupportVc.titleStr = @"不支持预览";
+    noSupportVc.titleStr = titleStr;
+    noSupportVc.filePath = pathStr;
     [self.navigationController pushViewController:noSupportVc animated:YES];
 }
 

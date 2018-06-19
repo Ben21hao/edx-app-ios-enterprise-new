@@ -4258,6 +4258,13 @@
 			path = BaiduBCEReader;
 			sourceTree = "<group>";
 		};
+		A490754020D8E6FF00E13001 /* TDDownloadOperation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TDDownloadOperation;
+			sourceTree = "<group>";
+		};
 		A49EA2B5200A0F9B00CD6CF1 /* TDQuentionViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -4384,6 +4391,7 @@
 		A4C5AC7720C7B1DA00B28A28 /* TDEnterpriseSkydrive */ = {
 			isa = PBXGroup;
 			children = (
+				A490754020D8E6FF00E13001 /* TDDownloadOperation */,
 				A458C99820D1FF9200F43DFD /* TDSkydriveViewController */,
 				A458C99720D1FF9200F43DFD /* TDFileDownLoadViewController */,
 				A416219320C927FB0019DD8D /* TDPlayVideoViewController */,

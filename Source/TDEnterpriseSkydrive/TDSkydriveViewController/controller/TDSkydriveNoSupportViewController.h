@@ -11,5 +11,6 @@
 @interface TDSkydriveNoSupportViewController : TDBaseViewController
 
 @property (nonatomic,strong) NSString *titleStr;
+@property (nonatomic,strong) NSString *filePath;//本地文件路径
 
 @end

@@ -240,6 +240,13 @@
 }
 
 #pragma mark - 设置时间显示样式
+
+- (void)setTitleStr:(NSString *)titleStr {
+    _titleStr = titleStr;
+    
+    self.titleLabel.attributedText = [self setTitleAttrButeText:titleStr fontSize:15];
+}
+
 - (void)setTotalTimeStr:(NSString *)totalTimeStr {
     _totalTimeStr = totalTimeStr;
     
@@ -256,14 +263,14 @@
     
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowBlurRadius = 1.0;
-    shadow.shadowColor = [UIColor blackColor];
+    shadow.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     shadow.shadowOffset = CGSizeMake(1, 1);
     
     NSDictionary *attributeDic = @{
                                    NSForegroundColorAttributeName : [UIColor whiteColor],
                                    //                                   NSStrokeWidthAttributeName : @-3.0,
                                    //                                   NSStrokeColorAttributeName : [UIColor blackColor],
-                                   NSVerticalGlyphFormAttributeName : @(0),
+                                   NSVerticalGlyphFormAttributeName : @(0), //阴影，两者配合使用
                                    NSShadowAttributeName : shadow,
                                    NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:font]
                                    };

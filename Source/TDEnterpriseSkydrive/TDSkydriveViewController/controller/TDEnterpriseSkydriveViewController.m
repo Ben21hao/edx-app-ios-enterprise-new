@@ -103,7 +103,7 @@
         NSLog(@"------>> %@",responseDic);
         
         id code = responseDic[@"code"];
-        if ([code intValue] == 200) {
+        if ([code intValue] == 20000) {
             
             self.noDataView.hidden = YES;
             if (self.dataArray.count > 0) { //只有下拉加载，访问成功后，删除原有数据
@@ -255,8 +255,8 @@
     //xls，xlsx，pdf，pptx，ppt，docx，rtf, txt
     if (indexPath.section == 0) {
         
-//        [self gotoLocalVc];
-        [self gotoVideoPlayVC];
+        [self gotoLocalVc];
+//        [self gotoVideoPlayVC];
     }
     else {
         

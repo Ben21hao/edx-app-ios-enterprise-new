@@ -32,6 +32,7 @@
 /*
  单独给出属性，为了处理文字样式
  */
+@property (nonatomic,strong) NSString *titleStr;
 @property (nonatomic,strong) NSString *totalTimeStr; //总时间
 @property (nonatomic,strong) NSString *currentTimeStr; //播放时间
 
