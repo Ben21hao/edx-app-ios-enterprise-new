@@ -101,15 +101,13 @@
 
 - (void)getFileData { //查询本地数据 -> 再请求服务器数据
     
-    WS(weakSelf);
-    [self.downloadOperation getLocalDownloadFileData:^(NSMutableArray *localArray) {//查询本地数据库的数据
-        if (weakSelf.sqliteArray) {
-            [weakSelf.sqliteArray removeAllObjects];
-        }
-        [weakSelf.sqliteArray addObjectsFromArray:localArray];
-        
-        [weakSelf requestData];//请求服务器的数据
-    }];
+    NSMutableArray *localArray = [self.downloadOperation getLocalDownloadFileData];//查询本地数据库的数据
+    if (self.sqliteArray) {
+        [self.sqliteArray removeAllObjects];
+    }
+    [self.sqliteArray addObjectsFromArray:localArray];
+    
+    [self requestData];//请求服务器的数据
 }
 
 #pragma mark - data
@@ -262,16 +260,9 @@
 #pragma mark - 判断是否
 - (BOOL)judgeHasDownloadingTask { //是否有下载中
     
-    [self.downloadOperation getLocalDownloadFileData:^(NSMutableArray *localArray) {//查询本地数据库的数据
-        
-        for (int i = 0; i < localArray.count; i ++) {
-            TDSkydrveFileModel *model = localArray[i];
-            NSLog(@"判断 -->> %@ -- %@ -- %ld",model.id,model.name,(long)model.status);
-        }
-    }];
-    
-    for (int i = 0; i < self.dataArray.count; i ++) {
-        TDSkydrveFileModel *model = self.dataArray[i];
+    NSMutableArray *localArray = [self.downloadOperation getLocalDownloadFileData];
+    for (int i = 0; i < localArray.count; i ++) {
+        TDSkydrveFileModel *model = localArray[i];
         
         if (model.status == 1) { //有文件在下载
             return YES;
@@ -317,28 +308,28 @@
 #pragma mark - TDDownloadOperationDelegate
 - (void)nextFileShouldBeginDownload { //有等待：下一个任务开始下载
 
-    TDSkydrveFileModel *nextModel = [self judgHasWaitToDownloadTask:self.dataArray];
-    if (nextModel) {//有等待下载： 下一个
-        [self currentModelDownloadOperation:nextModel];
-        [self.downloadOperation nextFileBeginDownload:nextModel];
-    }
-    
-    
-    [self.downloadOperation getLocalDownloadFileSortDataBlock:^(NSMutableArray *downloadArray, NSMutableArray *finishArray) {
-        NSLog(@"是否有等待--->>> %@ -->> %@",downloadArray,finishArray);
-    }];
-    
-//    WS(weakSelf);
+//    TDSkydrveFileModel *nextModel = [self judgHasWaitToDownloadTask:self.dataArray];
+//    if (nextModel) {//有等待下载： 下一个
+//        [self currentModelDownloadOperation:nextModel];
+//        [self.downloadOperation nextFileBeginDownload:nextModel];
+//    }
+//    
+//    
 //    [self.downloadOperation getLocalDownloadFileSortDataBlock:^(NSMutableArray *downloadArray, NSMutableArray *finishArray) {
-//        
-//        NSLog(@"下一个 ----->> 有等待 -->> %@",downloadArray);
-//        
-//        TDSkydrveFileModel *nextModel = [weakSelf judgHasWaitToDownloadTask:downloadArray];
-//        if (nextModel) {//有等待下载： 下一个
-//            [weakSelf currentModelDownloadOperation:nextModel];
-//            [weakSelf.downloadOperation nextFileBeginDownload:nextModel];
-//        }
+//        NSLog(@"是否有等待--->>> %@ -->> %@",downloadArray,finishArray);
 //    }];
+    
+    WS(weakSelf);
+    [self.downloadOperation getLocalDownloadFileSortDataBlock:^(NSMutableArray *downloadArray, NSMutableArray *finishArray) {
+        
+        NSLog(@"下一个 ----->> 有等待 -->> %@",downloadArray);
+        
+        TDSkydrveFileModel *nextModel = [weakSelf judgHasWaitToDownloadTask:downloadArray];
+        if (nextModel) {//有等待下载： 下一个
+            [weakSelf currentModelDownloadOperation:nextModel];
+            [weakSelf.downloadOperation nextFileBeginDownload:nextModel];
+        }
+    }];
 }
 
 - (void)currentFileDownloadFinish:(TDSkydrveFileModel *)currentModel { //下载完一个任务，刷新任务管理页

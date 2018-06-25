@@ -56,7 +56,7 @@ typedef void(^CompletionHandlerType)();
 
 - (void)sqliteOperationInit:(NSString *)username;//初始化
 
-- (void)getLocalDownloadFileData:(void(^)(NSMutableArray *localArray))handler; //查询数据库所有数据 - 用于初始化数据
+- (NSMutableArray *)getLocalDownloadFileData ; //查询数据库所有数据 - 用于初始化数据
 - (void)getLocalDownloadFileSortDataBlock:(void(^)(NSMutableArray *downloadArray, NSMutableArray *finishArray))handler;//查询
 
 - (void)insertDownloadFile:(TDSkydrveFileModel *)model;//加入

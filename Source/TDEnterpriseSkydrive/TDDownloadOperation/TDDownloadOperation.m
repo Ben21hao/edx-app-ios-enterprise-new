@@ -351,8 +351,8 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
     [self.sqliteOperation createSqliteForUser:username];
 }
 
-- (void)getLocalDownloadFileData:(void(^)(NSMutableArray *localArray))handler { //查本地数据库 - 用于初始化数据
-    [self.sqliteOperation querySqlite:handler];
+- (NSMutableArray *)getLocalDownloadFileData { //查本地数据库 - 用于初始化数据
+    return [self.sqliteOperation querySqliteAllData];
 }
 
 - (void)getLocalDownloadFileSortDataBlock:(void(^)(NSMutableArray *downloadArray, NSMutableArray *finishArray))handler {

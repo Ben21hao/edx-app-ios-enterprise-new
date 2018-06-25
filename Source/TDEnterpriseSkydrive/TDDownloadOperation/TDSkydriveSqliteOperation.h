@@ -13,7 +13,6 @@
 #import "FMDatabase.h"
 
 typedef void(^SqliteQuerySortHandler)(NSMutableArray *downloadArray, NSMutableArray *finishArray);
-typedef void(^SqliteQueryHandler)(NSMutableArray *localArray);
 
 @interface TDSkydriveSqliteOperation : NSObject
 
@@ -33,7 +32,7 @@ typedef void(^SqliteQueryHandler)(NSMutableArray *localArray);
 - (void)updateFileDownloadSize:(NSString *)download_size id:(NSString *)fileId;//已下载的大小
 
 - (void)querySqliteSortData:(SqliteQuerySortHandler)handler;//查 -分别返回未完成，已完成的文件数据
-- (void)querySqlite:(SqliteQueryHandler)handler;//查所有的数据
+- (NSMutableArray *)querySqliteAllData;//查所有的数据
     
 - (TDSkydrveFileModel *)querySqliteFileResumeData:(TDSkydrveFileModel *)model;//查询resumedata
 

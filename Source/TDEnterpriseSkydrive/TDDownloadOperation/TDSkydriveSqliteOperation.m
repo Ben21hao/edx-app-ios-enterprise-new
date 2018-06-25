@@ -287,7 +287,7 @@
     [self.dataBase close];
 }
 
-- (void)querySqlite:(SqliteQueryHandler)handler { //查整个表
+- (NSMutableArray *)querySqliteAllData { //查整个表
     
     NSMutableArray *downloadArray = [[NSMutableArray alloc] init];
     
@@ -338,13 +338,13 @@
 //                NSLog(@"查询数据库 ---> %@ -- %@", model.download_size, model.resumeData);
                 [downloadArray addObject:model];
             }
-            handler(downloadArray);
         }
     }
     else {
         NSLog(@"查 - 打开数据库失败");
     }
     [self.dataBase close];
+    return downloadArray;
 }
 
 - (TDSkydrveFileModel *)querySqliteFileResumeData:(TDSkydrveFileModel *)model { //查询resumedata
