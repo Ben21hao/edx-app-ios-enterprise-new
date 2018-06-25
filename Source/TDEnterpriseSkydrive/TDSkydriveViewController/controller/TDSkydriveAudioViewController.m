@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = @"音频播放";
+    self.titleViewLabel.text = self.titleStr;
     
     [self setViewConstraint];
     [self addObserverForVideoPlay];
@@ -51,11 +51,12 @@
 
 - (void)initAudioPlayer {
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"111115" ofType:@"mp3"];
-    NSURL *url = [NSURL fileURLWithPath:path];
-//    self.playerItem = [AVPlayerItem playerItemWithAsset:[AVAsset assetWithURL:url]];
+//    self.filePath = [[NSBundle mainBundle] pathForResource:@"111115" ofType:@"mp3"];
+    NSURL *url = [NSURL fileURLWithPath:self.filePath];
     
+//    self.playerItem = [AVPlayerItem playerItemWithAsset:[AVAsset assetWithURL:url]];
     self.playerItem = [[AVPlayerItem alloc] initWithURL:url];
+    
     [self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
     [self.playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
     [self.playerItem addObserver:self forKeyPath:@"playbackBufferEmpty" options:NSKeyValueObservingOptionNew context:nil];

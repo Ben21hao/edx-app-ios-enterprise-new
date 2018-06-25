@@ -135,8 +135,6 @@ typedef NS_ENUM(NSInteger, TDPanGestureDeriction) {
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     [session setActive:YES error:nil];
-    
-//    [self getSrtFileData];
 }
 
 - (void)videoPalyerInitialization { //初始化播放器
@@ -742,8 +740,6 @@ typedef NS_ENUM(NSInteger, TDPanGestureDeriction) {
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandle:)];
         [_videoMaskView addGestureRecognizer:tapGesture];
         
-        
-        _videoMaskView.titleStr = @"视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放视频播放";
     }
     return _videoMaskView;
 }

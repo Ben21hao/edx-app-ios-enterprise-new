@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TDSkydrveFileModel.h"
+#import "TDSkydriveProgressView.h"
 
 @interface TDSkydriveFileCell : UITableViewCell
 
@@ -15,8 +16,8 @@
 @property (nonatomic,strong) UILabel *titleLabel;
 @property (nonatomic,strong) UILabel *timeLabel;
 @property (nonatomic,strong) UILabel *sizeLabel;
-@property (nonatomic,strong) UIButton *downloadButton;
 @property (nonatomic,strong) UIButton *shareButton;
+@property (nonatomic,strong) TDSkydriveProgressView *progressView;
 
 @property (nonatomic,strong) TDSkydrveFileModel *fileModel;
 

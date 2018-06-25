@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TDSkydriveLocalModel.h"
+#import "TDSkydrveFileModel.h"
 
 @protocol TDSkydriveSelectDelegate <NSObject>
 
 - (void)userPreviewFileRowAtIndexpath:(NSIndexPath *)indexPath; //文件预览
-- (void)userSelectFileRowAtIndexpath:(NSIndexPath *)indexPath;//选择编辑文件
+- (void)userSelectFileRowAtIndexpath:(TDSkydrveFileModel *)model;//选择编辑文件
 
 @end
 
-@interface TDSkydriveLocalView : UIView 
+@interface TDSkydriveLocalView : UIView
 
 @property (nonatomic,strong) UIButton *editeButton;
 @property (nonatomic,strong) UIButton *deleteButton;
@@ -28,6 +28,8 @@
 @property (nonatomic,assign) BOOL isAllSelect;
 @property (nonatomic,weak) id <TDSkydriveSelectDelegate> delegate;
 
-- (void)userEditingFile:(BOOL)editing;
+- (void)reloadTableViewForDownload:(NSArray *)downloadArray finish:(NSArray *)finishArray; //刷新数据
+- (void)userEditingFile:(BOOL)editing; //是否点击编辑按钮
+
 
 @end

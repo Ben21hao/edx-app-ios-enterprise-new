@@ -420,6 +420,7 @@
 		9EEFFD651B300E87002A88B0 /* OEXInterface+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEFFD641B300E87002A88B0 /* OEXInterface+Swift.swift */; };
 		9EF21A9E1B4697CA000048F8 /* CourseLastAccessedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF21A9D1B4697CA000048F8 /* CourseLastAccessedController.swift */; };
 		A402F0401FCC124E00795041 /* TDWelcomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = A402F03F1FCC124E00795041 /* TDWelcomeView.m */; };
+		A408BD3820DA58A10074CC6E /* TDSkydriveSqliteOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A408BD3720DA58A10074CC6E /* TDSkydriveSqliteOperation.m */; };
 		A409D1B21F676EE300F6BF74 /* TDLanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A409D1B11F676EE300F6BF74 /* TDLanguageViewController.m */; };
 		A409D1B61F677D0300F6BF74 /* TDSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A409D1B51F677D0300F6BF74 /* TDSettingCell.m */; };
 		A409D1BA1F677D8300F6BF74 /* LanguageChangeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = A409D1B91F677D8300F6BF74 /* LanguageChangeTool.m */; };
@@ -531,6 +532,9 @@
 		A4891503200DE4D100DDA75D /* BCEDocumentReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4891502200DE4D100DDA75D /* BCEDocumentReader.framework */; };
 		A4891505200DE53700DDA75D /* DocPlayerSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A4891504200DE53700DDA75D /* DocPlayerSDK.bundle */; };
 		A48B69B61F79F6A900160C61 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = A48B69B51F79F6A900160C61 /* FontAwesome.otf */; };
+		A490754520D8EBC400E13001 /* NSURLSession+CorrectedResumeData.m in Sources */ = {isa = PBXBuildFile; fileRef = A490754220D8EBC400E13001 /* NSURLSession+CorrectedResumeData.m */; };
+		A490754620D8EBC400E13001 /* TDDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A490754420D8EBC400E13001 /* TDDownloadOperation.m */; };
+		A490754920D8F05D00E13001 /* TDSkydriveProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A490754820D8F05D00E13001 /* TDSkydriveProgressView.m */; };
 		A49EA30C200A0F9B00CD6CF1 /* TDImageGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A49EA2B9200A0F9B00CD6CF1 /* TDImageGroupViewController.m */; };
 		A49EA30D200A0F9B00CD6CF1 /* TDImageSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A49EA2BB200A0F9B00CD6CF1 /* TDImageSelectViewController.m */; };
 		A49EA30E200A0F9B00CD6CF1 /* TDPreViewImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A49EA2BD200A0F9B00CD6CF1 /* TDPreViewImageViewController.m */; };
@@ -1556,6 +1560,8 @@
 		9EF21A9D1B4697CA000048F8 /* CourseLastAccessedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseLastAccessedController.swift; sourceTree = "<group>"; };
 		A402F03E1FCC124E00795041 /* TDWelcomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWelcomeView.h; sourceTree = "<group>"; };
 		A402F03F1FCC124E00795041 /* TDWelcomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWelcomeView.m; sourceTree = "<group>"; };
+		A408BD3620DA58A10074CC6E /* TDSkydriveSqliteOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSkydriveSqliteOperation.h; sourceTree = "<group>"; };
+		A408BD3720DA58A10074CC6E /* TDSkydriveSqliteOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSkydriveSqliteOperation.m; sourceTree = "<group>"; };
 		A409D1B01F676EE300F6BF74 /* TDLanguageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDLanguageViewController.h; sourceTree = "<group>"; };
 		A409D1B11F676EE300F6BF74 /* TDLanguageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDLanguageViewController.m; sourceTree = "<group>"; };
 		A409D1B41F677D0300F6BF74 /* TDSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSettingCell.h; sourceTree = "<group>"; };
@@ -1754,6 +1760,12 @@
 		A4891502200DE4D100DDA75D /* BCEDocumentReader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BCEDocumentReader.framework; sourceTree = "<group>"; };
 		A4891504200DE53700DDA75D /* DocPlayerSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = DocPlayerSDK.bundle; path = BCEDocumentReader.framework/Resources/DocPlayerSDK.bundle; sourceTree = "<group>"; };
 		A48B69B51F79F6A900160C61 /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
+		A490754120D8EBC400E13001 /* NSURLSession+CorrectedResumeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSession+CorrectedResumeData.h"; sourceTree = "<group>"; };
+		A490754220D8EBC400E13001 /* NSURLSession+CorrectedResumeData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSession+CorrectedResumeData.m"; sourceTree = "<group>"; };
+		A490754320D8EBC400E13001 /* TDDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDDownloadOperation.h; sourceTree = "<group>"; };
+		A490754420D8EBC400E13001 /* TDDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDDownloadOperation.m; sourceTree = "<group>"; };
+		A490754720D8F05D00E13001 /* TDSkydriveProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSkydriveProgressView.h; sourceTree = "<group>"; };
+		A490754820D8F05D00E13001 /* TDSkydriveProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSkydriveProgressView.m; sourceTree = "<group>"; };
 		A49EA2B8200A0F9B00CD6CF1 /* TDImageGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDImageGroupViewController.h; sourceTree = "<group>"; };
 		A49EA2B9200A0F9B00CD6CF1 /* TDImageGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDImageGroupViewController.m; sourceTree = "<group>"; };
 		A49EA2BA200A0F9B00CD6CF1 /* TDImageSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDImageSelectViewController.h; sourceTree = "<group>"; };
@@ -4067,10 +4079,10 @@
 			children = (
 				A458C9C220D1FF9200F43DFD /* TDSkydriveLocalCell.h */,
 				A458C9BE20D1FF9200F43DFD /* TDSkydriveLocalCell.m */,
-				A458C9C320D1FF9200F43DFD /* TDSkydriveFileCell.h */,
-				A458C9BD20D1FF9200F43DFD /* TDSkydriveFileCell.m */,
 				A458C9C520D1FF9200F43DFD /* TDSkydriveFolderCell.h */,
 				A458C9BF20D1FF9200F43DFD /* TDSkydriveFolderCell.m */,
+				A458C9C320D1FF9200F43DFD /* TDSkydriveFileCell.h */,
+				A458C9BD20D1FF9200F43DFD /* TDSkydriveFileCell.m */,
 				A458C9C020D1FF9200F43DFD /* TDSkydriveLocalFileCell.h */,
 				A458C9C420D1FF9200F43DFD /* TDSkydriveLocalFileCell.m */,
 				A458C9C120D1FF9200F43DFD /* TDSkydriveFolderHeaderView.h */,
@@ -4107,6 +4119,8 @@
 				A458C9D020D1FF9200F43DFD /* TDSkydriveVideoView.m */,
 				A458C9D120D1FF9200F43DFD /* TDSkydriveVideoMaskView.h */,
 				A458C9D820D1FF9300F43DFD /* TDSkydriveVideoMaskView.m */,
+				A490754720D8F05D00E13001 /* TDSkydriveProgressView.h */,
+				A490754820D8F05D00E13001 /* TDSkydriveProgressView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -4261,6 +4275,12 @@
 		A490754020D8E6FF00E13001 /* TDDownloadOperation */ = {
 			isa = PBXGroup;
 			children = (
+				A490754120D8EBC400E13001 /* NSURLSession+CorrectedResumeData.h */,
+				A490754220D8EBC400E13001 /* NSURLSession+CorrectedResumeData.m */,
+				A490754320D8EBC400E13001 /* TDDownloadOperation.h */,
+				A490754420D8EBC400E13001 /* TDDownloadOperation.m */,
+				A408BD3620DA58A10074CC6E /* TDSkydriveSqliteOperation.h */,
+				A408BD3720DA58A10074CC6E /* TDSkydriveSqliteOperation.m */,
 			);
 			path = TDDownloadOperation;
 			sourceTree = "<group>";
@@ -7271,6 +7291,7 @@
 				B518BE711EA9DD950027569D /* TDUserMessageCell.swift in Sources */,
 				77ADF49E1AC1ACAA00AC8955 /* OEXExternalRegistrationOptionsView.m in Sources */,
 				697652261D9BA7C80031FF8B /* OEXColorsDataFactory.swift in Sources */,
+				A490754620D8EBC400E13001 /* TDDownloadOperation.m in Sources */,
 				A458C9F620D1FF9300F43DFD /* TDSkydriveFolderCell.m in Sources */,
 				B52591781EB348C3003A950D /* NSDataEx.m in Sources */,
 				B4B6D63F1A952D1C000F44E8 /* OEXRegistrationAgreementView.m in Sources */,
@@ -7421,6 +7442,7 @@
 				A458C9EE20D1FF9300F43DFD /* TDEnterpriseSkydriveViewController.m in Sources */,
 				770C514D1B1685F5009B9696 /* AuthenticatedWebViewController.swift in Sources */,
 				770A279D1A6F150B00DFC6FF /* OEXVideoPathEntry.m in Sources */,
+				A490754520D8EBC400E13001 /* NSURLSession+CorrectedResumeData.m in Sources */,
 				B5FAF7471EB04697000C2169 /* JHCouponsAlertView.m in Sources */,
 				B4B6D6161A949F0F000F44E8 /* OEXRegistrationFieldEmailView.m in Sources */,
 				9C9B7F6D1A8CC68400A857B2 /* OEXCourseInfoViewController.m in Sources */,
@@ -7570,6 +7592,7 @@
 				E03E6A151D38C91F00944AAA /* OfflineSupportViewController.swift in Sources */,
 				B5FAF7791EB06EA9000C2169 /* TDInformationDetailView.m in Sources */,
 				B52E8C9B1F0B8CB500F3170D /* VHPullingRefreshTableView.m in Sources */,
+				A490754920D8F05D00E13001 /* TDSkydriveProgressView.m in Sources */,
 				B518BE8D1EA9E6AB0027569D /* TDSubServiceViewController.m in Sources */,
 				B4B6D6291A949F1B000F44E8 /* OEXRegistrationFieldEmailController.m in Sources */,
 				E0ED96E71D6EED1C00B48B64 /* OEXCourseInfoViewController+Swift.swift in Sources */,
@@ -7619,6 +7642,7 @@
 				1AB539FA1BFE08DE0065501F /* DebugLogViewController.swift in Sources */,
 				A41084C8208EFF5600C6A0E1 /* TDQuentionMessageCell.m in Sources */,
 				1AE0A6CA1BF4FF9000E14917 /* UserCourseEnrollment.swift in Sources */,
+				A408BD3820DA58A10074CC6E /* TDSkydriveSqliteOperation.m in Sources */,
 				77503E8E1B287DBF00C47229 /* KeyboardInsetsSource.swift in Sources */,
 				7772BE841AF834EC0081CA7A /* CourseOutlineQuerier.swift in Sources */,
 				B59238A01EADB59A00C686D8 /* TDProfessorViewController.m in Sources */,

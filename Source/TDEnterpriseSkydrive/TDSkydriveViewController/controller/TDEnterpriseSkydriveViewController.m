@@ -39,6 +39,7 @@
 
 @property (nonatomic,strong) TDBaseToolModel *toolModel;
 @property (nonatomic,assign) BOOL isForgound;
+
 @end
 
 @implementation TDEnterpriseSkydriveViewController
@@ -100,7 +101,6 @@
         [self endRequestHandle];
         
         NSDictionary *responseDic = (NSDictionary *)responseObject;
-        NSLog(@"------>> %@",responseDic);
         
         id code = responseDic[@"code"];
         if ([code intValue] == 20000) {
@@ -333,7 +333,7 @@
     [self.navigationController pushViewController:skydriveFileVc animated:YES];
 }
 
-- (void)gotoPreviewFile:(NSString *)filePath type:(NSString *)type { //文档浏览
+- (void)gotoPreviewFilePath:(NSString *)filePath type:(NSString *)type { //文档浏览
     
     if (filePath.length == 0) {
         NSLog(@"----- 空路径 ---");
@@ -357,7 +357,7 @@
     [self.navigationController pushViewController:audioPlayVC animated:YES];
 }
 
-- (void)gotoPreviewImage:(NSString *)path title:(NSString *)titleStr type:(NSString *)typeStr { //图片预览
+- (void)gotoPreviewImagePath:(NSString *)path title:(NSString *)titleStr type:(NSString *)typeStr { //图片预览
     
     TDSkydriveImageViewController *imageVc = [[TDSkydriveImageViewController alloc] init];
     imageVc.filePath = path;
@@ -369,6 +369,7 @@
 - (void)gotoLocalVc { //文件管理
     
     TDSkydrveLoacalViewController *localVc = [[TDSkydrveLoacalViewController alloc] init];
+    localVc.username = self.username;
     [self.navigationController pushViewController:localVc animated:YES];
 }
 

@@ -105,7 +105,7 @@
     
     NSString *cacheDir = [NSString stringWithFormat:@"%@/Documents/cache/videos/", NSHomeDirectory()];
     if (create && ![[NSFileManager defaultManager] fileExistsAtPath:cacheDir]) {
-        
+        //创建文件夹
         [[NSFileManager defaultManager] createDirectoryAtPath:cacheDir withIntermediateDirectories:YES attributes:nil error:nil];
         
         NSError *error = nil;

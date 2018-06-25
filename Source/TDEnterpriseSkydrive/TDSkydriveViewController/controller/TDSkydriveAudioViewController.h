@@ -10,4 +10,7 @@
 
 @interface TDSkydriveAudioViewController : TDBaseViewController
 
+@property (nonatomic,strong) NSString *titleStr;
+@property (nonatomic,strong) NSString *filePath;
+
 @end

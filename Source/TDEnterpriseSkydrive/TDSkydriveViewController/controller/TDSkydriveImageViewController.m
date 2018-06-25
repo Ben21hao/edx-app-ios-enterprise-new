@@ -41,13 +41,14 @@
 
 - (void)setimageData {
     
+//    self.filePath = [[NSBundle mainBundle] pathForResource:@"111132" ofType:@"JPG"];
     NSData *data = [NSData dataWithContentsOfFile:self.filePath];
     if ([self.typeStr isEqualToString:@"gif"]) {//GIF
-        
         self.imageView.image = [UIImage sd_animatedGIFWithData:data];
     }
     else {
         self.imageView.image = [UIImage imageWithData:data];
+//        self.imageView.image = [[UIImage alloc] initWithContentsOfFile:self.filePath];
     }
 }
 

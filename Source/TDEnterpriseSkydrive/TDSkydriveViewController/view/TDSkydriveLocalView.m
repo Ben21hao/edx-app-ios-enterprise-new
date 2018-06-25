@@ -9,13 +9,17 @@
 #import "TDSkydriveLocalView.h"
 #import "TDSkydriveLocalFileCell.h"
 #import "TDSkydriveFolderHeaderView.h"
+
 #import "TDNodataView.h"
+#import "TDSkydrveFileModel.h"
 
 @interface TDSkydriveLocalView () <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) TDNodataView *noDataView;
 
+@property (nonatomic,strong) NSArray *dowloadingArray;
+@property (nonatomic,strong) NSArray *finishArray;
 @property (nonatomic,assign) BOOL isEditing;
 
 @end
@@ -32,43 +36,39 @@
     return self;
 }
 
-- (void)setIsAllSelect:(BOOL)isAllSelect {
-    
-    _isAllSelect = isAllSelect;
-    [self.tableView reloadData];
-}
-
 #pragma mark - tableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 8;
+    if (section == 0) {
+        return self.downloadArray.count;
+    }
+    
+    return self.finishArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     TDSkydriveLocalFileCell *cell = [[TDSkydriveLocalFileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDSkydriveLocalFileCell"];
     
-    if (indexPath.section == 0) {
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    
-    cell.downloadButton.tag = indexPath.row;
+    cell.progressView.downloadButton.tag = indexPath.row;
     cell.selectButton.tag = indexPath.row;
     
-    [cell.downloadButton addTarget:self action:@selector(downloadButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.selectButton addTarget:self action:@selector(selectButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.progressView.downloadButton addTarget:self action:@selector(downloadButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    cell.titleLabel.text = @"技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf";
-    cell.sizeLabel.text = @"300M";
-    cell.statusLabel.text = @"等待下载";
-    
-    cell.isEditing = self.isEditing;
-    if (self.isAllSelect) {
-        cell.selectButton.selected = YES;
+    TDSkydrveFileModel *model;
+    if (indexPath.section == 0) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        model = self.downloadArray[indexPath.row];
     }
+    else {
+        model = self.finishArray[indexPath.row];
+    }
+    
+    cell.fileModel = model;
+    cell.isEditing = self.isEditing;
     
     return cell;
 }
@@ -77,10 +77,10 @@
     
     TDSkydriveFolderHeaderView *headerView = [[TDSkydriveFolderHeaderView alloc] initWithReuseIdentifier:@"skydriveLocalHeaderView"];
     if (section == 0) {
-        headerView.titleLabel.text = @"正在下载（4个）";
+        headerView.titleLabel.text = [NSString stringWithFormat:@"正在下载（%lu个）",(unsigned long)self.downloadArray.count];
     }
     else {
-        headerView.titleLabel.text = @"已下载完成（1个）";
+        headerView.titleLabel.text = [NSString stringWithFormat:@"已下载完成（%lu个）",(unsigned long)self.finishArray.count];
     }
     
     return headerView;
@@ -100,8 +100,9 @@
     if (self.isEditing) { //选择
         TDSkydriveLocalFileCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         cell.selectButton.selected = !cell.selectButton.selected;
+        cell.fileModel.isSelected = !cell.fileModel.isSelected;
         
-        [self.delegate userSelectFileRowAtIndexpath:indexPath];
+        [self.delegate userSelectFileRowAtIndexpath:cell.fileModel];
     }
     else {
         if (indexPath.section == 1) {//已下载完成
@@ -115,11 +116,6 @@
     
 }
 
-- (void)selectButtonAction:(UIButton *)sender { //选择
-    sender.selected = !sender.selected;
-    
-}
-
 - (void)userEditingFile:(BOOL)editing { //是否编辑
     
     self.isEditing = editing;
@@ -127,6 +123,33 @@
     self.editeButton.hidden = editing;
     self.cancelButton.hidden = !editing;
     self.deleteButton.hidden = !editing;
+    
+    if (!editing) { //取消编辑
+        self.isAllSelect = NO;
+    }
+    
+    [self.tableView reloadData];
+}
+
+- (void)reloadTableViewForDownload:(NSArray *)downloadArray finish:(NSArray *)finishArray { //刷新数据
+    self.downloadArray = downloadArray;
+    self.finishArray = finishArray;
+    [self.tableView reloadData];
+}
+
+- (void)setIsAllSelect:(BOOL)isAllSelect {
+    _isAllSelect = isAllSelect;
+    
+    /*
+     遍历处理数据
+     */
+    for (TDSkydrveFileModel *model in self.downloadArray) {
+        model.isSelected = isAllSelect;
+    }
+    
+    for (TDSkydrveFileModel *model in self.finishArray) {
+        model.isSelected = isAllSelect;
+    }
     
     [self.tableView reloadData];
 }

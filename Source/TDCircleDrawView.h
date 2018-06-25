@@ -10,6 +10,6 @@
 
 @interface TDCircleDrawView : UIView
 
-@property (nonatomic,assign) double progress;
+@property (nonatomic,assign) double progress; //注意，一圈表示100
 
 @end

@@ -10,4 +10,7 @@
 
 @interface TDSkydrveLoacalViewController : TDBaseViewController
 
+@property (nonatomic,strong) NSString *userId;
+@property (nonatomic,strong) NSString *username;
+
 @end
