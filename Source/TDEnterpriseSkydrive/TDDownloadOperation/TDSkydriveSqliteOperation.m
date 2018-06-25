@@ -49,11 +49,11 @@
 }
 
 #pragma mark - 增
-- (void)insertFileData:(TDSkydrveFileModel *)model {//增加一条数据
+- (void)insertFileData:(TDSkydrveFileModel *)model{//增加一条数据
     
     if ([self.dataBase open]) {
         NSLog(@"增 - 打开数据库成功");
-        
+    
         NSString *insetSql = @"INSERT INTO skydrive_table (id,name,type,file_type,file_type_format,resources_url,created_at,file_size,download_size,resumeData,progress,status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         BOOL insert = [self.dataBase executeUpdate:insetSql, model.id, model.name, model.type, model.file_type, model.file_type_format, model.resources_url, model.created_at, model.file_size, @"0M", @"",@(model.progress),@(model.status)];
         
@@ -73,6 +73,7 @@
 - (void)deleteFileData:(NSString *)fileId { //根据文件id来删除删
     
     if ([self.dataBase open]) {
+    
         BOOL delete = [self.dataBase executeUpdate:@"delete from skydrive_table where id = ?", fileId];
         if (delete) {
             NSLog(@"删除成功 %@", fileId);
@@ -83,10 +84,10 @@
     [self.dataBase close];
 }
 
-- (void)deleteFileArray:(NSArray *)selectArray handler:(void(^)(TDSkydrveFileModel *model,BOOL isFinish))handler {
+- (void)deleteFileArray:(NSArray *)selectArray handler:(void(^)(TDSkydrveFileModel *model, BOOL isFinish))handler { //删除选中的
     
     if ([self.dataBase open]) {
-        
+    
         for (int i = 0; i < selectArray.count; i ++) {
             
             TDSkydrveFileModel *model = selectArray[i];
@@ -97,13 +98,16 @@
             if (delete) {
                 NSLog(@"删除成功 %@",model.id);
                 
-                handler(model,NO); //回调
+                handler(model, NO); //不是最后一个
+                
                 if (i == selectArray.count - 1) {
-                    handler(model, YES);
+                    handler(model, YES); //最后一个
                 }
                 
             } else {
                 NSLog(@"删除失败 %@", model.id);
+                
+                handler(model, YES); //删除结束
             }
         }
     }
@@ -114,7 +118,7 @@
 - (void)updateFileProgress:(CGFloat)progress id:(NSString *)fileId {//更新进度
     
     if ([self.dataBase open]) {
-        
+    
         NSString *queryStr = @"select * from skydrive_table where id = ?";
         FMResultSet *result = [self.dataBase executeQuery:queryStr,fileId];
         
@@ -138,7 +142,7 @@
 -(void)updateFileStatus:(NSInteger)status id:(NSString *)fileId {//更新状态
     
     if ([self.dataBase open]) {
-        
+    
         NSString *queryStr = @"select * from skydrive_table where id = ?";
         FMResultSet *result = [self.dataBase executeQuery:queryStr,fileId];
         
@@ -150,10 +154,11 @@
         }
         
         BOOL change = [self.dataBase executeUpdate:@"update skydrive_table set status = ? where status = ?", @(status), @(oldStatus)];
+        
         if (change) {
-//            NSLog(@"status更新成功");
+            NSLog(@"status更新成功 %@",fileId);
         } else {
-            NSLog(@"status更新失败");
+            NSLog(@"status更新失败  %@",fileId);
         }
     }
     
@@ -163,7 +168,7 @@
 -(void)updateFileRusumeData:(NSData *)resumeData id:(NSString *)fileId {//更新 resumeData
     
     if ([self.dataBase open]) {
-        
+    
         NSString *queryStr = @"select * from skydrive_table where id = ?";
         FMResultSet *result = [self.dataBase executeQuery:queryStr,fileId];
         
@@ -189,7 +194,7 @@
 -(void)updateFileDownloadSize:(NSString *)download_size id:(NSString *)fileId {
     
     if ([self.dataBase open]) {
-        
+    
         NSString *queryStr = @"select * from skydrive_table where id = ?";
         FMResultSet *result = [self.dataBase executeQuery:queryStr,fileId];
         
@@ -218,7 +223,7 @@
     NSMutableArray *finishArray = [[NSMutableArray alloc] init];
     
     if ([self.dataBase open]) {
-//        NSLog(@"查 - 打开数据库成功");
+        NSLog(@"查 - 打开数据库成功");
         
         NSString *queryStr = @"select * from skydrive_table";
         FMResultSet *result = [self.dataBase executeQuery:queryStr];
@@ -239,11 +244,29 @@
                 model.file_size = [result stringForColumn:@"file_size"];
                 model.download_size = [result stringForColumn:@"download_size"];
                 
-                NSString *str = [result stringForColumn:@"resumeData"];
-                model.resumeData = [self strToData:str];
-                
                 model.progress = [result doubleForColumn:@"progress"];
-                model.status = [result intForColumn:@"status"];
+                if (model.progress == 1.0) {
+                    model.status = 5;
+                }
+                else {
+                    model.status = [result intForColumn:@"status"];
+                }
+//                model.status = [result intForColumn:@"status"];
+                
+                if (model.status != 5) {
+                    NSString *str = [result stringForColumn:@"resumeData"];
+                    if (str.length == 0) {
+                        model.resumeData = nil;
+                    }
+                    else {
+                        model.resumeData = [self strToData:str];
+                    }
+                }
+                
+//                NSString *str = [result stringForColumn:@"resumeData"];
+//                model.resumeData = [self strToData:str];
+                
+                NSLog(@"数据库 --->>> %f --->>>> %ld",model.progress,(long)model.status);
                 
                 if (model.status == 5) {
                     [finishArray addObject:model];
@@ -252,15 +275,14 @@
                     [downloadArray addObject:model];
                 }
             }
-            
+            handler(downloadArray,finishArray);
         }
+        
     }
     else {
         NSLog(@"查 - 打开数据库失败");
     }
     [self.dataBase close];
-    
-    handler(downloadArray,finishArray);
 }
 
 - (void)querySqlite:(SqliteQueryHandler)handler { //查整个表
@@ -268,7 +290,7 @@
     NSMutableArray *downloadArray = [[NSMutableArray alloc] init];
     
     if ([self.dataBase open]) {
-//        NSLog(@"查 - 打开数据库成功");
+        NSLog(@"查 - 打开数据库成功");
         
         NSString *queryStr = @"select * from skydrive_table";
         FMResultSet *result = [self.dataBase executeQuery:queryStr];
@@ -289,29 +311,44 @@
                 model.file_size = [result stringForColumn:@"file_size"];
                 model.download_size = [result stringForColumn:@"download_size"];
                 
-                NSString *str = [result stringForColumn:@"resumeData"];
-                model.resumeData = [self strToData:str];
-                
                 model.progress = [result doubleForColumn:@"progress"];
-                model.status = [result intForColumn:@"status"];
+                if (model.progress == 1.0) {
+                    model.status = 5;
+                }
+                else {
+                    model.status = [result intForColumn:@"status"];
+                }
+//                model.status = [result intForColumn:@"status"];
+                
+                if (model.status != 5) {
+                    NSString *str = [result stringForColumn:@"resumeData"];
+                    if (str.length == 0) {
+                        model.resumeData = nil;
+                    }
+                    else {
+                        model.resumeData = [self strToData:str];
+                    }
+                }
+                
+//                NSString *str = [result stringForColumn:@"resumeData"];
+//                model.resumeData = [self strToData:str];
                 
 //                NSLog(@"查询数据库 ---> %@ -- %@", model.download_size, model.resumeData);
                 [downloadArray addObject:model];
             }
+            handler(downloadArray);
         }
     }
     else {
         NSLog(@"查 - 打开数据库失败");
     }
     [self.dataBase close];
-    
-    handler(downloadArray);
 }
 
 - (TDSkydrveFileModel *)querySqliteFileResumeData:(TDSkydrveFileModel *)model { //查询resumedata
     
     if ([self.dataBase open]) {
-//        NSLog(@"查 - 打开数据库成功");
+        NSLog(@"查 - 打开数据库成功");
         
         NSString *queryStr = @"select * from skydrive_table where id = ?";
         FMResultSet *result = [self.dataBase executeQuery:queryStr, model.id];
@@ -325,7 +362,7 @@
     else {
         NSLog(@"查 - 打开数据库失败");
     }
-    
+
     [self.dataBase close];
     return model;
 }
@@ -338,6 +375,7 @@
 
 - (NSData *)strToData:(NSString *)str {
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+//    NSLog(@"本地str转resumedata: %@ -->> %@",str,data);
     return data;
 }
 

@@ -36,7 +36,13 @@
     self.timeLabel.text = fileModel.created_at;
     
     if (fileModel.download_size.length > 0 && fileModel.progress > 0) {
-        self.sizeLabel.text = [NSString stringWithFormat:@"%@/%@",fileModel.download_size,fileModel.file_size];
+        
+        if (fileModel.status == 5) {
+            self.sizeLabel.text = fileModel.file_size;
+        }
+        else {
+            self.sizeLabel.text = [NSString stringWithFormat:@"%@/%@",fileModel.download_size,fileModel.file_size];
+        }
     }
     else {
         self.sizeLabel.text = fileModel.file_size;
@@ -95,6 +101,8 @@
     self.progressView.progress = fileModel.progress * 100; //注意乘于100
     self.progressView.status = fileModel.status;
     
+    self.shareButton.hidden = ![fileModel.is_shareable boolValue];
+    
 //    NSLog(@"下载cell -- 观察者");
     self.notifiName = [NSString stringWithFormat:@"%@_downloadProgressNotification",fileModel.id];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProgressNotification:) name:self.notifiName object:nil];
@@ -139,11 +147,11 @@
 //    NSLog(@"现在的状态 -- %ld",(long)status);
 }
 
-- (void)dealloc {
-//     NSLog(@"下载cell -- 销毁");
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:self.notifiName object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:self.statusNotifiName object:nil];
-}
+//- (void)dealloc {
+////     NSLog(@"下载cell -- 销毁");
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:self.notifiName object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:self.statusNotifiName object:nil];
+//}
 
 #pragma mark - UI
 - (void)configeView {

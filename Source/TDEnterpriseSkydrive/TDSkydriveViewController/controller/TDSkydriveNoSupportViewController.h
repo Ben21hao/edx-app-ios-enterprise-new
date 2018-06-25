@@ -7,10 +7,14 @@
 //
 
 #import "TDBaseViewController.h"
+#import "TDDownloadOperation.h"
 
 @interface TDSkydriveNoSupportViewController : TDBaseViewController
 
+@property (nonatomic,strong) TDSkydrveFileModel *model;
 @property (nonatomic,strong) NSString *titleStr;
 @property (nonatomic,strong) NSString *filePath;//本地文件路径
+
+@property (nonatomic,strong) TDDownloadOperation *downloadOperation;
 
 @end

@@ -25,12 +25,12 @@ typedef void(^SqliteQueryHandler)(NSMutableArray *localArray);
 - (void)insertFileData:(TDSkydrveFileModel *)model; //增
 
 - (void)deleteFileData:(NSString *)fileId; //根据文件id来删除删
-- (void)deleteFileArray:(NSArray *)selectArray handler:(void(^)(TDSkydrveFileModel *model,BOOL isFinish))handler; //批量删除
+- (void)deleteFileArray:(NSArray *)selectArray handler:(void(^)(TDSkydrveFileModel *model, BOOL isFinish))handler; //批量删除
 
 - (void)updateFileProgress:(CGFloat)progress id:(NSString *)fileId;//更新进度
 - (void)updateFileStatus:(NSInteger)status id:(NSString *)fileId;//更新下载状态
--(void)updateFileRusumeData:(NSData *)resumeData id:(NSString *)fileId; //已下载数据，用于断点续传
--(void)updateFileDownloadSize:(NSString *)download_size id:(NSString *)fileId;//已下载的大小
+- (void)updateFileRusumeData:(NSData *)resumeData id:(NSString *)fileId; //已下载数据，用于断点续传
+- (void)updateFileDownloadSize:(NSString *)download_size id:(NSString *)fileId;//已下载的大小
 
 - (void)querySqliteSortData:(SqliteQuerySortHandler)handler;//查 -分别返回未完成，已完成的文件数据
 - (void)querySqlite:(SqliteQueryHandler)handler;//查所有的数据

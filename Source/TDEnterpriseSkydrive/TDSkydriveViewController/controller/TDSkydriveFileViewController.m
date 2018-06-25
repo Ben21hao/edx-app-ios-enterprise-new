@@ -23,7 +23,6 @@
 #import "TDSkydrveFileModel.h"
 
 #import "TDDownloadOperation.h"
-#import "TDSkydriveSqliteOperation.h"
 #import "OEXAuthentication.h"
 #import "edX-Swift.h"
 
@@ -42,7 +41,6 @@
 @property (nonatomic,strong) NSMutableArray *sqliteArray; //数据库的数据
 
 @property (nonatomic,strong) TDDownloadOperation *downloadOperation;
-@property (nonatomic,strong) TDSkydriveSqliteOperation *sqliteOperation;
 
 @end
 
@@ -77,13 +75,41 @@
     [self.downloadOperation backgroundURLSession];
     self.downloadOperation.userName = self.username;
     self.downloadOperation.delegate = self;
-    [self.downloadOperation getLocalDownloadFileData]; //查询本地数据库的数据
+    [self getFileData];
     
     [self setLoadDataView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFileData) name:@"skydrive_delete_finish" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFileData) name:@"noSupport_skydrive_delete_finish" object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.downloadOperation.delegate = self;
+}
+
+- (void)dealloc {
+    NSLog(@" ---->>> ");
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"skydrive_delete_finish" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"skydrivnoSupport_skydrive_delete_finishe_delete_finish" object:nil];
 }
 
 - (void)rightButtonAciton:(UIButton *)sender {
     [self gotoLocalVc];
+}
+
+- (void)getFileData { //查询本地数据 -> 再请求服务器数据
+    
+    WS(weakSelf);
+    [self.downloadOperation getLocalDownloadFileData:^(NSMutableArray *localArray) {//查询本地数据库的数据
+        if (weakSelf.sqliteArray) {
+            [weakSelf.sqliteArray removeAllObjects];
+        }
+        [weakSelf.sqliteArray addObjectsFromArray:localArray];
+        
+        [weakSelf requestData];//请求服务器的数据
+    }];
 }
 
 #pragma mark - data
@@ -178,26 +204,21 @@
 - (void)downloadButtonAction:(UIButton *)sender { //下载按钮
     
     TDSkydrveFileModel *model = self.dataArray[sender.tag];
-    
     switch (model.status) {
         case 0: {
             if ([self judgeHasDownloadingTask]) {//有下载中： 未下载 -> 等待下载
                 [self.downloadOperation fileChageToWaitToDownload:model firstAdd:YES];
             }
             else { //无下载中：未下载 -> 下载
-                [self fileDownloadOperation:model];
+                [self currentModelDownloadOperation:model];
                 [self.downloadOperation beginDownloadFileModel:model firstAdd:YES]; //下载，第一次加入
             }
         }
             break;
         case 1:{//下载中 -> 暂停
-            [self fileDownloadOperation:model];
-            [self.downloadOperation pauseDownload:model]; //暂停
-            
-            TDSkydrveFileModel *nextModel = [self judgHasWaitToDownloadTask];
-            if (nextModel) {//有等待下载： 下一个
-                [self.downloadOperation nextFileBeginDownload:nextModel];
-            }
+            [self currentModelDownloadOperation:model];
+            [self.downloadOperation pauseDownload:model]; //暂停(暂停完成后，判断是否有等待，有则下一个)
+            NSLog(@"暂停 -->> %@",model.name);
         }
             break;
         case 2: { //等待下载 -> 暂停
@@ -209,17 +230,17 @@
                 [self.downloadOperation fileChageToWaitToDownload:model firstAdd:NO];
             }
             else { //无下载中：暂停 -> 下载
-                [self fileDownloadOperation:model];
+                [self currentModelDownloadOperation:model];
                 [self.downloadOperation beginDownloadFileModel:model firstAdd:NO];//下载
             }
         }
             break;
-        case 4: {
+        case 4: {//失败
             if ([self judgeHasDownloadingTask]) {//有下载中： 失败 -> 等待下载
                 [self.downloadOperation fileChageToWaitToDownload:model firstAdd:NO];
             }
-            else { //无下载中：下载失败 -> 下载
-                [self fileDownloadOperation:model];
+            else { //无下载中：失败 -> 下载
+                [self currentModelDownloadOperation:model];
                 [self.downloadOperation beginDownloadFileModel:model firstAdd:NO]; //下载
             }
         }
@@ -230,13 +251,12 @@
         default:
             break;
     }
-    NSLog(@"点击下载：状态 ----->> %ld",(long)model.status);
-    //    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:sender.tag inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+//    NSLog(@"点击下载：状态 ----->> %ld",(long)model.status);
 }
 
-- (void)fileDownloadOperation:(TDSkydrveFileModel *)model { //当前下载文件
-    self.downloadOperation.model = model;
-    self.downloadOperation.filePath = [self getPreviewFilePathForId:model];
+- (void)currentModelDownloadOperation:(TDSkydrveFileModel *)currentModel { //当前下载文件
+    self.downloadOperation.currentModel = currentModel;
+    self.downloadOperation.filePath = [self getPreviewFilePathForId:currentModel];
 }
 
 #pragma mark - 判断是否
@@ -252,10 +272,10 @@
     return NO; //无正在下载的文件
 }
 
-- (TDSkydrveFileModel *)judgHasWaitToDownloadTask { //是否有正在等待
+- (TDSkydrveFileModel *)judgHasWaitToDownloadTask:(NSMutableArray *)localArray { //是否有正在等待
     
-    for (int i = 0; i < self.dataArray.count; i ++) {
-        TDSkydrveFileModel *model = self.dataArray[i];
+    for (int i = 0; i < localArray.count; i ++) {
+        TDSkydrveFileModel *model = localArray[i];
         
         if (model.status == 2) { //有文件在等待下载
             return model;
@@ -270,7 +290,7 @@
         
         TDSkydrveFileModel *model = self.sqliteArray[i];
         if (model.status == 1) {//正在下载
-            [self fileDownloadOperation:model];
+            [self currentModelDownloadOperation:model];
         }
         
         if ([fileModel.id isEqualToString:model.id]) {
@@ -279,7 +299,7 @@
             fileModel.download_size = model.download_size;
             fileModel.resumeData = model.resumeData;
             
-            NSLog(@"同步model --->> %@  %@ -- %ld",model.id ,model.file_size,(long)model.status);
+//            NSLog(@"同步model --->> %@  %@ -- %ld",model.id ,model.file_size,(long)model.status);
             return model;
         }
     }
@@ -287,25 +307,34 @@
 }
 
 #pragma mark - TDDownloadOperationDelegate
-- (void)queryDataOfLocalDatabase:(NSMutableArray *)localArray { //查询本地所有的数据
-    
-    for (TDSkydrveFileModel *model in localArray) {
-        NSLog(@"查询本地数据库 --->>%@ -- %@ -- %ld -- %lf - %@ -- %@",model.id ,model.file_size,(long)model.status,model.progress,model.download_size,model.resumeData);
-    }
-    if (self.sqliteArray) {
-        [self.sqliteArray removeAllObjects];
-    }
-    [self.sqliteArray addObjectsFromArray:localArray];
-    
-    [self requestData];//请求解数据
-}
-
 - (void)nextFileShouldBeginDownload { //有等待：下一个任务开始下载
-    
-    TDSkydrveFileModel *nextModel = [self judgHasWaitToDownloadTask];
+
+    TDSkydrveFileModel *nextModel = [self judgHasWaitToDownloadTask:self.dataArray];
     if (nextModel) {//有等待下载： 下一个
+        [self currentModelDownloadOperation:nextModel];
         [self.downloadOperation nextFileBeginDownload:nextModel];
     }
+    
+    
+    [self.downloadOperation getLocalDownloadFileSortDataBlock:^(NSMutableArray *downloadArray, NSMutableArray *finishArray) {
+        NSLog(@"是否有等待--->>> %@ -->> %@",downloadArray,finishArray);
+    }];
+    
+//    WS(weakSelf);
+//    [self.downloadOperation getLocalDownloadFileSortDataBlock:^(NSMutableArray *downloadArray, NSMutableArray *finishArray) {
+//        
+//        NSLog(@"下一个 ----->> 有等待 -->> %@",downloadArray);
+//        
+//        TDSkydrveFileModel *nextModel = [weakSelf judgHasWaitToDownloadTask:downloadArray];
+//        if (nextModel) {//有等待下载： 下一个
+//            [weakSelf currentModelDownloadOperation:nextModel];
+//            [weakSelf.downloadOperation nextFileBeginDownload:nextModel];
+//        }
+//    }];
+}
+
+- (void)currentFileDownloadFinish:(TDSkydrveFileModel *)currentModel { //下载完一个任务，刷新任务管理页
+    
 }
 
 #pragma mark - tableView Delegate
@@ -377,7 +406,7 @@
                     [self gotoVideoPlayVC:model];
                     break;
                 case 5:
-                    
+                    [self gotoNoSupportVc:model];
                     break;
                 default: //不支持的文件类型
                     [self gotoNoSupportVc:model];
@@ -462,7 +491,7 @@
     NSString *namePath = [NSString stringWithFormat:@"skydive_download_%@_%@.%@",self.username,model.id,model.file_type];
     NSString *filePath = [path stringByAppendingPathComponent:namePath];
     
-    NSLog(@"文件路径------->> %@",filePath);
+//    NSLog(@"文件路径------->> %@",filePath);
     return filePath;
 }
 
@@ -482,7 +511,6 @@
     fileVc.folderID = model.id;
     [self.navigationController pushViewController:fileVc animated:YES];
 }
-
 
 #pragma mark - 分享
 - (void)shareButtonAction:(UIButton *)sender { //分享按钮
@@ -604,7 +632,7 @@
     
     self.noDataView.hidden = YES;
     
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getFileData)];
     header.lastUpdatedTimeLabel.hidden = YES; //隐藏时间
     [header setTitle:TDLocalizeSelect(@"DROP_REFRESH_TEXT", nil) forState:MJRefreshStateIdle];
     [header setTitle:TDLocalizeSelect(@"RELEASE_REFRESH_TEXT", nil) forState:MJRefreshStatePulling];
@@ -614,7 +642,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
 }
 
 @end

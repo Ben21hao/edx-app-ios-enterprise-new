@@ -46,7 +46,17 @@
     self.selectButton.selected = fileModel.isSelected;
     
     self.titleLabel.text = fileModel.name;
-    self.sizeLabel.text = fileModel.file_size;
+    if (fileModel.download_size.length > 0 && fileModel.progress > 0) {
+        if (fileModel.status == 5) {
+            self.sizeLabel.text = fileModel.file_size;
+        }
+        else {
+            self.sizeLabel.text = [NSString stringWithFormat:@"%@/%@",fileModel.download_size,fileModel.file_size];
+        }
+    }
+    else {
+        self.sizeLabel.text = fileModel.file_size;
+    }
     
     NSString *imageName;
     NSInteger format = [fileModel.file_type_format integerValue];
@@ -97,8 +107,56 @@
     }
     self.leftImageView.image = [UIImage imageNamed:imageName];
     
-    self.progressView.progress = fileModel.progress;
+    self.progressView.progress = fileModel.progress * 100; //注意乘于100
     self.progressView.status = fileModel.status;
+    
+    [self cellStatusText:fileModel];
+    
+//    NSLog(@"本地cell -- 观察者");
+    self.notifiName = [NSString stringWithFormat:@"%@_downloadProgressNotification",fileModel.id];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProgressNotification:) name:self.notifiName object:nil];
+    
+    self.statusNotifiName = [NSString stringWithFormat:@"%@_downloadStatusNotification",fileModel.id];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateStatusNotification:) name:self.statusNotifiName object:nil];
+}
+
+- (void)updateProgressNotification:(NSNotification *)notification { //更新进度
+    
+    NSDictionary *userInfo = notification.userInfo;
+    CGFloat progress = [userInfo[@"progress"] floatValue];
+    
+    self.fileModel.progress = progress;
+    self.progressView.progress = progress * 100;
+    
+    NSString *sizeStr = userInfo[@"download_size"];
+    if (sizeStr.length > 0  && progress > 0) {
+        self.fileModel.download_size = sizeStr;
+        self.sizeLabel.text = [NSString stringWithFormat:@"%@/%@",sizeStr,self.fileModel.file_size];
+    }
+    
+    if (progress == 1) {
+        self.fileModel.status = 5;
+        self.progressView.status = 5;
+        
+        self.fileModel.download_size = self.fileModel.file_size;
+        self.sizeLabel.text = [NSString stringWithFormat:@"%@",self.fileModel.file_size];
+    }
+//    NSLog(@"现在进度 -- %f",progress);
+}
+
+- (void)updateStatusNotification:(NSNotification *)notification { //更新状态
+    
+    NSDictionary *userInfo = notification.userInfo;
+    NSInteger status = [userInfo[@"status"] integerValue];
+    self.progressView.status = status;
+    self.fileModel.status = status;
+    
+    [self cellStatusText:self.fileModel];
+    
+//    NSLog(@"现在的状态 -- %ld",(long)status);
+}
+
+- (void)cellStatusText:(TDSkydrveFileModel *)fileModel {
     
     switch (fileModel.status) {// 0 未下载，1 下载中，2 等待下载，3 暂停，4 下载失败，5 下载完成
         case 0:
@@ -124,45 +182,13 @@
             self.statusLabel.text = @"";
             break;
     }
-    
-//    NSLog(@"本地cell -- 观察者");
-    self.notifiName = [NSString stringWithFormat:@"%@_downloadProgressNotification",fileModel.id];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProgressNotification:) name:self.notifiName object:nil];
-    
-    self.statusNotifiName = [NSString stringWithFormat:@"%@_downloadStatusNotification",fileModel.id];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateStatusNotification:) name:self.statusNotifiName object:nil];
 }
 
-- (void)updateProgressNotification:(NSNotification *)notification { //更新进度
-    
-    NSDictionary *userInfo = notification.userInfo;
-    CGFloat progress = [userInfo[@"progress"] floatValue];
-    
-    self.fileModel.progress = progress;
-    self.progressView.progress = progress * 100;
-    
-    if (progress == 1) {
-        self.fileModel.status = 5;
-        self.progressView.status = 5;
-    }
-//    NSLog(@"现在进度 -- %f",progress);
-}
-
-- (void)updateStatusNotification:(NSNotification *)notification { //更新状态
-    
-    NSDictionary *userInfo = notification.userInfo;
-    NSInteger status = [userInfo[@"status"] integerValue];
-    self.progressView.status = status;
-    self.fileModel.status = status;
-    
-//    NSLog(@"现在的状态 -- %ld",(long)status);
-}
-
-- (void)dealloc {
-//    NSLog(@"本地cell -- 销毁");
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:self.notifiName object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:self.statusNotifiName object:nil];
-}
+//- (void)dealloc {
+////    NSLog(@"本地cell -- 销毁");
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:self.notifiName object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:self.statusNotifiName object:nil];
+//}
 
 #pragma mark - UI
 - (void)configeView {

@@ -52,6 +52,10 @@
 
 - (void)deleteFile { //删除该文件
     
+    NSArray *selectArray = [[NSArray alloc] initWithObjects:self.model, nil];
+    [self.downloadOperation deleteSelectLocalFile:selectArray handler:^(TDSkydrveFileModel *model, BOOL isFinish) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"noSupport_skydrive_delete_finish" object:nil];
+    }];
 }
 
 - (void)systemActivity { //系统分享
@@ -59,7 +63,8 @@
     //    UIImage *image = [UIImage imageNamed:@"tubiao"];
 //    NSURL *url = [NSURL URLWithString:@"https://www.jianshu.com/p/d500fb72a079"];
     
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"111112" withExtension:@"pdf"];
+    NSURL *url = [[NSURL alloc] initFileURLWithPath:self.filePath];
+//    NSURL *url = [[NSBundle mainBundle] URLForResource:@"111112" withExtension:@"pdf"];
     
     NSArray *itemArray = @[@"文件分享",url];
     UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:itemArray applicationActivities:nil];

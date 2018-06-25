@@ -11,8 +11,11 @@
 
 @protocol TDDownloadOperationDelegate <NSObject>
 
-- (void)queryDataOfLocalDatabase:(NSMutableArray *)localArray;
-- (void)nextFileShouldBeginDownload;
+- (void)nextFileShouldBeginDownload; //下一个任务
+
+@optional
+- (void)queryDataOfLocalSortDatabase:(NSMutableArray *)downloadArray finish:(NSMutableArray *)finishArray; //分别查询未完成，已完成的数据
+- (void)currentFileDownloadFinish:(TDSkydrveFileModel *)currentModel;//下载完一个任务，刷新任务管理页
 
 @end
 
@@ -21,7 +24,7 @@ typedef void(^CompletionHandlerType)();
 @interface TDDownloadOperation : NSObject
 
 @property (nonatomic,strong) NSString *userName;
-@property (nonatomic,strong) TDSkydrveFileModel *model; //正在下载的文件model
+@property (nonatomic,strong) TDSkydrveFileModel *currentModel; //正在下载的文件model
 @property (nonatomic,strong) NSString *filePath;
 
 /*
@@ -52,11 +55,17 @@ typedef void(^CompletionHandlerType)();
  */
 @property (nonatomic,weak) id<TDDownloadOperationDelegate> delegate;
 
-- (void)getLocalDownloadFileData; //查询数据库所有数据 - 用于初始化数据
+- (void)getLocalDownloadFileData:(void(^)(NSMutableArray *localArray))handler; //查询数据库所有数据 - 用于初始化数据
+- (void)getLocalDownloadFileSortData; //查本地数据库 - 分未完成和完成
+- (void)getLocalDownloadFileSortDataBlock:(void(^)(NSMutableArray *downloadArray, NSMutableArray *finishArray))handler;//查询
+
 - (void)insertDownloadFile:(TDSkydrveFileModel *)model;//加入
+
 - (void)updateDownloadFileStatus:(TDSkydrveFileModel *)model;//更新下载的状态
 - (void)updateDownloadFileProgress:(TDSkydrveFileModel *)model; //更新下载进度
 - (void)updateDownloadFileRusumeData:(TDSkydrveFileModel *)model; //更新 resumeData
 - (void)updateDownloadFileDownloadSize:(TDSkydrveFileModel *)model; //更新已下载大小
+
+- (void)deleteSelectLocalFile:(NSArray *)selectArray handler:(void(^)(TDSkydrveFileModel *model, BOOL isFinish))handler;//删除选中的数组
     
 @end

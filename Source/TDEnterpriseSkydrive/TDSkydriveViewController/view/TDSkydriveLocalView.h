@@ -11,6 +11,7 @@
 
 @protocol TDSkydriveSelectDelegate <NSObject>
 
+- (void)userClickFileRowModel:(TDSkydrveFileModel *)model; //点击下载
 - (void)userPreviewFileRowAtIndexpath:(NSIndexPath *)indexPath; //文件预览
 - (void)userSelectFileRowAtIndexpath:(TDSkydrveFileModel *)model;//选择编辑文件
 

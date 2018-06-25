@@ -52,19 +52,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     TDSkydriveLocalFileCell *cell = [[TDSkydriveLocalFileCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TDSkydriveLocalFileCell"];
-    
-    cell.progressView.downloadButton.tag = indexPath.row;
     cell.selectButton.tag = indexPath.row;
     
+    cell.progressView.downloadButton.tag = indexPath.row;
     [cell.progressView.downloadButton addTarget:self action:@selector(downloadButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
     TDSkydrveFileModel *model;
     if (indexPath.section == 0) {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         model = self.downloadArray[indexPath.row];
+        
+        cell.progressView.downloadButton.userInteractionEnabled = YES;
     }
     else {
         model = self.finishArray[indexPath.row];
+        cell.progressView.downloadButton.userInteractionEnabled = NO;
     }
     
     cell.fileModel = model;
@@ -78,9 +80,12 @@
     TDSkydriveFolderHeaderView *headerView = [[TDSkydriveFolderHeaderView alloc] initWithReuseIdentifier:@"skydriveLocalHeaderView"];
     if (section == 0) {
         headerView.titleLabel.text = [NSString stringWithFormat:@"正在下载（%lu个）",(unsigned long)self.downloadArray.count];
+        headerView.hidden = self.downloadArray.count == 0;
+        
     }
     else {
         headerView.titleLabel.text = [NSString stringWithFormat:@"已下载完成（%lu个）",(unsigned long)self.finishArray.count];
+        headerView.hidden = self.finishArray.count == 0;
     }
     
     return headerView;
@@ -91,6 +96,17 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    if (section == 0) {
+        if (self.downloadArray.count == 0) {
+            return 0;
+        }
+    }
+    else {
+        if (self.finishArray.count == 0) {
+            return 0;
+        }
+    }
     return 40;
 }
 
@@ -114,8 +130,34 @@
 #pragma mark - action
 - (void)downloadButtonAction:(UIButton *)sender { //下载
     
+    TDSkydrveFileModel *model = self.downloadArray[sender.tag];
+    [self.delegate userClickFileRowModel:model];
 }
 
+- (void)reloadTableViewForDownload:(NSArray *)downloadArray finish:(NSArray *)finishArray { //刷新数据
+    self.downloadArray = downloadArray;
+    self.finishArray = finishArray;
+    
+    BOOL noData = self.downloadArray.count == 0 && self.finishArray.count == 0;
+    self.noDataView.hidden = !noData;
+    self.editeButton.hidden = noData;
+    self.cancelButton.hidden = YES;
+    self.deleteButton.hidden = YES;
+    
+    [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_equalTo(self);
+        make.bottom.mas_equalTo(self.mas_bottom).offset(noData ? 0 : -48);
+    }];
+    
+    [self.editeButton mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(self);
+        make.height.mas_equalTo(noData ? 0 : 48);
+    }];
+    
+    [self.tableView reloadData];
+}
+
+#pragma mark - 编辑
 - (void)userEditingFile:(BOOL)editing { //是否编辑
     
     self.isEditing = editing;
@@ -131,13 +173,7 @@
     [self.tableView reloadData];
 }
 
-- (void)reloadTableViewForDownload:(NSArray *)downloadArray finish:(NSArray *)finishArray { //刷新数据
-    self.downloadArray = downloadArray;
-    self.finishArray = finishArray;
-    [self.tableView reloadData];
-}
-
-- (void)setIsAllSelect:(BOOL)isAllSelect {
+- (void)setIsAllSelect:(BOOL)isAllSelect { //全选
     _isAllSelect = isAllSelect;
     
     /*
@@ -153,6 +189,7 @@
     
     [self.tableView reloadData];
 }
+
 
 #pragma mark - UI
 - (void)configView {

@@ -21,7 +21,7 @@
 @property (nonatomic,strong) NSURLSessionDownloadTask *downloadTask;
 @property (nonatomic,strong) NSURLSession *backgroundSession;
 
-@property (nonatomic,strong) NSData *resumeData; //已下载的数据，用于续传
+//@property (nonatomic,strong) NSData *resumeData; //当前下载文件已下载的数据，用于续传
 @property (nonatomic,assign) int64_t expectedTotalBytes; //总大小
 
 @property (nonatomic,strong) TDSkydriveSqliteOperation *sqliteOperation;
@@ -95,15 +95,14 @@ static NSURLSession *session = nil;
     [self.downloadTask resume];
     
     NSLog(@"--->> 开始下载");
-    self.model.status = 1;
+    self.currentModel.status = 1;
     if (isFirst) {
-        [self insertDownloadFile:model];
+        [self insertDownloadFile:model]; //加入本地数据库
     }
     else {
-        [self updateDownloadFileStatus:model];
+        [self updateDownloadFileStatus:model]; //更新数据库状态
     }
-    //发通知
-    [self postDownloadStatusNotification:self.model]; //失败后再下载的，不再增加记录
+    [self postDownloadStatusNotification:self.currentModel]; //cell状态
 }
 
 //- (void)continueDownload:(TDSkydrveFileModel *)model { //继续下载
@@ -122,8 +121,8 @@ static NSURLSession *session = nil;
 //    }
 //    
 //    NSLog(@"--->> 继续下载");
-//    self.model.status = 1;
-//    [self postDownloadStatusNotification:self.model];
+//    self.currentModel.status = 1;
+//    [self postDownloadStatusNotification:self.currentModel];
 //}
 
 - (void)pauseDownload:(TDSkydrveFileModel *)model { //下载中 -> 暂停
@@ -132,10 +131,10 @@ static NSURLSession *session = nil;
     [self.downloadTask cancelByProducingResumeData:^(NSData * resumeData) { //暂停下载
         
         __strong __typeof(wSelf) sSelf = wSelf;
-        self.model.resumeData = resumeData;
+        self.currentModel.resumeData = resumeData;
         
-        if ([sSelf isValideResumeData:self.model.resumeData]) {
-            [sSelf updateDownloadFileRusumeData:self.model];
+        if ([sSelf isValideResumeData:self.currentModel.resumeData]) {
+            [sSelf updateDownloadFileRusumeData:self.currentModel];
         }
 //        NSLog(@"存已下载的数据 ----->> %@",model.resumeData);
     }];
@@ -165,16 +164,20 @@ static NSURLSession *session = nil;
         [self updateDownloadFileStatus:model];
     }
     [self postDownloadStatusNotification:model];
+    
+    NSLog(@"等待 -->> %@",model.name);
 }
 
-
-- (void)nextFileBeginDownload:(TDSkydrveFileModel *)model { //有等待： 下一个 等待的任务开始下载
+- (void)nextFileBeginDownload:(TDSkydrveFileModel *)model { //有等待： 下一个 等待的任务开始下载(暂停，完成，失败 三种情况)
     [self beginDownloadFileModel:model firstAdd:NO];
 }
 
 #pragma mark - 处理kill掉程序
 - (void)exitApplicationSaveResumeData { //用户退出程序
-    [self.downloadTask cancel];
+    
+    [self.downloadTask cancelByProducingResumeData:^(NSData * _Nullable resumeData) {
+        
+    }];
 }
 
 #pragma mark - NSURLSessionDownloadDelegate
@@ -233,22 +236,20 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
         if ([error.userInfo objectForKey:NSURLSessionDownloadTaskResumeData]) { // 看已下载的数据是否有效check if resume data are available
             
             NSData *resumeData = [error.userInfo objectForKey:NSURLSessionDownloadTaskResumeData]; //通过之前保存的resumeData，获取断点的NSURLSessionTask，调用resume恢复下载
-            self.model.resumeData = resumeData;
-            if ([self isValideResumeData:self.model.resumeData]) {
-                [self updateDownloadFileRusumeData:self.model];
+            self.currentModel.resumeData = resumeData;
+            if ([self isValideResumeData:self.currentModel.resumeData]) {
+                [self updateDownloadFileRusumeData:self.currentModel];
             }
         }
         
-        NSLog(@"--->> %@",[error.userInfo objectForKey:NSLocalizedDescriptionKey]);
+        NSLog(@"下载error --->> %@",[error.userInfo objectForKey:NSLocalizedDescriptionKey]);
         if (error.code == -999) {
             
-            self.model.status = 3;
-            [self postDownloadStatusNotification:self.model];
+            self.currentModel.status = 3;
             NSLog(@"--->> 暂停下载");
         }
         else {
-            self.model.status = 4;
-            [self postDownloadStatusNotification:self.model];
+            self.currentModel.status = 4;
             NSLog(@"--->> 下载失败");
         }
         
@@ -256,32 +257,33 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
 //        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
 //        [delegate sendLocalNotification]; //发送本地通知
         
-        [self postDownlaodProgressNotification:@"1"];
-        self.model.status = 5;
-        [self postDownloadStatusNotification:self.model];
+        [self postDownlaodProgressNotification:@"1"]; //更新progress
+        self.currentModel.status = 5;
         
+        [self.delegate currentFileDownloadFinish:self.currentModel]; //完成当前的下载任务
         NSLog(@"--->> 下载成功");
     }
-    [self updateDownloadFileStatus:self.model]; //更新状态
+    [self postDownloadStatusNotification:self.currentModel]; //cell的status
+    [self updateDownloadFileStatus:self.currentModel]; //更新本地状态
     
-//    [self.delegate nextFileShouldBeginDownload]; //开始下一个任务
+    [self.delegate nextFileShouldBeginDownload]; //开始下一个任务
 }
 
 #pragma mark - 更新通知
 - (void)postDownlaodProgressNotification:(NSString *)progress { //更新当前下载的进度
     
-    self.model.progress = [progress floatValue];
+    self.currentModel.progress = [progress floatValue];
     NSString *sizeStr = [self sizeConversion];
-    self.model.download_size = sizeStr;
+    self.currentModel.download_size = sizeStr;
     
-    int value = self.model.progress * 100;
+    int value = self.currentModel.progress * 100;
     if (value % 10 == 0) { //十分之一更新一次
-        [self updateDownloadFileProgress:self.model];//更新进度
-        [self updateDownloadFileDownloadSize:self.model];
+        [self updateDownloadFileProgress:self.currentModel];//更新进度
+        [self updateDownloadFileDownloadSize:self.currentModel];
     }
     
     NSDictionary *userInfo = @{@"progress":progress, @"download_size": sizeStr};
-    NSString *name = [NSString stringWithFormat:@"%@_downloadProgressNotification",self.model.id];
+    NSString *name = [NSString stringWithFormat:@"%@_downloadProgressNotification",self.currentModel.id];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:name object:nil userInfo:userInfo];
@@ -301,7 +303,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
 
 - (NSString *)sizeConversion { //大小换算
     
-    CGFloat writtenBytes = self.expectedTotalBytes * self.model.progress;
+    CGFloat writtenBytes = self.expectedTotalBytes * self.currentModel.progress;
     
     NSString *sizeStr = @"";
     CGFloat kb = writtenBytes/1024;
@@ -344,15 +346,31 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
 }
 
 #pragma mark - 本地数据库
-- (void)getLocalDownloadFileData { //查本地数据库 - 用于初始化数据
+- (void)getLocalDownloadFileData:(void(^)(NSMutableArray *localArray))handler { //查本地数据库 - 用于初始化数据
+    
+    self.sqliteOperation = [[TDSkydriveSqliteOperation alloc] init];
+    [self.sqliteOperation createSqliteForUser:self.userName];
+
+    [self.sqliteOperation querySqlite:handler];
+}
+
+- (void)getLocalDownloadFileSortData { //查本地数据库 - 分未完成和完成
     
     self.sqliteOperation = [[TDSkydriveSqliteOperation alloc] init];
     [self.sqliteOperation createSqliteForUser:self.userName];
     
     WS(weakSelf);
-    [self.sqliteOperation querySqlite:^(NSMutableArray *localArray) {
-        [weakSelf.delegate queryDataOfLocalDatabase:localArray];
+    [self.sqliteOperation querySqliteSortData:^(NSMutableArray *downloadArray, NSMutableArray *finishArray) {
+        [weakSelf.delegate queryDataOfLocalSortDatabase:downloadArray finish:finishArray];
     }];
+}
+
+- (void)getLocalDownloadFileSortDataBlock:(void(^)(NSMutableArray *downloadArray, NSMutableArray *finishArray))handler {
+    
+    self.sqliteOperation = [[TDSkydriveSqliteOperation alloc] init];
+    [self.sqliteOperation createSqliteForUser:self.userName];
+    
+    [self.sqliteOperation querySqliteSortData:handler];
 }
 
 //增
@@ -377,5 +395,9 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
     [self.sqliteOperation updateFileDownloadSize:model.download_size id:model.id];
 }
 
+//删除
+- (void)deleteSelectLocalFile:(NSArray *)selectArray handler:(void(^)(TDSkydrveFileModel *model, BOOL isFinish))handler {
+    [self.sqliteOperation deleteFileArray:selectArray handler:handler];
+}
 
 @end
