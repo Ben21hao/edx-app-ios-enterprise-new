@@ -346,29 +346,16 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
 }
 
 #pragma mark - 本地数据库
-- (void)getLocalDownloadFileData:(void(^)(NSMutableArray *localArray))handler { //查本地数据库 - 用于初始化数据
-    
+- (void)sqliteOperationInit:(NSString *)username {//初始化
     self.sqliteOperation = [[TDSkydriveSqliteOperation alloc] init];
-    [self.sqliteOperation createSqliteForUser:self.userName];
+    [self.sqliteOperation createSqliteForUser:username];
+}
 
+- (void)getLocalDownloadFileData:(void(^)(NSMutableArray *localArray))handler { //查本地数据库 - 用于初始化数据
     [self.sqliteOperation querySqlite:handler];
 }
 
-- (void)getLocalDownloadFileSortData { //查本地数据库 - 分未完成和完成
-    
-    self.sqliteOperation = [[TDSkydriveSqliteOperation alloc] init];
-    [self.sqliteOperation createSqliteForUser:self.userName];
-    
-    WS(weakSelf);
-    [self.sqliteOperation querySqliteSortData:^(NSMutableArray *downloadArray, NSMutableArray *finishArray) {
-        [weakSelf.delegate queryDataOfLocalSortDatabase:downloadArray finish:finishArray];
-    }];
-}
-
 - (void)getLocalDownloadFileSortDataBlock:(void(^)(NSMutableArray *downloadArray, NSMutableArray *finishArray))handler {
-    
-    self.sqliteOperation = [[TDSkydriveSqliteOperation alloc] init];
-    [self.sqliteOperation createSqliteForUser:self.userName];
     
     [self.sqliteOperation querySqliteSortData:handler];
 }
@@ -401,3 +388,5 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
 }
 
 @end
+
+

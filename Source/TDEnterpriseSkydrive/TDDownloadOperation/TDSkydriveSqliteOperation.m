@@ -119,17 +119,17 @@
     
     if ([self.dataBase open]) {
     
-        NSString *queryStr = @"select * from skydrive_table where id = ?";
-        FMResultSet *result = [self.dataBase executeQuery:queryStr,fileId];
+//        NSString *queryStr = @"select * from skydrive_table where id = ?";
+//        FMResultSet *result = [self.dataBase executeQuery:queryStr,fileId];
         
-        CGFloat oldProgress = 0.0;
-        if (result) {
-            while ([result next]) {
-                oldProgress = [result doubleForColumn:@"progress"];
-            }
-        }
+//        CGFloat oldProgress = 0.0;
+//        if (result) {
+//            while ([result next]) {
+//                oldProgress = [result doubleForColumn:@"progress"];
+//            }
+//        }
         
-        BOOL change = [self.dataBase executeUpdate:@"update skydrive_table set progress = ? where progress = ?", @(progress), @(oldProgress)];
+        BOOL change = [self.dataBase executeUpdate:@"update skydrive_table set progress = ? where id = ?", @(progress), fileId];
         if (change) {
 //            NSLog(@"progress更新成功 %@ %lf",fileId,progress);
         } else {
@@ -143,23 +143,25 @@
     
     if ([self.dataBase open]) {
     
-        NSString *queryStr = @"select * from skydrive_table where id = ?";
-        FMResultSet *result = [self.dataBase executeQuery:queryStr,fileId];
+//        NSString *queryStr = @"select * from skydrive_table";
+//        FMResultSet *result = [self.dataBase executeQuery:queryStr,fileId];
+//        
+//        if (result) {
+//            while ([result next]) {
         
-        NSInteger oldStatus = 1;
-        if (result) {
-            while ([result next]) {
-                oldStatus = [result intForColumn:@"status"];
-            }
-        }
-        
-        BOOL change = [self.dataBase executeUpdate:@"update skydrive_table set status = ? where status = ?", @(status), @(oldStatus)];
-        
-        if (change) {
-            NSLog(@"status更新成功 %@",fileId);
-        } else {
-            NSLog(@"status更新失败  %@",fileId);
-        }
+//                NSString *idStr = [result stringForColumn:@"id"];
+//                if ([idStr isEqualToString:fileId]) {
+//                    NSInteger oldStatus = [result intForColumn:@"status"];
+                    BOOL change = [self.dataBase executeUpdate:@"update skydrive_table set status = ? where id = ?", @(status), fileId];
+                    
+                    if (change) {
+                        NSLog(@"status更新成功 %@ -> %ld",fileId,(long)status);
+                    } else {
+                        NSLog(@"status更新失败  %@",fileId);
+                    }
+//                }
+//            }
+//        }
     }
     
     [self.dataBase close];
@@ -169,22 +171,22 @@
     
     if ([self.dataBase open]) {
     
-        NSString *queryStr = @"select * from skydrive_table where id = ?";
-        FMResultSet *result = [self.dataBase executeQuery:queryStr,fileId];
-        
-        NSString *oldDataStr = @"";
-        if (result) {
-            while ([result next]) {
-                oldDataStr = [result stringForColumn:@"resumeData"];
-            }
-        }
+//        NSString *queryStr = @"select * from skydrive_table where id = ?";
+//        FMResultSet *result = [self.dataBase executeQuery:queryStr,fileId];
+//        
+//        NSString *oldDataStr = @"";
+//        if (result) {
+//            while ([result next]) {
+//                oldDataStr = [result stringForColumn:@"resumeData"];
+//            }
+//        }
         
         NSString *resumeStr = [self dataToString:resumeData];
-        BOOL change = [self.dataBase executeUpdate:@"update skydrive_table set resumeData = ? where resumeData = ?", resumeStr, oldDataStr];
+        BOOL change = [self.dataBase executeUpdate:@"update skydrive_table set resumeData = ? where id = ?", resumeStr, fileId];
         if (change) {
-            NSLog(@"resumeData更新成功 %@ 以前的- %@",resumeStr,oldDataStr);
+            NSLog(@"resumeData更新成功 %@",resumeStr);
         } else {
-            NSLog(@"resumeData更新失败 %@ 以前的- %@",resumeStr,oldDataStr);
+            NSLog(@"resumeData更新失败 %@",resumeStr);
         }
     }
     
@@ -195,21 +197,21 @@
     
     if ([self.dataBase open]) {
     
-        NSString *queryStr = @"select * from skydrive_table where id = ?";
-        FMResultSet *result = [self.dataBase executeQuery:queryStr,fileId];
+//        NSString *queryStr = @"select * from skydrive_table where id = ?";
+//        FMResultSet *result = [self.dataBase executeQuery:queryStr,fileId];
+//        
+//        NSString *oldSize = @"";
+//        if (result) {
+//            while ([result next]) {
+//                oldSize = [result stringForColumn:@"download_size"];
+//            }
+//        }
         
-        NSString *oldSize = @"";
-        if (result) {
-            while ([result next]) {
-                oldSize = [result stringForColumn:@"download_size"];
-            }
-        }
-        
-        BOOL change = [self.dataBase executeUpdate:@"update skydrive_table set download_size = ? where download_size = ?", download_size, oldSize];
+        BOOL change = [self.dataBase executeUpdate:@"update skydrive_table set download_size = ? where id = ?", download_size, fileId];
         if (change) {
-//            NSLog(@"download_size更新成功 %@ - %@",download_size,oldSize);
+//            NSLog(@"download_size更新成功 %@ - %@",download_size);
         } else {
-            NSLog(@"download_size更新失败 %@ - %@",download_size,oldSize);
+            NSLog(@"download_size更新失败 %@",download_size);
         }
     }
     
@@ -266,7 +268,7 @@
 //                NSString *str = [result stringForColumn:@"resumeData"];
 //                model.resumeData = [self strToData:str];
                 
-                NSLog(@"数据库 --->>> %f --->>>> %ld",model.progress,(long)model.status);
+                NSLog(@"数据库 --->>>%@ %@ --> %f --->>>> %ld",model.id,model.name,model.progress,(long)model.status);
                 
                 if (model.status == 5) {
                     [finishArray addObject:model];

@@ -64,7 +64,7 @@
     
     self.downloadOperation = [TDDownloadOperation shareOperation];
     [self.downloadOperation backgroundURLSession];
-    self.downloadOperation.userName = self.username;
+    [self.downloadOperation sqliteOperationInit:self.username];
     self.downloadOperation.delegate = self;
     
     [self getLocalData];
@@ -90,7 +90,8 @@
 #pragma mark - TDDownloadOperationDelegate
 - (void)currentFileDownloadFinish:(TDSkydrveFileModel *)currentModel { //下载完一个任务，刷新任务管理页
     
-    for (TDSkydrveFileModel *model in self.downloadingArray) {
+    for (int i = 0; i < self.downloadingArray.count; i ++) {
+        TDSkydrveFileModel *model = self.downloadingArray[i];
         if ([model.id isEqualToString:currentModel.id]) {
             [self.downloadingArray removeObject:model];
         }

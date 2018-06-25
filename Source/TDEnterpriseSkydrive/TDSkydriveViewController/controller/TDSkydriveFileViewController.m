@@ -73,7 +73,7 @@
     
     self.downloadOperation = [TDDownloadOperation shareOperation];
     [self.downloadOperation backgroundURLSession];
-    self.downloadOperation.userName = self.username;
+    [self.downloadOperation sqliteOperationInit:self.username];
     self.downloadOperation.delegate = self;
     [self getFileData];
     
@@ -261,6 +261,14 @@
 
 #pragma mark - 判断是否
 - (BOOL)judgeHasDownloadingTask { //是否有下载中
+    
+    [self.downloadOperation getLocalDownloadFileData:^(NSMutableArray *localArray) {//查询本地数据库的数据
+        
+        for (int i = 0; i < localArray.count; i ++) {
+            TDSkydrveFileModel *model = localArray[i];
+            NSLog(@"判断 -->> %@ -- %@ -- %ld",model.id,model.name,(long)model.status);
+        }
+    }];
     
     for (int i = 0; i < self.dataArray.count; i ++) {
         TDSkydrveFileModel *model = self.dataArray[i];

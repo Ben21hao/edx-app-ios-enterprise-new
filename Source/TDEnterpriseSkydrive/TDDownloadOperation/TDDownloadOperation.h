@@ -14,7 +14,6 @@
 - (void)nextFileShouldBeginDownload; //下一个任务
 
 @optional
-- (void)queryDataOfLocalSortDatabase:(NSMutableArray *)downloadArray finish:(NSMutableArray *)finishArray; //分别查询未完成，已完成的数据
 - (void)currentFileDownloadFinish:(TDSkydrveFileModel *)currentModel;//下载完一个任务，刷新任务管理页
 
 @end
@@ -23,7 +22,6 @@ typedef void(^CompletionHandlerType)();
 
 @interface TDDownloadOperation : NSObject
 
-@property (nonatomic,strong) NSString *userName;
 @property (nonatomic,strong) TDSkydrveFileModel *currentModel; //正在下载的文件model
 @property (nonatomic,strong) NSString *filePath;
 
@@ -53,10 +51,12 @@ typedef void(^CompletionHandlerType)();
 /*
  数据库
  */
+
 @property (nonatomic,weak) id<TDDownloadOperationDelegate> delegate;
 
+- (void)sqliteOperationInit:(NSString *)username;//初始化
+
 - (void)getLocalDownloadFileData:(void(^)(NSMutableArray *localArray))handler; //查询数据库所有数据 - 用于初始化数据
-- (void)getLocalDownloadFileSortData; //查本地数据库 - 分未完成和完成
 - (void)getLocalDownloadFileSortDataBlock:(void(^)(NSMutableArray *downloadArray, NSMutableArray *finishArray))handler;//查询
 
 - (void)insertDownloadFile:(TDSkydrveFileModel *)model;//加入
