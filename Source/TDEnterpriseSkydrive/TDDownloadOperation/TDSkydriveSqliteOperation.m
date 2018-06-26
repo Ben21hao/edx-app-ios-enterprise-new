@@ -118,16 +118,6 @@
 - (void)updateFileProgress:(CGFloat)progress id:(NSString *)fileId {//更新进度
     
     if ([self.dataBase open]) {
-    
-//        NSString *queryStr = @"select * from skydrive_table where id = ?";
-//        FMResultSet *result = [self.dataBase executeQuery:queryStr,fileId];
-        
-//        CGFloat oldProgress = 0.0;
-//        if (result) {
-//            while ([result next]) {
-//                oldProgress = [result doubleForColumn:@"progress"];
-//            }
-//        }
         
         BOOL change = [self.dataBase executeUpdate:@"update skydrive_table set progress = ? where id = ?", @(progress), fileId];
         if (change) {
@@ -142,26 +132,14 @@
 -(void)updateFileStatus:(NSInteger)status id:(NSString *)fileId {//更新状态
     
     if ([self.dataBase open]) {
-    
-//        NSString *queryStr = @"select * from skydrive_table";
-//        FMResultSet *result = [self.dataBase executeQuery:queryStr,fileId];
-//        
-//        if (result) {
-//            while ([result next]) {
         
-//                NSString *idStr = [result stringForColumn:@"id"];
-//                if ([idStr isEqualToString:fileId]) {
-//                    NSInteger oldStatus = [result intForColumn:@"status"];
-                    BOOL change = [self.dataBase executeUpdate:@"update skydrive_table set status = ? where id = ?", @(status), fileId];
-                    
-                    if (change) {
-                        NSLog(@"status更新成功 %@ -> %ld",fileId,(long)status);
-                    } else {
-                        NSLog(@"status更新失败  %@",fileId);
-                    }
-//                }
-//            }
-//        }
+        BOOL change = [self.dataBase executeUpdate:@"update skydrive_table set status = ? where id = ?", @(status), fileId];
+        
+        if (change) {
+            NSLog(@"status更新成功 %@ -> %ld",fileId,(long)status);
+        } else {
+            NSLog(@"status更新失败  %@",fileId);
+        }
     }
     
     [self.dataBase close];
@@ -170,16 +148,6 @@
 -(void)updateFileRusumeData:(NSData *)resumeData id:(NSString *)fileId {//更新 resumeData
     
     if ([self.dataBase open]) {
-    
-//        NSString *queryStr = @"select * from skydrive_table where id = ?";
-//        FMResultSet *result = [self.dataBase executeQuery:queryStr,fileId];
-//        
-//        NSString *oldDataStr = @"";
-//        if (result) {
-//            while ([result next]) {
-//                oldDataStr = [result stringForColumn:@"resumeData"];
-//            }
-//        }
         
         NSString *resumeStr = [self dataToString:resumeData];
         BOOL change = [self.dataBase executeUpdate:@"update skydrive_table set resumeData = ? where id = ?", resumeStr, fileId];
@@ -196,16 +164,6 @@
 -(void)updateFileDownloadSize:(NSString *)download_size id:(NSString *)fileId {
     
     if ([self.dataBase open]) {
-    
-//        NSString *queryStr = @"select * from skydrive_table where id = ?";
-//        FMResultSet *result = [self.dataBase executeQuery:queryStr,fileId];
-//        
-//        NSString *oldSize = @"";
-//        if (result) {
-//            while ([result next]) {
-//                oldSize = [result stringForColumn:@"download_size"];
-//            }
-//        }
         
         BOOL change = [self.dataBase executeUpdate:@"update skydrive_table set download_size = ? where id = ?", download_size, fileId];
         if (change) {
@@ -344,6 +302,7 @@
         NSLog(@"查 - 打开数据库失败");
     }
     [self.dataBase close];
+    
     return downloadArray;
 }
 
@@ -379,100 +338,6 @@
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
 //    NSLog(@"本地str转resumedata: %@ -->> %@",str,data);
     return data;
-}
-
-#pragma mark - demo
-- (void)sqliteInit:(NSString *)username {
-    
-    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    self.sqlitePath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_skydriveFile.sqlite",username]]; //根据username建数据库
-    self.dataBase = [FMDatabase databaseWithPath:self.sqlitePath]; //初始化对象
-    
-    if ([self.dataBase open]) {
-        NSLog(@"打开数据库成功");
-    }
-    else {
-        NSLog(@"打开数据库失败");
-    }
-    
-    //3.创建表
-    BOOL result = [self.dataBase executeUpdate:@"CREATE TABLE IF NOT EXISTS skydrive_table (id text NOT NULL, name text NOT NULL, type text NOT NULL, file_size text);"];
-    if (result) {
-        NSLog(@"创建表成功");
-    } else {
-        NSLog(@"创建表失败");
-    }
-    
-    
-    //增
-    BOOL insert = [self.dataBase executeUpdate:@"INSERT INTO skydrive_table (id,name,type,file_size) VALUES (?,?,?,?)",@"哈哈哈哈哈哈id",@"哈哈哈哈哈哈name",@"哈哈哈哈哈哈type",@"哈哈哈哈哈哈file_size"];
-    //2.executeUpdateWithForamat：不确定的参数用%@，%d等来占位 （参数为原始数据类型，执行语句不区分大小写）
-    //    BOOL result = [_db executeUpdateWithFormat:@"insert into skydrive_table (name,age, sex) values (%@,%i,%@)",name,age,sex];
-    //3.参数是数组的使用方式
-    //    BOOL result = [_db executeUpdate:@"INSERT INTO skydrive_table(name,age,sex) VALUES  (?,?,?);" withArgumentsInArray:@[name,@(age),sex]];
-    if (insert) {
-        NSLog(@"插入成功");
-    } else {
-        NSLog(@"插入失败");
-    }
-    
-    BOOL insert1 = [self.dataBase executeUpdate:@"INSERT INTO skydrive_table (id,name,type,file_size) VALUES (?,?,?,?)",@"哈哈哈哈哈哈id1",@"哈哈哈哈哈哈name1",@"哈哈哈哈哈哈type1",@"哈哈哈哈哈哈file_size1"];
-    //2.executeUpdateWithForamat：不确定的参数用%@，%d等来占位 （参数为原始数据类型，执行语句不区分大小写）
-    //    BOOL result = [_db executeUpdateWithFormat:@"insert into skydrive_table (name,age, sex) values (%@,%i,%@)",name,age,sex];
-    //3.参数是数组的使用方式
-    //    BOOL result = [_db executeUpdate:@"INSERT INTO skydrive_table(name,age,sex) VALUES  (?,?,?);" withArgumentsInArray:@[name,@(age),sex]];
-    if (insert1) {
-        NSLog(@"插入成功1");
-    } else {
-        NSLog(@"插入失败1");
-    }
-    
-    //改
-    BOOL change = [self.dataBase executeUpdate:@"update skydrive_table set name = ? where name = ?", @"修改嘻嘻嘻嘻嘻嘻name", @"哈哈哈哈哈哈name"];
-    if (change) {
-        NSLog(@"更新成功");
-    } else {
-        NSLog(@"更新失败 %d", result);
-    }
-    
-    //删
-    BOOL delete = [self.dataBase executeUpdate:@"delete from skydrive_table where name = ?", @"哈哈哈哈哈哈name1"];
-    if (delete) {
-        NSLog(@"删除成功");
-    } else {
-        NSLog(@"删除失败 %d", result);
-    }
-    
-    
-    //查
-    //查询整个表
-    FMResultSet *resultSet = [self.dataBase executeQuery:@"select * from skydrive_table"];
-    //根据条件查询
-    //FMResultSet * resultSet = [self.dataBase executeQuery:@"select * from skydrive_table where id < ?", @(4)];
-    if (resultSet) {
-        //遍历结果集合
-        while ([resultSet next]) {
-            NSString *idNum = [resultSet objectForColumn:@"id"];
-            NSString *fileId = [resultSet objectForColumn:@"name"];
-            NSString *path = [resultSet objectForColumn:@"type"];
-            NSData *resumeData = [resultSet objectForColumn:@"file_size"];
-            NSLog(@"----->> id：%@ fileId：%@ path：%@ resumeData：%@",idNum,fileId, path, resumeData);
-        }
-    }
-    else {
-        NSLog(@"查询失败");
-    }
-    
-    
-    //如果表格存在 则销毁
-    BOOL isDrop = [self.dataBase executeUpdate:@"drop table if exists skydrive_table"];
-    if (isDrop) {
-        NSLog(@"删除表成功");
-    } else {
-        NSLog(@"删除表失败");
-    }
-    
-    [self.dataBase close];
 }
 
 

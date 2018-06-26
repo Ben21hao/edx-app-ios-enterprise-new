@@ -13,7 +13,7 @@
 @property (nonatomic,strong) NSString *id;//文件表id
 @property (nonatomic,strong) NSString *name;//文件或者文件夹名
 
-@property (nonatomic,strong) NSString *type;//0：文件夹; 1：文件
+@property (nonatomic,strong) NSString *type; //0：文件夹; 1：文件
 @property (nonatomic,strong) NSString *file_type;//文件类型, png,jpeg等后缀
 @property (nonatomic,strong) NSString *file_type_format;//文件分类: 0 文件夹 ，1 图片，3 文档，2 音频，4 视频， 5 压缩包，6 其他
 
@@ -31,5 +31,7 @@
 
 @property (nonatomic,assign) BOOL isEditing;//是否正在编辑
 @property (nonatomic,assign) BOOL isSelected;//是否已被选择
+
+@property (nonatomic,assign) BOOL udpateLocal;//是否更新本地数据库
 
 @end

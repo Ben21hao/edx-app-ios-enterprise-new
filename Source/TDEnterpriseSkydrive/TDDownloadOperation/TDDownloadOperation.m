@@ -11,6 +11,7 @@
 #import "NSURLSession+CorrectedResumeData.h"
 
 #import <UIKit/UIKit.h>
+#import "Reachability.h"
 //#import "AppDelegate.h"
 
 #define IS_IOS10ORLATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10)
@@ -50,6 +51,10 @@ static NSURLSession *session = nil;
     return self;
 }
 
+- (void)dealloc {
+    NSLog(@"TDDownloadOperation --->> 销毁");
+}
+
 #pragma mark - backgroundURLSession
 - (NSURLSession *)backgroundURLSession { //只有一个后台session
     
@@ -69,6 +74,7 @@ static NSURLSession *session = nil;
     });
     return session;
 }
+
 
 #pragma mark - 对当前下载文件的操作
 - (void)beginDownloadFileModel:(TDSkydrveFileModel *)model firstAdd:(BOOL)isFirst { //下载, isFirst：是否第一次加入下载
@@ -100,7 +106,9 @@ static NSURLSession *session = nil;
         [self insertDownloadFile:model]; //加入本地数据库
     }
     else {
-        [self updateDownloadFileStatus:model]; //更新数据库状态
+        if (model.udpateLocal) {
+            [self updateDownloadFileStatus:model]; //更新数据库状态
+        }
     }
     [self postDownloadStatusNotification:self.currentModel]; //cell状态
 }
@@ -136,7 +144,7 @@ static NSURLSession *session = nil;
         if ([sSelf isValideResumeData:self.currentModel.resumeData]) {
             [sSelf updateDownloadFileRusumeData:self.currentModel];
         }
-//        NSLog(@"存已下载的数据 ----->> %@",model.resumeData);
+        //        NSLog(@"存已下载的数据 ----->> %@",model.resumeData);
     }];
 }
 
@@ -149,9 +157,13 @@ static NSURLSession *session = nil;
 
 #pragma mark - 不是当前下载文件
 - (void)waitChageToPause:(TDSkydrveFileModel *)model { //等待下载 -> 暂停
+    
     model.status = 3;
-    [self updateDownloadFileStatus:model]; //更新
     [self postDownloadStatusNotification:model];
+    
+    if (model.udpateLocal) {
+        [self updateDownloadFileStatus:model]; //更新
+    }
 }
 
 - (void)fileChageToWaitToDownload:(TDSkydrveFileModel *)model firstAdd:(BOOL)isFirst  { //有下载中：-> 等待 (点击 开始下载，暂停，失败)
@@ -161,7 +173,9 @@ static NSURLSession *session = nil;
         [self insertDownloadFile:model];
     }
     else {
-        [self updateDownloadFileStatus:model];
+        if (model.udpateLocal) {
+            [self updateDownloadFileStatus:model];
+        }
     }
     [self postDownloadStatusNotification:model];
     
@@ -175,8 +189,18 @@ static NSURLSession *session = nil;
 #pragma mark - 处理kill掉程序
 - (void)exitApplicationSaveResumeData { //用户退出程序
     
+//    __weak __typeof(self) wSelf = self;
+//    [self.downloadTask cancelByProducingResumeData:^(NSData * resumeData) { //暂停下载
+//        
+//        __strong __typeof(wSelf) sSelf = wSelf;
+//        self.currentModel.resumeData = resumeData;
+//        
+//        if ([sSelf isValideResumeData:self.currentModel.resumeData]) {
+//            [sSelf updateDownloadFileRusumeData:self.currentModel];
+//        }
+//        //        NSLog(@"存已下载的数据 ----->> %@",model.resumeData);
+//    }];
     [self.downloadTask cancelByProducingResumeData:^(NSData * _Nullable resumeData) {
-        
     }];
 }
 
@@ -246,10 +270,14 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
         if (error.code == -999) {
             
             self.currentModel.status = 3;
+            if (self.currentModel.udpateLocal) {
+                [self updateDownloadFileStatus:self.currentModel]; //更新本地状态
+            }
             NSLog(@"--->> 暂停下载");
         }
         else {
             self.currentModel.status = 4;
+            [self updateDownloadFileStatus:self.currentModel]; //更新本地状态
             NSLog(@"--->> 下载失败");
         }
         
@@ -261,10 +289,10 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
         self.currentModel.status = 5;
         
         [self.delegate currentFileDownloadFinish:self.currentModel]; //完成当前的下载任务
+        [self updateDownloadFileStatus:self.currentModel]; //更新本地状态
         NSLog(@"--->> 下载成功");
     }
     [self postDownloadStatusNotification:self.currentModel]; //cell的status
-    [self updateDownloadFileStatus:self.currentModel]; //更新本地状态
     
     [self.delegate nextFileShouldBeginDownload]; //开始下一个任务
 }

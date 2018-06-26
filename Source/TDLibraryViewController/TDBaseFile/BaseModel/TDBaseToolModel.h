@@ -47,6 +47,7 @@
  */
 - (BOOL)networkingState;
 - (BOOL)getNetworkingState;
+- (BOOL)networkingStateReachableViaWWAN; //是否是移动网络
 
 /*
  数字小数点后面显示小一点

@@ -506,7 +506,6 @@
 		A458C9FE20D1FF9300F43DFD /* TDSkydriveVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = A458C9D020D1FF9200F43DFD /* TDSkydriveVideoView.m */; };
 		A458C9FF20D1FF9300F43DFD /* TDSkydriveAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A458C9D320D1FF9200F43DFD /* TDSkydriveAlertView.m */; };
 		A458CA0020D1FF9300F43DFD /* TDSkydriveVideoMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = A458C9D820D1FF9300F43DFD /* TDSkydriveVideoMaskView.m */; };
-		A458CA0320D1FFA500F43DFD /* TDFileDownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A458CA0220D1FFA500F43DFD /* TDFileDownloadViewController.m */; };
 		A458CA0620D2524400F43DFD /* TDSkydriveNoSupportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A458CA0520D2524400F43DFD /* TDSkydriveNoSupportViewController.m */; };
 		A459566C209AAFF200706DB7 /* TDPreviewVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A459566B209AAFF200706DB7 /* TDPreviewVideoViewController.m */; };
 		A4595674209AB07200706DB7 /* TDPreviewImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4595670209AB07200706DB7 /* TDPreviewImageCell.m */; };
@@ -549,6 +548,7 @@
 		A4AEE9FC20A43B7900C3D835 /* OssService.m in Sources */ = {isa = PBXBuildFile; fileRef = A4AEE9F820A43B7800C3D835 /* OssService.m */; };
 		A4D1184B2091DC9D00D84235 /* SRUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D1184A2091DC9D00D84235 /* SRUtil.m */; };
 		A4D53DAF209C4D850014E723 /* TDAvPlayerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D53DAE209C4D850014E723 /* TDAvPlayerOperation.m */; };
+		A4DD2E8C20E1DAE0005CAAAE /* TDReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4DD2E8B20E1DAE0005CAAAE /* TDReachabilityManager.m */; };
 		A4DD5BB01FA95EA900E2CE35 /* TDFindCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4DD5BAF1FA95EA900E2CE35 /* TDFindCourseViewController.m */; };
 		A4DD5BBF1FA95F7C00E2CE35 /* TDSortCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4DD5BBE1FA95F7C00E2CE35 /* TDSortCourseViewController.m */; };
 		A4DD5BC21FA9665500E2CE35 /* TDPageingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4DD5BC11FA9665500E2CE35 /* TDPageingViewController.m */; };
@@ -1712,8 +1712,6 @@
 		A458C9D620D1FF9300F43DFD /* TDSkydriveAudioView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSkydriveAudioView.h; sourceTree = "<group>"; };
 		A458C9D720D1FF9300F43DFD /* TDNodataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDNodataView.h; sourceTree = "<group>"; };
 		A458C9D820D1FF9300F43DFD /* TDSkydriveVideoMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSkydriveVideoMaskView.m; sourceTree = "<group>"; };
-		A458CA0120D1FFA500F43DFD /* TDFileDownloadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDFileDownloadViewController.h; sourceTree = "<group>"; };
-		A458CA0220D1FFA500F43DFD /* TDFileDownloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFileDownloadViewController.m; sourceTree = "<group>"; };
 		A458CA0420D2524400F43DFD /* TDSkydriveNoSupportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSkydriveNoSupportViewController.h; sourceTree = "<group>"; };
 		A458CA0520D2524400F43DFD /* TDSkydriveNoSupportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSkydriveNoSupportViewController.m; sourceTree = "<group>"; };
 		A459566A209AAFF200706DB7 /* TDPreviewVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDPreviewVideoViewController.h; sourceTree = "<group>"; };
@@ -1794,6 +1792,8 @@
 		A4D1184A2091DC9D00D84235 /* SRUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRUtil.m; sourceTree = "<group>"; };
 		A4D53DAD209C4D850014E723 /* TDAvPlayerOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAvPlayerOperation.h; sourceTree = "<group>"; };
 		A4D53DAE209C4D850014E723 /* TDAvPlayerOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAvPlayerOperation.m; sourceTree = "<group>"; };
+		A4DD2E8A20E1DAE0005CAAAE /* TDReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDReachabilityManager.h; sourceTree = "<group>"; };
+		A4DD2E8B20E1DAE0005CAAAE /* TDReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDReachabilityManager.m; sourceTree = "<group>"; };
 		A4DD5BAE1FA95EA900E2CE35 /* TDFindCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDFindCourseViewController.h; sourceTree = "<group>"; };
 		A4DD5BAF1FA95EA900E2CE35 /* TDFindCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDFindCourseViewController.m; sourceTree = "<group>"; };
 		A4DD5BBD1FA95F7C00E2CE35 /* TDSortCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSortCourseViewController.h; sourceTree = "<group>"; };
@@ -4011,15 +4011,6 @@
 			path = view;
 			sourceTree = "<group>";
 		};
-		A458C99720D1FF9200F43DFD /* TDFileDownLoadViewController */ = {
-			isa = PBXGroup;
-			children = (
-				A458CA0120D1FFA500F43DFD /* TDFileDownloadViewController.h */,
-				A458CA0220D1FFA500F43DFD /* TDFileDownloadViewController.m */,
-			);
-			path = TDFileDownLoadViewController;
-			sourceTree = "<group>";
-		};
 		A458C99820D1FF9200F43DFD /* TDSkydriveViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -4281,6 +4272,8 @@
 				A490754420D8EBC400E13001 /* TDDownloadOperation.m */,
 				A408BD3620DA58A10074CC6E /* TDSkydriveSqliteOperation.h */,
 				A408BD3720DA58A10074CC6E /* TDSkydriveSqliteOperation.m */,
+				A4DD2E8A20E1DAE0005CAAAE /* TDReachabilityManager.h */,
+				A4DD2E8B20E1DAE0005CAAAE /* TDReachabilityManager.m */,
 			);
 			path = TDDownloadOperation;
 			sourceTree = "<group>";
@@ -4413,7 +4406,6 @@
 			children = (
 				A490754020D8E6FF00E13001 /* TDDownloadOperation */,
 				A458C99820D1FF9200F43DFD /* TDSkydriveViewController */,
-				A458C99720D1FF9200F43DFD /* TDFileDownLoadViewController */,
 				A416219320C927FB0019DD8D /* TDPlayVideoViewController */,
 			);
 			path = TDEnterpriseSkydrive;
@@ -7402,6 +7394,7 @@
 				B5148C101ED279CB00F6DACD /* TDRequestBaseModel.m in Sources */,
 				1904A14C1A1386C2006A5524 /* OEXDBManager.m in Sources */,
 				BE54F19C195F080E005D069F /* Reachability.m in Sources */,
+				A4DD2E8C20E1DAE0005CAAAE /* TDReachabilityManager.m in Sources */,
 				B52E8CDE1F0B8D6300F3170D /* SZQuestionItem.m in Sources */,
 				B52E8D2B1F0B94E900F3170D /* BarrageDispatcher.m in Sources */,
 				A458C9FF20D1FF9300F43DFD /* TDSkydriveAlertView.m in Sources */,
@@ -7623,7 +7616,6 @@
 				B5168B731EB8294800C80436 /* TDSubmitCourseViewController.m in Sources */,
 				698EE6E91E38A53600DF4FEA /* RatingView.swift in Sources */,
 				B52E8D381F0B94E900F3170D /* NSSafeObject.m in Sources */,
-				A458CA0320D1FFA500F43DFD /* TDFileDownloadViewController.m in Sources */,
 				A4D53DAF209C4D850014E723 /* TDAvPlayerOperation.m in Sources */,
 				694D34A01D75BDF80047F3F4 /* UIAlertController+OEXBlockActions.swift in Sources */,
 				BECB7B1B1924C0C3009C77F1 /* main.m in Sources */,

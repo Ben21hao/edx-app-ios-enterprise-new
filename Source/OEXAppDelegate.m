@@ -397,8 +397,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     NSLog(@"-------> =注销= <---------");
     
-    TDDownloadOperation *operation = [TDDownloadOperation shareOperation];
-    [operation exitApplicationSaveResumeData];
+   [[NSNotificationCenter defaultCenter] postNotificationName:@"Network_Status_NotReachable" object:nil];
 }
 
 #pragma mark Push Notifications
@@ -430,9 +429,10 @@
     // 否则 NSURLSessionDownloadDelegate 和 NSURLSessionDelegate 方法会因为
     // 没有 对 session 的 delegate 设定而不会被调用。参见上面的 backgroundURLSession
     TDDownloadOperation *operation = [TDDownloadOperation shareOperation];
+    [operation backgroundURLSession];
     
-    NSURLSession *backgroundSession = [operation backgroundURLSession];
-    NSLog(@"Rejoining session with identifier %@ %@", identifier, backgroundSession);
+//    NSURLSession *backgroundSession = [operation backgroundURLSession];
+//    NSLog(@"Rejoining session with identifier %@ %@", identifier, backgroundSession);
     
     // 保存 completion handler 以在处理 session 事件后更新 UI
     [operation addCompletionHandler:completionHandler forSession:identifier];

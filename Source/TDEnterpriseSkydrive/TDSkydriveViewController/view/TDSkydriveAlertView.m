@@ -11,7 +11,6 @@
 
 @interface TDSkydriveAlertView ()
 
-@property (nonatomic,strong) UIView *bgView;
 @property (nonatomic,strong) UIView *alertView;
 
 @property (nonatomic,strong) UILabel *titleLabel;
@@ -49,9 +48,9 @@
 #pragma mark - UI
 - (void)configView {
     
-    self.bgView = [[UIView alloc] init];
-    self.bgView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
-    [self addSubview:self.bgView];
+    self.bgButton = [[UIButton alloc] init];
+    self.bgButton.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+    [self addSubview:self.bgButton];
     
     self.alertView = [[UIView alloc] init];
     self.alertView.layer.masksToBounds = YES;
@@ -110,15 +109,15 @@
 
 - (void)setViewConstraint {
     
-    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.bgButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self);
     }];
     
     
     CGFloat width = (TDWidth / 3) * 2;
     [self.alertView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.bgView.mas_centerX);
-        make.centerY.mas_equalTo(self.bgView.mas_centerY);
+        make.centerX.mas_equalTo(self.bgButton.mas_centerX);
+        make.centerY.mas_equalTo(self.bgButton.mas_centerY);
         make.size.mas_equalTo(CGSizeMake(width, 235));
     }];
     

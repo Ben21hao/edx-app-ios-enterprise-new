@@ -14,7 +14,6 @@
 #import "TDVideoViewController.h"
 #import "TDSkydrveLoacalViewController.h"
 #import "TDSkydriveImageViewController.h"
-#import "TDFileDownloadViewController.h"
 
 #import "TDSkydriveFolderCell.h"
 #import "TDSkydriveLocalCell.h"
@@ -23,11 +22,15 @@
 #import "TDBaseView.h"
 #import "TDSkydrveFileModel.h"
 
+#import "TDReachabilityManager.h"
 #import "OEXAuthentication.h"
 #import "edX-Swift.h"
 
 #import <MJExtension/MJExtension.h>
 #import <MJRefresh/MJRefresh.h>
+
+#include <sys/param.h>
+#include <sys/mount.h>
 
 @interface TDEnterpriseSkydriveViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -59,6 +62,8 @@
     self.toolModel = [[TDBaseToolModel alloc] init];
     self.isForgound = YES;
     [self setViewConstraint];
+    
+    [TDReachabilityManager startReachability];//网络开始检测
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -77,7 +82,49 @@
     [super viewWillDisappear:animated];
 
     self.isForgound = NO;
+    
+    [self freeDiskSpaceInBytes:@"188.8GB"];
 }
+
+- (BOOL)freeDiskSpaceInBytes:(NSString *)sizeStr {
+    
+    float freesize = 0.0;// 剩余大小
+    NSError *error = nil;// 是否登录
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSDictionary *dictionary = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[paths lastObject] error: &error];
+    
+    if (dictionary) {
+        NSNumber *_free = [dictionary objectForKey:NSFileSystemFreeSize];
+        freesize = [_free unsignedLongLongValue] * 1.0 / (1024);
+        
+        NSString *unitStr = [sizeStr substringFromIndex:sizeStr.length - 2];
+        NSString *valueStr = [sizeStr substringToIndex:sizeStr.length - 2];
+        
+        CGFloat fileSize = 0.0;
+        if ([unitStr isEqualToString:@"GB"]) {
+            fileSize = [valueStr floatValue] * 1024 * 1024 * 1024;
+        }
+        else if ([unitStr isEqualToString:@"MB"]){
+            fileSize = [valueStr floatValue] * 1024 * 1024;
+        }
+        else {
+            fileSize = [valueStr floatValue] * 1024;
+        }
+        
+        NSLog(@"单位 ----->>> %lf - %@",fileSize,unitStr);
+        
+        if (fileSize > freesize) {
+            return NO;
+        }
+        return YES;
+    }
+    else {
+        NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %ld", [error domain], (long)[error code]);
+        return YES;
+    }
+}
+
 
 #pragma mark - data
 - (void)requestData {
@@ -193,38 +240,6 @@
         TDSkydriveFolderCell *cell = [[TDSkydriveFolderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"enterpriseSkydriveCell"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.fileModel = model;
-        
-//        cell.timeLabel.text = @"2018-01-18 18:28";
-//        switch (indexPath.row) {
-//            case 0:
-//                cell.titleLabel.text = @"技术部pdf技术部pdf技术部pdf技术部技术部pp技术部pdf技术部pdfdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部pdf技术部";
-//                break;
-//            case 1:
-//                cell.titleLabel.text = @"设计部xlsx";
-//                break;
-//            case 2:
-//                cell.titleLabel.text = @"市场部htm";
-//                break;
-//            case 3:
-//                cell.titleLabel.text = @"人事部pptx";
-//                break;
-//            case 4:
-//                cell.titleLabel.text = @"销售部ppt";
-//                break;
-//            case 5:
-//                cell.titleLabel.text = @"运营部docx";
-//                break;
-//            case 6:
-//                cell.titleLabel.text = @"会计pages";
-//                break;
-//            case 7:
-//                cell.titleLabel.text = @"研发部rtf";
-//                break;
-//                
-//            default:
-//                cell.titleLabel.text = @"生产部txt";
-//                break;
-//        }
         return cell;
     }
 }
@@ -371,12 +386,6 @@
     TDSkydrveLoacalViewController *localVc = [[TDSkydrveLoacalViewController alloc] init];
     localVc.username = self.username;
     [self.navigationController pushViewController:localVc animated:YES];
-}
-
-- (void)gotoDownloadVc { //文件下载
-    
-    TDFileDownloadViewController *downloadVc = [[TDFileDownloadViewController alloc] init];
-    [self.navigationController pushViewController:downloadVc animated:YES];
 }
 
 #pragma mark - UI

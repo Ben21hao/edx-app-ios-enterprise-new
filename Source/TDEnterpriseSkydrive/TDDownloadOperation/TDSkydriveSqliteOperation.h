@@ -36,6 +36,5 @@ typedef void(^SqliteQuerySortHandler)(NSMutableArray *downloadArray, NSMutableAr
     
 - (TDSkydrveFileModel *)querySqliteFileResumeData:(TDSkydrveFileModel *)model;//查询resumedata
 
-- (void)sqliteInit:(NSString *)username; //demo
 
 @end

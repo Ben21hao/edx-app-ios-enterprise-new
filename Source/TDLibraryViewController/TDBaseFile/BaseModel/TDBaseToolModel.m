@@ -157,6 +157,13 @@
     return reachable;
 }
 
+- (BOOL)networkingStateReachableViaWWAN { //是否是移动网络
+    
+    OEXAppDelegate* appD = (OEXAppDelegate *)[[UIApplication sharedApplication] delegate];
+    BOOL reachable = [appD.reachability isReachableViaWWAN]; //移动网络
+    return reachable;
+}
+
 - (BOOL)getNetworkingState {
     
     OEXAppDelegate* appD = (OEXAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -591,6 +598,8 @@
         }
     }
 }
+
+
 
 
 @end

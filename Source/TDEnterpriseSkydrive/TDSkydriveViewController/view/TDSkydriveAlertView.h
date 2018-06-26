@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, TDSkydriveShareTime) {
 
 @interface TDSkydriveAlertView : UIView
 
+@property (nonatomic,strong) UIButton *bgButton;
 @property (nonatomic,strong) UIButton *cancelButton;
 @property (nonatomic,strong) UIButton *sureButton;
 

@@ -12,6 +12,7 @@ import Foundation
 /// Override reloadViewData function
 
 public class OfflineSupportViewController: UIViewController {
+    
     typealias Env = protocol<ReachabilityProvider>
     private let environment : Env
     let titleViewLabel = UILabel.init(frame: CGRectMake(0, 0, TDScreenWidth - 198, 44))
