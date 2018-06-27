@@ -56,6 +56,7 @@
     [super viewDidLoad];
     
     self.titleViewLabel.text = self.folderName;
+    self.titleViewLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
     self.rightButton.hidden = NO;
     [self.rightButton setImage:[UIImage imageNamed:@"file_download_image"] forState:UIControlStateNormal];
     
@@ -73,8 +74,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFileData) name:@"skydrive_delete_finish" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFileData) name:@"noSupport_skydrive_delete_finish" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityNotReachableAction:) name:@"Network_Status_NotReachable" object:nil];
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityReachableViaWWANAction:) name:@"Network_Status_ReachableViaWWAN" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityNotReachableAction:) name:@"Network_Status_NotReachable" object:nil]; //网络不可用
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityReachableViaWWANAction:) name:@"Network_Status_ReachableViaWWAN" object:nil]; //网络切换为移动网络
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -84,7 +86,7 @@
 }
 
 - (void)dealloc {
-    NSLog(@" ---->>> ");
+    NSLog(@" 销毁---->>> ");
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"skydrive_delete_finish" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"skydrivnoSupport_skydrive_delete_finishe_delete_finish" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Network_Status_NotReachable" object:nil];
@@ -225,7 +227,7 @@
             [self.downloadOperation waitChageToPause:model];
         }
             break;
-        case 3: {
+        case 3: { //暂停
             if ([self judgeHasDownloadingTask]) {//有下载中： 暂停 -> 等待下载，下一个
                 [self.downloadOperation fileChageToWaitToDownload:model firstAdd:NO];
             }
@@ -275,11 +277,16 @@
 
 - (void)beginDownloadFileModel:(TDSkydrveFileModel *)model firstAdd:(BOOL)isFirst {
     
-    if (![self.toolModel networkingState]) {
+    if (![self.toolModel networkingState]) { //没网
         return;
     }
     
+    if (![self freeDiskSpaceEnounghInBytes:model.real_file_size]) { //内存不足
+        [self pauseAllDownloadFile:YES]; //所有任务暂停
+        return;
+    }
     
+    [self currentModelDownloadOperation:model];
     [self.downloadOperation beginDownloadFileModel:model firstAdd:isFirst];//下载
 }
 
@@ -323,6 +330,33 @@
     [alertControler addAction:cancelAction];
     [alertControler addAction:continueAction];
     [self presentViewController:alertControler animated:YES completion:nil];
+}
+
+- (CGFloat)freeDiskSpaceEnounghInBytes:(NSString *)sizeStr { //手机存储是否足够
+    
+    CGFloat fileSize = [sizeStr floatValue];
+    CGFloat freeSize = 0.0;// 剩余大小
+    NSError *error = nil;// 是否登录
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSDictionary *dictionary = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[paths lastObject] error: &error];
+    
+    if (dictionary) {
+        NSNumber *_free = [dictionary objectForKey:NSFileSystemFreeSize];
+        freeSize = [_free unsignedLongLongValue] * 1.0;
+        
+//        NSLog(@"存储空间 ----->>> %lf - %lf",freeSize,fileSize);
+        
+        if (fileSize > freeSize) {
+            [self.view makeToast:@"手机容量不足无法继续下载该文件" duration:1.08 position:CSToastPositionCenter];
+            return NO;
+        }
+        return YES;
+    }
+    else {
+        NSLog(@"查询内存存储控件失败: Domain = %@, Code = %ld", [error domain], (long)[error code]);
+        return YES;
+    }
 }
 
 #pragma mark - 判断是否
@@ -373,6 +407,21 @@
     return fileModel;
 }
 
+- (void)allDataChangeStatus:(TDSkydrveFileModel *)fileModel {
+    
+    for (int i = 0; i < self.dataArray.count; i ++) {
+        
+        TDSkydrveFileModel *model = self.dataArray[i];
+        
+        if ([fileModel.id isEqualToString:model.id]) {
+            model.progress = fileModel.progress;
+            model.status = fileModel.status;
+            model.download_size = fileModel.download_size;
+            model.resumeData = fileModel.resumeData;
+        }
+    }
+}
+
 #pragma mark - TDDownloadOperationDelegate
 - (void)nextFileShouldBeginDownload { //有等待：下一个任务开始下载
     
@@ -384,8 +433,14 @@
         TDSkydrveFileModel *nextModel = [weakSelf judgHasWaitToDownloadTask:downloadArray];
         if (nextModel) {//有等待下载： 下一个
             nextModel.udpateLocal = YES;
-            [weakSelf currentModelDownloadOperation:nextModel];
-            [weakSelf.downloadOperation nextFileBeginDownload:nextModel];
+            
+            if (![self freeDiskSpaceEnounghInBytes:nextModel.real_file_size]) { //内存不足
+                [self pauseAllDownloadFile:YES]; //所有任务暂停
+            }
+            else {
+                [weakSelf currentModelDownloadOperation:nextModel];
+                [weakSelf.downloadOperation nextFileBeginDownload:nextModel];
+            }
         }
     }];
 }
@@ -409,11 +464,14 @@
             model.udpateLocal = YES; //更新本地数据库
             
             if (model.status == 1 || model.status == 2) { // -> 暂停
+                
+                model.status = 2;
                 [weakSelf currentModelDownloadOperation:model];
                 [weakSelf.downloadOperation pauseDownload:model];
-//            }
-//            else if (model.status == 2) { //等待 -> 暂停
+
                 [weakSelf.downloadOperation waitChageToPause:model];
+                
+                [weakSelf allDataChangeStatus:model];//同步本地数据
             }
         }
     }];
@@ -425,7 +483,7 @@
     [self wifiOnlyAlertViewShow];
 }
 
-- (void)pauseAllDownloadFile:(BOOL)updateLocal { //暂停 - updateLocal: 是否更新本地数据库
+- (void)pauseAllDownloadFile:(BOOL)udpateLocal { //暂停 - udpateLocal: 是否更新本地数据库
     
     WS(weakSelf);
     [self.downloadOperation getLocalDownloadFileSortDataBlock:^(NSMutableArray *downloadArray, NSMutableArray *finishArray) {
@@ -433,7 +491,7 @@
         for (int i = 0; i < downloadArray.count; i ++) {
             
             TDSkydrveFileModel *model = downloadArray[i];
-            model.udpateLocal = updateLocal; //是否更新本地数据库
+            model.udpateLocal = udpateLocal; //是否更新本地数据库
             
             if (model.status == 1 || model.status == 2) { // -> 暂停
                 [weakSelf currentModelDownloadOperation:model];
@@ -464,46 +522,6 @@
             }
         }
     }];
-}
-
-- (BOOL)freeDiskSpaceInBytes:(NSString *)sizeStr { //是否够存储空间
-    
-    float freesize = 0.0;// 剩余大小
-    NSError *error = nil;// 是否登录
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSDictionary *dictionary = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[paths lastObject] error: &error];
-    
-    if (dictionary) {
-        NSNumber *_free = [dictionary objectForKey:NSFileSystemFreeSize];
-        freesize = [_free unsignedLongLongValue] * 1.0 / (1024);
-        
-        NSString *unitStr = [sizeStr substringFromIndex:sizeStr.length - 2];
-        NSString *valueStr = [sizeStr substringToIndex:sizeStr.length - 2];
-        
-        CGFloat fileSize = 0.0;
-        if ([unitStr isEqualToString:@"GB"]) {
-            fileSize = [valueStr floatValue] * 1024 * 1024 * 1024;
-        }
-        else if ([unitStr isEqualToString:@"MB"]){
-            fileSize = [valueStr floatValue] * 1024 * 1024;
-        }
-        else {
-            fileSize = [valueStr floatValue] * 1024;
-        }
-        
-        NSLog(@"单位 ----->>> %lf - %@",fileSize,unitStr);
-        
-        if (fileSize > freesize) {
-            [self.view makeToast:@"手机容量不足无法继续下载该文件" duration:1.08 position:CSToastPositionCenter];
-            return NO;
-        }
-        return YES;
-    }
-    else {
-        NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %ld", [error domain], (long)[error code]);
-        return YES;
-    }
 }
 
 #pragma mark - tableView Delegate
@@ -648,8 +666,9 @@
     }
     
     TDSkydriveNoSupportViewController *noSupportVc = [[TDSkydriveNoSupportViewController alloc] init];
-    noSupportVc.titleStr = model.id;
+    noSupportVc.model = model;
     noSupportVc.filePath = filePath;
+    noSupportVc.downloadOperation = self.downloadOperation;
     [self.navigationController pushViewController:noSupportVc animated:YES];
 }
 
@@ -779,7 +798,7 @@
         pasteBoard.string = [NSString stringWithFormat:@"链接：%@",linkStr];
     }
     
-    [self.view makeToast:@"外链地址已经复制到剪切板中！" duration:1.08 position:CSToastPositionCenter];
+    [self.view makeToast:@"链接已复制" duration:1.08 position:CSToastPositionCenter];
 }
 
 #pragma mark - UI

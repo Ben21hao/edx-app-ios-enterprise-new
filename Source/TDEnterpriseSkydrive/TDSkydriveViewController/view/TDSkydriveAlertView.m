@@ -60,7 +60,7 @@
     
     self.titleLabel = [[UILabel alloc] init];
     self.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:15];
-    self.titleLabel.textColor = [UIColor colorWithHexString:colorHexStr10];
+    self.titleLabel.textColor = [UIColor colorWithHexString:@"#6e6e6e"];
     [self addSubview:self.titleLabel];
     
     self.oneDayView = [self skyTimeView:TDSkydriveShareTimeOneDay];

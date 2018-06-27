@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = self.titleStr;
+    self.titleViewLabel.text = self.model.name;
     
     [self setViewConstraint];
 }
@@ -40,7 +40,7 @@
     }];
     
     WS(weakSelf);
-    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [weakSelf deleteFile];
     }];
     
@@ -53,8 +53,10 @@
 - (void)deleteFile { //删除该文件
     
     NSArray *selectArray = [[NSArray alloc] initWithObjects:self.model, nil];
+    WS(weakSelf);
     [self.downloadOperation deleteSelectLocalFile:selectArray handler:^(TDSkydrveFileModel *model, BOOL isFinish) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"noSupport_skydrive_delete_finish" object:nil];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
 }
 

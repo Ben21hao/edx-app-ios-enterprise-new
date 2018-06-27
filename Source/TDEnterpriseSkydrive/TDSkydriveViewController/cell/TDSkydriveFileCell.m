@@ -145,14 +145,14 @@
     self.fileModel.status = status;
     
     self.sizeLabel.textColor =  [UIColor colorWithHexString:status == 4 ? @"#ff4a5b" : @"#9b9b9b"];
-//    NSLog(@"现在的状态 -- %ld",(long)status);
+//    NSLog(@"更新现在的状态 -- %ld",(long)status);
 }
 
-//- (void)dealloc {
-////     NSLog(@"下载cell -- 销毁");
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:self.notifiName object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:self.statusNotifiName object:nil];
-//}
+- (void)dealloc {
+//     NSLog(@"下载cell -- 销毁");
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:self.notifiName object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:self.statusNotifiName object:nil];
+}
 
 #pragma mark - UI
 - (void)configeView {

@@ -531,8 +531,10 @@ typedef NS_ENUM(NSInteger, TDPanGestureDeriction) {
 }
 
 - (void)showLoadingFailButton {
+    
     self.isPlaying = NO;
     self.videoMaskView.failButton.hidden = NO;
+    self.videoMaskView.centerButton.hidden = YES;
     [self.videoMaskView.loadingView endLoadingAnimation];
 }
 

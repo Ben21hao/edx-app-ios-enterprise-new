@@ -12,7 +12,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Reachability.h"
-//#import "AppDelegate.h"
 
 #define IS_IOS10ORLATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10)
 
@@ -101,7 +100,7 @@ static NSURLSession *session = nil;
     
     [self.downloadTask resume];
     
-    NSLog(@"--->> 开始下载");
+    NSLog(@"--->> 开始下载 %@",model.name);
     self.currentModel.status = 1;
     if (isFirst) {
         [self insertDownloadFile:model]; //加入本地数据库
@@ -257,33 +256,38 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
         }
         
         NSLog(@"下载error --->> %@",[error.userInfo objectForKey:NSLocalizedDescriptionKey]);
-        if (error.code == -999) {
+        if (error.code == -999) { //暂停
             
             self.currentModel.status = 3;
             if (self.currentModel.udpateLocal) {
-                [self updateDownloadFileStatus:self.currentModel]; //更新本地状态
+                [self allowUpdateLocalData];
             }
             NSLog(@"--->> 暂停下载");
         }
         else {
             self.currentModel.status = 4;
-            [self updateDownloadFileStatus:self.currentModel]; //更新本地状态
+            [self allowUpdateLocalData];
             NSLog(@"--->> 下载失败");
         }
         
     } else {
-//        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//        [delegate sendLocalNotification]; //发送本地通知
         
         [self postDownlaodProgressNotification:@"1"]; //更新progress
         self.currentModel.status = 5;
         
         [self.delegate currentFileDownloadFinish:self.currentModel]; //完成当前的下载任务
+        
         [self updateDownloadFileStatus:self.currentModel]; //更新本地状态
+        if (self.currentModel.udpateLocal) {
+            [self.delegate nextFileShouldBeginDownload]; //开始下一个任务
+        }
         NSLog(@"--->> 下载成功");
     }
     [self postDownloadStatusNotification:self.currentModel]; //cell的status
-    
+}
+
+- (void)allowUpdateLocalData { //允许更新本地数据库
+    [self updateDownloadFileStatus:self.currentModel]; //更新本地状态
     [self.delegate nextFileShouldBeginDownload]; //开始下一个任务
 }
 
