@@ -265,7 +265,7 @@
         default:
             break;
     }
-//    NSLog(@"点击下载：状态 ----->> %ld",(long)model.status);
+    NSLog(@"点击下载：状态 ----->> %ld",(long)model.status);
 }
 
 - (void)currentModelDownloadOperation:(TDSkydrveFileModel *)currentModel { //当前下载文件
@@ -279,10 +279,11 @@
         return;
     }
     
+    
     [self.downloadOperation beginDownloadFileModel:model firstAdd:isFirst];//下载
 }
 
-- (void)changeDownloadEnvirentment:(TDSkydrveFileModel *)model firstAdd:(BOOL)isFirst { //提示移动网络下
+- (void)changeDownloadEnvirentment:(TDSkydrveFileModel *)model firstAdd:(BOOL)isFirst { //4G环境下，若只允许wifi下载，提示移动网络下
     
     UIAlertController *alertControler = [UIAlertController alertControllerWithTitle:nil message:@"当前是4G网络，是否继续下载当前的文件？" preferredStyle:UIAlertControllerStyleAlert];
     
@@ -294,6 +295,29 @@
     UIAlertAction *continueAction = [UIAlertAction actionWithTitle:@"继续" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [OEXInterface setDownloadOnlyOnWifiPref:NO]; //切换允许移动网络下载
         [weakSelf beginDownloadFileModel:model firstAdd:isFirst];//下载
+    }];
+    
+    [alertControler addAction:cancelAction];
+    [alertControler addAction:continueAction];
+    [self presentViewController:alertControler animated:YES completion:nil];
+}
+
+- (void)wifiOnlyAlertViewShow { //只有wifi下载的弹框
+    
+    if (![self judgeHasDownloadingTask]) { //没有下载中
+        return;
+    }
+    
+    UIAlertController *alertControler = [UIAlertController alertControllerWithTitle:nil message:@"当前是4G网络，是否继续下载当前的文件？" preferredStyle:UIAlertControllerStyleAlert];
+    
+    WS(weakSelf);
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"暂停" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [weakSelf pauseAllDownloadFile:YES];
+    }];
+    
+    UIAlertAction *continueAction = [UIAlertAction actionWithTitle:@"继续" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [OEXInterface setDownloadOnlyOnWifiPref:NO]; //切换允许移动网络下载
+        [weakSelf continiuAllDownloadFile]; //继续下载
     }];
     
     [alertControler addAction:cancelAction];
@@ -359,6 +383,7 @@
         
         TDSkydrveFileModel *nextModel = [weakSelf judgHasWaitToDownloadTask:downloadArray];
         if (nextModel) {//有等待下载： 下一个
+            nextModel.udpateLocal = YES;
             [weakSelf currentModelDownloadOperation:nextModel];
             [weakSelf.downloadOperation nextFileBeginDownload:nextModel];
         }
@@ -373,6 +398,8 @@
 - (void)reachabilityNotReachableAction:(NSNotification *)notification {//没网
     
     NSLog(@"--->> 网络信号不好");
+    
+    [self.view makeToast:@"您当前网络信号不佳" duration:1.08 position:CSToastPositionCenter];
     
     WS(weakSelf);
     [self.downloadOperation getLocalDownloadFileSortDataBlock:^(NSMutableArray *downloadArray, NSMutableArray *finishArray) {
@@ -394,27 +421,8 @@
 
 - (void)reachabilityReachableViaWWANAction:(NSNotification *)notification {//只允许wifi下载情况下，切换到移动网络
     
-    [self pauseAllDownloadFile:NO];
+    [self pauseAllDownloadFile:NO]; //不更新
     [self wifiOnlyAlertViewShow];
-}
-
-- (void)wifiOnlyAlertViewShow { //只有wifi下载的弹框
-    
-    UIAlertController *alertControler = [UIAlertController alertControllerWithTitle:nil message:@"当前是4G网络，是否继续下载当前的文件？" preferredStyle:UIAlertControllerStyleAlert];
-    
-    WS(weakSelf);
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"暂停" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [weakSelf pauseAllDownloadFile:YES];
-    }];
-    
-    UIAlertAction *continueAction = [UIAlertAction actionWithTitle:@"继续" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [OEXInterface setDownloadOnlyOnWifiPref:NO]; //切换允许移动网络下载
-        [weakSelf continiuAllDownloadFile];
-    }];
-    
-    [alertControler addAction:cancelAction];
-    [alertControler addAction:continueAction];
-    [self presentViewController:alertControler animated:YES completion:nil];
 }
 
 - (void)pauseAllDownloadFile:(BOOL)updateLocal { //暂停 - updateLocal: 是否更新本地数据库
@@ -458,6 +466,46 @@
     }];
 }
 
+- (BOOL)freeDiskSpaceInBytes:(NSString *)sizeStr { //是否够存储空间
+    
+    float freesize = 0.0;// 剩余大小
+    NSError *error = nil;// 是否登录
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSDictionary *dictionary = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[paths lastObject] error: &error];
+    
+    if (dictionary) {
+        NSNumber *_free = [dictionary objectForKey:NSFileSystemFreeSize];
+        freesize = [_free unsignedLongLongValue] * 1.0 / (1024);
+        
+        NSString *unitStr = [sizeStr substringFromIndex:sizeStr.length - 2];
+        NSString *valueStr = [sizeStr substringToIndex:sizeStr.length - 2];
+        
+        CGFloat fileSize = 0.0;
+        if ([unitStr isEqualToString:@"GB"]) {
+            fileSize = [valueStr floatValue] * 1024 * 1024 * 1024;
+        }
+        else if ([unitStr isEqualToString:@"MB"]){
+            fileSize = [valueStr floatValue] * 1024 * 1024;
+        }
+        else {
+            fileSize = [valueStr floatValue] * 1024;
+        }
+        
+        NSLog(@"单位 ----->>> %lf - %@",fileSize,unitStr);
+        
+        if (fileSize > freesize) {
+            [self.view makeToast:@"手机容量不足无法继续下载该文件" duration:1.08 position:CSToastPositionCenter];
+            return NO;
+        }
+        return YES;
+    }
+    else {
+        NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %ld", [error domain], (long)[error code]);
+        return YES;
+    }
+}
+
 #pragma mark - tableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -491,7 +539,6 @@
         [cell.shareButton addTarget:self action:@selector(shareButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         
         cell.fileModel = model;
-//        NSLog(@"cell的model --->> %@ -- %ld",model.name,(long)model.status);
         
         return cell;
     }

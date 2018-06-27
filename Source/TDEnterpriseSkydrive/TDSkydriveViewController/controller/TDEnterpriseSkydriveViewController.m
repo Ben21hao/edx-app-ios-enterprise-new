@@ -8,12 +8,8 @@
 
 #import "TDEnterpriseSkydriveViewController.h"
 #import "TDSkydriveFileViewController.h"
-#import "TDLocalFileWebViewController.h"
-#import "TDSkydriveVideoViewController.h"
-#import "TDSkydriveAudioViewController.h"
 #import "TDVideoViewController.h"
 #import "TDSkydrveLoacalViewController.h"
-#import "TDSkydriveImageViewController.h"
 
 #import "TDSkydriveFolderCell.h"
 #import "TDSkydriveLocalCell.h"
@@ -83,48 +79,7 @@
 
     self.isForgound = NO;
     
-    [self freeDiskSpaceInBytes:@"188.8GB"];
 }
-
-- (BOOL)freeDiskSpaceInBytes:(NSString *)sizeStr {
-    
-    float freesize = 0.0;// 剩余大小
-    NSError *error = nil;// 是否登录
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSDictionary *dictionary = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[paths lastObject] error: &error];
-    
-    if (dictionary) {
-        NSNumber *_free = [dictionary objectForKey:NSFileSystemFreeSize];
-        freesize = [_free unsignedLongLongValue] * 1.0 / (1024);
-        
-        NSString *unitStr = [sizeStr substringFromIndex:sizeStr.length - 2];
-        NSString *valueStr = [sizeStr substringToIndex:sizeStr.length - 2];
-        
-        CGFloat fileSize = 0.0;
-        if ([unitStr isEqualToString:@"GB"]) {
-            fileSize = [valueStr floatValue] * 1024 * 1024 * 1024;
-        }
-        else if ([unitStr isEqualToString:@"MB"]){
-            fileSize = [valueStr floatValue] * 1024 * 1024;
-        }
-        else {
-            fileSize = [valueStr floatValue] * 1024;
-        }
-        
-        NSLog(@"单位 ----->>> %lf - %@",fileSize,unitStr);
-        
-        if (fileSize > freesize) {
-            return NO;
-        }
-        return YES;
-    }
-    else {
-        NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %ld", [error domain], (long)[error code]);
-        return YES;
-    }
-}
-
 
 #pragma mark - data
 - (void)requestData {
@@ -168,7 +123,7 @@
                 }
             }
             else {
-                [self nodataViewReason:@"该网盘暂无文件"];
+                [self nodataViewReason:@"该网盘暂无文件夹"];
             }
             [self.tableView reloadData];
         }
@@ -269,73 +224,11 @@
     
     //xls，xlsx，pdf，pptx，ppt，docx，rtf, txt
     if (indexPath.section == 0) {
-        
         [self gotoLocalVc];
-//        [self gotoVideoPlayVC];
     }
     else {
-        
         TDSkydrveFileModel *model = self.dataArray[indexPath.row];
         [self gotoFolderView:model.name folderId:model.id];
-        
-//        switch (indexPath.row) {
-//            case 0: {
-////                NSString *fileUrl = [[NSBundle mainBundle] pathForResource:@"111112" ofType:@"pdf"];
-////                [self gotoPreviewFile:fileUrl type:@"pdf"];
-//                [self gotoFolderView:model.name folderId:model.id];
-//                
-//            }
-//                break;
-//            case 1: {
-////                NSString *fileUrl = [[NSBundle mainBundle] pathForResource:@"111117" ofType:@"xlsx"];
-////                [self gotoPreviewFile:fileUrl type:@"xlsx"];
-//                
-//                [self gotoAudioPlayVC];
-//            }
-//                break;
-//            case 2: {
-////                NSString *fileUrl = [[NSBundle mainBundle] pathForResource:@"Terms-and-Services" ofType:@"htm"];
-////                [self gotoPreviewFile:fileUrl type:@"htm"];
-//                [self gotoVideoPlayVC];
-//            }
-//                break;
-//            case 3: {
-////                NSString *fileUrl = [[NSBundle mainBundle] pathForResource:@"111118" ofType:@"pptx"];
-////                [self gotoPreviewFile:fileUrl type:@"pptx"];
-//                
-//                [self gotoDownloadVc];
-//                }
-//                break;
-//            case 4: {
-//                NSString *fileUrl = [[NSBundle mainBundle] pathForResource:@"111119" ofType:@"ppt"];
-//                [self gotoPreviewFile:fileUrl type:@"ppt"];
-//                }
-//                break;
-//            case 5: {
-//                NSString *fileUrl = [[NSBundle mainBundle] pathForResource:@"111129" ofType:@"png"];
-////                [self gotoPreviewFile:fileUrl type:@"docx"];
-//                [self gotoPreviewImage:fileUrl title:@"png浏览" type:@"png"];
-//            }
-//                break;
-//            case 6: {
-//                NSString *fileUrl = [[NSBundle mainBundle] pathForResource:@"111132" ofType:@"JPG"];//111125.pages
-////                [self gotoPreviewFile:fileUrl type:@"pages"];
-//                 [self gotoPreviewImage:fileUrl title:@"jpg浏览" type:@"jpg"];
-//            }
-//                break;
-//            case 7: {
-//                NSString *fileUrl = [[NSBundle mainBundle] pathForResource:@"111130" ofType:@"bmp"];
-////                [self gotoPreviewFile:fileUrl type:@"rtf"];
-//                [self gotoPreviewImage:fileUrl title:@"bmp浏览" type:@"bmp"];
-//            }
-//                break;
-//            default: {
-//                NSString *fileUrl = [[NSBundle mainBundle] pathForResource:@"111128" ofType:@"gif"];
-////                [self gotoPreviewFile:fileUrl type:@"gif"];
-//                [self gotoPreviewImage:fileUrl title:@"gif浏览" type:@"gif"];
-//                }
-//                break;
-//        }
     }
 }
 
@@ -346,39 +239,6 @@
     skydriveFileVc.folderName = folderName;
     skydriveFileVc.folderID = folderId;
     [self.navigationController pushViewController:skydriveFileVc animated:YES];
-}
-
-- (void)gotoPreviewFilePath:(NSString *)filePath type:(NSString *)type { //文档浏览
-    
-    if (filePath.length == 0) {
-        NSLog(@"----- 空路径 ---");
-        return;
-    }
-    TDLocalFileWebViewController *webVc = [[TDLocalFileWebViewController alloc] init];
-    webVc.titleStr = @"文档浏览";
-    webVc.url = [NSURL fileURLWithPath:filePath];
-    webVc.typeStr = type;
-    [self.navigationController pushViewController:webVc animated:YES];
-}
-
-- (void)gotoVideoPlayVC { //视频播放
-    TDSkydriveVideoViewController *videoVc = [[TDSkydriveVideoViewController alloc] init];
-//    TDVideoViewController *videoVc = [[TDVideoViewController alloc] init];
-    [self.navigationController pushViewController:videoVc animated:YES];
-}
-
-- (void)gotoAudioPlayVC { //音频播放
-    TDSkydriveAudioViewController *audioPlayVC = [[TDSkydriveAudioViewController alloc] init];
-    [self.navigationController pushViewController:audioPlayVC animated:YES];
-}
-
-- (void)gotoPreviewImagePath:(NSString *)path title:(NSString *)titleStr type:(NSString *)typeStr { //图片预览
-    
-    TDSkydriveImageViewController *imageVc = [[TDSkydriveImageViewController alloc] init];
-    imageVc.filePath = path;
-    imageVc.titleStr = titleStr;
-    imageVc.typeStr = typeStr;
-    [self.navigationController pushViewController:imageVc animated:YES];
 }
 
 - (void)gotoLocalVc { //文件管理
@@ -401,7 +261,7 @@
     
     self.noDataView = [[TDNodataView alloc] init];
     self.noDataView.imageView.image = [UIImage imageNamed:@"file_null_image"];
-    self.noDataView.messageLabel.text = @"该网盘暂无文件";
+    self.noDataView.messageLabel.text = @"该网盘暂无文件夹";
     [self.tableView addSubview:self.noDataView];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

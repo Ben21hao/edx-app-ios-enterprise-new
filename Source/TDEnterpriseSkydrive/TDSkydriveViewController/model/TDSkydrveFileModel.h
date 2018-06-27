@@ -20,6 +20,7 @@
 @property (nonatomic,strong) NSString *resources_url;//文件下载地址
 @property (nonatomic,strong) NSString *created_at;//创建时间
 
+@property (nonatomic,strong) NSString *real_file_size;//大小
 @property (nonatomic,strong) NSString *file_size;//文件大小 单位：KB，M, GB
 @property (nonatomic,strong) NSString *download_size;//已下载大小
 @property (nonatomic,strong) NSData *resumeData;//已下载数据,用于断点续传

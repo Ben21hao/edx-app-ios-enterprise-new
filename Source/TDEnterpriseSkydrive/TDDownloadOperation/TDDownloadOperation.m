@@ -83,6 +83,7 @@ static NSURLSession *session = nil;
     
     //cancel last download task，取消上次的任务
     [self.downloadTask cancelByProducingResumeData:^(NSData * resumeData) {
+        NSLog(@"----->> 暂停上次的任务");
     }];
 
     if (model.resumeData) { //续传
@@ -144,7 +145,7 @@ static NSURLSession *session = nil;
         if ([sSelf isValideResumeData:self.currentModel.resumeData]) {
             [sSelf updateDownloadFileRusumeData:self.currentModel];
         }
-        //        NSLog(@"存已下载的数据 ----->> %@",model.resumeData);
+        NSLog(@"暂停当前任务 ----->> %@",model.resumeData);
     }];
 }
 
@@ -179,7 +180,7 @@ static NSURLSession *session = nil;
     }
     [self postDownloadStatusNotification:model];
     
-    NSLog(@"等待 -->> %@",model.name);
+    NSLog(@"变等待 -->> %@",model.name);
 }
 
 - (void)nextFileBeginDownload:(TDSkydrveFileModel *)model { //有等待： 下一个 等待的任务开始下载(暂停，完成，失败 三种情况)
@@ -188,18 +189,7 @@ static NSURLSession *session = nil;
 
 #pragma mark - 处理kill掉程序
 - (void)exitApplicationSaveResumeData { //用户退出程序
-    
-//    __weak __typeof(self) wSelf = self;
-//    [self.downloadTask cancelByProducingResumeData:^(NSData * resumeData) { //暂停下载
-//        
-//        __strong __typeof(wSelf) sSelf = wSelf;
-//        self.currentModel.resumeData = resumeData;
-//        
-//        if ([sSelf isValideResumeData:self.currentModel.resumeData]) {
-//            [sSelf updateDownloadFileRusumeData:self.currentModel];
-//        }
-//        //        NSLog(@"存已下载的数据 ----->> %@",model.resumeData);
-//    }];
+
     [self.downloadTask cancelByProducingResumeData:^(NSData * _Nullable resumeData) {
     }];
 }
