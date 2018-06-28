@@ -118,7 +118,7 @@
     CGFloat progress = [userInfo[@"progress"] floatValue];
     self.fileModel.progress = progress;
     self.progressView.progress = progress * 100;
-    self.progressView.status = 1;
+//    self.progressView.status = 1;
     
     NSString *sizeStr = userInfo[@"download_size"];
     if (sizeStr.length > 0  && progress > 0) {

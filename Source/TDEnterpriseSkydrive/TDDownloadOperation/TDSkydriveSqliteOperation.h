@@ -24,7 +24,7 @@ typedef void(^SqliteQuerySortHandler)(NSMutableArray *downloadArray, NSMutableAr
 - (void)insertFileData:(TDSkydrveFileModel *)model; //增
 
 - (void)deleteFileData:(NSString *)fileId; //根据文件id来删除删
-- (void)deleteFileArray:(NSArray *)selectArray handler:(void(^)(TDSkydrveFileModel *model, BOOL isFinish))handler; //批量删除
+- (void)deleteFileArray:(NSArray *)selectArray forUser:(NSString *)username handler:(void(^)(TDSkydrveFileModel *model, BOOL isFinish))handler; //批量删除
 
 - (void)updateFileProgress:(CGFloat)progress id:(NSString *)fileId;//更新进度
 - (void)updateFileStatus:(NSInteger)status id:(NSString *)fileId;//更新下载状态

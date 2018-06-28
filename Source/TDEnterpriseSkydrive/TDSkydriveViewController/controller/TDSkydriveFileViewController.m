@@ -113,6 +113,7 @@
     }
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
     NSString *authenStr = [OEXAuthentication authHeaderForApiAccess];
     [manager.requestSerializer setValue:authenStr forHTTPHeaderField:@"Authorization"];
     
@@ -157,7 +158,7 @@
             [self accountInvalidUser];
         }
         else {
-            [self nodataViewReason:@"请求失败，下拉重新加载"];
+            [self nodataViewReason:TDLocalizeSelect(@"SKY_REQUEST_FAILED", nil)];
         }
 
         
@@ -347,7 +348,7 @@
         
 //        NSLog(@"存储空间 ----->>> %lf - %lf",freeSize,fileSize);
         
-        if (fileSize > freeSize) {
+        if (fileSize > freeSize - 2048) { //给2M的剩余空间
             [self.view makeToast:TDLocalizeSelect(@"SKY_INSUFFICIENT_STORAGE", nil) duration:1.08 position:CSToastPositionCenter];
             return NO;
         }
@@ -524,6 +525,7 @@
     }];
 }
 
+
 #pragma mark - tableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -666,6 +668,7 @@
     }
     
     TDSkydriveNoSupportViewController *noSupportVc = [[TDSkydriveNoSupportViewController alloc] init];
+    noSupportVc.username = self.username;
     noSupportVc.model = model;
     noSupportVc.filePath = filePath;
     noSupportVc.downloadOperation = self.downloadOperation;
@@ -752,11 +755,12 @@
     TDSkydrveFileModel *model = self.dataArray[index];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    [params setValue:expireStr forKey:@"expire_at"];//分享文件的时长。有7，1，0
     [params setValue:model.id forKey:@"cloud_file"];//分享文件的id
+    [params setValue:expireStr forKey:@"expire_at"];//分享文件的时长。有7，1，0
     [params setValue:[NSString stringWithFormat:@"%d",type] forKey:@"type"];//0 加密，1 公开
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
     NSString *authValue = [NSString stringWithFormat:@"%@", [OEXAuthentication authHeaderForApiAccess]];
     [manager.requestSerializer setValue:authValue forHTTPHeaderField:@"Authorization"];//安全验证
     
@@ -792,10 +796,10 @@
     
     UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
     if (passwordStr.length > 0) {
-        pasteBoard.string = [NSString stringWithFormat:@"链接：%@\n密码：%@",linkStr,passwordStr];
+        pasteBoard.string = [TDLocalizeSelect(@"SKY_LINK_PASSWORD", nil) oex_formatWithParameters:@{@"link":linkStr,@"password":passwordStr}];
     }
     else {
-        pasteBoard.string = [NSString stringWithFormat:@"链接：%@",linkStr];
+        pasteBoard.string = [TDLocalizeSelect(@"SKY_LINK", nil) oex_formatWithParameters:@{@"link":linkStr}];
     }
     
     [self.view makeToast:TDLocalizeSelect(@"SKY_URL_COPIED", nil) duration:1.08 position:CSToastPositionCenter];

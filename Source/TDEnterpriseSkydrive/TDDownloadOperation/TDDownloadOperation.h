@@ -66,6 +66,6 @@ typedef void(^CompletionHandlerType)();
 - (void)updateDownloadFileRusumeData:(TDSkydrveFileModel *)model; //更新 resumeData
 - (void)updateDownloadFileDownloadSize:(TDSkydrveFileModel *)model; //更新已下载大小
 
-- (void)deleteSelectLocalFile:(NSArray *)selectArray handler:(void(^)(TDSkydrveFileModel *model, BOOL isFinish))handler;//删除选中的数组
+- (void)deleteSelectLocalFile:(NSArray *)selectArray forUser:(NSString *)username handler:(void(^)(TDSkydrveFileModel *model, BOOL isFinish))handler;//删除选中的数组
     
 @end

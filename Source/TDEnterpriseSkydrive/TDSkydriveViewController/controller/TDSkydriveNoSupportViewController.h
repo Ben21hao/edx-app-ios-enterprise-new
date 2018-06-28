@@ -11,6 +11,7 @@
 
 @interface TDSkydriveNoSupportViewController : TDBaseViewController
 
+@property (nonatomic,strong) NSString *username;
 @property (nonatomic,strong) TDSkydrveFileModel *model;
 @property (nonatomic,strong) NSString *filePath;//本地文件路径
 

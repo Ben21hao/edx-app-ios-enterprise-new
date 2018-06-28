@@ -184,7 +184,7 @@
 
 - (void)deleteButtonAction:(UIButton *)sender {//删除
     if (self.selectArray.count == 0) {
-        [self.view makeToast:@"请选择需要删除的文件" duration:1.08 position:CSToastPositionCenter];
+        [self.view makeToast:TDLocalizeSelect(@"SKY_SELECTE_DELETE", nil) duration:1.08 position:CSToastPositionCenter];
         return;
     }
     [self deleteFileAlertView];
@@ -192,7 +192,7 @@
 
 - (void)deleteFileAlertView {
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"确认删除" message:@"是否删除当前所选文件？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:TDLocalizeSelect(@"SKY_WARMING", nil) message:TDLocalizeSelect(@"SKY_SELECTE_DELETE", nil) preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"CANCEL", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
@@ -228,7 +228,7 @@
     NSLog(@"删除选中 -- %@",self.selectArray);
     
     WS(weakSelf);
-    [self.downloadOperation deleteSelectLocalFile:self.selectArray handler:^(TDSkydrveFileModel *model, BOOL isFinish) { //删除数据
+    [self.downloadOperation deleteSelectLocalFile:self.selectArray forUser:self.username handler:^(TDSkydrveFileModel *model, BOOL isFinish) { //删除数据
         
         if ([weakSelf.downloadingArray containsObject:model]) {
             [weakSelf.downloadingArray removeObject:model];
@@ -242,7 +242,7 @@
             [weakSelf.selectArray removeAllObjects];
             [weakSelf.localView reloadTableViewForDownload:self.downloadingArray finish:self.finishArray];
             
-            [weakSelf.localView makeToast:@"已成功删除所选文件" duration:1.08 position:CSToastPositionCenter];
+            [weakSelf.localView makeToast:TDLocalizeSelect(@"SKY_DELECTE_SUCCESS", nil) duration:1.08 position:CSToastPositionCenter];
             
             [weakSelf finishEditeHandle];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"skydrive_delete_finish" object:nil];
@@ -452,7 +452,7 @@
         
 //        NSLog(@"存储空间 ----->>> %lf - %lf",freeSize,fileSize);
         
-        if (fileSize > freeSize) {
+        if (fileSize > freeSize - 2048) { //给2M的剩余空间
             [self.view makeToast:TDLocalizeSelect(@"SKY_INSUFFICIENT_STORAGE", nil) duration:1.08 position:CSToastPositionCenter];
             return NO;
         }
@@ -602,6 +602,7 @@
     }
     
     TDSkydriveNoSupportViewController *noSupportVc = [[TDSkydriveNoSupportViewController alloc] init];
+    noSupportVc.username = self.username;
     noSupportVc.model = model;
     noSupportVc.filePath = filePath;
     noSupportVc.downloadOperation = self.downloadOperation;

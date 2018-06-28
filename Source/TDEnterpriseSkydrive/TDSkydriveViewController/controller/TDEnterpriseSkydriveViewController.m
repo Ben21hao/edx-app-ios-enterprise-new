@@ -90,6 +90,7 @@
     }
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager shareManager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer]; 
     NSString *authenStr = [OEXAuthentication authHeaderForApiAccess];
     [manager.requestSerializer setValue:authenStr forHTTPHeaderField:@"Authorization"];
     
@@ -131,7 +132,7 @@
             [self accountInvalidUser];
         }
         else {
-            [self nodataViewReason:@"请求失败，下拉重新加载"];
+            [self nodataViewReason:TDLocalizeSelect(@"SKY_REQUEST_FAILED", nil)];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

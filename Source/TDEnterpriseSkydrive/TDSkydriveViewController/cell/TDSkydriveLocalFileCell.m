@@ -110,6 +110,8 @@
     self.progressView.progress = fileModel.progress * 100; //注意乘于100
     self.progressView.status = fileModel.status;
     
+    self.progressView.hidden = fileModel.status == 5;
+    
     [self cellStatusText:fileModel];
     
 //    NSLog(@"本地cell -- 观察者");

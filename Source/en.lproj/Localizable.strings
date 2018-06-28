@@ -2076,3 +2076,16 @@
 "SKY_DELETE_SUCCESS"="Successfully deleted the selected files.";
 /*账号异常，请联系管理员   Account error, please contact Admin. */
 "SKY_ACCOUNT_ERROR"="Account error, please contact Admin.";
+
+/*是否删除当前文件？   Confirm to delete file？*/
+"SKY_CONFIRM_DELETE"="Confirm to delete file？";
+/*请选择需要删除的文件    Please select files to delete.*/
+"SKY_SELECTE_DELETE"="Please select files to delete.";
+/*已成功删除所选文件    Successfully deleted selected files.*/
+"SKY_DELECTE_SUCCESS"="Successfully deleted selected files.";
+/*请求失败，下拉重新加载    Request failed, scroll down to reload.*/
+"SKY_REQUEST_FAILED"="Request failed, scroll down to reload.";
+/*链接：{link}\n密码：{password}        URL：{link}\nPassword：{password}*/
+"SKY_LINK_PASSWORD"="URL：{link}\nPassword：{password}";
+/*链接：{link} URL：{link} */
+"SKY_LINK"="URL：{link}";

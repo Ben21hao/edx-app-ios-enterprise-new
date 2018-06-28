@@ -2041,8 +2041,8 @@
 "SKY_ENCRYPTED"="加密";
 /*正在下载（{count}个）    Downloading ({count}) */
 "SKY_DOWNLOADING"="正在下载（{count}个）";
-/*已完成下载（{count}个）    Downloaded ({count}) */
-"SKY_DOWNLOADED"="已完成下载（{count}个）";
+/*已下载完成（{count}个）    Downloaded ({count}) */
+"SKY_DOWNLOADED"="已下载完成（{count}个）";
 /*等待下载    Waiting */
 "SKY_WAITING"="等待下载";
 /*下载失败    Failed */
@@ -2075,5 +2075,19 @@
 "SKY_DELETE_SUCCESS"="已完成删除所选文件";
 /*账号异常，请联系管理员   Account error, please contact Admin. */
 "SKY_ACCOUNT_ERROR"="账号异常，请联系管理员";
+/*账号异常，请联系管理员   Account error, please contact Admin. */
+"SKY_ACCOUNT_ERROR"="账号异常，请联系管理员";
 
+/*是否删除当前文件？   Confirm to delete file？*/
+"SKY_CONFIRM_DELETE"="是否删除当前文件？";
+/*请选择需要删除的文件    Please select files to delete.*/
+"SKY_SELECTE_DELETE"="请选择需要删除的文件";
+/*已成功删除所选文件    Successfully deleted selected files.*/
+"SKY_DELECTE_SUCCESS"="已成功删除所选文件";
+/*请求失败，下拉重新加载    Request failed, scroll down to reload.*/
+"SKY_REQUEST_FAILED"="请求失败，下拉重新加载";
+/*链接：{link} \n密码：{password}        URL：{link}\nPassword：{password}*/
+"SKY_LINK_PASSWORD"="链接：{link}\n密码：{password}";
+/*链接：{link} URL：{link} */
+"SKY_LINK"="链接：{link}";
 

@@ -13,8 +13,6 @@
 #import <UIKit/UIKit.h>
 #import "Reachability.h"
 
-#define IS_IOS10ORLATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10)
-
 @interface TDDownloadOperation () <NSURLSessionDownloadDelegate>
 
 @property (nonatomic,strong) NSMutableDictionary *completionHandlerDictionary;
@@ -79,18 +77,17 @@ static NSURLSession *session = nil;
 - (void)beginDownloadFileModel:(TDSkydrveFileModel *)model firstAdd:(BOOL)isFirst { //下载, isFirst：是否第一次加入下载
     
     self.completionHandlerDictionary = @{}.mutableCopy;
-    
-    //cancel last download task，取消上次的任务
-    [self.downloadTask cancelByProducingResumeData:^(NSData * resumeData) {
+    [self.downloadTask cancelByProducingResumeData:^(NSData * resumeData) {//cancel last download task，取消上次的任务
         NSLog(@"----->> 暂停上次的任务");
     }];
-
+    
     if (model.resumeData) { //续传
-        if (IS_IOS10ORLATER) {
-            self.downloadTask = [self.backgroundSession downloadTaskWithCorrectResumeData:model.resumeData];
-        } else {
+//
+//        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10) {
+//            self.downloadTask = [self.backgroundSession downloadTaskWithCorrectResumeData:model.resumeData];
+//        } else {
             self.downloadTask = [self.backgroundSession downloadTaskWithResumeData:model.resumeData];
-        }
+//        }
     }
     else { //第一次下载
         NSURL *downloadURL = [NSURL URLWithString:model.resources_url];
@@ -100,7 +97,7 @@ static NSURLSession *session = nil;
     
     [self.downloadTask resume];
     
-    NSLog(@"--->> 开始下载 %@",model.name);
+//    NSLog(@"--->> 开始下载 %@",model.name);
     self.currentModel.status = 1;
     if (isFirst) {
         [self insertDownloadFile:model]; //加入本地数据库
@@ -125,7 +122,6 @@ static NSURLSession *session = nil;
 //        
 //    }
 //    else {
-//        [self beginDownloadFileModel:model firstAdd:NO]; //没有已下载数据开始下载
 //    }
 //    
 //    NSLog(@"--->> 继续下载");
@@ -260,12 +256,14 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
             
             self.currentModel.status = 3;
             if (self.currentModel.udpateLocal) {
+                [self postDownloadStatusNotification:self.currentModel]; //cell的status
                 [self allowUpdateLocalData];
             }
             NSLog(@"--->> 暂停下载");
         }
         else {
             self.currentModel.status = 4;
+            [self postDownloadStatusNotification:self.currentModel]; //cell的status
             [self allowUpdateLocalData];
             NSLog(@"--->> 下载失败");
         }
@@ -276,6 +274,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
         self.currentModel.status = 5;
         
         [self.delegate currentFileDownloadFinish:self.currentModel]; //完成当前的下载任务
+        [self postDownloadStatusNotification:self.currentModel]; //cell的status
         
         [self updateDownloadFileStatus:self.currentModel]; //更新本地状态
         if (self.currentModel.udpateLocal) {
@@ -283,7 +282,6 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
         }
         NSLog(@"--->> 下载成功");
     }
-    [self postDownloadStatusNotification:self.currentModel]; //cell的status
 }
 
 - (void)allowUpdateLocalData { //允许更新本地数据库
@@ -313,7 +311,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
 }
 
 - (void)postDownloadStatusNotification:(TDSkydrveFileModel *)model { //对应文件：更新状态
-
+    
     //0 未下载，1 下载中，2 等待下载，3 暂停，4 下载失败，5 下载完成
     NSDictionary *userInfo = @{@"status": [NSString stringWithFormat:@"%ld",(long)model.status]};
     NSString *name = [NSString stringWithFormat:@"%@_downloadStatusNotification",model.id];
@@ -405,8 +403,8 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
 }
 
 //删除
-- (void)deleteSelectLocalFile:(NSArray *)selectArray handler:(void(^)(TDSkydrveFileModel *model, BOOL isFinish))handler {
-    [self.sqliteOperation deleteFileArray:selectArray handler:handler];
+- (void)deleteSelectLocalFile:(NSArray *)selectArray forUser:(NSString *)username handler:(void(^)(TDSkydrveFileModel *model, BOOL isFinish))handler {
+    [self.sqliteOperation deleteFileArray:selectArray forUser:username handler:handler];
 }
 
 @end

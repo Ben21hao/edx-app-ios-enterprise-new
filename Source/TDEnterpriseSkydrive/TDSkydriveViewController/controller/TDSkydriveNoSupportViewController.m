@@ -34,7 +34,7 @@
 
 - (void)deleteButtonAction:(UIButton *)sender {
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"确认删除" message:@"是否删除当前文件？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:TDLocalizeSelect(@"SKY_WARMING", nil) message:TDLocalizeSelect(@"SKY_CONFIRM_DELETE", nil) preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"CANCEL", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
@@ -54,7 +54,7 @@
     
     NSArray *selectArray = [[NSArray alloc] initWithObjects:self.model, nil];
     WS(weakSelf);
-    [self.downloadOperation deleteSelectLocalFile:selectArray handler:^(TDSkydrveFileModel *model, BOOL isFinish) {
+    [self.downloadOperation deleteSelectLocalFile:selectArray forUser:self.username handler:^(TDSkydrveFileModel *model, BOOL isFinish) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"noSupport_skydrive_delete_finish" object:nil];
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }];

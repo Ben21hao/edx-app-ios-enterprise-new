@@ -85,7 +85,7 @@
     [self.dataBase close];
 }
 
-- (void)deleteFileArray:(NSArray *)selectArray handler:(void(^)(TDSkydrveFileModel *model, BOOL isFinish))handler { //删除选中的
+- (void)deleteFileArray:(NSArray *)selectArray forUser:(NSString *)username handler:(void(^)(TDSkydrveFileModel *model, BOOL isFinish))handler { //删除选中的
     
     if ([self.dataBase open]) {
     
@@ -99,7 +99,12 @@
             if (delete) {
                 NSLog(@"删除成功 %@",model.id);
                 
-                
+                NSString *filePath = [self getPreviewFilePathForId:model forUser:username];
+                NSFileManager *manager = [NSFileManager defaultManager];
+                if ([manager fileExistsAtPath:filePath]) {
+                    [manager removeItemAtPath:filePath error:nil];
+                    NSLog(@"----->> 移除本地文件 %@",model.name);
+                }
                 
                 if (i == selectArray.count - 1) {
                     handler(model, YES); //最后一个
@@ -115,6 +120,16 @@
         }
     }
     [self.dataBase close];
+}
+
+- (NSString *)getPreviewFilePathForId:(TDSkydrveFileModel *)model forUser:(NSString *)username { //拼接路径
+    
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *namePath = [NSString stringWithFormat:@"skydive_download_%@_%@.%@",username,model.id,model.file_type];
+    NSString *filePath = [path stringByAppendingPathComponent:namePath];
+    
+    //    NSLog(@"文件路径------->> %@",filePath);
+    return filePath;
 }
 
 #pragma mark - 改
@@ -215,7 +230,6 @@
                 else {
                     model.status = [result intForColumn:@"status"];
                 }
-//                model.status = [result intForColumn:@"status"];
                 
                 if (model.status != 5) {
                     NSString *str = [result stringForColumn:@"resumeData"];
@@ -226,9 +240,6 @@
                         model.resumeData = [self strToData:str];
                     }
                 }
-                
-//                NSString *str = [result stringForColumn:@"resumeData"];
-//                model.resumeData = [self strToData:str];
                 
                 NSLog(@"数据库 --->>>%@ %@ --> %f --->>>> %ld",model.id,model.name,model.progress,(long)model.status);
                 
