@@ -2090,4 +2090,5 @@
 "SKY_LINK_PASSWORD"="链接：{link}\n密码：{password}";
 /*链接：{link} URL：{link} */
 "SKY_LINK"="链接：{link}";
-
+/*音频无法播放 Unable to play audio.*/
+"SKY_AUDIO_FAILE"="音频无法播放";

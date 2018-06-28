@@ -604,6 +604,10 @@
     }
 }
 
+- (void)judgeDucumentCanPreview:(TDSkydrveFileModel *)model {
+    
+}
+
 #pragma makr - 文件浏览/播放
 - (void)gotoVideoPlayVC:(TDSkydrveFileModel *)model { //视频播放
     

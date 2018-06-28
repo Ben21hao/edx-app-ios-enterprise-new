@@ -50,6 +50,14 @@
     [self.loadIngView removeFromSuperview];
 }
 
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
+    NSLog(@"didFailNavigation ----- %@",error);
+}
+
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
+    NSLog(@"didFailProvisionalNavigation ----- %@",error);
+}
+
 - (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
     NSLog(@"crash ----- %@",webView.URL.absoluteString);
 }

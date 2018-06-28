@@ -73,12 +73,14 @@
     [self.alertView addSubview:self.foreverView];
     
     self.cancelButton = [[UIButton alloc] init];
+    self.cancelButton.showsTouchWhenHighlighted = YES;
     self.cancelButton.backgroundColor = [UIColor colorWithHexString:colorHexStr1];
     self.cancelButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:15];
     [self.cancelButton setTitleColor:[UIColor colorWithHexString:colorHexStr13] forState:UIControlStateNormal];
     [self.alertView addSubview:self.cancelButton];
     
     self.sureButton = [[UIButton alloc] init];
+    self.sureButton.showsTouchWhenHighlighted = YES;
     self.sureButton.backgroundColor = [UIColor colorWithHexString:colorHexStr10];
     self.sureButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:15];
     [self.sureButton setTitleColor:[UIColor colorWithHexString:colorHexStr13] forState:UIControlStateNormal];

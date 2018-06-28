@@ -108,7 +108,9 @@
         }
     }
 
-    [self.finishArray addObject:currentModel];
+    [self.finishArray insertObject:currentModel atIndex:0];
+//    [self.finishArray addObject:currentModel];
+    
     [self.localView reloadTableViewForDownload:self.downloadingArray finish:self.finishArray];
 }
 

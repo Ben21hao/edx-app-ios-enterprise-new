@@ -57,7 +57,7 @@ static NSURLSession *session = nil;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSString *identifier = @"com.yourcompany.appId.BackgroundSession";
+        NSString *identifier = @"cn.eliteu.enterprise.BackgroundSession";
         NSURLSessionConfiguration* sessionConfig = nil;
         
 //#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000)

@@ -24,6 +24,8 @@
 @property (nonatomic,assign) BOOL isPlaying;
 @property (nonatomic,assign) BOOL isOperation;//是否有手势在操作
 
+@property (nonatomic,assign) BOOL failPlay;//播放失败
+
 @end
 
 @implementation TDSkydriveAudioViewController
@@ -109,19 +111,23 @@
         switch (status) {
             case AVPlayerStatusUnknown: {
                 NSLog(@"AVPlayerStatusUnknown。。。");
+                self.failPlay = YES;
             }
                 break;
                 
             case AVPlayerStatusReadyToPlay: {
                 NSLog(@"AVPlayerStatusReadyToPlay。。。");
-                
+                self.failPlay = NO;
                 self.totalDuration = CMTimeGetSeconds(playerItem.duration);
                 self.audioView.totalLabel.text = [self timeFormatterExchange:self.totalDuration];
+                
+                [self playButtonAction:self.audioView.playButton];
             }
                 break;
                 
             case AVPlayerStatusFailed: {
                 NSLog(@"AVPlayerStatusFailed。。。");
+                self.failPlay = YES;
             }
                 break;
                 
@@ -163,7 +169,7 @@
     self.isPlaying = NO;
 }
 
-- (void)playAudioPlayer { //暂停播放
+- (void)playAudioPlayer { //播放音频
     
     [self.audioPlayer play];
     self.audioView.playButton.selected = YES;
@@ -178,14 +184,18 @@
 }
 
 - (void)playButtonAction:(UIButton *)sender { //播放按钮
-
     sender.selected = !sender.selected;
     
+    if (self.failPlay && sender.selected) {
+        [self.view makeToast:TDLocalizeSelect(@"SKY_AUDIO_FAILE", nil) duration:1.08 position:CSToastPositionCenter];
+        return;
+    }
+    
     if (sender.selected) {
+        
         if (self.audioView.slider.value == 1.0) {
             [self.audioPlayer seekToTime:kCMTimeZero];
         }
-        
         [self playAudioPlayer];
     }
     else {
@@ -288,7 +298,6 @@
     self.audioView = [[TDSkydriveAudioView alloc] init];
     [self.audioView.playButton addTarget:self action:@selector(playButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.audioView];
-    
     
     CGFloat width = (TDWidth / 3) * 2;
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
