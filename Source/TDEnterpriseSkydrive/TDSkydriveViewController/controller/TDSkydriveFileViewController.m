@@ -149,7 +149,7 @@
                 }
             }
             else {
-                [self nodataViewReason:@"该文件夹暂无文件"];
+                [self nodataViewReason:TDLocalizeSelect(@"SKY_FOLDERS_EMPTY_TEXT", nil)];
             }
             [self.tableView reloadData];
         }
@@ -182,9 +182,9 @@
 #pragma amrk - 用户不存在
 - (void)accountInvalidUser {
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:TDLocalizeSelect(@"SYSTEM_WARING", nil) message:@"账号异常，请联系管理员" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:TDLocalizeSelect(@"SYSTEM_WARING", nil) message:TDLocalizeSelect(@"SKY_ACCOUNT_ERROR", nil) preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"退出登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"LOGOUT", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [[OEXRouter sharedRouter] logoutAction];
     }];
     
@@ -292,14 +292,14 @@
 
 - (void)changeDownloadEnvirentment:(TDSkydrveFileModel *)model firstAdd:(BOOL)isFirst { //4G环境下，若只允许wifi下载，提示移动网络下
     
-    UIAlertController *alertControler = [UIAlertController alertControllerWithTitle:nil message:@"当前是4G网络，是否继续下载当前的文件？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertControler = [UIAlertController alertControllerWithTitle:nil message:TDLocalizeSelect(@"SKY_CELLULAR_CONNECTION_TEXT", nil) preferredStyle:UIAlertControllerStyleAlert];
     
     WS(weakSelf);
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"暂停" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"SKY_PAUSE_BUTTON_TEXT", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [weakSelf pauseAllDownloadFile:YES];
     }];
     
-    UIAlertAction *continueAction = [UIAlertAction actionWithTitle:@"继续" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *continueAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"SKY_CONTINUE_BUTTON_TEXT", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [OEXInterface setDownloadOnlyOnWifiPref:NO]; //切换允许移动网络下载
         [weakSelf beginDownloadFileModel:model firstAdd:isFirst];//下载
     }];
@@ -315,14 +315,14 @@
         return;
     }
     
-    UIAlertController *alertControler = [UIAlertController alertControllerWithTitle:nil message:@"当前是4G网络，是否继续下载当前的文件？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertControler = [UIAlertController alertControllerWithTitle:nil message:TDLocalizeSelect(@"SKY_CELLULAR_CONNECTION_TEXT", nil)  preferredStyle:UIAlertControllerStyleAlert];
     
     WS(weakSelf);
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"暂停" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"SKY_PAUSE_BUTTON_TEXT", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [weakSelf pauseAllDownloadFile:YES];
     }];
     
-    UIAlertAction *continueAction = [UIAlertAction actionWithTitle:@"继续" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *continueAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"SKY_CONTINUE_BUTTON_TEXT", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [OEXInterface setDownloadOnlyOnWifiPref:NO]; //切换允许移动网络下载
         [weakSelf continiuAllDownloadFile]; //继续下载
     }];
@@ -348,7 +348,7 @@
 //        NSLog(@"存储空间 ----->>> %lf - %lf",freeSize,fileSize);
         
         if (fileSize > freeSize) {
-            [self.view makeToast:@"手机容量不足无法继续下载该文件" duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"SKY_INSUFFICIENT_STORAGE", nil) duration:1.08 position:CSToastPositionCenter];
             return NO;
         }
         return YES;
@@ -454,7 +454,7 @@
     
     NSLog(@"--->> 网络信号不好");
     
-    [self.view makeToast:@"您当前网络信号不佳" duration:1.08 position:CSToastPositionCenter];
+    [self.view makeToast:TDLocalizeSelect(@"SKY_BAD_NETWORK", nil) duration:1.08 position:CSToastPositionCenter];
     
     WS(weakSelf);
     [self.downloadOperation getLocalDownloadFileSortDataBlock:^(NSMutableArray *downloadArray, NSMutableArray *finishArray) {
@@ -737,7 +737,7 @@
         return;
     }
     
-    [SVProgressHUD showWithStatus:@"创建中"];
+    [SVProgressHUD showWithStatus:TDLocalizeSelect(@"SKY_CREAT_WAIT", nil)];
     SVProgressHUD.defaultMaskType = SVProgressHUDMaskTypeBlack;
     SVProgressHUD.defaultStyle = SVProgressHUDAnimationTypeNative;
     
@@ -777,7 +777,7 @@
             [self copyShareLink:shareUrl password:password];
         }
         else {
-            [self.view makeToast:@"链接创建失败" duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"SKY_FAIL_CREATE", nil) duration:1.08 position:CSToastPositionCenter];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -798,7 +798,7 @@
         pasteBoard.string = [NSString stringWithFormat:@"链接：%@",linkStr];
     }
     
-    [self.view makeToast:@"链接已复制" duration:1.08 position:CSToastPositionCenter];
+    [self.view makeToast:TDLocalizeSelect(@"SKY_URL_COPIED", nil) duration:1.08 position:CSToastPositionCenter];
 }
 
 #pragma mark - UI
@@ -818,7 +818,7 @@
     
     self.noDataView = [[TDNodataView alloc] init];
     self.noDataView.imageView.image = [UIImage imageNamed:@"file_null_image"];
-    self.noDataView.messageLabel.text = @"该文件夹暂无文件";
+    self.noDataView.messageLabel.text = TDLocalizeSelect(@"SKY_FOLDERS_EMPTY_TEXT", nil);
     [self.tableView addSubview:self.noDataView];
     
     [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -60,7 +60,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleViewLabel.text = @"文件管理";
+    self.titleViewLabel.text = TDLocalizeSelect(@"SKY_MANAGE_FILES_TEXT", nil);
     [self.rightButton setImage:[UIImage imageNamed:@"select_white_circle"] forState:UIControlStateNormal];
     [self.rightButton setImage:[UIImage imageNamed:@"select_blue_white_circle"] forState:UIControlStateSelected];
     [self setViewConstraint];
@@ -194,12 +194,12 @@
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"确认删除" message:@"是否删除当前所选文件？" preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"CANCEL", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }];
     
     WS(weakSelf);
-    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"OK", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         [weakSelf deleteSelectData];
     }];
@@ -397,14 +397,14 @@
 
 - (void)changeDownloadEnvirentment:(TDSkydrveFileModel *)model firstAdd:(BOOL)isFirst { //4G环境下，若只允许wifi下载，提示移动网络下
     
-    UIAlertController *alertControler = [UIAlertController alertControllerWithTitle:nil message:@"当前是4G网络，是否继续下载当前的文件？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertControler = [UIAlertController alertControllerWithTitle:nil message:TDLocalizeSelect(@"SKY_CELLULAR_CONNECTION_TEXT", nil)  preferredStyle:UIAlertControllerStyleAlert];
     
     WS(weakSelf);
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"暂停" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"SKY_PAUSE_BUTTON_TEXT", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [weakSelf pauseAllDownloadFile:YES];
     }];
     
-    UIAlertAction *continueAction = [UIAlertAction actionWithTitle:@"继续" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *continueAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"SKY_CONTINUE_BUTTON_TEXT", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [OEXInterface setDownloadOnlyOnWifiPref:NO]; //切换允许移动网络下载
         [weakSelf beginDownloadFileModel:model firstAdd:isFirst];//下载
     }];
@@ -420,14 +420,14 @@
         return;
     }
     
-    UIAlertController *alertControler = [UIAlertController alertControllerWithTitle:nil message:@"当前是4G网络，是否继续下载当前的文件？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertControler = [UIAlertController alertControllerWithTitle:nil message:TDLocalizeSelect(@"SKY_CELLULAR_CONNECTION_TEXT", nil)  preferredStyle:UIAlertControllerStyleAlert];
     
     WS(weakSelf);
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"暂停" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"SKY_PAUSE_BUTTON_TEXT", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [weakSelf pauseAllDownloadFile:YES];
     }];
     
-    UIAlertAction *continueAction = [UIAlertAction actionWithTitle:@"继续" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *continueAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"SKY_CONTINUE_BUTTON_TEXT", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [OEXInterface setDownloadOnlyOnWifiPref:NO]; //切换允许移动网络下载
         [weakSelf continiuAllDownloadFile]; //恢复下载
     }];
@@ -453,7 +453,7 @@
 //        NSLog(@"存储空间 ----->>> %lf - %lf",freeSize,fileSize);
         
         if (fileSize > freeSize) {
-            [self.view makeToast:@"手机容量不足无法继续下载该文件" duration:1.08 position:CSToastPositionCenter];
+            [self.view makeToast:TDLocalizeSelect(@"SKY_INSUFFICIENT_STORAGE", nil) duration:1.08 position:CSToastPositionCenter];
             return NO;
         }
         return YES;
@@ -614,7 +614,7 @@
     NSString *namePath = [NSString stringWithFormat:@"skydive_download_%@_%@.%@",self.username,model.id,model.file_type];
     NSString *filePath = [path stringByAppendingPathComponent:namePath];
     
-    NSLog(@"文件路径------->> %@",filePath);
+//    NSLog(@"文件路径------->> %@",filePath);
     return filePath;
 }
 

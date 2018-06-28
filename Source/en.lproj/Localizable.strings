@@ -2012,5 +2012,67 @@
 /*发送验证码失败 Failed to send verification code.*/
 "CODE_SEND_FAILED" = "Failed to send verification code.";
 
-/* 企业网盘 Enterprise SkyDrive*/
-"ENTERPRISE_SKYDRIVE"="Enterprise SkyDrive";
+/* 企业网盘 EliteU Cloud*/
+"ENTERPRISE_SKYDRIVE"="EliteU Cloud";
+/*文件管理    Manage Files */
+"SKY_MANAGE_FILES_TEXT"="Manage Files";
+/*网盘文件夹    Cloud Folders*/
+"SKY_CLOUND_FOULDERS_TEXT"="Cloud Folders";
+/*该网盘暂无文件    EliteU cloud is empty.*/
+"SKY_ELITEU_ENPTY_TEXT"="EliteU cloud is empty.";
+/*该文件夹暂无文件    This folder is empty. */
+"SKY_FOLDERS_EMPTY_TEXT"="This folder is empty.";
+/*当前是4G网络，是否继续下载当前的文件？    Continue downloading over 4G cellular connection? */
+"SKY_CELLULAR_CONNECTION_TEXT"="Continue downloading over 4G cellular connection?";
+/*暂停   Pause */
+"SKY_PAUSE_BUTTON_TEXT"="Pause";
+/*继续   Continue */
+"SKY_CONTINUE_BUTTON_TEXT"="Continue";
+/*分享文件有效期      Available Period */
+"SKY_AVAILABLE_PERIOD"="Available Period";
+/*1天   1 Day */
+"SKY_ONE_DAY"="1 Day";
+/*7天   7 Days*/
+"SKY_SEVEN_DAY"="7 Days";
+/*永久有效    Always */
+"SKY_ALWAYS"="Always";
+/*公开    Public */
+"SKY_PUBLIC"="Public";
+/*加密    Encrypted */
+"SKY_ENCRYPTED"="Encrypted";
+/*正在下载（{count}个）    Downloading ({count}) */
+"SKY_DOWNLOADING"="Downloading ({count})";
+/*已完成下载（{count}个）    Downloaded ({count}) */
+"SKY_DOWNLOADED"="Downloaded ({count})";
+/*等待下载    Waiting */
+"SKY_WAITING"="Waiting";
+/*下载失败    Failed */
+"SKY_FAILED"="Failed";
+/*暂停下载    Paused */
+"SKY_PAUSED"="Paused";
+/*编辑      Edit */
+"SKY_EDITE"="Edit";
+/*确认删除      Warning*/
+"SKY_WARMING"="Warning";
+/*是否删除当前所选文件      Confirm to delete the selected files? */
+"SKY_CONFIRM_DELETE"="Confirm to delete the selected files?";
+/*抱歉，该文件暂时无法查看！      Sorry, unable to view this file now!*/
+"SKY_UNABLE_VIEW"="Sorry, unable to view this file now!";
+/*打开     Open */
+"SKY_OPEN"="Open";
+/*您当前网络信号不佳       Bad network connection. */
+"SKY_BAD_NETWORK"="Bad network connection.";
+/*手机容量不足无法继续下载该文件      Insufficient storage, unable to continue downloading. */
+"SKY_INSUFFICIENT_STORAGE"="Insufficient storage, unable to continue downloading.";
+/*链接已复制      URL copied. */
+"SKY_URL_COPIED"="URL copied.";
+/*创建中，请稍后       Creating URL, please wait. */
+"SKY_CREAT_WAIT"="Creating URL, please wait.";
+/*链接创建失败      Failed to create URL. */
+"SKY_FAIL_CREATE"="Failed to create URL.";
+/*这里还没有您下载的文件哦~      No downloaded files. */
+"SKY_NO_DOWNLOAD_FILES"="No downloaded files.";
+/*已完成删除所选文件      Successfully deleted the selected files. */
+"SKY_DELETE_SUCCESS"="Successfully deleted the selected files.";
+/*账号异常，请联系管理员   Account error, please contact Admin. */
+"SKY_ACCOUNT_ERROR"="Account error, please contact Admin.";

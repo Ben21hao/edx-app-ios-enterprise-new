@@ -12,6 +12,7 @@
 
 #import "TDNodataView.h"
 #import "TDSkydrveFileModel.h"
+#import "NSString+OEXFormatting.h"
 
 @interface TDSkydriveLocalView () <UITableViewDelegate,UITableViewDataSource>
 
@@ -79,12 +80,12 @@
     
     TDSkydriveFolderHeaderView *headerView = [[TDSkydriveFolderHeaderView alloc] initWithReuseIdentifier:@"skydriveLocalHeaderView"];
     if (section == 0) {
-        headerView.titleLabel.text = [NSString stringWithFormat:@"正在下载（%lu个）",(unsigned long)self.downloadArray.count];
+        headerView.titleLabel.text = [TDLocalizeSelect(@"SKY_DOWNLOADING", nil) oex_formatWithParameters:@{@"count": [NSString stringWithFormat:@"%lu",(unsigned long)self.downloadArray.count]}];
         headerView.hidden = self.downloadArray.count == 0;
         
     }
     else {
-        headerView.titleLabel.text = [NSString stringWithFormat:@"已下载完成（%lu个）",(unsigned long)self.finishArray.count];
+        headerView.titleLabel.text = [TDLocalizeSelect(@"SKY_DOWNLOADED", nil) oex_formatWithParameters:@{@"count":[NSString stringWithFormat:@"%lu",(unsigned long)self.finishArray.count]}]; ;
         headerView.hidden = self.finishArray.count == 0;
     }
     
@@ -202,20 +203,20 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
     [self addSubview:self.tableView];
     
-    self.editeButton = [self setPlayButtonTitle:@"编辑" backgroundColor:@"#3e4147"];
+    self.editeButton = [self setPlayButtonTitle:TDLocalizeSelect(@"SKY_EDITE", nil) backgroundColor:@"#3e4147"];
     [self addSubview:self.editeButton];
     
-    self.deleteButton = [self setPlayButtonTitle:@"删除" backgroundColor:@"#555a5f"];
+    self.deleteButton = [self setPlayButtonTitle:TDLocalizeSelect(@"DELETE", nil) backgroundColor:@"#555a5f"];
     [self addSubview:self.deleteButton];
     
-    self.cancelButton = [self setPlayButtonTitle:@"取消" backgroundColor:@"#3e4147"];
+    self.cancelButton = [self setPlayButtonTitle:TDLocalizeSelect(@"CANCEL", nil) backgroundColor:@"#3e4147"];
     [self addSubview:self.cancelButton];
     
     [self userEditingFile:NO];
     
     self.noDataView = [[TDNodataView alloc] init];
     self.noDataView.imageView.image = [UIImage imageNamed:@"file_null_image"];
-    self.noDataView.messageLabel.text = @"这里还没有您下载的文件哦~";
+    self.noDataView.messageLabel.text = TDLocalizeSelect(@"SKY_NO_DOWNLOAD_FILES", nil);
     [self.tableView addSubview:self.noDataView];
     
     self.noDataView.hidden = YES;

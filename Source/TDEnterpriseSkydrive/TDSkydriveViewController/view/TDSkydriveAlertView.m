@@ -84,13 +84,13 @@
     [self.sureButton setTitleColor:[UIColor colorWithHexString:colorHexStr13] forState:UIControlStateNormal];
     [self.alertView addSubview:self.sureButton];
     
-    self.titleLabel.text = @"分享文件有效期";
-    [self.cancelButton setTitle:@"公开" forState:UIControlStateNormal];
-    [self.sureButton setTitle:@"加密" forState:UIControlStateNormal];
+    self.titleLabel.text = TDLocalizeSelect(@"SKY_AVAILABLE_PERIOD", nil);
+    [self.cancelButton setTitle:TDLocalizeSelect(@"SKY_PUBLIC", nil) forState:UIControlStateNormal];
+    [self.sureButton setTitle:TDLocalizeSelect(@"SKY_ENCRYPTED", nil) forState:UIControlStateNormal];
     
-    self.oneDayView.titleLabel.text = @"1天";
-    self.sevenDayView.titleLabel.text = @"7天";
-    self.foreverView.titleLabel.text = @"永久有效";
+    self.oneDayView.titleLabel.text = TDLocalizeSelect(@"SKY_ONE_DAY", nil);
+    self.sevenDayView.titleLabel.text = TDLocalizeSelect(@"SKY_SEVEN_DAY", nil);
+    self.foreverView.titleLabel.text = TDLocalizeSelect(@"SKY_ALWAYS", nil);
     
     self.foreverView.selectButton.selected = YES;
     self.timeType = TDSkydriveShareTimeForever;

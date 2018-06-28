@@ -123,7 +123,7 @@
                 }
             }
             else {
-                [self nodataViewReason:@"该网盘暂无文件夹"];
+                [self nodataViewReason:TDLocalizeSelect(@"SKY_ELITEU_ENPTY_TEXT", nil)];
             }
             [self.tableView reloadData];
         }
@@ -153,9 +153,9 @@
 
 - (void)accountInvalidUser {
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:TDLocalizeSelect(@"SYSTEM_WARING", nil) message:@"账号异常，请联系管理员" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:TDLocalizeSelect(@"SYSTEM_WARING", nil) message:TDLocalizeSelect(@"SKY_ACCOUNT_ERROR", nil) preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"退出登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:TDLocalizeSelect(@"LOGOUT", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [[OEXRouter sharedRouter] logoutAction];
     }];
     
@@ -184,7 +184,7 @@
         TDSkydriveLocalCell *cell = [[TDSkydriveLocalCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"enterpriseSkydriveCell"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
-        cell.titleLabel.text = @"文件管理";
+        cell.titleLabel.text = TDLocalizeSelect(@"SKY_MANAGE_FILES_TEXT", nil);
         
         return cell;
     }
@@ -202,7 +202,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     TDSkydriveFolderHeaderView *headerView = [[TDSkydriveFolderHeaderView alloc] initWithReuseIdentifier:@"skydriveFolderHeaderView"];
-    headerView.titleLabel.text = @"网盘文件夹";
+    headerView.titleLabel.text = TDLocalizeSelect(@"SKY_CLOUND_FOULDERS_TEXT", nil);
     return headerView;
 }
 
@@ -261,7 +261,7 @@
     
     self.noDataView = [[TDNodataView alloc] init];
     self.noDataView.imageView.image = [UIImage imageNamed:@"file_null_image"];
-    self.noDataView.messageLabel.text = @"该网盘暂无文件夹";
+    self.noDataView.messageLabel.text = TDLocalizeSelect(@"SKY_ELITEU_ENPTY_TEXT", nil);
     [self.tableView addSubview:self.noDataView];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

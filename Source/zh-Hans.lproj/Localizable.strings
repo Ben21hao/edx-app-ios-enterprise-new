@@ -2011,5 +2011,69 @@
 /*发送验证码失败 Failed to send verification code.*/
 "CODE_SEND_FAILED" = "发送验证码失败";
 
-/* 企业网盘 Enterprise SkyDrive*/
+/* 企业网盘 EliteU Cloud*/
 "ENTERPRISE_SKYDRIVE"="企业网盘";
+/*文件管理    Manage Files */
+"SKY_MANAGE_FILES_TEXT"="文件管理";
+/*网盘文件夹    Cloud Folders*/
+"SKY_CLOUND_FOULDERS_TEXT"="网盘文件夹";
+/*该网盘暂无文件    EliteU cloud is empty.*/
+"SKY_ELITEU_ENPTY_TEXT"="该网盘暂无文件夹";
+/*该文件夹暂无文件    This folder is empty. */
+"SKY_FOLDERS_EMPTY_TEXT"="该文件夹暂无文件";
+/*当前是4G网络，是否继续下载当前的文件？    Continue downloading over 4G cellular connection? */
+"SKY_CELLULAR_CONNECTION_TEXT"="当前是4G网络，是否继续下载当前的文件？";
+/*暂停   Pause */
+"SKY_PAUSE_BUTTON_TEXT"="暂停";
+/*继续   Continue */
+"SKY_CONTINUE_BUTTON_TEXT"="继续";
+/*分享文件有效期      Available Period */
+"SKY_AVAILABLE_PERIOD"="分享文件有效期";
+/*1天   1 Day */
+"SKY_ONE_DAY"="1天";
+/*7天   7 Days*/
+"SKY_SEVEN_DAY"="7天";
+/*永久有效    Always */
+"SKY_ALWAYS"="永久有效";
+/*公开    Public */
+"SKY_PUBLIC"="公开";
+/*加密    Encrypted */
+"SKY_ENCRYPTED"="加密";
+/*正在下载（{count}个）    Downloading ({count}) */
+"SKY_DOWNLOADING"="正在下载（{count}个）";
+/*已完成下载（{count}个）    Downloaded ({count}) */
+"SKY_DOWNLOADED"="已完成下载（{count}个）";
+/*等待下载    Waiting */
+"SKY_WAITING"="等待下载";
+/*下载失败    Failed */
+"SKY_FAILED"="下载失败";
+/*暂停下载    Paused */
+"SKY_PAUSED"="暂停下载";
+/*编辑      Edit */
+"SKY_EDITE"="编辑";
+/*确认删除      Warning*/
+"SKY_WARMING"="确认删除";
+/*是否删除当前所选文件      Confirm to delete the selected files? */
+"SKY_CONFIRM_DELETE"="是否删除当前所选文件";
+/*抱歉，该文件暂时无法查看！      Sorry, unable to view this file now!*/
+"SKY_UNABLE_VIEW"="抱歉，该文件暂时无法查看！";
+/*打开     Open */
+"SKY_OPEN"="打开";
+/*您当前网络信号不佳       Bad network connection. */
+"SKY_BAD_NETWORK"="您当前网络信号不佳";
+/*手机容量不足无法继续下载该文件      Insufficient storage, unable to continue downloading. */
+"SKY_INSUFFICIENT_STORAGE"="手机容量不足无法继续下载该文件";
+/*链接已复制      URL copied. */
+"SKY_URL_COPIED"="链接已复制";
+/*创建中，请稍后       Creating URL, please wait. */
+"SKY_CREAT_WAIT"="创建中，请稍后";
+/*链接创建失败      Failed to create URL. */
+"SKY_FAIL_CREATE"="链接创建失败";
+/*这里还没有您下载的文件哦~      No downloaded files. */
+"SKY_NO_DOWNLOAD_FILES"="这里还没有您下载的文件哦~";
+/*已完成删除所选文件      Successfully deleted the selected files. */
+"SKY_DELETE_SUCCESS"="已完成删除所选文件";
+/*账号异常，请联系管理员   Account error, please contact Admin. */
+"SKY_ACCOUNT_ERROR"="账号异常，请联系管理员";
+
+

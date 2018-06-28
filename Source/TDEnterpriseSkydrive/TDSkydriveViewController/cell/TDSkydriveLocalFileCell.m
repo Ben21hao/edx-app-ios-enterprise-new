@@ -167,14 +167,14 @@
             self.statusLabel.text = @"";
             break;
         case 2:
-            self.statusLabel.text = @"等待下载";
+            self.statusLabel.text = TDLocalizeSelect(@"SKY_WAITING", nil);
             break;
         case 3:
-            self.statusLabel.text = @"暂停下载";
+            self.statusLabel.text = TDLocalizeSelect(@"SKY_PAUSED", nil);
             break;
         case 4:
             self.statusLabel.attributedText = [[NSMutableAttributedString alloc]
-                                               initWithString:@"下载失败"
+                                               initWithString:TDLocalizeSelect(@"SKY_FAILED", nil)
                                                attributes:@{
                                                             NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#ff4a5b"]
                                                             }] ;

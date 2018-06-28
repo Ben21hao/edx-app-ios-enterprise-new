@@ -31,7 +31,7 @@
 - (void)createSqliteTable { //创建表
     
     if ([self.dataBase open]) {
-        NSLog(@"打开数据库成功");
+//        NSLog(@"打开数据库成功");
         
         NSString *createSql = @"CREATE TABLE IF NOT EXISTS skydrive_table (id text NOT NULL, name text NOT NULL, type text, file_type text, file_type_format text, resources_url text, created_at text, real_file_size text, file_size text, download_size text, resumeData text, progress double, status integer);";
         
@@ -52,7 +52,7 @@
 - (void)insertFileData:(TDSkydrveFileModel *)model{//增加一条数据
     
     if ([self.dataBase open]) {
-        NSLog(@"增 - 打开数据库成功");
+//        NSLog(@"增 - 打开数据库成功");
     
         NSString *insetSql = @"INSERT INTO skydrive_table (id, name, type, file_type, file_type_format, resources_url, created_at, real_file_size, file_size, download_size, resumeData, progress, status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
         BOOL insert = [self.dataBase executeUpdate:insetSql, model.id, model.name, model.type, model.file_type, model.file_type_format, model.resources_url, model.created_at, model.real_file_size, model.file_size, @"0M", @"",@(model.progress),@(model.status)];
@@ -76,10 +76,10 @@
     
         BOOL delete = [self.dataBase executeUpdate:@"delete from skydrive_table where id = ?", fileId];
         if (delete) {
-            NSLog(@"删除成功 %@", fileId);
+            NSLog(@"数据库 --> 删除成功 %@", fileId);
         }
         else {
-            NSLog(@"删除失败 %@", fileId);
+            NSLog(@"数据库 --> 删除失败 %@", fileId);
         }
     }
     [self.dataBase close];
@@ -254,7 +254,7 @@
     NSMutableArray *downloadArray = [[NSMutableArray alloc] init];
     
     if ([self.dataBase open]) {
-        NSLog(@"查 - 打开数据库成功");
+//        NSLog(@"查 - 打开数据库成功");
         
         NSString *queryStr = @"select * from skydrive_table";
         FMResultSet *result = [self.dataBase executeQuery:queryStr];
@@ -314,7 +314,7 @@
 - (TDSkydrveFileModel *)querySqliteFileResumeData:(TDSkydrveFileModel *)model { //查询resumedata
     
     if ([self.dataBase open]) {
-        NSLog(@"查 - 打开数据库成功");
+//        NSLog(@"查 - 打开数据库成功");
         
         NSString *queryStr = @"select * from skydrive_table where id = ?";
         FMResultSet *result = [self.dataBase executeQuery:queryStr, model.id];
