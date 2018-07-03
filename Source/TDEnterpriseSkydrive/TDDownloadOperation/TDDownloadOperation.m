@@ -44,11 +44,15 @@ static NSURLSession *session = nil;
     self = [super init];
     if (self) {
         self.backgroundSession = [self backgroundURLSession];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appTerminateAction:) name:@"Application_Terminate_Notification" object:nil]; //网络不可用
     }
     return self;
 }
 
 - (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Application_Terminate_Notification" object:nil];
     NSLog(@"TDDownloadOperation --->> 销毁");
 }
 
@@ -185,8 +189,30 @@ static NSURLSession *session = nil;
 #pragma mark - 处理kill掉程序
 - (void)exitApplicationSaveResumeData { //用户退出程序
 
-    [self.downloadTask cancelByProducingResumeData:^(NSData * _Nullable resumeData) {
+    NSLog(@"------>>> app销毁");
+}
+
+- (void)appTerminateAction:(NSNotification *)notification {
+    
+    if (!self.sqliteOperation) { //若无数据库操作类
+        return;
+    }
+    
+    WS(weakSelf);
+    [self getLocalDownloadFileSortDataBlock:^(NSMutableArray *downloadArray, NSMutableArray *finishArray) {
+        
+        for (int i = 0; i < downloadArray.count; i ++) {
+            TDSkydrveFileModel *model = downloadArray[i];
+            model.udpateLocal = YES; //更新本地数据库
+            
+            if (model.status == 1 || model.status == 2) { // -> 暂停
+                model.status = 3;
+                [weakSelf updateDownloadFileStatus:model]; //更新本地状态
+            }
+        }
     }];
+    
+    NSLog(@"------>>> app销毁 %@",self.username);
 }
 
 #pragma mark - NSURLSessionDownloadDelegate
@@ -376,7 +402,6 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
 }
 
 - (void)getLocalDownloadFileSortDataBlock:(void(^)(NSMutableArray *downloadArray, NSMutableArray *finishArray))handler {
-    
     [self.sqliteOperation querySqliteSortData:handler];
 }
 

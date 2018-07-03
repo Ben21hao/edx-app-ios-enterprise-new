@@ -479,10 +479,12 @@
             model.udpateLocal = YES; //更新本地数据库
             
             if (model.status == 1) { // -> 暂停
+                model.status = 3;
                 [weakSelf currentModelDownloadOperation:model];
                 [weakSelf.downloadOperation pauseDownload:model];
             }
             else if (model.status == 2) { //等待 -> 暂停
+                model.status = 3;
                 [weakSelf.downloadOperation waitChageToPause:model];
             }
         }

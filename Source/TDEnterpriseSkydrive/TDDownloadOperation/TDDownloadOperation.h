@@ -24,7 +24,7 @@ typedef void(^CompletionHandlerType)();
 
 @property (nonatomic,strong) TDSkydrveFileModel *currentModel; //正在下载的文件model
 @property (nonatomic,strong) NSString *filePath;
-
+@property (nonatomic,strong) NSString *username;
 /*
  初始化
  */

@@ -70,8 +70,9 @@
         cell.progressView.downloadButton.userInteractionEnabled = NO;
     }
     
-    cell.isEditing = self.isEditing;
     cell.fileModel = model;
+    
+    cell.isEditing = self.isEditing;
     
     return cell;
 }

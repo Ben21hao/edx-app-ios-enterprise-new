@@ -19,7 +19,7 @@
     [[UIColor colorWithHexString:colorHexStr1] setStroke]; //设置描边颜色 - 两种方式都可以
     
     CGPoint center = CGPointMake(self.bounds.origin.x + self.bounds.size.width / 2, self.bounds.origin.y + self.bounds.size.height / 2); //设置圆心位置
-    CGFloat radius = 9.5; //半径
+    CGFloat radius = 9.1; //半径
     CGFloat startA = - M_PI_2; //圆起点位置
     CGFloat endA = - M_PI_2 + M_PI * 2 * (self.progress / 100); //圆终点位置
     
@@ -28,6 +28,8 @@
     
     CGContextAddPath(ctx, path.CGPath);  //把路径 path 添加到上下文
     CGContextStrokePath(ctx);  //渲染
+    
 }
+
 
 @end

@@ -397,7 +397,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     NSLog(@"-------> =注销= <---------");
     
-   [[NSNotificationCenter defaultCenter] postNotificationName:@"Network_Status_NotReachable" object:nil];
+   [[NSNotificationCenter defaultCenter] postNotificationName:@"Application_Terminate_Notification" object:nil];
 }
 
 #pragma mark Push Notifications

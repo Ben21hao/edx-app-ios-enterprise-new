@@ -68,6 +68,7 @@
     [self.downloadOperation backgroundURLSession];
     [self.downloadOperation sqliteOperationInit:self.username];
     self.downloadOperation.delegate = self;
+    self.downloadOperation.username = self.username;
     [self getFileData];
     
     [self setLoadDataView];
@@ -345,8 +346,7 @@
     if (dictionary) {
         NSNumber *_free = [dictionary objectForKey:NSFileSystemFreeSize];
         freeSize = [_free unsignedLongLongValue] * 1.0;
-        
-//        NSLog(@"存储空间 ----->>> %lf - %lf",freeSize,fileSize);
+        NSLog(@"存储空间 ----->>> 剩余：%.2lfM - 文件：%.2lfM",freeSize/1024/1024,fileSize/1024/1024);
         
         if (fileSize > freeSize - 2048) { //给2M的剩余空间
             [self.view makeToast:TDLocalizeSelect(@"SKY_INSUFFICIENT_STORAGE", nil) duration:1.08 position:CSToastPositionCenter];
@@ -466,7 +466,7 @@
             
             if (model.status == 1 || model.status == 2) { // -> 暂停
                 
-                model.status = 2;
+                model.status = 3;
                 [weakSelf currentModelDownloadOperation:model];
                 [weakSelf.downloadOperation pauseDownload:model];
 

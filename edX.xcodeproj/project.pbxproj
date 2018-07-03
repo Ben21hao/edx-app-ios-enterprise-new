@@ -466,33 +466,13 @@
 		A450D05420BB9DF200E6E4CC /* TDRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = A450D05320BB9DF200E6E4CC /* TDRecordView.m */; };
 		A450D05D20BBA17300E6E4CC /* TDWebImagePreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A450D05820BBA17300E6E4CC /* TDWebImagePreviewViewController.m */; };
 		A450D05E20BBA17300E6E4CC /* TDWebImagePreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A450D05B20BBA17300E6E4CC /* TDWebImagePreviewCell.m */; };
-		A458C9D920D1FF9300F43DFD /* 111118.pptx in Resources */ = {isa = PBXBuildFile; fileRef = A458C99A20D1FF9200F43DFD /* 111118.pptx */; };
-		A458C9DA20D1FF9300F43DFD /* 111124.md in Sources */ = {isa = PBXBuildFile; fileRef = A458C99B20D1FF9200F43DFD /* 111124.md */; };
 		A458C9DB20D1FF9300F43DFD /* TDLocalFileWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A458C99E20D1FF9200F43DFD /* TDLocalFileWebViewController.m */; };
-		A458C9DC20D1FF9300F43DFD /* 111129.png in Resources */ = {isa = PBXBuildFile; fileRef = A458C9A020D1FF9200F43DFD /* 111129.png */; };
-		A458C9DD20D1FF9300F43DFD /* 111116.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = A458C9A120D1FF9200F43DFD /* 111116.xlsx */; };
-		A458C9DE20D1FF9300F43DFD /* 111117.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = A458C9A220D1FF9200F43DFD /* 111117.xlsx */; };
-		A458C9DF20D1FF9300F43DFD /* 111112.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A458C9A420D1FF9200F43DFD /* 111112.pdf */; };
 		A458C9E020D1FF9300F43DFD /* TDSkydriveVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A458C9A520D1FF9200F43DFD /* TDSkydriveVideoViewController.m */; };
-		A458C9E120D1FF9300F43DFD /* 111122.docx in Resources */ = {isa = PBXBuildFile; fileRef = A458C9A620D1FF9200F43DFD /* 111122.docx */; };
-		A458C9E220D1FF9300F43DFD /* 111130.bmp in Resources */ = {isa = PBXBuildFile; fileRef = A458C9A720D1FF9200F43DFD /* 111130.bmp */; };
-		A458C9E320D1FF9300F43DFD /* 111119.ppt in Resources */ = {isa = PBXBuildFile; fileRef = A458C9A820D1FF9200F43DFD /* 111119.ppt */; };
-		A458C9E420D1FF9300F43DFD /* 111111.xls in Resources */ = {isa = PBXBuildFile; fileRef = A458C9A920D1FF9200F43DFD /* 111111.xls */; };
-		A458C9E520D1FF9300F43DFD /* 111127.gif in Resources */ = {isa = PBXBuildFile; fileRef = A458C9AA20D1FF9200F43DFD /* 111127.gif */; };
-		A458C9E620D1FF9300F43DFD /* 111123.txt in Resources */ = {isa = PBXBuildFile; fileRef = A458C9AC20D1FF9200F43DFD /* 111123.txt */; };
-		A458C9E720D1FF9300F43DFD /* 111131.tif in Resources */ = {isa = PBXBuildFile; fileRef = A458C9AD20D1FF9200F43DFD /* 111131.tif */; };
 		A458C9E820D1FF9300F43DFD /* TDSkydriveAudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A458C9AE20D1FF9200F43DFD /* TDSkydriveAudioViewController.m */; };
-		A458C9E920D1FF9300F43DFD /* 111128.gif in Resources */ = {isa = PBXBuildFile; fileRef = A458C9B020D1FF9200F43DFD /* 111128.gif */; };
 		A458C9EA20D1FF9300F43DFD /* TDSkydriveImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A458C9B120D1FF9200F43DFD /* TDSkydriveImageViewController.m */; };
 		A458C9EB20D1FF9300F43DFD /* TDSkydriveFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A458C9B220D1FF9200F43DFD /* TDSkydriveFileViewController.m */; };
-		A458C9EC20D1FF9300F43DFD /* 111126.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A458C9B420D1FF9200F43DFD /* 111126.rtf */; };
-		A458C9ED20D1FF9300F43DFD /* 111113.mov in Resources */ = {isa = PBXBuildFile; fileRef = A458C9B520D1FF9200F43DFD /* 111113.mov */; };
 		A458C9EE20D1FF9300F43DFD /* TDEnterpriseSkydriveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A458C9B620D1FF9200F43DFD /* TDEnterpriseSkydriveViewController.m */; };
-		A458C9EF20D1FF9300F43DFD /* 111114.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A458C9B720D1FF9200F43DFD /* 111114.mp4 */; };
-		A458C9F020D1FF9300F43DFD /* 111115.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A458C9B820D1FF9200F43DFD /* 111115.mp3 */; };
-		A458C9F120D1FF9300F43DFD /* 111125.pages in Resources */ = {isa = PBXBuildFile; fileRef = A458C9B920D1FF9200F43DFD /* 111125.pages */; };
 		A458C9F220D1FF9300F43DFD /* TDSkydrveLoacalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A458C9BA20D1FF9200F43DFD /* TDSkydrveLoacalViewController.m */; };
-		A458C9F320D1FF9300F43DFD /* 111132.JPG in Resources */ = {isa = PBXBuildFile; fileRef = A458C9BB20D1FF9200F43DFD /* 111132.JPG */; };
 		A458C9F420D1FF9300F43DFD /* TDSkydriveFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A458C9BD20D1FF9200F43DFD /* TDSkydriveFileCell.m */; };
 		A458C9F520D1FF9300F43DFD /* TDSkydriveLocalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A458C9BE20D1FF9200F43DFD /* TDSkydriveLocalCell.m */; };
 		A458C9F620D1FF9300F43DFD /* TDSkydriveFolderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A458C9BF20D1FF9200F43DFD /* TDSkydriveFolderCell.m */; };
@@ -1652,40 +1632,20 @@
 		A450D05820BBA17300E6E4CC /* TDWebImagePreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWebImagePreviewViewController.m; sourceTree = "<group>"; };
 		A450D05B20BBA17300E6E4CC /* TDWebImagePreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDWebImagePreviewCell.m; sourceTree = "<group>"; };
 		A450D05C20BBA17300E6E4CC /* TDWebImagePreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDWebImagePreviewCell.h; sourceTree = "<group>"; };
-		A458C99A20D1FF9200F43DFD /* 111118.pptx */ = {isa = PBXFileReference; lastKnownFileType = file; path = 111118.pptx; sourceTree = "<group>"; };
-		A458C99B20D1FF9200F43DFD /* 111124.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = 111124.md; sourceTree = "<group>"; };
 		A458C99C20D1FF9200F43DFD /* TDSkydriveFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSkydriveFileViewController.h; sourceTree = "<group>"; };
 		A458C99D20D1FF9200F43DFD /* TDSkydriveImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSkydriveImageViewController.h; sourceTree = "<group>"; };
 		A458C99E20D1FF9200F43DFD /* TDLocalFileWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDLocalFileWebViewController.m; sourceTree = "<group>"; };
 		A458C99F20D1FF9200F43DFD /* TDSkydriveAudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSkydriveAudioViewController.h; sourceTree = "<group>"; };
-		A458C9A020D1FF9200F43DFD /* 111129.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 111129.png; sourceTree = "<group>"; };
-		A458C9A120D1FF9200F43DFD /* 111116.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = 111116.xlsx; sourceTree = "<group>"; };
-		A458C9A220D1FF9200F43DFD /* 111117.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = 111117.xlsx; sourceTree = "<group>"; };
 		A458C9A320D1FF9200F43DFD /* TDEnterpriseSkydriveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDEnterpriseSkydriveViewController.h; sourceTree = "<group>"; };
-		A458C9A420D1FF9200F43DFD /* 111112.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = 111112.pdf; sourceTree = "<group>"; };
 		A458C9A520D1FF9200F43DFD /* TDSkydriveVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSkydriveVideoViewController.m; sourceTree = "<group>"; };
-		A458C9A620D1FF9200F43DFD /* 111122.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = 111122.docx; sourceTree = "<group>"; };
-		A458C9A720D1FF9200F43DFD /* 111130.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = 111130.bmp; sourceTree = "<group>"; };
-		A458C9A820D1FF9200F43DFD /* 111119.ppt */ = {isa = PBXFileReference; lastKnownFileType = file; path = 111119.ppt; sourceTree = "<group>"; };
-		A458C9A920D1FF9200F43DFD /* 111111.xls */ = {isa = PBXFileReference; lastKnownFileType = file; path = 111111.xls; sourceTree = "<group>"; };
-		A458C9AA20D1FF9200F43DFD /* 111127.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 111127.gif; sourceTree = "<group>"; };
 		A458C9AB20D1FF9200F43DFD /* TDSkydrveLoacalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSkydrveLoacalViewController.h; sourceTree = "<group>"; };
-		A458C9AC20D1FF9200F43DFD /* 111123.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 111123.txt; sourceTree = "<group>"; };
-		A458C9AD20D1FF9200F43DFD /* 111131.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = 111131.tif; sourceTree = "<group>"; };
 		A458C9AE20D1FF9200F43DFD /* TDSkydriveAudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSkydriveAudioViewController.m; sourceTree = "<group>"; };
 		A458C9AF20D1FF9200F43DFD /* TDLocalFileWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDLocalFileWebViewController.h; sourceTree = "<group>"; };
-		A458C9B020D1FF9200F43DFD /* 111128.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 111128.gif; sourceTree = "<group>"; };
 		A458C9B120D1FF9200F43DFD /* TDSkydriveImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSkydriveImageViewController.m; sourceTree = "<group>"; };
 		A458C9B220D1FF9200F43DFD /* TDSkydriveFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSkydriveFileViewController.m; sourceTree = "<group>"; };
 		A458C9B320D1FF9200F43DFD /* TDSkydriveVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDSkydriveVideoViewController.h; sourceTree = "<group>"; };
-		A458C9B420D1FF9200F43DFD /* 111126.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = 111126.rtf; sourceTree = "<group>"; };
-		A458C9B520D1FF9200F43DFD /* 111113.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = 111113.mov; sourceTree = "<group>"; };
 		A458C9B620D1FF9200F43DFD /* TDEnterpriseSkydriveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDEnterpriseSkydriveViewController.m; sourceTree = "<group>"; };
-		A458C9B720D1FF9200F43DFD /* 111114.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 111114.mp4; sourceTree = "<group>"; };
-		A458C9B820D1FF9200F43DFD /* 111115.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 111115.mp3; sourceTree = "<group>"; };
-		A458C9B920D1FF9200F43DFD /* 111125.pages */ = {isa = PBXFileReference; lastKnownFileType = file; path = 111125.pages; sourceTree = "<group>"; };
 		A458C9BA20D1FF9200F43DFD /* TDSkydrveLoacalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSkydrveLoacalViewController.m; sourceTree = "<group>"; };
-		A458C9BB20D1FF9200F43DFD /* 111132.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 111132.JPG; sourceTree = "<group>"; };
 		A458C9BD20D1FF9200F43DFD /* TDSkydriveFileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSkydriveFileCell.m; sourceTree = "<group>"; };
 		A458C9BE20D1FF9200F43DFD /* TDSkydriveLocalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSkydriveLocalCell.m; sourceTree = "<group>"; };
 		A458C9BF20D1FF9200F43DFD /* TDSkydriveFolderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSkydriveFolderCell.m; sourceTree = "<group>"; };
@@ -4041,26 +4001,6 @@
 				A458C9AE20D1FF9200F43DFD /* TDSkydriveAudioViewController.m */,
 				A458CA0420D2524400F43DFD /* TDSkydriveNoSupportViewController.h */,
 				A458CA0520D2524400F43DFD /* TDSkydriveNoSupportViewController.m */,
-				A458C99A20D1FF9200F43DFD /* 111118.pptx */,
-				A458C99B20D1FF9200F43DFD /* 111124.md */,
-				A458C9A020D1FF9200F43DFD /* 111129.png */,
-				A458C9A120D1FF9200F43DFD /* 111116.xlsx */,
-				A458C9A220D1FF9200F43DFD /* 111117.xlsx */,
-				A458C9A420D1FF9200F43DFD /* 111112.pdf */,
-				A458C9A620D1FF9200F43DFD /* 111122.docx */,
-				A458C9A720D1FF9200F43DFD /* 111130.bmp */,
-				A458C9A820D1FF9200F43DFD /* 111119.ppt */,
-				A458C9A920D1FF9200F43DFD /* 111111.xls */,
-				A458C9AA20D1FF9200F43DFD /* 111127.gif */,
-				A458C9AC20D1FF9200F43DFD /* 111123.txt */,
-				A458C9AD20D1FF9200F43DFD /* 111131.tif */,
-				A458C9B020D1FF9200F43DFD /* 111128.gif */,
-				A458C9B420D1FF9200F43DFD /* 111126.rtf */,
-				A458C9B520D1FF9200F43DFD /* 111113.mov */,
-				A458C9B720D1FF9200F43DFD /* 111114.mp4 */,
-				A458C9B820D1FF9200F43DFD /* 111115.mp3 */,
-				A458C9B920D1FF9200F43DFD /* 111125.pages */,
-				A458C9BB20D1FF9200F43DFD /* 111132.JPG */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -6573,7 +6513,6 @@
 			files = (
 				69ECC6151D50D1170030CF87 /* bt_facebook.png in Resources */,
 				B52E8DDF1F0B951700F3170D /* Expression_67@2x.png in Resources */,
-				A458C9D920D1FF9300F43DFD /* 111118.pptx in Resources */,
 				B52E8DF61F0B951700F3170D /* Expression_88@2x.png in Resources */,
 				69ECC6171D50D1170030CF87 /* bt_google.png in Resources */,
 				9ED269CA1AF0D62B00328A34 /* OEXMyVideosSubSectionViewController.storyboard in Resources */,
@@ -6589,7 +6528,6 @@
 				B51B77E21F27410500AECD99 /* Icon-29.png in Resources */,
 				69ECC6131D50D1170030CF87 /* loginScreenImage.png in Resources */,
 				69ECC6011D50D1170030CF87 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
-				A458C9E720D1FF9300F43DFD /* 111131.tif in Resources */,
 				B518BE5F1EA9B91B0027569D /* Localizable.strings in Resources */,
 				19A1339719CAE108003ADD24 /* EULA.htm in Resources */,
 				B52E8DC11F0B951700F3170D /* Expression_3@2x.png in Resources */,
@@ -6614,7 +6552,6 @@
 				B52E8DEE1F0B951700F3170D /* Expression_80@2x.png in Resources */,
 				B52E8DF41F0B951700F3170D /* Expression_86@2x.png in Resources */,
 				B52E8C951F0B8CB500F3170D /* message_emoji@3x.png in Resources */,
-				A458C9E220D1FF9300F43DFD /* 111130.bmp in Resources */,
 				6960892C1D53935500EE66DD /* courseCertificate@2x.png in Resources */,
 				B52E8DBD1F0B951700F3170D /* Expression_36@2x.png in Resources */,
 				B52E8DD41F0B951700F3170D /* Expression_57@2x.png in Resources */,
@@ -6636,8 +6573,6 @@
 				6926CDAE1D59BE3600A16E22 /* ic_previous.png in Resources */,
 				69ECC61E1D50D1170030CF87 /* bt_scrollbar_tap.png in Resources */,
 				B52E8DAD1F0B951700F3170D /* Expression_21@2x.png in Resources */,
-				A458C9DF20D1FF9300F43DFD /* 111112.pdf in Resources */,
-				A458C9ED20D1FF9300F43DFD /* 111113.mov in Resources */,
 				69ECC62B1D50D1170030CF87 /* downloading.png in Resources */,
 				B52E8C931F0B8CB500F3170D /* live_keyboard@3x.png in Resources */,
 				B52E8DA41F0B951600F3170D /* Expression_13@2x.png in Resources */,
@@ -6652,8 +6587,6 @@
 				B52E8DC91F0B951700F3170D /* Expression_47@2x.png in Resources */,
 				B52E8DCE1F0B951700F3170D /* Expression_51@2x.png in Resources */,
 				B52E8C921F0B8CB500F3170D /* live_keyboard@2x.png in Resources */,
-				A458C9EF20D1FF9300F43DFD /* 111114.mp4 in Resources */,
-				A458C9E420D1FF9300F43DFD /* 111111.xls in Resources */,
 				B52E8C9A1F0B8CB500F3170D /* loadingout@3x.png in Resources */,
 				B52E8DB21F0B951700F3170D /* Expression_26@2x.png in Resources */,
 				6926CDAC1D59BE3600A16E22 /* ic_next.png in Resources */,
@@ -6673,16 +6606,13 @@
 				B52E8DA21F0B951600F3170D /* Expression_11@2x.png in Resources */,
 				B5FAF7501EB047D2000C2169 /* PayTableViewCell.xib in Resources */,
 				B52E8C301F0B8C0400F3170D /* WatchPlayBackViewController.xib in Resources */,
-				A458C9E520D1FF9300F43DFD /* 111127.gif in Resources */,
 				B52E8DE91F0B951700F3170D /* Expression_76@2x.png in Resources */,
 				B52E8DDB1F0B951700F3170D /* Expression_63@2x.png in Resources */,
 				B51B77E51F27410500AECD99 /* Icon-40.png in Resources */,
-				A458C9EC20D1FF9300F43DFD /* 111126.rtf in Resources */,
 				77DC29601ABCA0F200FAD22C /* OEXLoginSplashViewController.xib in Resources */,
 				190AF7951A4061950029E23E /* Main.storyboard in Resources */,
 				69ECC6181D50D1170030CF87 /* bt_google_RTL.png in Resources */,
 				6926CDB01D59BE3600A16E22 /* ic_seek_thumb.png in Resources */,
-				A458C9E120D1FF9300F43DFD /* 111122.docx in Resources */,
 				B52E8C941F0B8CB500F3170D /* message_emoji@2x.png in Resources */,
 				B47780591AADA95400436DB4 /* Terms-and-Services.htm in Resources */,
 				69ECC64A1D50D1170030CF87 /* launchBackground.png in Resources */,
@@ -6708,12 +6638,10 @@
 				69ECC64C1D50D1170030CF87 /* Default-568h@2x.png in Resources */,
 				9ED269CC1AF0E67200328A34 /* OEXMyVideosViewController.storyboard in Resources */,
 				69ECC6471D50D1170030CF87 /* separator3.png in Resources */,
-				A458C9DE20D1FF9300F43DFD /* 111117.xlsx in Resources */,
 				1A55019C1BBA30C900D5F9DD /* profiles.json in Resources */,
 				B51B77EB1F27410500AECD99 /* Icon-76.png in Resources */,
 				B52E8DA91F0B951700F3170D /* Expression_18@2x.png in Resources */,
 				B52E8DEF1F0B951700F3170D /* Expression_81@2x.png in Resources */,
-				A458C9DC20D1FF9300F43DFD /* 111129.png in Resources */,
 				BD7C6C401DCA329A0004D135 /* fonts.json in Resources */,
 				B52E8DF01F0B951700F3170D /* Expression_82@2x.png in Resources */,
 				B52E8DF91F0B951700F3170D /* Expression_90@2x.png in Resources */,
@@ -6734,13 +6662,10 @@
 				B52E8C0B1F0B7B1000F3170D /* kodak.inf in Resources */,
 				69ECC61B1D50D1170030CF87 /* bt_logout_active.png in Resources */,
 				1905BFF11A31B037001917FA /* COURSE_NOT_LISTED.htm in Resources */,
-				A458C9F120D1FF9300F43DFD /* 111125.pages in Resources */,
 				69ECC6291D50D1170030CF87 /* check@2x.png in Resources */,
 				B4B6D64A1A95CF33000F44E8 /* OEXUserLicenseAgreementViewController.xib in Resources */,
-				A458C9E620D1FF9300F43DFD /* 111123.txt in Resources */,
 				B52E8C971F0B8CB500F3170D /* loadingin@2x.png in Resources */,
 				69ECC63E1D50D1170030CF87 /* icon_google_white.png in Resources */,
-				A458C9F020D1FF9300F43DFD /* 111115.mp3 in Resources */,
 				69ECC63D1D50D1170030CF87 /* icon_facebook_white@2x.png in Resources */,
 				B52E8DBF1F0B951700F3170D /* Expression_38@2x.png in Resources */,
 				69ECC6361D50D1170030CF87 /* ic_partiallywatched@2x.png in Resources */,
@@ -6749,7 +6674,6 @@
 				69ECC64F1D50D1170030CF87 /* Default-Landscape@3x.png in Resources */,
 				69ECC6331D50D1170030CF87 /* ic_lms_blue.png in Resources */,
 				B52E8DA51F0B951600F3170D /* Expression_14@2x.png in Resources */,
-				A458C9F320D1FF9300F43DFD /* 111132.JPG in Resources */,
 				B52E8DB51F0B951700F3170D /* Expression_29@2x.png in Resources */,
 				B52E8DCD1F0B951700F3170D /* Expression_50@2x.png in Resources */,
 				69ECC6511D50D1170030CF87 /* handouts-announcements.css in Resources */,
@@ -6779,9 +6703,7 @@
 				6960892B1D53935500EE66DD /* courseCertificate.png in Resources */,
 				A48B69B61F79F6A900160C61 /* FontAwesome.otf in Resources */,
 				B52E8DFD1F0B951700F3170D /* MLEmoji_Expression.bundle in Resources */,
-				A458C9E320D1FF9300F43DFD /* 111119.ppt in Resources */,
 				69ECC6071D50D1170030CF87 /* OpenSans-SemiboldItalic.ttf in Resources */,
-				A458C9DD20D1FF9300F43DFD /* 111116.xlsx in Resources */,
 				B52E8DB11F0B951700F3170D /* Expression_25@2x.png in Resources */,
 				B52E8DEC1F0B951700F3170D /* Expression_79@2x.png in Resources */,
 				B51B77EC1F27410500AECD99 /* Icon-76@2x.png in Resources */,
@@ -6813,7 +6735,6 @@
 				B52E8DB91F0B951700F3170D /* Expression_32@2x.png in Resources */,
 				69ECC6351D50D1170030CF87 /* ic_next_default.png in Resources */,
 				69ECC6311D50D1170030CF87 /* ic_download.png in Resources */,
-				A458C9E920D1FF9300F43DFD /* 111128.gif in Resources */,
 				B52E8DB81F0B951700F3170D /* Expression_31@2x.png in Resources */,
 				69ECC6001D50D1170030CF87 /* OpenSans-ExtraBold.ttf in Resources */,
 				B52E8DCA1F0B951700F3170D /* Expression_48@2x.png in Resources */,
@@ -7161,7 +7082,6 @@
 				1AB676AE1BA0964B002AD0EB /* OEXVideoPlayerSettings.swift in Sources */,
 				9EA4788B1BE76A7700393FA6 /* DiscussionSearchBarDelegate.swift in Sources */,
 				B5DE85071EBC1453007C78F4 /* TDCourseButtonsCell.swift in Sources */,
-				A458C9DA20D1FF9300F43DFD /* 111124.md in Sources */,
 				B59238F11EADD0BE00C686D8 /* TDRecommendCell.m in Sources */,
 				B5018BFC1EF8D02100D9F9F0 /* TDDownloadSubCell.m in Sources */,
 				77D76BFD1AA5076D00C51C2C /* OEXLocalizedString.m in Sources */,

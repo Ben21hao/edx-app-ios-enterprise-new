@@ -37,7 +37,12 @@
 - (void)userEditing:(BOOL)isEditing {
     
     self.selectButton.hidden = !isEditing;
-    self.progressView.hidden = isEditing;
+    if (self.fileModel.status == 5) {
+        self.progressView.hidden = YES;
+    }
+    else {
+        self.progressView.hidden = isEditing;
+    }
 }
 
 - (void)setFileModel:(TDSkydrveFileModel *)fileModel {
