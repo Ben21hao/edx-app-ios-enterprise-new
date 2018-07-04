@@ -46,8 +46,9 @@
 
 @interface OEXAppDelegate () <UIApplicationDelegate>
 
-@property (nonatomic, strong) NSMutableDictionary* dictCompletionHandler;
-@property (nonatomic, strong) OEXEnvironment* environment;
+@property (nonatomic,strong) NSMutableDictionary* dictCompletionHandler;
+@property (nonatomic,strong) OEXEnvironment* environment;
+@property (nonatomic,strong) TDDownloadOperation *operation;
 
 @end
 
@@ -104,6 +105,13 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"App-start-diagram"];
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO]; //显示电池条
+    
+    NSString *username = self.environment.session.currentUser.username;
+    if (username.length > 0) {
+        self.operation = [TDDownloadOperation shareOperation];
+        [self.operation sqliteOperationInit:username];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Application_Launching_Notification" object:nil];
+    }
     
     return YES;
 }
@@ -428,14 +436,11 @@
     // 你必须重新建立一个后台 seesion 的参照
     // 否则 NSURLSessionDownloadDelegate 和 NSURLSessionDelegate 方法会因为
     // 没有 对 session 的 delegate 设定而不会被调用。参见上面的 backgroundURLSession
-    TDDownloadOperation *operation = [TDDownloadOperation shareOperation];
-    [operation backgroundURLSession];
-    
-//    NSURLSession *backgroundSession = [operation backgroundURLSession];
-//    NSLog(@"Rejoining session with identifier %@ %@", identifier, backgroundSession);
+    self.operation = [TDDownloadOperation shareOperation];
+    [self.operation backgroundURLSession];
     
     // 保存 completion handler 以在处理 session 事件后更新 UI
-    [operation addCompletionHandler:completionHandler forSession:identifier];
+    [self.operation addCompletionHandler:completionHandler forSession:identifier];
 }
 
 - (void)addCompletionHandler:(void (^)())handler forSession:(NSString *)identifier {

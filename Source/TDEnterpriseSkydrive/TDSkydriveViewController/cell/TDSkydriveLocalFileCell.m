@@ -192,11 +192,11 @@
     }
 }
 
-//- (void)dealloc {
-////    NSLog(@"本地cell -- 销毁");
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:self.notifiName object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:self.statusNotifiName object:nil];
-//}
+- (void)dealloc {
+//    NSLog(@"本地cell -- 销毁");
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:self.notifiName object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:self.statusNotifiName object:nil];
+}
 
 #pragma mark - UI
 - (void)configeView {
@@ -215,12 +215,12 @@
     [self.bgView addSubview:self.titleLabel];
     
     self.sizeLabel = [[UILabel alloc] init];
-    self.sizeLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
+    self.sizeLabel.font = [UIFont fontWithName:@"OpenSans" size:10];
     self.sizeLabel.textColor = [UIColor colorWithHexString:@"#9b9b9b"];
     [self.bgView addSubview:self.sizeLabel];
     
     self.statusLabel = [[UILabel alloc] init];
-    self.statusLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
+    self.statusLabel.font = [UIFont fontWithName:@"OpenSans" size:10];
     self.statusLabel.textColor = [UIColor colorWithHexString:@"#9b9b9b"];
     [self.bgView addSubview:self.statusLabel];
     

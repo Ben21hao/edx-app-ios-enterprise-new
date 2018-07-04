@@ -2022,8 +2022,8 @@
 "SKY_ELITEU_ENPTY_TEXT"="EliteU cloud is empty.";
 /*该文件夹暂无文件    This folder is empty. */
 "SKY_FOLDERS_EMPTY_TEXT"="This folder is empty.";
-/*当前是4G网络，是否继续下载当前的文件？    Continue downloading over 4G cellular connection? */
-"SKY_CELLULAR_CONNECTION_TEXT"="Continue downloading over 4G cellular connection?";
+/*当前是移动网络，是否继续下载当前的文件？    Continue downloading over cellular connection?*/
+"SKY_CELLULAR_CONNECTION_TEXT"="Continue downloading over cellular connection?";
 /*暂停   Pause */
 "SKY_PAUSE_BUTTON_TEXT"="Pause";
 /*继续   Continue */
@@ -2066,7 +2066,7 @@
 "SKY_INSUFFICIENT_STORAGE"="Insufficient storage, unable to continue downloading.";
 /*链接已复制      URL copied. */
 "SKY_URL_COPIED"="URL copied.";
-/*创建中，请稍后       Creating URL, please wait. */
+/*创建中...      Creating URL... */
 "SKY_CREAT_WAIT"="Creating URL, please wait.";
 /*链接创建失败      Failed to create URL. */
 "SKY_FAIL_CREATE"="Failed to create URL.";

@@ -12,10 +12,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Reachability.h"
+#import "OEXInterface.h"
 
 @interface TDDownloadOperation () <NSURLSessionDownloadDelegate>
 
 @property (nonatomic,strong) NSMutableDictionary *completionHandlerDictionary;
+
 @property (nonatomic,strong) NSURLSessionDownloadTask *downloadTask;
 @property (nonatomic,strong) NSURLSession *backgroundSession;
 
@@ -45,7 +47,8 @@ static NSURLSession *session = nil;
     if (self) {
         self.backgroundSession = [self backgroundURLSession];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appTerminateAction:) name:@"Application_Terminate_Notification" object:nil]; //网络不可用
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appTerminateAction:) name:@"Application_Terminate_Notification" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appLaunchAction:) name:@"Application_Launching_Notification" object:nil];
     }
     return self;
 }
@@ -53,19 +56,21 @@ static NSURLSession *session = nil;
 - (void)dealloc {
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Application_Terminate_Notification" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Application_Launching_Notification" object:nil];
     NSLog(@"TDDownloadOperation --->> 销毁");
 }
 
 #pragma mark - backgroundURLSession
-- (NSURLSession *)backgroundURLSession { //只有一个后台session
+- (NSURLSession *)backgroundURLSession {
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        
         NSString *identifier = @"cn.eliteu.enterprise.BackgroundSession";
         NSURLSessionConfiguration* sessionConfig = nil;
         
 //#if (defined(__IPHONE_OS_VERSION_MIN_REQUIRED) && __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000)
-        sessionConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:identifier];
+        sessionConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:identifier]; //后台下载
 //#else
 //        sessionConfig = [NSURLSessionConfiguration backgroundSessionConfiguration:identifier];
 //#endif
@@ -80,10 +85,12 @@ static NSURLSession *session = nil;
 #pragma mark - 对当前下载文件的操作
 - (void)beginDownloadFileModel:(TDSkydrveFileModel *)model firstAdd:(BOOL)isFirst { //下载, isFirst：是否第一次加入下载
     
+    self.currentModel = model;
+    self.currentModel.status = 1;
+    self.filePath = [self getPreviewFilePathForId:model];
+    
     self.completionHandlerDictionary = @{}.mutableCopy;
-    [self.downloadTask cancelByProducingResumeData:^(NSData * resumeData) {//cancel last download task，取消上次的任务
-        NSLog(@"----->> 暂停上次的任务");
-    }];
+    [self.downloadTask cancelByProducingResumeData:^(NSData * resumeData) { }];//取消上次的任务
     
     if (model.resumeData) { //续传
 //
@@ -101,8 +108,6 @@ static NSURLSession *session = nil;
     
     [self.downloadTask resume];
     
-//    NSLog(@"--->> 开始下载 %@",model.name);
-    self.currentModel.status = 1;
     if (isFirst) {
         [self insertDownloadFile:model]; //加入本地数据库
     }
@@ -114,38 +119,28 @@ static NSURLSession *session = nil;
     [self postDownloadStatusNotification:self.currentModel]; //cell状态
 }
 
-//- (void)continueDownload:(TDSkydrveFileModel *)model { //继续下载
-//    
-//    if (model.resumeData) {
-//        if (IS_IOS10ORLATER) {
-//            self.downloadTask = [self.backgroundSession downloadTaskWithCorrectResumeData:model.resumeData];
-//        } else {
-//            self.downloadTask = [self.backgroundSession downloadTaskWithResumeData:model.resumeData];
-//        }
-//        [self.downloadTask resume];
-//        
-//    }
-//    else {
-//    }
-//    
-//    NSLog(@"--->> 继续下载");
-//    self.currentModel.status = 1;
-//    [self postDownloadStatusNotification:self.currentModel];
-//}
-
 - (void)pauseDownload:(TDSkydrveFileModel *)model { //下载中 -> 暂停
     
-    __weak __typeof(self) wSelf = self;
+    self.currentModel = model;
+    self.currentModel.status = 3;
+    self.filePath = [self getPreviewFilePathForId:model];
+    
+    __weak __typeof(self) weakSelf = self;
     [self.downloadTask cancelByProducingResumeData:^(NSData * resumeData) { //暂停下载
         
-        __strong __typeof(wSelf) sSelf = wSelf;
-        self.currentModel.resumeData = resumeData;
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.currentModel.resumeData = resumeData;
         
-        if ([sSelf isValideResumeData:self.currentModel.resumeData]) {
-            [sSelf updateDownloadFileRusumeData:self.currentModel];
+        if ([strongSelf isValideResumeData:self.currentModel.resumeData]) {
+            [strongSelf updateDownloadFileRusumeData:self.currentModel];
         }
-        NSLog(@"暂停当前任务 ----->> %@",model.resumeData);
+//        NSLog(@"暂停当前任务 ----->> %@",model.resumeData);
     }];
+}
+
+- (void)nextFileBeginDownload:(TDSkydrveFileModel *)model { //有等待： 下一个 等待的任务开始下载(暂停，完成，失败 三种情况)
+    self.currentModel = model;
+    [self beginDownloadFileModel:model firstAdd:NO];
 }
 
 - (BOOL)isValideResumeData:(NSData *)resumeData {
@@ -182,16 +177,7 @@ static NSURLSession *session = nil;
     NSLog(@"变等待 -->> %@",model.name);
 }
 
-- (void)nextFileBeginDownload:(TDSkydrveFileModel *)model { //有等待： 下一个 等待的任务开始下载(暂停，完成，失败 三种情况)
-    [self beginDownloadFileModel:model firstAdd:NO];
-}
-
 #pragma mark - 处理kill掉程序
-- (void)exitApplicationSaveResumeData { //用户退出程序
-
-    NSLog(@"------>>> app销毁");
-}
-
 - (void)appTerminateAction:(NSNotification *)notification {
     
     if (!self.sqliteOperation) { //若无数据库操作类
@@ -208,14 +194,72 @@ static NSURLSession *session = nil;
             if (model.status == 1 || model.status == 2) { // -> 暂停
                 model.status = 3;
                 [weakSelf updateDownloadFileStatus:model]; //更新本地状态
+                
+                NSLog(@"------>>> app销毁,更新 %@",model.name);
             }
         }
     }];
-    
-    NSLog(@"------>>> app销毁 %@",self.username);
 }
 
-#pragma mark - NSURLSessionDownloadDelegate
+#pragma mark - 进入程序
+- (void)appLaunchAction:(NSNotification *)notification {
+    [self enterAppHandle];
+    NSLog(@"--->> 进入App");
+}
+
+- (void)enterAppHandle {
+    
+    if (!self.sqliteOperation) { //若无数据库操作类
+        return;
+    }
+    TDBaseToolModel *toolModel = [[TDBaseToolModel alloc] init];
+    BOOL wifiOnly = [OEXInterface shouldDownloadOnlyOnWifi];
+    
+    WS(weakSelf);
+    [self getLocalDownloadFileSortDataBlock:^(NSMutableArray *downloadArray, NSMutableArray *finishArray) {
+        
+        for (int i = 0; i < downloadArray.count; i ++) {
+            TDSkydrveFileModel *model = downloadArray[i];
+            model.udpateLocal = YES; //更新本地数据库
+            
+            if ([toolModel networkingStateReachableViaWWAN] && wifiOnly) { //移动网络 + 仅wifi下载
+                model.status = 3;
+                [self waitChageToPause:model]; //暂停
+            }
+            else {
+                if (model.status == 1) { //有下载中，开始下载
+                    model.status = 1;
+                    [weakSelf beginDownloadFileModel:model firstAdd:NO]; //更新本地状态
+                }
+                else if (model.status == 2) {
+                    model.status = 3;
+                    [self waitChageToPause:model]; //暂停
+                }
+            }
+            NSLog(@"------>>> 进入app %@",model.name);
+        }
+    }];
+}
+
+- (NSString *)getPreviewFilePathForId:(TDSkydrveFileModel *)model { //拼接路径
+    
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *namePath = [NSString stringWithFormat:@"skydive_download_%@_%@.%@",self.username,model.id,model.file_type];
+    NSString *filePath = [path stringByAppendingPathComponent:namePath];
+    
+    //    NSLog(@"文件路径------->> %@",filePath);
+    return filePath;
+}
+
+#pragma mark - NSURLSessionDownload Delegate
+- (void)URLSession:(NSURLSession *)session
+              task:(NSURLSessionTask *)task
+willPerformHTTPRedirection:(NSHTTPURLResponse *)response
+        newRequest:(NSURLRequest *)request
+ completionHandler:(void (^)(NSURLRequest * _Nullable))completionHandler { ///即将现在
+    
+}
+
 - (void)URLSession:(NSURLSession *)session
       downloadTask:(NSURLSessionDownloadTask *)downloadTask
 didFinishDownloadingToURL:(NSURL *)location { //下载成功
@@ -251,6 +295,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
     [self postDownlaodProgressNotification:progress]; //更新进度
 }
 
+#pragma mark - NSURLSession Delegate
 - (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session {
     
     NSLog(@"Background URL session %@ finished events.\n", session);
@@ -269,23 +314,29 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
     
     if (error) {
         if ([error.userInfo objectForKey:NSURLSessionDownloadTaskResumeData]) { // 看已下载的数据是否有效check if resume data are available
-            
+//
             NSData *resumeData = [error.userInfo objectForKey:NSURLSessionDownloadTaskResumeData]; //通过之前保存的resumeData，获取断点的NSURLSessionTask，调用resume恢复下载
             self.currentModel.resumeData = resumeData;
             if ([self isValideResumeData:self.currentModel.resumeData]) {
                 [self updateDownloadFileRusumeData:self.currentModel];
             }
         }
-        
+    
         NSLog(@"下载error --->> %@",[error.userInfo objectForKey:NSLocalizedDescriptionKey]);
         if (error.code == -999) { //暂停
             
-            self.currentModel.status = 3;
-            if (self.currentModel.udpateLocal) {
-                [self postDownloadStatusNotification:self.currentModel]; //cell的status
-                [self allowUpdateLocalData];
+            if (![self.downloadTask isEqual:task]) {
+                NSLog(@"--->> kill掉重新报告");
             }
-            NSLog(@"--->> 暂停下载");
+            else {
+                self.currentModel.status = 3;
+                [self postDownloadStatusNotification:self.currentModel]; //cell的status
+                
+                if (self.currentModel.udpateLocal) {
+                    [self allowUpdateLocalData];
+                }
+                NSLog(@"--->> 暂停下载");
+            }
         }
         else {
             self.currentModel.status = 4;
@@ -293,8 +344,8 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
             [self allowUpdateLocalData];
             NSLog(@"--->> 下载失败");
         }
-        
-    } else {
+    }
+    else {
         
         [self postDownlaodProgressNotification:@"1"]; //更新progress
         self.currentModel.status = 5;
@@ -393,6 +444,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
 
 #pragma mark - 本地数据库
 - (void)sqliteOperationInit:(NSString *)username {//初始化
+    self.username = username;
     self.sqliteOperation = [[TDSkydriveSqliteOperation alloc] init];
     [self.sqliteOperation createSqliteForUser:username];
 }
@@ -429,6 +481,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite { //下载进度
 
 //删除
 - (void)deleteSelectLocalFile:(NSArray *)selectArray forUser:(NSString *)username handler:(void(^)(TDSkydrveFileModel *model, BOOL isFinish))handler {
+    self.username = username;
     [self.sqliteOperation deleteFileArray:selectArray forUser:username handler:handler];
 }
 

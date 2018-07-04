@@ -49,12 +49,12 @@
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.mas_centerY);
-        make.left.mas_equalTo(self.mas_left).offset(18);
+        make.left.mas_equalTo(self.mas_left).offset(28);
     }];
     
     [self.selectButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.mas_centerY);
-        make.right.mas_equalTo(self.mas_right).offset(0);
+        make.right.mas_equalTo(self.mas_right).offset(-13);
         make.size.mas_equalTo(CGSizeMake(48, 48));
     }];
 }

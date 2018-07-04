@@ -15,7 +15,6 @@ private enum OEXRearViewOptions: Int {
     case UserProfile, MyCourse, MyVideos, FindCourses, SkyDrive, UserCenter , MySettings, SubmitFeedback, Debug, Logout
 }
 
-private let LogoutCellDefaultHeight: CGFloat = 130.0
 private let versionButtonStyle = OEXTextStyle(weight:.Normal, size:.XXSmall, color: OEXStyles.sharedStyles().neutralWhite())
 
 class OEXRearTableViewController : UITableViewController {
@@ -49,7 +48,6 @@ class OEXRearTableViewController : UITableViewController {
     @IBOutlet weak var appVersionButton: UIButton!
     @IBOutlet var userContentView: UIView!
     @IBOutlet weak var redImageView: UIImageView!
-//    let redImageView = UIImageView()
     
     lazy var environment = Environment()
     var profileFeed: Feed<UserProfile>?
@@ -63,8 +61,8 @@ class OEXRearTableViewController : UITableViewController {
         setupProfileLoader()
         updateUIWithUserInfo()
         
-        self.view.backgroundColor = OEXStyles.sharedStyles().baseColor7()
-        self.tableView.backgroundColor = OEXStyles.sharedStyles().baseColor7()
+        self.view.backgroundColor = OEXStyles.sharedStyles().baseColor6()
+        self.tableView.backgroundColor = OEXStyles.sharedStyles().baseColor6()
         
 //        logoutButton.setBackgroundImage(UIImage(named: "bt_logout_active"), forState: .Highlighted)
         logoutButton.backgroundColor = OEXStyles.sharedStyles().baseColor7()
@@ -109,8 +107,7 @@ class OEXRearTableViewController : UITableViewController {
         //        let environmentName = self.environment.config.environmentName()
         //        let appVersion = NSBundle.mainBundle().oex_buildVersionString()
         //        appVersionButton.setAttributedTitle(versionButtonStyle.attributedStringWithText(Strings.versionDisplay(number: appVersion, environment: environmentName)), forState:.Normal)
-        //
-        
+
         let baseTool = TDBaseToolModel()
         let versionStr = baseTool.getAppVersionNum(1)
         appVersionButton.setTitle(versionStr , forState: .Normal)
@@ -151,7 +148,8 @@ class OEXRearTableViewController : UITableViewController {
                     let url = NSURL.init(string: companyImageStr)
                     self.companyImage.sd_setImageWithURL(url, placeholderImage: UIImage.init(named: "logobg"))
                 }
-            } else {
+            }
+            else {
                 self.companyImage.image = UIImage.init(named: "E_Logo_Enterprise")
             }
             
@@ -161,7 +159,8 @@ class OEXRearTableViewController : UITableViewController {
             if (profile.nickname == nil) == true {//如果昵称为空,显示用户名
                 if profile.name != profile.username {
                     self.userNameLabel.text = profile.name
-                } else {
+                }
+                else {
                     self.userNameLabel.text = TDLocalizeSelectSwift("NO_NAME")
                 }
             }
@@ -177,7 +176,8 @@ class OEXRearTableViewController : UITableViewController {
             
             if profile.is_receiver == true {
                 self.redImageView.hidden = profile.unreplied_count == 0 && profile.unsolved_msg_count == 0
-            } else{
+            }
+            else{
                 self.redImageView.hidden = profile.unsolved_msg_count == 0;
             }
             
@@ -218,7 +218,6 @@ class OEXRearTableViewController : UITableViewController {
         } else {
             setButtonHiddenOrNo(false)
         }
-        
          profileFeed?.refresh()
     }
     
@@ -227,17 +226,18 @@ class OEXRearTableViewController : UITableViewController {
         loginButton.layer.cornerRadius = 5.0
         loginButton.backgroundColor = OEXStyles.sharedStyles().baseColor2()
         
-//        loginButton.hidden = isHidden
-//        userNameLabel.hidden = !isHidden
-//        userEmailLabel.hidden = !isHidden
         loginButton.hidden = true
         userNameLabel.hidden = true
         userEmailLabel.hidden = true
         userProfilePicture.hidden = true
-        
-//        logoutButton.hidden = !isHidden
+
         logoutButton.hidden = true
         appVersionButton.hidden = true
+        
+        //        loginButton.hidden = isHidden
+        //        userNameLabel.hidden = !isHidden
+        //        userEmailLabel.hidden = !isHidden
+        //        logoutButton.hidden = !isHidden
     }
     
     private func setNaturalTextAlignment() {
@@ -340,6 +340,7 @@ class OEXRearTableViewController : UITableViewController {
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
+        let logoutHeight : CGFloat = TDScreenWidth * 5/6 * 0.53
         if indexPath.row == OEXRearViewOptions.Debug.rawValue && !environment.config.shouldShowDebug() {
             return 0
         }
@@ -350,14 +351,14 @@ class OEXRearTableViewController : UITableViewController {
             return 0
         }
         else if indexPath.row == OEXRearViewOptions.Logout.rawValue {
-//            let screenHeight = UIScreen.mainScreen().bounds.height
-//            let tableviewHeight : CGFloat = 518 + (TDScreenWidth - 320) * 5/6 * 0.53
-//            return max((screenHeight - tableviewHeight) + LogoutCellDefaultHeight, LogoutCellDefaultHeight)
-            return 0
+            
+            let screenHeight = UIScreen.mainScreen().bounds.height
+            let tableviewHeight : CGFloat = 300 + logoutHeight
+            return screenHeight - tableviewHeight
         }
         else if indexPath.row == OEXRearViewOptions.UserProfile.rawValue {
             remarkCompayConstraint()
-            return TDScreenWidth * 5/6 * 0.53
+            return logoutHeight
         }
         
         return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
@@ -366,14 +367,8 @@ class OEXRearTableViewController : UITableViewController {
     func remarkCompayConstraint() {
         self.tableView.backgroundColor = OEXStyles.sharedStyles().baseColor6()
         self.userContentView.backgroundColor = OEXStyles.sharedStyles().baseColor6()
-//        self.companyImage.backgroundColor = OEXStyles.sharedStyles().baseColor1()
         
         self.companyImage.snp_remakeConstraints { (make) in
-//            make.left.greaterThanOrEqualTo(self.userContentView.snp_left).offset(39)
-//            make.right.lessThanOrEqualTo(self.userContentView.snp_right).offset(-39)
-//            make.top.greaterThanOrEqualTo(self.userContentView.snp_top).offset(39)
-//            make.bottom.lessThanOrEqualTo(self.userContentView.snp_bottom).offset(-39)
-            
             make.left.lessThanOrEqualTo(self.userContentView.snp_left).offset(48)
             make.right.greaterThanOrEqualTo(self.userContentView.snp_right).offset(-48)
             make.top.lessThanOrEqualTo(self.userContentView.snp_top).offset(48)

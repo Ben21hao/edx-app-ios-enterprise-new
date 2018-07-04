@@ -2021,8 +2021,8 @@
 "SKY_ELITEU_ENPTY_TEXT"="该网盘暂无文件夹";
 /*该文件夹暂无文件    This folder is empty. */
 "SKY_FOLDERS_EMPTY_TEXT"="该文件夹暂无文件";
-/*当前是4G网络，是否继续下载当前的文件？    Continue downloading over 4G cellular connection? */
-"SKY_CELLULAR_CONNECTION_TEXT"="当前是4G网络，是否继续下载当前的文件？";
+/*当前是移动网络，是否继续下载当前的文件？    Continue downloading over cellular connection? */
+"SKY_CELLULAR_CONNECTION_TEXT"="当前是移动网络，是否继续下载当前的文件？";
 /*暂停   Pause */
 "SKY_PAUSE_BUTTON_TEXT"="暂停";
 /*继续   Continue */
@@ -2065,8 +2065,8 @@
 "SKY_INSUFFICIENT_STORAGE"="手机容量不足无法继续下载该文件";
 /*链接已复制      URL copied. */
 "SKY_URL_COPIED"="链接已复制";
-/*创建中，请稍后       Creating URL, please wait. */
-"SKY_CREAT_WAIT"="创建中，请稍后";
+/*创建中...       Creating URL... */
+"SKY_CREAT_WAIT"="创建中...";
 /*链接创建失败      Failed to create URL. */
 "SKY_FAIL_CREATE"="链接创建失败";
 /*这里还没有您下载的文件哦~      No downloaded files. */

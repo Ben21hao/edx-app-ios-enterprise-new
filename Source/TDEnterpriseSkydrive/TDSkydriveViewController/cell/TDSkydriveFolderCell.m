@@ -50,7 +50,7 @@
     [self.bgView addSubview:self.titleLabel];
     
     self.timeLabel = [[UILabel alloc] init];
-    self.timeLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
+    self.timeLabel.font = [UIFont fontWithName:@"OpenSans" size:10];
     self.timeLabel.textColor = [UIColor colorWithHexString:@"#9b9b9b"];
     [self.bgView addSubview:self.timeLabel];
     

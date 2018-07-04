@@ -34,8 +34,7 @@ typedef void(^CompletionHandlerType)();
 /*
  当前下载
  */
-- (void)beginDownloadFileModel:(TDSkydrveFileModel *)model firstAdd:(BOOL)isFirst; //开始下载
-//- (void)continueDownload:(TDSkydrveFileModel *)model; //继续下载
+- (void)beginDownloadFileModel:(TDSkydrveFileModel *)model firstAdd:(BOOL)isFirst; //开始或继续下载
 - (void)pauseDownload:(TDSkydrveFileModel *)model; //下载中 变 暂停下载
 
 /*
@@ -45,7 +44,6 @@ typedef void(^CompletionHandlerType)();
 - (void)fileChageToWaitToDownload:(TDSkydrveFileModel *)model firstAdd:(BOOL)isFirst; //有下载中：-> 等待 (点击 开始下载，暂停，失败)
 - (void)nextFileBeginDownload:(TDSkydrveFileModel *)model; //有等待： 下一个 等待的任务开始下载
 
-- (void)exitApplicationSaveResumeData; //用户退出程序
 - (void)addCompletionHandler:(CompletionHandlerType)handler forSession:(NSString *)identifier;// 保存 completion handler 以在处理 session 事件后更新 UI
 
 /*

@@ -31,14 +31,14 @@
 - (void)createSqliteTable { //创建表
     
     if ([self.dataBase open]) {
-//        NSLog(@"打开数据库成功");
         
         NSString *createSql = @"CREATE TABLE IF NOT EXISTS skydrive_table (id text NOT NULL, name text NOT NULL, type text, file_type text, file_type_format text, resources_url text, created_at text, real_file_size text, file_size text, download_size text, resumeData text, progress double, status integer);";
         
         BOOL result = [self.dataBase executeUpdate:createSql];
         if (result) {
-            NSLog(@"创建表成功");
-        } else {
+//            NSLog(@"创建表成功");
+        }
+        else {
             NSLog(@"创建表失败");
         }
     }
@@ -59,7 +59,8 @@
         
         if (insert) {
             NSLog(@"插入成功 %@",model.id);
-        } else {
+        }
+        else {
             NSLog(@"插入失败 %@",model.id);
         }
     }
@@ -103,7 +104,7 @@
                 NSFileManager *manager = [NSFileManager defaultManager];
                 if ([manager fileExistsAtPath:filePath]) {
                     [manager removeItemAtPath:filePath error:nil];
-                    NSLog(@"----->> 移除本地文件 %@",model.name);
+                    NSLog(@"NSFileManager----->> 移除本地文件 %@",model.name);
                 }
                 
                 if (i == selectArray.count - 1) {
@@ -155,7 +156,8 @@
         
         if (change) {
             NSLog(@"status更新成功 %@ -> %ld",fileId,(long)status);
-        } else {
+        }
+        else {
             NSLog(@"status更新失败  %@",fileId);
         }
     }
@@ -240,8 +242,7 @@
                         model.resumeData = [self strToData:str];
                     }
                 }
-                
-                NSLog(@"数据库 --->>>%@ %@ --> %f --->>>> %ld",model.id,model.name,model.progress,(long)model.status);
+//                NSLog(@"数据库 --->>>%@ %@ --> %f --->>>> %ld",model.id,model.name,model.progress,(long)model.status);
                 
                 if (model.status == 5) {
                     [finishArray addObject:model];
@@ -294,7 +295,6 @@
                 else {
                     model.status = [result intForColumn:@"status"];
                 }
-//                model.status = [result intForColumn:@"status"];
                 
                 if (model.status != 5) {
                     NSString *str = [result stringForColumn:@"resumeData"];
@@ -305,10 +305,6 @@
                         model.resumeData = [self strToData:str];
                     }
                 }
-                
-//                NSString *str = [result stringForColumn:@"resumeData"];
-//                model.resumeData = [self strToData:str];
-                
 //                NSLog(@"查询数据库 ---> %@ -- %@", model.download_size, model.resumeData);
                 [downloadArray addObject:model];
             }

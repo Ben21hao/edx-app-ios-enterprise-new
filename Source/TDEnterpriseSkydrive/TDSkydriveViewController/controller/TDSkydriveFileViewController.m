@@ -78,6 +78,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityNotReachableAction:) name:@"Network_Status_NotReachable" object:nil]; //网络不可用
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityReachableViaWWANAction:) name:@"Network_Status_ReachableViaWWAN" object:nil]; //网络切换为移动网络
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appTerminateAction:) name:@"Application_Terminate_Notification" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -87,11 +88,13 @@
 }
 
 - (void)dealloc {
+    
     NSLog(@" 销毁---->>> ");
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"skydrive_delete_finish" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"skydrivnoSupport_skydrive_delete_finishe_delete_finish" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Network_Status_NotReachable" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Network_Status_ReachableViaWWAN" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Application_Terminate_Notification" object:nil];
 }
 
 - (void)rightButtonAciton:(UIButton *)sender {
@@ -207,8 +210,6 @@
             }
             else { //无下载中：未下载 -> 下载
                 
-                [self currentModelDownloadOperation:model];
-                
                 BOOL wifiOnly = [OEXInterface shouldDownloadOnlyOnWifi];
                 if ([self.toolModel networkingStateReachableViaWWAN] && wifiOnly) { //移动网络
                     [self changeDownloadEnvirentment:model firstAdd:YES];
@@ -220,7 +221,6 @@
         }
             break;
         case 1:{//下载中 -> 暂停
-            [self currentModelDownloadOperation:model];
             [self.downloadOperation pauseDownload:model]; //暂停(暂停完成后，判断是否有等待，有则下一个)
             NSLog(@"暂停 -->> %@",model.name);
         }
@@ -234,7 +234,6 @@
                 [self.downloadOperation fileChageToWaitToDownload:model firstAdd:NO];
             }
             else { //无下载中：暂停 -> 下载
-                [self currentModelDownloadOperation:model];
                 
                 BOOL wifiOnly = [OEXInterface shouldDownloadOnlyOnWifi];
                 if ([self.toolModel networkingStateReachableViaWWAN] && wifiOnly) { //移动网络
@@ -251,7 +250,6 @@
                 [self.downloadOperation fileChageToWaitToDownload:model firstAdd:NO];
             }
             else { //无下载中：失败 -> 下载
-                [self currentModelDownloadOperation:model];
                 
                 BOOL wifiOnly = [OEXInterface shouldDownloadOnlyOnWifi];
                 if ([self.toolModel networkingStateReachableViaWWAN] && wifiOnly) { //移动网络
@@ -269,15 +267,10 @@
         default:
             break;
     }
-    NSLog(@"点击下载：状态 ----->> %ld",(long)model.status);
+//    NSLog(@"点击下载：状态 ----->> %ld",(long)model.status);
 }
 
-- (void)currentModelDownloadOperation:(TDSkydrveFileModel *)currentModel { //当前下载文件
-    self.downloadOperation.currentModel = currentModel;
-    self.downloadOperation.filePath = [self getPreviewFilePathForId:currentModel];
-}
-
-- (void)beginDownloadFileModel:(TDSkydrveFileModel *)model firstAdd:(BOOL)isFirst {
+- (void)beginDownloadFileModel:(TDSkydrveFileModel *)model firstAdd:(BOOL)isFirst { //开始下载
     
     if (![self.toolModel networkingState]) { //没网
         return;
@@ -287,8 +280,6 @@
         [self pauseAllDownloadFile:YES]; //所有任务暂停
         return;
     }
-    
-    [self currentModelDownloadOperation:model];
     [self.downloadOperation beginDownloadFileModel:model firstAdd:isFirst];//下载
 }
 
@@ -332,6 +323,25 @@
     [alertControler addAction:cancelAction];
     [alertControler addAction:continueAction];
     [self presentViewController:alertControler animated:YES completion:nil];
+}
+
+- (void)continiuAllDownloadFile { //继续
+    
+    WS(weakSelf);
+    [self.downloadOperation getLocalDownloadFileSortDataBlock:^(NSMutableArray *downloadArray, NSMutableArray *finishArray) {
+        
+        for (int i = 0; i < downloadArray.count; i ++) {
+            TDSkydrveFileModel *model = downloadArray[i];
+            model.udpateLocal = YES; //更新本地数据库
+            
+            if (model.status == 1) { //下载 -> 下载
+                [weakSelf beginDownloadFileModel:model firstAdd:NO];
+            }
+            else if (model.status == 2) { //等待 -> 等待
+                [weakSelf.downloadOperation fileChageToWaitToDownload:model firstAdd:NO];
+            }
+        }
+    }];
 }
 
 - (CGFloat)freeDiskSpaceEnounghInBytes:(NSString *)sizeStr { //手机存储是否足够
@@ -391,9 +401,6 @@
     for (int i = 0; i < localArray.count; i ++) {
         
         TDSkydrveFileModel *model = localArray[i];
-        if (model.status == 1) {//正在下载
-            [self currentModelDownloadOperation:model];
-        }
         
         if ([fileModel.id isEqualToString:model.id]) {
             fileModel.progress = model.progress;
@@ -401,7 +408,7 @@
             fileModel.download_size = model.download_size;
             fileModel.resumeData = model.resumeData;
             
-            NSLog(@"同步model --->> %@  %@ -- %ld",fileModel.name ,fileModel.is_shareable,(long)fileModel.status);
+            NSLog(@"同步model --->> %@  %@ -- %ld",fileModel.name ,fileModel.id,(long)fileModel.status);
             return fileModel;
         }
     }
@@ -429,8 +436,6 @@
     WS(weakSelf);
     [self.downloadOperation getLocalDownloadFileSortDataBlock:^(NSMutableArray *downloadArray, NSMutableArray *finishArray) {
         
-        NSLog(@"下一个 ----->> 有等待 -->> %@",downloadArray);
-        
         TDSkydrveFileModel *nextModel = [weakSelf judgHasWaitToDownloadTask:downloadArray];
         if (nextModel) {//有等待下载： 下一个
             nextModel.udpateLocal = YES;
@@ -439,7 +444,6 @@
                 [self pauseAllDownloadFile:YES]; //所有任务暂停
             }
             else {
-                [weakSelf currentModelDownloadOperation:nextModel];
                 [weakSelf.downloadOperation nextFileBeginDownload:nextModel];
             }
         }
@@ -448,12 +452,22 @@
 
 - (void)currentFileDownloadFinish:(TDSkydrveFileModel *)currentModel { //下载完一个任务，刷新任务管理页
     
+    for (int i = 0; i < self.dataArray.count; i ++) {
+        
+        TDSkydrveFileModel *model = self.dataArray[i];
+        if ([model.id isEqualToString:currentModel.id]) {
+            model.status = 5;
+        }
+    }
+    [self.tableView reloadData];
 }
 
 #pragma mark - 网络变化
 - (void)reachabilityNotReachableAction:(NSNotification *)notification {//没网
-    
-    NSLog(@"--->> 网络信号不好");
+
+    if (![self judgeHasDownloadingTask]) { //没有下载中
+        return;
+    }
     
     [self.view makeToast:TDLocalizeSelect(@"SKY_BAD_NETWORK", nil) duration:1.08 position:CSToastPositionCenter];
     
@@ -467,7 +481,6 @@
             if (model.status == 1 || model.status == 2) { // -> 暂停
                 
                 model.status = 3;
-                [weakSelf currentModelDownloadOperation:model];
                 [weakSelf.downloadOperation pauseDownload:model];
 
                 [weakSelf.downloadOperation waitChageToPause:model];
@@ -478,10 +491,9 @@
     }];
 }
 
-- (void)reachabilityReachableViaWWANAction:(NSNotification *)notification {//只允许wifi下载情况下，切换到移动网络
-    
-    [self pauseAllDownloadFile:NO]; //不更新
-    [self wifiOnlyAlertViewShow];
+- (void)reachabilityReachableViaWWANAction:(NSNotification *)notification {//移动网络：只允许wifi下载情况下，切换到移动网络
+    [self pauseAllDownloadFile:NO]; //暂停所有，不更新
+    [self wifiOnlyAlertViewShow]; //弹框提示
 }
 
 - (void)pauseAllDownloadFile:(BOOL)udpateLocal { //暂停 - udpateLocal: 是否更新本地数据库
@@ -495,36 +507,20 @@
             model.udpateLocal = udpateLocal; //是否更新本地数据库
             
             if (model.status == 1 || model.status == 2) { // -> 暂停
-                [weakSelf currentModelDownloadOperation:model];
-                [weakSelf.downloadOperation pauseDownload:model];
-//            }
-//            else if (model.status == 2) { //等待 -> 暂停
+                
+                model.status = 3;
                 [weakSelf.downloadOperation waitChageToPause:model];
+                [weakSelf.downloadOperation pauseDownload:model];
+                
+                NSLog(@"暂停 ----->> %@",model.name);
             }
         }
     }];
 }
 
-- (void)continiuAllDownloadFile { //继续
- 
-    WS(weakSelf);
-    [self.downloadOperation getLocalDownloadFileSortDataBlock:^(NSMutableArray *downloadArray, NSMutableArray *finishArray) {
-        
-        for (int i = 0; i < downloadArray.count; i ++) {
-            TDSkydrveFileModel *model = downloadArray[i];
-            model.udpateLocal = YES; //更新本地数据库
-            
-            if (model.status == 1) { //下载 -> 下载
-                [weakSelf currentModelDownloadOperation:model];
-                [weakSelf beginDownloadFileModel:model firstAdd:NO];
-            }
-            else if (model.status == 2) { //等待 -> 等待
-                [weakSelf.downloadOperation fileChageToWaitToDownload:model firstAdd:NO];
-            }
-        }
-    }];
+- (void)appTerminateAction:(NSNotification *)notification { //退出程序
+    [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 #pragma mark - tableView Delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

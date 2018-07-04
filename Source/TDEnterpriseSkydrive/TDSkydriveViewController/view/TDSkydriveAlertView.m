@@ -120,43 +120,43 @@
     [self.alertView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.bgButton.mas_centerX);
         make.centerY.mas_equalTo(self.bgButton.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(width, 235));
+        make.size.mas_equalTo(CGSizeMake(width, 268));
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.alertView.mas_left).offset(13);
-        make.top.mas_equalTo(self.alertView.mas_top).offset(8);
-        make.height.mas_equalTo(29);
+        make.left.mas_equalTo(self.alertView.mas_left).offset(28);
+        make.top.mas_equalTo(self.alertView.mas_top).offset(6);
+        make.height.mas_equalTo(43);
     }];
     
     [self.oneDayView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.titleLabel.mas_bottom);
         make.left.right.mas_equalTo(self.alertView);
-        make.height.mas_equalTo(48);
+        make.height.mas_equalTo(53);
     }];
     
     [self.sevenDayView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.oneDayView.mas_bottom);
         make.left.right.mas_equalTo(self.alertView);
-        make.height.mas_equalTo(48);
+        make.height.mas_equalTo(self.oneDayView.mas_height);
     }];
     
     [self.foreverView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.sevenDayView.mas_bottom);
         make.left.right.mas_equalTo(self.alertView);
-        make.height.mas_equalTo(48);
+        make.height.mas_equalTo(self.oneDayView.mas_height);
     }];
     
     [self.cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.alertView.mas_left);
         make.bottom.mas_equalTo(self.alertView.mas_bottom);
-        make.size.mas_equalTo(CGSizeMake(width/2, 39));
+        make.size.mas_equalTo(CGSizeMake(width/2, 41));
     }];
     
     [self.sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.alertView.mas_right);
         make.bottom.mas_equalTo(self.alertView.mas_bottom);
-        make.size.mas_equalTo(CGSizeMake(width/2, 39));
+        make.size.mas_equalTo(CGSizeMake(width/2, 41));
     }];
 }
 

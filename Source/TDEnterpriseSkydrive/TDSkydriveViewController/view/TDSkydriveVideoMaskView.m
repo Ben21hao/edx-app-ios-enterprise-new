@@ -37,7 +37,7 @@
     
     [self addSubview:self.centerButton];
     
-    self.topBarView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.0];
+    self.topBarView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     self.bottomBarView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     
     self.progressView.progress = 0.0;
@@ -153,6 +153,7 @@
     }
     return _returnButton;
 }
+
 - (UIView *)bottomBarView {
     if (!_bottomBarView) {
         _bottomBarView = [[UIView alloc] init];
